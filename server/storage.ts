@@ -14,18 +14,18 @@ export interface IStorage {
   getServices(): Promise<Service[]>;
   getServiceBySlug(slug: string): Promise<Service | undefined>;
   createService(service: InsertService): Promise<Service>;
-  
+
   // Patients
   getPatients(): Promise<Patient[]>;
   getPatient(id: number): Promise<Patient | undefined>;
   createPatient(patient: InsertPatient): Promise<Patient>;
-  
+
   // Appointments
   getAppointments(): Promise<Appointment[]>;
   getAppointment(id: number): Promise<Appointment | undefined>;
   createAppointment(appointment: InsertAppointment): Promise<Appointment>;
   updateAppointmentStatus(id: number, status: string): Promise<Appointment>;
-  
+
   // Users
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
@@ -51,23 +51,69 @@ export class MemStorage implements IStorage {
       users: 1,
     };
 
-    // Initialize with default services
+    // Detaylı hizmet bilgileri
     const defaultServices = [
       {
         id: this.currentId.services++,
         name: "Saç Ekimi",
         description: "Modern FUE tekniği ile doğal görünümlü saç ekimi",
+        longDescription: "DHI ve Safir FUE teknikleri kullanılarak yapılan saç ekimi operasyonları, maksimum greft sayısı ve doğal görünüm sağlar. Deneyimli ekibimiz, kişiye özel planlama ile en uygun tekniği belirler.",
+        benefits: [
+          "Kalıcı ve doğal sonuçlar",
+          "Minimum iyileşme süresi",
+          "Lokal anestezi ile ağrısız işlem",
+          "Yüksek başarı oranı",
+          "Maksimum greft verimi"
+        ],
+        process: [
+          "Ücretsiz konsültasyon ve analiz",
+          "Saç çizgisi ve ekim planı tasarımı",
+          "Lokal anestezi uygulaması",
+          "Greft toplama işlemi",
+          "Kanal açma ve greft yerleştirme",
+          "Post-operatif bakım talimatları"
+        ],
+        faqs: [
+          "Saç ekimi kalıcı mıdır?|Evet, saç ekimi kalıcı bir çözümdür. Ekilen saçlar genetik olarak dökülmeye dirençli bölgeden alındığı için ömür boyu kalıcıdır.",
+          "İşlem ne kadar sürer?|Ortalama 6-8 saat sürer.",
+          "Ne zaman sonuç alırım?|İlk sonuçlar 6. ayda görülmeye başlar, tam sonuç 12-15 ay içinde alınır.",
+          "İşlem acı verir mi?|Lokal anestezi sayesinde işlem sırasında acı hissetmezsiniz."
+        ],
+        price: 2500,
+        duration: "6-8 saat",
         imageUrl: "/images/hair-transplant.svg",
-        slug: "sac-ekimi",
+        slug: "sac-ekimi"
       },
       {
         id: this.currentId.services++,
         name: "Sakal Ekimi",
         description: "Kalıcı ve doğal görünümlü sakal ekimi",
+        longDescription: "Sakal ekimi, yüz bölgesinde seyrek veya hiç sakal çıkmayan alanlara FUE tekniği ile sakal kılı ekimi yapılmasıdır. Doğal ve kalıcı sonuçlar elde edilir.",
+        benefits: [
+          "Kalıcı çözüm",
+          "Doğal görünüm",
+          "Hızlı iyileşme",
+          "Minimal iz",
+          "Kişiye özel tasarım"
+        ],
+        process: [
+          "Yüz analizi ve planlama",
+          "Donör alan hazırlığı",
+          "Lokal anestezi",
+          "Greft toplama",
+          "Kanal açma ve yerleştirme",
+          "Bakım önerileri"
+        ],
+        faqs: [
+          "Sakal ekimi kalıcı mıdır?|Evet, ömür boyu kalıcıdır.",
+          "Sonuçlar ne zaman görülür?|İlk sonuçlar 3. ayda görülür, tam sonuç 6-8 ayda alınır.",
+          "Günlük yaşama ne zaman dönebilirim?|2-3 gün içinde normal yaşamınıza dönebilirsiniz."
+        ],
+        price: 1500,
+        duration: "4-6 saat",
         imageUrl: "/images/beard-transplant.svg",
-        slug: "sakal-ekimi",
-      },
-      // Add other services...
+        slug: "sakal-ekimi"
+      }
     ];
 
     defaultServices.forEach(service => this.services.set(service.id, service));
@@ -124,7 +170,7 @@ export class MemStorage implements IStorage {
   async updateAppointmentStatus(id: number, status: string): Promise<Appointment> {
     const appointment = this.appointments.get(id);
     if (!appointment) throw new Error("Appointment not found");
-    
+
     const updatedAppointment = { ...appointment, status };
     this.appointments.set(id, updatedAppointment);
     return updatedAppointment;
