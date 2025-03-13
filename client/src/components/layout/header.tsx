@@ -12,7 +12,7 @@ export default function Header() {
     <header className="border-b">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/">
-          <a className="text-2xl font-bold text-primary">Hair Clinic</a>
+          <a className="text-2xl font-bold text-primary">Saç Ekimi Kliniği</a>
         </Link>
 
         <NavigationMenu>
@@ -20,28 +20,28 @@ export default function Header() {
             <NavigationMenuItem>
               <Link href="/hizmetler">
                 <NavigationMenuLink className="px-4 py-2">
-                  Hizmetler
+                  Hizmetlerimiz
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/galeri">
                 <NavigationMenuLink className="px-4 py-2">
-                  Galeri
+                  Hasta Sonuçları
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/urunler">
                 <NavigationMenuLink className="px-4 py-2">
-                  Ürünler
+                  Bakım Ürünleri
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/randevu">
                 <Button variant="default">
-                  Randevu Al
+                  Ücretsiz Danışma
                 </Button>
               </Link>
             </NavigationMenuItem>
