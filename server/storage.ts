@@ -56,30 +56,37 @@ export class MemStorage implements IStorage {
       {
         id: this.currentId.services++,
         name: "Saç Ekimi",
-        description: "Modern FUE tekniği ile doğal görünümlü saç ekimi",
-        longDescription: "DHI ve Safir FUE teknikleri kullanılarak yapılan saç ekimi operasyonları, maksimum greft sayısı ve doğal görünüm sağlar. Deneyimli ekibimiz, kişiye özel planlama ile en uygun tekniği belirler.",
+        description: "Modern FUE ve DHI teknikleriyle doğal görünümlü saç ekimi",
+        longDescription: "Safir FUE ve DHI teknikleri kullanılarak yapılan saç ekimi operasyonları, maksimum greft sayısı ve doğal görünüm sağlar. Deneyimli ekibimiz, kişiye özel planlama ile en uygun tekniği belirler. Gürcistan'ın modern kliniklerinde, en son teknoloji ve steril ortamda gerçekleştirilen işlemlerle kalıcı sonuçlar elde edilir.",
         benefits: [
           "Kalıcı ve doğal sonuçlar",
           "Minimum iyileşme süresi",
           "Lokal anestezi ile ağrısız işlem",
           "Yüksek başarı oranı",
-          "Maksimum greft verimi"
+          "Maksimum greft verimi",
+          "Kişiye özel tasarım",
+          "Sıfır iz teknolojisi",
+          "Hızlı iyileşme süreci"
         ],
         process: [
-          "Ücretsiz konsültasyon ve analiz",
+          "Ücretsiz online konsültasyon",
+          "Detaylı saç analizi",
           "Saç çizgisi ve ekim planı tasarımı",
+          "Kan testleri ve sağlık kontrolü",
           "Lokal anestezi uygulaması",
           "Greft toplama işlemi",
           "Kanal açma ve greft yerleştirme",
-          "Post-operatif bakım talimatları"
+          "Post-operatif bakım talimatları",
+          "1 yıl boyunca düzenli takip"
         ],
         faqs: [
           "Saç ekimi kalıcı mıdır?|Evet, saç ekimi kalıcı bir çözümdür. Ekilen saçlar genetik olarak dökülmeye dirençli bölgeden alındığı için ömür boyu kalıcıdır.",
-          "İşlem ne kadar sürer?|Ortalama 6-8 saat sürer.",
-          "Ne zaman sonuç alırım?|İlk sonuçlar 6. ayda görülmeye başlar, tam sonuç 12-15 ay içinde alınır.",
-          "İşlem acı verir mi?|Lokal anestezi sayesinde işlem sırasında acı hissetmezsiniz."
+          "İşlem ne kadar sürer?|Ortalama 6-8 saat sürer. Bu süre ekilecek greft sayısına göre değişebilir.",
+          "Ne zaman sonuç alırım?|İlk sonuçlar 6. ayda görülmeye başlar, tam sonuç 12-15 ay içinde alınır. Her hasta için iyileşme süreci farklılık gösterebilir.",
+          "İşlem acı verir mi?|Lokal anestezi sayesinde işlem sırasında acı hissetmezsiniz. İşlem sonrası hafif bir gerginlik hissi olabilir.",
+          "İşlem sonrası günlük hayatıma ne zaman dönebilirim?|İşlemden 3 gün sonra günlük aktivitelerinize dönebilirsiniz. Spor ve ağır aktiviteler için 1 ay beklemeniz önerilir.",
+          "Ekilen saçlar dökülür mü?|İşlemden 2-3 hafta sonra ekilen saçlar dökülür, bu normal bir süreçtir. 3-4 ay sonra yeni saçlar çıkmaya başlar."
         ],
-        price: 2500,
         duration: "6-8 saat",
         imageUrl: "/images/hair-transplant.svg",
         slug: "sac-ekimi"
@@ -88,31 +95,133 @@ export class MemStorage implements IStorage {
         id: this.currentId.services++,
         name: "Sakal Ekimi",
         description: "Kalıcı ve doğal görünümlü sakal ekimi",
-        longDescription: "Sakal ekimi, yüz bölgesinde seyrek veya hiç sakal çıkmayan alanlara FUE tekniği ile sakal kılı ekimi yapılmasıdır. Doğal ve kalıcı sonuçlar elde edilir.",
+        longDescription: "Sakal ekimi, yüz bölgesinde seyrek veya hiç sakal çıkmayan alanlara FUE tekniği ile sakal kılı ekimi yapılmasıdır. En son teknoloji ve uzman kadromuzla doğal ve kalıcı sonuçlar elde edilir. Kişiye özel planlama ile yüz yapınıza en uygun sakal tasarımı yapılır.",
         benefits: [
           "Kalıcı çözüm",
           "Doğal görünüm",
           "Hızlı iyileşme",
           "Minimal iz",
-          "Kişiye özel tasarım"
+          "Kişiye özel tasarım",
+          "Tek seansta tamamlama",
+          "Lokal anestezi ile ağrısız işlem",
+          "Yüksek başarı oranı"
         ],
         process: [
+          "Ücretsiz konsültasyon",
           "Yüz analizi ve planlama",
+          "Sakal tasarımı",
           "Donör alan hazırlığı",
           "Lokal anestezi",
           "Greft toplama",
           "Kanal açma ve yerleştirme",
-          "Bakım önerileri"
+          "Bakım önerileri",
+          "6 ay boyunca takip"
         ],
         faqs: [
-          "Sakal ekimi kalıcı mıdır?|Evet, ömür boyu kalıcıdır.",
+          "Sakal ekimi kalıcı mıdır?|Evet, ömür boyu kalıcıdır. Ekilen kıllar genetik olarak dökülmeye dirençlidir.",
           "Sonuçlar ne zaman görülür?|İlk sonuçlar 3. ayda görülür, tam sonuç 6-8 ayda alınır.",
-          "Günlük yaşama ne zaman dönebilirim?|2-3 gün içinde normal yaşamınıza dönebilirsiniz."
+          "Günlük yaşama ne zaman dönebilirim?|2-3 gün içinde normal yaşamınıza dönebilirsiniz.",
+          "İşlem izi kalır mı?|Kullanılan modern teknikler sayesinde gözle görülür iz kalmaz.",
+          "Ekilen sakallar normal sakal gibi uzar mı?|Evet, ekilen sakallar doğal sakallar gibi uzar ve şekil verilebilir."
         ],
-        price: 1500,
         duration: "4-6 saat",
         imageUrl: "/images/beard-transplant.svg",
         slug: "sakal-ekimi"
+      },
+      {
+        id: this.currentId.services++,
+        name: "Kaş Ekimi",
+        description: "Kalıcı ve doğal görünümlü kaş ekimi",
+        longDescription: "Kaş ekimi, seyrek veya şekli bozuk kaşların DHI tekniği ile yeniden şekillendirilmesidir. Her kaş teli için özel açı ve yön belirlenerek doğal bir görünüm elde edilir. Yüz hatlarınıza uygun kaş tasarımı ile dengeli ve estetik bir görünüm sağlanır.",
+        benefits: [
+          "Kalıcı sonuç",
+          "Doğal görünüm",
+          "Minimal travma",
+          "Hızlı iyileşme",
+          "Kişiye özel tasarım",
+          "İz bırakmayan teknik",
+          "Tek seansta uygulama"
+        ],
+        process: [
+          "Detaylı yüz analizi",
+          "Kaş tasarımı",
+          "Donör alan seçimi",
+          "Lokal anestezi",
+          "DHI tekniği ile ekim",
+          "Bakım talimatları",
+          "3 ay takip"
+        ],
+        faqs: [
+          "Kaş ekimi kalıcı mıdır?|Evet, kaş ekimi kalıcı bir çözümdür.",
+          "İşlem ne kadar sürer?|Ortalama 2-3 saat sürer.",
+          "Sonuçlar ne zaman görülür?|İlk sonuçlar 2. ayda görülmeye başlar, tam sonuç 6 ayda alınır.",
+          "Kaşlarım doğal görünecek mi?|Evet, DHI tekniği sayesinde her kıl doğal açı ve yönde ekilir."
+        ],
+        duration: "2-3 saat",
+        imageUrl: "/images/eyebrow-transplant.svg",
+        slug: "kas-ekimi"
+      },
+      {
+        id: this.currentId.services++,
+        name: "PRP Tedavisi",
+        description: "Kişinin kendi kanından elde edilen plazma ile saç güçlendirme",
+        longDescription: "PRP (Platelet Rich Plasma) tedavisi, kişinin kendi kanından elde edilen trombositten zengin plazmanın saç köklerine enjekte edilmesidir. Bu yöntem saç dökülmesini yavaşlatır, mevcut saçları güçlendirir ve yeni saç çıkışını uyarır. Doğal ve güvenli bir tedavi yöntemidir.",
+        benefits: [
+          "Doğal tedavi yöntemi",
+          "Hızlı uygulama",
+          "Yan etki riski minimal",
+          "Saç kalitesinde artış",
+          "Dökülmelerde azalma",
+          "Saç köklerinde canlanma"
+        ],
+        process: [
+          "Kan alımı",
+          "Plazma ayrıştırma",
+          "Saç derisi temizliği",
+          "PRP enjeksiyonu",
+          "Saç bakım önerileri",
+          "Periyodik kontrol"
+        ],
+        faqs: [
+          "PRP tedavisi ağrılı mıdır?|Lokal anestezi kremi ile ağrısız uygulama yapılır.",
+          "Kaç seans gerekir?|Genellikle 4-6 seans önerilir, ayda bir uygulama yapılır.",
+          "Sonuçlar ne zaman görülür?|İlk sonuçlar 2-3 ay içinde görülmeye başlar.",
+          "Tedavi kimlere uygulanabilir?|Saç dökülmesi yaşayan ve saçlarını güçlendirmek isteyen herkese uygulanabilir."
+        ],
+        duration: "30-45 dakika",
+        imageUrl: "/images/prp-treatment.svg",
+        slug: "prp-tedavisi"
+      },
+      {
+        id: this.currentId.services++,
+        name: "Mezoterapi",
+        description: "Vitamini ve mineral takviyesi ile saç güçlendirme tedavisi",
+        longDescription: "Saç mezoterapisi, saç köklerinin ihtiyaç duyduğu vitamin, mineral ve amino asitlerin doğrudan saç derisine enjekte edilmesidir. Bu yöntem saç dökülmesini önler, saç kalitesini artırır ve yeni saç çıkışını destekler. Kişiye özel formüllerle en etkili sonuç hedeflenir.",
+        benefits: [
+          "Hızlı etki",
+          "Doğrudan etki alanına uygulama",
+          "Saç kalitesinde artış",
+          "Dökülmelerde azalma",
+          "Saç köklerinde beslenme",
+          "Uzun süreli etki"
+        ],
+        process: [
+          "Saç analizi",
+          "Formül belirleme",
+          "Saç derisi temizliği",
+          "Mezoterapi uygulaması",
+          "Bakım önerileri",
+          "Düzenli kontrol"
+        ],
+        faqs: [
+          "Mezoterapi ağrılı mıdır?|Anestezik krem ile ağrısız uygulama yapılır.",
+          "Kaç seans uygulanır?|Genellikle 6-8 seans, haftada bir uygulama yapılır.",
+          "Sonuçlar kalıcı mıdır?|Düzenli bakım ile kalıcı sonuçlar elde edilir.",
+          "İşlem sonrası günlük hayata dönüş?|İşlem sonrası hemen günlük hayata dönülebilir."
+        ],
+        duration: "45-60 dakika",
+        imageUrl: "/images/mesotherapy.svg",
+        slug: "mezoterapi"
       }
     ];
 
