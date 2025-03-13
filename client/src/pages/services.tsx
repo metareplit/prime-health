@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Clock, Check, HelpCircle, ArrowRight, ListChecks, Info } from "lucide-react";
+import { Clock, Check, HelpCircle, ArrowRight, ListChecks, Info, Filter } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Service } from "@shared/schema";
 import { Metadata } from "@/components/ui/metadata";
@@ -39,8 +39,20 @@ export default function Services() {
       />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-primary/5 to-transparent py-16">
-        <div className="container mx-auto px-4">
+      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-transparent py-16">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="absolute -right-40 -top-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+        />
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="absolute -left-40 -bottom-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+        />
+        <div className="container mx-auto px-4 relative">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -77,7 +89,7 @@ export default function Services() {
                 variants={item}
                 className="group"
               >
-                <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300">
+                <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 relative">
                   <div className="relative overflow-hidden aspect-video">
                     <img
                       src={service.imageUrl}
@@ -85,56 +97,88 @@ export default function Services() {
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <Button 
+                        variant="secondary" 
+                        size="sm" 
+                        className="w-full bg-white/90 hover:bg-white"
+                        asChild
+                      >
+                        <Link href={`/randevu?service=${service.slug}`}>
+                          Randevu Al
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
 
                   <CardHeader className="flex-grow">
-                    <CardTitle className="text-xl font-bold">{service.name}</CardTitle>
+                    <CardTitle className="text-xl font-bold flex items-center justify-between">
+                      {service.name}
+                      <span className="flex items-center text-sm font-normal text-primary">
+                        <Clock className="h-4 w-4 mr-1" />
+                        {service.duration}
+                      </span>
+                    </CardTitle>
                     <p className="text-gray-600 text-sm mt-2">{service.description}</p>
-                    <div className="flex items-center gap-2 mt-3 text-sm text-primary">
-                      <Clock className="h-4 w-4" />
-                      <span>{service.duration}</span>
-                    </div>
                   </CardHeader>
 
                   <CardContent>
                     <Tabs defaultValue="details" className="w-full">
                       <TabsList className="grid w-full grid-cols-3 mb-4">
-                        <TabsTrigger value="details">
-                          <Info className="h-4 w-4 mr-1" /> Detaylar
+                        <TabsTrigger value="details" className="text-xs">
+                          <Info className="h-3 w-3 mr-1" /> Detaylar
                         </TabsTrigger>
-                        <TabsTrigger value="benefits">
-                          <Check className="h-4 w-4 mr-1" /> Avantajlar
+                        <TabsTrigger value="benefits" className="text-xs">
+                          <Check className="h-3 w-3 mr-1" /> Avantajlar
                         </TabsTrigger>
-                        <TabsTrigger value="faq">
-                          <HelpCircle className="h-4 w-4 mr-1" /> SSS
+                        <TabsTrigger value="faq" className="text-xs">
+                          <HelpCircle className="h-3 w-3 mr-1" /> SSS
                         </TabsTrigger>
                       </TabsList>
 
                       <TabsContent value="details" className="mt-2">
                         <div className="space-y-2">
-                          <h3 className="font-semibold mb-2">İşlem Süreci</h3>
+                          <h3 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                            <ListChecks className="h-4 w-4 text-primary" />
+                            İşlem Süreci
+                          </h3>
                           <ol className="space-y-1 text-sm">
                             {service.process.slice(0, 4).map((step, idx) => (
-                              <li key={idx} className="flex items-center gap-2">
+                              <motion.li
+                                key={idx}
+                                initial={{ opacity: 0, x: -10 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: idx * 0.1 }}
+                                className="flex items-center gap-2 p-2 rounded hover:bg-gray-50"
+                              >
                                 <span className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs flex-shrink-0">
                                   {idx + 1}
                                 </span>
                                 <span className="text-gray-600">{step}</span>
-                              </li>
+                              </motion.li>
                             ))}
                           </ol>
                         </div>
                       </TabsContent>
 
                       <TabsContent value="benefits" className="mt-2">
-                        <ul className="grid grid-cols-1 gap-2">
+                        <motion.ul 
+                          className="grid grid-cols-1 gap-2"
+                          variants={container}
+                          initial="hidden"
+                          animate="show"
+                        >
                           {service.benefits.slice(0, 4).map((benefit, idx) => (
-                            <li key={idx} className="flex items-center gap-2 text-sm">
+                            <motion.li
+                              key={idx}
+                              variants={item}
+                              className="flex items-center gap-2 text-sm p-2 rounded hover:bg-gray-50"
+                            >
                               <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
                               <span className="text-gray-600">{benefit}</span>
-                            </li>
+                            </motion.li>
                           ))}
-                        </ul>
+                        </motion.ul>
                       </TabsContent>
 
                       <TabsContent value="faq" className="mt-2">
@@ -145,9 +189,11 @@ export default function Services() {
                               <AccordionItem 
                                 key={idx} 
                                 value={`item-${idx}`}
-                                className="border-b"
+                                className="border-b last:border-0"
                               >
-                                <AccordionTrigger className="text-sm">{question}</AccordionTrigger>
+                                <AccordionTrigger className="text-sm hover:text-primary transition-colors">
+                                  {question}
+                                </AccordionTrigger>
                                 <AccordionContent className="text-sm text-gray-600">
                                   {answer}
                                 </AccordionContent>
@@ -158,15 +204,18 @@ export default function Services() {
                       </TabsContent>
                     </Tabs>
 
-                    <Link href={`/randevu?service=${service.slug}`} className="block mt-4">
+                    <div className="mt-4 pt-4 border-t">
                       <Button 
                         size="sm"
                         className="w-full group hover:translate-y-[-1px] transition-all duration-300"
+                        asChild
                       >
-                        <span>Randevu Al</span>
-                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        <Link href={`/randevu?service=${service.slug}`}>
+                          <span>Detaylı Bilgi ve Randevu</span>
+                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </Link>
                       </Button>
-                    </Link>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
