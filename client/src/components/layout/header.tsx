@@ -14,13 +14,27 @@ export default function Header() {
         <Link href="/">
           <a className="text-2xl font-bold text-primary">Hair Clinic</a>
         </Link>
-        
+
         <NavigationMenu>
-          <NavigationMenuList>
+          <NavigationMenuList className="space-x-2">
             <NavigationMenuItem>
               <Link href="/hizmetler">
                 <NavigationMenuLink className="px-4 py-2">
                   Hizmetler
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/galeri">
+                <NavigationMenuLink className="px-4 py-2">
+                  Galeri
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/urunler">
+                <NavigationMenuLink className="px-4 py-2">
+                  Ürünler
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="600px" viewBox="0 0 800 600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Eyebrow Transplant</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Eye area representation -->
+        <ellipse cx="400" cy="300" rx="200" ry="100" fill="#E2E8F0" stroke="#2D3748" stroke-width="3"/>
+        <!-- Eyebrow shape -->
+        <path d="M300,200 Q400,180 500,200" 
+              stroke="#4299E1" stroke-width="3" fill="none"/>
+        <!-- Treatment area indication -->
+        <path d="M300,180 Q400,160 500,180" 
+              stroke="#4299E1" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+    </g>
+</svg>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="600px" viewBox="0 0 800 600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Hair Transplant</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Modern stylized head silhouette -->
+        <path d="M400,100 C550,100 650,250 650,400 C650,550 550,700 400,700 C250,700 150,550 150,400 C150,250 250,100 400,100" 
+              fill="#E2E8F0" stroke="#2D3748" stroke-width="3"/>
+        <!-- Hair follicles representation -->
+        <g transform="translate(250,200)" stroke="#4A5568" stroke-width="2">
+            <path d="M0,0 C10,-10 20,-10 30,0" />
+            <path d="M50,0 C60,-10 70,-10 80,0" />
+            <path d="M100,0 C110,-10 120,-10 130,0" />
+        </g>
+        <!-- Treatment area indication -->
+        <circle cx="400" cy="250" r="100" stroke="#4299E1" stroke-width="2" stroke-dasharray="5,5"/>
+    </g>
+</svg>

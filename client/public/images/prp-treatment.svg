@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="600px" viewBox="0 0 800 600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>PRP Treatment</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Medical tube representation -->
+        <rect x="300" y="200" width="200" height="400" rx="20" fill="#E2E8F0" stroke="#2D3748" stroke-width="3"/>
+        <!-- PRP indication -->
+        <rect x="300" y="400" width="200" height="200" fill="#FED7D7" stroke="#C53030" stroke-width="3"/>
+        <!-- Plasma representation -->
+        <g transform="translate(350,450)">
+            <circle cx="0" cy="0" r="10" fill="#FC8181"/>
+            <circle cx="50" cy="0" r="10" fill="#FC8181"/>
+            <circle cx="100" cy="0" r="10" fill="#FC8181"/>
+        </g>
+    </g>
+</svg>
