@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Check, AlertCircle, Droplet, Clock } from "lucide-react";
+import { Check, AlertCircle, Droplet, Clock, Filter } from "lucide-react";
 import { Metadata } from "@/components/ui/metadata";
 
 const productCategories = [
@@ -20,25 +20,42 @@ const productCategories = [
           "Biotin",
           "Keratin",
           "Panthenol",
-          "Aloe Vera"
+          "Aloe Vera",
+          "E Vitamini",
+          "Argan Yağı"
         ],
         usage: "Günde bir kez, nazikçe masaj yaparak uygulayın",
         benefits: [
           "Saç köklerini güçlendirir",
           "Yeni saç büyümesini destekler",
           "Saç derisini nemlendirir",
-          "pH dengesini korur"
+          "pH dengesini korur",
+          "Saç tellerini besler",
+          "Kırılmaları önler"
         ],
         instructions: [
           "Saçınızı ılık su ile ıslatın",
           "Az miktarda şampuan kullanın",
-          "Nazikçe masaj yapın",
-          "İyice durulayın"
+          "Parmak uçlarıyla nazikçe masaj yapın",
+          "2-3 dakika bekletin",
+          "İyice durulayın",
+          "Gerekirse işlemi tekrarlayın"
         ],
         warnings: [
           "Göz ile temasından kaçının",
           "Yalnızca harici kullanım içindir",
-          "Tahriş durumunda kullanımı bırakın"
+          "Tahriş durumunda kullanımı bırakın",
+          "Çocukların ulaşamayacağı yerde saklayın"
+        ],
+        usageTimes: [
+          "Saç ekimi sonrası 15. günden itibaren",
+          "Sabah veya akşam duşlarında",
+          "İhtiyaca göre günde 1-2 kez"
+        ],
+        storageConditions: [
+          "Serin ve kuru yerde saklayın",
+          "Direkt güneş ışığından koruyun",
+          "25°C altında muhafaza edin"
         ]
       }
     ]
@@ -57,25 +74,96 @@ const productCategories = [
           "Minoxidil",
           "Peptitler",
           "Biotin",
-          "Kafein"
+          "Kafein",
+          "Saw Palmetto",
+          "Ginseng Özü"
         ],
         usage: "Günde iki kez, temiz saç derisine uygulayın",
         benefits: [
           "Saç büyümesini uyarır",
           "Saç dökülmesini azaltır",
           "Saç kalitesini artırır",
-          "Saç köklerini besler"
+          "Saç köklerini besler",
+          "Kan dolaşımını artırır",
+          "Saç tellerini kalınlaştırır"
         ],
         instructions: [
           "Saç derisi temiz ve kuru olmalı",
           "Damlalık ile direkt saç derisine uygulayın",
-          "Nazikçe masaj yapın",
-          "En az 4 saat saçınızı yıkamayın"
+          "Her bölgeye 2-3 damla damlatın",
+          "Parmak uçlarıyla nazikçe masaj yapın",
+          "En az 4 saat saçınızı yıkamayın",
+          "Düzenli kullanım önemlidir"
         ],
         warnings: [
           "Hamilelik ve emzirme döneminde kullanmayın",
           "Alerjik reaksiyon durumunda kullanımı bırakın",
-          "Doktor tavsiyesi ile kullanın"
+          "Doktor tavsiyesi ile kullanın",
+          "Gözle temastan kaçının"
+        ],
+        usageTimes: [
+          "Sabah ve akşam olmak üzere günde 2 kez",
+          "Tercihen duş sonrası",
+          "Minimum 4-6 ay düzenli kullanım"
+        ],
+        storageConditions: [
+          "Oda sıcaklığında saklayın",
+          "Direkt güneş ışığından koruyun",
+          "Kutu açıldıktan sonra 6 ay içinde tüketin"
+        ]
+      }
+    ]
+  },
+  {
+    id: "vitaminler",
+    title: "Saç Bakım Vitaminleri",
+    description: "Saç sağlığını içten destekleyen vitamin takviyeleri",
+    products: [
+      {
+        id: 1,
+        name: "Saç Vitamini Kompleksi",
+        description: "Saç büyümesi ve sağlığı için özel vitamin formülü",
+        image: "/images/products/vitamin-1.svg",
+        ingredients: [
+          "Biotin (B7)",
+          "Çinko",
+          "Demir",
+          "C Vitamini",
+          "D Vitamini",
+          "E Vitamini",
+          "B12 Vitamini",
+          "Folat"
+        ],
+        usage: "Günde 1 tablet, yemeklerle birlikte alın",
+        benefits: [
+          "Saç büyümesini destekler",
+          "Saç tellerini güçlendirir",
+          "Saç dökülmesini azaltır",
+          "Saç sağlığını korur",
+          "Tırnak sağlığını destekler",
+          "Cilt sağlığına katkıda bulunur"
+        ],
+        instructions: [
+          "Sabah kahvaltı ile birlikte alın",
+          "Bol su ile tüketin",
+          "Düzenli kullanım önemlidir",
+          "Önerilen dozu aşmayın"
+        ],
+        warnings: [
+          "Hamilelik ve emzirme döneminde doktora danışın",
+          "Aşırı dozdan kaçının",
+          "İlaç kullanıyorsanız doktorunuza danışın",
+          "Alerjik reaksiyon durumunda kullanımı bırakın"
+        ],
+        usageTimes: [
+          "Her sabah kahvaltıda",
+          "Minimum 3 ay düzenli kullanım",
+          "İdeal kullanım süresi 6 ay"
+        ],
+        storageConditions: [
+          "Serin ve kuru yerde saklayın",
+          "Çocukların ulaşamayacağı yerde muhafaza edin",
+          "25°C altında saklayın"
         ]
       }
     ]
@@ -91,8 +179,20 @@ export default function Products() {
         keywords="saç bakım ürünleri, saç ekimi şampuanı, saç serumu, saç vitamini, saç bakım kılavuzu"
       />
 
-      <section className="bg-gradient-to-b from-primary/5 to-transparent py-16">
-        <div className="container mx-auto px-4">
+      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-transparent py-16">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="absolute -right-40 -top-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+        />
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="absolute -left-40 -bottom-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+        />
+        <div className="container mx-auto px-4 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -194,6 +294,34 @@ export default function Products() {
                                           </li>
                                         ))}
                                       </ol>
+                                    </AccordionContent>
+                                  </AccordionItem>
+
+                                  <AccordionItem value="usage-times">
+                                    <AccordionTrigger>Ne Zaman Kullanılmalı?</AccordionTrigger>
+                                    <AccordionContent>
+                                      <ul className="space-y-2">
+                                        {product.usageTimes.map((time, idx) => (
+                                          <li key={idx} className="flex items-center gap-2 text-sm">
+                                            <Clock className="h-4 w-4 text-primary" />
+                                            {time}
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </AccordionContent>
+                                  </AccordionItem>
+
+                                  <AccordionItem value="storage">
+                                    <AccordionTrigger>Saklama Koşulları</AccordionTrigger>
+                                    <AccordionContent>
+                                      <ul className="space-y-2">
+                                        {product.storageConditions.map((condition, idx) => (
+                                          <li key={idx} className="flex items-center gap-2 text-sm">
+                                            <Filter className="h-4 w-4 text-primary" />
+                                            {condition}
+                                          </li>
+                                        ))}
+                                      </ul>
                                     </AccordionContent>
                                   </AccordionItem>
                                 </Accordion>

@@ -40,7 +40,7 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-[4/3] overflow-hidden cursor-ew-resize"
+      className="relative w-full aspect-[4/3] overflow-hidden cursor-ew-resize rounded-lg shadow-lg"
     >
       {/* Before Image */}
       <div className="absolute inset-0">
@@ -103,11 +103,20 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
       </motion.div>
 
       {/* Labels */}
-      <div className="absolute bottom-4 left-4 bg-black/50 text-white px-2 py-1 rounded text-sm">
+      <div className="absolute bottom-4 left-4 bg-black/50 text-white px-2 py-1 rounded text-sm font-medium">
         Öncesi
       </div>
-      <div className="absolute bottom-4 right-4 bg-black/50 text-white px-2 py-1 rounded text-sm">
+      <div className="absolute bottom-4 right-4 bg-black/50 text-white px-2 py-1 rounded text-sm font-medium">
         Sonrası
+      </div>
+
+      {/* Progress Bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200">
+        <motion.div
+          className="h-full bg-primary"
+          style={{ width: `${sliderPosition}%` }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        />
       </div>
     </div>
   );
