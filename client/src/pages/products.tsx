@@ -20,7 +20,7 @@ const productCategories = [
         id: 1,
         name: "Biotin Güçlendirici Şampuan",
         description: "Saç ekimi sonrası kullanım için özel olarak geliştirilmiş biotin içerikli şampuan",
-        image: "/images/products/shampoo-1.svg",
+        image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc",
         hairType: ["Yağlı", "Normal", "Karma"],
         usagePhase: "Saç ekimi sonrası 15. günden itibaren",
         ingredients: [
@@ -54,7 +54,7 @@ const productCategories = [
         id: 2,
         name: "Keratin Onarıcı Şampuan",
         description: "Yıpranmış saçlar için keratin protein kompleksi içeren özel formül",
-        image: "/images/products/shampoo-2.svg",
+        image: "https://images.unsplash.com/photo-1619451334792-150fd785ee74",
         hairType: ["Kuru", "Yıpranmış"],
         usagePhase: "Saç ekimi sonrası 1. aydan itibaren",
         ingredients: [
@@ -87,7 +87,7 @@ const productCategories = [
         id: 3,
         name: "Kafein Kompleks Şampuan",
         description: "Saç büyümesini hızlandıran kafein ve bitki özleri içeren formül",
-        image: "/images/products/shampoo-3.svg",
+        image: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e",
         hairType: ["Tüm Saç Tipleri"],
         usagePhase: "Saç ekimi sonrası 3. haftadan itibaren",
         ingredients: [
@@ -127,7 +127,7 @@ const productCategories = [
         id: 1,
         name: "Peptit Kompleks Serum",
         description: "Saç büyümesini hızlandıran ve güçlendiren peptit bazlı serum",
-        image: "/images/products/serum-1.svg",
+        image: "https://images.unsplash.com/photo-1626784215021-2e39ccf971cd",
         hairType: ["Tüm Saç Tipleri"],
         usagePhase: "Saç ekimi sonrası 1. aydan itibaren",
         ingredients: [
@@ -159,7 +159,7 @@ const productCategories = [
         id: 2,
         name: "Yoğun Bakım Serum",
         description: "Saç köklerini besleyen ve güçlendiren yoğun bakım serumu",
-        image: "/images/products/serum-2.svg",
+        image: "https://images.unsplash.com/photo-1617897903246-719242758050",
         hairType: ["İnce Telli", "Zayıf"],
         usagePhase: "Saç ekimi sonrası 2. aydan itibaren",
         ingredients: [
@@ -191,7 +191,7 @@ const productCategories = [
         id: 3,
         name: "Canlandırıcı Saç Serumu",
         description: "Doğal bitki özleri ile saç derisini canlandıran serum",
-        image: "/images/products/serum-3.svg",
+        image: "https://images.unsplash.com/photo-1612817288484-6f916006741a",
         hairType: ["Hassas", "Yıpranmış"],
         usagePhase: "Saç ekimi sonrası 3. aydan itibaren",
         ingredients: [
