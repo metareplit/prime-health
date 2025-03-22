@@ -18,7 +18,6 @@ export const services = pgTable("services", {
 export const patients = pgTable("patients", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  email: text("email").notNull(),
   phone: text("phone").notNull(),
   age: text("age").notNull(),
   gender: text("gender").notNull(),
@@ -49,8 +48,7 @@ export const users = pgTable("users", {
 export const insertServiceSchema = createInsertSchema(services);
 
 export const insertPatientSchema = createInsertSchema(patients).extend({
-  email: z.string().email("Geçerli bir e-posta adresi giriniz"),
-  phone: z.string().min(10, "Telefon numarası en az 10 karakter olmalıdır"),
+  phone: z.string().min(8, "Geçerli bir telefon numarası giriniz"),
   age: z.string().min(1, "Yaş bilgisi gereklidir"),
   gender: z.string().min(1, "Cinsiyet seçimi gereklidir"),
   communicationPreferences: z.array(z.string()).optional(),
