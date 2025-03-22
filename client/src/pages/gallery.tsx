@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import BeforeAfterSlider from "@/components/gallery/before-after-slider";
-import { Metadata } from "@/components/ui/metadata";
-import { Search, Star, Users, Calendar, CheckCircle, Share2, Info, ArrowRight, Filter } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Search, Calendar, Star, Share2, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import { Metadata } from "@/components/ui/metadata";
+
+import BeforeAfterSlider from "@/components/gallery/before-after-slider";
+import { CategoryFilters } from "@/components/gallery/category-filters";
+import ThreeDComparison from "@/components/gallery/three-d-comparison";
+import { SuccessStories } from "@/components/gallery/success-stories";
+import { Statistics } from "@/components/gallery/statistics";
 
 // Galeri öğeleri veri yapısı (15 örnek vaka eklenecek)
 const galleryItems = [
@@ -158,13 +163,14 @@ export default function Gallery() {
   const [selectedCase, setSelectedCase] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("all");
+  const [show3D, setShow3D] = useState(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <Metadata
         title="Hasta Sonuçları Galerisi | Hair Clinic Tiflis"
         description="Profesyonel saç ekimi kliniğimizde gerçekleştirilen operasyonların öncesi ve sonrası sonuçları. Modern teknoloji ve uzman kadromuzla doğal ve kalıcı sonuçlar."
-        keywords="saç ekimi öncesi sonrası, sakal ekimi sonuçları, kaş ekimi sonuçları, hasta yorumları, tiflis saç ekimi, öncesi sonrası fotoğraflar"
+        keywords="saç ekimi öncesi sonrası, sakal ekimi sonuçları, kaş ekimi sonuçları, hasta yorumları, tiflis saç ekimi"
       />
 
       {/* Hero Section */}
@@ -197,30 +203,13 @@ export default function Gallery() {
             </p>
 
             {/* İstatistikler */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-white p-4 rounded-xl shadow-sm">
-                <div className="text-2xl md:text-3xl font-bold text-primary">10K+</div>
-                <div className="text-sm text-gray-600">Başarılı Operasyon</div>
-              </div>
-              <div className="bg-white p-4 rounded-xl shadow-sm">
-                <div className="text-2xl md:text-3xl font-bold text-primary">98%</div>
-                <div className="text-sm text-gray-600">Hasta Memnuniyeti</div>
-              </div>
-              <div className="bg-white p-4 rounded-xl shadow-sm">
-                <div className="text-2xl md:text-3xl font-bold text-primary">15+</div>
-                <div className="text-sm text-gray-600">Yıllık Deneyim</div>
-              </div>
-              <div className="bg-white p-4 rounded-xl shadow-sm">
-                <div className="text-2xl md:text-3xl font-bold text-primary">4.9</div>
-                <div className="text-sm text-gray-600">Hasta Değerlendirmesi</div>
-              </div>
-            </div>
+            <Statistics />
           </motion.div>
         </div>
       </section>
 
-      {/* Arama ve Filtreleme */}
       <div className="container mx-auto px-4 py-8">
+        {/* Arama ve Filtreleme */}
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
@@ -231,29 +220,6 @@ export default function Gallery() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-          </div>
-          <div className="flex gap-2">
-            <Button
-              variant={selectedFilter === "all" ? "default" : "outline"}
-              size="sm"
-              onClick={() => setSelectedFilter("all")}
-            >
-              Tümü
-            </Button>
-            <Button
-              variant={selectedFilter === "latest" ? "default" : "outline"}
-              size="sm"
-              onClick={() => setSelectedFilter("latest")}
-            >
-              En Yeni
-            </Button>
-            <Button
-              variant={selectedFilter === "popular" ? "default" : "outline"}
-              size="sm"
-              onClick={() => setSelectedFilter("popular")}
-            >
-              En Beğenilen
-            </Button>
           </div>
         </div>
 
@@ -273,6 +239,12 @@ export default function Gallery() {
 
           {galleryItems.map((category) => (
             <TabsContent key={category.category} value={category.category}>
+              {/* Kategori Filtreleri */}
+              <CategoryFilters
+                category={category.category}
+                onFilterChange={(filters) => console.log(filters)}
+              />
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {category.items.map((item) => (
                   <motion.div
@@ -317,6 +289,9 @@ export default function Gallery() {
             </TabsContent>
           ))}
         </Tabs>
+
+        {/* Başarı Hikayeleri */}
+        <SuccessStories />
       </div>
 
       {/* Detay Modal */}
@@ -325,10 +300,28 @@ export default function Gallery() {
           <ScrollArea className="max-h-[80vh]">
             {selectedCase && (
               <div className="space-y-6">
-                <BeforeAfterSlider
-                  beforeImage={selectedCase.beforeImage}
-                  afterImage={selectedCase.afterImage}
-                />
+                {/* 3D/2D Görünüm Geçişi */}
+                <div className="flex justify-end mb-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShow3D(!show3D)}
+                  >
+                    {show3D ? "2D Görünüm" : "3D Görünüm"}
+                  </Button>
+                </div>
+
+                {show3D ? (
+                  <ThreeDComparison
+                    beforeImage={selectedCase.beforeImage}
+                    afterImage={selectedCase.afterImage}
+                  />
+                ) : (
+                  <BeforeAfterSlider
+                    beforeImage={selectedCase.beforeImage}
+                    afterImage={selectedCase.afterImage}
+                  />
+                )}
 
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Sol Kolon */}
