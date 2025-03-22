@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -9,24 +9,21 @@ const slides = [
     id: 1,
     title: "Doğal ve Kalıcı Sonuçlar",
     description: "Uzman kadromuz ve modern teknolojilerimizle en iyi sonuçları elde edin",
-    beforeImage: "/images/gallery/hair-before-1.jpg",
-    afterImage: "/images/gallery/hair-after-1.jpg",
+    image: "/images/gallery/hair-after-1.jpg",
     tag: "Saç Ekimi"
   },
   {
     id: 2,
     title: "Profesyonel Sakal Ekimi",
     description: "Yüz hatlarınızı belirginleştirin, özgüveninizi artırın",
-    beforeImage: "/images/gallery/beard-before-1.jpg",
-    afterImage: "/images/gallery/beard-after-1.jpg",
+    image: "/images/gallery/beard-after-1.jpg",
     tag: "Sakal Ekimi"
   },
   {
     id: 3,
     title: "Estetik Kaş Ekimi",
     description: "Doğal ve kalıcı kaşlara kavuşun",
-    beforeImage: "/images/gallery/eyebrow-before-1.jpg",
-    afterImage: "/images/gallery/eyebrow-after-1.jpg",
+    image: "/images/gallery/eyebrow-after-1.jpg",
     tag: "Kaş Ekimi"
   }
 ];
@@ -71,38 +68,21 @@ export default function HeroSlider() {
           {slides.map((slide, index) => (
             <div key={slide.id} className="embla__slide relative">
               <div className="relative h-[50vh] min-h-[400px] w-full">
-                <div className="absolute inset-0 grid grid-cols-2">
-                  {/* Before Image */}
-                  <div 
-                    className="relative"
-                    style={{
-                      backgroundImage: `url(${slide.beforeImage})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center'
-                    }}
-                  >
-                    <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
-                      Öncesi
-                    </div>
-                  </div>
+                {/* Görsel Arka Plan */}
+                <div 
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage: `url(${slide.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                />
 
-                  {/* After Image */}
-                  <div 
-                    className="relative"
-                    style={{
-                      backgroundImage: `url(${slide.afterImage})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center'
-                    }}
-                  >
-                    <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
-                      Sonrası
-                    </div>
-                  </div>
-                </div>
+                {/* Koyu Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
-                {/* Content Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                {/* İçerik */}
+                <div className="absolute inset-0 flex items-center justify-center">
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
