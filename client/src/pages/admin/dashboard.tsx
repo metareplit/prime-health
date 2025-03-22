@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Users, Calendar, FileText, Package } from "lucide-react";
 import type { User, Post, Product, Appointment } from "@shared/schema";
+import { DashboardAnalytics } from "@/components/analytics/dashboard-analytics";
 
 interface DashboardCard {
   title: string;
@@ -17,7 +18,9 @@ export default function AdminDashboard() {
     queryKey: ["/api/users"],
   });
 
-  const { data: appointments, isLoading: loadingAppointments } = useQuery<Appointment[]>({
+  const { data: appointments, isLoading: loadingAppointments } = useQuery<
+    Appointment[]
+  >({
     queryKey: ["/api/appointments"],
   });
 
@@ -38,7 +41,7 @@ export default function AdminDashboard() {
     },
     {
       title: "Aktif Randevular",
-      value: appointments?.filter(apt => apt.status === "pending").length || 0,
+      value: appointments?.filter((apt) => apt.status === "pending").length || 0,
       description: "Bekleyen randevu sayısı",
       icon: <Calendar className="h-4 w-4 text-green-500" />,
     },
@@ -61,7 +64,7 @@ export default function AdminDashboard() {
   );
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Dashboard</h1>
         <Link href="/admin/appointments">
@@ -73,25 +76,24 @@ export default function AdminDashboard() {
         {cards.map((card) => (
           <Card key={card.title}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                {card.title}
-              </CardTitle>
+              <CardTitle className="text-sm font-medium">{card.title}</CardTitle>
               {card.icon}
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{card.value}</div>
-              <p className="text-xs text-muted-foreground">
-                {card.description}
-              </p>
+              <p className="text-xs text-muted-foreground">{card.description}</p>
             </CardContent>
           </Card>
         ))}
       </div>
 
+      {/* Yeni Analytics Bileşeni */}
+      <DashboardAnalytics />
+
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Son Randevular</CardTitle>
+            <CardTitle>Bugünkü Randevular</CardTitle>
           </CardHeader>
           <CardContent>
             {loadingAppointments ? (
@@ -112,13 +114,15 @@ export default function AdminDashboard() {
                       </p>
                     </div>
                     <div>
-                      <span className={`px-3 py-1 rounded-full text-sm ${
-                        appointment.status === "confirmed"
-                          ? "bg-green-100 text-green-800"
-                          : appointment.status === "pending"
-                          ? "bg-yellow-100 text-yellow-800"
-                          : "bg-red-100 text-red-800"
-                      }`}>
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm ${
+                          appointment.status === "confirmed"
+                            ? "bg-green-100 text-green-800"
+                            : appointment.status === "pending"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
+                      >
                         {appointment.status}
                       </span>
                     </div>
