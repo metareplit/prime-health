@@ -8,6 +8,7 @@ import Home from "@/pages/home";
 import Services from "@/pages/services";
 import Gallery from "@/pages/gallery";
 import Products from "@/pages/products";
+import Contact from "@/pages/iletisim";
 import Appointment from "@/pages/appointment";
 import AdminDashboard from "@/pages/admin/dashboard";
 import AdminPatients from "@/pages/admin/patients";
@@ -23,6 +24,7 @@ function Router() {
           <Route path="/hizmetler" component={Services} />
           <Route path="/galeri" component={Gallery} />
           <Route path="/urunler" component={Products} />
+          <Route path="/iletisim" component={Contact} />
           <Route path="/randevu" component={Appointment} />
           <Route path="/admin" component={AdminDashboard} />
           <Route path="/admin/hastalar" component={AdminPatients} />
