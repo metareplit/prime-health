@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Metadata } from "@/components/ui/metadata";
 
-// Ürün kategorileri ve ürünleri
 const productCategories = [
   {
     id: "sampuanlar",
@@ -51,7 +50,72 @@ const productCategories = [
           "Tahriş durumunda kullanımı bırakın"
         ]
       },
-      // 5 adet daha şampuan eklenecek...
+      {
+        id: 2,
+        name: "Keratin Onarıcı Şampuan",
+        description: "Yıpranmış saçlar için keratin protein kompleksi içeren özel formül",
+        image: "/images/products/shampoo-2.svg",
+        hairType: ["Kuru", "Yıpranmış"],
+        usagePhase: "Saç ekimi sonrası 1. aydan itibaren",
+        ingredients: [
+          "Keratin Kompleksi",
+          "Silk Protein",
+          "Argan Yağı",
+          "Jojoba Yağı",
+          "B5 Vitamini",
+          "Collagen"
+        ],
+        benefits: [
+          "Saç tellerini onarır",
+          "Kırılmaları önler",
+          "Yumuşaklık sağlar",
+          "Elektriklenmeyi azaltır"
+        ],
+        instructions: [
+          "Saçı iyice ıslatın",
+          "Şampuanı saç boyuna uygulayın",
+          "3-4 dakika bekletin",
+          "Detaylıca durulayın"
+        ],
+        warnings: [
+          "Saç derisi hassasiyeti durumunda kullanmayın",
+          "Çocuklardan uzak tutun",
+          "Göz ile temasından kaçının"
+        ]
+      },
+      {
+        id: 3,
+        name: "Kafein Kompleks Şampuan",
+        description: "Saç büyümesini hızlandıran kafein ve bitki özleri içeren formül",
+        image: "/images/products/shampoo-3.svg",
+        hairType: ["Tüm Saç Tipleri"],
+        usagePhase: "Saç ekimi sonrası 3. haftadan itibaren",
+        ingredients: [
+          "Kafein",
+          "Saw Palmetto",
+          "Biberiye Özü",
+          "Ginseng",
+          "Biotin",
+          "Niacinamide"
+        ],
+        benefits: [
+          "Saç büyümesini uyarır",
+          "Kan dolaşımını artırır",
+          "Saç köklerini besler",
+          "DHT blokeri etkisi gösterir"
+        ],
+        instructions: [
+          "Günlük kullanım için uygundur",
+          "Saç derisine masaj yaparak uygulayın",
+          "2 dakika bekletin",
+          "İyice durulayın"
+        ],
+        warnings: [
+          "Kafeine hassasiyeti olanlar kullanmamalıdır",
+          "Açık yaralara uygulamayın",
+          "Doktor kontrolünde kullanın"
+        ]
+      }
     ]
   },
   {
@@ -91,7 +155,70 @@ const productCategories = [
           "Gözle temastan kaçının"
         ]
       },
-      // 5 adet daha serum eklenecek...
+      {
+        id: 2,
+        name: "Yoğun Bakım Serum",
+        description: "Saç köklerini besleyen ve güçlendiren yoğun bakım serumu",
+        image: "/images/products/serum-2.svg",
+        hairType: ["İnce Telli", "Zayıf"],
+        usagePhase: "Saç ekimi sonrası 2. aydan itibaren",
+        ingredients: [
+          "Keratinöz Peptitler",
+          "Collagen",
+          "B5 Vitamini",
+          "E Vitamini",
+          "Argan Yağı"
+        ],
+        benefits: [
+          "Saç tellerini kalınlaştırır",
+          "Kırılmaları önler",
+          "Parlaklık sağlar",
+          "Saç yapısını güçlendirir"
+        ],
+        instructions: [
+          "Akşam uygulanması önerilir",
+          "4-5 damla kullanın",
+          "Saç diplerine masaj yapın",
+          "Durulamayın"
+        ],
+        warnings: [
+          "Yalnızca harici kullanım içindir",
+          "Güneş ışığından koruyun",
+          "Aşırı kullanımdan kaçının"
+        ]
+      },
+      {
+        id: 3,
+        name: "Canlandırıcı Saç Serumu",
+        description: "Doğal bitki özleri ile saç derisini canlandıran serum",
+        image: "/images/products/serum-3.svg",
+        hairType: ["Hassas", "Yıpranmış"],
+        usagePhase: "Saç ekimi sonrası 3. aydan itibaren",
+        ingredients: [
+          "Biberiye Özü",
+          "Aloe Vera",
+          "Mentol",
+          "Kafein",
+          "Panthenol"
+        ],
+        benefits: [
+          "Saç derisini canlandırır",
+          "Serinletici etki sağlar",
+          "Kaşıntıyı azaltır",
+          "Saç büyümesini destekler"
+        ],
+        instructions: [
+          "Sabah ve akşam uygulayın",
+          "Saç derisine masaj yapın",
+          "5 dakika bekletin",
+          "Durulamayın"
+        ],
+        warnings: [
+          "Hassas ciltlerde test edilmeli",
+          "Göz çevresine uygulamayın",
+          "Tahriş durumunda kullanmayın"
+        ]
+      }
     ]
   },
   {
