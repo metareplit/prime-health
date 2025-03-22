@@ -5,6 +5,8 @@ import { Link } from "wouter";
 import { Users, Calendar, FileText, Package } from "lucide-react";
 import type { User, Post, Product, Appointment } from "@shared/schema";
 import { DashboardAnalytics } from "@/components/analytics/dashboard-analytics";
+import { SocialMediaAnalytics } from "@/components/analytics/social-media-analytics";
+import { SEOAnalytics } from "@/components/analytics/seo-analytics";
 
 interface DashboardCard {
   title: string;
@@ -59,10 +61,6 @@ export default function AdminDashboard() {
     },
   ];
 
-  const todayAppointments = appointments?.filter(
-    (apt) => new Date(apt.date).toDateString() === new Date().toDateString()
-  );
-
   return (
     <div className="space-y-6">
       <div className="flex justify-end">
@@ -86,84 +84,14 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      {/* Yeni Analytics Bileşeni */}
+      {/* Sosyal Medya Analitikleri */}
+      <SocialMediaAnalytics />
+
+      {/* SEO ve Anahtar Kelime Analizi */}
+      <SEOAnalytics />
+
+      {/* Genel Site Analitikleri */}
       <DashboardAnalytics />
-
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Bugünkü Randevular</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {loadingAppointments ? (
-              <div>Yükleniyor...</div>
-            ) : (
-              <div className="space-y-4">
-                {todayAppointments?.slice(0, 5).map((appointment) => (
-                  <div
-                    key={appointment.id}
-                    className="flex justify-between items-center p-4 border rounded-lg"
-                  >
-                    <div>
-                      <p className="font-semibold">
-                        {new Date(appointment.date).toLocaleDateString("tr-TR")}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        Hasta ID: {appointment.patientId}
-                      </p>
-                    </div>
-                    <div>
-                      <span
-                        className={`px-3 py-1 rounded-full text-sm ${
-                          appointment.status === "confirmed"
-                            ? "bg-green-100 text-green-800"
-                            : appointment.status === "pending"
-                            ? "bg-yellow-100 text-yellow-800"
-                            : "bg-red-100 text-red-800"
-                        }`}
-                      >
-                        {appointment.status}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Son Blog Yazıları</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {loadingPosts ? (
-              <div>Yükleniyor...</div>
-            ) : (
-              <div className="space-y-4">
-                {posts?.slice(0, 5).map((post) => (
-                  <div
-                    key={post.id}
-                    className="flex justify-between items-center p-4 border rounded-lg"
-                  >
-                    <div>
-                      <p className="font-semibold">{post.title}</p>
-                      <p className="text-sm text-gray-600">
-                        {new Date(post.createdAt).toLocaleDateString("tr-TR")}
-                      </p>
-                    </div>
-                    <Link href={`/admin/posts/${post.id}`}>
-                      <Button variant="ghost" size="sm">
-                        Düzenle
-                      </Button>
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
     </div>
   );
 }
