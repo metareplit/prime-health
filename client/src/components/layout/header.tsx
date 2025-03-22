@@ -2,14 +2,6 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/auth";
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import {
   Sheet,
   SheetContent,
   SheetTrigger,
@@ -42,152 +34,32 @@ export default function Header() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex">
-              <NavigationMenu>
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger>Hizmetlerimiz</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px]">
-                        <li className="row-span-3">
-                          <Link href="/hizmetler/sac-ekimi">
-                            <NavigationMenuLink className="flex h-full w-full select-none 
-                              flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md">
-                              <div className="mb-2 text-lg font-medium">
-                                Saç Ekimi
-                              </div>
-                              <p className="text-sm leading-tight text-muted-foreground">
-                                Modern tekniklerle doğal ve kalıcı saç ekimi çözümleri
-                              </p>
-                            </NavigationMenuLink>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/hizmetler/sakal-ekimi">
-                            <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                              <div className="text-sm font-medium leading-none">Sakal Ekimi</div>
-                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                Yüz hatlarınıza uygun doğal sakal görünümü
-                              </p>
-                            </a>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/hizmetler/kas-ekimi">
-                            <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                              <div className="text-sm font-medium leading-none">Kaş Ekimi</div>
-                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                Yüz ifadenizi tamamlayan kaş tasarımı
-                              </p>
-                            </a>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/hizmetler/pip-ekimi">
-                            <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                              <div className="text-sm font-medium leading-none">PRP Tedavisi</div>
-                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                Saç dökülmesine karşı etkili PRP tedavisi
-                              </p>
-                            </a>
-                          </Link>
-                        </li>
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <Link href="/galeri">
-                      <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                        Hasta Sonuçları
-                      </NavigationMenuLink>
-                    </Link>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger>Ürünler</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px]">
-                        <li className="row-span-3">
-                          <Link href="/urunler/sac-bakim">
-                            <NavigationMenuLink className="flex h-full w-full select-none 
-                              flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md">
-                              <div className="mb-2 text-lg font-medium">
-                                Saç Bakım Ürünleri
-                              </div>
-                              <p className="text-sm leading-tight text-muted-foreground">
-                                Saç sağlığınız için özel olarak seçilmiş bakım ürünleri
-                              </p>
-                            </NavigationMenuLink>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/urunler/sampuanlar">
-                            <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                              <div className="text-sm font-medium leading-none">Şampuanlar</div>
-                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                Saç tipinize uygun özel şampuanlar
-                              </p>
-                            </a>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/urunler/vitaminler">
-                            <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                              <div className="text-sm font-medium leading-none">Vitamin Takviyeleri</div>
-                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                Saç sağlığı için vitamin ve mineraller
-                              </p>
-                            </a>
-                          </Link>
-                        </li>
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger>Blog</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px]">
-                        <li>
-                          <Link href="/blog/sac-ekimi">
-                            <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                              <div className="text-sm font-medium leading-none">Saç Ekimi Makaleleri</div>
-                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                Saç ekimi hakkında detaylı bilgiler
-                              </p>
-                            </a>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/blog/bakim-onerileri">
-                            <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                              <div className="text-sm font-medium leading-none">Bakım Önerileri</div>
-                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                Saç bakımı için profesyonel öneriler
-                              </p>
-                            </a>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/blog/basari-hikayeleri">
-                            <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                              <div className="text-sm font-medium leading-none">Başarı Hikayeleri</div>
-                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                Hasta deneyimleri ve sonuç hikayeleri
-                              </p>
-                            </a>
-                          </Link>
-                        </li>
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <Link href="/iletisim">
-                      <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                        İletişim
-                      </NavigationMenuLink>
-                    </Link>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
+            <nav className="hidden md:flex items-center gap-6">
+              <Link href="/hizmetler">
+                <a className="text-sm font-medium transition-colors hover:text-primary">
+                  Hizmetlerimiz
+                </a>
+              </Link>
+              <Link href="/galeri">
+                <a className="text-sm font-medium transition-colors hover:text-primary">
+                  Hasta Sonuçları
+                </a>
+              </Link>
+              <Link href="/urunler">
+                <a className="text-sm font-medium transition-colors hover:text-primary">
+                  Ürünler
+                </a>
+              </Link>
+              <Link href="/blog">
+                <a className="text-sm font-medium transition-colors hover:text-primary">
+                  Blog
+                </a>
+              </Link>
+              <Link href="/iletisim">
+                <a className="text-sm font-medium transition-colors hover:text-primary">
+                  İletişim
+                </a>
+              </Link>
             </nav>
           </div>
 
