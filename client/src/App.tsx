@@ -31,6 +31,8 @@ import AdminUsers from "@/pages/admin/users";
 import AdminSettings from "@/pages/admin/settings";
 import AdminPostNew from "@/pages/admin/posts/new";
 import AdminPostEdit from "@/pages/admin/posts/[id]";
+import AdminProductNew from "@/pages/admin/products/new";
+import AdminProductEdit from "@/pages/admin/products/[id]";
 
 function Router() {
   return (
@@ -92,6 +94,20 @@ function Router() {
             {() => (
               <AdminLayout>
                 <AdminProducts />
+              </AdminLayout>
+            )}
+          </Route>
+          <Route path="/admin/products/new">
+            {() => (
+              <AdminLayout>
+                <AdminProductNew />
+              </AdminLayout>
+            )}
+          </Route>
+          <Route path="/admin/products/:id">
+            {() => (
+              <AdminLayout>
+                <AdminProductEdit />
               </AdminLayout>
             )}
           </Route>
