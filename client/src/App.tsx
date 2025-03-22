@@ -24,12 +24,13 @@ import AdminDashboard from "@/pages/admin/dashboard";
 import AdminPatients from "@/pages/admin/patients";
 import NotFound from "@/pages/not-found";
 import { AdminLayout } from "@/components/layout/admin-layout";
-import AdminPosts from "@/pages/admin/posts"; // Added
-import AdminProducts from "@/pages/admin/products"; // Added
-import AdminMedia from "@/pages/admin/media"; // Added
-import AdminUsers from "@/pages/admin/users"; // Added
-import AdminSettings from "@/pages/admin/settings"; // Added
-
+import AdminPosts from "@/pages/admin/posts";
+import AdminProducts from "@/pages/admin/products";
+import AdminMedia from "@/pages/admin/media";
+import AdminUsers from "@/pages/admin/users";
+import AdminSettings from "@/pages/admin/settings";
+import AdminPostNew from "@/pages/admin/posts/new";
+import AdminPostEdit from "@/pages/admin/posts/[id]";
 
 function Router() {
   return (
@@ -70,6 +71,20 @@ function Router() {
             {() => (
               <AdminLayout>
                 <AdminPosts />
+              </AdminLayout>
+            )}
+          </Route>
+          <Route path="/admin/posts/new">
+            {() => (
+              <AdminLayout>
+                <AdminPostNew />
+              </AdminLayout>
+            )}
+          </Route>
+          <Route path="/admin/posts/:id">
+            {() => (
+              <AdminLayout>
+                <AdminPostEdit />
               </AdminLayout>
             )}
           </Route>

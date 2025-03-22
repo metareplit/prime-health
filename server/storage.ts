@@ -1,10 +1,13 @@
 import { 
   users, posts, products, media, settings, services,
+  messages, patientImages, appointments,
   type User, type Post, type Product, type Media, type Setting, type Service,
-  type InsertUser, type InsertPost, type InsertProduct, type InsertMedia, type InsertSetting, type InsertService 
+  type Message, type PatientImage, type Appointment,
+  type InsertUser, type InsertPost, type InsertProduct, type InsertMedia, type InsertSetting, type InsertService,
+  type InsertMessage, type InsertPatientImage, type InsertAppointment
 } from "@shared/schema";
 import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { eq, or } from "drizzle-orm";
 import session from "express-session";
 import connectPg from "connect-pg-simple";
 
@@ -50,6 +53,19 @@ export interface IStorage {
   createService(service: InsertService): Promise<Service>;
   updateService(id: number, data: Partial<Service>): Promise<Service>;
   deleteService(id: number): Promise<void>;
+
+  // Messages methods
+  getUserMessages(userId: number): Promise<Message[]>;
+  createMessage(message: InsertMessage): Promise<Message>;
+
+  // Patient Images methods
+  getPatientImages(patientId: number): Promise<PatientImage[]>;
+  createPatientImage(image: InsertPatientImage): Promise<PatientImage>;
+
+  // Appointments methods
+  getUserAppointments(userId: number): Promise<Appointment[]>;
+  createAppointment(appointment: InsertAppointment): Promise<Appointment>;
+  updateAppointmentStatus(id: number, status: string): Promise<Appointment>;
 
   sessionStore: session.SessionStore;
 }
@@ -222,6 +238,54 @@ export class DatabaseStorage implements IStorage {
 
   async deleteService(id: number): Promise<void> {
     await db.delete(services).where(eq(services.id, id));
+  }
+
+  // Messages methods
+  async getUserMessages(userId: number): Promise<Message[]> {
+    return await db
+      .select()
+      .from(messages)
+      .where(or(eq(messages.senderId, userId), eq(messages.receiverId, userId)));
+  }
+
+  async createMessage(message: InsertMessage): Promise<Message> {
+    const [newMessage] = await db.insert(messages).values(message).returning();
+    return newMessage;
+  }
+
+  // Patient Images methods
+  async getPatientImages(patientId: number): Promise<PatientImage[]> {
+    return await db
+      .select()
+      .from(patientImages)
+      .where(eq(patientImages.patientId, patientId));
+  }
+
+  async createPatientImage(image: InsertPatientImage): Promise<PatientImage> {
+    const [newImage] = await db.insert(patientImages).values(image).returning();
+    return newImage;
+  }
+
+  // Appointments methods
+  async getUserAppointments(userId: number): Promise<Appointment[]> {
+    return await db
+      .select()
+      .from(appointments)
+      .where(eq(appointments.patientId, userId));
+  }
+
+  async createAppointment(appointment: InsertAppointment): Promise<Appointment> {
+    const [newAppointment] = await db.insert(appointments).values(appointment).returning();
+    return newAppointment;
+  }
+
+  async updateAppointmentStatus(id: number, status: string): Promise<Appointment> {
+    const [updatedAppointment] = await db
+      .update(appointments)
+      .set({ status })
+      .where(eq(appointments.id, id))
+      .returning();
+    return updatedAppointment;
   }
 }
 
