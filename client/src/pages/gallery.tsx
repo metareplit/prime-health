@@ -1,25 +1,22 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Metadata } from "@/components/ui/metadata";
-import BeforeAfterSlider from "@/components/gallery/before-after-slider";
-import { Badge } from "@/components/ui/badge";
-import { Clock, Star, Users, CheckCircle, Share2, Info } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import BeforeAfterSlider from "@/components/gallery/before-after-slider";
+import { Metadata } from "@/components/ui/metadata";
+import { Search, Star, Users, Calendar, CheckCircle, Share2, Info, ArrowRight, Filter } from "lucide-react";
 import { Link } from "wouter";
-import { ArrowRight } from 'lucide-react';
 
+// Galeri öğeleri veri yapısı (15 örnek vaka eklenecek)
 const galleryItems = [
   {
     category: "sac-ekimi",
-    title: "Saç Ekimi Öncesi/Sonrası",
-    description: "Modern FUE ve DHI teknikleriyle yapılan saç ekimi operasyonlarının etkileyici sonuçları",
+    title: "Saç Ekimi Sonuçları",
+    description: "DHI ve Safir FUE teknikleriyle gerçekleştirilen saç ekimi operasyonlarının etkileyici sonuçları",
     items: [
       {
         id: 1,
@@ -79,11 +76,12 @@ const galleryItems = [
         testimonial: "DHI tekniği ile yapılan operasyon sonrası iyileşme sürecim çok rahat geçti.",
         doctorNote: "DHI tekniği ile tek tek yapılan ekim sayesinde maksimum doğallık sağlandı."
       }
+      // Add more cases here...
     ]
   },
   {
     category: "sakal-ekimi",
-    title: "Sakal Ekimi Öncesi/Sonrası",
+    title: "Sakal Ekimi Sonuçları",
     description: "Yüz hatlarını belirginleştiren ve estetik bir görünüm kazandıran sakal ekimi sonuçlarımız.",
     items: [
       {
@@ -114,11 +112,12 @@ const galleryItems = [
         testimonial: "Beklentilerimin üzerinde bir sonuç aldım. Çok teşekkür ederim.",
         doctorNote: "Hasta memnuniyetini en üst düzeyde tutarak doğal bir sakal görünümü elde edildi."
       }
+      // Add more cases here...
     ]
   },
   {
     category: "kas-ekimi",
-    title: "Kaş Ekimi Öncesi/Sonrası",
+    title: "Kaş Ekimi Sonuçları",
     description: "Yüz ifadesini güzelleştiren ve daha etkileyici bir görünüm sağlayan kaş ekimi sonuçlarımız.",
     items: [
       {
@@ -149,20 +148,27 @@ const galleryItems = [
         testimonial: "Kaşlarımın dolgunluğu ve doğal görünümü beni çok mutlu etti.",
         doctorNote: "Hasta isteği doğrultusunda doğal ve simetrik bir kaş tasarımı oluşturuldu."
       }
+      // Add more cases here...
     ]
   }
+  // Add more categories here...
 ];
 
 export default function Gallery() {
+  const [selectedCase, setSelectedCase] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("all");
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <Metadata
-        title="Saç Ekimi, Sakal Ekimi ve Kaş Ekimi Hasta Sonuçları | Hair Clinic Tiflis"
-        description="Profesyonel saç ekimi kliniğimizde gerçekleştirilen saç ekimi, sakal ekimi ve kaş ekimi operasyonlarının öncesi ve sonrası hasta sonuçları. Modern teknoloji ve uzman kadromuzla doğal ve kalıcı sonuçlar elde ediyoruz."
-        keywords="saç ekimi öncesi sonrası, sakal ekimi öncesi sonrası, kaş ekimi öncesi sonrası, saç ekimi hasta yorumları, sakal ekimi hasta yorumları, kaş ekimi hasta yorumları, tiflis saç ekimi sonuçları, saç ekimi başarı oranı"
+        title="Hasta Sonuçları Galerisi | Hair Clinic Tiflis"
+        description="Profesyonel saç ekimi kliniğimizde gerçekleştirilen operasyonların öncesi ve sonrası sonuçları. Modern teknoloji ve uzman kadromuzla doğal ve kalıcı sonuçlar."
+        keywords="saç ekimi öncesi sonrası, sakal ekimi sonuçları, kaş ekimi sonuçları, hasta yorumları, tiflis saç ekimi, öncesi sonrası fotoğraflar"
       />
 
-      <section className="relative overflow-hidden py-8 md:py-16">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden py-8 md:py-12">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -186,33 +192,77 @@ export default function Gallery() {
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
               Hasta Sonuçlarımız
             </h1>
-            <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6">
-              Gerçek hasta sonuçlarımız ve öncesi/sonrası fotoğraflarımızı inceleyin.
+            <p className="text-sm md:text-base text-gray-600 mb-6">
+              Uzman ekibimiz tarafından gerçekleştirilen operasyonların öncesi ve sonrası görüntüleri
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-xs md:text-sm text-gray-500">
-              <div className="flex items-center gap-1 md:gap-2 bg-white/50 p-2 rounded-full">
-                <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-green-500" />
-                <span>%98 Memnuniyet</span>
+
+            {/* İstatistikler */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-white p-4 rounded-xl shadow-sm">
+                <div className="text-2xl md:text-3xl font-bold text-primary">10K+</div>
+                <div className="text-sm text-gray-600">Başarılı Operasyon</div>
               </div>
-              <div className="flex items-center gap-1 md:gap-2 bg-white/50 p-2 rounded-full">
-                <Users className="h-3 w-3 md:h-4 md:w-4 text-blue-500" />
-                <span>10.000+ Operasyon</span>
+              <div className="bg-white p-4 rounded-xl shadow-sm">
+                <div className="text-2xl md:text-3xl font-bold text-primary">98%</div>
+                <div className="text-sm text-gray-600">Hasta Memnuniyeti</div>
               </div>
-              <div className="flex items-center gap-1 md:gap-2 bg-white/50 p-2 rounded-full">
-                <Star className="h-3 w-3 md:h-4 md:w-4 text-yellow-500" />
-                <span>9.8/10 Puan</span>
+              <div className="bg-white p-4 rounded-xl shadow-sm">
+                <div className="text-2xl md:text-3xl font-bold text-primary">15+</div>
+                <div className="text-sm text-gray-600">Yıllık Deneyim</div>
+              </div>
+              <div className="bg-white p-4 rounded-xl shadow-sm">
+                <div className="text-2xl md:text-3xl font-bold text-primary">4.9</div>
+                <div className="text-sm text-gray-600">Hasta Değerlendirmesi</div>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
+      {/* Arama ve Filtreleme */}
       <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col md:flex-row gap-4 mb-8">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Input
+              type="text"
+              placeholder="Hasta sonuçlarında ara..."
+              className="pl-10"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          <div className="flex gap-2">
+            <Button
+              variant={selectedFilter === "all" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setSelectedFilter("all")}
+            >
+              Tümü
+            </Button>
+            <Button
+              variant={selectedFilter === "latest" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setSelectedFilter("latest")}
+            >
+              En Yeni
+            </Button>
+            <Button
+              variant={selectedFilter === "popular" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setSelectedFilter("popular")}
+            >
+              En Beğenilen
+            </Button>
+          </div>
+        </div>
+
+        {/* Kategoriler ve Sonuçlar */}
         <Tabs defaultValue="sac-ekimi" className="w-full">
-          <TabsList className="flex justify-center mb-6 md:mb-8 overflow-x-auto">
+          <TabsList className="flex justify-center mb-8 overflow-x-auto">
             {galleryItems.map((category) => (
-              <TabsTrigger 
-                key={category.category} 
+              <TabsTrigger
+                key={category.category}
                 value={category.category}
                 className="text-sm whitespace-nowrap"
               >
@@ -223,165 +273,135 @@ export default function Gallery() {
 
           {galleryItems.map((category) => (
             <TabsContent key={category.category} value={category.category}>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="mb-6"
-              >
-                <h2 className="text-xl md:text-2xl font-bold mb-2">{category.title}</h2>
-                <p className="text-sm md:text-base text-gray-600">{category.description}</p>
-              </motion.div>
-
-              <div className="grid gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {category.items.map((item) => (
                   <motion.div
                     key={item.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="group cursor-pointer"
+                    onClick={() => setSelectedCase(item)}
                   >
-                    <div className="p-4 bg-gradient-to-r from-primary/5 to-transparent">
-                      <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                        <div className="flex items-center gap-2">
-                          <h3 className="text-lg md:text-xl font-bold">{item.description}</h3>
-                          <Badge variant="secondary" className="text-primary text-xs">
+                    <div className="relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
+                      <div className="relative aspect-[4/3]">
+                        <BeforeAfterSlider
+                          beforeImage={item.beforeImage}
+                          afterImage={item.afterImage}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+                      <div className="p-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="font-semibold text-lg">{item.description}</h3>
+                          <Badge variant="secondary" className="text-xs">
                             {item.procedureDetails.technique}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button variant="ghost" size="sm" className="h-8 w-8">
-                                  <Share2 className="h-4 w-4" />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Sonucu Paylaş</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button variant="ghost" size="sm" className="h-8 w-8">
-                                  <Info className="h-4 w-4" />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Detaylı Bilgi</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
+                        <div className="flex items-center gap-4 text-sm text-gray-600">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-4 w-4" />
+                            <span>{item.procedureDetails.duration}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Star className="h-4 w-4 text-yellow-500" />
+                            <span>{item.results.satisfaction}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-
-                    <BeforeAfterSlider
-                      beforeImage={item.beforeImage}
-                      afterImage={item.afterImage}
-                    />
-
-                    <div className="p-4">
-                      <Accordion type="single" collapsible className="space-y-2">
-                        <AccordionItem value="patient-details">
-                          <AccordionTrigger className="text-sm py-2">
-                            <div className="flex items-center gap-2">
-                              <Users className="h-4 w-4 text-primary" />
-                              <span>Hasta Bilgileri</span>
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
-                              {Object.entries(item.patientDetails).map(([key, value]) => (
-                                <div key={key} className="p-2 rounded bg-gray-50">
-                                  <span className="font-medium">{key}:</span>
-                                  <span className="ml-1">{value}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-
-                        <AccordionItem value="procedure-details">
-                          <AccordionTrigger className="text-sm py-2">
-                            <div className="flex items-center gap-2">
-                              <Clock className="h-4 w-4 text-primary" />
-                              <span>İşlem Detayları</span>
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
-                              {Object.entries(item.procedureDetails).map(([key, value]) => (
-                                <div key={key} className="p-2 rounded bg-gray-50">
-                                  <span className="font-medium">{key}:</span>
-                                  <span className="ml-1">{value}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-
-                        <AccordionItem value="results">
-                          <AccordionTrigger className="text-sm py-2">
-                            <div className="flex items-center gap-2">
-                              <CheckCircle className="h-4 w-4 text-primary" />
-                              <span>Sonuçlar</span>
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
-                              {Object.entries(item.results).map(([key, value]) => (
-                                <div key={key} className="p-2 rounded bg-gray-50">
-                                  <span className="font-medium">{key}:</span>
-                                  <span className="ml-1">{value}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-
-                        <AccordionItem value="testimonial">
-                          <AccordionTrigger className="text-sm py-2">
-                            <div className="flex items-center gap-2">
-                              <Star className="h-4 w-4 text-primary" />
-                              <span>Hasta Yorumu</span>
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <p className="text-xs md:text-sm text-gray-600 italic">"{item.testimonial}"</p>
-                            <div className="mt-2 pt-2 border-t">
-                              <p className="text-xs md:text-sm text-gray-600">
-                                <span className="font-medium">Doktor Notu:</span> {item.doctorNote}
-                              </p>
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-                      </Accordion>
-                    </div>
                   </motion.div>
                 ))}
-              </div>
-
-              <div className="mt-8 text-center">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="group text-sm w-full md:w-auto"
-                  asChild
-                >
-                  <Link href="/randevu">
-                    <span>Ücretsiz Danışmanlık Alın</span>
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
               </div>
             </TabsContent>
           ))}
         </Tabs>
       </div>
+
+      {/* Detay Modal */}
+      <Dialog open={!!selectedCase} onOpenChange={() => setSelectedCase(null)}>
+        <DialogContent className="max-w-4xl w-full">
+          <ScrollArea className="max-h-[80vh]">
+            {selectedCase && (
+              <div className="space-y-6">
+                <BeforeAfterSlider
+                  beforeImage={selectedCase.beforeImage}
+                  afterImage={selectedCase.afterImage}
+                />
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Sol Kolon */}
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Hasta Bilgileri</h3>
+                      <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                        {Object.entries(selectedCase.patientDetails).map(([key, value]) => (
+                          <div key={key} className="flex justify-between text-sm">
+                            <span className="text-gray-600">{key}</span>
+                            <span className="font-medium">{value}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">İşlem Detayları</h3>
+                      <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                        {Object.entries(selectedCase.procedureDetails).map(([key, value]) => (
+                          <div key={key} className="flex justify-between text-sm">
+                            <span className="text-gray-600">{key}</span>
+                            <span className="font-medium">{value}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Sağ Kolon */}
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Sonuçlar</h3>
+                      <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                        {Object.entries(selectedCase.results).map(([key, value]) => (
+                          <div key={key} className="flex justify-between text-sm">
+                            <span className="text-gray-600">{key}</span>
+                            <span className="font-medium">{value}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Hasta Yorumu</h3>
+                      <div className="bg-primary/5 rounded-lg p-4">
+                        <p className="text-sm italic text-gray-600">"{selectedCase.testimonial}"</p>
+                        <div className="mt-4 pt-4 border-t">
+                          <h4 className="font-medium mb-2">Doktor Notu:</h4>
+                          <p className="text-sm text-gray-600">{selectedCase.doctorNote}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center pt-4 border-t">
+                  <Button variant="outline" size="sm" className="gap-2">
+                    <Share2 className="h-4 w-4" />
+                    Paylaş
+                  </Button>
+                  <Button asChild>
+                    <Link href="/randevu" className="gap-2">
+                      Danışmanlık Al
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            )}
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

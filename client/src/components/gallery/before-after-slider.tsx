@@ -9,44 +9,57 @@ interface BeforeAfterSliderProps {
 export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [isTouching, setIsTouching] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseDown = () => {
-    setIsDragging(true);
+  const handleInteractionStart = (clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = ((clientX - rect.left) / rect.width) * 100;
+    setSliderPosition(Math.min(Math.max(x, 0), 100));
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
+  const handleMouseDown = () => setIsDragging(true);
+  const handleMouseUp = () => setIsDragging(false);
+  const handleTouchStart = () => setIsTouching(true);
+  const handleTouchEnd = () => setIsTouching(false);
 
   const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging || !containerRef.current) return;
+    if (!isDragging) return;
+    handleInteractionStart(e.clientX);
+  };
 
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    setSliderPosition(Math.min(Math.max(x, 0), 100));
+  const handleTouchMove = (e: TouchEvent) => {
+    if (!isTouching || !e.touches[0]) return;
+    handleInteractionStart(e.touches[0].clientX);
   };
 
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchend', handleTouchEnd);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [isDragging]);
+  }, [isDragging, isTouching]);
 
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-[4/3] overflow-hidden cursor-ew-resize rounded-lg shadow-sm"
+      className="relative w-full aspect-[4/3] overflow-hidden rounded-lg touch-none select-none bg-gray-100"
+      onMouseDown={handleMouseDown}
+      onTouchStart={handleTouchStart}
     >
       {/* Before Image */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 bg-gray-200">
         <img
           src={beforeImage}
-          alt="Before"
+          alt="Öncesi"
           className="w-full h-full object-cover"
           loading="lazy"
         />
@@ -59,7 +72,7 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
       >
         <img
           src={afterImage}
-          alt="After"
+          alt="Sonrası"
           className="w-full h-full object-cover"
           loading="lazy"
         />
@@ -70,52 +83,28 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
         className="absolute top-0 bottom-0 w-0.5 bg-white cursor-ew-resize"
         style={{ left: `${sliderPosition}%` }}
         whileHover={{ scale: 1.1 }}
-        onMouseDown={handleMouseDown}
+        whileTap={{ scale: 1.1 }}
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-md flex items-center justify-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-primary rotate-180"
-          >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-primary"
-          >
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
+          <div className="flex items-center gap-0.5">
+            <div className="w-0.5 h-3 bg-primary rounded-full transform -rotate-12" />
+            <div className="w-0.5 h-3 bg-primary rounded-full transform rotate-12" />
+          </div>
         </div>
       </motion.div>
 
       {/* Labels */}
-      <div className="absolute bottom-2 left-2 bg-black/50 text-white px-2 py-0.5 rounded text-xs font-medium">
+      <div className="absolute bottom-2 left-2 bg-black/50 backdrop-blur-sm text-white px-2 py-0.5 rounded text-xs font-medium">
         Öncesi
       </div>
-      <div className="absolute bottom-2 right-2 bg-black/50 text-white px-2 py-0.5 rounded text-xs font-medium">
+      <div className="absolute bottom-2 right-2 bg-black/50 backdrop-blur-sm text-white px-2 py-0.5 rounded text-xs font-medium">
         Sonrası
       </div>
 
       {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-200">
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-200/50 backdrop-blur-sm">
         <motion.div
-          className="h-full bg-primary"
+          className="h-full bg-white"
           style={{ width: `${sliderPosition}%` }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         />
