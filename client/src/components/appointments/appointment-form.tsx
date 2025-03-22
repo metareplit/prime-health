@@ -11,15 +11,39 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Calendar } from "@/components/ui/calendar";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { motion } from "framer-motion";
+import { User, Phone, Mail, CalendarDays, Clock, FileText, CheckCircle2, ArrowRight } from "lucide-react";
 import type { Service } from "@shared/schema";
 
 interface AppointmentFormProps {
   selectedService?: Service;
 }
+
+const timeSlots = [
+  "09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"
+];
+
+const genderOptions = [
+  { label: "Erkek", value: "male" },
+  { label: "Kadın", value: "female" },
+];
+
+const communicationPreferences = [
+  { id: "whatsapp", label: "WhatsApp" },
+  { id: "phone", label: "Telefon" },
+  { id: "email", label: "E-posta" },
+];
 
 export default function AppointmentForm({ selectedService }: AppointmentFormProps) {
   const { toast } = useToast();
@@ -28,9 +52,17 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
   const form = useForm({
     resolver: zodResolver(insertPatientSchema),
     defaultValues: {
+      step: "personal",
       name: "",
       email: "",
       phone: "",
+      age: "",
+      gender: "",
+      communicationPreferences: [],
+      previousTreatments: "",
+      medicalConditions: "",
+      preferredDate: new Date(),
+      preferredTime: "",
       notes: "",
     },
   });
@@ -59,17 +91,18 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
         await createAppointment.mutateAsync({
           patientId: patient.id,
           serviceId: selectedService.id,
-          date: new Date().toISOString(), // You might want to add a date picker here
+          date: new Date(data.preferredDate).toISOString(),
+          time: data.preferredTime,
           status: "pending",
           notes: data.notes,
         });
       }
 
       queryClient.invalidateQueries({ queryKey: ["/api/appointments"] });
-      
+
       toast({
         title: "Başarılı!",
-        description: "Randevunuz başarıyla oluşturuldu.",
+        description: "Danışmanlık talebiniz başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz.",
       });
 
       form.reset();
@@ -77,83 +110,322 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
       toast({
         variant: "destructive",
         title: "Hata!",
-        description: "Randevu oluşturulurken bir hata oluştu.",
+        description: "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.",
       });
     }
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Ad Soyad</FormLabel>
-              <FormControl>
-                <Input placeholder="Ad Soyad" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+    <div className="max-w-2xl mx-auto">
+      <Tabs value={form.watch("step")} className="w-full">
+        <TabsList className="grid w-full grid-cols-3 mb-8">
+          <TabsTrigger value="personal" className="data-[state=active]:bg-primary data-[state=active]:text-white">
+            <User className="h-4 w-4 mr-2" />
+            Kişisel Bilgiler
+          </TabsTrigger>
+          <TabsTrigger value="medical" className="data-[state=active]:bg-primary data-[state=active]:text-white">
+            <FileText className="h-4 w-4 mr-2" />
+            Sağlık Bilgileri
+          </TabsTrigger>
+          <TabsTrigger value="appointment" className="data-[state=active]:bg-primary data-[state=active]:text-white">
+            <CalendarDays className="h-4 w-4 mr-2" />
+            Randevu Detayları
+          </TabsTrigger>
+        </TabsList>
 
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input type="email" placeholder="Email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <TabsContent value="personal">
+              <Card>
+                <CardContent className="pt-6 space-y-6">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-6"
+                  >
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Ad Soyad</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Ad Soyad" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-        <FormField
-          control={form.control}
-          name="phone"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Telefon</FormLabel>
-              <FormControl>
-                <Input placeholder="Telefon" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                    <div className="grid grid-cols-2 gap-4">
+                      <FormField
+                        control={form.control}
+                        name="age"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Yaş</FormLabel>
+                            <FormControl>
+                              <Input type="number" placeholder="Yaş" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-        <FormField
-          control={form.control}
-          name="notes"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Notlar</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Eklemek istediğiniz notlar..."
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                      <FormField
+                        control={form.control}
+                        name="gender"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Cinsiyet</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Seçiniz" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {genderOptions.map((option) => (
+                                  <SelectItem key={option.value} value={option.value}>
+                                    {option.label}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
 
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={createPatient.isPending || createAppointment.isPending}
-        >
-          {createPatient.isPending || createAppointment.isPending
-            ? "Gönderiliyor..."
-            : "Randevu Oluştur"}
-        </Button>
-      </form>
-    </Form>
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>E-posta</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="E-posta adresiniz" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Telefon</FormLabel>
+                          <FormControl>
+                            <Input placeholder="+90 555 123 4567" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="communicationPreferences"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>İletişim Tercihleri</FormLabel>
+                          <div className="grid grid-cols-3 gap-4 mt-2">
+                            {communicationPreferences.map((item) => (
+                              <FormField
+                                key={item.id}
+                                control={form.control}
+                                name="communicationPreferences"
+                                render={({ field }) => (
+                                  <FormItem key={item.id}>
+                                    <FormControl>
+                                      <div className="flex items-center space-x-2">
+                                        <Checkbox
+                                          checked={field.value?.includes(item.id)}
+                                          onCheckedChange={(checked) => {
+                                            return checked
+                                              ? field.onChange([...field.value, item.id])
+                                              : field.onChange(
+                                                  field.value?.filter((value) => value !== item.id)
+                                                );
+                                          }}
+                                        />
+                                        <FormLabel className="text-sm font-normal">
+                                          {item.label}
+                                        </FormLabel>
+                                      </div>
+                                    </FormControl>
+                                  </FormItem>
+                                )}
+                              />
+                            ))}
+                          </div>
+                          <FormDescription>
+                            Size nasıl ulaşmamızı tercih edersiniz?
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <Button
+                      type="button"
+                      className="w-full"
+                      onClick={() => form.setValue("step", "medical")}
+                    >
+                      Devam Et
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </motion.div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="medical">
+              <Card>
+                <CardContent className="pt-6 space-y-6">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-6"
+                  >
+                    <FormField
+                      control={form.control}
+                      name="previousTreatments"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Daha Önce Aldığınız Tedaviler</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Varsa daha önce aldığınız tedavileri belirtiniz..."
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="medicalConditions"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Sağlık Durumu</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Varsa kronik rahatsızlıklarınızı veya düzenli kullandığınız ilaçları belirtiniz..."
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <Button
+                      type="button"
+                      className="w-full"
+                      onClick={() => form.setValue("step", "appointment")}
+                    >
+                      Devam Et
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </motion.div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="appointment">
+              <Card>
+                <CardContent className="pt-6 space-y-6">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-6"
+                  >
+                    <FormField
+                      control={form.control}
+                      name="preferredDate"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col">
+                          <FormLabel>Tercih Ettiğiniz Tarih</FormLabel>
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            className="rounded-md border"
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="preferredTime"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Tercih Ettiğiniz Saat</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Saat seçiniz" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {timeSlots.map((time) => (
+                                <SelectItem key={time} value={time}>
+                                  {time}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="notes"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Ek Notlar</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Eklemek istediğiniz notlar..."
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <Button
+                      type="submit"
+                      className="w-full"
+                      disabled={createPatient.isPending || createAppointment.isPending}
+                    >
+                      {createPatient.isPending || createAppointment.isPending ? (
+                        "Gönderiliyor..."
+                      ) : (
+                        <>
+                          Randevu Oluştur
+                          <CheckCircle2 className="ml-2 h-4 w-4" />
+                        </>
+                      )}
+                    </Button>
+                  </motion.div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </form>
+        </Form>
+      </Tabs>
+    </div>
   );
 }

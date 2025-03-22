@@ -20,6 +20,11 @@ export const patients = pgTable("patients", {
   name: text("name").notNull(),
   email: text("email").notNull(),
   phone: text("phone").notNull(),
+  age: text("age").notNull(),
+  gender: text("gender").notNull(),
+  communicationPreferences: text("communication_preferences").array(),
+  previousTreatments: text("previous_treatments"),
+  medicalConditions: text("medical_conditions"),
   notes: text("notes"),
 });
 
@@ -28,6 +33,7 @@ export const appointments = pgTable("appointments", {
   patientId: integer("patient_id").notNull(),
   serviceId: integer("service_id").notNull(),
   date: timestamp("date").notNull(),
+  time: text("time").notNull(),
   status: text("status").notNull(), // pending, confirmed, completed, cancelled
   notes: text("notes"),
 });
@@ -39,8 +45,23 @@ export const users = pgTable("users", {
   isAdmin: boolean("is_admin").notNull().default(false),
 });
 
+// Schema validations with extended rules
 export const insertServiceSchema = createInsertSchema(services);
-export const insertPatientSchema = createInsertSchema(patients);
+
+export const insertPatientSchema = createInsertSchema(patients).extend({
+  email: z.string().email("Geçerli bir e-posta adresi giriniz"),
+  phone: z.string().min(10, "Telefon numarası en az 10 karakter olmalıdır"),
+  age: z.string().min(1, "Yaş bilgisi gereklidir"),
+  gender: z.string().min(1, "Cinsiyet seçimi gereklidir"),
+  communicationPreferences: z.array(z.string()).optional(),
+  previousTreatments: z.string().optional(),
+  medicalConditions: z.string().optional(),
+  notes: z.string().optional(),
+  step: z.string(),
+  preferredDate: z.date(),
+  preferredTime: z.string(),
+});
+
 export const insertAppointmentSchema = createInsertSchema(appointments);
 export const insertUserSchema = createInsertSchema(users);
 
