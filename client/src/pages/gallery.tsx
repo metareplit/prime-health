@@ -3,7 +3,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Metadata } from "@/components/ui/metadata";
 import BeforeAfterSlider from "@/components/gallery/before-after-slider";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Star, Users, CheckCircle } from "lucide-react";
+import { Clock, Star, Users, CheckCircle, Share2, Download, Info } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Link } from "wouter";
+import { ArrowRight } from 'lucide-react';
 
 const galleryItems = [
   {
@@ -147,19 +156,19 @@ export default function Gallery() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <Metadata
-        title="Hasta Sonuçları ve Öncesi/Sonrası Görseller | Hair Clinic Tiflis"
-        description="Saç ekimi, sakal ekimi ve kaş ekimi öncesi ve sonrası hasta sonuçlarımız. Gerçek hasta deneyimleri ve profesyonel sonuçlarımızı inceleyin."
-        keywords="saç ekimi öncesi sonrası, sakal ekimi öncesi sonrası, hasta sonuçları, tiflis saç ekimi sonuçları, öncesi sonrası fotoğraflar"
+        title="Saç Ekimi, Sakal Ekimi ve Kaş Ekimi Hasta Sonuçları | Hair Clinic Tiflis"
+        description="Profesyonel saç ekimi kliniğimizde gerçekleştirilen saç ekimi, sakal ekimi ve kaş ekimi operasyonlarının öncesi ve sonrası hasta sonuçları. Modern teknoloji ve uzman kadromuzla doğal ve kalıcı sonuçlar elde ediyoruz."
+        keywords="saç ekimi öncesi sonrası, sakal ekimi öncesi sonrası, kaş ekimi öncesi sonrası, saç ekimi hasta yorumları, sakal ekimi hasta yorumları, kaş ekimi hasta yorumları, tiflis saç ekimi sonuçları, saç ekimi başarı oranı"
       />
 
       <section className="relative overflow-hidden py-16">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
           className="absolute -right-40 -top-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
         />
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -174,11 +183,26 @@ export default function Gallery() {
             className="max-w-3xl mx-auto text-center"
           >
             <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
-              Hasta Sonuçları Galerisi
+              Hasta Sonuçlarımız
             </h1>
-            <p className="text-lg text-gray-600">
-              Gerçek hasta sonuçlarımız ve profesyonel öncesi/sonrası fotoğraflarımızı inceleyin. Her hasta için özel planlama ve en uygun teknik kullanılmıştır.
+            <p className="text-lg text-gray-600 mb-6">
+              Gerçek hasta sonuçlarımız ve öncesi/sonrası fotoğraflarımızı inceleyin.
+              Her vakada kişiye özel planlama ve en uygun teknik kullanılmıştır.
             </p>
+            <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-green-500" />
+                <span>%98 Hasta Memnuniyeti</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="h-4 w-4 text-blue-500" />
+                <span>10.000+ Başarılı Operasyon</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Star className="h-4 w-4 text-yellow-500" />
+                <span>9.8/10 Değerlendirme</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -186,17 +210,24 @@ export default function Gallery() {
       <div className="container mx-auto px-4 py-12">
         <Tabs defaultValue="sac-ekimi" className="w-full">
           <TabsList className="flex justify-center mb-8">
-            <TabsTrigger value="sac-ekimi">Saç Ekimi</TabsTrigger>
-            <TabsTrigger value="sakal-ekimi">Sakal Ekimi</TabsTrigger>
-            <TabsTrigger value="kas-ekimi">Kaş Ekimi</TabsTrigger>
+            {galleryItems.map((category) => (
+              <TabsTrigger key={category.category} value={category.category}>
+                {category.title}
+              </TabsTrigger>
+            ))}
           </TabsList>
 
           {galleryItems.map((category) => (
             <TabsContent key={category.category} value={category.category}>
-              <div className="mb-8">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="mb-8"
+              >
                 <h2 className="text-2xl font-bold mb-2">{category.title}</h2>
                 <p className="text-gray-600">{category.description}</p>
-              </div>
+              </motion.div>
 
               <div className="grid gap-16">
                 {category.items.map((item) => (
@@ -209,10 +240,38 @@ export default function Gallery() {
                   >
                     <div className="p-6 bg-gradient-to-r from-primary/5 to-transparent">
                       <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-2xl font-bold">{item.description}</h3>
-                        <Badge variant="secondary" className="text-primary">
-                          {item.procedureDetails.technique}
-                        </Badge>
+                        <div className="flex items-center gap-4">
+                          <h3 className="text-2xl font-bold">{item.description}</h3>
+                          <Badge variant="secondary" className="text-primary">
+                            {item.procedureDetails.technique}
+                          </Badge>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button variant="ghost" size="icon">
+                                  <Share2 className="h-4 w-4" />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Sonucu Paylaş</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button variant="ghost" size="icon">
+                                  <Info className="h-4 w-4" />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Detaylı Bilgi Al</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </div>
                       </div>
                     </div>
 
@@ -288,6 +347,20 @@ export default function Gallery() {
                     </div>
                   </motion.div>
                 ))}
+              </div>
+
+              <div className="mt-12 text-center">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="group"
+                  asChild
+                >
+                  <Link href="/randevu">
+                    <span>Ücretsiz Danışmanlık Alın</span>
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </Button>
               </div>
             </TabsContent>
           ))}
