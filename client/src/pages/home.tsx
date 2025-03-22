@@ -6,8 +6,6 @@ import HeroSlider from "@/components/home/hero-slider";
 import { motion } from "framer-motion";
 import { Shield, Users, Stethoscope, Clock, Award, HeartHandshake, Building2, Map, ArrowRight, CheckCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import BeforeAfterSlider from "@/components/gallery/before-after-slider";
-import { SuccessStories } from "@/components/gallery/success-stories";
 
 const features = [
   {
@@ -222,96 +220,6 @@ export default function Home() {
               ))}
             </div>
           )}
-        </div>
-      </section>
-
-      {/* Before/After and Success Stories Section */}
-      <section className="py-20 bg-gradient-to-b from-transparent to-primary/5">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Hasta Başarı Hikayeleri
-            </h2>
-            <p className="text-lg text-gray-600">
-              Binlerce mutlu hastamızın deneyimlerini ve sonuçlarını inceleyin
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch mb-20">
-            {/* Before/After Column */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-xl shadow-lg p-8 space-y-8"
-            >
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-semibold mb-2">Öncesi & Sonrası</h3>
-                <p className="text-gray-600">Gerçek hasta sonuçlarımızı inceleyin</p>
-              </div>
-
-              <div className="space-y-8">
-                <div className="rounded-lg overflow-hidden shadow-md">
-                  <BeforeAfterSlider
-                    beforeImage="/images/gallery/hair-before-1.jpg"
-                    afterImage="/images/gallery/hair-after-1.jpg"
-                  />
-                  <div className="bg-gray-50 p-4">
-                    <h4 className="font-medium text-primary">Saç Ekimi</h4>
-                    <p className="text-sm text-gray-600">6 ay sonrası sonuç</p>
-                  </div>
-                </div>
-
-                <div className="rounded-lg overflow-hidden shadow-md">
-                  <BeforeAfterSlider
-                    beforeImage="/images/gallery/beard-before-1.jpg"
-                    afterImage="/images/gallery/beard-after-1.jpg"
-                  />
-                  <div className="bg-gray-50 p-4">
-                    <h4 className="font-medium text-primary">Sakal Ekimi</h4>
-                    <p className="text-sm text-gray-600">4 ay sonrası sonuç</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Success Stories Column */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-xl shadow-lg p-8"
-            >
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-semibold mb-2">Hasta Yorumları</h3>
-                <p className="text-gray-600">Hastalarımızın deneyimlerini okuyun</p>
-              </div>
-              <SuccessStories />
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <Link href="/galeri">
-              <Button variant="outline" size="lg" className="group hover:shadow-lg transition-all duration-300">
-                Tüm Sonuçları İnceleyin
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          </motion.div>
         </div>
       </section>
     </div>
