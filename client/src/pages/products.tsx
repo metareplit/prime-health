@@ -174,7 +174,7 @@ export default function Products() {
   return (
     <div className="min-h-screen">
       <Metadata
-        title="Saç Bakım Ürünleri ve Kullanım Kılavuzu | Hair Clinic Tiflis"
+        title="Saç Bakım Ürünleri ve Kullanım Kılavuzu | Hair Clinic"
         description="Saç ekimi sonrası bakım ürünleri, şampuanlar, serumlar ve vitaminler. Profesyonel saç bakım ürünleri hakkında detaylı bilgi."
         keywords="saç bakım ürünleri, saç ekimi şampuanı, saç serumu, saç vitamini, saç bakım kılavuzu"
       />
