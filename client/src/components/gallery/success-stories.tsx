@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Card } from "@/components/ui/card";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -24,12 +24,22 @@ const successStories: SuccessStory[] = [
     age: "35",
     location: "İstanbul",
     procedure: "Saç Ekimi",
-    testimonial: "Harika sonuçlar aldım, çok memnunum...",
+    testimonial: "Uzun süre saç dökülmesi problemi yaşadıktan sonra kliniğinizde saç ekimi yaptırdım. Sonuçlar beklediğimden çok daha iyi. Doğal ve sık bir saça kavuştum. Tüm ekibe teşekkür ederim.",
     rating: 5,
     videoUrl: "/videos/testimonial-1.mp4",
     imageUrl: "/images/testimonials/ahmet.jpg"
   },
-  // Diğer başarı hikayeleri...
+  {
+    id: 2,
+    name: "Mehmet S.",
+    age: "42",
+    location: "Ankara",
+    procedure: "Sakal Ekimi",
+    testimonial: "Sakal ekimi konusunda tereddütlerim vardı ancak operasyon sonrası aldığım sonuç muhteşem. Artık daha genç ve bakımlı görünüyorum. Profesyonel yaklaşımınız için teşekkürler.",
+    rating: 5,
+    videoUrl: "/videos/testimonial-2.mp4",
+    imageUrl: "/images/testimonials/mehmet.jpg"
+  }
 ];
 
 export function SuccessStories() {
@@ -37,10 +47,8 @@ export function SuccessStories() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <div className="py-8">
-      <h2 className="text-2xl font-bold mb-6 text-center">Başarı Hikayeleri</h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="py-4">
+      <div className="grid grid-cols-1 gap-6">
         {successStories.map((story) => (
           <motion.div
             key={story.id}
@@ -82,7 +90,7 @@ export function SuccessStories() {
                 )}
               </div>
 
-              <div className="p-4">
+              <div className="p-6">
                 <div className="flex items-center gap-4 mb-4">
                   <Avatar>
                     <img src={story.imageUrl} alt={story.name} />
@@ -95,7 +103,7 @@ export function SuccessStories() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1 mb-2">
+                <div className="flex items-center gap-1 mb-4">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
                       key={i}
@@ -108,14 +116,14 @@ export function SuccessStories() {
                 </div>
 
                 <div className="relative">
-                  <Quote className="absolute -top-2 -left-2 h-4 w-4 text-primary/20" />
-                  <p className="text-sm text-gray-600 italic pl-6">
+                  <Quote className="absolute -top-2 -left-2 h-8 w-8 text-primary/20" />
+                  <p className="text-gray-600 italic pl-8 leading-relaxed">
                     {story.testimonial}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-4 border-t">
-                  <p className="text-xs text-gray-500">{story.procedure}</p>
+                <div className="mt-6 pt-4 border-t">
+                  <p className="text-sm text-gray-500">{story.procedure}</p>
                 </div>
               </div>
             </Card>
