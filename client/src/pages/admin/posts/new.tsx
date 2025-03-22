@@ -22,6 +22,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { X, Plus, ImagePlus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useLocation } from "wouter";
@@ -30,6 +32,8 @@ export default function NewPost() {
   const { toast } = useToast();
   const [, setLocation] = useLocation();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [tags, setTags] = useState<string[]>([]);
+  const [newTag, setNewTag] = useState("");
 
   const form = useForm<InsertPost>({
     resolver: zodResolver(insertPostSchema),
@@ -39,12 +43,16 @@ export default function NewPost() {
       excerpt: "",
       status: "draft",
       category: "general",
+      seoTitle: "",
+      seoDescription: "",
+      featuredImage: "",
+      tags: [],
     },
   });
 
   const createPost = useMutation({
     mutationFn: async (data: InsertPost) => {
-      const res = await apiRequest("POST", "/api/posts", data);
+      const res = await apiRequest("POST", "/api/posts", { ...data, tags });
       return await res.json();
     },
     onSuccess: () => {
@@ -63,6 +71,17 @@ export default function NewPost() {
       });
     },
   });
+
+  const handleAddTag = () => {
+    if (newTag && !tags.includes(newTag)) {
+      setTags([...tags, newTag]);
+      setNewTag("");
+    }
+  };
+
+  const handleRemoveTag = (tag: string) => {
+    setTags(tags.filter((t) => t !== tag));
+  };
 
   const onSubmit = async (data: InsertPost) => {
     setIsSubmitting(true);
@@ -136,26 +155,138 @@ export default function NewPost() {
                 )}
               />
 
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="status"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Durum</FormLabel>
+                      <Select
+                        value={field.value}
+                        onValueChange={field.onChange}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Durum seçin" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="draft">Taslak</SelectItem>
+                          <SelectItem value="published">Yayında</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="category"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Kategori</FormLabel>
+                      <Select
+                        value={field.value}
+                        onValueChange={field.onChange}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Kategori seçin" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="general">Genel</SelectItem>
+                          <SelectItem value="sac-ekimi">Saç Ekimi</SelectItem>
+                          <SelectItem value="sakal-ekimi">Sakal Ekimi</SelectItem>
+                          <SelectItem value="bakim">Bakım</SelectItem>
+                          <SelectItem value="teknoloji">Teknoloji</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
               <FormField
                 control={form.control}
-                name="status"
+                name="featuredImage"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Durum</FormLabel>
-                    <Select
-                      value={field.value}
-                      onValueChange={field.onChange}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Durum seçin" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="draft">Taslak</SelectItem>
-                        <SelectItem value="published">Yayında</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <FormLabel>Öne Çıkan Görsel</FormLabel>
+                    <FormControl>
+                      <div className="flex items-center gap-4">
+                        <Input
+                          type="text"
+                          placeholder="Görsel URL'si..."
+                          {...field}
+                        />
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="icon"
+                          onClick={() => {/* Medya yöneticisini aç */}}
+                        >
+                          <ImagePlus className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="space-y-4">
+                <FormLabel>Etiketler</FormLabel>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {tags.map((tag) => (
+                    <Badge key={tag} variant="secondary">
+                      {tag}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveTag(tag)}
+                        className="ml-2"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </Badge>
+                  ))}
+                </div>
+                <div className="flex gap-2">
+                  <Input
+                    type="text"
+                    placeholder="Yeni etiket..."
+                    value={newTag}
+                    onChange={(e) => setNewTag(e.target.value)}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleAddTag();
+                      }
+                    }}
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={handleAddTag}
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    Ekle
+                  </Button>
+                </div>
+              </div>
+
+              <FormField
+                control={form.control}
+                name="seoTitle"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>SEO Başlığı</FormLabel>
+                    <FormControl>
+                      <Input placeholder="SEO başlığı..." {...field} />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -163,27 +294,17 @@ export default function NewPost() {
 
               <FormField
                 control={form.control}
-                name="category"
+                name="seoDescription"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Kategori</FormLabel>
-                    <Select
-                      value={field.value}
-                      onValueChange={field.onChange}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Kategori seçin" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="general">Genel</SelectItem>
-                        <SelectItem value="sac-ekimi">Saç Ekimi</SelectItem>
-                        <SelectItem value="sakal-ekimi">Sakal Ekimi</SelectItem>
-                        <SelectItem value="bakim">Bakım</SelectItem>
-                        <SelectItem value="teknoloji">Teknoloji</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <FormLabel>SEO Açıklaması</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="SEO açıklaması..."
+                        className="h-20"
+                        {...field}
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
