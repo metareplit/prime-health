@@ -30,10 +30,10 @@ function SidebarItem({ icon, label, href, active }: SidebarItemProps) {
     <Link href={href}>
       <a
         className={cn(
-          "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-muted",
+          "flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200",
           active
-            ? "bg-primary text-primary-foreground font-medium"
-            : "text-muted-foreground hover:text-foreground"
+            ? "bg-primary/10 text-primary hover:bg-primary/15"
+            : "text-muted-foreground hover:bg-muted hover:text-foreground"
         )}
       >
         {icon}
@@ -49,129 +49,131 @@ export function Sidebar() {
   const pathname = location || '';
 
   return (
-    <div className="w-64 border-r min-h-screen p-6 space-y-8 bg-background shadow-sm">
-      <div className="flex items-center gap-2 px-2 pb-4 border-b">
-        <span className="text-lg font-semibold">Yönetim Paneli</span>
-      </div>
-
-      <nav className="space-y-8">
-        {/* Ana Sayfa ve Analitikler */}
-        <div>
-          <div className="text-xs font-semibold text-muted-foreground mb-4 px-2 uppercase tracking-wider">
-            Genel Bakış
-          </div>
-          <div className="space-y-2">
-            <SidebarItem
-              icon={<LayoutDashboard className="h-4 w-4" />}
-              label="Dashboard"
-              href="/admin"
-              active={pathname === "/admin"}
-            />
-            <SidebarItem
-              icon={<LineChart className="h-4 w-4" />}
-              label="Analitikler"
-              href="/admin/analytics"
-              active={pathname === "/admin/analytics"}
-            />
-            <SidebarItem
-              icon={<Globe className="h-4 w-4" />}
-              label="SEO Yönetimi"
-              href="/admin/seo"
-              active={pathname === "/admin/seo"}
-            />
-          </div>
+    <div className="fixed inset-y-0 left-0 w-64 bg-card border-r border-border">
+      <div className="flex flex-col h-full">
+        <div className="flex items-center gap-2 p-6 border-b border-border">
+          <span className="text-xl font-semibold tracking-tight">Admin Panel</span>
         </div>
 
-        {/* İçerik Yönetimi */}
-        <div>
-          <div className="text-xs font-semibold text-muted-foreground mb-4 px-2 uppercase tracking-wider">
-            İçerik Yönetimi
+        <nav className="flex-1 p-4 space-y-6 overflow-y-auto">
+          {/* Ana Sayfa ve Analitikler */}
+          <div>
+            <div className="mb-3 px-4 text-xs font-semibold tracking-wider text-muted-foreground/70 uppercase">
+              Genel Bakış
+            </div>
+            <div className="space-y-1">
+              <SidebarItem
+                icon={<LayoutDashboard className="h-4 w-4" />}
+                label="Dashboard"
+                href="/admin"
+                active={pathname === "/admin"}
+              />
+              <SidebarItem
+                icon={<LineChart className="h-4 w-4" />}
+                label="Analitikler"
+                href="/admin/analytics"
+                active={pathname === "/admin/analytics"}
+              />
+              <SidebarItem
+                icon={<Globe className="h-4 w-4" />}
+                label="SEO Yönetimi"
+                href="/admin/seo"
+                active={pathname === "/admin/seo"}
+              />
+            </div>
           </div>
-          <div className="space-y-2">
-            <SidebarItem
-              icon={<FileText className="h-4 w-4" />}
-              label="Blog Yazıları"
-              href="/admin/posts"
-              active={pathname.startsWith("/admin/posts")}
-            />
-            <SidebarItem
-              icon={<Package className="h-4 w-4" />}
-              label="Ürünler"
-              href="/admin/products"
-              active={pathname.startsWith("/admin/products")}
-            />
-            <SidebarItem
-              icon={<Image className="h-4 w-4" />}
-              label="Medya"
-              href="/admin/media"
-              active={pathname.startsWith("/admin/media")}
-            />
-          </div>
-        </div>
 
-        {/* Kullanıcı ve Randevu Yönetimi */}
-        <div>
-          <div className="text-xs font-semibold text-muted-foreground mb-4 px-2 uppercase tracking-wider">
-            Kullanıcı Yönetimi
+          {/* İçerik Yönetimi */}
+          <div>
+            <div className="mb-3 px-4 text-xs font-semibold tracking-wider text-muted-foreground/70 uppercase">
+              İçerik Yönetimi
+            </div>
+            <div className="space-y-1">
+              <SidebarItem
+                icon={<FileText className="h-4 w-4" />}
+                label="Blog Yazıları"
+                href="/admin/posts"
+                active={pathname.startsWith("/admin/posts")}
+              />
+              <SidebarItem
+                icon={<Package className="h-4 w-4" />}
+                label="Ürünler"
+                href="/admin/products"
+                active={pathname.startsWith("/admin/products")}
+              />
+              <SidebarItem
+                icon={<Image className="h-4 w-4" />}
+                label="Medya"
+                href="/admin/media"
+                active={pathname.startsWith("/admin/media")}
+              />
+            </div>
           </div>
-          <div className="space-y-2">
-            <SidebarItem
-              icon={<Users className="h-4 w-4" />}
-              label="Kullanıcılar"
-              href="/admin/users"
-              active={pathname.startsWith("/admin/users")}
-            />
-            <SidebarItem
-              icon={<Calendar className="h-4 w-4" />}
-              label="Randevular"
-              href="/admin/appointments"
-              active={pathname.startsWith("/admin/appointments")}
-            />
-            <SidebarItem
-              icon={<MessageSquare className="h-4 w-4" />}
-              label="Mesajlar"
-              href="/admin/messages"
-              active={pathname.startsWith("/admin/messages")}
-            />
-          </div>
-        </div>
 
-        {/* Sistem */}
-        <div>
-          <div className="text-xs font-semibold text-muted-foreground mb-4 px-2 uppercase tracking-wider">
-            Sistem
+          {/* Kullanıcı ve Randevu Yönetimi */}
+          <div>
+            <div className="mb-3 px-4 text-xs font-semibold tracking-wider text-muted-foreground/70 uppercase">
+              Kullanıcı Yönetimi
+            </div>
+            <div className="space-y-1">
+              <SidebarItem
+                icon={<Users className="h-4 w-4" />}
+                label="Kullanıcılar"
+                href="/admin/users"
+                active={pathname.startsWith("/admin/users")}
+              />
+              <SidebarItem
+                icon={<Calendar className="h-4 w-4" />}
+                label="Randevular"
+                href="/admin/appointments"
+                active={pathname.startsWith("/admin/appointments")}
+              />
+              <SidebarItem
+                icon={<MessageSquare className="h-4 w-4" />}
+                label="Mesajlar"
+                href="/admin/messages"
+                active={pathname.startsWith("/admin/messages")}
+              />
+            </div>
           </div>
-          <div className="space-y-2">
-            <SidebarItem
-              icon={<BellRing className="h-4 w-4" />}
-              label="Bildirimler"
-              href="/admin/notifications"
-              active={pathname.startsWith("/admin/notifications")}
-            />
-            <SidebarItem
-              icon={<Activity className="h-4 w-4" />}
-              label="Sistem Durumu"
-              href="/admin/system"
-              active={pathname.startsWith("/admin/system")}
-            />
-            <SidebarItem
-              icon={<Settings className="h-4 w-4" />}
-              label="Ayarlar"
-              href="/admin/settings"
-              active={pathname.startsWith("/admin/settings")}
-            />
-          </div>
-        </div>
-      </nav>
 
-      <div className="absolute bottom-6 w-52">
-        <button
-          onClick={() => logoutMutation.mutate()}
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-red-500 transition-colors hover:bg-red-50"
-        >
-          <LogOut className="h-4 w-4" />
-          Çıkış Yap
-        </button>
+          {/* Sistem */}
+          <div>
+            <div className="mb-3 px-4 text-xs font-semibold tracking-wider text-muted-foreground/70 uppercase">
+              Sistem
+            </div>
+            <div className="space-y-1">
+              <SidebarItem
+                icon={<BellRing className="h-4 w-4" />}
+                label="Bildirimler"
+                href="/admin/notifications"
+                active={pathname.startsWith("/admin/notifications")}
+              />
+              <SidebarItem
+                icon={<Activity className="h-4 w-4" />}
+                label="Sistem Durumu"
+                href="/admin/system"
+                active={pathname.startsWith("/admin/system")}
+              />
+              <SidebarItem
+                icon={<Settings className="h-4 w-4" />}
+                label="Ayarlar"
+                href="/admin/settings"
+                active={pathname.startsWith("/admin/settings")}
+              />
+            </div>
+          </div>
+        </nav>
+
+        <div className="p-4 border-t border-border">
+          <button
+            onClick={() => logoutMutation.mutate()}
+            className="flex w-full items-center gap-3 px-4 py-2.5 text-sm font-medium text-red-500 rounded-lg transition-colors hover:bg-red-500/10"
+          >
+            <LogOut className="h-4 w-4" />
+            Çıkış Yap
+          </button>
+        </div>
       </div>
     </div>
   );

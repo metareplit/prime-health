@@ -27,12 +27,10 @@ export function AdminLayout({ children, title = "Dashboard" }: AdminLayoutProps)
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="flex">
-        <Sidebar />
-        <div className="flex-1">
-          <AdminHeader title={title} />
-          <main className="p-8">{children}</main>
-        </div>
+      <Sidebar />
+      <div className="pl-64">
+        <AdminHeader title={title} />
+        <main className="p-8">{children}</main>
       </div>
     </div>
   );
