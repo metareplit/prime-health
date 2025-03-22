@@ -96,14 +96,6 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
-
-          <div className="text-center mt-12">
-            <Link href="/randevu">
-              <Button size="lg" className="shadow-lg">
-                Ücretsiz Danışmanlık Alın
-              </Button>
-            </Link>
-          </div>
         </div>
       </section>
 
