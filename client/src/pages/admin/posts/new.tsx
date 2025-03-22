@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { insertPostSchema, type InsertPost } from "@shared/schema";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Editor } from "@tinymce/tinymce-react";
 import {
   Form,
   FormControl,
@@ -147,10 +148,26 @@ export default function NewPost() {
                     <FormItem>
                       <FormLabel>İçerik</FormLabel>
                       <FormControl>
-                        <Textarea
-                          placeholder="Yazı içeriği..."
-                          className="h-64"
-                          {...field}
+                        <Editor
+                          apiKey="no-api-key"
+                          init={{
+                            height: 500,
+                            menubar: true,
+                            plugins: [
+                              'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                              'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                              'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                            ],
+                            toolbar: 'undo redo | formatselect | ' +
+                              'bold italic backcolor | alignleft aligncenter ' +
+                              'alignright alignjustify | bullist numlist outdent indent | ' +
+                              'removeformat | help',
+                            content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 14px }'
+                          }}
+                          value={field.value}
+                          onEditorChange={(content) => {
+                            field.onChange(content);
+                          }}
                         />
                       </FormControl>
                       <FormMessage />
