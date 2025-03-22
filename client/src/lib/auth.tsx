@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { queryClient } from "./queryClient";
 import type { User } from '@shared/schema';
 
 interface AuthContextType {
@@ -8,6 +10,9 @@ interface AuthContextType {
   login: (username: string, password: string) => Promise<void>;
   register: (userData: any) => Promise<void>;
   logout: () => Promise<void>;
+  loginMutation: any;
+  logoutMutation: any;
+  registerMutation: any;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -29,48 +34,90 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       .finally(() => setLoading(false));
   }, []);
 
+  const loginMutation = useMutation({
+    mutationFn: async ({ username, password }: { username: string; password: string }) => {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message);
+      }
+
+      const user = await res.json();
+      setUser(user);
+      return user;
+    },
+  });
+
+  const registerMutation = useMutation({
+    mutationFn: async (userData: any) => {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message);
+      }
+
+      const user = await res.json();
+      setUser(user);
+      return user;
+    },
+  });
+
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      setUser(null);
+      queryClient.clear();
+      setLocation('/');
+    },
+  });
+
   const login = async (username: string, password: string) => {
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    });
-
-    if (!res.ok) {
-      const error = await res.json();
-      throw new Error(error.message);
+    try {
+      await loginMutation.mutateAsync({ username, password });
+      setLocation('/');
+    } catch (error) {
+      throw error;
     }
-
-    const user = await res.json();
-    setUser(user);
-    setLocation('/hasta-portali');
   };
 
   const register = async (userData: any) => {
-    const res = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData),
-    });
-
-    if (!res.ok) {
-      const error = await res.json();
-      throw new Error(error.message);
+    try {
+      await registerMutation.mutateAsync(userData);
+      setLocation('/');
+    } catch (error) {
+      throw error;
     }
-
-    const user = await res.json();
-    setUser(user);
-    setLocation('/hasta-portali');
   };
 
   const logout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' });
-    setUser(null);
-    setLocation('/');
+    try {
+      await logoutMutation.mutateAsync();
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      loading, 
+      login, 
+      register, 
+      logout,
+      loginMutation,
+      registerMutation,
+      logoutMutation
+    }}>
       {children}
     </AuthContext.Provider>
   );

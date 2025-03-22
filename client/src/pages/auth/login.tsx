@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { apiRequest } from "@/lib/queryClient";
+import { useAuth } from "@/lib/auth";
 
 const loginSchema = z.object({
   username: z.string().min(1, "Kullanıcı adı gereklidir"),
@@ -24,7 +24,8 @@ const loginSchema = z.object({
 export default function Login() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
-  
+  const { loginMutation } = useAuth();
+
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -35,15 +36,12 @@ export default function Login() {
 
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     try {
-      const res = await apiRequest("POST", "/api/auth/login", values);
-      
-      if (res.ok) {
-        toast({
-          title: "Giriş başarılı!",
-          description: "Hasta portala yönlendiriliyorsunuz...",
-        });
-        setLocation("/hasta-portali");
-      }
+      await loginMutation.mutateAsync(values);
+      toast({
+        title: "Giriş başarılı!",
+        description: "Yönlendiriliyorsunuz...",
+      });
+      setLocation("/");
     } catch (error) {
       toast({
         variant: "destructive",
@@ -54,14 +52,14 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-primary/5 to-transparent">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="max-w-md w-full space-y-8 p-8 bg-white rounded-xl shadow-lg"
       >
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900">Hasta Girişi</h2>
+          <h2 className="text-3xl font-bold text-gray-900">Giriş Yap</h2>
           <p className="mt-2 text-sm text-gray-600">
             Hesabınız yok mu?{" "}
             <Link href="/auth/register">
@@ -102,8 +100,12 @@ export default function Login() {
               )}
             />
 
-            <Button type="submit" className="w-full">
-              Giriş Yap
+            <Button 
+              type="submit" 
+              className="w-full"
+              disabled={loginMutation.isPending}
+            >
+              {loginMutation.isPending ? "Giriş yapılıyor..." : "Giriş Yap"}
             </Button>
           </form>
         </Form>
