@@ -9,7 +9,7 @@ import { Link } from "wouter";
 
 export default function AdminPosts() {
   const [searchTerm, setSearchTerm] = useState("");
-  
+
   const { data: posts, isLoading } = useQuery<Post[]>({
     queryKey: ["/api/posts"],
   });
@@ -54,7 +54,7 @@ export default function AdminPosts() {
                 <div className="space-y-1">
                   <h3 className="font-semibold">{post.title}</h3>
                   <p className="text-sm text-muted-foreground">
-                    {new Date(post.createdAt).toLocaleDateString("tr-TR")}
+                    {post.createdAt ? new Date(post.createdAt).toLocaleDateString("tr-TR") : ""}
                   </p>
                   <div className="flex items-center gap-2">
                     <span className={`px-2 py-1 rounded-full text-xs ${
