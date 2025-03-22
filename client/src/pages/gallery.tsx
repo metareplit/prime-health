@@ -28,8 +28,8 @@ const galleryItems = [
     items: [
       {
         id: 1,
-        beforeImage: "/images/gallery/hair-before-1.jpg",
-        afterImage: "/images/gallery/hair-after-1.jpg",
+        beforeImage: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70",
+        afterImage: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c",
         description: "6 ay sonrası sonuç",
         patientDetails: {
           age: "35",
@@ -57,8 +57,8 @@ const galleryItems = [
       },
       {
         id: 2,
-        beforeImage: "/images/gallery/hair-before-2.jpg",
-        afterImage: "/images/gallery/hair-after-2.jpg",
+        beforeImage: "https://images.unsplash.com/photo-1580500325466-7ba0d8330bd7",
+        afterImage: "https://images.unsplash.com/photo-1633364428037-497362c84eda",
         description: "8 ay sonrası sonuç",
         patientDetails: {
           age: "42",
@@ -93,8 +93,8 @@ const galleryItems = [
     items: [
       {
         id: 1,
-        beforeImage: "/images/gallery/beard-before-1.jpg",
-        afterImage: "/images/gallery/beard-after-1.jpg",
+        beforeImage: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6",
+        afterImage: "https://images.unsplash.com/photo-1600845264496-786c8c6a7b50",
         description: "3 ay sonrası sonuç",
         patientDetails: {
           age: "28",
@@ -128,8 +128,8 @@ const galleryItems = [
     items: [
       {
         id: 1,
-        beforeImage: "/images/gallery/eyebrow-before-1.jpg",
-        afterImage: "/images/gallery/eyebrow-after-1.jpg",
+        beforeImage: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec",
+        afterImage: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec",
         description: "4 ay sonrası sonuç",
         patientDetails: {
           age: "32",
