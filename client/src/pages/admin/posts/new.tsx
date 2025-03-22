@@ -95,89 +95,28 @@ export default function NewPost() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Yeni Blog Yazısı</h1>
-      </div>
+    <>
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold">Yeni Blog Yazısı</h1>
+        </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Blog Yazısı Detayları</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Başlık</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Yazı başlığı..." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="excerpt"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Özet</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Yazı özeti..."
-                        className="h-20"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="content"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>İçerik</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Yazı içeriği..."
-                        className="h-64"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <div className="grid grid-cols-2 gap-4">
+        <Card>
+          <CardHeader>
+            <CardTitle>Blog Yazısı Detayları</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                   control={form.control}
-                  name="status"
+                  name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Durum</FormLabel>
-                      <Select
-                        value={field.value}
-                        onValueChange={field.onChange}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Durum seçin" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="draft">Taslak</SelectItem>
-                          <SelectItem value="published">Yayında</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <FormLabel>Başlık</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Yazı başlığı..." {...field} />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -185,163 +124,235 @@ export default function NewPost() {
 
                 <FormField
                   control={form.control}
-                  name="category"
+                  name="excerpt"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Kategori</FormLabel>
-                      <Select
-                        value={field.value}
-                        onValueChange={field.onChange}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Kategori seçin" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="general">Genel</SelectItem>
-                          <SelectItem value="sac-ekimi">Saç Ekimi</SelectItem>
-                          <SelectItem value="sakal-ekimi">Sakal Ekimi</SelectItem>
-                          <SelectItem value="bakim">Bakım</SelectItem>
-                          <SelectItem value="teknoloji">Teknoloji</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <FormField
-                control={form.control}
-                name="featuredImage"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Öne Çıkan Görsel</FormLabel>
-                    <FormControl>
-                      <div className="flex items-center gap-4">
-                        <Input
-                          type="text"
-                          placeholder="Görsel URL'si..."
+                      <FormLabel>Özet</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Yazı özeti..."
+                          className="h-20"
                           {...field}
                         />
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="icon"
-                          onClick={() => setIsMediaModalOpen(true)}
-                        >
-                          <ImagePlus className="h-4 w-4" />
-                        </Button>
-                      </div>
-                      {field.value && (
-                        <div className="mt-2">
-                          <img
-                            src={field.value}
-                            alt="Öne çıkan görsel"
-                            className="w-40 h-40 object-cover rounded-lg"
-                          />
-                        </div>
-                      )}
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <div className="space-y-4">
-                <FormLabel>Etiketler</FormLabel>
-                <div className="flex flex-wrap gap-2 mb-2">
-                  {tags.map((tag) => (
-                    <Badge key={tag} variant="secondary">
-                      {tag}
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveTag(tag)}
-                        className="ml-2"
-                      >
-                        <X className="h-3 w-3" />
-                      </button>
-                    </Badge>
-                  ))}
-                </div>
-                <div className="flex gap-2">
-                  <Input
-                    type="text"
-                    placeholder="Yeni etiket..."
-                    value={newTag}
-                    onChange={(e) => setNewTag(e.target.value)}
-                    onKeyPress={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        handleAddTag();
-                      }
-                    }}
+                <FormField
+                  control={form.control}
+                  name="content"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>İçerik</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Yazı içeriği..."
+                          className="h-64"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="status"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Durum</FormLabel>
+                        <Select
+                          value={field.value}
+                          onValueChange={field.onChange}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Durum seçin" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="draft">Taslak</SelectItem>
+                            <SelectItem value="published">Yayında</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
+
+                  <FormField
+                    control={form.control}
+                    name="category"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Kategori</FormLabel>
+                        <Select
+                          value={field.value}
+                          onValueChange={field.onChange}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Kategori seçin" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="general">Genel</SelectItem>
+                            <SelectItem value="sac-ekimi">Saç Ekimi</SelectItem>
+                            <SelectItem value="sakal-ekimi">
+                              Sakal Ekimi
+                            </SelectItem>
+                            <SelectItem value="bakim">Bakım</SelectItem>
+                            <SelectItem value="teknoloji">Teknoloji</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name="featuredImage"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Öne Çıkan Görsel</FormLabel>
+                      <FormControl>
+                        <div className="space-y-4">
+                          <div className="flex items-center gap-4">
+                            <Input
+                              type="text"
+                              placeholder="Görsel URL'si..."
+                              {...field}
+                            />
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="icon"
+                              onClick={() => setIsMediaModalOpen(true)}
+                            >
+                              <ImagePlus className="h-4 w-4" />
+                            </Button>
+                          </div>
+                          {field.value && (
+                            <div className="mt-2">
+                              <img
+                                src={field.value}
+                                alt="Öne çıkan görsel"
+                                className="w-40 h-40 object-cover rounded-lg"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="space-y-4">
+                  <FormLabel>Etiketler</FormLabel>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {tags.map((tag) => (
+                      <Badge key={tag} variant="secondary">
+                        {tag}
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveTag(tag)}
+                          className="ml-2"
+                        >
+                          <X className="h-3 w-3" />
+                        </button>
+                      </Badge>
+                    ))}
+                  </div>
+                  <div className="flex gap-2">
+                    <Input
+                      type="text"
+                      placeholder="Yeni etiket..."
+                      value={newTag}
+                      onChange={(e) => setNewTag(e.target.value)}
+                      onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          handleAddTag();
+                        }
+                      }}
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={handleAddTag}
+                    >
+                      <Plus className="h-4 w-4 mr-2" />
+                      Ekle
+                    </Button>
+                  </div>
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name="seoTitle"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>SEO Başlığı</FormLabel>
+                      <FormControl>
+                        <Input placeholder="SEO başlığı..." {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="seoDescription"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>SEO Açıklaması</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="SEO açıklaması..."
+                          className="h-20"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="flex gap-2">
+                  <Button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "Kaydediliyor..." : "Kaydet"}
+                  </Button>
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={handleAddTag}
+                    onClick={() => setLocation("/admin/posts")}
                   >
-                    <Plus className="h-4 w-4 mr-2" />
-                    Ekle
+                    İptal
                   </Button>
                 </div>
-              </div>
-
-              <FormField
-                control={form.control}
-                name="seoTitle"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>SEO Başlığı</FormLabel>
-                    <FormControl>
-                      <Input placeholder="SEO başlığı..." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="seoDescription"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>SEO Açıklaması</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="SEO açıklaması..."
-                        className="h-20"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <div className="flex gap-2">
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "Kaydediliyor..." : "Kaydet"}
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => setLocation("/admin/posts")}
-                >
-                  İptal
-                </Button>
-              </div>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
-      <MediaModal
-        open={isMediaModalOpen}
-        onClose={() => setIsMediaModalOpen(false)}
-        onSelect={(url) => form.setValue("featuredImage", url)}
-      />
-    </div>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
+      </div>
+      {isMediaModalOpen && (
+        <MediaModal
+          open={isMediaModalOpen}
+          onClose={() => setIsMediaModalOpen(false)}
+          onSelect={(url) => {
+            form.setValue("featuredImage", url);
+            setIsMediaModalOpen(false);
+          }}
+        />
+      )}
+    </>
   );
 }

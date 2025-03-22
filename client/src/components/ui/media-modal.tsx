@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import * as Dialog from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ImagePlus } from "lucide-react";
@@ -65,56 +59,66 @@ export function MediaModal({ open, onClose, onSelect }: MediaModalProps) {
   };
 
   return (
-    <Sheet open={open} onOpenChange={onClose}>
-      <SheetContent side="right" className="w-[800px] sm:max-w-[800px]">
-        <SheetHeader>
-          <SheetTitle>Medya Yöneticisi</SheetTitle>
-          <SheetDescription>
-            Görsel seçin veya yeni görsel yükleyin
-          </SheetDescription>
-        </SheetHeader>
-        <div className="mt-4 space-y-4">
-          <div className="flex gap-4 items-center">
-            <Input
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="flex-1"
-            />
-            <Button
-              onClick={handleUpload}
-              disabled={!selectedFile || uploadMutation.isPending}
-            >
-              {uploadMutation.isPending ? "Yükleniyor..." : "Yükle"}
-            </Button>
-          </div>
-          <div className="grid grid-cols-4 gap-4">
-            {isLoading ? (
-              <div>Yükleniyor...</div>
-            ) : (
-              mediaFiles?.map((media) => (
-                <div
-                  key={media.id}
-                  className="relative group cursor-pointer"
-                  onClick={() => {
-                    onSelect(media.url);
-                    onClose();
-                  }}
-                >
-                  <img
-                    src={media.url}
-                    alt={media.originalName}
-                    className="w-full h-32 object-cover rounded-lg"
-                  />
-                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
-                    <span className="text-white text-sm">{media.originalName}</span>
+    <Dialog.Root open={open} onOpenChange={onClose}>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 bg-black/50" />
+        <Dialog.Content className="fixed left-[50%] top-[50%] z-50 max-h-[85vh] w-[90vw] max-w-[800px] translate-x-[-50%] translate-y-[-50%] rounded-lg bg-white p-6 shadow-lg">
+          <Dialog.Title className="text-lg font-semibold">
+            Medya Yöneticisi
+          </Dialog.Title>
+
+          <div className="mt-4 space-y-4">
+            <div className="flex items-center gap-2">
+              <Input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="flex-1"
+              />
+              <Button
+                onClick={handleUpload}
+                disabled={!selectedFile || uploadMutation.isPending}
+              >
+                {uploadMutation.isPending ? "Yükleniyor..." : "Yükle"}
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4 overflow-y-auto max-h-[60vh]">
+              {isLoading ? (
+                <div>Yükleniyor...</div>
+              ) : (
+                mediaFiles?.map((media) => (
+                  <div
+                    key={media.id}
+                    className="relative group cursor-pointer"
+                    onClick={() => {
+                      onSelect(media.url);
+                      onClose();
+                    }}
+                  >
+                    <img
+                      src={media.url}
+                      alt={media.originalName}
+                      className="w-full h-32 object-cover rounded-lg"
+                    />
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                      <span className="text-white text-sm">
+                        {media.originalName}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              ))
-            )}
+                ))
+              )}
+            </div>
           </div>
-        </div>
-      </SheetContent>
-    </Sheet>
+
+          <Dialog.Close asChild>
+            <button className="absolute right-4 top-4 rounded-sm opacity-70 hover:opacity-100">
+              ✕
+            </button>
+          </Dialog.Close>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }
