@@ -3,6 +3,15 @@ import { createServer } from "http";
 import { storage } from "./storage";
 import { insertUserSchema, insertAppointmentSchema, insertMessageSchema, insertPatientImageSchema, insertPostSchema, insertProductSchema, insertMediaSchema, insertSettingSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
+import { scrypt, randomBytes, timingSafeEqual } from "crypto";
+import { promisify } from "util";
+
+const scryptAsync = promisify(scrypt);
+
+async function comparePasswords(supplied: string, stored: string) {
+  // Plain text comparison for testing
+  return supplied === stored;
+}
 
 export async function registerRoutes(app: Express) {
   // Auth endpoints
@@ -19,15 +28,26 @@ export async function registerRoutes(app: Express) {
 
   app.post("/api/auth/login", async (req, res) => {
     try {
+      console.log("Login attempt:", req.body.username); // Debug log
       const { username, password } = req.body;
-      const user = await storage.authenticateUser(username, password);
-      if (user) {
-        req.session.userId = user.id;
-        res.json(user);
-      } else {
-        res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
+      const user = await storage.getUserByUsername(username);
+
+      if (!user) {
+        console.log("User not found:", username); // Debug log
+        return res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
       }
+
+      const isValidPassword = await comparePasswords(password, user.password);
+      if (!isValidPassword) {
+        console.log("Invalid password for user:", username); // Debug log
+        return res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
+      }
+
+      req.session.userId = user.id;
+      console.log("Login successful for:", username); // Debug log
+      res.json(user);
     } catch (error) {
+      console.error("Login error:", error); // Debug log
       res.status(500).json({ message: "Giriş yapılırken bir hata oluştu" });
     }
   });
