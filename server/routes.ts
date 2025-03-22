@@ -29,28 +29,42 @@ export async function registerRoutes(app: Express) {
   app.post("/api/auth/login", async (req: AuthRequest, res: Response) => {
     try {
       const { username, password } = req.body;
-      console.log("Login attempt for:", username);
+      console.log("Login attempt:", username, password); // Debug log
 
       const user = await storage.getUserByUsername(username);
       if (!user) {
-        console.log("User not found:", username);
         return res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
       }
 
+      // Debug log
+      console.log("Found user:", {
+        username: user.username,
+        password: user.password,
+        role: user.role
+      });
+
       // Test için direkt karşılaştırma
       if (password !== user.password) {
-        console.log("Invalid password for:", username);
         return res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
       }
 
       req.session.userId = user.id;
-      console.log("Login successful for:", username);
-      res.json({
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        fullName: user.fullName,
-        role: user.role
+      console.log("Login successful, setting session:", req.session);
+
+      // Set session
+      req.session.save((err) => {
+        if (err) {
+          console.error("Session save error:", err);
+          return res.status(500).json({ message: "Oturum başlatılırken hata oluştu" });
+        }
+
+        res.json({
+          id: user.id,
+          username: user.username,
+          role: user.role,
+          fullName: user.fullName,
+          email: user.email
+        });
       });
     } catch (error) {
       console.error("Login error:", error);
