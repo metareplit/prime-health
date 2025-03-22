@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Star, Share2, ArrowRight } from "lucide-react";
+import { Calendar, Star, Share2, ArrowRight, Camera, Users, Clock, CheckCircle } from "lucide-react";
 import { Link } from "wouter";
 import { Metadata } from "@/components/ui/metadata";
 
@@ -13,7 +13,13 @@ import BeforeAfterSlider from "@/components/gallery/before-after-slider";
 import ThreeDComparison from "@/components/gallery/three-d-comparison";
 import { SuccessStories } from "@/components/gallery/success-stories";
 
-// Galeri öğeleri veri yapısı
+// Kategori ikonları
+const categoryIcons = {
+  "sac-ekimi": <Camera className="h-4 w-4" />,
+  "sakal-ekimi": <Users className="h-4 w-4" />,
+  "kas-ekimi": <Clock className="h-4 w-4" />
+};
+
 const galleryItems = [
   {
     category: "sac-ekimi",
@@ -199,14 +205,17 @@ export default function Gallery() {
       <div className="container mx-auto px-4 py-8">
         {/* Kategoriler ve Sonuçlar */}
         <Tabs defaultValue="sac-ekimi" className="w-full">
-          <TabsList className="flex justify-center mb-8 overflow-x-auto">
+          <TabsList className="relative flex justify-center mb-8 p-1 bg-white rounded-full shadow-sm border overflow-x-auto">
             {galleryItems.map((category) => (
               <TabsTrigger
                 key={category.category}
                 value={category.category}
-                className="text-sm whitespace-nowrap"
+                className="relative rounded-full px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-primary data-[state=active]:text-white"
               >
-                {category.title}
+                <span className="flex items-center gap-2">
+                  {categoryIcons[category.category]}
+                  {category.title}
+                </span>
               </TabsTrigger>
             ))}
           </TabsList>
@@ -264,99 +273,125 @@ export default function Gallery() {
 
       {/* Detay Modal */}
       <Dialog open={!!selectedCase} onOpenChange={() => setSelectedCase(null)}>
-        <DialogContent className="max-w-4xl w-full">
+        <DialogContent className="max-w-4xl w-full p-0">
           <ScrollArea className="max-h-[80vh]">
             {selectedCase && (
-              <div className="space-y-6">
-                {/* 3D/2D Görünüm Geçişi */}
-                <div className="flex justify-end mb-4">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setShow3D(!show3D)}
-                  >
-                    {show3D ? "2D Görünüm" : "3D Görünüm"}
-                  </Button>
-                </div>
+              <div>
+                {/* Modal Header */}
+                <DialogHeader className="p-6 bg-gradient-to-r from-primary/5 to-transparent">
+                  <div className="flex items-center justify-between">
+                    <DialogTitle className="text-2xl font-bold">{selectedCase.description}</DialogTitle>
+                    <Badge variant="secondary" className="text-primary">
+                      {selectedCase.procedureDetails.technique}
+                    </Badge>
+                  </div>
+                </DialogHeader>
 
-                {show3D ? (
-                  <ThreeDComparison
-                    beforeImage={selectedCase.beforeImage}
-                    afterImage={selectedCase.afterImage}
-                  />
-                ) : (
-                  <BeforeAfterSlider
-                    beforeImage={selectedCase.beforeImage}
-                    afterImage={selectedCase.afterImage}
-                  />
-                )}
+                <div className="p-6 space-y-6">
+                  {/* Görsel Karşılaştırma */}
+                  <div className="relative">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShow3D(!show3D)}
+                      className="absolute top-4 right-4 z-10"
+                    >
+                      {show3D ? "2D Görünüm" : "3D Görünüm"}
+                    </Button>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Sol Kolon */}
-                  <div className="space-y-4">
-                    <div>
-                      <h3 className="text-lg font-semibold mb-2">Hasta Bilgileri</h3>
-                      <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                        {Object.entries(selectedCase.patientDetails).map(([key, value]) => (
-                          <div key={key} className="flex justify-between text-sm">
-                            <span className="text-gray-600">{key}</span>
-                            <span className="font-medium">{value}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <h3 className="text-lg font-semibold mb-2">İşlem Detayları</h3>
-                      <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                        {Object.entries(selectedCase.procedureDetails).map(([key, value]) => (
-                          <div key={key} className="flex justify-between text-sm">
-                            <span className="text-gray-600">{key}</span>
-                            <span className="font-medium">{value}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                    {show3D ? (
+                      <ThreeDComparison
+                        beforeImage={selectedCase.beforeImage}
+                        afterImage={selectedCase.afterImage}
+                      />
+                    ) : (
+                      <BeforeAfterSlider
+                        beforeImage={selectedCase.beforeImage}
+                        afterImage={selectedCase.afterImage}
+                      />
+                    )}
                   </div>
 
-                  {/* Sağ Kolon */}
-                  <div className="space-y-4">
-                    <div>
-                      <h3 className="text-lg font-semibold mb-2">Sonuçlar</h3>
-                      <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                        {Object.entries(selectedCase.results).map(([key, value]) => (
-                          <div key={key} className="flex justify-between text-sm">
-                            <span className="text-gray-600">{key}</span>
-                            <span className="font-medium">{value}</span>
-                          </div>
-                        ))}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {/* Sol Kolon */}
+                    <div className="space-y-4">
+                      <div className="bg-white rounded-xl shadow-sm p-4">
+                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                          <Users className="h-5 w-5 text-primary" />
+                          Hasta Bilgileri
+                        </h3>
+                        <div className="space-y-2">
+                          {Object.entries(selectedCase.patientDetails).map(([key, value]) => (
+                            <div key={key} className="flex justify-between items-center py-2 border-b last:border-0">
+                              <span className="text-gray-600">{key}</span>
+                              <span className="font-medium">{value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="bg-white rounded-xl shadow-sm p-4">
+                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                          <Clock className="h-5 w-5 text-primary" />
+                          İşlem Detayları
+                        </h3>
+                        <div className="space-y-2">
+                          {Object.entries(selectedCase.procedureDetails).map(([key, value]) => (
+                            <div key={key} className="flex justify-between items-center py-2 border-b last:border-0">
+                              <span className="text-gray-600">{key}</span>
+                              <span className="font-medium">{value}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
 
-                    <div>
-                      <h3 className="text-lg font-semibold mb-2">Hasta Yorumu</h3>
-                      <div className="bg-primary/5 rounded-lg p-4">
-                        <p className="text-sm italic text-gray-600">"{selectedCase.testimonial}"</p>
-                        <div className="mt-4 pt-4 border-t">
-                          <h4 className="font-medium mb-2">Doktor Notu:</h4>
-                          <p className="text-sm text-gray-600">{selectedCase.doctorNote}</p>
+                    {/* Sağ Kolon */}
+                    <div className="space-y-4">
+                      <div className="bg-white rounded-xl shadow-sm p-4">
+                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                          <CheckCircle className="h-5 w-5 text-primary" />
+                          Sonuçlar
+                        </h3>
+                        <div className="space-y-2">
+                          {Object.entries(selectedCase.results).map(([key, value]) => (
+                            <div key={key} className="flex justify-between items-center py-2 border-b last:border-0">
+                              <span className="text-gray-600">{key}</span>
+                              <span className="font-medium">{value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="bg-white rounded-xl shadow-sm p-4">
+                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                          <Star className="h-5 w-5 text-primary" />
+                          Hasta Yorumu
+                        </h3>
+                        <div className="space-y-4">
+                          <p className="italic text-gray-600">"{selectedCase.testimonial}"</p>
+                          <div className="pt-4 border-t">
+                            <h4 className="font-medium mb-2">Doktor Notu:</h4>
+                            <p className="text-gray-600">{selectedCase.doctorNote}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="flex justify-between items-center pt-4 border-t">
-                  <Button variant="outline" size="sm" className="gap-2">
-                    <Share2 className="h-4 w-4" />
-                    Paylaş
-                  </Button>
-                  <Button asChild>
-                    <Link href="/randevu" className="gap-2">
-                      Danışmanlık Al
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
+                  {/* Modal Footer */}
+                  <div className="flex justify-between items-center pt-4 border-t mt-6">
+                    <Button variant="outline" size="sm" className="gap-2">
+                      <Share2 className="h-4 w-4" />
+                      Paylaş
+                    </Button>
+                    <Button asChild>
+                      <Link href="/randevu" className="gap-2">
+                        Danışmanlık Al
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             )}
