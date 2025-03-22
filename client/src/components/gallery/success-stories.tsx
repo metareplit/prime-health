@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Avatar } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Star, Quote, Play, Pause } from "lucide-react";
+import { Star, Quote } from "lucide-react";
 
 interface SuccessStory {
   id: number;
@@ -13,7 +11,6 @@ interface SuccessStory {
   procedure: string;
   testimonial: string;
   rating: number;
-  videoUrl?: string;
   imageUrl: string;
 }
 
@@ -26,7 +23,6 @@ const successStories: SuccessStory[] = [
     procedure: "Saç Ekimi",
     testimonial: "Uzun süre saç dökülmesi problemi yaşadıktan sonra kliniğinizde saç ekimi yaptırdım. Sonuçlar beklediğimden çok daha iyi. Doğal ve sık bir saça kavuştum.",
     rating: 5,
-    videoUrl: "/videos/testimonial-1.mp4",
     imageUrl: "/images/testimonials/ahmet.jpg"
   },
   {
@@ -37,98 +33,82 @@ const successStories: SuccessStory[] = [
     procedure: "Sakal Ekimi",
     testimonial: "Sakal ekimi konusunda tereddütlerim vardı ancak operasyon sonrası aldığım sonuç muhteşem. Artık daha genç ve bakımlı görünüyorum.",
     rating: 5,
-    videoUrl: "/videos/testimonial-2.mp4",
     imageUrl: "/images/testimonials/mehmet.jpg"
+  },
+  {
+    id: 3,
+    name: "Ali K.",
+    age: "38",
+    location: "İzmir",
+    procedure: "Saç Ekimi",
+    testimonial: "Profesyonel ekip ve modern teknolojiler sayesinde çok başarılı bir sonuç aldım. Özgüvenim yerine geldi.",
+    rating: 5,
+    imageUrl: "/images/testimonials/ali.jpg"
   }
 ];
 
 export function SuccessStories() {
-  const [activeVideo, setActiveVideo] = useState<number | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-
   return (
-    <div className="space-y-6">
-      {successStories.map((story) => (
-        <motion.div
-          key={story.id}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="group"
-        >
-          <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg">
-            <div className="relative aspect-video bg-gray-100">
-              {story.videoUrl ? (
-                <>
-                  <video
-                    src={story.videoUrl}
-                    poster={story.imageUrl}
-                    className="w-full h-full object-cover"
-                  />
-                  <Button
-                    variant="secondary"
-                    size="icon"
-                    className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    onClick={() => {
-                      setActiveVideo(activeVideo === story.id ? null : story.id);
-                      setIsPlaying(!isPlaying);
-                    }}
-                  >
-                    {activeVideo === story.id && isPlaying ? (
-                      <Pause className="h-4 w-4" />
-                    ) : (
-                      <Play className="h-4 w-4" />
-                    )}
-                  </Button>
-                </>
-              ) : (
-                <img
-                  src={story.imageUrl}
-                  alt={story.name}
-                  className="w-full h-full object-cover"
-                />
-              )}
-            </div>
+    <div className="py-12">
+      <motion.h2 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-2xl font-bold text-center mb-8"
+      >
+        Hasta Başarı Hikayeleri
+      </motion.h2>
 
-            <div className="p-6">
-              <div className="flex items-center gap-4 mb-4">
-                <Avatar className="border-2 border-primary/10">
-                  <img src={story.imageUrl} alt={story.name} />
-                </Avatar>
-                <div>
-                  <h3 className="font-medium text-lg">{story.name}</h3>
-                  <p className="text-sm text-gray-500">
-                    {story.age} yaş, {story.location}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {successStories.map((story, index) => (
+          <motion.div
+            key={story.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
+          >
+            <Card className="h-full hover:shadow-lg transition-shadow">
+              <CardContent className="p-6 flex flex-col h-full">
+                <div className="flex items-center gap-4 mb-4">
+                  <Avatar className="w-12 h-12 border-2 border-primary/10">
+                    <img src={story.imageUrl} alt={story.name} className="object-cover" />
+                  </Avatar>
+                  <div>
+                    <h3 className="font-medium text-base">{story.name}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {story.age} yaş, {story.location}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1 mb-3">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-4 w-4 ${
+                        i < story.rating ? "text-yellow-400" : "text-gray-200"
+                      }`}
+                      fill={i < story.rating ? "currentColor" : "none"}
+                    />
+                  ))}
+                </div>
+
+                <div className="relative bg-muted/50 rounded-lg p-4 mb-4 flex-grow">
+                  <Quote className="absolute -top-2 -left-2 h-6 w-6 text-primary/20" />
+                  <p className="text-sm text-muted-foreground italic leading-relaxed">
+                    {story.testimonial}
                   </p>
                 </div>
-              </div>
 
-              <div className="flex items-center gap-1 mb-4">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`h-4 w-4 ${
-                      i < story.rating ? "text-yellow-400" : "text-gray-200"
-                    }`}
-                    fill={i < story.rating ? "currentColor" : "none"}
-                  />
-                ))}
-              </div>
-
-              <div className="relative bg-gray-50 rounded-lg p-6 mb-4">
-                <Quote className="absolute -top-3 -left-3 h-8 w-8 text-primary/20" />
-                <p className="text-gray-600 italic leading-relaxed">
-                  {story.testimonial}
-                </p>
-              </div>
-
-              <div className="pt-4 border-t">
-                <p className="text-sm font-medium text-primary">{story.procedure}</p>
-              </div>
-            </div>
-          </Card>
-        </motion.div>
-      ))}
+                <div className="mt-auto">
+                  <p className="text-sm font-medium text-primary">
+                    {story.procedure}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }
