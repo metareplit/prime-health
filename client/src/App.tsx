@@ -34,6 +34,8 @@ import AdminPostEdit from "@/pages/admin/posts/[id]";
 import AdminProductNew from "@/pages/admin/products/new";
 import AdminProductEdit from "@/pages/admin/products/[id]";
 import AdminLogin from "@/pages/admin/login";
+import AdminAnalytics from "@/pages/admin/analytics";
+import AdminSEO from "@/pages/admin/seo";
 
 function Router() {
   return (
@@ -45,6 +47,21 @@ function Router() {
         {(params) => (
           <AdminLayout title="Dashboard">
             <AdminDashboard />
+          </AdminLayout>
+        )}
+      </Route>
+      <Route path="/admin/analytics">
+        {(params) => (
+          <AdminLayout title="Analitikler">
+            <AdminAnalytics />
+          </AdminLayout>
+        )}
+      </Route>
+
+      <Route path="/admin/seo">
+        {(params) => (
+          <AdminLayout title="SEO Yönetimi">
+            <AdminSEO />
           </AdminLayout>
         )}
       </Route>
