@@ -40,7 +40,7 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-[4/3] overflow-hidden cursor-ew-resize rounded-lg shadow-lg"
+      className="relative w-full aspect-[4/3] overflow-hidden cursor-ew-resize rounded-lg shadow-sm"
     >
       {/* Before Image */}
       <div className="absolute inset-0">
@@ -48,6 +48,7 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
           src={beforeImage}
           alt="Before"
           className="w-full h-full object-cover"
+          loading="lazy"
         />
       </div>
 
@@ -60,35 +61,36 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
           src={afterImage}
           alt="After"
           className="w-full h-full object-cover"
+          loading="lazy"
         />
       </div>
 
       {/* Slider */}
       <motion.div
-        className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize"
+        className="absolute top-0 bottom-0 w-0.5 bg-white cursor-ew-resize"
         style={{ left: `${sliderPosition}%` }}
         whileHover={{ scale: 1.1 }}
         onMouseDown={handleMouseDown}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-md flex items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="16"
+            height="16"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="text-primary"
+            className="text-primary rotate-180"
           >
             <polyline points="15 18 9 12 15 6" />
           </svg>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="16"
+            height="16"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -103,15 +105,15 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
       </motion.div>
 
       {/* Labels */}
-      <div className="absolute bottom-4 left-4 bg-black/50 text-white px-2 py-1 rounded text-sm font-medium">
+      <div className="absolute bottom-2 left-2 bg-black/50 text-white px-2 py-0.5 rounded text-xs font-medium">
         Öncesi
       </div>
-      <div className="absolute bottom-4 right-4 bg-black/50 text-white px-2 py-1 rounded text-sm font-medium">
+      <div className="absolute bottom-2 right-2 bg-black/50 text-white px-2 py-0.5 rounded text-xs font-medium">
         Sonrası
       </div>
 
       {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200">
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-200">
         <motion.div
           className="h-full bg-primary"
           style={{ width: `${sliderPosition}%` }}
