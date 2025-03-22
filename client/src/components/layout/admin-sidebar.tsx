@@ -49,18 +49,18 @@ export function Sidebar() {
   const pathname = location || '';
 
   return (
-    <div className="w-64 border-r min-h-screen p-6 space-y-6 bg-background shadow-sm">
+    <div className="w-64 border-r min-h-screen p-6 space-y-8 bg-background shadow-sm">
       <div className="flex items-center gap-2 px-2 pb-4 border-b">
         <span className="text-lg font-semibold">Yönetim Paneli</span>
       </div>
 
-      <nav className="space-y-1">
+      <nav className="space-y-8">
         {/* Ana Sayfa ve Analitikler */}
-        <div className="mb-6">
-          <div className="text-xs font-semibold text-muted-foreground mb-3 px-2 uppercase tracking-wider">
+        <div>
+          <div className="text-xs font-semibold text-muted-foreground mb-4 px-2 uppercase tracking-wider">
             Genel Bakış
           </div>
-          <div className="space-y-1">
+          <div className="space-y-2">
             <SidebarItem
               icon={<LayoutDashboard className="h-4 w-4" />}
               label="Dashboard"
@@ -83,11 +83,11 @@ export function Sidebar() {
         </div>
 
         {/* İçerik Yönetimi */}
-        <div className="mb-6">
-          <div className="text-xs font-semibold text-muted-foreground mb-3 px-2 uppercase tracking-wider">
+        <div>
+          <div className="text-xs font-semibold text-muted-foreground mb-4 px-2 uppercase tracking-wider">
             İçerik Yönetimi
           </div>
-          <div className="space-y-1">
+          <div className="space-y-2">
             <SidebarItem
               icon={<FileText className="h-4 w-4" />}
               label="Blog Yazıları"
@@ -110,11 +110,11 @@ export function Sidebar() {
         </div>
 
         {/* Kullanıcı ve Randevu Yönetimi */}
-        <div className="mb-6">
-          <div className="text-xs font-semibold text-muted-foreground mb-3 px-2 uppercase tracking-wider">
+        <div>
+          <div className="text-xs font-semibold text-muted-foreground mb-4 px-2 uppercase tracking-wider">
             Kullanıcı Yönetimi
           </div>
-          <div className="space-y-1">
+          <div className="space-y-2">
             <SidebarItem
               icon={<Users className="h-4 w-4" />}
               label="Kullanıcılar"
@@ -137,11 +137,11 @@ export function Sidebar() {
         </div>
 
         {/* Sistem */}
-        <div className="mb-6">
-          <div className="text-xs font-semibold text-muted-foreground mb-3 px-2 uppercase tracking-wider">
+        <div>
+          <div className="text-xs font-semibold text-muted-foreground mb-4 px-2 uppercase tracking-wider">
             Sistem
           </div>
-          <div className="space-y-1">
+          <div className="space-y-2">
             <SidebarItem
               icon={<BellRing className="h-4 w-4" />}
               label="Bildirimler"
