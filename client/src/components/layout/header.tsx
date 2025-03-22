@@ -25,6 +25,11 @@ export default function Header() {
               Hasta Sonuçları
             </a>
           </Link>
+          <Link href="/urunler">
+            <a className="text-sm font-medium text-foreground/60 transition-colors hover:text-foreground">
+              Bakım Ürünleri
+            </a>
+          </Link>
           <Link href="/blog">
             <a className="text-sm font-medium text-foreground/60 transition-colors hover:text-foreground">
               Blog
