@@ -66,7 +66,7 @@ export function MediaModal({ open, onClose, onSelect }: MediaModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Medya Yöneticisi</DialogTitle>
           <DialogDescription>
