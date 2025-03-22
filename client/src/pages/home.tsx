@@ -6,6 +6,8 @@ import HeroSlider from "@/components/home/hero-slider";
 import { motion } from "framer-motion";
 import { Shield, Users, Stethoscope, Clock, Award, HeartHandshake, Building2, Map, ArrowRight, CheckCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import BeforeAfterSlider from "@/components/gallery/before-after-slider";
+import { SuccessStories } from "@/components/gallery/success-stories";
 
 const features = [
   {
@@ -220,6 +222,65 @@ export default function Home() {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Before/After and Success Stories Section */}
+      <section className="py-20 bg-gradient-to-b from-transparent to-primary/5">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Hasta Başarı Hikayeleri
+            </h2>
+            <p className="text-lg text-gray-600">
+              Binlerce mutlu hastamızın deneyimlerini ve sonuçlarını inceleyin
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <BeforeAfterSlider
+                beforeImage="/images/gallery/hair-before-1.jpg"
+                afterImage="/images/gallery/hair-after-1.jpg"
+              />
+              <BeforeAfterSlider
+                beforeImage="/images/gallery/beard-before-1.jpg"
+                afterImage="/images/gallery/beard-after-1.jpg"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="bg-white rounded-xl shadow-lg p-8">
+                <SuccessStories />
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="text-center">
+            <Link href="/galeri">
+              <Button variant="outline" size="lg" className="group">
+                Tüm Sonuçları İnceleyin
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
     </div>
