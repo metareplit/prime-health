@@ -3,8 +3,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Metadata } from "@/components/ui/metadata";
 import BeforeAfterSlider from "@/components/gallery/before-after-slider";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Star, Users, CheckCircle, Share2, Download, Info } from "lucide-react";
+import { Clock, Star, Users, CheckCircle, Share2, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import {
   Tooltip,
   TooltipContent,
@@ -161,7 +162,7 @@ export default function Gallery() {
         keywords="saç ekimi öncesi sonrası, sakal ekimi öncesi sonrası, kaş ekimi öncesi sonrası, saç ekimi hasta yorumları, sakal ekimi hasta yorumları, kaş ekimi hasta yorumları, tiflis saç ekimi sonuçları, saç ekimi başarı oranı"
       />
 
-      <section className="relative overflow-hidden py-16">
+      <section className="relative overflow-hidden py-8 md:py-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -182,36 +183,39 @@ export default function Gallery() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
               Hasta Sonuçlarımız
             </h1>
-            <p className="text-lg text-gray-600 mb-6">
+            <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6">
               Gerçek hasta sonuçlarımız ve öncesi/sonrası fotoğraflarımızı inceleyin.
-              Her vakada kişiye özel planlama ve en uygun teknik kullanılmıştır.
             </p>
-            <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-500" />
-                <span>%98 Hasta Memnuniyeti</span>
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-xs md:text-sm text-gray-500">
+              <div className="flex items-center gap-1 md:gap-2 bg-white/50 p-2 rounded-full">
+                <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-green-500" />
+                <span>%98 Memnuniyet</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Users className="h-4 w-4 text-blue-500" />
-                <span>10.000+ Başarılı Operasyon</span>
+              <div className="flex items-center gap-1 md:gap-2 bg-white/50 p-2 rounded-full">
+                <Users className="h-3 w-3 md:h-4 md:w-4 text-blue-500" />
+                <span>10.000+ Operasyon</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Star className="h-4 w-4 text-yellow-500" />
-                <span>9.8/10 Değerlendirme</span>
+              <div className="flex items-center gap-1 md:gap-2 bg-white/50 p-2 rounded-full">
+                <Star className="h-3 w-3 md:h-4 md:w-4 text-yellow-500" />
+                <span>9.8/10 Puan</span>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-8">
         <Tabs defaultValue="sac-ekimi" className="w-full">
-          <TabsList className="flex justify-center mb-8">
+          <TabsList className="flex justify-center mb-6 md:mb-8 overflow-x-auto">
             {galleryItems.map((category) => (
-              <TabsTrigger key={category.category} value={category.category}>
+              <TabsTrigger 
+                key={category.category} 
+                value={category.category}
+                className="text-sm whitespace-nowrap"
+              >
                 {category.title}
               </TabsTrigger>
             ))}
@@ -223,34 +227,34 @@ export default function Gallery() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="mb-8"
+                className="mb-6"
               >
-                <h2 className="text-2xl font-bold mb-2">{category.title}</h2>
-                <p className="text-gray-600">{category.description}</p>
+                <h2 className="text-xl md:text-2xl font-bold mb-2">{category.title}</h2>
+                <p className="text-sm md:text-base text-gray-600">{category.description}</p>
               </motion.div>
 
-              <div className="grid gap-16">
+              <div className="grid gap-8">
                 {category.items.map((item) => (
                   <motion.div
                     key={item.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="bg-white rounded-xl shadow-lg overflow-hidden"
+                    className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
                   >
-                    <div className="p-6 bg-gradient-to-r from-primary/5 to-transparent">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-4">
-                          <h3 className="text-2xl font-bold">{item.description}</h3>
-                          <Badge variant="secondary" className="text-primary">
+                    <div className="p-4 bg-gradient-to-r from-primary/5 to-transparent">
+                      <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-lg md:text-xl font-bold">{item.description}</h3>
+                          <Badge variant="secondary" className="text-primary text-xs">
                             {item.procedureDetails.technique}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1">
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <Button variant="ghost" size="icon">
+                                <Button variant="ghost" size="sm" className="h-8 w-8">
                                   <Share2 className="h-4 w-4" />
                                 </Button>
                               </TooltipTrigger>
@@ -262,12 +266,12 @@ export default function Gallery() {
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <Button variant="ghost" size="icon">
+                                <Button variant="ghost" size="sm" className="h-8 w-8">
                                   <Info className="h-4 w-4" />
                                 </Button>
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p>Detaylı Bilgi Al</p>
+                                <p>Detaylı Bilgi</p>
                               </TooltipContent>
                             </Tooltip>
                           </TooltipProvider>
@@ -280,80 +284,92 @@ export default function Gallery() {
                       afterImage={item.afterImage}
                     />
 
-                    <div className="p-8">
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div className="space-y-4">
-                          <h4 className="text-lg font-semibold flex items-center gap-2 text-primary">
-                            <Users className="h-5 w-5" />
-                            Hasta Bilgileri
-                          </h4>
-                          <div className="space-y-2 text-sm">
-                            {Object.entries(item.patientDetails).map(([key, value]) => (
-                              <div key={key} className="flex justify-between items-center p-2 rounded bg-gray-50">
-                                <span className="font-medium">{key.charAt(0).toUpperCase() + key.slice(1)}:</span>
-                                <span>{value}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
+                    <div className="p-4">
+                      <Accordion type="single" collapsible className="space-y-2">
+                        <AccordionItem value="patient-details">
+                          <AccordionTrigger className="text-sm py-2">
+                            <div className="flex items-center gap-2">
+                              <Users className="h-4 w-4 text-primary" />
+                              <span>Hasta Bilgileri</span>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
+                              {Object.entries(item.patientDetails).map(([key, value]) => (
+                                <div key={key} className="p-2 rounded bg-gray-50">
+                                  <span className="font-medium">{key}:</span>
+                                  <span className="ml-1">{value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
 
-                        <div className="space-y-4">
-                          <h4 className="text-lg font-semibold flex items-center gap-2 text-primary">
-                            <Clock className="h-5 w-5" />
-                            İşlem Detayları
-                          </h4>
-                          <div className="space-y-2 text-sm">
-                            {Object.entries(item.procedureDetails).map(([key, value]) => (
-                              <div key={key} className="flex justify-between items-center p-2 rounded bg-gray-50">
-                                <span className="font-medium">{key.charAt(0).toUpperCase() + key.slice(1)}:</span>
-                                <span>{value}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
+                        <AccordionItem value="procedure-details">
+                          <AccordionTrigger className="text-sm py-2">
+                            <div className="flex items-center gap-2">
+                              <Clock className="h-4 w-4 text-primary" />
+                              <span>İşlem Detayları</span>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
+                              {Object.entries(item.procedureDetails).map(([key, value]) => (
+                                <div key={key} className="p-2 rounded bg-gray-50">
+                                  <span className="font-medium">{key}:</span>
+                                  <span className="ml-1">{value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
 
-                        <div className="space-y-4">
-                          <h4 className="text-lg font-semibold flex items-center gap-2 text-primary">
-                            <CheckCircle className="h-5 w-5" />
-                            Sonuçlar
-                          </h4>
-                          <div className="space-y-2 text-sm">
-                            {Object.entries(item.results).map(([key, value]) => (
-                              <div key={key} className="flex justify-between items-center p-2 rounded bg-gray-50">
-                                <span className="font-medium">{key.charAt(0).toUpperCase() + key.slice(1)}:</span>
-                                <span>{value}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
+                        <AccordionItem value="results">
+                          <AccordionTrigger className="text-sm py-2">
+                            <div className="flex items-center gap-2">
+                              <CheckCircle className="h-4 w-4 text-primary" />
+                              <span>Sonuçlar</span>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
+                              {Object.entries(item.results).map(([key, value]) => (
+                                <div key={key} className="p-2 rounded bg-gray-50">
+                                  <span className="font-medium">{key}:</span>
+                                  <span className="ml-1">{value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
 
-                      <div className="mt-8 p-6 bg-primary/5 rounded-lg">
-                        <div className="mb-4">
-                          <h4 className="text-lg font-semibold flex items-center gap-2 text-primary mb-2">
-                            <Star className="h-5 w-5" />
-                            Hasta Yorumu
-                          </h4>
-                          <p className="text-gray-600 italic">"{item.testimonial}"</p>
-                        </div>
-                        <div>
-                          <h4 className="text-lg font-semibold flex items-center gap-2 text-primary mb-2">
-                            <CheckCircle className="h-5 w-5" />
-                            Doktor Notu
-                          </h4>
-                          <p className="text-gray-600">{item.doctorNote}</p>
-                        </div>
-                      </div>
+                        <AccordionItem value="testimonial">
+                          <AccordionTrigger className="text-sm py-2">
+                            <div className="flex items-center gap-2">
+                              <Star className="h-4 w-4 text-primary" />
+                              <span>Hasta Yorumu</span>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <p className="text-xs md:text-sm text-gray-600 italic">"{item.testimonial}"</p>
+                            <div className="mt-2 pt-2 border-t">
+                              <p className="text-xs md:text-sm text-gray-600">
+                                <span className="font-medium">Doktor Notu:</span> {item.doctorNote}
+                              </p>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
                     </div>
                   </motion.div>
                 ))}
               </div>
 
-              <div className="mt-12 text-center">
+              <div className="mt-8 text-center">
                 <Button
                   variant="outline"
                   size="lg"
-                  className="group"
+                  className="group text-sm w-full md:w-auto"
                   asChild
                 >
                   <Link href="/randevu">
