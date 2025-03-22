@@ -1,22 +1,19 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search, Calendar, Star, Share2, ArrowRight } from "lucide-react";
+import { Calendar, Star, Share2, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { Metadata } from "@/components/ui/metadata";
 
 import BeforeAfterSlider from "@/components/gallery/before-after-slider";
-import { CategoryFilters } from "@/components/gallery/category-filters";
 import ThreeDComparison from "@/components/gallery/three-d-comparison";
 import { SuccessStories } from "@/components/gallery/success-stories";
-import { Statistics } from "@/components/gallery/statistics";
 
-// Galeri öğeleri veri yapısı (15 örnek vaka eklenecek)
+// Galeri öğeleri veri yapısı
 const galleryItems = [
   {
     category: "sac-ekimi",
@@ -81,7 +78,6 @@ const galleryItems = [
         testimonial: "DHI tekniği ile yapılan operasyon sonrası iyileşme sürecim çok rahat geçti.",
         doctorNote: "DHI tekniği ile tek tek yapılan ekim sayesinde maksimum doğallık sağlandı."
       }
-      // Add more cases here...
     ]
   },
   {
@@ -117,7 +113,6 @@ const galleryItems = [
         testimonial: "Beklentilerimin üzerinde bir sonuç aldım. Çok teşekkür ederim.",
         doctorNote: "Hasta memnuniyetini en üst düzeyde tutarak doğal bir sakal görünümü elde edildi."
       }
-      // Add more cases here...
     ]
   },
   {
@@ -153,16 +148,12 @@ const galleryItems = [
         testimonial: "Kaşlarımın dolgunluğu ve doğal görünümü beni çok mutlu etti.",
         doctorNote: "Hasta isteği doğrultusunda doğal ve simetrik bir kaş tasarımı oluşturuldu."
       }
-      // Add more cases here...
     ]
   }
-  // Add more categories here...
 ];
 
 export default function Gallery() {
   const [selectedCase, setSelectedCase] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedFilter, setSelectedFilter] = useState("all");
   const [show3D, setShow3D] = useState(false);
 
   return (
@@ -201,28 +192,11 @@ export default function Gallery() {
             <p className="text-sm md:text-base text-gray-600 mb-6">
               Uzman ekibimiz tarafından gerçekleştirilen operasyonların öncesi ve sonrası görüntüleri
             </p>
-
-            {/* İstatistikler */}
-            <Statistics />
           </motion.div>
         </div>
       </section>
 
       <div className="container mx-auto px-4 py-8">
-        {/* Arama ve Filtreleme */}
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <Input
-              type="text"
-              placeholder="Hasta sonuçlarında ara..."
-              className="pl-10"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-        </div>
-
         {/* Kategoriler ve Sonuçlar */}
         <Tabs defaultValue="sac-ekimi" className="w-full">
           <TabsList className="flex justify-center mb-8 overflow-x-auto">
@@ -239,12 +213,6 @@ export default function Gallery() {
 
           {galleryItems.map((category) => (
             <TabsContent key={category.category} value={category.category}>
-              {/* Kategori Filtreleri */}
-              <CategoryFilters
-                category={category.category}
-                onFilterChange={(filters) => console.log(filters)}
-              />
-
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {category.items.map((item) => (
                   <motion.div
