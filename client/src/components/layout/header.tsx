@@ -18,6 +18,13 @@ export default function Header() {
         <NavigationMenu>
           <NavigationMenuList className="space-x-2">
             <NavigationMenuItem>
+              <Link href="/">
+                <NavigationMenuLink className="px-4 py-2">
+                  Anasayfa
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
               <Link href="/hizmetler">
                 <NavigationMenuLink className="px-4 py-2">
                   Hizmetlerimiz
@@ -35,6 +42,13 @@ export default function Header() {
               <Link href="/urunler">
                 <NavigationMenuLink className="px-4 py-2">
                   Bakım Ürünleri
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/iletisim">
+                <NavigationMenuLink className="px-4 py-2">
+                  İletişim
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
