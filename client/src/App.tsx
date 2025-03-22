@@ -10,6 +10,8 @@ import Gallery from "@/pages/gallery";
 import Products from "@/pages/products";
 import Contact from "@/pages/iletisim";
 import Appointment from "@/pages/appointment";
+import Blog from "@/pages/blog";
+import BlogPost from "@/pages/blog/[slug]";
 import AdminDashboard from "@/pages/admin/dashboard";
 import AdminPatients from "@/pages/admin/patients";
 import NotFound from "@/pages/not-found";
@@ -26,6 +28,8 @@ function Router() {
           <Route path="/urunler" component={Products} />
           <Route path="/iletisim" component={Contact} />
           <Route path="/randevu" component={Appointment} />
+          <Route path="/blog" component={Blog} />
+          <Route path="/blog/:slug" component={BlogPost} />
           <Route path="/admin" component={AdminDashboard} />
           <Route path="/admin/hastalar" component={AdminPatients} />
           <Route component={NotFound} />
