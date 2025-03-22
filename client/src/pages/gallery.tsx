@@ -28,7 +28,7 @@ const galleryItems = [
     items: [
       {
         id: 1,
-        beforeImage: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70",
+        beforeImage: "https://images.unsplash.com/photo-1582751324471-8417778b8164",
         afterImage: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c",
         description: "6 ay sonrası sonuç",
         patientDetails: {
@@ -57,7 +57,7 @@ const galleryItems = [
       },
       {
         id: 2,
-        beforeImage: "https://images.unsplash.com/photo-1580500325466-7ba0d8330bd7",
+        beforeImage: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70",
         afterImage: "https://images.unsplash.com/photo-1633364428037-497362c84eda",
         description: "8 ay sonrası sonuç",
         patientDetails: {
@@ -122,7 +122,7 @@ const galleryItems = [
     items: [
       {
         id: 1,
-        beforeImage: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6",
+        beforeImage: "https://images.unsplash.com/photo-1586610724704-aef83d8917f3",
         afterImage: "https://images.unsplash.com/photo-1600845264496-786c8c6a7b50",
         description: "3 ay sonrası sonuç",
         patientDetails: {
@@ -151,7 +151,7 @@ const galleryItems = [
       {
         id: 2,
         beforeImage: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6",
-        afterImage: "https://images.unsplash.com/photo-1600845264496-786c8c6a7b50",
+        afterImage: "https://images.unsplash.com/photo-1597633425046-08f5110420b5",
         description: "4 ay sonrası sonuç",
         patientDetails: {
           age: "32",
@@ -186,7 +186,7 @@ const galleryItems = [
       {
         id: 1,
         beforeImage: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec",
-        afterImage: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec",
+        afterImage: "https://images.unsplash.com/photo-1619764243330-ba31697e8a36",
         description: "4 ay sonrası sonuç",
         patientDetails: {
           age: "32",
