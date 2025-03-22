@@ -1,30 +1,20 @@
 import { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const slides = [
   {
     id: 1,
-    title: "Doğal ve Kalıcı Sonuçlar",
-    description: "Uzman kadromuz ve modern teknolojilerimizle en iyi sonuçları elde edin",
-    image: "/images/gallery/hair-after-1.jpg",
-    tag: "Saç Ekimi"
+    image: "/images/gallery/hair-after-1.jpg"
   },
   {
     id: 2,
-    title: "Profesyonel Sakal Ekimi",
-    description: "Yüz hatlarınızı belirginleştirin, özgüveninizi artırın",
-    image: "/images/gallery/beard-after-1.jpg",
-    tag: "Sakal Ekimi"
+    image: "/images/gallery/beard-after-1.jpg"
   },
   {
     id: 3,
-    title: "Estetik Kaş Ekimi",
-    description: "Doğal ve kalıcı kaşlara kavuşun",
-    image: "/images/gallery/eyebrow-after-1.jpg",
-    tag: "Kaş Ekimi"
+    image: "/images/gallery/eyebrow-after-1.jpg"
   }
 ];
 
@@ -65,10 +55,9 @@ export default function HeroSlider() {
 
       <div className="embla" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((slide, index) => (
+          {slides.map((slide) => (
             <div key={slide.id} className="embla__slide relative">
               <div className="relative h-[50vh] min-h-[400px] w-full">
-                {/* Görsel Arka Plan */}
                 <div 
                   className="absolute inset-0"
                   style={{
@@ -77,28 +66,6 @@ export default function HeroSlider() {
                     backgroundPosition: 'center'
                   }}
                 />
-
-                {/* Koyu Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-
-                {/* İçerik */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-center text-white max-w-2xl px-4"
-                  >
-                    <span className="inline-block bg-primary px-4 py-1 rounded-full text-sm mb-4">
-                      {slide.tag}
-                    </span>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">{slide.title}</h2>
-                    <p className="text-lg mb-8">{slide.description}</p>
-                    <Button size="lg" variant="secondary">
-                      Detaylı Bilgi
-                    </Button>
-                  </motion.div>
-                </div>
               </div>
             </div>
           ))}
