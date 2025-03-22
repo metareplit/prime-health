@@ -244,7 +244,8 @@ export default function NewPost() {
                             <Input
                               type="text"
                               placeholder="Görsel URL'si..."
-                              {...field}
+                              value={field.value || ""}
+                              onChange={field.onChange}
                             />
                             <Button
                               type="button"
@@ -318,7 +319,11 @@ export default function NewPost() {
                     <FormItem>
                       <FormLabel>SEO Başlığı</FormLabel>
                       <FormControl>
-                        <Input placeholder="SEO başlığı..." {...field} />
+                        <Input
+                          placeholder="SEO başlığı..."
+                          value={field.value || ""}
+                          onChange={field.onChange}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -335,7 +340,8 @@ export default function NewPost() {
                         <Textarea
                           placeholder="SEO açıklaması..."
                           className="h-20"
-                          {...field}
+                          value={field.value || ""}
+                          onChange={field.onChange}
                         />
                       </FormControl>
                       <FormMessage />

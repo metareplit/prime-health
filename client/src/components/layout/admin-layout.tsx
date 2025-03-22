@@ -33,7 +33,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             <div className="flex h-16 items-center px-8 gap-8">
               <div className="ml-auto flex items-center gap-4">
                 <span className="text-sm text-muted-foreground">
-                  {user.name || user.username}
+                  {user.fullName || user.username}
                 </span>
                 <Button
                   variant="ghost"
