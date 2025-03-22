@@ -83,13 +83,42 @@ const galleryItems = [
         },
         testimonial: "DHI tekniği ile yapılan operasyon sonrası iyileşme sürecim çok rahat geçti.",
         doctorNote: "DHI tekniği ile tek tek yapılan ekim sayesinde maksimum doğallık sağlandı."
+      },
+      {
+        id: 3,
+        beforeImage: "https://images.unsplash.com/photo-1599666433232-2dd6176cfd0f",
+        afterImage: "https://images.unsplash.com/photo-1633364449571-a8c4cd7261ed",
+        description: "12 ay sonrası sonuç",
+        patientDetails: {
+          age: "38",
+          gender: "Erkek",
+          problemArea: "Ön saç çizgisi",
+          diagnosis: "Male pattern baldness",
+          hairLossStage: "Norwood Scale 3"
+        },
+        procedureDetails: {
+          technique: "Safir FUE",
+          grafts: "3200",
+          duration: "6 saat",
+          anesthesia: "Lokal anestezi",
+          recoveryTime: "12 ay"
+        },
+        results: {
+          satisfaction: "Çok memnun",
+          density: "52 grafs/cm²",
+          survivalRate: "94%",
+          naturalness: "Doğal görünüm",
+          finalResult: "Mükemmel sonuç"
+        },
+        testimonial: "Saç ekimi sonrası özgüvenim tamamen yerine geldi. Çok mutluyum.",
+        doctorNote: "Doğal saç çizgisi ve optimal greft dağılımı ile başarılı sonuç elde edildi."
       }
     ]
   },
   {
     category: "sakal-ekimi",
     title: "Sakal Ekimi Sonuçları",
-    description: "Yüz hatlarını belirginleştiren ve estetik bir görünüm kazandıran sakal ekimi sonuçlarımız.",
+    description: "Yüz hatlarını belirginleştiren ve estetik bir görünüm kazandıran sakal ekimi sonuçlarımız",
     items: [
       {
         id: 1,
@@ -118,13 +147,41 @@ const galleryItems = [
         },
         testimonial: "Beklentilerimin üzerinde bir sonuç aldım. Çok teşekkür ederim.",
         doctorNote: "Hasta memnuniyetini en üst düzeyde tutarak doğal bir sakal görünümü elde edildi."
+      },
+      {
+        id: 2,
+        beforeImage: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6",
+        afterImage: "https://images.unsplash.com/photo-1600845264496-786c8c6a7b50",
+        description: "4 ay sonrası sonuç",
+        patientDetails: {
+          age: "32",
+          gender: "Erkek",
+          problemArea: "Çene ve boyun bölgesi",
+          diagnosis: "Sparse beard growth"
+        },
+        procedureDetails: {
+          technique: "FUE",
+          grafts: "2200",
+          duration: "4 saat",
+          anesthesia: "Lokal anestezi",
+          recoveryTime: "3 ay"
+        },
+        results: {
+          satisfaction: "Memnun",
+          density: "38 grafs/cm²",
+          survivalRate: "92%",
+          naturalness: "Çok doğal görünüm",
+          finalResult: "Dolgun sakal görünümü"
+        },
+        testimonial: "FUE tekniği ile yapılan sakal ekimi sonrası çok doğal bir görünüm elde ettim.",
+        doctorNote: "Simetrik ve doğal görünümlü sakal ekimi başarıyla tamamlandı."
       }
     ]
   },
   {
     category: "kas-ekimi",
     title: "Kaş Ekimi Sonuçları",
-    description: "Yüz ifadesini güzelleştiren ve daha etkileyici bir görünüm sağlayan kaş ekimi sonuçlarımız.",
+    description: "Yüz ifadesini güzelleştiren ve daha etkileyici bir görünüm sağlayan kaş ekimi sonuçlarımız",
     items: [
       {
         id: 1,
@@ -153,6 +210,34 @@ const galleryItems = [
         },
         testimonial: "Kaşlarımın dolgunluğu ve doğal görünümü beni çok mutlu etti.",
         doctorNote: "Hasta isteği doğrultusunda doğal ve simetrik bir kaş tasarımı oluşturuldu."
+      },
+      {
+        id: 2,
+        beforeImage: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e",
+        afterImage: "https://images.unsplash.com/photo-1522337094846-8a992d63659e",
+        description: "3 ay sonrası sonuç",
+        patientDetails: {
+          age: "28",
+          gender: "Kadın",
+          problemArea: "İnce kaşlar",
+          diagnosis: "Thin eyebrows"
+        },
+        procedureDetails: {
+          technique: "DHI",
+          grafts: "300",
+          duration: "2 saat",
+          anesthesia: "Lokal anestezi",
+          recoveryTime: "3 ay"
+        },
+        results: {
+          satisfaction: "Çok memnun",
+          density: "28 grafs/cm²",
+          survivalRate: "95%",
+          naturalness: "Doğal görünüm",
+          finalResult: "Dolgun ve doğal kaşlar"
+        },
+        testimonial: "Kaş ekimi sonrası yüz ifadem tamamen değişti, çok mutluyum.",
+        doctorNote: "Yüz hatlarıyla uyumlu, doğal görünümlü kaş tasarımı uygulandı."
       }
     ]
   }
