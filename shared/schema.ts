@@ -44,7 +44,7 @@ export const patientImages = pgTable("patient_images", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-// Keep existing services table
+// Services table
 export const services = pgTable("services", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -100,3 +100,7 @@ export type InsertMessage = z.infer<typeof insertMessageSchema>;
 export type InsertPatientImage = z.infer<typeof insertPatientImageSchema>;
 export type InsertService = z.infer<typeof insertServiceSchema>;
 export type InsertAppointment = z.infer<typeof insertAppointmentSchema>;
+
+// Geriye dönük uyumluluk için alias
+export const insertPatientSchema = insertUserSchema;
+export type InsertPatient = InsertUser;
