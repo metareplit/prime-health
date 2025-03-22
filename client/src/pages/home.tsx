@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import HeroSlider from "@/components/home/hero-slider";
 import { motion } from "framer-motion";
-import { Shield, Users, Stethoscope, Clock, Award, HeartHandshake, Building2, Map } from "lucide-react";
+import { Shield, Users, Stethoscope, Clock, Award, HeartHandshake, Building2, Map, ArrowRight, CheckCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge"; // Added import for Badge
+
 
 const features = [
   {
@@ -100,22 +102,88 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20">
+      <section className="py-20 bg-gradient-to-b from-white to-primary/5">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Hizmetlerimiz
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Profesyonel Hizmetlerimiz
+            </h2>
+            <p className="text-lg text-gray-600">
+              Modern teknoloji ve uzman kadromuzla size özel çözümler sunuyoruz
+            </p>
+          </motion.div>
 
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="h-64 bg-gray-100 animate-pulse rounded-lg" />
+                <div
+                  key={i}
+                  className="h-[400px] bg-gray-100 animate-pulse rounded-xl"
+                />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {services?.map((service) => (
-                <ServiceCard key={service.id} service={service} />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {services?.map((service, index) => (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+                >
+                  {/* Service Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <div
+                      className="absolute inset-0 bg-cover bg-center transform group-hover:scale-110 transition-transform duration-500"
+                      style={{ backgroundImage: `url(${service.imageUrl})` }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <Badge className="bg-white/90 text-primary hover:bg-white">
+                        {service.category}
+                      </Badge>
+                    </div>
+                  </div>
+
+                  {/* Service Content */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold mb-3">{service.name}</h3>
+                    <p className="text-gray-600 mb-4 line-clamp-2">
+                      {service.description}
+                    </p>
+
+                    {/* Service Features */}
+                    <div className="space-y-2 mb-6">
+                      {service.features?.slice(0, 3).map((feature, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-sm text-gray-600">
+                          <CheckCircle className="h-4 w-4 text-primary" />
+                          <span>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Action Button */}
+                    <div className="pt-4 border-t">
+                      <Link href={`/hizmetler/${service.slug}`}>
+                        <Button
+                          variant="ghost"
+                          className="w-full group/btn hover:bg-primary hover:text-white"
+                        >
+                          <span>Detaylı Bilgi</span>
+                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </div>
           )}
