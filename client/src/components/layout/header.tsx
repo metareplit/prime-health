@@ -25,9 +25,9 @@ export default function Header() {
               Hasta Sonuçları
             </a>
           </Link>
-          <Link href="/urunler">
+          <Link href="/blog">
             <a className="text-sm font-medium text-foreground/60 transition-colors hover:text-foreground">
-              Bakım Ürünleri
+              Blog
             </a>
           </Link>
           <Link href="/iletisim">
