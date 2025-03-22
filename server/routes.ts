@@ -3,18 +3,41 @@ import { createServer } from "http";
 import { storage } from "./storage";
 import { insertUserSchema, insertAppointmentSchema, insertMessageSchema, insertPatientImageSchema, insertPostSchema, insertProductSchema, insertMediaSchema, insertSettingSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
-import { scrypt, randomBytes, timingSafeEqual } from "crypto";
-import { promisify } from "util";
-
-const scryptAsync = promisify(scrypt);
-
-async function comparePasswords(supplied: string, stored: string) {
-  // Plain text comparison for testing
-  return supplied === stored;
-}
 
 export async function registerRoutes(app: Express) {
   // Auth endpoints
+  app.post("/api/auth/login", async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      console.log("Login attempt for:", username); // Debug log
+
+      const user = await storage.getUserByUsername(username);
+      if (!user) {
+        console.log("User not found:", username);
+        return res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
+      }
+
+      // For testing purposes, direct password comparison
+      if (password !== user.password) {
+        console.log("Invalid password for:", username);
+        return res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
+      }
+
+      req.session.userId = user.id;
+      console.log("Login successful for:", username);
+      res.json({ 
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        fullName: user.fullName,
+        role: user.role
+      });
+    } catch (error) {
+      console.error("Login error:", error);
+      res.status(500).json({ message: "Giriş yapılırken bir hata oluştu" });
+    }
+  });
+
   app.post("/api/auth/register", async (req, res) => {
     try {
       const userData = insertUserSchema.parse(req.body);
@@ -23,32 +46,6 @@ export async function registerRoutes(app: Express) {
     } catch (error) {
       const validationError = fromZodError(error);
       res.status(400).json({ message: validationError.message });
-    }
-  });
-
-  app.post("/api/auth/login", async (req, res) => {
-    try {
-      console.log("Login attempt:", req.body.username); // Debug log
-      const { username, password } = req.body;
-      const user = await storage.getUserByUsername(username);
-
-      if (!user) {
-        console.log("User not found:", username); // Debug log
-        return res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
-      }
-
-      const isValidPassword = await comparePasswords(password, user.password);
-      if (!isValidPassword) {
-        console.log("Invalid password for user:", username); // Debug log
-        return res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
-      }
-
-      req.session.userId = user.id;
-      console.log("Login successful for:", username); // Debug log
-      res.json(user);
-    } catch (error) {
-      console.error("Login error:", error); // Debug log
-      res.status(500).json({ message: "Giriş yapılırken bir hata oluştu" });
     }
   });
 
