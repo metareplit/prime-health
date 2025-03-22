@@ -13,6 +13,9 @@ import {
   Cell,
   LineChart,
   Line,
+  Legend,
+  Area,
+  AreaChart,
 } from "recharts";
 import { useState } from "react";
 
@@ -30,140 +33,183 @@ const deviceData = [
   { name: "Tablet", value: 10 },
 ];
 
-const trafficSourceData = [
-  { name: "Organik Arama", value: 45 },
-  { name: "Direkt", value: 25 },
-  { name: "Sosyal Medya", value: 20 },
-  { name: "Referans", value: 10 },
-];
+const visitorTrendData = Array.from({ length: 30 }, (_, i) => ({
+  tarih: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toLocaleDateString('tr-TR'),
+  ziyaretçi: Math.floor(Math.random() * 300) + 100,
+  dönüşüm: Math.floor(Math.random() * 30) + 5,
+}));
 
-const keywordPerformanceData = [
-  { keyword: "saç ekimi", tıklama: 1200, gösterim: 15000, sıralama: 3 },
-  { keyword: "saç ekimi fiyatları", tıklama: 800, gösterim: 10000, sıralama: 5 },
-  { keyword: "sakal ekimi", tıklama: 600, gösterim: 8000, sıralama: 2 },
-  { keyword: "kaş ekimi", tıklama: 400, gösterim: 5000, sıralama: 4 },
-];
-
-const visitorTrendData = [
-  { tarih: "Pazartesi", ziyaretçi: 150 },
-  { tarih: "Salı", ziyaretçi: 180 },
-  { tarih: "Çarşamba", ziyaretçi: 200 },
-  { tarih: "Perşembe", ziyaretçi: 220 },
-  { tarih: "Cuma", ziyaretçi: 250 },
-  { tarih: "Cumartesi", ziyaretçi: 280 },
-  { tarih: "Pazar", ziyaretçi: 240 },
-];
+const bounceRateData = Array.from({ length: 12 }, (_, i) => ({
+  ay: new Date(2024, i, 1).toLocaleDateString('tr-TR', { month: 'short' }),
+  oran: Math.floor(Math.random() * 30) + 40,
+}));
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white p-3 border rounded-lg shadow-lg">
+        <p className="font-semibold">{label}</p>
+        {payload.map((pld: any, index: number) => (
+          <p key={index} className="text-sm">
+            {pld.name}: {pld.value}
+            {pld.name === "oran" ? "%" : ""}
+          </p>
+        ))}
+      </div>
+    );
+  }
+  return null;
+};
+
 export function DashboardAnalytics() {
-  const [activeTab, setActiveTab] = useState('visitors');
+  const [activeTab, setActiveTab] = useState('overview');
 
   return (
     <Card className="col-span-2">
       <CardHeader>
-        <CardTitle>Detaylı Analitikler</CardTitle>
+        <CardTitle>Site Analitikleri</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="mb-4">
+            <TabsTrigger value="overview">Genel Bakış</TabsTrigger>
             <TabsTrigger value="visitors">Ziyaretçi Analizi</TabsTrigger>
-            <TabsTrigger value="browsers">Tarayıcı/Cihaz</TabsTrigger>
-            <TabsTrigger value="traffic">Trafik Kaynakları</TabsTrigger>
-            <TabsTrigger value="seo">SEO Performans</TabsTrigger>
+            <TabsTrigger value="technology">Teknoloji</TabsTrigger>
+            <TabsTrigger value="conversion">Dönüşüm</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="visitors" className="h-[400px]">
+          <TabsContent value="overview">
+            <div className="grid gap-4 md:grid-cols-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm">30 Günlük Ziyaretçi Trendi</CardTitle>
+                </CardHeader>
+                <CardContent className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={visitorTrendData}>
+                      <defs>
+                        <linearGradient id="colorVisitor" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="tarih" />
+                      <YAxis />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Legend />
+                      <Area 
+                        type="monotone" 
+                        dataKey="ziyaretçi" 
+                        stroke="#8884d8" 
+                        fillOpacity={1} 
+                        fill="url(#colorVisitor)" 
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm">Aylık Çıkış Oranı</CardTitle>
+                </CardHeader>
+                <CardContent className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={bounceRateData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="ay" />
+                      <YAxis />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Legend />
+                      <Line 
+                        type="monotone" 
+                        dataKey="oran" 
+                        stroke="#82ca9d" 
+                        strokeWidth={2}
+                        dot={{ stroke: '#82ca9d', strokeWidth: 2, r: 4 }}
+                        activeDot={{ r: 8 }}
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="visitors">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={visitorTrendData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="tarih" />
                 <YAxis />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
                 <Line type="monotone" dataKey="ziyaretçi" stroke="#8884d8" />
               </LineChart>
             </ResponsiveContainer>
           </TabsContent>
 
-          <TabsContent value="browsers">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="h-[300px]">
-                <h3 className="text-sm font-medium mb-4">Tarayıcı Dağılımı</h3>
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={browserData}
-                      innerRadius={60}
-                      outerRadius={80}
-                      paddingAngle={5}
-                      dataKey="value"
-                    >
-                      {browserData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="h-[300px]">
-                <h3 className="text-sm font-medium mb-4">Cihaz Dağılımı</h3>
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={deviceData}
-                      innerRadius={60}
-                      outerRadius={80}
-                      paddingAngle={5}
-                      dataKey="value"
-                    >
-                      {deviceData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
+          <TabsContent value="technology">
+            <div className="grid gap-4 md:grid-cols-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm">Tarayıcı Dağılımı</CardTitle>
+                </CardHeader>
+                <CardContent className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={browserData}
+                        innerRadius={60}
+                        outerRadius={80}
+                        paddingAngle={5}
+                        dataKey="value"
+                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                      >
+                        {browserData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip content={<CustomTooltip />} />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm">Cihaz Dağılımı</CardTitle>
+                </CardHeader>
+                <CardContent className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={deviceData}
+                        innerRadius={60}
+                        outerRadius={80}
+                        paddingAngle={5}
+                        dataKey="value"
+                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                      >
+                        {deviceData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip content={<CustomTooltip />} />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
             </div>
           </TabsContent>
-
-          <TabsContent value="traffic" className="h-[400px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={trafficSourceData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
+          <TabsContent value="conversion">
+            {/* Placeholder for conversion tab -  To be implemented based on requirements. */}
           </TabsContent>
 
-          <TabsContent value="seo">
-            <div className="overflow-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left py-2">Anahtar Kelime</th>
-                    <th className="text-right py-2">Tıklama</th>
-                    <th className="text-right py-2">Gösterim</th>
-                    <th className="text-right py-2">Sıralama</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {keywordPerformanceData.map((keyword) => (
-                    <tr key={keyword.keyword} className="border-b">
-                      <td className="py-2">{keyword.keyword}</td>
-                      <td className="text-right py-2">{keyword.tıklama}</td>
-                      <td className="text-right py-2">{keyword.gösterim}</td>
-                      <td className="text-right py-2">{keyword.sıralama}.</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </TabsContent>
         </Tabs>
       </CardContent>
     </Card>
