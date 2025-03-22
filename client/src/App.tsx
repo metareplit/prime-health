@@ -61,72 +61,72 @@ function Router() {
           <Route path="/hasta-portali/randevular" component={PatientAppointments} />
           <Route path="/hasta-portali/profil" component={PatientProfile} />
 
-          {/* Admin Routes - AdminLayout ile sarmalanmış */}
+          {/* Admin Routes */}
           <Route path="/admin">
-            {() => (
+            {(params) => (
               <AdminLayout>
                 <AdminDashboard />
               </AdminLayout>
             )}
           </Route>
           <Route path="/admin/posts">
-            {() => (
+            {(params) => (
               <AdminLayout>
                 <AdminPosts />
               </AdminLayout>
             )}
           </Route>
           <Route path="/admin/posts/new">
-            {() => (
+            {(params) => (
               <AdminLayout>
                 <AdminPostNew />
               </AdminLayout>
             )}
           </Route>
           <Route path="/admin/posts/:id">
-            {() => (
+            {(params) => (
               <AdminLayout>
-                <AdminPostEdit />
+                <AdminPostEdit params={params} />
               </AdminLayout>
             )}
           </Route>
           <Route path="/admin/products">
-            {() => (
+            {(params) => (
               <AdminLayout>
                 <AdminProducts />
               </AdminLayout>
             )}
           </Route>
           <Route path="/admin/products/new">
-            {() => (
+            {(params) => (
               <AdminLayout>
                 <AdminProductNew />
               </AdminLayout>
             )}
           </Route>
           <Route path="/admin/products/:id">
-            {() => (
+            {(params) => (
               <AdminLayout>
-                <AdminProductEdit />
+                <AdminProductEdit params={params} />
               </AdminLayout>
             )}
           </Route>
           <Route path="/admin/media">
-            {() => (
+            {(params) => (
               <AdminLayout>
                 <AdminMedia />
               </AdminLayout>
             )}
           </Route>
           <Route path="/admin/users">
-            {() => (
+            {(params) => (
               <AdminLayout>
                 <AdminUsers />
               </AdminLayout>
             )}
           </Route>
           <Route path="/admin/settings">
-            {() => (
+            {(params) => (
               <AdminLayout>
                 <AdminSettings />
               </AdminLayout>
