@@ -25,9 +25,7 @@ export default function Header() {
           <div className="flex items-center gap-8">
             <Link href="/">
               <a className="flex items-center space-x-2">
-                <span className="text-2xl font-bold bg-gradient 
-                  bg-gradient-to-r from-primary to-primary/60 
-                  bg-clip-text text-transparent">
+                <span className="text-2xl font-bold bg-gradient bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                   Prime Health
                 </span>
               </a>
@@ -35,6 +33,11 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6">
+              <Link href="/">
+                <a className="text-sm font-medium transition-colors hover:text-primary">
+                  Anasayfa
+                </a>
+              </Link>
               <Link href="/hizmetler">
                 <a className="text-sm font-medium transition-colors hover:text-primary">
                   Hizmetlerimiz
@@ -140,6 +143,9 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent side="right">
                 <div className="grid gap-6 py-6">
+                  <Link href="/">
+                    <a className="text-sm font-medium">Anasayfa</a>
+                  </Link>
                   <Link href="/hizmetler">
                     <a className="text-sm font-medium">Hizmetlerimiz</a>
                   </Link>
