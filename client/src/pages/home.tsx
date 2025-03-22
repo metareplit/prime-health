@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import HeroSlider from "@/components/home/hero-slider";
 import { motion } from "framer-motion";
-import { Shield, Users, Stethoscope, Clock, Award, HeartHandshake, Building2, Map, ArrowRight, CheckCircle } from "lucide-react";
+import { Shield, Users, Stethoscope, Clock, Award, HeartHandshake, Building2, Map, ArrowRight, CheckCircle, PlusCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const features = [
   {
@@ -47,6 +48,29 @@ const features = [
     icon: <Map className="h-8 w-8 text-primary" />,
     title: "Merkezi Konum",
     description: "Tiflis'in merkezinde kolay ulaşılabilir lokasyon"
+  }
+];
+
+const faqItems = [
+  {
+    question: "Saç ekimi operasyonu ne kadar sürer?",
+    answer: "Saç ekimi operasyonu ortalama 6-8 saat sürer. Bu süre ekilecek greft sayısına ve kullanılan tekniğe göre değişiklik gösterebilir. İşlem lokal anestezi altında gerçekleştirilir."
+  },
+  {
+    question: "Saç ekimi sonrası iyileşme süreci nasıldır?",
+    answer: "İyileşme süreci kişiden kişiye değişmekle birlikte, genellikle ilk 2 hafta kritik önem taşır. 3. günden itibaren işe dönülebilir. Tam iyileşme ve sonuçların görülmesi 6-12 ay arasında sürer."
+  },
+  {
+    question: "Saç ekimi kalıcı bir çözüm müdür?",
+    answer: "Evet, saç ekimi kalıcı bir çözümdür. Ekilen saçlar genetik olarak dökülmeye dirençli bölgeden alındığı için ömür boyu dökülmeden kalır. Ancak var olan saçların korunması için gerekli bakımın yapılması önemlidir."
+  },
+  {
+    question: "Saç ekimi için yaş sınırı var mıdır?",
+    answer: "Saç ekimi için ideal yaş aralığı 25-55'tir. Ancak her vaka bireysel olarak değerlendirilir. Önemli olan saç kaybının stabil hale gelmiş olması ve yeterli donör alanının bulunmasıdır."
+  },
+  {
+    question: "Operasyon sonrası günlük yaşama ne zaman dönülebilir?",
+    answer: "Operasyondan 3 gün sonra günlük yaşama dönülebilir. Ancak spor, yüzme gibi aktiviteler için 1 ay beklenmesi önerilir. İlk 2 hafta güneş, terleme ve darbelere karşı dikkatli olunmalıdır."
   }
 ];
 
@@ -220,6 +244,69 @@ export default function Home() {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-gradient-to-b from-transparent to-primary/5">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Sıkça Sorulan Sorular
+            </h2>
+            <p className="text-lg text-gray-600">
+              Saç ekimi hakkında merak ettiğiniz tüm sorulara uzman ekibimizden yanıtlar
+            </p>
+          </motion.div>
+
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-4">
+              {faqItems.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <AccordionItem value={`item-${index}`} className="bg-white rounded-lg border">
+                    <AccordionTrigger className="px-6 py-4 hover:bg-gray-50 transition-colors">
+                      <div className="flex items-center gap-3 text-left">
+                        <PlusCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                        <span className="font-medium">{item.question}</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-4">
+                      <div className="pl-8 text-gray-600">
+                        {item.answer}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
+              ))}
+            </Accordion>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-center mt-12"
+            >
+              <Link href="/sikca-sorulan-sorular">
+                <Button variant="outline" className="group">
+                  Tüm Soruları Görüntüle
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </section>
     </div>
