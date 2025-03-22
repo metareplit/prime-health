@@ -1,15 +1,14 @@
-import {
-  type Service,
-  type Appointment,
-  type User,
-  type Message,
-  type PatientImage,
-  type InsertService,
-  type InsertAppointment,
-  type InsertUser,
-  type InsertMessage,
-  type InsertPatientImage,
+import { 
+  users, posts, products, media, settings, services,
+  type User, type Post, type Product, type Media, type Setting, type Service,
+  type InsertUser, type InsertPost, type InsertProduct, type InsertMedia, type InsertSetting, type InsertService 
 } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
+import session from "express-session";
+import connectPg from "connect-pg-simple";
+
+const PostgresSessionStore = connectPg(session);
 
 export interface IStorage {
   // User methods
@@ -20,250 +19,80 @@ export interface IStorage {
   updateUser(id: number, data: Partial<User>): Promise<User>;
   authenticateUser(username: string, password: string): Promise<User | null>;
 
-  // Messages
-  getUserMessages(userId: number): Promise<Message[]>;
-  createMessage(message: InsertMessage): Promise<Message>;
+  // Posts methods
+  getPosts(): Promise<Post[]>;
+  getPostBySlug(slug: string): Promise<Post | undefined>;
+  createPost(post: InsertPost): Promise<Post>;
+  updatePost(id: number, data: Partial<Post>): Promise<Post>;
+  deletePost(id: number): Promise<void>;
 
-  // Patient Images
-  getPatientImages(patientId: number): Promise<PatientImage[]>;
-  createPatientImage(image: InsertPatientImage): Promise<PatientImage>;
+  // Products methods
+  getProducts(): Promise<Product[]>;
+  getProductBySlug(slug: string): Promise<Product | undefined>;
+  createProduct(product: InsertProduct): Promise<Product>;
+  updateProduct(id: number, data: Partial<Product>): Promise<Product>;
+  deleteProduct(id: number): Promise<void>;
 
-  // Services
+  // Media methods
+  getMedia(): Promise<Media[]>;
+  getMediaById(id: number): Promise<Media | undefined>;
+  createMedia(media: InsertMedia): Promise<Media>;
+  deleteMedia(id: number): Promise<void>;
+
+  // Settings methods
+  getSettings(): Promise<Setting[]>;
+  getSettingByKey(key: string): Promise<Setting | undefined>;
+  updateSetting(key: string, value: string): Promise<Setting>;
+
+  // Services methods
   getServices(): Promise<Service[]>;
   getServiceBySlug(slug: string): Promise<Service | undefined>;
   createService(service: InsertService): Promise<Service>;
+  updateService(id: number, data: Partial<Service>): Promise<Service>;
+  deleteService(id: number): Promise<void>;
 
-  // Appointments
-  getUserAppointments(userId: number): Promise<Appointment[]>;
-  createAppointment(appointment: InsertAppointment): Promise<Appointment>;
-  updateAppointmentStatus(id: number, status: string): Promise<Appointment>;
+  sessionStore: session.SessionStore;
 }
 
-export class MemStorage implements IStorage {
-  private services: Map<number, Service>;
-  private appointments: Map<number, Appointment>;
-  private users: Map<number, User>;
-  private messages: Map<number, Message>;
-  private patientImages: Map<number, PatientImage>;
-  private currentId: { [key: string]: number };
+export class DatabaseStorage implements IStorage {
+  sessionStore: session.SessionStore;
 
   constructor() {
-    this.services = new Map();
-    this.appointments = new Map();
-    this.users = new Map();
-    this.messages = new Map();
-    this.patientImages = new Map();
-    this.currentId = {
-      services: 1,
-      appointments: 1,
-      users: 1,
-      messages: 1,
-      patientImages: 1,
-    };
-
-    // Initialize default services...
-    const defaultServices = [
-      {
-        id: this.currentId.services++,
-        name: "Saç Ekimi",
-        description: "Modern FUE ve DHI teknikleriyle doğal görünümlü saç ekimi",
-        longDescription: "Safir FUE ve DHI teknikleri kullanılarak yapılan saç ekimi operasyonları, maksimum greft sayısı ve doğal görünüm sağlar. Deneyimli ekibimiz, kişiye özel planlama ile en uygun tekniği belirler. Gürcistan'ın modern kliniklerinde, en son teknoloji ve steril ortamda gerçekleştirilen işlemlerle kalıcı sonuçlar elde edilir.",
-        benefits: [
-          "Kalıcı ve doğal sonuçlar",
-          "Minimum iyileşme süresi",
-          "Lokal anestezi ile ağrısız işlem",
-          "Yüksek başarı oranı",
-          "Maksimum greft verimi",
-          "Kişiye özel tasarım",
-          "Sıfır iz teknolojisi",
-          "Hızlı iyileşme süreci"
-        ],
-        process: [
-          "Ücretsiz online konsültasyon",
-          "Detaylı saç analizi",
-          "Saç çizgisi ve ekim planı tasarımı",
-          "Kan testleri ve sağlık kontrolü",
-          "Lokal anestezi uygulaması",
-          "Greft toplama işlemi",
-          "Kanal açma ve greft yerleştirme",
-          "Post-operatif bakım talimatları",
-          "1 yıl boyunca düzenli takip"
-        ],
-        faqs: [
-          "Saç ekimi kalıcı mıdır?|Evet, saç ekimi kalıcı bir çözümdür. Ekilen saçlar genetik olarak dökülmeye dirençli bölgeden alındığı için ömür boyu kalıcıdır.",
-          "İşlem ne kadar sürer?|Ortalama 6-8 saat sürer. Bu süre ekilecek greft sayısına göre değişebilir.",
-          "Ne zaman sonuç alırım?|İlk sonuçlar 6. ayda görülmeye başlar, tam sonuç 12-15 ay içinde alınır. Her hasta için iyileşme süreci farklılık gösterebilir.",
-          "İşlem acı verir mi?|Lokal anestezi sayesinde işlem sırasında acı hissetmezsiniz. İşlem sonrası hafif bir gerginlik hissi olabilir.",
-          "İşlem sonrası günlük hayatıma ne zaman dönebilirim?|İşlemden 3 gün sonra günlük aktivitelerinize dönebilirsiniz. Spor ve ağır aktiviteler için 1 ay beklemeniz önerilir.",
-          "Ekilen saçlar dökülür mü?|İşlemden 2-3 hafta sonra ekilen saçlar dökülür, bu normal bir süreçtir. 3-4 ay sonra yeni saçlar çıkmaya başlar."
-        ],
-        duration: "6-8 saat",
-        imageUrl: "https://images.unsplash.com/photo-1621789098261-b7a3b15ae244",
-        slug: "sac-ekimi"
+    this.sessionStore = new PostgresSessionStore({
+      conObject: {
+        connectionString: process.env.DATABASE_URL,
       },
-      {
-        id: this.currentId.services++,
-        name: "Sakal Ekimi",
-        description: "Kalıcı ve doğal görünümlü sakal ekimi",
-        longDescription: "Sakal ekimi, yüz bölgesinde seyrek veya hiç sakal çıkmayan alanlara FUE tekniği ile sakal kılı ekimi yapılmasıdır. En son teknoloji ve uzman kadromuzla doğal ve kalıcı sonuçlar elde edilir. Kişiye özel planlama ile yüz yapınıza en uygun sakal tasarımı yapılır.",
-        benefits: [
-          "Kalıcı çözüm",
-          "Doğal görünüm",
-          "Hızlı iyileşme",
-          "Minimal iz",
-          "Kişiye özel tasarım",
-          "Tek seansta tamamlama",
-          "Lokal anestezi ile ağrısız işlem",
-          "Yüksek başarı oranı"
-        ],
-        process: [
-          "Ücretsiz konsültasyon",
-          "Yüz analizi ve planlama",
-          "Sakal tasarımı",
-          "Donör alan hazırlığı",
-          "Lokal anestezi",
-          "Greft toplama",
-          "Kanal açma ve yerleştirme",
-          "Bakım önerileri",
-          "6 ay boyunca takip"
-        ],
-        faqs: [
-          "Sakal ekimi kalıcı mıdır?|Evet, ömür boyu kalıcıdır. Ekilen kıllar genetik olarak dökülmeye dirençlidir.",
-          "Sonuçlar ne zaman görülür?|İlk sonuçlar 3. ayda görülür, tam sonuç 6-8 ayda alınır.",
-          "Günlük yaşama ne zaman dönebilirim?|2-3 gün içinde normal yaşamınıza dönebilirsiniz.",
-          "İşlem izi kalır mı?|Kullanılan modern teknikler sayesinde gözle görülür iz kalmaz.",
-          "Ekilen sakallar normal sakal gibi uzar mı?|Evet, ekilen sakallar doğal sakallar gibi uzar ve şekil verilebilir."
-        ],
-        duration: "4-6 saat",
-        imageUrl: "https://images.unsplash.com/photo-1600845264496-786c8c6a7b50",
-        slug: "sakal-ekimi"
-      },
-      {
-        id: this.currentId.services++,
-        name: "Kaş Ekimi",
-        description: "Kalıcı ve doğal görünümlü kaş ekimi",
-        longDescription: "Kaş ekimi, seyrek veya şekli bozuk kaşların DHI tekniği ile yeniden şekillendirilmesidir. Her kaş teli için özel açı ve yön belirlenerek doğal bir görünüm elde edilir. Yüz hatlarınıza uygun kaş tasarımı ile dengeli ve estetik bir görünüm sağlanır.",
-        benefits: [
-          "Kalıcı sonuç",
-          "Doğal görünüm",
-          "Minimal travma",
-          "Hızlı iyileşme",
-          "Kişiye özel tasarım",
-          "İz bırakmayan teknik",
-          "Tek seansta uygulama"
-        ],
-        process: [
-          "Detaylı yüz analizi",
-          "Kaş tasarımı",
-          "Donör alan seçimi",
-          "Lokal anestezi",
-          "DHI tekniği ile ekim",
-          "Bakım talimatları",
-          "3 ay takip"
-        ],
-        faqs: [
-          "Kaş ekimi kalıcı mıdır?|Evet, kaş ekimi kalıcı bir çözümdür.",
-          "İşlem ne kadar sürer?|Ortalama 2-3 saat sürer.",
-          "Sonuçlar ne zaman görülür?|İlk sonuçlar 2. ayda görülmeye başlar, tam sonuç 6 ayda alınır.",
-          "Kaşlarım doğal görünecek mi?|Evet, DHI tekniği sayesinde her kıl doğal açı ve yönde ekilir."
-        ],
-        duration: "2-3 saat",
-        imageUrl: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec",
-        slug: "kas-ekimi"
-      },
-      {
-        id: this.currentId.services++,
-        name: "PRP Tedavisi",
-        description: "Kişinin kendi kanından elde edilen plazma ile saç güçlendirme",
-        longDescription: "PRP (Platelet Rich Plasma) tedavisi, kişinin kendi kanından elde edilen trombositten zengin plazmanın saç köklerine enjekte edilmesidir. Bu yöntem saç dökülmesini yavaşlatır, mevcut saçları güçlendirir ve yeni saç çıkışını uyarır. Doğal ve güvenli bir tedavi yöntemidir.",
-        benefits: [
-          "Doğal tedavi yöntemi",
-          "Hızlı uygulama",
-          "Yan etki riski minimal",
-          "Saç kalitesinde artış",
-          "Dökülmelerde azalma",
-          "Saç köklerinde canlanma"
-        ],
-        process: [
-          "Kan alımı",
-          "Plazma ayrıştırma",
-          "Saç derisi temizliği",
-          "PRP enjeksiyonu",
-          "Saç bakım önerileri",
-          "Periyodik kontrol"
-        ],
-        faqs: [
-          "PRP tedavisi ağrılı mıdır?|Lokal anestezi kremi ile ağrısız uygulama yapılır.",
-          "Kaç seans gerekir?|Genellikle 4-6 seans önerilir, ayda bir uygulama yapılır.",
-          "Sonuçlar ne zaman görülür?|İlk sonuçlar 2-3 ay içinde görülmeye başlar.",
-          "Tedavi kimlere uygulanabilir?|Saç dökülmesi yaşayan ve saçlarını güçlendirmek isteyen herkese uygulanabilir."
-        ],
-        duration: "30-45 dakika",
-        imageUrl: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d",
-        slug: "prp-tedavisi"
-      },
-      {
-        id: this.currentId.services++,
-        name: "Mezoterapi",
-        description: "Vitamini ve mineral takviyesi ile saç güçlendirme tedavisi",
-        longDescription: "Saç mezoterapisi, saç köklerinin ihtiyaç duyduğu vitamin, mineral ve amino asitlerin doğrudan saç derisine enjekte edilmesidir. Bu yöntem saç dökülmesini önler, saç kalitesini artırır ve yeni saç çıkışını destekler. Kişiye özel formüllerle en etkili sonuç hedeflenir.",
-        benefits: [
-          "Hızlı etki",
-          "Doğrudan etki alanına uygulama",
-          "Saç kalitesinde artış",
-          "Dökülmelerde azalma",
-          "Saç köklerinde beslenme",
-          "Uzun süreli etki"
-        ],
-        process: [
-          "Saç analizi",
-          "Formül belirleme",
-          "Saç derisi temizliği",
-          "Mezoterapi uygulaması",
-          "Bakım önerileri",
-          "Düzenli kontrol"
-        ],
-        faqs: [
-          "Mezoterapi ağrılı mıdır?|Anestezik krem ile ağrısız uygulama yapılır.",
-          "Kaç seans uygulanır?|Genellikle 6-8 seans, haftada bir uygulama yapılır.",
-          "Sonuçlar kalıcı mıdır?|Düzenli bakım ile kalıcı sonuçlar elde edilir.",
-          "İşlem sonrası günlük hayata dönüş?|İşlem sonrası hemen günlük hayata dönülebilir."
-        ],
-        duration: "45-60 dakika",
-        imageUrl: "https://images.unsplash.com/photo-1579684453423-f84349ef60b0",
-        slug: "mezoterapi"
-      }
-    ];
-
-    defaultServices.forEach(service => this.services.set(service.id, service));
+      createTableIfMissing: true,
+    });
   }
 
   // User methods
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
   }
 
   async getUserById(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(u => u.username === username);
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user;
   }
 
   async createUser(user: InsertUser): Promise<User> {
-    const id = this.currentId.users++;
-    const newUser = { ...user, id };
-    this.users.set(id, newUser);
+    const [newUser] = await db.insert(users).values(user).returning();
     return newUser;
   }
 
   async updateUser(id: number, data: Partial<User>): Promise<User> {
-    const user = await this.getUser(id);
-    if (!user) throw new Error("User not found");
-
-    const updatedUser = { ...user, ...data };
-    this.users.set(id, updatedUser);
+    const [updatedUser] = await db
+      .update(users)
+      .set(data)
+      .where(eq(users.id, id))
+      .returning();
     return updatedUser;
   }
 
@@ -273,72 +102,127 @@ export class MemStorage implements IStorage {
     return user;
   }
 
-  // Messages methods
-  async getUserMessages(userId: number): Promise<Message[]> {
-    return Array.from(this.messages.values()).filter(
-      m => m.senderId === userId || m.receiverId === userId
-    );
+  // Posts methods
+  async getPosts(): Promise<Post[]> {
+    return await db.select().from(posts);
   }
 
-  async createMessage(message: InsertMessage): Promise<Message> {
-    const id = this.currentId.messages++;
-    const newMessage = { ...message, id };
-    this.messages.set(id, newMessage);
-    return newMessage;
+  async getPostBySlug(slug: string): Promise<Post | undefined> {
+    const [post] = await db.select().from(posts).where(eq(posts.slug, slug));
+    return post;
   }
 
-  // Patient Images methods
-  async getPatientImages(patientId: number): Promise<PatientImage[]> {
-    return Array.from(this.patientImages.values()).filter(
-      img => img.patientId === patientId
-    );
+  async createPost(post: InsertPost): Promise<Post> {
+    const [newPost] = await db.insert(posts).values(post).returning();
+    return newPost;
   }
 
-  async createPatientImage(image: InsertPatientImage): Promise<PatientImage> {
-    const id = this.currentId.patientImages++;
-    const newImage = { ...image, id };
-    this.patientImages.set(id, newImage);
-    return newImage;
+  async updatePost(id: number, data: Partial<Post>): Promise<Post> {
+    const [updatedPost] = await db
+      .update(posts)
+      .set(data)
+      .where(eq(posts.id, id))
+      .returning();
+    return updatedPost;
   }
 
-  // Service methods
+  async deletePost(id: number): Promise<void> {
+    await db.delete(posts).where(eq(posts.id, id));
+  }
+
+  // Products methods
+  async getProducts(): Promise<Product[]> {
+    return await db.select().from(products);
+  }
+
+  async getProductBySlug(slug: string): Promise<Product | undefined> {
+    const [product] = await db.select().from(products).where(eq(products.slug, slug));
+    return product;
+  }
+
+  async createProduct(product: InsertProduct): Promise<Product> {
+    const [newProduct] = await db.insert(products).values(product).returning();
+    return newProduct;
+  }
+
+  async updateProduct(id: number, data: Partial<Product>): Promise<Product> {
+    const [updatedProduct] = await db
+      .update(products)
+      .set(data)
+      .where(eq(products.id, id))
+      .returning();
+    return updatedProduct;
+  }
+
+  async deleteProduct(id: number): Promise<void> {
+    await db.delete(products).where(eq(products.id, id));
+  }
+
+  // Media methods
+  async getMedia(): Promise<Media[]> {
+    return await db.select().from(media);
+  }
+
+  async getMediaById(id: number): Promise<Media | undefined> {
+    const [mediaItem] = await db.select().from(media).where(eq(media.id, id));
+    return mediaItem;
+  }
+
+  async createMedia(mediaItem: InsertMedia): Promise<Media> {
+    const [newMedia] = await db.insert(media).values(mediaItem).returning();
+    return newMedia;
+  }
+
+  async deleteMedia(id: number): Promise<void> {
+    await db.delete(media).where(eq(media.id, id));
+  }
+
+  // Settings methods
+  async getSettings(): Promise<Setting[]> {
+    return await db.select().from(settings);
+  }
+
+  async getSettingByKey(key: string): Promise<Setting | undefined> {
+    const [setting] = await db.select().from(settings).where(eq(settings.key, key));
+    return setting;
+  }
+
+  async updateSetting(key: string, value: string): Promise<Setting> {
+    const [updatedSetting] = await db
+      .update(settings)
+      .set({ value })
+      .where(eq(settings.key, key))
+      .returning();
+    return updatedSetting;
+  }
+
+  // Services methods
   async getServices(): Promise<Service[]> {
-    return Array.from(this.services.values());
+    return await db.select().from(services);
   }
 
   async getServiceBySlug(slug: string): Promise<Service | undefined> {
-    return Array.from(this.services.values()).find(s => s.slug === slug);
+    const [service] = await db.select().from(services).where(eq(services.slug, slug));
+    return service;
   }
 
   async createService(service: InsertService): Promise<Service> {
-    const id = this.currentId.services++;
-    const newService = { ...service, id };
-    this.services.set(id, newService);
+    const [newService] = await db.insert(services).values(service).returning();
     return newService;
   }
 
-  // Appointment methods
-  async getUserAppointments(userId: number): Promise<Appointment[]> {
-    return Array.from(this.appointments.values()).filter(
-      a => a.patientId === userId
-    );
+  async updateService(id: number, data: Partial<Service>): Promise<Service> {
+    const [updatedService] = await db
+      .update(services)
+      .set(data)
+      .where(eq(services.id, id))
+      .returning();
+    return updatedService;
   }
 
-  async createAppointment(appointment: InsertAppointment): Promise<Appointment> {
-    const id = this.currentId.appointments++;
-    const newAppointment = { ...appointment, id };
-    this.appointments.set(id, newAppointment);
-    return newAppointment;
-  }
-
-  async updateAppointmentStatus(id: number, status: string): Promise<Appointment> {
-    const appointment = this.appointments.get(id);
-    if (!appointment) throw new Error("Appointment not found");
-
-    const updatedAppointment = { ...appointment, status };
-    this.appointments.set(id, updatedAppointment);
-    return updatedAppointment;
+  async deleteService(id: number): Promise<void> {
+    await db.delete(services).where(eq(services.id, id));
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

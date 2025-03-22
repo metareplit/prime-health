@@ -23,6 +23,13 @@ import PatientProfile from "@/pages/patient/profile";
 import AdminDashboard from "@/pages/admin/dashboard";
 import AdminPatients from "@/pages/admin/patients";
 import NotFound from "@/pages/not-found";
+import { AdminLayout } from "@/components/layout/admin-layout";
+import AdminPosts from "@/pages/admin/posts"; // Added
+import AdminProducts from "@/pages/admin/products"; // Added
+import AdminMedia from "@/pages/admin/media"; // Added
+import AdminUsers from "@/pages/admin/users"; // Added
+import AdminSettings from "@/pages/admin/settings"; // Added
+
 
 function Router() {
   return (
@@ -30,6 +37,7 @@ function Router() {
       <Header />
       <main className="flex-grow">
         <Switch>
+          {/* Public Routes */}
           <Route path="/" component={Home} />
           <Route path="/hizmetler" component={Services} />
           <Route path="/galeri" component={Gallery} />
@@ -50,9 +58,50 @@ function Router() {
           <Route path="/hasta-portali/randevular" component={PatientAppointments} />
           <Route path="/hasta-portali/profil" component={PatientProfile} />
 
-          {/* Admin Routes */}
-          <Route path="/admin" component={AdminDashboard} />
-          <Route path="/admin/hastalar" component={AdminPatients} />
+          {/* Admin Routes - AdminLayout ile sarmalanmış */}
+          <Route path="/admin">
+            {() => (
+              <AdminLayout>
+                <AdminDashboard />
+              </AdminLayout>
+            )}
+          </Route>
+          <Route path="/admin/posts">
+            {() => (
+              <AdminLayout>
+                <AdminPosts />
+              </AdminLayout>
+            )}
+          </Route>
+          <Route path="/admin/products">
+            {() => (
+              <AdminLayout>
+                <AdminProducts />
+              </AdminLayout>
+            )}
+          </Route>
+          <Route path="/admin/media">
+            {() => (
+              <AdminLayout>
+                <AdminMedia />
+              </AdminLayout>
+            )}
+          </Route>
+          <Route path="/admin/users">
+            {() => (
+              <AdminLayout>
+                <AdminUsers />
+              </AdminLayout>
+            )}
+          </Route>
+          <Route path="/admin/settings">
+            {() => (
+              <AdminLayout>
+                <AdminSettings />
+              </AdminLayout>
+            )}
+          </Route>
+
           <Route component={NotFound} />
         </Switch>
       </main>

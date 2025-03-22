@@ -2,57 +2,103 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import type { Appointment } from "@shared/schema";
+import { Users, Calendar, FileText, Package } from "lucide-react";
+import type { User, Post, Product, Appointment } from "@shared/schema";
+
+interface DashboardCard {
+  title: string;
+  value: number;
+  description: string;
+  icon: React.ReactNode;
+}
 
 export default function AdminDashboard() {
-  const { data: appointments, isLoading } = useQuery<Appointment[]>({
+  const { data: users, isLoading: loadingUsers } = useQuery<User[]>({
+    queryKey: ["/api/users"],
+  });
+
+  const { data: appointments, isLoading: loadingAppointments } = useQuery<Appointment[]>({
     queryKey: ["/api/appointments"],
   });
+
+  const { data: posts, isLoading: loadingPosts } = useQuery<Post[]>({
+    queryKey: ["/api/posts"],
+  });
+
+  const { data: products, isLoading: loadingProducts } = useQuery<Product[]>({
+    queryKey: ["/api/products"],
+  });
+
+  const cards: DashboardCard[] = [
+    {
+      title: "Toplam Kullanıcı",
+      value: users?.length || 0,
+      description: "Kayıtlı kullanıcı sayısı",
+      icon: <Users className="h-4 w-4 text-blue-500" />,
+    },
+    {
+      title: "Aktif Randevular",
+      value: appointments?.filter(apt => apt.status === "pending").length || 0,
+      description: "Bekleyen randevu sayısı",
+      icon: <Calendar className="h-4 w-4 text-green-500" />,
+    },
+    {
+      title: "Blog Yazıları",
+      value: posts?.length || 0,
+      description: "Yayınlanan yazı sayısı",
+      icon: <FileText className="h-4 w-4 text-purple-500" />,
+    },
+    {
+      title: "Ürünler",
+      value: products?.length || 0,
+      description: "Aktif ürün sayısı",
+      icon: <Package className="h-4 w-4 text-orange-500" />,
+    },
+  ];
 
   const todayAppointments = appointments?.filter(
     (apt) => new Date(apt.date).toDateString() === new Date().toDateString()
   );
 
   return (
-    <div className="py-12">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Yönetim Paneli</h1>
-          <Link href="/admin/hastalar">
-            <Button>Hasta Listesi</Button>
-          </Link>
-        </div>
+    <div className="space-y-8">
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <Link href="/admin/appointments">
+          <Button>Yeni Randevu Oluştur</Button>
+        </Link>
+      </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Bugünkü Randevular</CardTitle>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {cards.map((card) => (
+          <Card key={card.title}>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                {card.title}
+              </CardTitle>
+              {card.icon}
             </CardHeader>
             <CardContent>
-              <p className="text-3xl font-bold">{todayAppointments?.length || 0}</p>
+              <div className="text-2xl font-bold">{card.value}</div>
+              <p className="text-xs text-muted-foreground">
+                {card.description}
+              </p>
             </CardContent>
           </Card>
+        ))}
+      </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Toplam Randevu</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-3xl font-bold">{appointments?.length || 0}</p>
-            </CardContent>
-          </Card>
-        </div>
-
+      <div className="grid gap-4 md:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle>Son Randevular</CardTitle>
           </CardHeader>
           <CardContent>
-            {isLoading ? (
+            {loadingAppointments ? (
               <div>Yükleniyor...</div>
             ) : (
               <div className="space-y-4">
-                {appointments?.slice(0, 5).map((appointment) => (
+                {todayAppointments?.slice(0, 5).map((appointment) => (
                   <div
                     key={appointment.id}
                     className="flex justify-between items-center p-4 border rounded-lg"
@@ -62,7 +108,7 @@ export default function AdminDashboard() {
                         {new Date(appointment.date).toLocaleDateString("tr-TR")}
                       </p>
                       <p className="text-sm text-gray-600">
-                        ID: {appointment.patientId}
+                        Hasta ID: {appointment.patientId}
                       </p>
                     </div>
                     <div>
@@ -76,6 +122,38 @@ export default function AdminDashboard() {
                         {appointment.status}
                       </span>
                     </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Son Blog Yazıları</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {loadingPosts ? (
+              <div>Yükleniyor...</div>
+            ) : (
+              <div className="space-y-4">
+                {posts?.slice(0, 5).map((post) => (
+                  <div
+                    key={post.id}
+                    className="flex justify-between items-center p-4 border rounded-lg"
+                  >
+                    <div>
+                      <p className="font-semibold">{post.title}</p>
+                      <p className="text-sm text-gray-600">
+                        {new Date(post.createdAt).toLocaleDateString("tr-TR")}
+                      </p>
+                    </div>
+                    <Link href={`/admin/posts/${post.id}`}>
+                      <Button variant="ghost" size="sm">
+                        Düzenle
+                      </Button>
+                    </Link>
                   </div>
                 ))}
               </div>

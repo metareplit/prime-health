@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, timestamp, boolean, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, timestamp, boolean, jsonb, decimal } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -18,6 +18,67 @@ export const users = pgTable("users", {
   medicalHistory: jsonb("medical_history"), // Stores detailed medical history
   preferences: jsonb("preferences"), // Stores user preferences
   createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Blog posts table
+export const posts = pgTable("posts", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  slug: text("slug").notNull().unique(),
+  content: text("content").notNull(),
+  excerpt: text("excerpt").notNull(),
+  featuredImage: text("featured_image"),
+  status: text("status").notNull().default("draft"), // draft, published
+  authorId: integer("author_id").references(() => users.id),
+  publishedAt: timestamp("published_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+  seoTitle: text("seo_title"),
+  seoDescription: text("seo_description"),
+  category: text("category"),
+  tags: text("tags").array(),
+});
+
+// Products table
+export const products = pgTable("products", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  slug: text("slug").notNull().unique(),
+  description: text("description").notNull(),
+  longDescription: text("long_description"),
+  price: decimal("price", { precision: 10, scale: 2 }).notNull(),
+  images: text("images").array(),
+  category: text("category").notNull(),
+  inStock: boolean("in_stock").notNull().default(true),
+  featured: boolean("featured").default(false),
+  specifications: jsonb("specifications"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Media library
+export const media = pgTable("media", {
+  id: serial("id").primaryKey(),
+  filename: text("filename").notNull(),
+  originalName: text("original_name").notNull(),
+  mimeType: text("mime_type").notNull(),
+  size: integer("size").notNull(),
+  url: text("url").notNull(),
+  uploadedById: integer("uploaded_by_id").references(() => users.id),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Site settings
+export const settings = pgTable("settings", {
+  id: serial("id").primaryKey(),
+  key: text("key").notNull().unique(),
+  value: text("value").notNull(),
+  type: text("type").notNull(), // text, json, number, boolean
+  group: text("group").notNull(), // general, contact, seo, social
+  label: text("label").notNull(),
+  description: text("description"),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
@@ -87,6 +148,10 @@ export const insertMessageSchema = createInsertSchema(messages);
 export const insertPatientImageSchema = createInsertSchema(patientImages);
 export const insertServiceSchema = createInsertSchema(services);
 export const insertAppointmentSchema = createInsertSchema(appointments);
+export const insertPostSchema = createInsertSchema(posts);
+export const insertProductSchema = createInsertSchema(products);
+export const insertMediaSchema = createInsertSchema(media);
+export const insertSettingSchema = createInsertSchema(settings);
 
 // Types
 export type User = typeof users.$inferSelect;
@@ -94,12 +159,20 @@ export type Message = typeof messages.$inferSelect;
 export type PatientImage = typeof patientImages.$inferSelect;
 export type Service = typeof services.$inferSelect;
 export type Appointment = typeof appointments.$inferSelect;
+export type Post = typeof posts.$inferSelect;
+export type Product = typeof products.$inferSelect;
+export type Media = typeof media.$inferSelect;
+export type Setting = typeof settings.$inferSelect;
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type InsertMessage = z.infer<typeof insertMessageSchema>;
 export type InsertPatientImage = z.infer<typeof insertPatientImageSchema>;
 export type InsertService = z.infer<typeof insertServiceSchema>;
 export type InsertAppointment = z.infer<typeof insertAppointmentSchema>;
+export type InsertPost = z.infer<typeof insertPostSchema>;
+export type InsertProduct = z.infer<typeof insertProductSchema>;
+export type InsertMedia = z.infer<typeof insertMediaSchema>;
+export type InsertSetting = z.infer<typeof insertSettingSchema>;
 
 // Geriye dönük uyumluluk için alias
 export const insertPatientSchema = insertUserSchema;
