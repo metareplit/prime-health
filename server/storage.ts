@@ -88,7 +88,7 @@ export class MemStorage implements IStorage {
           "Ekilen saçlar dökülür mü?|İşlemden 2-3 hafta sonra ekilen saçlar dökülür, bu normal bir süreçtir. 3-4 ay sonra yeni saçlar çıkmaya başlar."
         ],
         duration: "6-8 saat",
-        imageUrl: "/images/hair-transplant.svg",
+        imageUrl: "https://images.unsplash.com/photo-1621789098261-b7a3b15ae244",
         slug: "sac-ekimi"
       },
       {
@@ -125,7 +125,7 @@ export class MemStorage implements IStorage {
           "Ekilen sakallar normal sakal gibi uzar mı?|Evet, ekilen sakallar doğal sakallar gibi uzar ve şekil verilebilir."
         ],
         duration: "4-6 saat",
-        imageUrl: "/images/beard-transplant.svg",
+        imageUrl: "https://images.unsplash.com/photo-1600845264496-786c8c6a7b50",
         slug: "sakal-ekimi"
       },
       {
@@ -158,7 +158,7 @@ export class MemStorage implements IStorage {
           "Kaşlarım doğal görünecek mi?|Evet, DHI tekniği sayesinde her kıl doğal açı ve yönde ekilir."
         ],
         duration: "2-3 saat",
-        imageUrl: "/images/eyebrow-transplant.svg",
+        imageUrl: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec",
         slug: "kas-ekimi"
       },
       {
@@ -189,7 +189,7 @@ export class MemStorage implements IStorage {
           "Tedavi kimlere uygulanabilir?|Saç dökülmesi yaşayan ve saçlarını güçlendirmek isteyen herkese uygulanabilir."
         ],
         duration: "30-45 dakika",
-        imageUrl: "/images/prp-treatment.svg",
+        imageUrl: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d",
         slug: "prp-tedavisi"
       },
       {
@@ -220,7 +220,7 @@ export class MemStorage implements IStorage {
           "İşlem sonrası günlük hayata dönüş?|İşlem sonrası hemen günlük hayata dönülebilir."
         ],
         duration: "45-60 dakika",
-        imageUrl: "/images/mesotherapy.svg",
+        imageUrl: "https://images.unsplash.com/photo-1579684453423-f84349ef60b0",
         slug: "mezoterapi"
       }
     ];
