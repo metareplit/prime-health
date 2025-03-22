@@ -23,7 +23,7 @@ const successStories: SuccessStory[] = [
     procedure: "Saç Ekimi",
     testimonial: "Uzun süre saç dökülmesi problemi yaşadıktan sonra kliniğinizde saç ekimi yaptırdım. Sonuçlar beklediğimden çok daha iyi. Doğal ve sık bir saça kavuştum.",
     rating: 5,
-    imageUrl: "/images/testimonials/ahmet.jpg"
+    imageUrl: "https://images.unsplash.com/photo-1582751324471-8417778b8164"
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const successStories: SuccessStory[] = [
     procedure: "Sakal Ekimi",
     testimonial: "Sakal ekimi konusunda tereddütlerim vardı ancak operasyon sonrası aldığım sonuç muhteşem. Artık daha genç ve bakımlı görünüyorum.",
     rating: 5,
-    imageUrl: "/images/testimonials/mehmet.jpg"
+    imageUrl: "https://images.unsplash.com/photo-1590086783191-a0694c7d1e6e"
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ const successStories: SuccessStory[] = [
     procedure: "Saç Ekimi",
     testimonial: "Profesyonel ekip ve modern teknolojiler sayesinde çok başarılı bir sonuç aldım. Özgüvenim yerine geldi.",
     rating: 5,
-    imageUrl: "/images/testimonials/ali.jpg"
+    imageUrl: "https://images.unsplash.com/photo-1633364338573-2264981d561e"
   }
 ];
 
