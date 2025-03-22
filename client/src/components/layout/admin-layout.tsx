@@ -1,15 +1,16 @@
 import { Sidebar } from "./admin-sidebar";
-import { Button } from "@/components/ui/button";
+import { AdminHeader } from "./admin-header";
 import { useAuth } from "@/lib/auth";
 import { Redirect } from "wouter";
-import { Loader2, LogOut } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
+  title?: string;
 }
 
-export function AdminLayout({ children }: AdminLayoutProps) {
-  const { user, loading, logoutMutation } = useAuth();
+export function AdminLayout({ children, title = "Dashboard" }: AdminLayoutProps) {
+  const { user, loading } = useAuth();
 
   if (loading) {
     return (
@@ -29,22 +30,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       <div className="flex">
         <Sidebar />
         <div className="flex-1">
-          <header className="border-b">
-            <div className="flex h-16 items-center px-8 gap-8">
-              <div className="ml-auto flex items-center gap-4">
-                <span className="text-sm text-muted-foreground">
-                  {user.fullName || user.username}
-                </span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => logoutMutation.mutate()}
-                >
-                  <LogOut className="h-5 w-5" />
-                </Button>
-              </div>
-            </div>
-          </header>
+          <AdminHeader title={title} />
           <main className="p-8">{children}</main>
         </div>
       </div>
