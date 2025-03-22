@@ -50,7 +50,7 @@ export default function HeroSlider() {
     onSelect();
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on('select', onSelect);
-    
+
     // Otomatik geçiş
     const autoplayInterval = setInterval(() => {
       emblaApi.scrollNext();
@@ -65,12 +65,12 @@ export default function HeroSlider() {
   return (
     <div className="relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
-      
+
       <div className="embla" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((slide, index) => (
             <div key={slide.id} className="embla__slide relative">
-              <div className="relative h-[70vh] min-h-[600px] w-full">
+              <div className="relative h-[50vh] min-h-[400px] w-full">
                 <div className="absolute inset-0 grid grid-cols-2">
                   {/* Before Image */}
                   <div 
@@ -85,7 +85,7 @@ export default function HeroSlider() {
                       Öncesi
                     </div>
                   </div>
-                  
+
                   {/* After Image */}
                   <div 
                     className="relative"
@@ -112,7 +112,7 @@ export default function HeroSlider() {
                     <span className="inline-block bg-primary px-4 py-1 rounded-full text-sm mb-4">
                       {slide.tag}
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4">{slide.title}</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4">{slide.title}</h2>
                     <p className="text-lg mb-8">{slide.description}</p>
                     <Button size="lg" variant="secondary">
                       Detaylı Bilgi
