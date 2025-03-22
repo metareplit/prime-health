@@ -38,7 +38,9 @@ function SidebarItem({ icon, label, href, active }: SidebarItemProps) {
 
 export function Sidebar() {
   const { logoutMutation } = useAuth();
-  const [, location] = useLocation();
+  const [location] = useLocation();
+
+  const pathname = location || '';
 
   return (
     <div className="w-64 border-r min-h-screen p-6 space-y-6">
@@ -51,37 +53,37 @@ export function Sidebar() {
           icon={<LayoutDashboard className="h-4 w-4" />}
           label="Dashboard"
           href="/admin"
-          active={location === "/admin"}
+          active={pathname === "/admin"}
         />
         <SidebarItem
           icon={<FileText className="h-4 w-4" />}
           label="Blog Yazıları"
           href="/admin/posts"
-          active={location.startsWith("/admin/posts")}
+          active={pathname.startsWith("/admin/posts")}
         />
         <SidebarItem
           icon={<Package className="h-4 w-4" />}
           label="Ürünler"
           href="/admin/products"
-          active={location.startsWith("/admin/products")}
+          active={pathname.startsWith("/admin/products")}
         />
         <SidebarItem
           icon={<Image className="h-4 w-4" />}
           label="Medya"
           href="/admin/media"
-          active={location.startsWith("/admin/media")}
+          active={pathname.startsWith("/admin/media")}
         />
         <SidebarItem
           icon={<Users className="h-4 w-4" />}
           label="Kullanıcılar"
           href="/admin/users"
-          active={location.startsWith("/admin/users")}
+          active={pathname.startsWith("/admin/users")}
         />
         <SidebarItem
           icon={<Settings className="h-4 w-4" />}
           label="Ayarlar"
           href="/admin/settings"
-          active={location.startsWith("/admin/settings")}
+          active={pathname.startsWith("/admin/settings")}
         />
       </nav>
 
