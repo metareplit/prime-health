@@ -29,3 +29,21 @@
     transform: rotateY(180deg);
   }
 }
+
+/* Embla Carousel Styles */
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}

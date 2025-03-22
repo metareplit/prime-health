@@ -1,0 +1,161 @@
+import { useState, useEffect, useCallback } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
+const slides = [
+  {
+    id: 1,
+    title: "Doğal ve Kalıcı Sonuçlar",
+    description: "Uzman kadromuz ve modern teknolojilerimizle en iyi sonuçları elde edin",
+    beforeImage: "/images/gallery/hair-before-1.jpg",
+    afterImage: "/images/gallery/hair-after-1.jpg",
+    tag: "Saç Ekimi"
+  },
+  {
+    id: 2,
+    title: "Profesyonel Sakal Ekimi",
+    description: "Yüz hatlarınızı belirginleştirin, özgüveninizi artırın",
+    beforeImage: "/images/gallery/beard-before-1.jpg",
+    afterImage: "/images/gallery/beard-after-1.jpg",
+    tag: "Sakal Ekimi"
+  },
+  {
+    id: 3,
+    title: "Estetik Kaş Ekimi",
+    description: "Doğal ve kalıcı kaşlara kavuşun",
+    beforeImage: "/images/gallery/eyebrow-before-1.jpg",
+    afterImage: "/images/gallery/eyebrow-after-1.jpg",
+    tag: "Kaş Ekimi"
+  }
+];
+
+export default function HeroSlider() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    onSelect();
+    setScrollSnaps(emblaApi.scrollSnapList());
+    emblaApi.on('select', onSelect);
+    
+    // Otomatik geçiş
+    const autoplayInterval = setInterval(() => {
+      emblaApi.scrollNext();
+    }, 5000);
+
+    return () => {
+      clearInterval(autoplayInterval);
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  return (
+    <div className="relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
+      
+      <div className="embla" ref={emblaRef}>
+        <div className="embla__container">
+          {slides.map((slide, index) => (
+            <div key={slide.id} className="embla__slide relative">
+              <div className="relative h-[70vh] min-h-[600px] w-full">
+                <div className="absolute inset-0 grid grid-cols-2">
+                  {/* Before Image */}
+                  <div 
+                    className="relative"
+                    style={{
+                      backgroundImage: `url(${slide.beforeImage})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
+                    <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
+                      Öncesi
+                    </div>
+                  </div>
+                  
+                  {/* After Image */}
+                  <div 
+                    className="relative"
+                    style={{
+                      backgroundImage: `url(${slide.afterImage})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
+                    <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
+                      Sonrası
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-center text-white max-w-2xl px-4"
+                  >
+                    <span className="inline-block bg-primary px-4 py-1 rounded-full text-sm mb-4">
+                      {slide.tag}
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4">{slide.title}</h2>
+                    <p className="text-lg mb-8">{slide.description}</p>
+                    <Button size="lg" variant="secondary">
+                      Detaylı Bilgi
+                    </Button>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation Buttons */}
+      <Button
+        variant="outline"
+        size="icon"
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+        onClick={scrollPrev}
+      >
+        <ArrowLeft className="h-4 w-4" />
+      </Button>
+
+      <Button
+        variant="outline"
+        size="icon"
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+        onClick={scrollNext}
+      >
+        <ArrowRight className="h-4 w-4" />
+      </Button>
+
+      {/* Dots */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+        {scrollSnaps.map((_, index) => (
+          <button
+            key={index}
+            className={`w-2 h-2 rounded-full transition-all ${
+              index === selectedIndex ? 'bg-white w-4' : 'bg-white/50'
+            }`}
+            onClick={() => emblaApi?.scrollTo(index)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
