@@ -30,10 +30,10 @@ function SidebarItem({ icon, label, href, active }: SidebarItemProps) {
     <Link href={href}>
       <a
         className={cn(
-          "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
+          "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-muted",
           active
-            ? "bg-primary text-primary-foreground"
-            : "hover:bg-accent hover:text-accent-foreground"
+            ? "bg-primary text-primary-foreground font-medium"
+            : "text-muted-foreground hover:text-foreground"
         )}
       >
         {icon}
@@ -49,110 +49,118 @@ export function Sidebar() {
   const pathname = location || '';
 
   return (
-    <div className="w-64 border-r min-h-screen p-6 space-y-6">
-      <div className="flex items-center gap-2 px-2">
+    <div className="w-64 border-r min-h-screen p-6 space-y-6 bg-background shadow-sm">
+      <div className="flex items-center gap-2 px-2 pb-4 border-b">
         <span className="text-lg font-semibold">Yönetim Paneli</span>
       </div>
 
       <nav className="space-y-1">
         {/* Ana Sayfa ve Analitikler */}
-        <div className="mb-4">
-          <div className="text-xs font-semibold text-muted-foreground mb-2 px-2">
-            GENEL BAKIŞ
+        <div className="mb-6">
+          <div className="text-xs font-semibold text-muted-foreground mb-3 px-2 uppercase tracking-wider">
+            Genel Bakış
           </div>
-          <SidebarItem
-            icon={<LayoutDashboard className="h-4 w-4" />}
-            label="Dashboard"
-            href="/admin"
-            active={pathname === "/admin"}
-          />
-          <SidebarItem
-            icon={<LineChart className="h-4 w-4" />}
-            label="Analitikler"
-            href="/admin/analytics"
-            active={pathname === "/admin/analytics"}
-          />
-          <SidebarItem
-            icon={<Globe className="h-4 w-4" />}
-            label="SEO Yönetimi"
-            href="/admin/seo"
-            active={pathname === "/admin/seo"}
-          />
+          <div className="space-y-1">
+            <SidebarItem
+              icon={<LayoutDashboard className="h-4 w-4" />}
+              label="Dashboard"
+              href="/admin"
+              active={pathname === "/admin"}
+            />
+            <SidebarItem
+              icon={<LineChart className="h-4 w-4" />}
+              label="Analitikler"
+              href="/admin/analytics"
+              active={pathname === "/admin/analytics"}
+            />
+            <SidebarItem
+              icon={<Globe className="h-4 w-4" />}
+              label="SEO Yönetimi"
+              href="/admin/seo"
+              active={pathname === "/admin/seo"}
+            />
+          </div>
         </div>
 
         {/* İçerik Yönetimi */}
-        <div className="mb-4">
-          <div className="text-xs font-semibold text-muted-foreground mb-2 px-2">
-            İÇERİK YÖNETİMİ
+        <div className="mb-6">
+          <div className="text-xs font-semibold text-muted-foreground mb-3 px-2 uppercase tracking-wider">
+            İçerik Yönetimi
           </div>
-          <SidebarItem
-            icon={<FileText className="h-4 w-4" />}
-            label="Blog Yazıları"
-            href="/admin/posts"
-            active={pathname.startsWith("/admin/posts")}
-          />
-          <SidebarItem
-            icon={<Package className="h-4 w-4" />}
-            label="Ürünler"
-            href="/admin/products"
-            active={pathname.startsWith("/admin/products")}
-          />
-          <SidebarItem
-            icon={<Image className="h-4 w-4" />}
-            label="Medya"
-            href="/admin/media"
-            active={pathname.startsWith("/admin/media")}
-          />
+          <div className="space-y-1">
+            <SidebarItem
+              icon={<FileText className="h-4 w-4" />}
+              label="Blog Yazıları"
+              href="/admin/posts"
+              active={pathname.startsWith("/admin/posts")}
+            />
+            <SidebarItem
+              icon={<Package className="h-4 w-4" />}
+              label="Ürünler"
+              href="/admin/products"
+              active={pathname.startsWith("/admin/products")}
+            />
+            <SidebarItem
+              icon={<Image className="h-4 w-4" />}
+              label="Medya"
+              href="/admin/media"
+              active={pathname.startsWith("/admin/media")}
+            />
+          </div>
         </div>
 
         {/* Kullanıcı ve Randevu Yönetimi */}
-        <div className="mb-4">
-          <div className="text-xs font-semibold text-muted-foreground mb-2 px-2">
-            KULLANICI YÖNETİMİ
+        <div className="mb-6">
+          <div className="text-xs font-semibold text-muted-foreground mb-3 px-2 uppercase tracking-wider">
+            Kullanıcı Yönetimi
           </div>
-          <SidebarItem
-            icon={<Users className="h-4 w-4" />}
-            label="Kullanıcılar"
-            href="/admin/users"
-            active={pathname.startsWith("/admin/users")}
-          />
-          <SidebarItem
-            icon={<Calendar className="h-4 w-4" />}
-            label="Randevular"
-            href="/admin/appointments"
-            active={pathname.startsWith("/admin/appointments")}
-          />
-          <SidebarItem
-            icon={<MessageSquare className="h-4 w-4" />}
-            label="Mesajlar"
-            href="/admin/messages"
-            active={pathname.startsWith("/admin/messages")}
-          />
+          <div className="space-y-1">
+            <SidebarItem
+              icon={<Users className="h-4 w-4" />}
+              label="Kullanıcılar"
+              href="/admin/users"
+              active={pathname.startsWith("/admin/users")}
+            />
+            <SidebarItem
+              icon={<Calendar className="h-4 w-4" />}
+              label="Randevular"
+              href="/admin/appointments"
+              active={pathname.startsWith("/admin/appointments")}
+            />
+            <SidebarItem
+              icon={<MessageSquare className="h-4 w-4" />}
+              label="Mesajlar"
+              href="/admin/messages"
+              active={pathname.startsWith("/admin/messages")}
+            />
+          </div>
         </div>
 
         {/* Sistem */}
-        <div className="mb-4">
-          <div className="text-xs font-semibold text-muted-foreground mb-2 px-2">
-            SİSTEM
+        <div className="mb-6">
+          <div className="text-xs font-semibold text-muted-foreground mb-3 px-2 uppercase tracking-wider">
+            Sistem
           </div>
-          <SidebarItem
-            icon={<BellRing className="h-4 w-4" />}
-            label="Bildirimler"
-            href="/admin/notifications"
-            active={pathname.startsWith("/admin/notifications")}
-          />
-          <SidebarItem
-            icon={<Activity className="h-4 w-4" />}
-            label="Sistem Durumu"
-            href="/admin/system"
-            active={pathname.startsWith("/admin/system")}
-          />
-          <SidebarItem
-            icon={<Settings className="h-4 w-4" />}
-            label="Ayarlar"
-            href="/admin/settings"
-            active={pathname.startsWith("/admin/settings")}
-          />
+          <div className="space-y-1">
+            <SidebarItem
+              icon={<BellRing className="h-4 w-4" />}
+              label="Bildirimler"
+              href="/admin/notifications"
+              active={pathname.startsWith("/admin/notifications")}
+            />
+            <SidebarItem
+              icon={<Activity className="h-4 w-4" />}
+              label="Sistem Durumu"
+              href="/admin/system"
+              active={pathname.startsWith("/admin/system")}
+            />
+            <SidebarItem
+              icon={<Settings className="h-4 w-4" />}
+              label="Ayarlar"
+              href="/admin/settings"
+              active={pathname.startsWith("/admin/settings")}
+            />
+          </div>
         </div>
       </nav>
 
