@@ -1,15 +1,35 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
 import { insertUserSchema, insertAppointmentSchema, insertMessageSchema, insertPatientImageSchema, insertPostSchema, insertProductSchema, insertMediaSchema, insertSettingSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
+import session from "express-session";
+
+// Auth Middleware Types
+interface AuthRequest extends Request {
+  session: session.Session & { userId?: number };
+}
 
 export async function registerRoutes(app: Express) {
+  // Session middleware
+  app.use(
+    session({
+      store: storage.sessionStore,
+      secret: "your-secret-key",
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      },
+    })
+  );
+
   // Auth endpoints
-  app.post("/api/auth/login", async (req, res) => {
+  app.post("/api/auth/login", async (req: AuthRequest, res: Response) => {
     try {
       const { username, password } = req.body;
-      console.log("Login attempt for:", username); // Debug log
+      console.log("Login attempt for:", username);
 
       const user = await storage.getUserByUsername(username);
       if (!user) {
@@ -17,7 +37,7 @@ export async function registerRoutes(app: Express) {
         return res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
       }
 
-      // For testing purposes, direct password comparison
+      // Test için direkt karşılaştırma
       if (password !== user.password) {
         console.log("Invalid password for:", username);
         return res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
@@ -25,7 +45,7 @@ export async function registerRoutes(app: Express) {
 
       req.session.userId = user.id;
       console.log("Login successful for:", username);
-      res.json({ 
+      res.json({
         id: user.id,
         username: user.username,
         email: user.email,
@@ -38,7 +58,7 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.post("/api/auth/register", async (req, res) => {
+  app.post("/api/auth/register", async (req: Request, res: Response) => {
     try {
       const userData = insertUserSchema.parse(req.body);
       const user = await storage.createUser(userData);
@@ -49,14 +69,17 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.post("/api/auth/logout", (req, res) => {
-    req.session.destroy(() => {
+  app.post("/api/auth/logout", (req: AuthRequest, res: Response) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json({ message: "Çıkış yapılırken bir hata oluştu" });
+      }
       res.json({ message: "Çıkış yapıldı" });
     });
   });
 
   // Authentication middleware
-  const requireAuth = (req, res, next) => {
+  const requireAuth = (req: AuthRequest, res: Response, next: NextFunction) => {
     if (!req.session.userId) {
       return res.status(401).json({ message: "Oturum açmanız gerekiyor" });
     }
@@ -64,7 +87,7 @@ export async function registerRoutes(app: Express) {
   };
 
   // Admin middleware
-  const requireAdmin = async (req, res, next) => {
+  const requireAdmin = async (req: AuthRequest, res: Response, next: NextFunction) => {
     if (!req.session.userId) {
       return res.status(401).json({ message: "Oturum açmanız gerekiyor" });
     }
@@ -76,7 +99,7 @@ export async function registerRoutes(app: Express) {
   };
 
   // Posts endpoints
-  app.get("/api/posts", async (_req, res) => {
+  app.get("/api/posts", async (_req: Request, res: Response) => {
     try {
       const posts = await storage.getPosts();
       res.json(posts);
@@ -85,7 +108,7 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.post("/api/posts", requireAdmin, async (req, res) => {
+  app.post("/api/posts", requireAdmin, async (req: Request, res: Response) => {
     try {
       const postData = insertPostSchema.parse(req.body);
       const post = await storage.createPost(postData);
@@ -96,7 +119,7 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.patch("/api/posts/:id", requireAdmin, async (req, res) => {
+  app.patch("/api/posts/:id", requireAdmin, async (req: Request, res: Response) => {
     try {
       const post = await storage.updatePost(parseInt(req.params.id), req.body);
       res.json(post);
@@ -105,7 +128,7 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.delete("/api/posts/:id", requireAdmin, async (req, res) => {
+  app.delete("/api/posts/:id", requireAdmin, async (req: Request, res: Response) => {
     try {
       await storage.deletePost(parseInt(req.params.id));
       res.status(204).send();
@@ -115,7 +138,7 @@ export async function registerRoutes(app: Express) {
   });
 
   // Products endpoints
-  app.get("/api/products", async (_req, res) => {
+  app.get("/api/products", async (_req: Request, res: Response) => {
     try {
       const products = await storage.getProducts();
       res.json(products);
@@ -124,7 +147,7 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.post("/api/products", requireAdmin, async (req, res) => {
+  app.post("/api/products", requireAdmin, async (req: Request, res: Response) => {
     try {
       const productData = insertProductSchema.parse(req.body);
       const product = await storage.createProduct(productData);
@@ -135,7 +158,7 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.patch("/api/products/:id", requireAdmin, async (req, res) => {
+  app.patch("/api/products/:id", requireAdmin, async (req: Request, res: Response) => {
     try {
       const product = await storage.updateProduct(parseInt(req.params.id), req.body);
       res.json(product);
@@ -144,7 +167,7 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.delete("/api/products/:id", requireAdmin, async (req, res) => {
+  app.delete("/api/products/:id", requireAdmin, async (req: Request, res: Response) => {
     try {
       await storage.deleteProduct(parseInt(req.params.id));
       res.status(204).send();
@@ -154,7 +177,7 @@ export async function registerRoutes(app: Express) {
   });
 
   // Media endpoints
-  app.get("/api/media", async (_req, res) => {
+  app.get("/api/media", async (_req: Request, res: Response) => {
     try {
       const mediaFiles = await storage.getMedia();
       res.json(mediaFiles);
@@ -163,7 +186,7 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.post("/api/media", requireAdmin, async (req, res) => {
+  app.post("/api/media", requireAdmin, async (req: Request, res: Response) => {
     try {
       const mediaData = insertMediaSchema.parse(req.body);
       const media = await storage.createMedia(mediaData);
@@ -174,7 +197,7 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.delete("/api/media/:id", requireAdmin, async (req, res) => {
+  app.delete("/api/media/:id", requireAdmin, async (req: Request, res: Response) => {
     try {
       await storage.deleteMedia(parseInt(req.params.id));
       res.status(204).send();
@@ -184,7 +207,7 @@ export async function registerRoutes(app: Express) {
   });
 
   // Settings endpoints
-  app.get("/api/settings", async (_req, res) => {
+  app.get("/api/settings", async (_req: Request, res: Response) => {
     try {
       const settings = await storage.getSettings();
       res.json(settings);
@@ -193,7 +216,7 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.patch("/api/settings/:key", requireAdmin, async (req, res) => {
+  app.patch("/api/settings/:key", requireAdmin, async (req: Request, res: Response) => {
     try {
       const setting = await storage.updateSetting(req.params.key, req.body.value);
       res.json(setting);
@@ -203,12 +226,12 @@ export async function registerRoutes(app: Express) {
   });
 
   // User profile endpoints
-  app.get("/api/user/profile", requireAuth, async (req, res) => {
+  app.get("/api/user/profile", requireAuth, async (req: AuthRequest, res: Response) => {
     const user = await storage.getUserById(req.session.userId as number);
     res.json(user);
   });
 
-  app.patch("/api/user/profile", requireAuth, async (req, res) => {
+  app.patch("/api/user/profile", requireAuth, async (req: AuthRequest, res: Response) => {
     try {
       const user = await storage.updateUser(req.session.userId as number, req.body);
       res.json(user);
@@ -218,12 +241,12 @@ export async function registerRoutes(app: Express) {
   });
 
   // Messages endpoints
-  app.get("/api/messages", requireAuth, async (req, res) => {
+  app.get("/api/messages", requireAuth, async (req: AuthRequest, res: Response) => {
     const messages = await storage.getUserMessages(req.session.userId as number);
     res.json(messages);
   });
 
-  app.post("/api/messages", requireAuth, async (req, res) => {
+  app.post("/api/messages", requireAuth, async (req: AuthRequest, res: Response) => {
     try {
       const messageData = insertMessageSchema.parse({
         ...req.body,
@@ -238,12 +261,12 @@ export async function registerRoutes(app: Express) {
   });
 
   // Patient images endpoints
-  app.get("/api/patient-images", requireAuth, async (req, res) => {
+  app.get("/api/patient-images", requireAuth, async (req: AuthRequest, res: Response) => {
     const images = await storage.getPatientImages(req.session.userId as number);
     res.json(images);
   });
 
-  app.post("/api/patient-images", requireAuth, async (req, res) => {
+  app.post("/api/patient-images", requireAuth, async (req: AuthRequest, res: Response) => {
     try {
       const imageData = insertPatientImageSchema.parse({
         ...req.body,
@@ -258,12 +281,12 @@ export async function registerRoutes(app: Express) {
   });
 
   // Services endpoints
-  app.get("/api/services", async (_req, res) => {
+  app.get("/api/services", async (_req: Request, res: Response) => {
     const services = await storage.getServices();
     res.json(services);
   });
 
-  app.get("/api/services/:slug", async (req, res) => {
+  app.get("/api/services/:slug", async (req: Request, res: Response) => {
     const service = await storage.getServiceBySlug(req.params.slug);
     if (!service) {
       return res.status(404).json({ message: "Hizmet bulunamadı" });
@@ -272,12 +295,12 @@ export async function registerRoutes(app: Express) {
   });
 
   // Appointments endpoints
-  app.get("/api/appointments", requireAuth, async (req, res) => {
+  app.get("/api/appointments", requireAuth, async (req: AuthRequest, res: Response) => {
     const appointments = await storage.getUserAppointments(req.session.userId as number);
     res.json(appointments);
   });
 
-  app.post("/api/appointments", requireAuth, async (req, res) => {
+  app.post("/api/appointments", requireAuth, async (req: AuthRequest, res: Response) => {
     try {
       const appointmentData = insertAppointmentSchema.parse({
         ...req.body,
@@ -291,7 +314,7 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.patch("/api/appointments/:id/status", requireAuth, async (req, res) => {
+  app.patch("/api/appointments/:id/status", requireAuth, async (req: AuthRequest, res: Response) => {
     const { id } = req.params;
     const { status } = req.body;
 
