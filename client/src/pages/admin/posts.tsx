@@ -4,19 +4,28 @@ import { Post } from "@shared/schema";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Plus } from "lucide-react";
+import { Search, Plus, FileText, Edit, Trash } from "lucide-react";
 import { Link } from "wouter";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function AdminPosts() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
 
   const { data: posts, isLoading } = useQuery<Post[]>({
     queryKey: ["/api/posts"],
   });
 
   const filteredPosts = posts?.filter(post =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    post.content.toLowerCase().includes(searchTerm.toLowerCase())
+    (post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    post.content.toLowerCase().includes(searchTerm.toLowerCase())) &&
+    (statusFilter === "all" || post.status === statusFilter)
   );
 
   return (
@@ -32,7 +41,7 @@ export default function AdminPosts() {
       </div>
 
       <div className="flex gap-4 items-center">
-        <div className="relative flex-1 max-w-sm">
+        <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
@@ -42,6 +51,19 @@ export default function AdminPosts() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
+        <Select
+          value={statusFilter}
+          onValueChange={setStatusFilter}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Durum filtrele" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Tümü</SelectItem>
+            <SelectItem value="draft">Taslak</SelectItem>
+            <SelectItem value="published">Yayında</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {isLoading ? (
@@ -67,8 +89,9 @@ export default function AdminPosts() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Link href={`/admin/posts/${post.id}/edit`}>
+                  <Link href={`/admin/posts/${post.id}`}>
                     <Button variant="outline" size="sm">
+                      <Edit className="h-4 w-4 mr-2" />
                       Düzenle
                     </Button>
                   </Link>
