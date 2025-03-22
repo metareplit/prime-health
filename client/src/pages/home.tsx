@@ -126,13 +126,13 @@ export default function Home() {
 
       {/* Services Section */}
       <section className="relative overflow-hidden py-20 bg-gradient-to-b from-primary/5 to-transparent">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
           className="absolute -right-40 -top-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
         />
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -211,8 +211,8 @@ export default function Home() {
                     {/* Service Features */}
                     <div className="space-y-2 mb-6">
                       {service.features?.slice(0, 4).map((feature, idx) => (
-                        <div 
-                          key={idx} 
+                        <div
+                          key={idx}
                           className="flex items-center gap-2 text-sm text-gray-600 p-2 rounded-lg hover:bg-gray-50 transition-colors"
                         >
                           <CheckCircle className="h-4 w-4 text-primary" />
@@ -291,21 +291,6 @@ export default function Home() {
                 </motion.div>
               ))}
             </Accordion>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-center mt-12"
-            >
-              <Link href="/sikca-sorulan-sorular">
-                <Button variant="outline" className="group">
-                  Tüm Soruları Görüntüle
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-            </motion.div>
           </div>
         </div>
       </section>
