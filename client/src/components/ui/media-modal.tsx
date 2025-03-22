@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ImagePlus, X } from "lucide-react";
+import { ImagePlus } from "lucide-react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
@@ -66,16 +66,14 @@ export function MediaModal({ open, onClose, onSelect }: MediaModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="sm:max-w-[800px]">
         <DialogHeader>
           <DialogTitle>Medya Yöneticisi</DialogTitle>
           <DialogDescription>
             Görsel seçin veya yeni görsel yükleyin
           </DialogDescription>
         </DialogHeader>
-
-        <div className="space-y-4">
-          {/* Yükleme alanı */}
+        <div className="mt-4 space-y-4">
           <div className="flex gap-4 items-center">
             <Input
               type="file"
@@ -90,8 +88,6 @@ export function MediaModal({ open, onClose, onSelect }: MediaModalProps) {
               {uploadMutation.isPending ? "Yükleniyor..." : "Yükle"}
             </Button>
           </div>
-
-          {/* Medya grid */}
           <div className="grid grid-cols-4 gap-4">
             {isLoading ? (
               <div>Yükleniyor...</div>
