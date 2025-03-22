@@ -27,6 +27,7 @@ import { X, Plus, ImagePlus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useLocation } from "wouter";
+import { MediaModal } from "@/components/ui/media-modal";
 
 export default function NewPost() {
   const { toast } = useToast();
@@ -34,6 +35,7 @@ export default function NewPost() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [newTag, setNewTag] = useState("");
+  const [isMediaModalOpen, setIsMediaModalOpen] = useState(false);
 
   const form = useForm<InsertPost>({
     resolver: zodResolver(insertPostSchema),
@@ -227,11 +229,20 @@ export default function NewPost() {
                           type="button"
                           variant="outline"
                           size="icon"
-                          onClick={() => {/* Medya yöneticisini aç */}}
+                          onClick={() => setIsMediaModalOpen(true)}
                         >
                           <ImagePlus className="h-4 w-4" />
                         </Button>
                       </div>
+                      {field.value && (
+                        <div className="mt-2">
+                          <img
+                            src={field.value}
+                            alt="Öne çıkan görsel"
+                            className="w-40 h-40 object-cover rounded-lg"
+                          />
+                        </div>
+                      )}
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -261,7 +272,7 @@ export default function NewPost() {
                     value={newTag}
                     onChange={(e) => setNewTag(e.target.value)}
                     onKeyPress={(e) => {
-                      if (e.key === 'Enter') {
+                      if (e.key === "Enter") {
                         e.preventDefault();
                         handleAddTag();
                       }
@@ -311,10 +322,7 @@ export default function NewPost() {
               />
 
               <div className="flex gap-2">
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                >
+                <Button type="submit" disabled={isSubmitting}>
                   {isSubmitting ? "Kaydediliyor..." : "Kaydet"}
                 </Button>
                 <Button
@@ -329,6 +337,11 @@ export default function NewPost() {
           </Form>
         </CardContent>
       </Card>
+      <MediaModal
+        open={isMediaModalOpen}
+        onClose={() => setIsMediaModalOpen(false)}
+        onSelect={(url) => form.setValue("featuredImage", url)}
+      />
     </div>
   );
 }

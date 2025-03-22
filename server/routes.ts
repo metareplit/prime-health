@@ -4,13 +4,44 @@ import { storage } from "./storage";
 import { insertUserSchema, insertAppointmentSchema, insertMessageSchema, insertPatientImageSchema, insertPostSchema, insertProductSchema, insertMediaSchema, insertSettingSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import session from "express-session";
+import multer from 'multer';
+import path from 'path';
+import express from 'express';
+
 
 // Auth Middleware Types
 interface AuthRequest extends Request {
   session: session.Session & { userId?: number };
 }
 
+// Multer setup
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      cb(null, 'uploads/');
+    },
+    filename: (_req, file, cb) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      cb(null, uniqueSuffix + path.extname(file.originalname));
+    }
+  }),
+  fileFilter: (_req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Desteklenmeyen dosya türü'));
+    }
+  },
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB limit
+  }
+});
+
 export async function registerRoutes(app: Express) {
+  // Static file serving - uploads dizinini statik olarak servis et
+  app.use('/uploads', express.static('uploads'));
+
   // Session middleware
   app.use(
     session({
@@ -219,6 +250,31 @@ export async function registerRoutes(app: Express) {
       res.status(400).json({ message: "Medya dosyası silinirken bir hata oluştu" });
     }
   });
+
+  // Media upload endpoint'i
+  app.post("/api/media/upload", requireAdmin, upload.single("file"), async (req: Request, res: Response) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: "Dosya yüklenmedi" });
+      }
+
+      const mediaData = {
+        filename: req.file.filename,
+        originalName: req.file.originalname,
+        mimeType: req.file.mimetype,
+        size: req.file.size,
+        url: `/uploads/${req.file.filename}`,
+        uploadedById: (req as AuthRequest).session.userId,
+      };
+
+      const media = await storage.createMedia(mediaData);
+      res.status(201).json(media);
+    } catch (error) {
+      console.error("Media upload error:", error);
+      res.status(500).json({ message: "Dosya yüklenirken bir hata oluştu" });
+    }
+  });
+
 
   // Settings endpoints
   app.get("/api/settings", async (_req: Request, res: Response) => {
