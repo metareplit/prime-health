@@ -2,7 +2,6 @@ import { Link } from "wouter";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
@@ -19,37 +18,37 @@ export default function Header() {
           <NavigationMenuList className="space-x-2">
             <NavigationMenuItem>
               <Link href="/">
-                <NavigationMenuLink className="px-4 py-2">
+                <a className="px-4 py-2 rounded-md hover:bg-accent hover:text-accent-foreground">
                   Anasayfa
-                </NavigationMenuLink>
+                </a>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/hizmetler">
-                <NavigationMenuLink className="px-4 py-2">
+                <a className="px-4 py-2 rounded-md hover:bg-accent hover:text-accent-foreground">
                   Hizmetlerimiz
-                </NavigationMenuLink>
+                </a>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/galeri">
-                <NavigationMenuLink className="px-4 py-2">
+                <a className="px-4 py-2 rounded-md hover:bg-accent hover:text-accent-foreground">
                   Hasta Sonuçları
-                </NavigationMenuLink>
+                </a>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/urunler">
-                <NavigationMenuLink className="px-4 py-2">
+                <a className="px-4 py-2 rounded-md hover:bg-accent hover:text-accent-foreground">
                   Bakım Ürünleri
-                </NavigationMenuLink>
+                </a>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/iletisim">
-                <NavigationMenuLink className="px-4 py-2">
+                <a className="px-4 py-2 rounded-md hover:bg-accent hover:text-accent-foreground">
                   İletişim
-                </NavigationMenuLink>
+                </a>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
