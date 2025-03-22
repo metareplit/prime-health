@@ -1,11 +1,11 @@
 import { useState } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ImagePlus } from "lucide-react";
@@ -65,14 +65,14 @@ export function MediaModal({ open, onClose, onSelect }: MediaModalProps) {
   };
 
   return (
-    <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[800px]">
-        <DialogHeader>
-          <DialogTitle>Medya Yöneticisi</DialogTitle>
-          <DialogDescription>
+    <Sheet open={open} onOpenChange={onClose}>
+      <SheetContent side="right" className="w-[800px] sm:max-w-[800px]">
+        <SheetHeader>
+          <SheetTitle>Medya Yöneticisi</SheetTitle>
+          <SheetDescription>
             Görsel seçin veya yeni görsel yükleyin
-          </DialogDescription>
-        </DialogHeader>
+          </SheetDescription>
+        </SheetHeader>
         <div className="mt-4 space-y-4">
           <div className="flex gap-4 items-center">
             <Input
@@ -114,7 +114,7 @@ export function MediaModal({ open, onClose, onSelect }: MediaModalProps) {
             )}
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   );
 }
