@@ -243,44 +243,75 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch mb-20">
+            {/* Before/After Column */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="space-y-6"
+              className="bg-white rounded-xl shadow-lg p-8 space-y-8"
             >
-              <BeforeAfterSlider
-                beforeImage="/images/gallery/hair-before-1.jpg"
-                afterImage="/images/gallery/hair-after-1.jpg"
-              />
-              <BeforeAfterSlider
-                beforeImage="/images/gallery/beard-before-1.jpg"
-                afterImage="/images/gallery/beard-after-1.jpg"
-              />
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-semibold mb-2">Öncesi & Sonrası</h3>
+                <p className="text-gray-600">Gerçek hasta sonuçlarımızı inceleyin</p>
+              </div>
+
+              <div className="space-y-8">
+                <div className="rounded-lg overflow-hidden shadow-md">
+                  <BeforeAfterSlider
+                    beforeImage="/images/gallery/hair-before-1.jpg"
+                    afterImage="/images/gallery/hair-after-1.jpg"
+                  />
+                  <div className="bg-gray-50 p-4">
+                    <h4 className="font-medium text-primary">Saç Ekimi</h4>
+                    <p className="text-sm text-gray-600">6 ay sonrası sonuç</p>
+                  </div>
+                </div>
+
+                <div className="rounded-lg overflow-hidden shadow-md">
+                  <BeforeAfterSlider
+                    beforeImage="/images/gallery/beard-before-1.jpg"
+                    afterImage="/images/gallery/beard-after-1.jpg"
+                  />
+                  <div className="bg-gray-50 p-4">
+                    <h4 className="font-medium text-primary">Sakal Ekimi</h4>
+                    <p className="text-sm text-gray-600">4 ay sonrası sonuç</p>
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
+            {/* Success Stories Column */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
+              className="bg-white rounded-xl shadow-lg p-8"
             >
-              <div className="bg-white rounded-xl shadow-lg p-8">
-                <SuccessStories />
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-semibold mb-2">Hasta Yorumları</h3>
+                <p className="text-gray-600">Hastalarımızın deneyimlerini okuyun</p>
               </div>
+              <SuccessStories />
             </motion.div>
           </div>
 
-          <div className="text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
             <Link href="/galeri">
-              <Button variant="outline" size="lg" className="group">
+              <Button variant="outline" size="lg" className="group hover:shadow-lg transition-all duration-300">
                 Tüm Sonuçları İnceleyin
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
