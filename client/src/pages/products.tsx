@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Check, AlertCircle, Droplet, Clock, Filter, Search } from "lucide-react";
+import { Check, AlertCircle, Droplet, Clock, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Metadata } from "@/components/ui/metadata";
 
-// Ürün kategorileri ve ürünler
+// Ürün kategorileri ve ürünleri
 const productCategories = [
   {
     id: "sampuanlar",
@@ -133,44 +134,33 @@ export default function Products() {
   const [selectedPhase, setSelectedPhase] = useState<string[]>([]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Metadata
-        title="Profesyonel Saç Bakım Ürünleri ve Kullanım Kılavuzu | Hair Clinic"
-        description="Saç ekimi sonrası bakım ürünleri, şampuanlar, serumlar, maskeler ve vitaminler. Profesyonel saç bakım ürünleri hakkında detaylı bilgi ve kullanım talimatları."
-        keywords="saç bakım ürünleri, saç ekimi şampuanı, saç serumu, saç vitamini, saç bakım maskesi, saç toniği, saç kremi"
+        title="Profesyonel Saç Bakım Ürünleri | Hair Clinic"
+        description="Saç ekimi sonrası özel bakım ürünleri. Profesyonel saç bakım ürünleri hakkında detaylı bilgi ve kullanım talimatları."
+        keywords="saç bakım ürünleri, saç ekimi şampuanı, saç serumu, saç vitamini"
       />
 
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-transparent py-16">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="absolute -right-40 -top-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
-        />
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="absolute -left-40 -bottom-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
-        />
-        <div className="container mx-auto px-4 relative">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-b from-primary/5 to-transparent py-12">
+        <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">
               Profesyonel Saç Bakım Ürünleri
             </h1>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-lg text-muted-foreground mb-8">
               Saç ekimi sonrası en iyi sonucu almak için özel olarak formüle edilmiş ürünler
             </p>
 
             {/* Arama ve Filtreleme */}
-            <div className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
+            <div className="flex gap-4 max-w-md mx-auto">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
                   placeholder="Ürün ara..."
@@ -179,62 +169,35 @@ export default function Products() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  className="flex-shrink-0"
-                  onClick={() => setSelectedHairType([])}
-                >
-                  Saç Tipi
-                  {selectedHairType.length > 0 && (
-                    <Badge variant="secondary" className="ml-2">
-                      {selectedHairType.length}
-                    </Badge>
-                  )}
-                </Button>
-                <Button
-                  variant="outline"
-                  className="flex-shrink-0"
-                  onClick={() => setSelectedPhase([])}
-                >
-                  Kullanım Zamanı
-                  {selectedPhase.length > 0 && (
-                    <Badge variant="secondary" className="ml-2">
-                      {selectedPhase.length}
-                    </Badge>
-                  )}
-                </Button>
-              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <div className="container mx-auto px-4 py-12">
+      {/* Ürünler Section */}
+      <section className="container mx-auto px-4 py-8">
         <Tabs defaultValue="sampuanlar" className="w-full">
-          <TabsList className="flex flex-wrap justify-center mb-8 gap-2">
-            {productCategories.map((category) => (
-              <TabsTrigger 
-                key={category.id} 
-                value={category.id}
-                className="data-[state=active]:bg-primary/90"
-              >
-                {category.title}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+          <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-4 border-b">
+            <TabsList className="flex flex-wrap justify-center gap-2">
+              {productCategories.map((category) => (
+                <TabsTrigger
+                  key={category.id}
+                  value={category.id}
+                  className="data-[state=active]:bg-primary"
+                >
+                  {category.title}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </div>
 
           {productCategories.map((category) => (
             <TabsContent key={category.id} value={category.id}>
-              <div className="grid gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
                 {category.products
-                  .filter(product => 
+                  .filter(product =>
                     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     product.description.toLowerCase().includes(searchTerm.toLowerCase())
-                  )
-                  .filter(product => 
-                    selectedHairType.length === 0 || 
-                    product.hairType.some(type => selectedHairType.includes(type))
                   )
                   .map((product) => (
                     <motion.div
@@ -243,123 +206,142 @@ export default function Products() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5 }}
                     >
-                      <Card className="overflow-hidden">
-                        <div className="grid md:grid-cols-2 gap-6">
-                          <div className="relative aspect-square bg-gradient-to-br from-primary/5 to-primary/10 p-8 flex items-center justify-center">
-                            <img
-                              src={product.image}
-                              alt={product.name}
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                          <div className="p-6">
-                            <CardHeader className="p-0 mb-6">
-                              <div className="flex flex-wrap gap-2 mb-3">
-                                {product.hairType.map((type) => (
-                                  <Badge key={type} variant="secondary">
-                                    {type}
-                                  </Badge>
-                                ))}
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+                            <CardContent className="p-4">
+                              <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 mb-4">
+                                <img
+                                  src={product.image}
+                                  alt={product.name}
+                                  className="w-full h-full object-contain"
+                                />
                               </div>
-                              <CardTitle className="text-2xl">{product.name}</CardTitle>
-                              <p className="text-gray-600 mt-2">{product.description}</p>
-                            </CardHeader>
-                            <CardContent className="p-0">
-                              <div className="space-y-6">
-                                <div>
-                                  <h3 className="font-semibold flex items-center gap-2 mb-3">
-                                    <Droplet className="h-5 w-5 text-primary" />
-                                    İçerik Maddeleri
-                                  </h3>
-                                  <ul className="grid grid-cols-2 gap-2">
-                                    {product.ingredients.map((ingredient, idx) => (
-                                      <li key={idx} className="flex items-center gap-2 text-sm">
-                                        <Check className="h-4 w-4 text-green-500" />
-                                        {ingredient}
-                                      </li>
-                                    ))}
-                                  </ul>
+                              <div className="space-y-2">
+                                <div className="flex flex-wrap gap-1">
+                                  {product.hairType.map((type) => (
+                                    <Badge key={type} variant="secondary" className="text-xs">
+                                      {type}
+                                    </Badge>
+                                  ))}
                                 </div>
-
-                                <Accordion type="single" collapsible className="w-full">
-                                  <AccordionItem value="benefits">
-                                    <AccordionTrigger>
-                                      <span className="flex items-center gap-2">
-                                        <Check className="h-5 w-5 text-primary" />
-                                        Faydaları
-                                      </span>
-                                    </AccordionTrigger>
-                                    <AccordionContent>
-                                      <ul className="space-y-2 mt-2">
-                                        {product.benefits.map((benefit, idx) => (
-                                          <li key={idx} className="flex items-center gap-2 text-sm">
-                                            <Check className="h-4 w-4 text-green-500" />
-                                            {benefit}
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    </AccordionContent>
-                                  </AccordionItem>
-
-                                  <AccordionItem value="instructions">
-                                    <AccordionTrigger>
-                                      <span className="flex items-center gap-2">
-                                        <Clock className="h-5 w-5 text-primary" />
-                                        Kullanım Talimatları
-                                      </span>
-                                    </AccordionTrigger>
-                                    <AccordionContent>
-                                      <div className="space-y-4 mt-2">
-                                        <div>
-                                          <Badge variant="outline" className="mb-2">
-                                            {product.usagePhase}
-                                          </Badge>
-                                          <ol className="space-y-2">
-                                            {product.instructions.map((instruction, idx) => (
-                                              <li key={idx} className="flex items-center gap-2 text-sm">
-                                                <span className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs flex-shrink-0">
-                                                  {idx + 1}
-                                                </span>
-                                                {instruction}
-                                              </li>
-                                            ))}
-                                          </ol>
-                                        </div>
-                                      </div>
-                                    </AccordionContent>
-                                  </AccordionItem>
-
-                                  <AccordionItem value="warnings">
-                                    <AccordionTrigger>
-                                      <span className="flex items-center gap-2">
-                                        <AlertCircle className="h-5 w-5 text-primary" />
-                                        Uyarılar
-                                      </span>
-                                    </AccordionTrigger>
-                                    <AccordionContent>
-                                      <ul className="space-y-2 mt-2">
-                                        {product.warnings.map((warning, idx) => (
-                                          <li key={idx} className="flex items-center gap-2 text-sm text-red-600">
-                                            <AlertCircle className="h-4 w-4" />
-                                            {warning}
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    </AccordionContent>
-                                  </AccordionItem>
-                                </Accordion>
+                                <h3 className="font-semibold">{product.name}</h3>
+                                <p className="text-sm text-muted-foreground line-clamp-2">
+                                  {product.description}
+                                </p>
                               </div>
                             </CardContent>
+                          </Card>
+                        </DialogTrigger>
+
+                        <DialogContent className="max-w-3xl">
+                          <DialogHeader>
+                            <DialogTitle>{product.name}</DialogTitle>
+                          </DialogHeader>
+                          <div className="grid md:grid-cols-2 gap-6">
+                            <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-8">
+                              <img
+                                src={product.image}
+                                alt={product.name}
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+                            <div className="space-y-6">
+                              <div>
+                                <Badge variant="outline" className="mb-2">
+                                  {product.usagePhase}
+                                </Badge>
+                                <p className="text-muted-foreground">
+                                  {product.description}
+                                </p>
+                              </div>
+
+                              <div>
+                                <h4 className="font-semibold flex items-center gap-2 mb-3">
+                                  <Droplet className="h-5 w-5 text-primary" />
+                                  İçerik Maddeleri
+                                </h4>
+                                <ul className="grid grid-cols-2 gap-2">
+                                  {product.ingredients.map((ingredient, idx) => (
+                                    <li key={idx} className="flex items-center gap-2 text-sm">
+                                      <Check className="h-4 w-4 text-green-500" />
+                                      {ingredient}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+
+                              <Accordion type="single" collapsible className="w-full">
+                                <AccordionItem value="benefits">
+                                  <AccordionTrigger>
+                                    <span className="flex items-center gap-2">
+                                      <Check className="h-5 w-5 text-primary" />
+                                      Faydaları
+                                    </span>
+                                  </AccordionTrigger>
+                                  <AccordionContent>
+                                    <ul className="space-y-2">
+                                      {product.benefits.map((benefit, idx) => (
+                                        <li key={idx} className="flex items-center gap-2 text-sm">
+                                          <Check className="h-4 w-4 text-green-500" />
+                                          {benefit}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </AccordionContent>
+                                </AccordionItem>
+
+                                <AccordionItem value="instructions">
+                                  <AccordionTrigger>
+                                    <span className="flex items-center gap-2">
+                                      <Clock className="h-5 w-5 text-primary" />
+                                      Kullanım Talimatları
+                                    </span>
+                                  </AccordionTrigger>
+                                  <AccordionContent>
+                                    <ol className="space-y-2">
+                                      {product.instructions.map((instruction, idx) => (
+                                        <li key={idx} className="flex items-center gap-2 text-sm">
+                                          <span className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs flex-shrink-0">
+                                            {idx + 1}
+                                          </span>
+                                          {instruction}
+                                        </li>
+                                      ))}
+                                    </ol>
+                                  </AccordionContent>
+                                </AccordionItem>
+
+                                <AccordionItem value="warnings">
+                                  <AccordionTrigger>
+                                    <span className="flex items-center gap-2">
+                                      <AlertCircle className="h-5 w-5 text-primary" />
+                                      Uyarılar
+                                    </span>
+                                  </AccordionTrigger>
+                                  <AccordionContent>
+                                    <ul className="space-y-2">
+                                      {product.warnings.map((warning, idx) => (
+                                        <li key={idx} className="flex items-center gap-2 text-sm text-red-600">
+                                          <AlertCircle className="h-4 w-4" />
+                                          {warning}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </AccordionContent>
+                                </AccordionItem>
+                              </Accordion>
+                            </div>
                           </div>
-                        </div>
-                      </Card>
+                        </DialogContent>
+                      </Dialog>
                     </motion.div>
                   ))}
               </div>
             </TabsContent>
           ))}
         </Tabs>
-      </div>
+      </section>
     </div>
   );
 }
