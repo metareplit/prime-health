@@ -47,35 +47,63 @@ export default function AdminSuccessStories() {
     },
   });
 
-  const updateMutation = useMutation({
-    mutationFn: async (data: SuccessStory) => {
-      try {
-        const res = await apiRequest("PATCH", `/api/success-stories/${data.id}`, data);
-        if (!res.ok) {
-          const error = await res.json();
-          throw new Error(error.message || "Başarı hikayesi güncellenemedi");
-        }
-        return res.json();
-      } catch (error: any) {
-        throw new Error(error.message || "Başarı hikayesi güncellenemedi");
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/success-stories"] });
-      toast({
-        title: "Başarılı",
-        description: "Başarı hikayesi güncellendi.",
-      });
-      setEditingStory(null);
-    },
-    onError: (error: Error) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingStory) return;
+
+    if (!editingStory.patientName || !editingStory.treatmentType || !editingStory.description) {
       toast({
         title: "Hata",
-        description: error.message,
+        description: "Lütfen gerekli alanları doldurun.",
         variant: "destructive",
       });
-    },
-  });
+      return;
+    }
+
+    const now = new Date();
+    const storyData = {
+      patientName: editingStory.patientName,
+      age: editingStory.age || null,
+      treatmentType: editingStory.treatmentType,
+      description: editingStory.description,
+      testimonial: editingStory.testimonial || null,
+      beforeImages: [],
+      afterImages: [],
+      treatmentDate: now,
+      recoveryTime: null,
+      satisfaction: 5,
+      featured: false,
+      published: false,
+      createdAt: now,
+      updatedAt: now
+    };
+
+    try {
+      await createMutation.mutateAsync(storyData);
+    } catch (error) {
+      console.error("Form submission error:", error);
+    }
+  };
+
+  const handleCreate = () => {
+    const now = new Date();
+    setEditingStory({
+      patientName: "",
+      age: null,
+      treatmentType: "",
+      description: "",
+      testimonial: null,
+      beforeImages: [],
+      afterImages: [],
+      treatmentDate: now,
+      recoveryTime: null,
+      satisfaction: 5,
+      featured: false,
+      published: false,
+      createdAt: now,
+      updatedAt: now
+    });
+  };
 
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
@@ -110,67 +138,6 @@ export default function AdminSuccessStories() {
     },
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!editingStory) return;
-
-    if (!editingStory.patientName || !editingStory.treatmentType || !editingStory.description) {
-      toast({
-        title: "Hata",
-        description: "Lütfen gerekli alanları doldurun.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    const now = new Date();
-    const storyData = {
-      patientName: editingStory.patientName,
-      age: editingStory.age || null,
-      treatmentType: editingStory.treatmentType,
-      description: editingStory.description,
-      testimonial: editingStory.testimonial || null,
-      beforeImages: editingStory.beforeImages || [],
-      afterImages: editingStory.afterImages || [],
-      treatmentDate: now,
-      recoveryTime: editingStory.recoveryTime || null,
-      satisfaction: editingStory.satisfaction || 5,
-      featured: editingStory.featured || false,
-      published: editingStory.published || false,
-      createdAt: now,
-      updatedAt: now
-    };
-
-    try {
-      if ("id" in editingStory) {
-        await updateMutation.mutateAsync({ ...storyData, id: editingStory.id } as SuccessStory);
-      } else {
-        await createMutation.mutateAsync(storyData as Omit<SuccessStory, "id">);
-      }
-    } catch (error) {
-      console.error("Form submission error:", error);
-    }
-  };
-
-  const handleCreate = () => {
-    const now = new Date();
-    setEditingStory({
-      patientName: "",
-      age: null,
-      treatmentType: "",
-      description: "",
-      testimonial: null,
-      beforeImages: [],
-      afterImages: [],
-      treatmentDate: now,
-      recoveryTime: null,
-      satisfaction: 5,
-      featured: false,
-      published: false,
-      createdAt: now,
-      updatedAt: now
-    });
-  };
 
   return (
     <div className="space-y-6">
@@ -191,7 +158,7 @@ export default function AdminSuccessStories() {
         <Card>
           <CardHeader>
             <CardTitle>
-              {editingStory.id ? "Hikayeyi Düzenle" : "Yeni Hikaye"}
+              Yeni Hikaye
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -282,8 +249,8 @@ export default function AdminSuccessStories() {
                 >
                   İptal
                 </Button>
-                <Button type="submit" disabled={createMutation.isPending || updateMutation.isPending}>
-                  {createMutation.isPending || updateMutation.isPending ? "Kaydediliyor..." : "Kaydet"}
+                <Button type="submit" disabled={createMutation.isPending}>
+                  {createMutation.isPending ? "Kaydediliyor..." : "Kaydet"}
                 </Button>
               </div>
             </form>

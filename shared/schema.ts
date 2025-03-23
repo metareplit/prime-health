@@ -136,7 +136,7 @@ export const successStories = pgTable("success_stories", {
   afterImages: text("after_images").array(),
   treatmentDate: timestamp("treatment_date").notNull(),
   recoveryTime: text("recovery_time"),
-  satisfaction: integer("satisfaction").default(5), // 1-5 arası değerlendirme
+  satisfaction: integer("satisfaction").default(5),
   featured: boolean("featured").default(false),
   published: boolean("published").default(false),
   createdAt: timestamp("created_at").defaultNow(),
@@ -189,7 +189,28 @@ export const insertProductSchema = createInsertSchema(products);
 export const insertMediaSchema = createInsertSchema(media);
 export const insertSettingSchema = createInsertSchema(settings);
 export const insertEmailTemplateSchema = createInsertSchema(emailTemplates);
-export const insertSuccessStorySchema = createInsertSchema(successStories);
+
+// Add success stories validation schema
+export const successStoriesSchema = z.object({
+  patientName: z.string().min(1, "Hasta adı gereklidir"),
+  age: z.number().nullable(),
+  treatmentType: z.string().min(1, "Tedavi tipi gereklidir"),
+  description: z.string().min(1, "Açıklama gereklidir"),
+  testimonial: z.string().nullable(),
+  beforeImages: z.array(z.string()).default([]),
+  afterImages: z.array(z.string()).default([]),
+  treatmentDate: z.date(),
+  recoveryTime: z.string().nullable(),
+  satisfaction: z.number().min(1).max(5).default(5),
+  featured: z.boolean().default(false),
+  published: z.boolean().default(false),
+  createdAt: z.date().default(() => new Date()),
+  updatedAt: z.date().default(() => new Date())
+});
+
+// Update the insert schema
+export const insertSuccessStorySchema = successStoriesSchema;
+
 
 // Types
 export type User = typeof users.$inferSelect;
