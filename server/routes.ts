@@ -117,10 +117,14 @@ export async function registerRoutes(app: Express) {
 
   app.post("/api/auth/register", async (req: Request, res: Response) => {
     try {
+      console.log("Registration request body:", req.body); // Debug log
+
       const userData = insertUserSchema.parse({
         ...req.body,
         role: "patient" // Force role to be patient for all registrations
       });
+
+      console.log("Parsed user data:", userData); // Debug log
 
       const existingEmail = await storage.getUserByEmail(userData.email);
       if (existingEmail) {
@@ -147,6 +151,7 @@ export async function registerRoutes(app: Express) {
 
       res.status(201).json(user);
     } catch (error) {
+      console.error("Registration error:", error); // Debug log
       if (error instanceof Error) {
         res.status(400).json({ message: error.message });
       } else {

@@ -59,7 +59,7 @@ export const posts = pgTable("posts", {
   tags: text("tags").array(),
 });
 
-// Products table
+// Update products table boolean fields
 export const products = pgTable("products", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -69,9 +69,28 @@ export const products = pgTable("products", {
   price: text("price").notNull(),
   images: text("images").array(),
   category: text("category").notNull(),
-  inStock: text("in_stock").notNull().default(true),
-  featured: text("featured").default(false),
+  inStock: boolean("in_stock").notNull().default(true),
+  featured: boolean("featured").default(false),
   specifications: text("specifications"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Update services table boolean field
+export const services = pgTable("services", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
+  longDescription: text("long_description").notNull(),
+  benefits: text("benefits").array().notNull(),
+  process: text("process").array().notNull(),
+  faqs: text("faqs").array().notNull(),
+  duration: text("duration").notNull(),
+  price: text("price"),
+  imageUrl: text("image_url").notNull(),
+  slug: text("slug").notNull().unique(),
+  featured: boolean("featured").default(false),
+  order: serial("order").default(0),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -136,25 +155,6 @@ export const patientImages = pgTable("patient_images", {
   notes: text("notes"),
   doctorFeedback: text("doctor_feedback"),
   createdAt: timestamp("created_at").defaultNow(),
-});
-
-// Services table
-export const services = pgTable("services", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  description: text("description").notNull(),
-  longDescription: text("long_description").notNull(),
-  benefits: text("benefits").array().notNull(),
-  process: text("process").array().notNull(),
-  faqs: text("faqs").array().notNull(),
-  duration: text("duration").notNull(),
-  price: text("price"), // Changed from numeric to text
-  imageUrl: text("image_url").notNull(),
-  slug: text("slug").notNull().unique(),
-  featured: text("featured").default(false),
-  order: serial("order").default(0),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 // Appointments table with enhanced features
