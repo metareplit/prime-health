@@ -167,6 +167,20 @@ export const beforeAfter = pgTable("before_after", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+// Sliders tablosu
+export const sliders = pgTable("sliders", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description"),
+  imageUrl: text("image_url").notNull(),
+  buttonText: text("button_text"),
+  buttonUrl: text("button_url"),
+  order: serial("order").default(0),
+  isActive: text("is_active").default("true"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 // Schema validations with extended rules
 export const insertUserSchema = createInsertSchema(users).extend({
   email: z.string().email("Geçerli bir e-posta adresi giriniz"),
@@ -198,6 +212,23 @@ export const beforeAfterSchema = z.object({
 // Update the insert schema
 export const insertBeforeAfterSchema = beforeAfterSchema;
 
+// Slider şeması
+export const sliderSchema = z.object({
+  title: z.string().min(1, "Başlık gereklidir"),
+  description: z.string().optional(),
+  imageUrl: z.string().min(1, "Resim URL'si gereklidir"),
+  buttonText: z.string().optional(),
+  buttonUrl: z.string().optional(),
+  order: z.number().default(0),
+  isActive: z.string().default("true"),
+  createdAt: z.date().default(() => new Date()),
+  updatedAt: z.date().default(() => new Date())
+});
+
+// Insert şeması
+export const insertSliderSchema = sliderSchema;
+
+
 // Types
 export type User = typeof users.$inferSelect;
 export type Message = typeof messages.$inferSelect;
@@ -210,6 +241,7 @@ export type Media = typeof media.$inferSelect;
 export type Setting = typeof settings.$inferSelect;
 export type EmailTemplate = typeof emailTemplates.$inferSelect;
 export type BeforeAfter = typeof beforeAfter.$inferSelect;
+export type Slider = typeof sliders.$inferSelect;
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type InsertMessage = z.infer<typeof insertMessageSchema>;
@@ -222,6 +254,7 @@ export type InsertMedia = z.infer<typeof insertMediaSchema>;
 export type InsertSetting = z.infer<typeof insertSettingSchema>;
 export type InsertEmailTemplate = z.infer<typeof insertEmailTemplateSchema>;
 export type InsertBeforeAfter = z.infer<typeof insertBeforeAfterSchema>;
+export type InsertSlider = z.infer<typeof insertSliderSchema>;
 
 // Geriye dönük uyumluluk için alias
 export const insertPatientSchema = insertUserSchema;

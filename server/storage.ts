@@ -32,6 +32,9 @@ import {
   type InsertAppointment,
   type InsertEmailTemplate,
   type InsertBeforeAfter,
+  sliders,
+  type Slider,
+  type InsertSlider,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
@@ -110,6 +113,13 @@ export interface IStorage {
   updateBeforeAfter(id: number, data: Partial<BeforeAfter>): Promise<BeforeAfter>;
   deleteBeforeAfter(id: number): Promise<void>;
 
+  // Slider methods
+  getAllSliders(): Promise<Slider[]>;
+  getSliderById(id: number): Promise<Slider | undefined>;
+  createSlider(data: InsertSlider): Promise<Slider>;
+  updateSlider(id: number, data: Partial<Slider>): Promise<Slider>;
+  deleteSlider(id: number): Promise<void>;
+  updateSliderOrder(id: number, order: number): Promise<Slider>;
   sessionStore: any;
 }
 
@@ -400,6 +410,49 @@ export class DatabaseStorage implements IStorage {
 
   async deleteBeforeAfter(id: number): Promise<void> {
     await db.delete(beforeAfter).where(eq(beforeAfter.id, id));
+  }
+
+  // Slider methods
+  async getAllSliders(): Promise<Slider[]> {
+    return await db.select().from(sliders).orderBy(sliders.order);
+  }
+
+  async getSliderById(id: number): Promise<Slider | undefined> {
+    const [slider] = await db
+      .select()
+      .from(sliders)
+      .where(eq(sliders.id, id));
+    return slider;
+  }
+
+  async createSlider(data: InsertSlider): Promise<Slider> {
+    const [newSlider] = await db
+      .insert(sliders)
+      .values(data)
+      .returning();
+    return newSlider;
+  }
+
+  async updateSlider(id: number, data: Partial<Slider>): Promise<Slider> {
+    const [updatedSlider] = await db
+      .update(sliders)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(sliders.id, id))
+      .returning();
+    return updatedSlider;
+  }
+
+  async deleteSlider(id: number): Promise<void> {
+    await db.delete(sliders).where(eq(sliders.id, id));
+  }
+
+  async updateSliderOrder(id: number, order: number): Promise<Slider> {
+    const [updatedSlider] = await db
+      .update(sliders)
+      .set({ order, updatedAt: new Date() })
+      .where(eq(sliders.id, id))
+      .returning();
+    return updatedSlider;
   }
 }
 

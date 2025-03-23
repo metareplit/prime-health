@@ -15,7 +15,8 @@ import {
   BellRing,
   Activity,
   Mail,
-  Split, 
+  Split,
+  Images, // Slider yönetimi için ikon
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
@@ -106,6 +107,12 @@ export function Sidebar() {
                 label="Öncesi ve Sonrası"
                 href="/admin/before-after"
                 active={pathname.startsWith("/admin/before-after")}
+              />
+              <SidebarItem
+                icon={<Images className="h-4 w-4" />}
+                label="Sliderlar"
+                href="/admin/sliders"
+                active={pathname.startsWith("/admin/sliders")}
               />
               <SidebarItem
                 icon={<Image className="h-4 w-4" />}

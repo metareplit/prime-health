@@ -10,6 +10,7 @@ import AdminSEO from "@/pages/admin/seo";
 import AdminPosts from "@/pages/admin/posts";
 import AdminProducts from "@/pages/admin/products";
 import AdminMedia from "@/pages/admin/media";
+import AdminSliders from "@/pages/admin/sliders"; // Slider yönetimi için import
 import AdminUsers from "@/pages/admin/users";
 import AdminSettings from "@/pages/admin/settings";
 import AdminNotifications from "@/pages/admin/notifications";
@@ -122,6 +123,14 @@ function Router() {
         {() => (
           <AdminLayout title="Öncesi ve Sonrası">
             <AdminBeforeAfter />
+          </AdminLayout>
+        )}
+      </Route>
+
+      <Route path="/admin/sliders">
+        {() => (
+          <AdminLayout title="Slider Yönetimi">
+            <AdminSliders />
           </AdminLayout>
         )}
       </Route>

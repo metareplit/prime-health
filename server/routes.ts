@@ -12,7 +12,8 @@ import {
   insertSettingSchema,
   insertServiceSchema,
   insertEmailTemplateSchema,
-  insertBeforeAfterSchema
+  insertBeforeAfterSchema,
+  insertSliderSchema
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import session from "express-session";
@@ -506,6 +507,70 @@ export async function registerRoutes(app: Express) {
       res.json(appointment);
     } catch (error) {
       res.status(404).json({ message: "Randevu bulunamadı" });
+    }
+  });
+
+  // Slider endpoints
+  app.get("/api/sliders", async (_req: Request, res: Response) => {
+    try {
+      const sliders = await storage.getAllSliders();
+      res.json(sliders);
+    } catch (error) {
+      res.status(500).json({ message: "Slider'lar alınırken bir hata oluştu" });
+    }
+  });
+
+  app.post("/api/sliders", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const data = {
+        ...req.body,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+
+      const validatedData = insertSliderSchema.parse(data);
+      const slider = await storage.createSlider(validatedData);
+      res.status(201).json(slider);
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(400).json({ message: error.message });
+      } else {
+        res.status(500).json({ message: "Slider oluşturulurken bir hata oluştu" });
+      }
+    }
+  });
+
+  app.patch("/api/sliders/:id", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const slider = await storage.updateSlider(id, req.body);
+      if (!slider) {
+        return res.status(404).json({ message: "Slider bulunamadı" });
+      }
+      res.json(slider);
+    } catch (error) {
+      res.status(400).json({ message: "Slider güncellenirken bir hata oluştu" });
+    }
+  });
+
+  app.delete("/api/sliders/:id", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteSlider(id);
+      res.status(204).send();
+    } catch (error) {
+      res.status(400).json({ message: "Slider silinirken bir hata oluştu" });
+    }
+  });
+
+  app.patch("/api/sliders/:id/reorder", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const { order } = req.body;
+      const slider = await storage.updateSliderOrder(id, order);
+      res.json(slider);
+    } catch (error) {
+      res.status(400).json({ message: "Slider sırası güncellenirken bir hata oluştu" });
     }
   });
 
