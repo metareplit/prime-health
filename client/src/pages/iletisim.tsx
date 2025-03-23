@@ -1,11 +1,17 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Clock, Facebook, Instagram, Youtube, Twitter } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Metadata } from "@/components/ui/metadata";
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/5 to-transparent">
-      {/* Hero Section */}
+      <Metadata 
+        title="İletişim - Saç Ekimi ve Estetik Kliniği"
+        description="Saç ekimi ve estetik tedaviler için ücretsiz danışmanlık alın. İstanbul'daki kliniğimize ulaşın, randevu oluşturun veya sorularınızı sorun."
+        keywords="saç ekimi iletişim, estetik klinik iletişim, saç ekimi randevu, istanbul saç ekimi kliniği"
+      />
+
       <div className="relative py-20 bg-primary/5">
         <div className="container mx-auto px-4">
           <motion.div
@@ -24,7 +30,6 @@ export default function ContactPage() {
 
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* İletişim Bilgileri */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -82,7 +87,6 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  {/* Sosyal Medya */}
                   <div className="pt-8 border-t">
                     <h3 className="font-medium text-lg mb-4">Sosyal Medya</h3>
                     <div className="flex gap-4">
@@ -125,7 +129,6 @@ export default function ContactPage() {
             </Card>
           </motion.div>
 
-          {/* Harita */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}

@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { useAuth } from "@/lib/auth";
+import { Metadata } from "@/components/ui/metadata";
 
 const loginSchema = z.object({
   username: z.string().min(1, "Kullanıcı adı gereklidir"),
@@ -53,6 +54,11 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-primary/5 to-transparent">
+      <Metadata 
+        title="Giriş Yap"
+        description="Güvenli hasta portalına giriş yapın. Randevularınızı yönetin, tedavi sürecinizi takip edin."
+        keywords="hasta portal giriş, saç ekimi portal, estetik klinik giriş"
+      />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -20,6 +20,7 @@ import session from "express-session";
 import multer from 'multer';
 import path from 'path';
 import express from 'express';
+import fs from 'fs'; // Import fs module
 
 // Auth Middleware Types
 interface AuthRequest extends Request {
@@ -72,7 +73,7 @@ export async function registerRoutes(app: Express) {
   app.post("/api/auth/login", async (req: AuthRequest, res: Response) => {
     try {
       const { username, password } = req.body;
-      console.log("Login attempt:", username, password); // Debug log
+      console.log("Login attempt:", username); // Debug log
 
       const user = await storage.getUserByUsername(username);
       if (!user) {
@@ -81,9 +82,11 @@ export async function registerRoutes(app: Express) {
 
       // Debug log
       console.log("Found user:", {
+        id: user.id,
         username: user.username,
-        password: user.password,
-        role: user.role
+        role: user.role,
+        firstName: user.firstName,
+        lastName: user.lastName
       });
 
       // Test için direkt karşılaştırma
@@ -104,8 +107,9 @@ export async function registerRoutes(app: Express) {
         res.json({
           id: user.id,
           username: user.username,
+          firstName: user.firstName,
+          lastName: user.lastName,
           role: user.role,
-          fullName: user.fullName,
           email: user.email
         });
       });
@@ -297,11 +301,16 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Media upload endpoint'i
+  // Media upload endpoint'i güncelleme
   app.post("/api/media/upload", requireAdmin, upload.single("file"), async (req: Request, res: Response) => {
     try {
       if (!req.file) {
         return res.status(400).json({ message: "Dosya yüklenmedi" });
+      }
+
+      // Uploads dizininin varlığını kontrol et
+      if (!fs.existsSync('uploads')) {
+        fs.mkdirSync('uploads', { recursive: true });
       }
 
       const mediaData = {
@@ -312,6 +321,8 @@ export async function registerRoutes(app: Express) {
         url: `/uploads/${req.file.filename}`,
         uploadedById: (req as AuthRequest).session.userId,
       };
+
+      console.log('Uploading media:', mediaData); // Debug log
 
       const media = await storage.createMedia(mediaData);
       res.status(201).json(media);
