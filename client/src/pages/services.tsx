@@ -210,8 +210,8 @@ export default function Services() {
                         className="w-full group hover:translate-y-[-1px] transition-all duration-300"
                         asChild
                       >
-                        <Link href={`/randevu?service=${service.slug}`}>
-                          <span>Detaylı Bilgi ve Randevu</span>
+                        <Link href="/iletisim">
+                          <span>Ücretsiz Danışma</span>
                           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </Link>
                       </Button>
