@@ -8,21 +8,20 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2 } from "lucide-react";
 
 export default function AdminLogin() {
-  const { loginMutation, user } = useAuth();
+  const { loginMutation } = useAuth();
   const [, setLocation] = useLocation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // Eğer kullanıcı zaten giriş yapmışsa ve admin ise dashboard'a yönlendir
-  if (user?.role === "admin") {
-    setLocation("/admin");
-    return null;
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await loginMutation.mutateAsync({ username, password });
+      const user = await loginMutation.mutateAsync({ username, password });
+      if (user.role === "admin") {
+        setLocation("/admin");
+      } else {
+        setLocation("/");
+      }
     } catch (error) {
       // Hata zaten toast ile gösteriliyor
     }
