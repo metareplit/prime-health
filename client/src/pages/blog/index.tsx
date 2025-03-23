@@ -8,15 +8,16 @@ import { Search, Calendar, Clock, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { Metadata } from "@/components/ui/metadata";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 // Blog kategorileri
 const categories = [
-  "Tümü",
-  "Saç Ekimi",
-  "Sakal Ekimi",
-  "Kaş Ekimi",
-  "Bakım",
-  "Tedavi Süreci"
+  "all",
+  "hairTransplant",
+  "beardTransplant",
+  "eyebrowTransplant",
+  "aftercare",
+  "treatment"
 ];
 
 // Blog yazıları
@@ -26,7 +27,7 @@ const blogPosts = [
     title: "Saç Ekimi Öncesi Dikkat Edilmesi Gerekenler",
     description: "Saç ekimi operasyonu öncesinde bilmeniz gereken önemli noktalar ve hazırlık süreci hakkında detaylı bilgiler.",
     image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d",
-    category: "Saç Ekimi",
+    category: "hairTransplant",
     author: "Dr. Ahmet Yılmaz",
     date: "2024-03-15",
     readTime: "8 dk",
@@ -38,7 +39,7 @@ const blogPosts = [
     title: "DHI ve Safir FUE Teknikleri Arasındaki Farklar",
     description: "Modern saç ekimi teknikleri olan DHI ve Safir FUE yöntemlerinin karşılaştırmalı analizi ve hangi durumda hangi tekniğin tercih edilmesi gerektiği.",
     image: "https://images.unsplash.com/photo-1598264294394-ba29cf557627",
-    category: "Saç Ekimi",
+    category: "hairTransplant",
     author: "Dr. Mehmet Kaya",
     date: "2024-03-10",
     readTime: "10 dk",
@@ -50,7 +51,7 @@ const blogPosts = [
     title: "Sakal Ekiminde Doğal Görünüm Nasıl Sağlanır?",
     description: "Sakal ekimi operasyonlarında doğal görünümün sağlanması için dikkat edilmesi gereken teknik detaylar ve planlama süreci.",
     image: "https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8",
-    category: "Sakal Ekimi",
+    category: "beardTransplant",
     author: "Dr. Ahmet Yılmaz",
     date: "2024-03-05",
     readTime: "7 dk",
@@ -62,7 +63,7 @@ const blogPosts = [
     title: "Saç Ekimi Sonrası İlk 15 Gün",
     description: "Saç ekimi operasyonu sonrası ilk 15 günlük süreçte yapılması ve yapılmaması gerekenler hakkında kapsamlı rehber.",
     image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118",
-    category: "Tedavi Süreci",
+    category: "treatment",
     author: "Dr. Mehmet Kaya",
     date: "2024-02-28",
     readTime: "12 dk",
@@ -74,7 +75,7 @@ const blogPosts = [
     title: "Kaş Ekimi için Doğru Zaman Ne Zaman?",
     description: "Kaş ekimi operasyonu için en uygun zamanın belirlenmesi ve operasyon öncesi değerlendirme süreci hakkında bilgiler.",
     image: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec",
-    category: "Kaş Ekimi",
+    category: "eyebrowTransplant",
     author: "Dr. Ayşe Demir",
     date: "2024-02-20",
     readTime: "6 dk",
@@ -85,21 +86,22 @@ const blogPosts = [
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("Tümü");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const { t } = useTranslation('common');
 
   // Filtreleme fonksiyonu
   const filteredPosts = blogPosts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === "Tümü" || post.category === selectedCategory;
+                       post.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === "all" || post.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
   return (
     <div className="min-h-screen bg-background">
       <Metadata
-        title="Blog | Hair Clinic"
-        description="Saç ekimi, sakal ekimi ve estetik tedaviler hakkında profesyonel makaleler ve güncel bilgiler."
+        title={t('blog.title')}
+        description={t('blog.subtitle')}
         keywords="saç ekimi blog, sakal ekimi makaleler, estetik tedavi blog, saç ekimi tecrübeleri"
       />
 
@@ -113,10 +115,10 @@ export default function BlogPage() {
             className="max-w-3xl mx-auto text-center"
           >
             <h1 className="text-3xl md:text-4xl font-bold mb-4">
-              Saç Ekimi ve Estetik Blog
+              {t('blog.title')}
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Uzman kadromuzdan güncel bilgiler, tedavi süreçleri ve başarı hikayeleri
+              {t('blog.subtitle')}
             </p>
 
             {/* Arama */}
@@ -124,7 +126,7 @@ export default function BlogPage() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
-                placeholder="Blog yazılarında ara..."
+                placeholder={t('blog.search')}
                 className="pl-10"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -136,7 +138,7 @@ export default function BlogPage() {
 
       {/* Blog Posts Section */}
       <section className="container mx-auto px-4 py-12">
-        <Tabs defaultValue="Tümü" className="w-full">
+        <Tabs defaultValue="all" className="w-full">
           <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-4 border-b">
             <TabsList className="flex flex-wrap justify-center gap-2">
               {categories.map((category) => (
@@ -146,7 +148,7 @@ export default function BlogPage() {
                   onClick={() => setSelectedCategory(category)}
                   className="data-[state=active]:bg-primary"
                 >
-                  {category}
+                  {t(`blog.categories.${category}`)}
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -171,7 +173,7 @@ export default function BlogPage() {
                             className="w-full h-full object-cover"
                           />
                           <Badge className="absolute top-4 left-4">
-                            {post.category}
+                            {t(`blog.categories.${post.category}`)}
                           </Badge>
                         </div>
                         <div className="p-6 space-y-4">
@@ -187,7 +189,7 @@ export default function BlogPage() {
                           <div className="flex items-center justify-between text-sm text-muted-foreground">
                             <div className="flex items-center gap-2">
                               <Calendar className="h-4 w-4" />
-                              <span>{new Date(post.date).toLocaleDateString('tr-TR')}</span>
+                              <span>{new Date(post.date).toLocaleDateString()}</span>
                             </div>
                             <div className="flex items-center gap-2">
                               <Clock className="h-4 w-4" />
@@ -196,7 +198,7 @@ export default function BlogPage() {
                           </div>
 
                           <Button variant="link" className="p-0 h-auto">
-                            Devamını Oku
+                            {t('buttons.readMore')}
                             <ArrowRight className="ml-2 h-4 w-4" />
                           </Button>
                         </div>

@@ -24,7 +24,8 @@
     "continue": "Continue",
     "back": "Back",
     "edit": "Edit",
-    "upload": "Upload"
+    "upload": "Upload",
+    "readMore": "Read More"
   },
   "validation": {
     "required": "This field is required",
@@ -32,6 +33,19 @@
     "phone": "Please enter a valid phone number",
     "minLength": "Please enter at least {{count}} characters",
     "maxLength": "Please enter no more than {{count}} characters"
+  },
+  "blog": {
+    "title": "Hair Transplant and Aesthetics Blog",
+    "subtitle": "Latest updates, treatment processes, and success stories from our expert team",
+    "search": "Search blog posts...",
+    "categories": {
+      "all": "All",
+      "hairTransplant": "Hair Transplant",
+      "beardTransplant": "Beard Transplant",
+      "eyebrowTransplant": "Eyebrow Transplant",
+      "aftercare": "Aftercare",
+      "treatment": "Treatment Process"
+    }
   },
   "patient": {
     "dashboard": {

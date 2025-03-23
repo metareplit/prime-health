@@ -22,7 +22,10 @@
     "cancel": "İptal",
     "save": "Kaydet",
     "continue": "Devam Et",
-    "back": "Geri"
+    "back": "Geri",
+    "edit": "Düzenle",
+    "upload": "Yükle",
+    "readMore": "Devamını Oku"
   },
   "validation": {
     "required": "Bu alan zorunludur",
@@ -30,6 +33,19 @@
     "phone": "Geçerli bir telefon numarası giriniz",
     "minLength": "En az {{count}} karakter giriniz",
     "maxLength": "En fazla {{count}} karakter giriniz"
+  },
+  "blog": {
+    "title": "Saç Ekimi ve Estetik Blog",
+    "subtitle": "Uzman kadromuzdan güncel bilgiler, tedavi süreçleri ve başarı hikayeleri",
+    "search": "Blog yazılarında ara...",
+    "categories": {
+      "all": "Tümü",
+      "hairTransplant": "Saç Ekimi",
+      "beardTransplant": "Sakal Ekimi",
+      "eyebrowTransplant": "Kaş Ekimi",
+      "aftercare": "Bakım",
+      "treatment": "Tedavi Süreci"
+    }
   },
   "patient": {
     "dashboard": {
