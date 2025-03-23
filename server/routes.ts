@@ -123,13 +123,6 @@ export async function registerRoutes(app: Express) {
         role: "patient" // Force role to be patient for all registrations
       });
 
-      const existingUser = await storage.getUserByUsername(userData.username);
-      if (existingUser) {
-        return res.status(400).json({ 
-          message: "Bu kullanıcı adı zaten kullanımda" 
-        });
-      }
-
       const existingEmail = await storage.getUserByEmail(userData.email);
       if (existingEmail) {
         return res.status(400).json({ 
@@ -137,7 +130,22 @@ export async function registerRoutes(app: Express) {
         });
       }
 
-      const user = await storage.createUser(userData);
+      // Generate a username from first name and last name
+      const baseUsername = `${userData.firstName.toLowerCase()}.${userData.lastName.toLowerCase()}`;
+      let username = baseUsername;
+      let counter = 1;
+
+      // Check if username exists and generate a unique one if needed
+      while (await storage.getUserByUsername(username)) {
+        username = `${baseUsername}${counter}`;
+        counter++;
+      }
+
+      const user = await storage.createUser({
+        ...userData,
+        username, // Add generated username
+      });
+
       res.status(201).json(user);
     } catch (error) {
       const validationError = fromZodError(error);

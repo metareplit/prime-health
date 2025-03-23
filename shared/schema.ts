@@ -11,18 +11,28 @@ export const UserRole = {
 
 export type UserRoleType = typeof UserRole[keyof typeof UserRole];
 
+// Gender enum
+export const Gender = {
+  MALE: "male",
+  FEMALE: "female",
+  OTHER: "other",
+} as const;
+
+export type GenderType = typeof Gender[keyof typeof Gender];
+
 // Extended User model with patient-specific fields
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
-  username: text("username").notNull().unique(),
+  username: text("username").unique(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
   password: text("password").notNull(),
   email: text("email").notNull().unique(),
-  fullName: text("full_name").notNull(),
   phone: text("phone").notNull(),
   role: text("role").notNull().default(UserRole.PATIENT),
   profileImage: text("profile_image"),
-  dateOfBirth: timestamp("date_of_birth"),
-  gender: text("gender"),
+  dateOfBirth: timestamp("date_of_birth").notNull(),
+  gender: text("gender").notNull(),
   address: text("address"),
   medicalHistory: text("medical_history"),
   preferences: text("preferences"),
@@ -209,9 +219,15 @@ export const sliders = pgTable("sliders", {
 
 // Schema validations with extended rules
 export const insertUserSchema = createInsertSchema(users).extend({
+  firstName: z.string().min(2, "Ad en az 2 karakter olmalıdır"),
+  lastName: z.string().min(2, "Soyad en az 2 karakter olmalıdır"),
   email: z.string().email("Geçerli bir e-posta adresi giriniz"),
   phone: z.string().min(10, "Geçerli bir telefon numarası giriniz"),
   password: z.string().min(8, "Şifre en az 8 karakter olmalıdır"),
+  dateOfBirth: z.date().max(new Date(), "Doğum tarihi bugünden büyük olamaz"),
+  gender: z.enum(["male", "female", "other"], {
+    errorMap: () => ({ message: "Lütfen cinsiyet seçiniz" }),
+  }),
   role: z.enum([UserRole.ADMIN, UserRole.DOCTOR, UserRole.PATIENT]).default(UserRole.PATIENT),
 });
 

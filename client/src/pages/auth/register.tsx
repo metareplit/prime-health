@@ -10,19 +10,30 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { apiRequest } from "@/lib/queryClient";
-import { UserRole } from "@shared/schema";
+import { UserRole, Gender } from "@shared/schema";
 
 const registerSchema = z.object({
-  username: z.string().min(1, "Kullanıcı adı gereklidir"),
+  firstName: z.string().min(2, "Ad en az 2 karakter olmalıdır"),
+  lastName: z.string().min(2, "Soyad en az 2 karakter olmalıdır"),
   email: z.string().email("Geçerli bir e-posta adresi giriniz"),
   password: z.string().min(8, "Şifre en az 8 karakter olmalıdır"),
-  fullName: z.string().min(1, "Ad Soyad gereklidir"),
   phone: z.string().min(10, "Geçerli bir telefon numarası giriniz"),
+  dateOfBirth: z.string().min(1, "Doğum tarihi gereklidir"),
+  gender: z.enum(["male", "female", "other"], {
+    required_error: "Lütfen cinsiyet seçiniz",
+  }),
 });
 
 export default function Register() {
@@ -32,11 +43,13 @@ export default function Register() {
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      username: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
-      fullName: "",
       phone: "",
+      dateOfBirth: "",
+      gender: undefined,
     },
   });
 
@@ -44,7 +57,8 @@ export default function Register() {
     try {
       const res = await apiRequest("POST", "/api/auth/register", {
         ...values,
-        role: UserRole.PATIENT // Automatically set role to patient
+        dateOfBirth: new Date(values.dateOfBirth),
+        role: UserRole.PATIENT
       });
 
       if (res.ok) {
@@ -58,7 +72,7 @@ export default function Register() {
       toast({
         variant: "destructive",
         title: "Kayıt başarısız",
-        description: "Bu kullanıcı adı veya e-posta adresi zaten kullanımda.",
+        description: "Bu e-posta adresi zaten kullanımda.",
       });
     }
   }
@@ -84,33 +98,35 @@ export default function Register() {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="fullName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Ad Soyad</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Ad Soyad" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="firstName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Ad</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Adınız" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Kullanıcı Adı</FormLabel>
-                  <FormControl>
-                    <Input placeholder="kullaniciadi" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="lastName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Soyad</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Soyadınız" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormField
               control={form.control}
@@ -139,6 +155,45 @@ export default function Register() {
                 </FormItem>
               )}
             />
+
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="dateOfBirth"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Doğum Tarihi</FormLabel>
+                    <FormControl>
+                      <Input type="date" {...field} max={new Date().toISOString().split('T')[0]} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="gender"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Cinsiyet</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Seçiniz" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="male">Erkek</SelectItem>
+                        <SelectItem value="female">Kadın</SelectItem>
+                        <SelectItem value="other">Diğer</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormField
               control={form.control}
