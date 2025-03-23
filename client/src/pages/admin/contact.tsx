@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Setting } from "@shared/schema";
+import { ContactInfo } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
 
@@ -13,32 +13,39 @@ export default function AdminContact() {
   const { toast } = useToast();
   const [editMode, setEditMode] = useState(false);
 
-  const { data: settings, isLoading } = useQuery<Setting[]>({
-    queryKey: ["/api/settings/contact"],
+  const { data: contactInfo, isLoading } = useQuery<ContactInfo[]>({
+    queryKey: ["/api/contact-info"],
   });
 
   const updateMutation = useMutation({
-    mutationFn: async (data: Setting) => {
-      const res = await apiRequest("PATCH", `/api/settings/${data.id}`, data);
+    mutationFn: async (data: ContactInfo) => {
+      const res = await apiRequest("PATCH", `/api/contact-info/${data.id}`, data);
       return res.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/settings/contact"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/contact-info"] });
       toast({
         title: "Başarılı",
         description: "İletişim bilgileri başarıyla güncellendi.",
       });
       setEditMode(false);
     },
+    onError: (error: Error) => {
+      toast({
+        title: "Hata",
+        description: "İletişim bilgileri güncellenirken bir hata oluştu: " + error.message,
+        variant: "destructive",
+      });
+    },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!settings) return;
+    if (!contactInfo) return;
 
     // Update all contact settings
     Promise.all(
-      settings.map(setting => updateMutation.mutateAsync(setting))
+      contactInfo.map(info => updateMutation.mutateAsync(info))
     );
   };
 
@@ -76,12 +83,12 @@ export default function AdminContact() {
                 Telefon Numarası
               </label>
               <Input
-                value={settings?.find(s => s.key === "phone")?.value}
+                value={contactInfo?.find(i => i.type === "phone")?.value}
                 onChange={(e) => {
-                  if (!settings) return;
-                  const setting = settings.find(s => s.key === "phone");
-                  if (setting) {
-                    setting.value = e.target.value;
+                  if (!contactInfo) return;
+                  const info = contactInfo.find(i => i.type === "phone");
+                  if (info) {
+                    info.value = e.target.value;
                   }
                 }}
                 disabled={!editMode}
@@ -95,12 +102,12 @@ export default function AdminContact() {
                 E-posta Adresi
               </label>
               <Input
-                value={settings?.find(s => s.key === "email")?.value}
+                value={contactInfo?.find(i => i.type === "email")?.value}
                 onChange={(e) => {
-                  if (!settings) return;
-                  const setting = settings.find(s => s.key === "email");
-                  if (setting) {
-                    setting.value = e.target.value;
+                  if (!contactInfo) return;
+                  const info = contactInfo.find(i => i.type === "email");
+                  if (info) {
+                    info.value = e.target.value;
                   }
                 }}
                 disabled={!editMode}
@@ -114,12 +121,12 @@ export default function AdminContact() {
                 Adres
               </label>
               <Textarea
-                value={settings?.find(s => s.key === "address")?.value}
+                value={contactInfo?.find(i => i.type === "address")?.value}
                 onChange={(e) => {
-                  if (!settings) return;
-                  const setting = settings.find(s => s.key === "address");
-                  if (setting) {
-                    setting.value = e.target.value;
+                  if (!contactInfo) return;
+                  const info = contactInfo.find(i => i.type === "address");
+                  if (info) {
+                    info.value = e.target.value;
                   }
                 }}
                 disabled={!editMode}
@@ -141,12 +148,12 @@ export default function AdminContact() {
                 Facebook
               </label>
               <Input
-                value={settings?.find(s => s.key === "facebook")?.value}
+                value={contactInfo?.find(i => i.type === "facebook")?.value}
                 onChange={(e) => {
-                  if (!settings) return;
-                  const setting = settings.find(s => s.key === "facebook");
-                  if (setting) {
-                    setting.value = e.target.value;
+                  if (!contactInfo) return;
+                  const info = contactInfo.find(i => i.type === "facebook");
+                  if (info) {
+                    info.value = e.target.value;
                   }
                 }}
                 disabled={!editMode}
@@ -160,12 +167,12 @@ export default function AdminContact() {
                 Instagram
               </label>
               <Input
-                value={settings?.find(s => s.key === "instagram")?.value}
+                value={contactInfo?.find(i => i.type === "instagram")?.value}
                 onChange={(e) => {
-                  if (!settings) return;
-                  const setting = settings.find(s => s.key === "instagram");
-                  if (setting) {
-                    setting.value = e.target.value;
+                  if (!contactInfo) return;
+                  const info = contactInfo.find(i => i.type === "instagram");
+                  if (info) {
+                    info.value = e.target.value;
                   }
                 }}
                 disabled={!editMode}
@@ -179,12 +186,12 @@ export default function AdminContact() {
                 Twitter
               </label>
               <Input
-                value={settings?.find(s => s.key === "twitter")?.value}
+                value={contactInfo?.find(i => i.type === "twitter")?.value}
                 onChange={(e) => {
-                  if (!settings) return;
-                  const setting = settings.find(s => s.key === "twitter");
-                  if (setting) {
-                    setting.value = e.target.value;
+                  if (!contactInfo) return;
+                  const info = contactInfo.find(i => i.type === "twitter");
+                  if (info) {
+                    info.value = e.target.value;
                   }
                 }}
                 disabled={!editMode}

@@ -82,14 +82,27 @@ export const settings = pgTable("settings", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-// Messages for patient-doctor communication
+// Contact Info table for managing clinic contact details
+export const contactInfo = pgTable("contact_info", {
+  id: serial("id").primaryKey(),
+  type: text("type").notNull(), // address, phone, email, social
+  label: text("label").notNull(),
+  value: text("value").notNull(),
+  icon: text("icon"), // Lucide icon name
+  order: serial("order").default(0),
+  isActive: text("is_active").default("true"),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Messages table with enhanced features
 export const messages = pgTable("messages", {
   id: serial("id").primaryKey(),
   senderId: serial("sender_id").notNull().references(() => users.id),
   receiverId: serial("receiver_id").notNull().references(() => users.id),
   content: text("content").notNull(),
-  attachments: text("attachments").array(), // URLs to attached files
-  isRead: text("is_read").notNull().default("false"),
+  attachments: text("attachments").array().default([]), // URLs to attached files
+  isRead: text("is_read").default("false"),
+  readAt: timestamp("read_at"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -196,6 +209,13 @@ export const insertMessageSchema = createInsertSchema(messages).extend({
   content: z.string().min(1, "Mesaj içeriği boş olamaz"),
   attachments: z.array(z.string()).optional().default([]),
 });
+export const insertContactInfoSchema = createInsertSchema(contactInfo).extend({
+  label: z.string().min(1, "Etiket alanı zorunludur"),
+  value: z.string().min(1, "Değer alanı zorunludur"),
+  type: z.enum(["address", "phone", "email", "social"]),
+  icon: z.string().optional(),
+});
+
 export const insertPatientImageSchema = createInsertSchema(patientImages);
 export const insertServiceSchema = createInsertSchema(services);
 export const insertAppointmentSchema = createInsertSchema(appointments);
@@ -253,9 +273,11 @@ export type Setting = typeof settings.$inferSelect;
 export type EmailTemplate = typeof emailTemplates.$inferSelect;
 export type BeforeAfter = typeof beforeAfter.$inferSelect;
 export type Slider = typeof sliders.$inferSelect;
+export type ContactInfo = typeof contactInfo.$inferSelect;
+export type InsertContactInfo = z.infer<typeof insertContactInfoSchema>;
+export type InsertMessage = z.infer<typeof insertMessageSchema>;
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
-export type InsertMessage = z.infer<typeof insertMessageSchema>;
 export type InsertPatientImage = z.infer<typeof insertPatientImageSchema>;
 export type InsertService = z.infer<typeof insertServiceSchema>;
 export type InsertAppointment = z.infer<typeof insertAppointmentSchema>;

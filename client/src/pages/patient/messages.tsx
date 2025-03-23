@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/lib/auth";
-import { MessageSquare, Send, Image, Check, CheckCheck } from "lucide-react";
+import { MessageSquare, Send, Image, Check, CheckCheck, Loader2 } from "lucide-react";
 import type { Message } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 
@@ -15,16 +15,18 @@ export default function PatientMessages() {
   const { toast } = useToast();
   const [newMessage, setNewMessage] = useState("");
   const [attachments, setAttachments] = useState<File[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
 
   // Fetch messages
   const { data: messages, isLoading } = useQuery<Message[]>({
     queryKey: ["/api/messages"],
-    refetchInterval: 3000, // Poll every 3 seconds
+    refetchInterval: 3000, // Her 3 saniyede bir güncelle
   });
 
-  // Send message mutation
+  // Mesaj gönderme
   const sendMessageMutation = useMutation({
     mutationFn: async (content: string) => {
+      setIsUploading(true);
       const formData = new FormData();
       formData.append("content", content);
       attachments.forEach(file => {
@@ -38,12 +40,14 @@ export default function PatientMessages() {
       queryClient.invalidateQueries({ queryKey: ["/api/messages"] });
       setNewMessage("");
       setAttachments([]);
+      setIsUploading(false);
       toast({
-        title: "Mesaj gönderildi",
-        description: "Mesajınız başarıyla iletildi.",
+        title: "Başarılı",
+        description: "Mesajınız başarıyla gönderildi.",
       });
     },
     onError: (error: Error) => {
+      setIsUploading(false);
       toast({
         title: "Hata",
         description: "Mesaj gönderilemedi: " + error.message,
@@ -54,20 +58,34 @@ export default function PatientMessages() {
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newMessage.trim()) return;
+    if (!newMessage.trim() || isUploading) return;
     sendMessageMutation.mutate(newMessage);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setAttachments(Array.from(e.target.files));
+      // Dosya boyutu kontrolü
+      const files = Array.from(e.target.files);
+      const totalSize = files.reduce((acc, file) => acc + file.size, 0);
+      const maxSize = 10 * 1024 * 1024; // 10MB
+
+      if (totalSize > maxSize) {
+        toast({
+          title: "Hata",
+          description: "Toplam dosya boyutu 10MB'ı geçemez.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setAttachments(files);
     }
   };
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[500px]">
-        <MessageSquare className="h-8 w-8 animate-pulse text-muted-foreground" />
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
       </div>
     );
   }
@@ -152,24 +170,36 @@ export default function PatientMessages() {
                 onChange={(e) => setNewMessage(e.target.value)}
                 placeholder="Mesajınızı yazın..."
                 className="flex-1"
+                disabled={isUploading}
               />
               <Input
                 type="file"
                 id="attachments"
                 className="hidden"
                 multiple
+                accept="image/*,.pdf,.doc,.docx"
                 onChange={handleFileChange}
+                disabled={isUploading}
               />
               <Button
                 type="button"
                 variant="outline"
                 size="icon"
                 onClick={() => document.getElementById("attachments")?.click()}
+                disabled={isUploading}
               >
                 <Image className="h-4 w-4" />
               </Button>
-              <Button type="submit" size="icon" disabled={!newMessage.trim()}>
-                <Send className="h-4 w-4" />
+              <Button 
+                type="submit" 
+                size="icon" 
+                disabled={!newMessage.trim() || isUploading}
+              >
+                {isUploading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Send className="h-4 w-4" />
+                )}
               </Button>
             </form>
           </CardContent>
