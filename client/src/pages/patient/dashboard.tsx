@@ -14,8 +14,11 @@ import {
 } from "lucide-react";
 import type { Appointment, Message } from "@shared/schema";
 import { Metadata } from "@/components/ui/metadata";
+import { useTranslation } from "react-i18next";
 
 export default function PatientDashboard() {
+  const { t } = useTranslation('common');
+
   const { data: upcomingAppointments } = useQuery<Appointment[]>({
     queryKey: ["/api/appointments/upcoming"],
   });
@@ -27,8 +30,8 @@ export default function PatientDashboard() {
   return (
     <div className="container mx-auto px-4 py-8">
       <Metadata
-        title="Hasta Portalı - Kontrol Paneli"
-        description="Tedavi sürecinizi takip edin. Randevularınızı yönetin, mesajlarınızı görüntüleyin ve tedavi görsellerinizi yükleyin."
+        title={t('patient.dashboard.title')}
+        description={t('patient.dashboard.welcome')}
         keywords="hasta portali, randevu takip, tedavi süreci, saç ekimi takip"
         type="website"
       />
@@ -38,9 +41,9 @@ export default function PatientDashboard() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-3xl font-bold">Hasta Portalı</h1>
+          <h1 className="text-3xl font-bold">{t('patient.dashboard.title')}</h1>
           <p className="text-gray-600 mt-2">
-            Hoş geldiniz! Tedavi sürecinizi buradan takip edebilirsiniz.
+            {t('patient.dashboard.welcome')}
           </p>
         </motion.div>
 
@@ -49,14 +52,14 @@ export default function PatientDashboard() {
             <a>
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Randevular</CardTitle>
+                  <CardTitle className="text-sm font-medium">{t('patient.dashboard.appointments')}</CardTitle>
                   <Calendar className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
                     {upcomingAppointments?.length || 0}
                   </div>
-                  <p className="text-xs text-gray-600">Yaklaşan Randevu</p>
+                  <p className="text-xs text-gray-600">{t('patient.dashboard.upcomingAppointment')}</p>
                 </CardContent>
               </Card>
             </a>
@@ -66,14 +69,14 @@ export default function PatientDashboard() {
             <a>
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Mesajlar</CardTitle>
+                  <CardTitle className="text-sm font-medium">{t('patient.dashboard.messages')}</CardTitle>
                   <MessageSquare className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
                     {unreadMessages?.length || 0}
                   </div>
-                  <p className="text-xs text-gray-600">Okunmamış Mesaj</p>
+                  <p className="text-xs text-gray-600">{t('patient.dashboard.unreadMessage')}</p>
                 </CardContent>
               </Card>
             </a>
@@ -83,12 +86,12 @@ export default function PatientDashboard() {
             <a>
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Görsellerim</CardTitle>
+                  <CardTitle className="text-sm font-medium">{t('patient.dashboard.images')}</CardTitle>
                   <ImageIcon className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">Yükle</div>
-                  <p className="text-xs text-gray-600">Tedavi Görselleri</p>
+                  <div className="text-2xl font-bold">{t('buttons.upload')}</div>
+                  <p className="text-xs text-gray-600">{t('patient.dashboard.uploadImages')}</p>
                 </CardContent>
               </Card>
             </a>
@@ -98,12 +101,12 @@ export default function PatientDashboard() {
             <a>
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Profilim</CardTitle>
+                  <CardTitle className="text-sm font-medium">{t('patient.dashboard.profile')}</CardTitle>
                   <User className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">Düzenle</div>
-                  <p className="text-xs text-gray-600">Profil Bilgileri</p>
+                  <div className="text-2xl font-bold">{t('buttons.edit')}</div>
+                  <p className="text-xs text-gray-600">{t('patient.dashboard.editProfile')}</p>
                 </CardContent>
               </Card>
             </a>
@@ -113,7 +116,7 @@ export default function PatientDashboard() {
         {upcomingAppointments && upcomingAppointments.length > 0 && (
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle className="text-xl">Yaklaşan Randevular</CardTitle>
+              <CardTitle className="text-xl">{t('patient.dashboard.upcomingAppointments')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -127,14 +130,13 @@ export default function PatientDashboard() {
                       <div>
                         <p className="font-medium">{appointment.type}</p>
                         <p className="text-sm text-gray-600">
-                          {new Date(appointment.date).toLocaleDateString("tr-TR")}{" "}
-                          {appointment.time}
+                          {new Date(appointment.date).toLocaleDateString()} {appointment.time}
                         </p>
                       </div>
                     </div>
                     <Button variant="outline" size="sm" asChild>
                       <Link href={`/hasta-portali/randevular/${appointment.id}`}>
-                        <a>Detaylar</a>
+                        <a>{t('patient.dashboard.details')}</a>
                       </Link>
                     </Button>
                   </div>
@@ -147,7 +149,7 @@ export default function PatientDashboard() {
         {unreadMessages && unreadMessages.length > 0 && (
           <Card>
             <CardHeader>
-              <CardTitle className="text-xl">Son Mesajlar</CardTitle>
+              <CardTitle className="text-xl">{t('patient.dashboard.messages')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -159,7 +161,7 @@ export default function PatientDashboard() {
                     <div className="flex items-center gap-4">
                       <Bell className="h-5 w-5 text-primary" />
                       <div>
-                        <p className="font-medium">Yeni Mesaj</p>
+                        <p className="font-medium">{t('patient.dashboard.newMessage')}</p>
                         <p className="text-sm text-gray-600">
                           {message.content.substring(0, 50)}...
                         </p>
@@ -167,7 +169,7 @@ export default function PatientDashboard() {
                     </div>
                     <Button variant="outline" size="sm" asChild>
                       <Link href="/hasta-portali/mesajlar">
-                        <a>Oku</a>
+                        <a>{t('patient.dashboard.read')}</a>
                       </Link>
                     </Button>
                   </div>

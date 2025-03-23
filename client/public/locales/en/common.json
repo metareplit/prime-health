@@ -22,7 +22,9 @@
     "cancel": "Cancel",
     "save": "Save",
     "continue": "Continue",
-    "back": "Back"
+    "back": "Back",
+    "edit": "Edit",
+    "upload": "Upload"
   },
   "validation": {
     "required": "This field is required",
@@ -30,5 +32,41 @@
     "phone": "Please enter a valid phone number",
     "minLength": "Please enter at least {{count}} characters",
     "maxLength": "Please enter no more than {{count}} characters"
+  },
+  "patient": {
+    "dashboard": {
+      "title": "Patient Portal",
+      "welcome": "Welcome! You can track your treatment process here.",
+      "appointments": "Appointments",
+      "upcomingAppointment": "Upcoming Appointment",
+      "messages": "Messages",
+      "unreadMessage": "Unread Message",
+      "images": "My Images",
+      "uploadImages": "Treatment Images",
+      "profile": "My Profile",
+      "editProfile": "Profile Information",
+      "upcomingAppointments": "Upcoming Appointments",
+      "details": "Details",
+      "newMessage": "New Message",
+      "read": "Read"
+    },
+    "images": {
+      "title": "My Treatment Images",
+      "description": "Track your progress during treatment. Securely upload and manage your before and after images.",
+      "uploadNew": "Upload New Image",
+      "noImages": "You haven't uploaded any images yet.",
+      "uploadPrompt": "You can upload images to track your treatment progress.",
+      "view": "View",
+      "doctorFeedback": "Doctor feedback available"
+    },
+    "appointments": {
+      "createTitle": "Create Online Appointment",
+      "createDescription": "Schedule a free consultation at your convenience. Our expert doctors will provide detailed information about your treatment process.",
+      "selectDate": "Select Date",
+      "appointmentDetails": "Appointment Details",
+      "selectedDate": "Selected Date",
+      "createButton": "Create Appointment",
+      "contactNote": "* After your appointment is confirmed, our team will contact you to determine the most suitable time."
+    }
   }
 }

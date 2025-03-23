@@ -30,5 +30,41 @@
     "phone": "Geçerli bir telefon numarası giriniz",
     "minLength": "En az {{count}} karakter giriniz",
     "maxLength": "En fazla {{count}} karakter giriniz"
+  },
+  "patient": {
+    "dashboard": {
+      "title": "Hasta Portalı",
+      "welcome": "Hoş geldiniz! Tedavi sürecinizi buradan takip edebilirsiniz.",
+      "appointments": "Randevular",
+      "upcomingAppointment": "Yaklaşan Randevu",
+      "messages": "Mesajlar",
+      "unreadMessage": "Okunmamış Mesaj",
+      "images": "Görsellerim",
+      "uploadImages": "Tedavi Görselleri",
+      "profile": "Profilim",
+      "editProfile": "Profil Bilgileri",
+      "upcomingAppointments": "Yaklaşan Randevular",
+      "details": "Detaylar",
+      "newMessage": "Yeni Mesaj",
+      "read": "Oku"
+    },
+    "images": {
+      "title": "Tedavi Görsellerim",
+      "description": "Tedavi sürecinizdeki gelişimi takip edin. Öncesi ve sonrası görsellerinizi güvenle yükleyin ve yönetin.",
+      "uploadNew": "Yeni Görsel Yükle",
+      "noImages": "Henüz görsel yüklemediniz.",
+      "uploadPrompt": "Tedavi sürecinizi takip etmek için görsel yükleyebilirsiniz.",
+      "view": "Görüntüle",
+      "doctorFeedback": "Doktor yorumu var"
+    },
+    "appointments": {
+      "createTitle": "Online Randevu Oluşturun",
+      "createDescription": "Size en uygun tarih ve saatte ücretsiz danışmanlık için randevu alın. Uzman doktorlarımız tedavi süreciniz hakkında detaylı bilgi versin.",
+      "selectDate": "Tarih Seçin",
+      "appointmentDetails": "Randevu Detayları",
+      "selectedDate": "Seçilen Tarih",
+      "createButton": "Randevu Oluştur",
+      "contactNote": "* Randevunuz onaylandıktan sonra size en uygun saati belirlemek için ekibimiz sizinle iletişime geçecektir."
+    }
   }
 }

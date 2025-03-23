@@ -4,8 +4,11 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Image as ImageIcon, Upload, Eye } from "lucide-react";
 import type { PatientImage } from "@shared/schema";
 import { Metadata } from "@/components/ui/metadata";
+import { useTranslation } from "react-i18next";
 
 export default function PatientImages() {
+  const { t } = useTranslation('common');
+
   const { data: images } = useQuery<PatientImage[]>({
     queryKey: ["/api/patient-images"],
   });
@@ -13,18 +16,18 @@ export default function PatientImages() {
   return (
     <div className="container mx-auto px-4 py-8">
       <Metadata 
-        title="Tedavi Görsellerim - Hasta Portalı"
-        description="Tedavi sürecinizdeki gelişimi takip edin. Öncesi ve sonrası görsellerinizi güvenle yükleyin ve yönetin."
+        title={t('patient.images.title')}
+        description={t('patient.images.description')}
         keywords="hasta görselleri, tedavi takip, saç ekimi öncesi sonrası, hasta portal görseller"
         type="website"
       />
 
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold">Tedavi Görsellerim</h1>
+          <h1 className="text-3xl font-bold">{t('patient.images.title')}</h1>
           <Button>
             <Upload className="h-4 w-4 mr-2" />
-            Yeni Görsel Yükle
+            {t('patient.images.uploadNew')}
           </Button>
         </div>
 
@@ -32,9 +35,9 @@ export default function PatientImages() {
           {images?.length === 0 && (
             <div className="col-span-full text-center py-12 text-gray-500">
               <ImageIcon className="h-12 w-12 mx-auto mb-4 opacity-20" />
-              <p>Henüz görsel yüklemediniz.</p>
+              <p>{t('patient.images.noImages')}</p>
               <p className="text-sm mt-2">
-                Tedavi sürecinizi takip etmek için görsel yükleyebilirsiniz.
+                {t('patient.images.uploadPrompt')}
               </p>
             </div>
           )}
@@ -50,7 +53,7 @@ export default function PatientImages() {
                 <div className="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
                   <Button variant="secondary">
                     <Eye className="h-4 w-4 mr-2" />
-                    Görüntüle
+                    {t('patient.images.view')}
                   </Button>
                 </div>
               </div>
@@ -64,7 +67,7 @@ export default function PatientImages() {
                   </div>
                   {image.doctorFeedback && (
                     <div className="text-xs px-2 py-1 bg-green-50 text-green-600 rounded">
-                      Doktor yorumu var
+                      {t('patient.images.doctorFeedback')}
                     </div>
                   )}
                 </div>

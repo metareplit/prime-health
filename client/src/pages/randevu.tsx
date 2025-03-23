@@ -5,15 +5,17 @@ import { useState } from "react";
 import { tr } from "date-fns/locale";
 import { Metadata } from "@/components/ui/metadata";
 import { Clock, Calendar as CalendarIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Appointment() {
+  const { t } = useTranslation('common');
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/5 to-transparent py-10">
       <Metadata 
-        title="Online Randevu Oluştur"
-        description="Saç ekimi ve estetik tedaviler için hemen online randevu alın. Uzman doktorlarımızla ücretsiz danışmanlık için sizinle iletişime geçelim."
+        title={t('patient.appointments.createTitle')}
+        description={t('patient.appointments.createDescription')}
         keywords="saç ekimi randevu, estetik operasyon randevu, online konsültasyon, ücretsiz danışmanlık"
         type="website"
       />
@@ -22,11 +24,10 @@ export default function Appointment() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">
-              Online Randevu Oluşturun
+              {t('patient.appointments.createTitle')}
             </h1>
             <p className="text-lg text-gray-600">
-              Size en uygun tarih ve saatte ücretsiz danışmanlık için randevu alın.
-              Uzman doktorlarımız tedavi süreciniz hakkında detaylı bilgi versin.
+              {t('patient.appointments.createDescription')}
             </p>
           </div>
 
@@ -35,7 +36,7 @@ export default function Appointment() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <CalendarIcon className="h-5 w-5 text-primary" />
-                  Tarih Seçin
+                  {t('patient.appointments.selectDate')}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -46,7 +47,7 @@ export default function Appointment() {
                   locale={tr}
                   className="rounded-md border"
                   disabled={(date) => date < new Date()}
-                  aria-label="Randevu tarihi seçin"
+                  aria-label={t('patient.appointments.selectDate')}
                 />
               </CardContent>
             </Card>
@@ -55,12 +56,12 @@ export default function Appointment() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Clock className="h-5 w-5 text-primary" />
-                  Randevu Detayları
+                  {t('patient.appointments.appointmentDetails')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h3 className="font-medium mb-2">Seçilen Tarih</h3>
+                  <h3 className="font-medium mb-2">{t('patient.appointments.selectedDate')}</h3>
                   <p className="text-gray-600">
                     {date?.toLocaleDateString('tr-TR', {
                       weekday: 'long',
@@ -75,12 +76,11 @@ export default function Appointment() {
                   className="w-full bg-primary/90 hover:bg-primary"
                   size="lg"
                 >
-                  Randevu Oluştur
+                  {t('patient.appointments.createButton')}
                 </Button>
 
                 <p className="text-sm text-gray-500 text-center">
-                  * Randevunuz onaylandıktan sonra size en uygun saati belirlemek için
-                  ekibimiz sizinle iletişime geçecektir.
+                  {t('patient.appointments.contactNote')}
                 </p>
               </CardContent>
             </Card>
