@@ -29,20 +29,20 @@ export function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="flex items-center gap-2">
+        <Button variant="ghost" size="sm" className="flex items-center gap-2 px-3 py-2 hover:bg-accent hover:text-accent-foreground">
           <Globe className="h-4 w-4" />
-          <span>{currentLanguage?.flag}</span>
+          <span className="text-lg">{currentLanguage?.flag}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="w-[150px]">
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.code}
             onClick={() => changeLanguage(language.code)}
-            className="flex items-center gap-2 cursor-pointer"
+            className="flex items-center gap-2 px-3 py-2.5 cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors"
           >
-            <span>{language.flag}</span>
-            <span>{language.name}</span>
+            <span className="text-lg">{language.flag}</span>
+            <span className="flex-1">{language.name}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
