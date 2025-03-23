@@ -4,6 +4,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/lib/auth";
 import { AdminLayout } from "@/components/layout/admin-layout";
+import { LanguageSwitcher } from "@/components/ui/language-switcher";
+import "./lib/i18n"; // i18n başlatma
 import AdminDashboard from "@/pages/admin/dashboard";
 import AdminAnalytics from "@/pages/admin/analytics";
 import AdminSEO from "@/pages/admin/seo";
@@ -225,7 +227,9 @@ function Router() {
       <Route path="*">
         {() => (
           <div className="min-h-screen flex flex-col">
-            <Header />
+            <Header>
+              <LanguageSwitcher/>
+            </Header>
             <main className="flex-grow">
               <Switch>
                 <Route path="/hizmetler" component={Services} />

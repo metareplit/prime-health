@@ -1,0 +1,34 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "blog": "Blog",
+    "appointments": "Appointments",
+    "gallery": "Gallery",
+    "products": "Products",
+    "patientPortal": "Patient Portal",
+    "userMenu": "User Menu",
+    "menu": "Menu"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "buttons": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "continue": "Continue",
+    "back": "Back"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "phone": "Please enter a valid phone number",
+    "minLength": "Please enter at least {{count}} characters",
+    "maxLength": "Please enter no more than {{count}} characters"
+  }
+}
