@@ -18,6 +18,7 @@ import {
   Split,
   Images,
   Stethoscope, // Added for services icon
+  Contact,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
@@ -184,6 +185,12 @@ export function Sidebar() {
                 label="Ayarlar"
                 href="/admin/settings"
                 active={pathname.startsWith("/admin/settings")}
+              />
+              <SidebarItem
+                icon={<Contact className="h-4 w-4" />}
+                label="İletişim Bilgileri"
+                href="/admin/contact"
+                active={pathname.startsWith("/admin/contact")}
               />
             </div>
           </div>

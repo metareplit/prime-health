@@ -41,6 +41,7 @@ import PatientAppointments from "@/pages/patient/appointments";
 import PatientProfile from "@/pages/patient/profile";
 import NotFound from "@/pages/not-found";
 import AdminServices from "@/pages/admin/services";
+import AdminContact from "@/pages/admin/contact";
 
 function Router() {
   return (
@@ -187,6 +188,13 @@ function Router() {
         {() => (
           <AdminLayout title="Hizmetler">
             <AdminServices />
+          </AdminLayout>
+        )}
+      </Route>
+      <Route path="/admin/contact">
+        {() => (
+          <AdminLayout title="İletişim Bilgileri">
+            <AdminContact />
           </AdminLayout>
         )}
       </Route>
