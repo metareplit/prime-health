@@ -79,12 +79,19 @@ export default function Register() {
           description: "Hasta portalına giriş yapabilirsiniz.",
         });
         setLocation("/auth/login");
+      } else {
+        const error = await res.json();
+        toast({
+          variant: "destructive",
+          title: "Kayıt başarısız",
+          description: error.message || "Kayıt sırasında bir hata oluştu.",
+        });
       }
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Kayıt başarısız",
-        description: "Bu e-posta adresi zaten kullanımda.",
+        description: "Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.",
       });
     }
   }

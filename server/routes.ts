@@ -147,8 +147,11 @@ export async function registerRoutes(app: Express) {
 
       res.status(201).json(user);
     } catch (error) {
-      const validationError = fromZodError(error);
-      res.status(400).json({ message: validationError.message });
+      if (error instanceof Error) {
+        res.status(400).json({ message: error.message });
+      } else {
+        res.status(500).json({ message: "Kayıt işlemi sırasında bir hata oluştu" });
+      }
     }
   });
 
