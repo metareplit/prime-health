@@ -5,6 +5,7 @@ import { insertPatientSchema, insertAppointmentSchema } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import PhoneInput from 'react-phone-input-2';
+import { useTranslation } from "react-i18next";
 import 'react-phone-input-2/lib/style.css';
 import {
   Form,
@@ -49,6 +50,7 @@ const communicationPreferences = [
 export default function AppointmentForm({ selectedService }: AppointmentFormProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { t } = useTranslation('common');
 
   const form = useForm({
     resolver: zodResolver(insertPatientSchema),
@@ -99,16 +101,16 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
       queryClient.invalidateQueries({ queryKey: ["/api/appointments"] });
 
       toast({
-        title: "Başarılı!",
-        description: "Danışmanlık talebiniz başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz.",
+        title: t('appointment.book.success'),
+        description: t('appointment.book.confirmation'),
       });
 
       form.reset();
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Hata!",
-        description: "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.",
+        title: t('ui.toast.error'),
+        description: t('appointment.book.error'),
       });
     }
   };
@@ -119,15 +121,15 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
         <TabsList className="grid w-full grid-cols-3 mb-8">
           <TabsTrigger value="personal" className="data-[state=active]:bg-primary data-[state=active]:text-white">
             <User className="h-4 w-4 mr-2" />
-            Kişisel Bilgiler
+            {t('appointment.book.personalInfo')}
           </TabsTrigger>
           <TabsTrigger value="medical" className="data-[state=active]:bg-primary data-[state=active]:text-white">
             <FileText className="h-4 w-4 mr-2" />
-            Sağlık Bilgileri
+            {t('patient.profile.medicalHistory')}
           </TabsTrigger>
           <TabsTrigger value="appointment" className="data-[state=active]:bg-primary data-[state=active]:text-white">
             <CalendarDays className="h-4 w-4 mr-2" />
-            Randevu Detayları
+            {t('appointment.book.title')}
           </TabsTrigger>
         </TabsList>
 
@@ -138,7 +140,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                 <Card>
                   <CardHeader>
                     <CardTitle className="text-2xl font-semibold text-center">
-                      Kişisel Bilgileriniz
+                      {t('appointment.book.personalInfo')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-6 space-y-6">
@@ -153,10 +155,10 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         name="name"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Ad Soyad</FormLabel>
+                            <FormLabel>{t('auth.form.firstName')}</FormLabel>
                             <FormControl>
                               <Input 
-                                placeholder="Ad Soyad" 
+                                placeholder={t('auth.form.firstName')} 
                                 {...field} 
                                 className="bg-white/50 backdrop-blur-sm"
                               />
@@ -172,11 +174,11 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                           name="age"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Yaş</FormLabel>
+                              <FormLabel>{t('gallery.patientDetails.age')}</FormLabel>
                               <FormControl>
                                 <Input 
                                   type="number" 
-                                  placeholder="Yaş" 
+                                  placeholder={t('gallery.patientDetails.age')} 
                                   {...field} 
                                   className="bg-white/50 backdrop-blur-sm"
                                 />
@@ -191,19 +193,16 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                           name="gender"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Cinsiyet</FormLabel>
+                              <FormLabel>{t('gallery.patientDetails.gender')}</FormLabel>
                               <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
                                   <SelectTrigger className="bg-white/50 backdrop-blur-sm">
-                                    <SelectValue placeholder="Seçiniz" />
+                                    <SelectValue placeholder={t('form.select')} />
                                   </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
-                                  {genderOptions.map((option) => (
-                                    <SelectItem key={option.value} value={option.value}>
-                                      {option.label}
-                                    </SelectItem>
-                                  ))}
+                                  <SelectItem value="male">{t('patient.gender.male')}</SelectItem>
+                                  <SelectItem value="female">{t('patient.gender.female')}</SelectItem>
                                 </SelectContent>
                               </Select>
                               <FormMessage />
@@ -217,7 +216,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         name="phone"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Telefon</FormLabel>
+                            <FormLabel>{t('auth.form.phone')}</FormLabel>
                             <FormControl>
                               <div className="react-tel-input">
                                 <PhoneInput
@@ -242,7 +241,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         name="communicationPreferences"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>İletişim Tercihleri</FormLabel>
+                            <FormLabel>{t('appointment.communicationPreferences')}</FormLabel>
                             <div className="grid grid-cols-2 gap-4 mt-2">
                               {communicationPreferences.map((item) => (
                                 <FormField
@@ -274,7 +273,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                               ))}
                             </div>
                             <FormDescription>
-                              Size nasıl ulaşmamızı tercih edersiniz?
+                              {t('appointment.communicationPreferencesDescription')}
                             </FormDescription>
                             <FormMessage />
                           </FormItem>
@@ -286,7 +285,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         className="w-full bg-primary/90 hover:bg-primary"
                         onClick={() => form.setValue("step", "medical")}
                       >
-                        Devam Et
+                        {t('buttons.continue')}
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </motion.div>
@@ -298,7 +297,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                 <Card>
                   <CardHeader>
                     <CardTitle className="text-2xl font-semibold text-center">
-                      Sağlık Bilgileriniz
+                      {t('patient.profile.medicalHistory')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-6 space-y-6">
@@ -313,10 +312,10 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         name="previousTreatments"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Daha Önce Aldığınız Tedaviler</FormLabel>
+                            <FormLabel>{t('patient.medicalHistory.previousTreatments')}</FormLabel>
                             <FormControl>
                               <Textarea
-                                placeholder="Varsa daha önce aldığınız tedavileri belirtiniz..."
+                                placeholder={t('patient.medicalHistory.previousTreatmentsPlaceholder')}
                                 className="min-h-[100px] bg-white/50 backdrop-blur-sm"
                                 {...field}
                               />
@@ -331,10 +330,10 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         name="medicalConditions"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Sağlık Durumu</FormLabel>
+                            <FormLabel>{t('patient.medicalHistory.conditions')}</FormLabel>
                             <FormControl>
                               <Textarea
-                                placeholder="Varsa kronik rahatsızlıklarınızı veya düzenli kullandığınız ilaçları belirtiniz..."
+                                placeholder={t('patient.medicalHistory.conditionsPlaceholder')}
                                 className="min-h-[100px] bg-white/50 backdrop-blur-sm"
                                 {...field}
                               />
@@ -349,7 +348,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         className="w-full bg-primary/90 hover:bg-primary"
                         onClick={() => form.setValue("step", "appointment")}
                       >
-                        Devam Et
+                        {t('buttons.continue')}
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </motion.div>
@@ -361,7 +360,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                 <Card>
                   <CardHeader>
                     <CardTitle className="text-2xl font-semibold text-center">
-                      Randevu Detayları
+                      {t('appointment.book.title')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-6 space-y-6">
@@ -376,7 +375,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         name="preferredDate"
                         render={({ field }) => (
                           <FormItem className="flex flex-col">
-                            <FormLabel>Tercih Ettiğiniz Tarih</FormLabel>
+                            <FormLabel>{t('appointment.book.selectDate')}</FormLabel>
                             <FormControl>
                               <div className="border rounded-lg p-4 bg-white/50 backdrop-blur-sm">
                                 <Calendar
@@ -397,11 +396,11 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         name="preferredTime"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Tercih Ettiğiniz Saat</FormLabel>
+                            <FormLabel>{t('appointment.book.selectTime')}</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger className="bg-white/50 backdrop-blur-sm">
-                                  <SelectValue placeholder="Saat seçiniz" />
+                                  <SelectValue placeholder={t('appointment.book.selectTime')} />
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
@@ -422,10 +421,10 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         name="notes"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Ek Notlar</FormLabel>
+                            <FormLabel>{t('appointment.book.notes')}</FormLabel>
                             <FormControl>
                               <Textarea
-                                placeholder="Eklemek istediğiniz notlar..."
+                                placeholder={t('appointment.book.notesPlaceholder')}
                                 className="min-h-[100px] bg-white/50 backdrop-blur-sm"
                                 {...field}
                               />
@@ -441,10 +440,10 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         disabled={createPatient.isPending || createAppointment.isPending}
                       >
                         {createPatient.isPending || createAppointment.isPending ? (
-                          "Gönderiliyor..."
+                          t('form.loading')
                         ) : (
                           <>
-                            Randevu Oluştur
+                            {t('appointment.book.submit')}
                             <CheckCircle2 className="ml-2 h-4 w-4" />
                           </>
                         )}

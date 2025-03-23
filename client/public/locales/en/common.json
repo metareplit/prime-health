@@ -10,12 +10,42 @@
     "products": "Products",
     "patientPortal": "Patient Portal",
     "userMenu": "User Menu",
-    "menu": "Menu"
+    "menu": "Menu",
+    "doctors": "Our Doctors",
+    "press": "Press",
+    "brand": "Prime Health"
   },
   "auth": {
-    "login": "Login",
-    "register": "Register",
-    "logout": "Logout"
+    "login": {
+      "title": "Login",
+      "subtitle": "Sign in to your account",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create account"
+    },
+    "register": {
+      "title": "Register",
+      "subtitle": "Create a new account",
+      "haveAccount": "Already have an account?",
+      "terms": "Terms and conditions",
+      "privacy": "Privacy policy",
+      "agreeTerms": "I agree to the"
+    },
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "Full Name",
+      "lastName": "Last Name",
+      "phone": "Phone"
+    },
+    "errors": {
+      "invalidEmail": "Invalid email address",
+      "passwordMismatch": "Passwords do not match",
+      "weakPassword": "Password is too weak",
+      "required": "This field is required"
+    }
   },
   "buttons": {
     "submit": "Submit",
@@ -199,7 +229,62 @@
       "selectedDate": "Selected Date",
       "createButton": "Create Appointment",
       "contactNote": "* After your appointment is confirmed, our team will contact you to determine the most suitable time."
+    },
+    "portal": {
+      "welcome": "Welcome",
+      "appointments": "My Appointments",
+      "treatments": "My Treatments",
+      "documents": "My Documents",
+      "messages": "My Messages",
+      "profile": "My Profile"
+    },
+    "profile": {
+      "personalInfo": "Personal Information",
+      "medicalHistory": "Medical History",
+      "preferences": "Preferences",
+      "settings": "Settings",
+      "gender": {
+        "male": "Male",
+        "female": "Female"
+      },
+      "medicalHistory": {
+        "previousTreatments": "Previous Treatments",
+        "previousTreatmentsPlaceholder": "Please specify any previous treatments if applicable...",
+        "conditions": "Medical Conditions",
+        "conditionsPlaceholder": "Please specify any chronic conditions or regular medications if applicable..."
+      }
+    },
+    "messages": {
+      "newMessage": "New Message",
+      "inbox": "Inbox",
+      "sent": "Sent",
+      "compose": "Compose",
+      "reply": "Reply"
     }
+  },
+  "appointment": {
+    "book": {
+      "title": "Book Appointment",
+      "subtitle": "Choose your preferred date and time",
+      "selectDate": "Select date",
+      "selectTime": "Select time",
+      "selectService": "Select service",
+      "personalInfo": "Personal Information",
+      "notes": "Notes",
+      "success": "Your appointment has been successfully created",
+      "confirmation": "Appointment confirmation will be sent via email",
+      "submit": "Create Appointment",
+      "notesPlaceholder": "Any additional notes...",
+      "error": "An error occurred while creating your appointment. Please try again."
+    },
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled",
+      "completed": "Completed"
+    },
+    "communicationPreferences": "Communication Preferences",
+    "communicationPreferencesDescription": "How would you prefer us to contact you?"
   },
   "products": {
     "title": "Professional Hair Care Products",
@@ -269,7 +354,8 @@
     },
     "form": {
       "required": "This field is required",
-      "invalid": "Invalid value"
+      "invalid": "Invalid value",
+      "select": "Select"
     },
     "toast": {
       "success": "Success",
@@ -397,5 +483,20 @@
       "settings": "Settings",
       "logout": "Log Out"
     }
+  },
+  "form": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "filter": "Filter",
+    "reset": "Reset",
+    "loading": "Processing...",
+    "success": "Operation successful",
+    "error": "An error occurred",
+    "required": "* Required field",
+    "optional": "(Optional)"
   }
 }

@@ -32,7 +32,8 @@
     },
     "form": {
       "required": "Bu alan zorunludur",
-      "invalid": "Geçersiz değer"
+      "invalid": "Geçersiz değer",
+      "select": "Seçiniz"
     },
     "toast": {
       "success": "Başarılı",
@@ -320,7 +321,17 @@
       "personalInfo": "Kişisel Bilgiler",
       "medicalHistory": "Tıbbi Geçmiş",
       "preferences": "Tercihler",
-      "settings": "Ayarlar"
+      "settings": "Ayarlar",
+      "gender": {
+        "male": "Erkek",
+        "female": "Kadın"
+      },
+      "medicalHistory": {
+        "previousTreatments": "Önceki Tedaviler",
+        "previousTreatmentsPlaceholder": "Varsa daha önce aldığınız tedavileri belirtiniz...",
+        "conditions": "Sağlık Durumu",
+        "conditionsPlaceholder": "Varsa kronik rahatsızlıklarınızı veya düzenli kullandığınız ilaçları belirtiniz..."
+      }
     },
     "messages": {
       "newMessage": "Yeni Mesaj",
@@ -427,7 +438,10 @@
       "personalInfo": "Kişisel Bilgiler",
       "notes": "Notlar",
       "success": "Randevunuz başarıyla oluşturuldu",
-      "confirmation": "Randevu onayı e-posta ile gönderilecektir"
+      "confirmation": "Randevu onayı e-posta ile gönderilecektir",
+      "submit": "Randevu Oluştur",
+      "notesPlaceholder": "Eklemek istediğiniz notlar...",
+      "error": "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin."
     },
     "status": {
       "pending": "Bekliyor",
@@ -445,7 +459,7 @@
     "search": "Ara",
     "filter": "Filtrele",
     "reset": "Sıfırla",
-    "loading": "Yükleniyor...",
+    "loading": "İşleminiz devam ediyor...",
     "success": "İşlem başarılı",
     "error": "Bir hata oluştu",
     "required": "* Zorunlu alan",
