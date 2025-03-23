@@ -428,12 +428,23 @@ export async function registerRoutes(app: Express) {
 
   app.post("/api/success-stories", requireAdmin, async (req: Request, res: Response) => {
     try {
-      const storyData = insertSuccessStorySchema.parse(req.body);
-      const story = await storage.createSuccessStory(storyData);
+      // Convert date strings to Date objects
+      const storyData = {
+        ...req.body,
+        treatmentDate: new Date(req.body.treatmentDate),
+        createdAt: new Date(req.body.createdAt),
+        updatedAt: new Date(req.body.updatedAt),
+      };
+
+      const validatedData = insertSuccessStorySchema.parse(storyData);
+      const story = await storage.createSuccessStory(validatedData);
       res.status(201).json(story);
     } catch (error) {
-      const validationError = fromZodError(error);
-      res.status(400).json({ message: validationError.message });
+      if (error instanceof Error) {
+        res.status(400).json({ message: error.message });
+      } else {
+        res.status(500).json({ message: "Başarı hikayesi oluşturulurken bir hata oluştu" });
+      }
     }
   });
 

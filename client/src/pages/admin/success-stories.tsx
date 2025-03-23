@@ -123,22 +123,27 @@ export default function AdminSuccessStories() {
       return;
     }
 
+    const now = new Date();
     const storyData = {
-      ...editingStory,
-      treatmentDate: new Date().toISOString(),
+      patientName: editingStory.patientName,
+      age: editingStory.age || null,
+      treatmentType: editingStory.treatmentType,
+      description: editingStory.description,
+      testimonial: editingStory.testimonial || null,
       beforeImages: editingStory.beforeImages || [],
       afterImages: editingStory.afterImages || [],
-      age: editingStory.age || null,
-      testimonial: editingStory.testimonial || null,
+      treatmentDate: now,
       recoveryTime: editingStory.recoveryTime || null,
       satisfaction: editingStory.satisfaction || 5,
       featured: editingStory.featured || false,
       published: editingStory.published || false,
+      createdAt: now,
+      updatedAt: now
     };
 
     try {
       if ("id" in editingStory) {
-        await updateMutation.mutateAsync(storyData as SuccessStory);
+        await updateMutation.mutateAsync({ ...storyData, id: editingStory.id } as SuccessStory);
       } else {
         await createMutation.mutateAsync(storyData as Omit<SuccessStory, "id">);
       }
@@ -148,6 +153,7 @@ export default function AdminSuccessStories() {
   };
 
   const handleCreate = () => {
+    const now = new Date();
     setEditingStory({
       patientName: "",
       age: null,
@@ -156,11 +162,13 @@ export default function AdminSuccessStories() {
       testimonial: null,
       beforeImages: [],
       afterImages: [],
-      treatmentDate: new Date().toISOString(),
+      treatmentDate: now,
       recoveryTime: null,
       satisfaction: 5,
       featured: false,
       published: false,
+      createdAt: now,
+      updatedAt: now
     });
   };
 
