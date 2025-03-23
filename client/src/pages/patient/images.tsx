@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Image as ImageIcon, Upload, Eye } from "lucide-react";
 import type { PatientImage } from "@shared/schema";
+import { Metadata } from "@/components/ui/metadata";
 
 export default function PatientImages() {
   const { data: images } = useQuery<PatientImage[]>({
@@ -11,6 +12,13 @@ export default function PatientImages() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Metadata 
+        title="Tedavi Görsellerim - Hasta Portalı"
+        description="Tedavi sürecinizdeki gelişimi takip edin. Öncesi ve sonrası görsellerinizi güvenle yükleyin ve yönetin."
+        keywords="hasta görselleri, tedavi takip, saç ekimi öncesi sonrası, hasta portal görseller"
+        type="website"
+      />
+
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Tedavi Görsellerim</h1>
@@ -36,7 +44,7 @@ export default function PatientImages() {
               <div className="aspect-video relative">
                 <img
                   src={image.imageUrl}
-                  alt={`Progress ${image.type}`}
+                  alt={`${image.type} tedavi görseli - ${new Date(image.date).toLocaleDateString()}`}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
