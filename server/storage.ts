@@ -9,6 +9,7 @@ import {
   patientImages,
   appointments,
   emailTemplates,
+  beforeAfter,
   type User,
   type Post,
   type Product,
@@ -19,6 +20,7 @@ import {
   type PatientImage,
   type Appointment,
   type EmailTemplate,
+  type BeforeAfter,
   type InsertUser,
   type InsertPost,
   type InsertProduct,
@@ -29,9 +31,7 @@ import {
   type InsertPatientImage,
   type InsertAppointment,
   type InsertEmailTemplate,
-  successStories,
-  type SuccessStory,
-  type InsertSuccessStory,
+  type InsertBeforeAfter,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
@@ -103,14 +103,12 @@ export interface IStorage {
   updateEmailTemplate(id: number, data: Partial<EmailTemplate>): Promise<EmailTemplate>;
   deleteEmailTemplate(id: number): Promise<void>;
 
-  // Success Stories methods
-  getAllSuccessStories(): Promise<SuccessStory[]>;
-  getSuccessStoryById(id: number): Promise<SuccessStory | undefined>;
-  createSuccessStory(story: InsertSuccessStory): Promise<SuccessStory>;
-  updateSuccessStory(id: number, data: Partial<SuccessStory>): Promise<SuccessStory>;
-  deleteSuccessStory(id: number): Promise<void>;
-  toggleSuccessStoryPublished(id: number): Promise<SuccessStory>;
-  toggleSuccessStoryFeatured(id: number): Promise<SuccessStory>;
+  // Before After methods
+  getAllBeforeAfter(): Promise<BeforeAfter[]>;
+  getBeforeAfterById(id: number): Promise<BeforeAfter | undefined>;
+  createBeforeAfter(data: InsertBeforeAfter): Promise<BeforeAfter>;
+  updateBeforeAfter(id: number, data: Partial<BeforeAfter>): Promise<BeforeAfter>;
+  deleteBeforeAfter(id: number): Promise<void>;
 
   sessionStore: any;
 }
@@ -370,62 +368,38 @@ export class DatabaseStorage implements IStorage {
     await db.delete(emailTemplates).where(eq(emailTemplates.id, id));
   }
 
-  // Success Stories methods
-  async getAllSuccessStories(): Promise<SuccessStory[]> {
-    return await db.select().from(successStories).orderBy(successStories.createdAt);
+  // Before After methods
+  async getAllBeforeAfter(): Promise<BeforeAfter[]> {
+    return await db.select().from(beforeAfter).orderBy(beforeAfter.createdAt);
   }
 
-  async getSuccessStoryById(id: number): Promise<SuccessStory | undefined> {
-    const [story] = await db
+  async getBeforeAfterById(id: number): Promise<BeforeAfter | undefined> {
+    const [item] = await db
       .select()
-      .from(successStories)
-      .where(eq(successStories.id, id));
-    return story;
+      .from(beforeAfter)
+      .where(eq(beforeAfter.id, id));
+    return item;
   }
 
-  async createSuccessStory(story: InsertSuccessStory): Promise<SuccessStory> {
-    const [newStory] = await db
-      .insert(successStories)
-      .values(story)
+  async createBeforeAfter(data: InsertBeforeAfter): Promise<BeforeAfter> {
+    const [newItem] = await db
+      .insert(beforeAfter)
+      .values(data)
       .returning();
-    return newStory;
+    return newItem;
   }
 
-  async updateSuccessStory(id: number, data: Partial<SuccessStory>): Promise<SuccessStory> {
-    const [updatedStory] = await db
-      .update(successStories)
+  async updateBeforeAfter(id: number, data: Partial<BeforeAfter>): Promise<BeforeAfter> {
+    const [updatedItem] = await db
+      .update(beforeAfter)
       .set({ ...data, updatedAt: new Date() })
-      .where(eq(successStories.id, id))
+      .where(eq(beforeAfter.id, id))
       .returning();
-    return updatedStory;
+    return updatedItem;
   }
 
-  async deleteSuccessStory(id: number): Promise<void> {
-    await db.delete(successStories).where(eq(successStories.id, id));
-  }
-
-  async toggleSuccessStoryPublished(id: number): Promise<SuccessStory> {
-    const story = await this.getSuccessStoryById(id);
-    if (!story) throw new Error("Story not found");
-
-    const [updatedStory] = await db
-      .update(successStories)
-      .set({ published: !story.published, updatedAt: new Date() })
-      .where(eq(successStories.id, id))
-      .returning();
-    return updatedStory;
-  }
-
-  async toggleSuccessStoryFeatured(id: number): Promise<SuccessStory> {
-    const story = await this.getSuccessStoryById(id);
-    if (!story) throw new Error("Story not found");
-
-    const [updatedStory] = await db
-      .update(successStories)
-      .set({ featured: !story.featured, updatedAt: new Date() })
-      .where(eq(successStories.id, id))
-      .returning();
-    return updatedStory;
+  async deleteBeforeAfter(id: number): Promise<void> {
+    await db.delete(beforeAfter).where(eq(beforeAfter.id, id));
   }
 }
 

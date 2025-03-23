@@ -20,7 +20,7 @@ import AdminProductNew from "@/pages/admin/products/new";
 import AdminProductEdit from "@/pages/admin/products/[id]";
 import AdminLogin from "@/pages/admin/login";
 import AdminEmailTemplates from "@/pages/admin/email-templates";
-import AdminSuccessStories from "@/pages/admin/success-stories"; // Added import
+import AdminBeforeAfter from "@/pages/admin/before-after"; // Changed import
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Home from "@/pages/home";
@@ -118,10 +118,10 @@ function Router() {
         )}
       </Route>
 
-      <Route path="/admin/success-stories">
-        {(params) => (
-          <AdminLayout title="Başarı Hikayeleri">
-            <AdminSuccessStories params={params}/>
+      <Route path="/admin/before-after"> {/* Changed route */}
+        {() => (
+          <AdminLayout title="Öncesi ve Sonrası">
+            <AdminBeforeAfter />
           </AdminLayout>
         )}
       </Route>

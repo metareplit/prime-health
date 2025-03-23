@@ -1,4 +1,4 @@
-import type { Express, Request, Response, NextFunction } from "express";
+import type { Express, Request, Response } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
 import { 
@@ -11,8 +11,8 @@ import {
   insertMediaSchema, 
   insertSettingSchema,
   insertServiceSchema,
-  insertSuccessStorySchema,
-  insertEmailTemplateSchema
+  insertEmailTemplateSchema,
+  insertBeforeAfterSchema
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import session from "express-session";
@@ -135,7 +135,7 @@ export async function registerRoutes(app: Express) {
   });
 
   // Authentication middleware
-  const requireAuth = (req: AuthRequest, res: Response, next: NextFunction) => {
+  const requireAuth = (req: AuthRequest, res: Response, next: any) => {
     if (!req.session.userId) {
       return res.status(401).json({ message: "Oturum açmanız gerekiyor" });
     }
@@ -143,7 +143,7 @@ export async function registerRoutes(app: Express) {
   };
 
   // Admin middleware
-  const requireAdmin = async (req: AuthRequest, res: Response, next: NextFunction) => {
+  const requireAdmin = async (req: AuthRequest, res: Response, next: any) => {
     if (!req.session.userId) {
       return res.status(401).json({ message: "Oturum açmanız gerekiyor" });
     }
@@ -416,78 +416,57 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Success Stories endpoints
-  app.get("/api/success-stories", async (_req: Request, res: Response) => {
+  // Öncesi Sonrası endpoints
+  app.get("/api/before-after", async (_req: Request, res: Response) => {
     try {
-      const stories = await storage.getAllSuccessStories();
-      res.json(stories);
+      const items = await storage.getAllBeforeAfter();
+      res.json(items);
     } catch (error) {
-      res.status(500).json({ message: "Başarı hikayeleri alınırken bir hata oluştu" });
+      res.status(500).json({ message: "Kayıtlar alınırken bir hata oluştu" });
     }
   });
 
-  app.post("/api/success-stories", requireAdmin, async (req: Request, res: Response) => {
+  app.post("/api/before-after", requireAdmin, async (req: Request, res: Response) => {
     try {
-      // Convert date strings to Date objects
-      const storyData = {
+      const data = {
         ...req.body,
         treatmentDate: new Date(req.body.treatmentDate),
         createdAt: new Date(req.body.createdAt),
         updatedAt: new Date(req.body.updatedAt),
       };
 
-      const validatedData = insertSuccessStorySchema.parse(storyData);
-      const story = await storage.createSuccessStory(validatedData);
-      res.status(201).json(story);
+      const validatedData = insertBeforeAfterSchema.parse(data);
+      const item = await storage.createBeforeAfter(validatedData);
+      res.status(201).json(item);
     } catch (error) {
       if (error instanceof Error) {
         res.status(400).json({ message: error.message });
       } else {
-        res.status(500).json({ message: "Başarı hikayesi oluşturulurken bir hata oluştu" });
+        res.status(500).json({ message: "Kayıt oluşturulurken bir hata oluştu" });
       }
     }
   });
 
-  app.patch("/api/success-stories/:id", requireAdmin, async (req: Request, res: Response) => {
+  app.patch("/api/before-after/:id", requireAdmin, async (req: Request, res: Response) => {
     try {
       const id = parseInt(req.params.id);
-      const story = await storage.updateSuccessStory(id, req.body);
-      if (!story) {
-        return res.status(404).json({ message: "Başarı hikayesi bulunamadı" });
+      const item = await storage.updateBeforeAfter(id, req.body);
+      if (!item) {
+        return res.status(404).json({ message: "Kayıt bulunamadı" });
       }
-      res.json(story);
+      res.json(item);
     } catch (error) {
-      res.status(400).json({ message: "Başarı hikayesi güncellenirken bir hata oluştu" });
+      res.status(400).json({ message: "Kayıt güncellenirken bir hata oluştu" });
     }
   });
 
-  app.delete("/api/success-stories/:id", requireAdmin, async (req: Request, res: Response) => {
+  app.delete("/api/before-after/:id", requireAdmin, async (req: Request, res: Response) => {
     try {
       const id = parseInt(req.params.id);
-      await storage.deleteSuccessStory(id);
+      await storage.deleteBeforeAfter(id);
       res.status(204).send();
     } catch (error) {
-      res.status(400).json({ message: "Başarı hikayesi silinirken bir hata oluştu" });
-    }
-  });
-
-  app.post("/api/success-stories/:id/toggle-publish", requireAdmin, async (req: Request, res: Response) => {
-    try {
-      const id = parseInt(req.params.id);
-      const story = await storage.toggleSuccessStoryPublished(id);
-      res.json(story);
-    } catch (error) {
-      res.status(400).json({ message: "Yayın durumu değiştirilirken bir hata oluştu" });
-    }
-  });
-
-  app.post("/api/success-stories/:id/toggle-feature", requireAdmin, async (req: Request, res: Response) => {
-    try {
-      const id = parseInt(req.params.id);
-      const story = await storage.toggleSuccessStoryFeatured(id);
-      res.json(story);
-    } catch (error) {
-      res.status(400).json({ message: "Öne çıkarma durumu değiştirilirken bir hata oluştu" });
+      res.status(400).json({ message: "Kayıt silinirken bir hata oluştu" });
     }
   });
 
