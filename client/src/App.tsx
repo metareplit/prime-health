@@ -12,6 +12,8 @@ import AdminProducts from "@/pages/admin/products";
 import AdminMedia from "@/pages/admin/media";
 import AdminUsers from "@/pages/admin/users";
 import AdminSettings from "@/pages/admin/settings";
+import AdminNotifications from "@/pages/admin/notifications";
+import AdminSystem from "@/pages/admin/system";
 import AdminPostNew from "@/pages/admin/posts/new";
 import AdminPostEdit from "@/pages/admin/posts/[id]";
 import AdminProductNew from "@/pages/admin/products/new";
@@ -36,7 +38,6 @@ import PatientAppointments from "@/pages/patient/appointments";
 import PatientProfile from "@/pages/patient/profile";
 import NotFound from "@/pages/not-found";
 
-
 function Router() {
   return (
     <Switch>
@@ -44,7 +45,7 @@ function Router() {
       <Route path="/admin/login" component={AdminLogin} />
 
       <Route path="/admin">
-        {(params) => (
+        {() => (
           <AdminLayout title="Dashboard">
             <AdminDashboard />
           </AdminLayout>
@@ -52,7 +53,7 @@ function Router() {
       </Route>
 
       <Route path="/admin/analytics">
-        {(params) => (
+        {() => (
           <AdminLayout title="Analitikler">
             <AdminAnalytics />
           </AdminLayout>
@@ -60,16 +61,15 @@ function Router() {
       </Route>
 
       <Route path="/admin/seo">
-        {(params) => (
+        {() => (
           <AdminLayout title="SEO Yönetimi">
             <AdminSEO />
           </AdminLayout>
         )}
       </Route>
 
-      {/* Other Admin Routes */}
       <Route path="/admin/posts">
-        {(params) => (
+        {() => (
           <AdminLayout title="Blog Yazıları">
             <AdminPosts />
           </AdminLayout>
@@ -77,7 +77,7 @@ function Router() {
       </Route>
 
       <Route path="/admin/posts/new">
-        {(params) => (
+        {() => (
           <AdminLayout title="Yeni Blog Yazısı">
             <AdminPostNew />
           </AdminLayout>
@@ -93,7 +93,7 @@ function Router() {
       </Route>
 
       <Route path="/admin/products">
-        {(params) => (
+        {() => (
           <AdminLayout title="Ürünler">
             <AdminProducts />
           </AdminLayout>
@@ -101,7 +101,7 @@ function Router() {
       </Route>
 
       <Route path="/admin/products/new">
-        {(params) => (
+        {() => (
           <AdminLayout title="Yeni Ürün">
             <AdminProductNew />
           </AdminLayout>
@@ -117,7 +117,7 @@ function Router() {
       </Route>
 
       <Route path="/admin/media">
-        {(params) => (
+        {() => (
           <AdminLayout title="Medya">
             <AdminMedia />
           </AdminLayout>
@@ -125,21 +125,36 @@ function Router() {
       </Route>
 
       <Route path="/admin/users">
-        {(params) => (
+        {() => (
           <AdminLayout title="Kullanıcılar">
             <AdminUsers />
           </AdminLayout>
         )}
       </Route>
 
+      <Route path="/admin/notifications">
+        {() => (
+          <AdminLayout title="Bildirimler">
+            <AdminNotifications />
+          </AdminLayout>
+        )}
+      </Route>
+
+      <Route path="/admin/system">
+        {() => (
+          <AdminLayout title="Sistem Durumu">
+            <AdminSystem />
+          </AdminLayout>
+        )}
+      </Route>
+
       <Route path="/admin/settings">
-        {(params) => (
+        {() => (
           <AdminLayout title="Ayarlar">
             <AdminSettings />
           </AdminLayout>
         )}
       </Route>
-
 
       {/* Public Routes */}
       <Route path="/">
@@ -156,7 +171,7 @@ function Router() {
 
       {/* Other Public Routes */}
       <Route path="*">
-        {(params) => (
+        {() => (
           <div className="min-h-screen flex flex-col">
             <Header />
             <main className="flex-grow">

@@ -30,7 +30,7 @@ export function AdminLayout({ children, title = "Dashboard" }: AdminLayoutProps)
       <Sidebar />
       <div className="pl-64">
         <AdminHeader title={title} />
-        <main className="p-8">{children}</main>
+        <main className="p-8 max-w-7xl mx-auto">{children}</main>
       </div>
     </div>
   );
