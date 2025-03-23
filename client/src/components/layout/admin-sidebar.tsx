@@ -16,7 +16,8 @@ import {
   Activity,
   Mail,
   Split,
-  Images, // Slider yönetimi için ikon
+  Images,
+  Stethoscope, // Added for services icon
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
@@ -90,6 +91,12 @@ export function Sidebar() {
               İçerik Yönetimi
             </div>
             <div className="space-y-1">
+              <SidebarItem
+                icon={<Stethoscope className="h-4 w-4" />}
+                label="Hizmetler"
+                href="/admin/services"
+                active={pathname.startsWith("/admin/services")}
+              />
               <SidebarItem
                 icon={<FileText className="h-4 w-4" />}
                 label="Blog Yazıları"

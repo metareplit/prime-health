@@ -40,6 +40,7 @@ import PatientImages from "@/pages/patient/images";
 import PatientAppointments from "@/pages/patient/appointments";
 import PatientProfile from "@/pages/patient/profile";
 import NotFound from "@/pages/not-found";
+import AdminServices from "@/pages/admin/services";
 
 function Router() {
   return (
@@ -179,6 +180,13 @@ function Router() {
         {() => (
           <AdminLayout title="Email Şablonları">
             <AdminEmailTemplates />
+          </AdminLayout>
+        )}
+      </Route>
+      <Route path="/admin/services">
+        {() => (
+          <AdminLayout title="Hizmetler">
+            <AdminServices />
           </AdminLayout>
         )}
       </Route>

@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Service } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { Plus, Star, GripVertical, Pencil, Trash2, Upload, Clock, DollarSign } from "lucide-react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 
 export default function AdminServices() {
   const { toast } = useToast();
@@ -71,7 +71,7 @@ export default function AdminServices() {
     },
   });
 
-  const handleDragEnd = (result: any) => {
+  const handleDragEnd = (result: DropResult) => {
     if (!result.destination || !services) return;
 
     const items = Array.from(services);
@@ -90,8 +90,15 @@ export default function AdminServices() {
       if ("id" in editingService) {
         updateMutation.mutate(editingService as Service);
       } else {
-        const { id, ...serviceData } = editingService;
-        createMutation.mutate(serviceData);
+        const newService = {
+          ...editingService,
+          benefits: editingService.benefits || [],
+          process: editingService.process || [],
+          faqs: editingService.faqs || [],
+          featured: editingService.featured || false,
+          order: services?.length || 0,
+        } as Service;
+        createMutation.mutate(newService);
       }
     }
   };
@@ -105,7 +112,7 @@ export default function AdminServices() {
       process: [],
       faqs: [],
       duration: "",
-      price: "0",
+      price: "",
       imageUrl: "",
       slug: "",
       featured: false,
@@ -225,7 +232,6 @@ export default function AdminServices() {
                   <div className="relative">
                     <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
-                      type="number"
                       value={editingService.price}
                       onChange={(e) =>
                         setEditingService({
@@ -233,7 +239,7 @@ export default function AdminServices() {
                           price: e.target.value,
                         })
                       }
-                      placeholder="0.00"
+                      placeholder="2500€'dan başlayan"
                       className="pl-10"
                     />
                   </div>
@@ -320,10 +326,7 @@ export default function AdminServices() {
                                   </span>
                                   <span className="flex items-center gap-1">
                                     <DollarSign className="h-4 w-4" />
-                                    {new Intl.NumberFormat("tr-TR", {
-                                      style: "currency",
-                                      currency: "TRY",
-                                    }).format(Number(service.price))}
+                                    {service.price}
                                   </span>
                                 </div>
                               </div>
