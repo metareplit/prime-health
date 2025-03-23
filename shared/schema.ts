@@ -89,8 +89,9 @@ export const messages = pgTable("messages", {
   receiverId: serial("receiver_id").notNull().references(() => users.id),
   content: text("content").notNull(),
   attachments: text("attachments").array(), // URLs to attached files
-  isRead: text("is_read").notNull().default(false),
+  isRead: text("is_read").notNull().default("false"),
   createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 // Patient progress images
@@ -191,7 +192,10 @@ export const insertUserSchema = createInsertSchema(users).extend({
   password: z.string().min(8, "Şifre en az 8 karakter olmalıdır"),
 });
 
-export const insertMessageSchema = createInsertSchema(messages);
+export const insertMessageSchema = createInsertSchema(messages).extend({
+  content: z.string().min(1, "Mesaj içeriği boş olamaz"),
+  attachments: z.array(z.string()).optional().default([]),
+});
 export const insertPatientImageSchema = createInsertSchema(patientImages);
 export const insertServiceSchema = createInsertSchema(services);
 export const insertAppointmentSchema = createInsertSchema(appointments);

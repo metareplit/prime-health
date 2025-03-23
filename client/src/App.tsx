@@ -42,6 +42,7 @@ import PatientProfile from "@/pages/patient/profile";
 import NotFound from "@/pages/not-found";
 import AdminServices from "@/pages/admin/services";
 import AdminContact from "@/pages/admin/contact";
+import AdminMessages from "@/pages/admin/messages"; // Added import
 
 function Router() {
   return (
@@ -198,6 +199,14 @@ function Router() {
           </AdminLayout>
         )}
       </Route>
+      <Route path="/admin/messages"> {/* Added Route */}
+        {() => (
+          <AdminLayout title="Mesajlar">
+            <AdminMessages />
+          </AdminLayout>
+        )}
+      </Route> {/* Added Route */}
+
 
       {/* Public Routes */}
       <Route path="/">
