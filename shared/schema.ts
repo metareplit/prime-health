@@ -206,11 +206,7 @@ export const beforeAfter = pgTable("before_after", {
 // Sliders tablosu
 export const sliders = pgTable("sliders", {
   id: serial("id").primaryKey(),
-  title: text("title").notNull(),
-  description: text("description"),
   imageUrl: text("image_url").notNull(),
-  buttonText: text("button_text"),
-  buttonUrl: text("button_url"),
   order: integer("order").default(0),
   isActive: boolean("is_active").default(true),
   createdAt: timestamp("created_at").defaultNow(),
@@ -282,11 +278,7 @@ export const insertBeforeAfterSchema = beforeAfterSchema;
 
 // Slider şeması
 export const sliderSchema = z.object({
-  title: z.string().min(1, "Başlık gereklidir"),
-  description: z.string().optional(),
   imageUrl: z.string().min(1, "Resim URL'si gereklidir"),
-  buttonText: z.string().optional(),
-  buttonUrl: z.string().optional(),
   order: z.number().default(0),
   isActive: z.boolean().default(true),
   createdAt: z.date().default(() => new Date()),
