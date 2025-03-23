@@ -4,14 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { SuccessStory } from "@shared/schema";
 import { Plus, Star, Eye, EyeOff, Pencil, Trash2, Upload } from "lucide-react";
 
-export default function SuccessStories() {
+export default function AdminSuccessStories() {
   const { toast } = useToast();
   const [editingStory, setEditingStory] = useState<Partial<SuccessStory> | null>(null);
 
@@ -90,7 +88,7 @@ export default function SuccessStories() {
       } else {
         const storyData = {
           ...editingStory,
-          treatmentDate: new Date().toISOString(),
+          treatmentDate: new Date(),
           beforeImages: editingStory.beforeImages || [],
           afterImages: editingStory.afterImages || [],
           age: editingStory.age || null,
@@ -114,7 +112,7 @@ export default function SuccessStories() {
       testimonial: null,
       beforeImages: [],
       afterImages: [],
-      treatmentDate: new Date().toISOString(),
+      treatmentDate: new Date(),
       recoveryTime: null,
       satisfaction: 5,
       featured: false,
@@ -221,28 +219,6 @@ export default function SuccessStories() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Öncesi Fotoğrafları</label>
-                  <div className="border rounded-lg p-4">
-                    <Button variant="outline" className="w-full">
-                      <Upload className="h-4 w-4 mr-2" />
-                      Fotoğraf Yükle
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Sonrası Fotoğrafları</label>
-                  <div className="border rounded-lg p-4">
-                    <Button variant="outline" className="w-full">
-                      <Upload className="h-4 w-4 mr-2" />
-                      Fotoğraf Yükle
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
               <div className="flex gap-2 justify-end">
                 <Button
                   type="button"
@@ -269,7 +245,7 @@ export default function SuccessStories() {
           </div>
         ) : (
           stories?.map((story) => (
-            <Card key={story.id} className="overflow-hidden">
+            <Card key={story.id}>
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
@@ -286,7 +262,7 @@ export default function SuccessStories() {
                   <div className="flex items-center gap-2">
                     <Button
                       variant="ghost"
-                      size="icon"
+                      size="sm"
                       onClick={() => togglePublishMutation.mutate(story.id)}
                     >
                       {story.published ? (
@@ -297,46 +273,27 @@ export default function SuccessStories() {
                     </Button>
                     <Button
                       variant="ghost"
-                      size="icon"
+                      size="sm"
                       onClick={() => toggleFeatureMutation.mutate(story.id)}
                     >
                       <Star className={`h-4 w-4 ${story.featured ? "text-yellow-500 fill-yellow-500" : ""}`} />
                     </Button>
                     <Button
                       variant="ghost"
-                      size="icon"
+                      size="sm"
                       onClick={() => setEditingStory(story)}
                     >
                       <Pencil className="h-4 w-4" />
                     </Button>
                     <Button
                       variant="ghost"
-                      size="icon"
+                      size="sm"
                       className="text-red-500 hover:text-red-600"
                       onClick={() => deleteMutation.mutate(story.id)}
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
-                </div>
-
-                <div className="mt-4 grid grid-cols-2 gap-4">
-                  {story.beforeImages?.map((image, index) => (
-                    <img
-                      key={`before-${index}`}
-                      src={image}
-                      alt={`Öncesi ${index + 1}`}
-                      className="w-full h-48 object-cover rounded-lg"
-                    />
-                  ))}
-                  {story.afterImages?.map((image, index) => (
-                    <img
-                      key={`after-${index}`}
-                      src={image}
-                      alt={`Sonrası ${index + 1}`}
-                      className="w-full h-48 object-cover rounded-lg"
-                    />
-                  ))}
                 </div>
 
                 <div className="mt-4">
