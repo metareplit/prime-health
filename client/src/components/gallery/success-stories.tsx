@@ -95,7 +95,7 @@ export function SuccessStories() {
 
                 {(story.beforeImages?.length > 0 || story.afterImages?.length > 0) && (
                   <div className="mt-4 grid grid-cols-2 gap-4">
-                    {story.beforeImages?.[0] && (
+                    {story.beforeImages && story.beforeImages[0] && (
                       <div>
                         <p className="text-xs text-muted-foreground mb-2">{t('gallery.patientDetails.before')}</p>
                         <img 
@@ -105,7 +105,7 @@ export function SuccessStories() {
                         />
                       </div>
                     )}
-                    {story.afterImages?.[0] && (
+                    {story.afterImages && story.afterImages[0] && (
                       <div>
                         <p className="text-xs text-muted-foreground mb-2">{t('gallery.patientDetails.after')}</p>
                         <img 

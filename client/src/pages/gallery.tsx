@@ -8,20 +8,40 @@ import { Calendar, Star, Share2, ArrowRight, Camera, Users, Clock, CheckCircle }
 import { Link } from "wouter";
 import { Metadata } from "@/components/ui/metadata";
 import { useTranslation } from "react-i18next";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 import BeforeAfterSlider from "@/components/gallery/before-after-slider";
 import ThreeDComparison from "@/components/gallery/three-d-comparison";
 import { SuccessStories } from "@/components/gallery/success-stories";
 
-// Category icons remain the same
-const categoryIcons = {
+// Define case interface
+interface Case {
+  id: number;
+  beforeImage: string;
+  afterImage: string;
+  description: string;
+  patientDetails: Record<string, string>;
+  procedureDetails: {
+    technique: string;
+    grafts?: string;
+    duration: string;
+    anesthesia: string;
+    recoveryTime: string;
+  };
+  results: Record<string, string>;
+  testimonial: string;
+  doctorNote: string;
+}
+
+// Category icons with proper type
+const categoryIcons: Record<string, JSX.Element> = {
   "sac-ekimi": <Camera className="h-4 w-4" />,
   "sakal-ekimi": <Users className="h-4 w-4" />,
   "kas-ekimi": <Clock className="h-4 w-4" />
 };
 
 export default function Gallery() {
-  const [selectedCase, setSelectedCase] = useState(null);
+  const [selectedCase, setSelectedCase] = useState<Case | null>(null);
   const [show3D, setShow3D] = useState(false);
   const { t } = useTranslation('common');
 

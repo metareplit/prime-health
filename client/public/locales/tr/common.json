@@ -443,35 +443,24 @@
   "gallery": {
     "title": "Hasta Sonuçları Galerisi",
     "subtitle": "Profesyonel saç ekimi kliniğimizde gerçekleştirilen operasyonların öncesi ve sonrası sonuçları",
+    "search": {
+      "placeholder": "Hasta sonuçlarında ara...",
+      "noResults": "Sonuç bulunamadı"
+    },
+    "categories": {
+      "sac-ekimi": "Saç Ekimi",
+      "sakal-ekimi": "Sakal Ekimi",
+      "kas-ekimi": "Kaş Ekimi"
+    },
     "patientDetails": {
       "title": "Hasta Bilgileri",
       "before": "Öncesi",
       "after": "Sonrası",
-      "age": "yaş",
+      "age": "Yaş",
       "gender": "Cinsiyet",
       "problemArea": "Problem Bölgesi",
       "diagnosis": "Teşhis",
       "hairLossStage": "Saç Dökülme Evresi"
-    },
-    "beforeAfter": {
-      "loading": "Sonuçlar yükleniyor...",
-      "noResults": "Görüntülenecek sonuç bulunamadı",
-      "monthsAfter": "ay sonrası",
-      "daysAfter": "gün sonrası"
-    },
-    "categories": {
-      "hair": {
-        "title": "Saç Ekimi",
-        "description": "DHI ve Safir FUE teknikleriyle doğal ve kalıcı sonuçlar"
-      },
-      "beard": {
-        "title": "Sakal Ekimi",
-        "description": "Doğal görünümlü sakal ekimi sonuçları"
-      },
-      "eyebrow": {
-        "title": "Kaş Ekimi",
-        "description": "Kaş yapınıza özel tasarlanmış sonuçlar"
-      }
     },
     "procedureDetails": {
       "title": "İşlem Detayları",
@@ -498,6 +487,11 @@
       "consult": "Danışmanlık Al",
       "view3d": "3D Görünüm",
       "view2d": "2D Görünüm"
+    },
+    "filters": {
+      "all": "Tümü",
+      "latest": "En Yeni",
+      "popular": "En Beğenilen"
     }
   },
   "appointment": {

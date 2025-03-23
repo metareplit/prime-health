@@ -462,35 +462,55 @@
   "gallery": {
     "title": "Patient Results Gallery",
     "subtitle": "Before and after results of operations performed at our professional hair transplant clinic",
+    "search": {
+      "placeholder": "Search patient results...",
+      "noResults": "No results found"
+    },
     "categories": {
-      "hair": {
-        "title": "Hair Transplantation",
-        "description": "Natural and permanent results with DHI and Sapphire FUE techniques"
-      },
-      "beard": {
-        "title": "Beard Transplantation",
-        "description": "Natural-looking beard transplant results"
-      },
-      "eyebrow": {
-        "title": "Eyebrow Transplantation",
-        "description": "Results specially designed for your eyebrow structure"
-      }
+      "sac-ekimi": "Hair Transplantation",
+      "sakal-ekimi": "Beard Transplantation",
+      "kas-ekimi": "Eyebrow Transplantation"
     },
     "patientDetails": {
       "title": "Patient Information",
       "before": "Before",
       "after": "After",
-      "age": "years old",
+      "age": "Age",
       "gender": "Gender",
       "problemArea": "Problem Area",
       "diagnosis": "Diagnosis",
       "hairLossStage": "Hair Loss Stage"
     },
-    "beforeAfter": {
-      "loading": "Loading results...",
-      "noResults": "No results found",
-      "monthsAfter": "months after",
-      "daysAfter": "days after"
+    "procedureDetails": {
+      "title": "Procedure Details",
+      "technique": "Technique",
+      "grafts": "Graft Count",
+      "duration": "Duration",
+      "anesthesia": "Anesthesia",
+      "recoveryTime": "Recovery Time"
+    },
+    "results": {
+      "title": "Results",
+      "satisfaction": "Satisfaction",
+      "density": "Density",
+      "survivalRate": "Survival Rate",
+      "naturalness": "Naturalness",
+      "finalResult": "Final Result"
+    },
+    "testimonial": {
+      "title": "Patient Testimonial",
+      "doctorNote": "Doctor's Note"
+    },
+    "buttons": {
+      "share": "Share",
+      "consult": "Get Consultation",
+      "view3d": "3D View",
+      "view2d": "2D View"
+    },
+    "filters": {
+      "all": "All",
+      "latest": "Latest",
+      "popular": "Most Popular"
     }
   },
   "footer": {
