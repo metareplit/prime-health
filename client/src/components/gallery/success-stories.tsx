@@ -4,9 +4,10 @@ import { Avatar } from "@/components/ui/avatar";
 import { Star, Quote } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { SuccessStory } from "@shared/schema";
-import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export function SuccessStories() {
+  const { t } = useTranslation('common');
   const { data: stories, isLoading } = useQuery<SuccessStory[]>({
     queryKey: ["/api/success-stories"],
   });
@@ -19,7 +20,7 @@ export function SuccessStories() {
   if (isLoading) {
     return (
       <div className="py-12 text-center">
-        <p className="text-muted-foreground">Yükleniyor...</p>
+        <p className="text-muted-foreground">{t('ui.table.loading')}</p>
       </div>
     );
   }
@@ -35,7 +36,7 @@ export function SuccessStories() {
         animate={{ opacity: 1, y: 0 }}
         className="text-2xl font-bold text-center mb-8"
       >
-        Hasta Başarı Hikayeleri
+        {t('gallery.testimonial.title')}
       </motion.h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -51,7 +52,11 @@ export function SuccessStories() {
                 <div className="flex items-center gap-4 mb-4">
                   {story.beforeImages?.[0] && (
                     <Avatar className="w-12 h-12 border-2 border-primary/10">
-                      <img src={story.beforeImages[0]} alt={`${story.patientName} öncesi`} className="object-cover" />
+                      <img 
+                        src={story.beforeImages[0]} 
+                        alt={`${story.patientName} ${t('gallery.patientDetails.before')}`}
+                        className="object-cover" 
+                      />
                     </Avatar>
                   )}
                   <div>
@@ -62,7 +67,7 @@ export function SuccessStories() {
                       )}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {story.age} yaş
+                      {story.age} {t('gallery.patientDetails.age')}
                     </p>
                   </div>
                 </div>
@@ -92,20 +97,20 @@ export function SuccessStories() {
                   <div className="mt-4 grid grid-cols-2 gap-4">
                     {story.beforeImages?.[0] && (
                       <div>
-                        <p className="text-xs text-muted-foreground mb-2">Öncesi</p>
+                        <p className="text-xs text-muted-foreground mb-2">{t('gallery.patientDetails.before')}</p>
                         <img 
                           src={story.beforeImages[0]} 
-                          alt="Tedavi öncesi" 
+                          alt={t('gallery.patientDetails.before')}
                           className="w-full h-32 object-cover rounded-lg"
                         />
                       </div>
                     )}
                     {story.afterImages?.[0] && (
                       <div>
-                        <p className="text-xs text-muted-foreground mb-2">Sonrası</p>
+                        <p className="text-xs text-muted-foreground mb-2">{t('gallery.patientDetails.after')}</p>
                         <img 
                           src={story.afterImages[0]} 
-                          alt="Tedavi sonrası" 
+                          alt={t('gallery.patientDetails.after')}
                           className="w-full h-32 object-cover rounded-lg"
                         />
                       </div>
@@ -119,7 +124,7 @@ export function SuccessStories() {
                   </p>
                   {story.recoveryTime && (
                     <p className="text-xs text-muted-foreground mt-1">
-                      İyileşme Süresi: {story.recoveryTime}
+                      {t('gallery.procedureDetails.recoveryTime')}: {story.recoveryTime}
                     </p>
                   )}
                 </div>

@@ -278,5 +278,92 @@
       "createButton": "Randevu Oluştur",
       "contactNote": "* Randevunuz onaylandıktan sonra size en uygun saati belirlemek için ekibimiz sizinle iletişime geçecektir."
     }
+  },
+  "contact": {
+    "title": "İletişim",
+    "subtitle": "Size yardımcı olmaktan mutluluk duyarız. İstediğiniz zaman bizimle iletişime geçebilirsiniz.",
+    "address": {
+      "title": "Adres",
+      "line1": "Merkez Mahallesi, Şişli Caddesi No:123",
+      "line2": "Şişli, İstanbul"
+    },
+    "phone": {
+      "title": "Telefon",
+      "number1": "+90 (212) 123 45 67",
+      "number2": "+90 (532) 123 45 67"
+    },
+    "email": {
+      "title": "E-posta",
+      "address": "info@sacekimi.com"
+    },
+    "workingHours": {
+      "title": "Çalışma Saatleri",
+      "weekdays": "Pazartesi - Cumartesi: 09:00 - 18:00",
+      "weekend": "Pazar: Kapalı"
+    },
+    "socialMedia": {
+      "title": "Sosyal Medya",
+      "followUs": "Bizi takip edin"
+    }
+  },
+  "gallery": {
+    "title": "Hasta Sonuçları Galerisi",
+    "subtitle": "Profesyonel saç ekimi kliniğimizde gerçekleştirilen operasyonların öncesi ve sonrası sonuçları",
+    "patientDetails": {
+      "title": "Hasta Bilgileri",
+      "before": "Öncesi",
+      "after": "Sonrası",
+      "age": "yaş",
+      "gender": "Cinsiyet",
+      "problemArea": "Problem Bölgesi",
+      "diagnosis": "Teşhis",
+      "hairLossStage": "Saç Dökülme Evresi"
+    },
+    "beforeAfter": {
+      "loading": "Sonuçlar yükleniyor...",
+      "noResults": "Görüntülenecek sonuç bulunamadı",
+      "monthsAfter": "ay sonrası",
+      "daysAfter": "gün sonrası"
+    },
+    "categories": {
+      "hair": {
+        "title": "Saç Ekimi",
+        "description": "DHI ve Safir FUE teknikleriyle doğal ve kalıcı sonuçlar"
+      },
+      "beard": {
+        "title": "Sakal Ekimi",
+        "description": "Doğal görünümlü sakal ekimi sonuçları"
+      },
+      "eyebrow": {
+        "title": "Kaş Ekimi",
+        "description": "Kaş yapınıza özel tasarlanmış sonuçlar"
+      }
+    },
+    "procedureDetails": {
+      "title": "İşlem Detayları",
+      "technique": "Teknik",
+      "grafts": "Greft Sayısı",
+      "duration": "Süre",
+      "anesthesia": "Anestezi",
+      "recoveryTime": "İyileşme Süresi"
+    },
+    "results": {
+      "title": "Sonuçlar",
+      "satisfaction": "Memnuniyet",
+      "density": "Yoğunluk",
+      "survivalRate": "Tutma Oranı",
+      "naturalness": "Doğallık",
+      "finalResult": "Final Sonucu"
+    },
+    "testimonial": {
+      "title": "Hasta Yorumu",
+      "doctorNote": "Doktor Notu"
+    },
+    "buttons": {
+      "share": "Paylaş",
+      "consult": "Danışmanlık Al",
+      "view3d": "3D Görünüm",
+      "view2d": "2D Görünüm"
+    }
   }
 }

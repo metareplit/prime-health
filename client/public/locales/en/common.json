@@ -278,5 +278,66 @@
       "warning": "Warning",
       "close": "Close"
     }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "We are happy to help you. Feel free to contact us anytime.",
+    "address": {
+      "title": "Address",
+      "line1": "Central District, Sisli Street No:123",
+      "line2": "Sisli, Istanbul"
+    },
+    "phone": {
+      "title": "Phone",
+      "number1": "+90 (212) 123 45 67",
+      "number2": "+90 (532) 123 45 67"
+    },
+    "email": {
+      "title": "Email",
+      "address": "info@sacekimi.com"
+    },
+    "workingHours": {
+      "title": "Working Hours",
+      "weekdays": "Monday - Saturday: 09:00 - 18:00",
+      "weekend": "Sunday: Closed"
+    },
+    "socialMedia": {
+      "title": "Social Media",
+      "followUs": "Follow us"
+    }
+  },
+  "gallery": {
+    "title": "Patient Results Gallery",
+    "subtitle": "Before and after results of operations performed at our professional hair transplant clinic",
+    "categories": {
+      "hair": {
+        "title": "Hair Transplantation",
+        "description": "Natural and permanent results with DHI and Sapphire FUE techniques"
+      },
+      "beard": {
+        "title": "Beard Transplantation",
+        "description": "Natural-looking beard transplant results"
+      },
+      "eyebrow": {
+        "title": "Eyebrow Transplantation",
+        "description": "Results specially designed for your eyebrow structure"
+      }
+    },
+    "patientDetails": {
+      "title": "Patient Information",
+      "before": "Before",
+      "after": "After",
+      "age": "years old",
+      "gender": "Gender",
+      "problemArea": "Problem Area",
+      "diagnosis": "Diagnosis",
+      "hairLossStage": "Hair Loss Stage"
+    },
+    "beforeAfter": {
+      "loading": "Loading results...",
+      "noResults": "No results found",
+      "monthsAfter": "months after",
+      "daysAfter": "days after"
+    }
   }
 }

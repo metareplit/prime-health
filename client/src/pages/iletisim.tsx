@@ -2,13 +2,16 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Clock, Facebook, Instagram, Youtube, Twitter } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Metadata } from "@/components/ui/metadata";
+import { useTranslation } from "react-i18next";
 
 export default function ContactPage() {
+  const { t } = useTranslation('common');
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/5 to-transparent">
       <Metadata 
-        title="İletişim - Saç Ekimi ve Estetik Kliniği"
-        description="Saç ekimi ve estetik tedaviler için ücretsiz danışmanlık alın. İstanbul'daki kliniğimize ulaşın, randevu oluşturun veya sorularınızı sorun."
+        title={t('contact.title') + " - " + t('nav.home')}
+        description={t('contact.subtitle')}
         keywords="saç ekimi iletişim, estetik klinik iletişim, saç ekimi randevu, istanbul saç ekimi kliniği"
       />
 
@@ -20,9 +23,9 @@ export default function ContactPage() {
             transition={{ duration: 0.5 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h1 className="text-4xl font-bold mb-6">İletişim</h1>
+            <h1 className="text-4xl font-bold mb-6">{t('contact.title')}</h1>
             <p className="text-lg text-gray-600">
-              Size yardımcı olmaktan mutluluk duyarız. İstediğiniz zaman bizimle iletişime geçebilirsiniz.
+              {t('contact.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -43,11 +46,11 @@ export default function ContactPage() {
                       <MapPin className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-lg mb-2">Adres</h3>
+                      <h3 className="font-medium text-lg mb-2">{t('contact.address.title')}</h3>
                       <p className="text-gray-600 text-lg">
-                        Merkez Mahallesi, Şişli Caddesi No:123
+                        {t('contact.address.line1')}
                         <br />
-                        Şişli, İstanbul
+                        {t('contact.address.line2')}
                       </p>
                     </div>
                   </div>
@@ -57,9 +60,9 @@ export default function ContactPage() {
                       <Phone className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-lg mb-2">Telefon</h3>
-                      <p className="text-gray-600 text-lg">+90 (212) 123 45 67</p>
-                      <p className="text-gray-600 text-lg">+90 (532) 123 45 67</p>
+                      <h3 className="font-medium text-lg mb-2">{t('contact.phone.title')}</h3>
+                      <p className="text-gray-600 text-lg">{t('contact.phone.number1')}</p>
+                      <p className="text-gray-600 text-lg">{t('contact.phone.number2')}</p>
                     </div>
                   </div>
 
@@ -68,8 +71,8 @@ export default function ContactPage() {
                       <Mail className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-lg mb-2">E-posta</h3>
-                      <p className="text-gray-600 text-lg">info@sacekimi.com</p>
+                      <h3 className="font-medium text-lg mb-2">{t('contact.email.title')}</h3>
+                      <p className="text-gray-600 text-lg">{t('contact.email.address')}</p>
                     </div>
                   </div>
 
@@ -78,23 +81,24 @@ export default function ContactPage() {
                       <Clock className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-lg mb-2">Çalışma Saatleri</h3>
+                      <h3 className="font-medium text-lg mb-2">{t('contact.workingHours.title')}</h3>
                       <p className="text-gray-600 text-lg">
-                        Pazartesi - Cumartesi: 09:00 - 18:00
+                        {t('contact.workingHours.weekdays')}
                         <br />
-                        Pazar: Kapalı
+                        {t('contact.workingHours.weekend')}
                       </p>
                     </div>
                   </div>
 
                   <div className="pt-8 border-t">
-                    <h3 className="font-medium text-lg mb-4">Sosyal Medya</h3>
+                    <h3 className="font-medium text-lg mb-4">{t('contact.socialMedia.title')}</h3>
                     <div className="flex gap-4">
                       <a 
                         href="#" 
                         className="bg-primary/10 p-4 rounded-lg hover:bg-primary/20 transition-colors"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Facebook"
                       >
                         <Facebook className="h-6 w-6 text-primary" />
                       </a>
@@ -103,6 +107,7 @@ export default function ContactPage() {
                         className="bg-primary/10 p-4 rounded-lg hover:bg-primary/20 transition-colors"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Instagram"
                       >
                         <Instagram className="h-6 w-6 text-primary" />
                       </a>
@@ -111,6 +116,7 @@ export default function ContactPage() {
                         className="bg-primary/10 p-4 rounded-lg hover:bg-primary/20 transition-colors"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Youtube"
                       >
                         <Youtube className="h-6 w-6 text-primary" />
                       </a>
@@ -119,6 +125,7 @@ export default function ContactPage() {
                         className="bg-primary/10 p-4 rounded-lg hover:bg-primary/20 transition-colors"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Twitter"
                       >
                         <Twitter className="h-6 w-6 text-primary" />
                       </a>
@@ -144,6 +151,7 @@ export default function ContactPage() {
                   allowFullScreen
                   loading="lazy"
                   className="rounded-lg"
+                  title="Google Maps"
                 ></iframe>
               </CardContent>
             </Card>
