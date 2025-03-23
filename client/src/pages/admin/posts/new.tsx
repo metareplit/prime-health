@@ -165,7 +165,7 @@ export default function NewPost() {
                             content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 14px }'
                           }}
                           value={field.value}
-                          onEditorChange={(content) => {
+                          onEditorChange={(content: string) => {
                             field.onChange(content);
                           }}
                         />
@@ -183,7 +183,7 @@ export default function NewPost() {
                       <FormItem>
                         <FormLabel>Durum</FormLabel>
                         <Select
-                          value={field.value}
+                          value={field.value || ""}
                           onValueChange={field.onChange}
                         >
                           <FormControl>
@@ -208,7 +208,7 @@ export default function NewPost() {
                       <FormItem>
                         <FormLabel>Kategori</FormLabel>
                         <Select
-                          value={field.value}
+                          value={field.value || ""}
                           onValueChange={field.onChange}
                         >
                           <FormControl>
