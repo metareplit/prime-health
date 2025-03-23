@@ -7,34 +7,16 @@ import type { User } from '@shared/schema';
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (username: string, password: string) => Promise<void>;
-  register: (userData: any) => Promise<void>;
-  logout: () => Promise<void>;
-  loginMutation: any;
-  logoutMutation: any;
-  registerMutation: any;
+  loginMutation: ReturnType<typeof useLoginMutation>;
+  logoutMutation: ReturnType<typeof useLogoutMutation>;
+  registerMutation: ReturnType<typeof useRegisterMutation>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+function useLoginMutation() {
   const [, setLocation] = useLocation();
-
-  useEffect(() => {
-    // Check if user is already logged in
-    fetch('/api/user/profile')
-      .then(res => {
-        if (res.ok) return res.json();
-        throw new Error('Not authenticated');
-      })
-      .then(user => setUser(user))
-      .catch(() => setUser(null))
-      .finally(() => setLoading(false));
-  }, []);
-
-  const loginMutation = useMutation({
+  return useMutation({
     mutationFn: async ({ username, password }: { username: string; password: string }) => {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
@@ -48,13 +30,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       const user = await res.json();
-      setUser(user);
       return user;
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/user/profile'] });
+      setLocation('/');
+    },
   });
+}
 
-  const registerMutation = useMutation({
-    mutationFn: async (userData: any) => {
+function useRegisterMutation() {
+  const [, setLocation] = useLocation();
+  return useMutation({
+    mutationFn: async (userData: Partial<User>) => {
       const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -67,53 +55,56 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       const user = await res.json();
-      setUser(user);
       return user;
     },
-  });
-
-  const logoutMutation = useMutation({
-    mutationFn: async () => {
-      await fetch('/api/auth/logout', { method: 'POST' });
-      setUser(null);
-      queryClient.clear();
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/user/profile'] });
       setLocation('/');
     },
   });
+}
 
-  const login = async (username: string, password: string) => {
-    try {
-      await loginMutation.mutateAsync({ username, password });
+function useLogoutMutation() {
+  const [, setLocation] = useLocation();
+  return useMutation({
+    mutationFn: async () => {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    },
+    onSuccess: () => {
+      queryClient.setQueryData(['/api/user/profile'], null);
       setLocation('/');
-    } catch (error) {
-      throw error;
-    }
-  };
+    },
+  });
+}
 
-  const register = async (userData: any) => {
-    try {
-      await registerMutation.mutateAsync(userData);
-      setLocation('/');
-    } catch (error) {
-      throw error;
-    }
-  };
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [loading, setLoading] = useState(true);
 
-  const logout = async () => {
-    try {
-      await logoutMutation.mutateAsync();
-    } catch (error) {
-      throw error;
-    }
-  };
+  const { data: user, isLoading } = useQuery<User | null>({
+    queryKey: ['/api/user/profile'],
+    queryFn: async () => {
+      try {
+        const res = await fetch('/api/user/profile');
+        if (!res.ok) return null;
+        return res.json();
+      } catch {
+        return null;
+      }
+    },
+  });
+
+  const loginMutation = useLoginMutation();
+  const registerMutation = useRegisterMutation();
+  const logoutMutation = useLogoutMutation();
+
+  useEffect(() => {
+    setLoading(isLoading);
+  }, [isLoading]);
 
   return (
     <AuthContext.Provider value={{ 
-      user, 
-      loading, 
-      login, 
-      register, 
-      logout,
+      user: user ?? null,
+      loading,
       loginMutation,
       registerMutation,
       logoutMutation
