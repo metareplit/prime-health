@@ -15,7 +15,7 @@ import {
   BellRing,
   Activity,
   Mail,
-  BeforeAfter, // Added BeforeAfter icon
+  Split, 
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
@@ -102,7 +102,7 @@ export function Sidebar() {
                 active={pathname.startsWith("/admin/products")}
               />
               <SidebarItem
-                icon={<BeforeAfter className="h-4 w-4" />}
+                icon={<Split className="h-4 w-4" />}
                 label="Öncesi ve Sonrası"
                 href="/admin/before-after"
                 active={pathname.startsWith("/admin/before-after")}

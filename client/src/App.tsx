@@ -20,7 +20,7 @@ import AdminProductNew from "@/pages/admin/products/new";
 import AdminProductEdit from "@/pages/admin/products/[id]";
 import AdminLogin from "@/pages/admin/login";
 import AdminEmailTemplates from "@/pages/admin/email-templates";
-import AdminBeforeAfter from "@/pages/admin/before-after"; // Changed import
+import AdminBeforeAfter from "@/pages/admin/before-after";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Home from "@/pages/home";
@@ -118,7 +118,7 @@ function Router() {
         )}
       </Route>
 
-      <Route path="/admin/before-after"> {/* Changed route */}
+      <Route path="/admin/before-after">
         {() => (
           <AdminLayout title="Öncesi ve Sonrası">
             <AdminBeforeAfter />
