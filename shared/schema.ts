@@ -115,8 +115,32 @@ export const services = pgTable("services", {
   process: text("process").array().notNull(),
   faqs: text("faqs").array().notNull(),
   duration: text("duration").notNull(),
+  price: decimal("price", { precision: 10, scale: 2 }),
   imageUrl: text("image_url").notNull(),
   slug: text("slug").notNull().unique(),
+  featured: boolean("featured").default(false),
+  order: integer("order").default(0),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Success Stories table
+export const successStories = pgTable("success_stories", {
+  id: serial("id").primaryKey(),
+  patientName: text("patient_name").notNull(),
+  age: integer("age"),
+  treatmentType: text("treatment_type").notNull(),
+  description: text("description").notNull(),
+  testimonial: text("testimonial"),
+  beforeImages: text("before_images").array(),
+  afterImages: text("after_images").array(),
+  treatmentDate: timestamp("treatment_date").notNull(),
+  recoveryTime: text("recovery_time"),
+  satisfaction: integer("satisfaction").default(5), // 1-5 arası değerlendirme
+  featured: boolean("featured").default(false),
+  published: boolean("published").default(false),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 // Enhanced appointments table
@@ -165,6 +189,7 @@ export const insertProductSchema = createInsertSchema(products);
 export const insertMediaSchema = createInsertSchema(media);
 export const insertSettingSchema = createInsertSchema(settings);
 export const insertEmailTemplateSchema = createInsertSchema(emailTemplates);
+export const insertSuccessStorySchema = createInsertSchema(successStories);
 
 // Types
 export type User = typeof users.$inferSelect;
@@ -177,6 +202,7 @@ export type Product = typeof products.$inferSelect;
 export type Media = typeof media.$inferSelect;
 export type Setting = typeof settings.$inferSelect;
 export type EmailTemplate = typeof emailTemplates.$inferSelect;
+export type SuccessStory = typeof successStories.$inferSelect;
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type InsertMessage = z.infer<typeof insertMessageSchema>;
@@ -188,6 +214,7 @@ export type InsertProduct = z.infer<typeof insertProductSchema>;
 export type InsertMedia = z.infer<typeof insertMediaSchema>;
 export type InsertSetting = z.infer<typeof insertSettingSchema>;
 export type InsertEmailTemplate = z.infer<typeof insertEmailTemplateSchema>;
+export type InsertSuccessStory = z.infer<typeof insertSuccessStorySchema>;
 
 // Geriye dönük uyumluluk için alias
 export const insertPatientSchema = insertUserSchema;

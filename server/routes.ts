@@ -1,13 +1,24 @@
 import type { Express, Request, Response, NextFunction } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
-import { insertUserSchema, insertAppointmentSchema, insertMessageSchema, insertPatientImageSchema, insertPostSchema, insertProductSchema, insertMediaSchema, insertSettingSchema } from "@shared/schema";
+import { 
+  insertUserSchema, 
+  insertAppointmentSchema, 
+  insertMessageSchema, 
+  insertPatientImageSchema, 
+  insertPostSchema, 
+  insertProductSchema, 
+  insertMediaSchema, 
+  insertSettingSchema,
+  insertServiceSchema,
+  insertSuccessStorySchema,
+  insertEmailTemplateSchema
+} from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import session from "express-session";
 import multer from 'multer';
 import path from 'path';
 import express from 'express';
-
 
 // Auth Middleware Types
 interface AuthRequest extends Request {
@@ -352,16 +363,121 @@ export async function registerRoutes(app: Express) {
 
   // Services endpoints
   app.get("/api/services", async (_req: Request, res: Response) => {
-    const services = await storage.getServices();
-    res.json(services);
+    try {
+      const services = await storage.getAllServices();
+      res.json(services);
+    } catch (error) {
+      res.status(500).json({ message: "Hizmetler alınırken bir hata oluştu" });
+    }
   });
 
-  app.get("/api/services/:slug", async (req: Request, res: Response) => {
-    const service = await storage.getServiceBySlug(req.params.slug);
-    if (!service) {
-      return res.status(404).json({ message: "Hizmet bulunamadı" });
+  app.post("/api/services", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const serviceData = insertServiceSchema.parse(req.body);
+      const service = await storage.createService(serviceData);
+      res.status(201).json(service);
+    } catch (error) {
+      const validationError = fromZodError(error);
+      res.status(400).json({ message: validationError.message });
     }
-    res.json(service);
+  });
+
+  app.patch("/api/services/:id", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const service = await storage.updateService(id, req.body);
+      if (!service) {
+        return res.status(404).json({ message: "Hizmet bulunamadı" });
+      }
+      res.json(service);
+    } catch (error) {
+      res.status(400).json({ message: "Hizmet güncellenirken bir hata oluştu" });
+    }
+  });
+
+  app.delete("/api/services/:id", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteService(id);
+      res.status(204).send();
+    } catch (error) {
+      res.status(400).json({ message: "Hizmet silinirken bir hata oluştu" });
+    }
+  });
+
+  app.patch("/api/services/:id/reorder", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const { order } = req.body;
+      const service = await storage.updateServiceOrder(id, order);
+      res.json(service);
+    } catch (error) {
+      res.status(400).json({ message: "Hizmet sırası güncellenirken bir hata oluştu" });
+    }
+  });
+
+  // Success Stories endpoints
+  app.get("/api/success-stories", async (_req: Request, res: Response) => {
+    try {
+      const stories = await storage.getAllSuccessStories();
+      res.json(stories);
+    } catch (error) {
+      res.status(500).json({ message: "Başarı hikayeleri alınırken bir hata oluştu" });
+    }
+  });
+
+  app.post("/api/success-stories", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const storyData = insertSuccessStorySchema.parse(req.body);
+      const story = await storage.createSuccessStory(storyData);
+      res.status(201).json(story);
+    } catch (error) {
+      const validationError = fromZodError(error);
+      res.status(400).json({ message: validationError.message });
+    }
+  });
+
+  app.patch("/api/success-stories/:id", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const story = await storage.updateSuccessStory(id, req.body);
+      if (!story) {
+        return res.status(404).json({ message: "Başarı hikayesi bulunamadı" });
+      }
+      res.json(story);
+    } catch (error) {
+      res.status(400).json({ message: "Başarı hikayesi güncellenirken bir hata oluştu" });
+    }
+  });
+
+  app.delete("/api/success-stories/:id", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteSuccessStory(id);
+      res.status(204).send();
+    } catch (error) {
+      res.status(400).json({ message: "Başarı hikayesi silinirken bir hata oluştu" });
+    }
+  });
+
+  app.post("/api/success-stories/:id/toggle-publish", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const story = await storage.toggleSuccessStoryPublished(id);
+      res.json(story);
+    } catch (error) {
+      res.status(400).json({ message: "Yayın durumu değiştirilirken bir hata oluştu" });
+    }
+  });
+
+  app.post("/api/success-stories/:id/toggle-feature", requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const story = await storage.toggleSuccessStoryFeatured(id);
+      res.json(story);
+    } catch (error) {
+      res.status(400).json({ message: "Öne çıkarma durumu değiştirilirken bir hata oluştu" });
+    }
   });
 
   // Appointments endpoints

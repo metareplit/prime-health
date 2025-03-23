@@ -1,10 +1,37 @@
-import { 
-  users, posts, products, media, settings, services,
-  messages, patientImages, appointments, emailTemplates,
-  type User, type Post, type Product, type Media, type Setting, type Service,
-  type Message, type PatientImage, type Appointment, type EmailTemplate,
-  type InsertUser, type InsertPost, type InsertProduct, type InsertMedia, type InsertSetting, type InsertService,
-  type InsertMessage, type InsertPatientImage, type InsertAppointment, type InsertEmailTemplate
+import {
+  users,
+  posts,
+  products,
+  media,
+  settings,
+  services,
+  messages,
+  patientImages,
+  appointments,
+  emailTemplates,
+  type User,
+  type Post,
+  type Product,
+  type Media,
+  type Setting,
+  type Service,
+  type Message,
+  type PatientImage,
+  type Appointment,
+  type EmailTemplate,
+  type InsertUser,
+  type InsertPost,
+  type InsertProduct,
+  type InsertMedia,
+  type InsertSetting,
+  type InsertService,
+  type InsertMessage,
+  type InsertPatientImage,
+  type InsertAppointment,
+  type InsertEmailTemplate,
+  successStories,
+  type SuccessStory,
+  type InsertSuccessStory,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
@@ -48,11 +75,14 @@ export interface IStorage {
   updateSetting(key: string, value: string): Promise<Setting>;
 
   // Services methods
-  getServices(): Promise<Service[]>;
+  getAllServices(): Promise<Service[]>;
+  getServiceById(id: number): Promise<Service | undefined>;
   getServiceBySlug(slug: string): Promise<Service | undefined>;
   createService(service: InsertService): Promise<Service>;
   updateService(id: number, data: Partial<Service>): Promise<Service>;
   deleteService(id: number): Promise<void>;
+  updateServiceOrder(id: number, order: number): Promise<Service>;
+
 
   // Messages methods
   getUserMessages(userId: number): Promise<Message[]>;
@@ -72,6 +102,15 @@ export interface IStorage {
   createEmailTemplate(template: InsertEmailTemplate): Promise<EmailTemplate>;
   updateEmailTemplate(id: number, data: Partial<EmailTemplate>): Promise<EmailTemplate>;
   deleteEmailTemplate(id: number): Promise<void>;
+
+  // Success Stories methods
+  getAllSuccessStories(): Promise<SuccessStory[]>;
+  getSuccessStoryById(id: number): Promise<SuccessStory | undefined>;
+  createSuccessStory(story: InsertSuccessStory): Promise<SuccessStory>;
+  updateSuccessStory(id: number, data: Partial<SuccessStory>): Promise<SuccessStory>;
+  deleteSuccessStory(id: number): Promise<void>;
+  toggleSuccessStoryPublished(id: number): Promise<SuccessStory>;
+  toggleSuccessStoryFeatured(id: number): Promise<SuccessStory>;
 
   sessionStore: any;
 }
@@ -219,8 +258,13 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Services methods
-  async getServices(): Promise<Service[]> {
-    return await db.select().from(services);
+  async getAllServices(): Promise<Service[]> {
+    return await db.select().from(services).orderBy(services.order);
+  }
+
+  async getServiceById(id: number): Promise<Service | undefined> {
+    const [service] = await db.select().from(services).where(eq(services.id, id));
+    return service;
   }
 
   async getServiceBySlug(slug: string): Promise<Service | undefined> {
@@ -236,7 +280,7 @@ export class DatabaseStorage implements IStorage {
   async updateService(id: number, data: Partial<Service>): Promise<Service> {
     const [updatedService] = await db
       .update(services)
-      .set(data)
+      .set({ ...data, updatedAt: new Date() })
       .where(eq(services.id, id))
       .returning();
     return updatedService;
@@ -244,6 +288,15 @@ export class DatabaseStorage implements IStorage {
 
   async deleteService(id: number): Promise<void> {
     await db.delete(services).where(eq(services.id, id));
+  }
+
+  async updateServiceOrder(id: number, order: number): Promise<Service> {
+    const [updatedService] = await db
+      .update(services)
+      .set({ order, updatedAt: new Date() })
+      .where(eq(services.id, id))
+      .returning();
+    return updatedService;
   }
 
   // Messages methods
@@ -315,6 +368,64 @@ export class DatabaseStorage implements IStorage {
 
   async deleteEmailTemplate(id: number): Promise<void> {
     await db.delete(emailTemplates).where(eq(emailTemplates.id, id));
+  }
+
+  // Success Stories methods
+  async getAllSuccessStories(): Promise<SuccessStory[]> {
+    return await db.select().from(successStories).orderBy(successStories.createdAt);
+  }
+
+  async getSuccessStoryById(id: number): Promise<SuccessStory | undefined> {
+    const [story] = await db
+      .select()
+      .from(successStories)
+      .where(eq(successStories.id, id));
+    return story;
+  }
+
+  async createSuccessStory(story: InsertSuccessStory): Promise<SuccessStory> {
+    const [newStory] = await db
+      .insert(successStories)
+      .values(story)
+      .returning();
+    return newStory;
+  }
+
+  async updateSuccessStory(id: number, data: Partial<SuccessStory>): Promise<SuccessStory> {
+    const [updatedStory] = await db
+      .update(successStories)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(successStories.id, id))
+      .returning();
+    return updatedStory;
+  }
+
+  async deleteSuccessStory(id: number): Promise<void> {
+    await db.delete(successStories).where(eq(successStories.id, id));
+  }
+
+  async toggleSuccessStoryPublished(id: number): Promise<SuccessStory> {
+    const story = await this.getSuccessStoryById(id);
+    if (!story) throw new Error("Story not found");
+
+    const [updatedStory] = await db
+      .update(successStories)
+      .set({ published: !story.published, updatedAt: new Date() })
+      .where(eq(successStories.id, id))
+      .returning();
+    return updatedStory;
+  }
+
+  async toggleSuccessStoryFeatured(id: number): Promise<SuccessStory> {
+    const story = await this.getSuccessStoryById(id);
+    if (!story) throw new Error("Story not found");
+
+    const [updatedStory] = await db
+      .update(successStories)
+      .set({ featured: !story.featured, updatedAt: new Date() })
+      .where(eq(successStories.id, id))
+      .returning();
+    return updatedStory;
   }
 }
 

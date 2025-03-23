@@ -19,6 +19,8 @@ import AdminPostEdit from "@/pages/admin/posts/[id]";
 import AdminProductNew from "@/pages/admin/products/new";
 import AdminProductEdit from "@/pages/admin/products/[id]";
 import AdminLogin from "@/pages/admin/login";
+import AdminEmailTemplates from "@/pages/admin/email-templates";
+import AdminSuccessStories from "@/pages/admin/success-stories"; // Added import
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Home from "@/pages/home";
@@ -37,7 +39,6 @@ import PatientImages from "@/pages/patient/images";
 import PatientAppointments from "@/pages/patient/appointments";
 import PatientProfile from "@/pages/patient/profile";
 import NotFound from "@/pages/not-found";
-import AdminEmailTemplates from "@/pages/admin/email-templates";
 
 function Router() {
   return (
@@ -117,6 +118,14 @@ function Router() {
         )}
       </Route>
 
+      <Route path="/admin/success-stories"> {/* Added route */}
+        {() => (
+          <AdminLayout title="Başarı Hikayeleri">
+            <AdminSuccessStories />
+          </AdminLayout>
+        )}
+      </Route>
+
       <Route path="/admin/media">
         {() => (
           <AdminLayout title="Medya">
@@ -156,6 +165,7 @@ function Router() {
           </AdminLayout>
         )}
       </Route>
+
       <Route path="/admin/email-templates">
         {() => (
           <AdminLayout title="Email Şablonları">
