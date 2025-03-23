@@ -20,32 +20,40 @@ export function LanguageSwitcher() {
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
-    // Dil tercihini localStorage'a kaydet
     localStorage.setItem('i18nextLng', lng);
   };
 
   const currentLanguage = languages.find(lang => lang.code === i18n.language);
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="flex items-center gap-2 px-3 py-2 hover:bg-accent hover:text-accent-foreground">
-          <Globe className="h-4 w-4" />
-          <span className="text-lg">{currentLanguage?.flag}</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[150px]">
-        {languages.map((language) => (
-          <DropdownMenuItem
-            key={language.code}
-            onClick={() => changeLanguage(language.code)}
-            className="flex items-center gap-2 px-3 py-2.5 cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors"
+    <div className="relative z-50">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-accent hover:text-accent-foreground min-w-[80px] justify-center"
           >
-            <span className="text-lg">{language.flag}</span>
-            <span className="flex-1">{language.name}</span>
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+            <span className="text-xl">{currentLanguage?.flag}</span>
+            <Globe className="h-4 w-4 opacity-60" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent 
+          align="end" 
+          className="w-[160px] mt-2 bg-background/95 backdrop-blur-sm"
+        >
+          {languages.map((language) => (
+            <DropdownMenuItem
+              key={language.code}
+              onClick={() => changeLanguage(language.code)}
+              className="flex items-center gap-3 px-4 py-2.5 cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              <span className="text-xl">{language.flag}</span>
+              <span className="flex-1 text-sm">{language.name}</span>
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 }

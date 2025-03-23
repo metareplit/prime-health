@@ -31,7 +31,7 @@ export default function Header({ children }: HeaderProps) {
           <div className="flex items-center gap-8">
             <Link href="/">
               <a className="flex items-center space-x-2">
-                <span className="text-2xl font-bold bg-gradient bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+                <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                   Prime Health
                 </span>
               </a>
@@ -73,8 +73,10 @@ export default function Header({ children }: HeaderProps) {
           </div>
 
           {/* Right Side: Auth, Language & Actions */}
-          <div className="flex items-center gap-4">
-            {children} {/* Language Switcher */}
+          <div className="flex items-center gap-2">
+            <div className="relative flex items-center">
+              {children} {/* Language Switcher */}
+            </div>
 
             {user ? (
               <DropdownMenu>
