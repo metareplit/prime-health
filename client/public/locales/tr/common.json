@@ -12,6 +12,52 @@
     "userMenu": "Kullanıcı Menüsü",
     "menu": "Menü"
   },
+  "ui": {
+    "dialog": {
+      "close": "Kapat"
+    },
+    "command": {
+      "search": "Ara...",
+      "empty": "Sonuç bulunamadı.",
+      "shortcut": "Kısayol"
+    },
+    "table": {
+      "empty": "Veri bulunamadı.",
+      "loading": "Yükleniyor...",
+      "previous": "Önceki",
+      "next": "Sonraki",
+      "rowsPerPage": "Sayfa başına satır:",
+      "of": "/",
+      "more": "Daha Fazla"
+    },
+    "form": {
+      "required": "Bu alan zorunludur",
+      "invalid": "Geçersiz değer"
+    },
+    "toast": {
+      "success": "Başarılı",
+      "error": "Hata",
+      "info": "Bilgi",
+      "warning": "Uyarı",
+      "close": "Kapat"
+    }
+  },
+  "buttons": {
+    "submit": "Gönder",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "continue": "Devam Et",
+    "back": "Geri",
+    "edit": "Düzenle",
+    "upload": "Yükle",
+    "readMore": "Devamını Oku",
+    "learnMore": "Daha Fazla Bilgi",
+    "getStarted": "Hemen Başla",
+    "contactUs": "Bize Ulaşın",
+    "close": "Kapat",
+    "delete": "Sil",
+    "confirm": "Onayla"
+  },
   "products": {
     "title": "Profesyonel Saç Bakım Ürünleri",
     "subtitle": "Saç ekimi sonrası en iyi sonucu almak için özel olarak formüle edilmiş ürünler",
@@ -64,19 +110,6 @@
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
     "logout": "Çıkış Yap"
-  },
-  "buttons": {
-    "submit": "Gönder",
-    "cancel": "İptal",
-    "save": "Kaydet",
-    "continue": "Devam Et",
-    "back": "Geri",
-    "edit": "Düzenle",
-    "upload": "Yükle",
-    "readMore": "Devamını Oku",
-    "learnMore": "Daha Fazla Bilgi",
-    "getStarted": "Hemen Başla",
-    "contactUs": "Bize Ulaşın"
   },
   "validation": {
     "required": "Bu alan zorunludur",

@@ -28,7 +28,10 @@
     "readMore": "Read More",
     "learnMore": "Learn More",
     "getStarted": "Get Started",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "close": "Close",
+    "delete": "Delete",
+    "confirm": "Confirm"
   },
   "validation": {
     "required": "This field is required",
@@ -244,6 +247,36 @@
         "thin": "Thin",
         "thick": "Thick"
       }
+    }
+  },
+  "ui": {
+    "dialog": {
+      "close": "Close"
+    },
+    "command": {
+      "search": "Search...",
+      "empty": "No results found.",
+      "shortcut": "Shortcut"
+    },
+    "table": {
+      "empty": "No data found.",
+      "loading": "Loading...",
+      "previous": "Previous",
+      "next": "Next",
+      "rowsPerPage": "Rows per page:",
+      "of": "of",
+      "more": "More"
+    },
+    "form": {
+      "required": "This field is required",
+      "invalid": "Invalid value"
+    },
+    "toast": {
+      "success": "Success",
+      "error": "Error",
+      "info": "Info",
+      "warning": "Warning",
+      "close": "Close"
     }
   }
 }

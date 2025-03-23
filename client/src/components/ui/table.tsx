@@ -1,5 +1,5 @@
 import * as React from "react"
-
+import { useTranslation } from "react-i18next"
 import { cn } from "@/lib/utils"
 
 const Table = React.forwardRef<
@@ -27,13 +27,29 @@ TableHeader.displayName = "TableHeader"
 const TableBody = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
->(({ className, ...props }, ref) => (
-  <tbody
-    ref={ref}
-    className={cn("[&_tr:last-child]:border-0", className)}
-    {...props}
-  />
-))
+>(({ className, ...props }, ref) => {
+  const { t } = useTranslation('common');
+
+  if (!props.children) {
+    return (
+      <tbody ref={ref}>
+        <tr>
+          <td colSpan={100} className="text-center py-4 text-muted-foreground">
+            {t('ui.table.empty')}
+          </td>
+        </tr>
+      </tbody>
+    )
+  }
+
+  return (
+    <tbody
+      ref={ref}
+      className={cn("[&_tr:last-child]:border-0", className)}
+      {...props}
+    />
+  )
+})
 TableBody.displayName = "TableBody"
 
 const TableFooter = React.forwardRef<
