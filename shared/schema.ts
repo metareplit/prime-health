@@ -115,7 +115,7 @@ export const services = pgTable("services", {
   process: text("process").array().notNull(),
   faqs: text("faqs").array().notNull(),
   duration: text("duration").notNull(),
-  price: text("price", { precision: 10, scale: 2 }),
+  price: text("price"), // Changed from numeric to text
   imageUrl: text("image_url").notNull(),
   slug: text("slug").notNull().unique(),
   featured: text("featured").default(false),
@@ -123,7 +123,6 @@ export const services = pgTable("services", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
-
 
 // Appointments table
 export const appointments = pgTable("appointments", {
