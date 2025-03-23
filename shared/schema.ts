@@ -162,7 +162,11 @@ export const beforeAfter = pgTable("before_after", {
   treatmentType: text("treatment_type").notNull(),
   beforeImages: text("before_images").array(),
   afterImages: text("after_images").array(),
+  beforeDate: timestamp("before_date"),
+  afterDate: timestamp("after_date"),
   treatmentDate: timestamp("treatment_date").notNull(),
+  notes: text("notes"),
+  description: text("description"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -204,7 +208,11 @@ export const beforeAfterSchema = z.object({
   treatmentType: z.string().min(1, "Tedavi tipi gereklidir"),
   beforeImages: z.array(z.string()).default([]),
   afterImages: z.array(z.string()).default([]),
+  beforeDate: z.date().optional(),
+  afterDate: z.date().optional(),
   treatmentDate: z.date(),
+  notes: z.string().optional(),
+  description: z.string().optional(),
   createdAt: z.date().default(() => new Date()),
   updatedAt: z.date().default(() => new Date())
 });

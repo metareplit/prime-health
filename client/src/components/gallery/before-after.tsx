@@ -22,6 +22,11 @@ export function BeforeAfterGallery() {
     return null;
   }
 
+  const formatDate = (date: Date | null | undefined) => {
+    if (!date) return null;
+    return format(new Date(date), 'd MMMM yyyy', { locale: tr });
+  };
+
   return (
     <div className="py-12">
       <motion.h2 
@@ -46,9 +51,11 @@ export function BeforeAfterGallery() {
                   <h3 className="text-xl font-semibold text-primary mb-2">
                     {item.treatmentType}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Tedavi Tarihi: {format(new Date(item.treatmentDate), 'd MMMM yyyy', { locale: tr })}
-                  </p>
+                  {item.treatmentDate && (
+                    <p className="text-sm text-muted-foreground">
+                      Tedavi Tarihi: {formatDate(item.treatmentDate)}
+                    </p>
+                  )}
                   {item.notes && (
                     <p className="mt-3 text-sm">{item.notes}</p>
                   )}
@@ -70,7 +77,7 @@ export function BeforeAfterGallery() {
                     </div>
                     {item.beforeDate && (
                       <p className="text-xs text-center text-muted-foreground">
-                        {format(new Date(item.beforeDate), 'd MMMM yyyy', { locale: tr })}
+                        {formatDate(item.beforeDate)}
                       </p>
                     )}
                   </div>
@@ -90,7 +97,7 @@ export function BeforeAfterGallery() {
                     </div>
                     {item.afterDate && (
                       <p className="text-xs text-center text-muted-foreground">
-                        {format(new Date(item.afterDate), 'd MMMM yyyy', { locale: tr })}
+                        {formatDate(item.afterDate)}
                       </p>
                     )}
                   </div>
