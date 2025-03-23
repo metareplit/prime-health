@@ -109,7 +109,37 @@
   "auth": {
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
-    "logout": "Çıkış Yap"
+    "logout": "Çıkış Yap",
+    "login": {
+      "title": "Giriş Yap",
+      "subtitle": "Hesabınıza giriş yapın",
+      "rememberMe": "Beni hatırla",
+      "forgotPassword": "Şifremi unuttum",
+      "noAccount": "Hesabınız yok mu?",
+      "createAccount": "Hesap oluştur"
+    },
+    "register": {
+      "title": "Kayıt Ol",
+      "subtitle": "Yeni hesap oluşturun",
+      "haveAccount": "Zaten hesabınız var mı?",
+      "terms": "Şartlar ve koşulları",
+      "privacy": "Gizlilik politikasını",
+      "agreeTerms": "kabul ediyorum"
+    },
+    "form": {
+      "email": "E-posta",
+      "password": "Şifre",
+      "confirmPassword": "Şifreyi onayla",
+      "firstName": "Ad",
+      "lastName": "Soyad",
+      "phone": "Telefon"
+    },
+    "errors": {
+      "invalidEmail": "Geçersiz e-posta adresi",
+      "passwordMismatch": "Şifreler eşleşmiyor",
+      "weakPassword": "Şifre çok zayıf",
+      "required": "Bu alan zorunludur"
+    }
   },
   "validation": {
     "required": "Bu alan zorunludur",
@@ -277,6 +307,27 @@
       "selectedDate": "Seçilen Tarih",
       "createButton": "Randevu Oluştur",
       "contactNote": "* Randevunuz onaylandıktan sonra size en uygun saati belirlemek için ekibimiz sizinle iletişime geçecektir."
+    },
+    "portal": {
+      "welcome": "Hoş Geldiniz",
+      "appointments": "Randevularım",
+      "treatments": "Tedavilerim",
+      "documents": "Belgelerim",
+      "messages": "Mesajlarım",
+      "profile": "Profilim"
+    },
+    "profile": {
+      "personalInfo": "Kişisel Bilgiler",
+      "medicalHistory": "Tıbbi Geçmiş",
+      "preferences": "Tercihler",
+      "settings": "Ayarlar"
+    },
+    "messages": {
+      "newMessage": "Yeni Mesaj",
+      "inbox": "Gelen Kutusu",
+      "sent": "Gönderilen",
+      "compose": "Mesaj Yaz",
+      "reply": "Yanıtla"
     }
   },
   "contact": {
@@ -364,6 +415,98 @@
       "consult": "Danışmanlık Al",
       "view3d": "3D Görünüm",
       "view2d": "2D Görünüm"
+    }
+  },
+  "appointment": {
+    "book": {
+      "title": "Randevu Al",
+      "subtitle": "Size en uygun tarih ve saati seçin",
+      "selectDate": "Tarih seçin",
+      "selectTime": "Saat seçin",
+      "selectService": "Hizmet seçin",
+      "personalInfo": "Kişisel Bilgiler",
+      "notes": "Notlar",
+      "success": "Randevunuz başarıyla oluşturuldu",
+      "confirmation": "Randevu onayı e-posta ile gönderilecektir"
+    },
+    "status": {
+      "pending": "Bekliyor",
+      "confirmed": "Onaylandı",
+      "cancelled": "İptal Edildi",
+      "completed": "Tamamlandı"
+    }
+  },
+  "form": {
+    "submit": "Gönder",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "search": "Ara",
+    "filter": "Filtrele",
+    "reset": "Sıfırla",
+    "loading": "Yükleniyor...",
+    "success": "İşlem başarılı",
+    "error": "Bir hata oluştu",
+    "required": "* Zorunlu alan",
+    "optional": "(Opsiyonel)"
+  },
+  "footer": {
+    "company": {
+      "title": "Şirket",
+      "about": "Hakkımızda",
+      "careers": "Kariyer",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Kullanım Şartları"
+    },
+    "social": {
+      "title": "Sosyal Medya",
+      "followUs": "Bizi Takip Edin",
+      "facebook": "Facebook'ta Takip Et",
+      "instagram": "Instagram'da Takip Et",
+      "twitter": "Twitter'da Takip Et",
+      "youtube": "Youtube'da Takip Et"
+    },
+    "contact": {
+      "title": "İletişim",
+      "address": "Adres",
+      "phone": "Telefon",
+      "email": "E-posta"
+    },
+    "newsletter": {
+      "title": "Bülten",
+      "subtitle": "Güncel gelişmelerden haberdar olun",
+      "placeholder": "E-posta adresiniz",
+      "subscribe": "Abone Ol",
+      "success": "Başarıyla abone oldunuz",
+      "error": "Bir hata oluştu"
+    },
+    "copyright": "© {year} Tüm hakları saklıdır",
+    "brand": "Hair Clinic Tiflis"
+  },
+  "header": {
+    "menu": {
+      "open": "Menüyü aç",
+      "close": "Menüyü kapat",
+      "main": "Ana menü",
+      "user": "Kullanıcı menüsü"
+    },
+    "search": {
+      "placeholder": "Ara...",
+      "button": "Ara",
+      "noResults": "Sonuç bulunamadı"
+    },
+    "buttons": {
+      "appointment": "Randevu Al",
+      "consultation": "Ücretsiz Danışmanlık",
+      "contact": "İletişime Geç"
+    },
+    "userMenu": {
+      "profile": "Profilim",
+      "appointments": "Randevularım",
+      "dashboard": "Kontrol Paneli",
+      "settings": "Ayarlar",
+      "logout": "Çıkış Yap"
     }
   }
 }

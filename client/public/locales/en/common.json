@@ -339,5 +339,63 @@
       "monthsAfter": "months after",
       "daysAfter": "days after"
     }
+  },
+  "footer": {
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "careers": "Careers",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "social": {
+      "title": "Social Media",
+      "followUs": "Follow Us",
+      "facebook": "Follow on Facebook",
+      "instagram": "Follow on Instagram",
+      "twitter": "Follow on Twitter",
+      "youtube": "Follow on Youtube"
+    },
+    "contact": {
+      "title": "Contact",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "subtitle": "Stay updated with our latest developments",
+      "placeholder": "Your email address",
+      "subscribe": "Subscribe",
+      "success": "Successfully subscribed",
+      "error": "An error occurred"
+    },
+    "copyright": "© {year} All rights reserved",
+    "brand": "Hair Clinic Tbilisi"
+  },
+  "header": {
+    "menu": {
+      "open": "Open menu",
+      "close": "Close menu",
+      "main": "Main menu",
+      "user": "User menu"
+    },
+    "search": {
+      "placeholder": "Search...",
+      "button": "Search",
+      "noResults": "No results found"
+    },
+    "buttons": {
+      "appointment": "Book Appointment",
+      "consultation": "Free Consultation",
+      "contact": "Contact Us"
+    },
+    "userMenu": {
+      "profile": "My Profile",
+      "appointments": "My Appointments",
+      "dashboard": "Dashboard",
+      "settings": "Settings",
+      "logout": "Log Out"
+    }
   }
 }

@@ -32,7 +32,7 @@ export default function Header({ children }: HeaderProps) {
             <Link href="/">
               <a className="flex items-center space-x-2">
                 <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                  Prime Health
+                  {t('nav.brand')}
                 </span>
               </a>
             </Link>
