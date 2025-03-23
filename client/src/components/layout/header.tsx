@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, User, LogOut, Settings, Shield } from "lucide-react";
+import { Menu, User, LogOut, Settings } from "lucide-react";
 
 export default function Header() {
   const { user, logoutMutation } = useAuth();
@@ -89,23 +89,13 @@ export default function Header() {
                   </div>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href="/hasta-portali/profil">
+                    <Link href="/hasta-portali">
                       <a className="flex w-full items-center">
                         <Settings className="mr-2 h-4 w-4" />
-                        Profil Ayarları
+                        Hasta Portalı
                       </a>
                     </Link>
                   </DropdownMenuItem>
-                  {user.role === "admin" && (
-                    <DropdownMenuItem asChild>
-                      <Link href="/admin">
-                        <a className="flex w-full items-center">
-                          <Shield className="mr-2 h-4 w-4" />
-                          Yönetim Paneli
-                        </a>
-                      </Link>
-                    </DropdownMenuItem>
-                  )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     className="text-red-600 focus:bg-red-50 focus:text-red-600"
