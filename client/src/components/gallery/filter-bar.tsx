@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Search, Filter, SlidersHorizontal } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface FilterBarProps {
   searchTerm: string;
@@ -21,6 +22,8 @@ export default function FilterBar({
   onAgeRangeChange,
   onGraftCountChange
 }: FilterBarProps) {
+  const { t } = useTranslation('common');
+
   return (
     <div className="bg-white rounded-lg shadow-sm p-4 space-y-4">
       <div className="flex flex-col md:flex-row gap-4">
@@ -28,7 +31,7 @@ export default function FilterBar({
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
             type="text"
-            placeholder="Hasta sonuçlarında ara..."
+            placeholder={t('gallery.search.placeholder')}
             className="pl-10"
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
@@ -40,21 +43,21 @@ export default function FilterBar({
             size="sm"
             onClick={() => onFilterChange("all")}
           >
-            Tümü
+            {t('blog.filters.all')}
           </Button>
           <Button
             variant={selectedFilter === "latest" ? "default" : "outline"}
             size="sm"
             onClick={() => onFilterChange("latest")}
           >
-            En Yeni
+            {t('blog.filters.latest')}
           </Button>
           <Button
             variant={selectedFilter === "popular" ? "default" : "outline"}
             size="sm"
             onClick={() => onFilterChange("popular")}
           >
-            En Beğenilen
+            {t('blog.filters.popular')}
           </Button>
         </div>
       </div>
@@ -63,7 +66,7 @@ export default function FilterBar({
         <div className="flex-1 space-y-2">
           <label className="text-sm font-medium flex items-center gap-2">
             <SlidersHorizontal className="h-4 w-4" />
-            Yaş Aralığı
+            {t('gallery.patientDetails.age')}
           </label>
           <Slider
             defaultValue={[20, 60]}
@@ -76,7 +79,7 @@ export default function FilterBar({
         <div className="flex-1 space-y-2">
           <label className="text-sm font-medium flex items-center gap-2">
             <Filter className="h-4 w-4" />
-            Greft Sayısı
+            {t('services.treatments.hair.process.extraction')}
           </label>
           <Slider
             defaultValue={[1000, 5000]}

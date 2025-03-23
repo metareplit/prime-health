@@ -6,6 +6,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { Calendar, Clock, Share2, Facebook, Twitter, Linkedin } from "lucide-react";
 import { Link, useRoute } from "wouter";
 import { Metadata } from "@/components/ui/metadata";
+import { useTranslation } from "react-i18next";
 
 // Blog yazıları (Gerçek uygulamada API'den gelecek)
 const blogPosts = [
@@ -64,9 +65,10 @@ const blogPosts = [
 export default function BlogPostPage() {
   const [, params] = useRoute("/blog/:slug");
   const post = blogPosts.find(post => post.slug === params?.slug);
+  const { t } = useTranslation('common');
 
   if (!post) {
-    return <div>Blog yazısı bulunamadı.</div>;
+    return <div>{t('blog.search.noResults')}</div>;
   }
 
   // İlgili yazılar
@@ -77,7 +79,7 @@ export default function BlogPostPage() {
   return (
     <div className="min-h-screen bg-background">
       <Metadata
-        title={`${post.title} | Hair Clinic Blog`}
+        title={`${post.title} | ${t('blog.title')}`}
         description={post.description}
         keywords={post.tags.join(", ")}
       />
@@ -113,11 +115,11 @@ export default function BlogPostPage() {
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" />
-                  <span>{new Date(post.date).toLocaleDateString('tr-TR')}</span>
+                  <span>{t('blog.publishDate', { date: new Date(post.date).toLocaleDateString() })}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  <span>{post.readTime}</span>
+                  <span>{t('blog.readTime', { minutes: post.readTime })}</span>
                 </div>
               </div>
             </div>
@@ -159,16 +161,16 @@ export default function BlogPostPage() {
                 <div className="flex items-center gap-4 mt-8 pt-8 border-t">
                   <span className="font-medium flex items-center gap-2">
                     <Share2 className="h-4 w-4" />
-                    Paylaş
+                    {t('social.share.title')}
                   </span>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="icon">
+                    <Button variant="outline" size="icon" aria-label={t('social.share.facebook')}>
                       <Facebook className="h-4 w-4" />
                     </Button>
-                    <Button variant="outline" size="icon">
+                    <Button variant="outline" size="icon" aria-label={t('social.share.twitter')}>
                       <Twitter className="h-4 w-4" />
                     </Button>
-                    <Button variant="outline" size="icon">
+                    <Button variant="outline" size="icon" aria-label={t('social.share.linkedin')}>
                       <Linkedin className="h-4 w-4" />
                     </Button>
                   </div>
@@ -182,7 +184,7 @@ export default function BlogPostPage() {
             {/* Author Card */}
             <Card>
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-4">Yazar Hakkında</h3>
+                <h3 className="text-lg font-semibold mb-4">{t('blog.author.about')}</h3>
                 <div className="flex items-center gap-4 mb-4">
                   <Avatar className="h-16 w-16">
                     <img src={post.author.image} alt={post.author.name} />
@@ -201,7 +203,7 @@ export default function BlogPostPage() {
             {/* Related Posts */}
             <Card>
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-4">İlgili Yazılar</h3>
+                <h3 className="text-lg font-semibold mb-4">{t('blog.relatedPosts')}</h3>
                 <div className="space-y-4">
                   {relatedPosts.map((relatedPost) => (
                     <Link key={relatedPost.id} href={`/blog/${relatedPost.slug}`}>

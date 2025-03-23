@@ -10,7 +10,10 @@
     "products": "Ürünler",
     "patientPortal": "Hasta Portalı",
     "userMenu": "Kullanıcı Menüsü",
-    "menu": "Menü"
+    "menu": "Menü",
+    "doctors": "Doktorlarımız",
+    "press": "Basında Biz",
+    "brand": "Prime Health"
   },
   "ui": {
     "dialog": {
@@ -147,7 +150,12 @@
     "email": "Geçerli bir e-posta adresi giriniz",
     "phone": "Geçerli bir telefon numarası giriniz",
     "minLength": "En az {{count}} karakter giriniz",
-    "maxLength": "En fazla {{count}} karakter giriniz"
+    "maxLength": "En fazla {{count}} karakter giriniz",
+    "passwordMatch": "Şifreler eşleşmiyor",
+    "invalidDate": "Geçerli bir tarih giriniz",
+    "futureDate": "Gelecek bir tarih seçiniz",
+    "numeric": "Sadece sayı giriniz",
+    "url": "Geçerli bir URL giriniz"
   },
   "home": {
     "hero": {
@@ -233,10 +241,33 @@
       "title": "Ücretsiz Konsültasyon",
       "description": "Size en uygun tedavi yöntemini belirlemek için hemen randevu alın",
       "button": "Randevu Al"
+    },
+    "details": {
+      "duration": "Süre",
+      "recovery": "İyileşme Süresi",
+      "anesthesia": "Anestezi",
+      "hospital": "Hastanede Kalış",
+      "results": "Sonuçlar",
+      "recommendation": "Öneriler"
+    },
+    "treatments": {
+      "hair": {
+        "technique": {
+          "dhi": "DHI Tekniği",
+          "fue": "Safir FUE Tekniği",
+          "description": "En son teknoloji ve doğal sonuçlar"
+        },
+        "process": {
+          "planning": "Planlama",
+          "extraction": "Greft Alımı",
+          "implantation": "Ekim İşlemi",
+          "aftercare": "Sonrası Bakım"
+        }
+      }
     }
   },
   "blog": {
-    "title": "Saç Ekimi ve Estetik Blog",
+    "title": "Blog",
     "subtitle": "Uzman kadromuzdan güncel bilgiler, tedavi süreçleri ve başarı hikayeleri",
     "search": "Blog yazılarında ara...",
     "categories": {
@@ -244,8 +275,49 @@
       "hairTransplant": "Saç Ekimi",
       "beardTransplant": "Sakal Ekimi",
       "eyebrowTransplant": "Kaş Ekimi",
+      "aesthetics": "Estetik",
+      "dermatology": "Dermatoloji",
       "aftercare": "Bakım",
       "treatment": "Tedavi Süreci"
+    },
+    "readMore": "Devamını Oku",
+    "share": {
+      "title": "Bu Yazıyı Paylaş",
+      "copied": "Bağlantı kopyalandı"
+    },
+    "author": {
+      "about": "Yazar Hakkında",
+      "articles": "Diğer Yazıları"
+    },
+    "relatedPosts": "Benzer Yazılar",
+    "comments": {
+      "title": "Yorumlar",
+      "noComments": "Henüz yorum yapılmamış",
+      "writeComment": "Yorum Yaz",
+      "submit": "Gönder"
+    },
+    "search": {
+      "title": "Blog'da Ara",
+      "placeholder": "Arama yapmak için yazın...",
+      "noResults": "Sonuç bulunamadı",
+      "trending": "Popüler Konular"
+    },
+    "filters": {
+      "latest": "En Yeni",
+      "popular": "Popüler",
+      "category": "Kategori"
+    },
+    "readTime": "{{minutes}} dakika okuma",
+    "publishDate": "{{date}} tarihinde yayınlandı",
+    "authorInfo": {
+      "title": "Yazar Hakkında",
+      "credentials": "Uzmanlık Alanları",
+      "experience": "Deneyim"
+    },
+    "engagement": {
+      "likes": "Beğeni",
+      "comments": "Yorum",
+      "shares": "Paylaşım"
     }
   },
   "faq": {
@@ -521,6 +593,113 @@
       "dashboard": "Kontrol Paneli",
       "settings": "Ayarlar",
       "logout": "Çıkış Yap"
+    }
+  },
+  "seo": {
+    "defaultTitle": "Hair Clinic Tiflis - Saç Ekimi ve Estetik Tedavi Merkezi",
+    "defaultDescription": "Gürcistan Tiflis'te modern teknoloji ve uzman kadromuzla saç ekimi, sakal ekimi ve estetik tedavi hizmetleri sunuyoruz.",
+    "defaultKeywords": "saç ekimi, sakal ekimi, kaş ekimi, estetik tedavi, tiflis, gürcistan",
+    "pages": {
+      "home": {
+        "title": "Hair Clinic Tiflis - Saç Ekimi ve Estetik Tedavi Merkezi",
+        "description": "Gürcistan Tiflis'te modern teknoloji ve uzman kadromuzla saç ekimi, sakal ekimi ve estetik tedavi hizmetleri"
+      },
+      "services": {
+        "title": "Saç Ekimi ve Estetik Tedavi Hizmetlerimiz",
+        "description": "DHI ve Safir FUE teknikleriyle doğal ve kalıcı saç ekimi sonuçları"
+      },
+      "blog": {
+        "title": "Saç Ekimi ve Estetik Blog",
+        "description": "Saç ekimi, sakal ekimi ve estetik tedaviler hakkında uzman bilgileri"
+      },
+      "contact": {
+        "title": "İletişim - Hair Clinic Tiflis",
+        "description": "Ücretsiz danışmanlık ve detaylı bilgi için bizimle iletişime geçin"
+      }
+    }
+  },
+  "cookies": {
+    "title": "Çerez Politikası",
+    "message": "Size daha iyi hizmet verebilmek için çerezleri kullanıyoruz",
+    "accept": "Kabul Et",
+    "decline": "Reddet",
+    "preferences": "Tercihlerimi Yönet"
+  },
+  "gdpr": {
+    "title": "KVKK Bildirimi",
+    "message": "Kişisel verileriniz KVKK kapsamında işlenmektedir",
+    "details": "Detaylı Bilgi",
+    "accept": "Anladım"
+  },
+  "notifications": {
+    "title": "Bildirimler",
+    "noNotifications": "Bildiriminiz bulunmuyor",
+    "markAsRead": "Okundu olarak işaretle",
+    "clearAll": "Tümünü Temizle"
+  },
+  "mobile": {
+    "menu": {
+      "open": "Menüyü Aç",
+      "close": "Menüyü Kapat",
+      "back": "Geri",
+      "search": "Ara"
+    },
+    "navigation": {
+      "previous": "Önceki",
+      "next": "Sonraki",
+      "menu": "Menü"
+    }
+  },
+  "social": {
+    "share": {
+      "title": "Paylaş",
+      "facebook": "Facebook'ta Paylaş",
+      "twitter": "Twitter'da Paylaş",
+      "linkedin": "LinkedIn'de Paylaş",
+      "whatsapp": "WhatsApp'ta Paylaş",
+      "copyLink": "Bağlantıyı Kopyala"
+    },
+    "follow": {
+      "title": "Bizi Takip Edin",
+      "facebook": "Facebook'ta Takip Et",
+      "instagram": "Instagram'da Takip Et",
+      "twitter": "Twitter'da Takip Et",
+      "youtube": "Youtube'da Takip Et",
+      "linkedin": "LinkedIn'de Takip Et"
+    }
+  },
+  "testimonials": {
+    "verified": "Doğrulanmış Hasta",
+    "beforeAfter": "Öncesi & Sonrası",
+    "rating": "Değerlendirme",
+    "recommend": "Tavsiye Eder",
+    "experience": "Deneyim",
+    "results": "Sonuçlar",
+    "filters": {
+      "all": "Tüm Yorumlar",
+      "verified": "Doğrulanmış",
+      "withPhotos": "Fotoğraflı"
+    }
+  },
+  "forms": {
+    "consultation": {
+      "title": "Ücretsiz Danışmanlık Formu",
+      "subtitle": "Size özel tedavi planı için formu doldurun",
+      "fields": {
+        "concern": "Tedavi Alanı",
+        "history": "Önceki Tedaviler",
+        "expectations": "Beklentileriniz",
+        "availability": "Uygun Zamanlar"
+      }
+    },
+    "contact": {
+      "success": "Mesajınız başarıyla iletildi",
+      "error": "Mesajınız iletilemedi",
+      "fields": {
+        "subject": "Konu",
+        "message": "Mesajınız",
+        "attachment": "Dosya Ekle"
+      }
     }
   }
 }

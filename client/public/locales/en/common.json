@@ -68,7 +68,12 @@
     "email": "Please enter a valid email address",
     "phone": "Please enter a valid phone number",
     "minLength": "Please enter at least {{count}} characters",
-    "maxLength": "Please enter no more than {{count}} characters"
+    "maxLength": "Please enter no more than {{count}} characters",
+    "passwordMatch": "Passwords do not match",
+    "invalidDate": "Please enter a valid date",
+    "futureDate": "Please select a future date",
+    "numeric": "Please enter numbers only",
+    "url": "Please enter a valid URL"
   },
   "home": {
     "hero": {
@@ -180,19 +185,81 @@
       "title": "Free Consultation",
       "description": "Book an appointment now to determine the most suitable treatment method for you",
       "button": "Book Appointment"
+    },
+    "details": {
+      "duration": "Duration",
+      "recovery": "Recovery Time",
+      "anesthesia": "Anesthesia",
+      "hospital": "Hospital Stay",
+      "results": "Results",
+      "recommendation": "Recommendations"
+    },
+    "treatments": {
+      "hair": {
+        "technique": {
+          "dhi": "DHI Technique",
+          "fue": "Sapphire FUE Technique",
+          "description": "Latest technology and natural results"
+        },
+        "process": {
+          "planning": "Planning",
+          "extraction": "Graft Extraction",
+          "implantation": "Implantation",
+          "aftercare": "Aftercare"
+        }
+      }
     }
   },
   "blog": {
-    "title": "Hair Transplant and Aesthetics Blog",
-    "subtitle": "Latest updates, treatment processes, and success stories from our expert team",
-    "search": "Search blog posts...",
+    "title": "Blog",
+    "readMore": "Read More",
     "categories": {
       "all": "All",
       "hairTransplant": "Hair Transplant",
       "beardTransplant": "Beard Transplant",
       "eyebrowTransplant": "Eyebrow Transplant",
+      "aesthetics": "Aesthetics",
+      "dermatology": "Dermatology",
       "aftercare": "Aftercare",
       "treatment": "Treatment Process"
+    },
+    "search": {
+      "title": "Search Blog",
+      "placeholder": "Type to search...",
+      "noResults": "No results found",
+      "trending": "Trending Topics"
+    },
+    "share": {
+      "title": "Share This Article",
+      "copied": "Link copied"
+    },
+    "author": {
+      "about": "About the Author",
+      "articles": "Other Articles"
+    },
+    "relatedPosts": "Related Posts",
+    "comments": {
+      "title": "Comments",
+      "noComments": "No comments yet",
+      "writeComment": "Write a Comment",
+      "submit": "Submit"
+    },
+    "filters": {
+      "latest": "Latest",
+      "popular": "Popular",
+      "category": "Category"
+    },
+    "readTime": "{{minutes}} min read",
+    "publishDate": "Published on {{date}}",
+    "authorInfo": {
+      "title": "About the Author",
+      "credentials": "Specializations",
+      "experience": "Experience"
+    },
+    "engagement": {
+      "likes": "Likes",
+      "comments": "Comments",
+      "shares": "Shares"
     }
   },
   "patient": {
@@ -498,5 +565,132 @@
     "error": "An error occurred",
     "required": "* Required field",
     "optional": "(Optional)"
+  },
+  "seo": {
+    "defaultTitle": "Hair Clinic Tbilisi - Hair Transplant and Aesthetic Treatment Center",
+    "defaultDescription": "We provide hair transplant, beard transplant and eyebrow transplant and aesthetic treatment services with modern technology and expert staff in Tbilisi, Georgia.",
+    "defaultKeywords": "hair transplant, beard transplant, eyebrow transplant, aesthetic treatment, tbilisi, georgia",
+    "pages": {
+      "home": {
+        "title": "Hair Clinic Tbilisi - Hair Transplant and Aesthetic Treatment Center",
+        "description": "Hair transplant, beard transplant and aesthetic treatment services with modern technology and expert staff in Tbilisi, Georgia"
+      },
+      "services": {
+        "title": "Our Hair Transplant and Aesthetic Treatment Services",
+        "description": "Natural and permanent hair transplant results with DHI and Sapphire FUE techniques"
+      },
+      "blog": {
+        "title": "Hair Transplant and Aesthetics Blog",
+        "description": "Expert insights about hair transplant, beard transplant and aesthetic treatments"
+      },
+      "contact": {
+        "title": "Contact - Hair Clinic Tbilisi",
+        "description": "Get in touch with us for free consultation and detailed information"
+      }
+    }
+  },
+  "cookies": {
+    "title": "Cookie Policy",
+    "message": "We use cookies to provide you with a better service",
+    "accept": "Accept",
+    "decline": "Decline",
+    "preferences": "Manage Preferences"
+  },
+  "gdpr": {
+    "title": "Privacy Notice",
+    "message": "Your personal data is processed in accordance with GDPR",
+    "details": "Learn More",
+    "accept": "I Understand"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "noNotifications": "No notifications",
+    "markAsRead": "Mark as Read",
+    "clearAll": "Clear All"
+  },
+  "mobile": {
+    "menu": {
+      "open": "Open Menu",
+      "close": "Close Menu",
+      "back": "Back",
+      "search": "Search"
+    },
+    "navigation": {
+      "previous": "Previous",
+      "next": "Next",
+      "menu": "Menu"
+    }
+  },
+  "social": {
+    "share": {
+      "title": "Share",
+      "facebook": "Share on Facebook",
+      "twitter": "Share on Twitter",
+      "linkedin": "Share on LinkedIn",
+      "whatsapp": "Share on WhatsApp",
+      "copyLink": "Copy Link"
+    },
+    "follow": {
+      "title": "Follow Us",
+      "facebook": "Follow on Facebook",
+      "instagram": "Follow on Instagram",
+      "twitter": "Follow on Twitter",
+      "youtube": "Follow on Youtube",
+      "linkedin": "Follow on LinkedIn"
+    }
+  },
+  "testimonials": {
+    "verified": "Verified Patient",
+    "beforeAfter": "Before & After",
+    "rating": "Rating",
+    "recommend": "Would Recommend",
+    "experience": "Experience",
+    "results": "Results",
+    "filters": {
+      "all": "All Reviews",
+      "verified": "Verified",
+      "withPhotos": "With Photos"
+    }
+  },
+  "forms": {
+    "consultation": {
+      "title": "Free Consultation Form",
+      "subtitle": "Fill out the form for your personalized treatment plan",
+      "fields": {
+        "concern": "Treatment Area",
+        "history": "Previous Treatments",
+        "expectations": "Your Expectations",
+        "availability": "Preferred Times"
+      }
+    },
+    "contact": {
+      "success": "Your message has been sent successfully",
+      "error": "Failed to send your message",
+      "fields": {
+        "subject": "Subject",
+        "message": "Your Message",
+        "attachment": "Attach File"
+      }
+    }
+  },
+  "seo": {
+    "pages": {
+      "home": {
+        "title": "Hair Clinic Tbilisi - Hair Transplant and Aesthetic Treatment Center",
+        "description": "Hair transplant, beard transplant and aesthetic treatment services with modern technology and expert staff in Tbilisi, Georgia"
+      },
+      "services": {
+        "title": "Our Hair Transplant and Aesthetic Treatment Services",
+        "description": "Natural and permanent hair transplant results with DHI and Sapphire FUE techniques"
+      },
+      "blog": {
+        "title": "Hair Transplant and Aesthetics Blog",
+        "description": "Expert insights about hair transplant, beard transplant and aesthetic treatments"
+      },
+      "contact": {
+        "title": "Contact - Hair Clinic Tbilisi",
+        "description": "Get in touch with us for free consultation and detailed information"
+      }
+    }
   }
 }
