@@ -25,7 +25,10 @@
     "back": "Geri",
     "edit": "Düzenle",
     "upload": "Yükle",
-    "readMore": "Devamını Oku"
+    "readMore": "Devamını Oku",
+    "learnMore": "Daha Fazla Bilgi",
+    "getStarted": "Hemen Başla",
+    "contactUs": "Bize Ulaşın"
   },
   "validation": {
     "required": "Bu alan zorunludur",
@@ -33,6 +36,92 @@
     "phone": "Geçerli bir telefon numarası giriniz",
     "minLength": "En az {{count}} karakter giriniz",
     "maxLength": "En fazla {{count}} karakter giriniz"
+  },
+  "home": {
+    "hero": {
+      "title": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
+      "subtitle": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
+      "cta": "Ücretsiz Konsültasyon"
+    },
+    "features": {
+      "title": "Neden Bizi Seçmelisiniz?",
+      "subtitle": "Size en iyi hizmeti sunmak için çalışıyoruz",
+      "expertise": {
+        "title": "Uzman Kadro",
+        "description": "Alanında uzman doktorlarımız ve deneyimli ekibimizle yanınızdayız"
+      },
+      "technology": {
+        "title": "Modern Teknoloji",
+        "description": "En son teknolojik cihazlar ve yöntemlerle tedavi"
+      },
+      "care": {
+        "title": "Kişisel Bakım",
+        "description": "Her hastaya özel tedavi planı ve sürekli takip"
+      },
+      "recovery": {
+        "title": "Hızlı İyileşme",
+        "description": "Minimal invaziv teknikler ile hızlı iyileşme süreci"
+      },
+      "guarantee": {
+        "title": "Garantili Sonuç",
+        "description": "Yüksek hasta memnuniyeti ve garantili sonuçlar"
+      },
+      "approach": {
+        "title": "Kişisel Yaklaşım",
+        "description": "Her hastaya özel tasarlanmış tedavi planı"
+      },
+      "clinic": {
+        "title": "Modern Klinik",
+        "description": "Tam donanımlı, konforlu klinik ortamı"
+      },
+      "location": {
+        "title": "Merkezi Konum",
+        "description": "Kolay ulaşılabilir merkezi lokasyon"
+      }
+    },
+    "services": {
+      "title": "Hizmetlerimiz",
+      "subtitle": "Size sunduğumuz tedavi seçenekleri",
+      "viewAll": "Tüm Hizmetleri Gör"
+    },
+    "testimonials": {
+      "title": "Hasta Yorumları",
+      "subtitle": "Başarı hikayelerimiz ve mutlu hastalarımız"
+    },
+    "stats": {
+      "title": "Rakamlarla Biz",
+      "happyPatients": "Mutlu Hasta",
+      "experience": "Yıllık Deneyim",
+      "procedures": "Başarılı İşlem",
+      "experts": "Uzman Doktor"
+    }
+  },
+  "services": {
+    "title": "Hizmetlerimiz",
+    "description": "Modern teknoloji ve uzman kadromuzla sunduğumuz tedavi seçenekleri",
+    "categories": {
+      "hair": {
+        "title": "Saç Ekimi",
+        "description": "DHI ve Safir FUE teknikleriyle doğal ve kalıcı sonuçlar"
+      },
+      "beard": {
+        "title": "Sakal Ekimi",
+        "description": "Yüz hatlarınıza uygun doğal sakal görünümü"
+      },
+      "eyebrow": {
+        "title": "Kaş Ekimi",
+        "description": "Kaş yapınıza özel tasarım ve uygulama"
+      },
+      "prp": {
+        "title": "PRP Tedavisi",
+        "description": "Saç ve cilt gençleştirme tedavileri"
+      }
+    },
+    "consultation": {
+      "title": "Ücretsiz Konsültasyon",
+      "description": "Size en uygun tedavi yöntemini belirlemek için hemen randevu alın",
+      "button": "Randevu Al"
+    }
   },
   "blog": {
     "title": "Saç Ekimi ve Estetik Blog",
@@ -45,6 +134,32 @@
       "eyebrowTransplant": "Kaş Ekimi",
       "aftercare": "Bakım",
       "treatment": "Tedavi Süreci"
+    }
+  },
+  "faq": {
+    "title": "Sıkça Sorulan Sorular",
+    "subtitle": "Saç ekimi hakkında merak ettiğiniz tüm sorulara uzman ekibimizden yanıtlar",
+    "items": {
+      "0": {
+        "question": "Saç ekimi operasyonu ne kadar sürer?",
+        "answer": "Saç ekimi operasyonu ortalama 6-8 saat sürer. Bu süre ekilecek greft sayısına ve kullanılan tekniğe göre değişiklik gösterebilir. İşlem lokal anestezi altında gerçekleştirilir."
+      },
+      "1": {
+        "question": "Saç ekimi sonrası iyileşme süreci nasıldır?",
+        "answer": "İyileşme süreci kişiden kişiye değişmekle birlikte, genellikle ilk 2 hafta kritik önem taşır. 3. günden itibaren işe dönülebilir. Tam iyileşme ve sonuçların görülmesi 6-12 ay arasında sürer."
+      },
+      "2": {
+        "question": "Saç ekimi kalıcı bir çözüm müdür?",
+        "answer": "Evet, saç ekimi kalıcı bir çözümdür. Ekilen saçlar genetik olarak dökülmeye dirençli bölgeden alındığı için ömür boyu dökülmeden kalır. Ancak var olan saçların korunması için gerekli bakımın yapılması önemlidir."
+      },
+      "3": {
+        "question": "Saç ekimi için yaş sınırı var mıdır?",
+        "answer": "Saç ekimi için ideal yaş aralığı 25-55'tir. Ancak her vaka bireysel olarak değerlendirilir. Önemli olan saç kaybının stabil hale gelmiş olması ve yeterli donör alanının bulunmasıdır."
+      },
+      "4": {
+        "question": "Operasyon sonrası günlük yaşama ne zaman dönülebilir?",
+        "answer": "Operasyondan 3 gün sonra günlük yaşama dönülebilir. Ancak spor, yüzme gibi aktiviteler için 1 ay beklenmesi önerilir. İlk 2 hafta güneş, terleme ve darbelere karşı dikkatli olunmalıdır."
+      }
     }
   },
   "patient": {

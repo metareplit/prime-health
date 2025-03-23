@@ -5,7 +5,7 @@
     "about": "About",
     "contact": "Contact",
     "blog": "Blog",
-    "appointments": "Appointments",
+    "appointments": "Book Appointment",
     "gallery": "Gallery",
     "products": "Products",
     "patientPortal": "Patient Portal",
@@ -25,7 +25,10 @@
     "back": "Back",
     "edit": "Edit",
     "upload": "Upload",
-    "readMore": "Read More"
+    "readMore": "Read More",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us"
   },
   "validation": {
     "required": "This field is required",
@@ -33,6 +36,118 @@
     "phone": "Please enter a valid phone number",
     "minLength": "Please enter at least {{count}} characters",
     "maxLength": "Please enter no more than {{count}} characters"
+  },
+  "home": {
+    "hero": {
+      "title": "Expert Clinic in Hair Transplantation and Aesthetic Treatments",
+      "subtitle": "Achieve the best results with our modern technology and expert team",
+      "cta": "Free Consultation"
+    },
+    "features": {
+      "title": "Why Choose Us?",
+      "subtitle": "We work to provide you with the best service",
+      "expertise": {
+        "title": "Expert Team",
+        "description": "We are here with our expert doctors and experienced team"
+      },
+      "technology": {
+        "title": "Modern Technology",
+        "description": "Treatment with the latest technological devices and methods"
+      },
+      "care": {
+        "title": "Personal Care",
+        "description": "Custom treatment plan and continuous monitoring for each patient"
+      },
+      "recovery": {
+        "title": "Fast Recovery",
+        "description": "Quick recovery process with minimally invasive techniques"
+      },
+      "guarantee": {
+        "title": "Guaranteed Results",
+        "description": "High patient satisfaction and guaranteed results"
+      },
+      "approach": {
+        "title": "Personal Approach",
+        "description": "Customized treatment plan for each patient"
+      },
+      "clinic": {
+        "title": "Modern Clinic",
+        "description": "Fully equipped, comfortable clinical environment"
+      },
+      "location": {
+        "title": "Central Location",
+        "description": "Easily accessible central location"
+      }
+    },
+    "services": {
+      "title": "Our Services",
+      "subtitle": "Treatment options we offer",
+      "viewAll": "View All Services"
+    },
+    "testimonials": {
+      "title": "Patient Reviews",
+      "subtitle": "Our success stories and happy patients"
+    },
+    "stats": {
+      "title": "Our Numbers",
+      "happyPatients": "Happy Patients",
+      "experience": "Years Experience",
+      "procedures": "Successful Procedures",
+      "experts": "Expert Doctors"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers from our expert team to all your questions about hair transplantation",
+    "items": {
+      "0": {
+        "question": "How long does a hair transplant operation take?",
+        "answer": "A hair transplant operation takes approximately 6-8 hours. This duration may vary depending on the number of grafts to be transplanted and the technique used. The procedure is performed under local anesthesia."
+      },
+      "1": {
+        "question": "What is the recovery process like after hair transplantation?",
+        "answer": "While the recovery process varies from person to person, generally the first 2 weeks are critically important. You can return to work from the 3rd day. Complete healing and seeing results takes 6-12 months."
+      },
+      "2": {
+        "question": "Is hair transplantation a permanent solution?",
+        "answer": "Yes, hair transplantation is a permanent solution. Since the transplanted hair is taken from an area genetically resistant to hair loss, it remains without falling out for life. However, it is important to maintain proper care to protect existing hair."
+      },
+      "3": {
+        "question": "Is there an age limit for hair transplantation?",
+        "answer": "The ideal age range for hair transplantation is 25-55. However, each case is evaluated individually. What's important is that hair loss has stabilized and there is sufficient donor area available."
+      },
+      "4": {
+        "question": "When can one return to daily life after the operation?",
+        "answer": "You can return to daily life 3 days after the operation. However, it is recommended to wait 1 month for activities such as sports and swimming. During the first 2 weeks, care should be taken against sun exposure, sweating, and impacts."
+      }
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "description": "Treatment options we offer with modern technology and expert staff",
+    "categories": {
+      "hair": {
+        "title": "Hair Transplantation",
+        "description": "Natural and permanent results with DHI and Sapphire FUE techniques"
+      },
+      "beard": {
+        "title": "Beard Transplantation",
+        "description": "Natural beard appearance suitable for your facial features"
+      },
+      "eyebrow": {
+        "title": "Eyebrow Transplantation",
+        "description": "Custom design and application for your eyebrow structure"
+      },
+      "prp": {
+        "title": "PRP Treatment",
+        "description": "Hair and skin rejuvenation treatments"
+      }
+    },
+    "consultation": {
+      "title": "Free Consultation",
+      "description": "Book an appointment now to determine the most suitable treatment method for you",
+      "button": "Book Appointment"
+    }
   },
   "blog": {
     "title": "Hair Transplant and Aesthetics Blog",

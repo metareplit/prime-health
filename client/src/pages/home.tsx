@@ -7,74 +7,76 @@ import { motion } from "framer-motion";
 import { Shield, Users, Stethoscope, Clock, Award, HeartHandshake, Building2, Map, ArrowRight, CheckCircle, PlusCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useTranslation } from "react-i18next";
 
 const features = [
   {
     icon: <Shield className="h-8 w-8 text-primary" />,
-    title: "Güvenilir Hizmet",
-    description: "10 yılı aşkın deneyim ve binlerce başarılı operasyon"
+    titleKey: "home.features.expertise.title",
+    descriptionKey: "home.features.expertise.description"
   },
   {
     icon: <Users className="h-8 w-8 text-primary" />,
-    title: "Uzman Kadro",
-    description: "Alanında uzman doktorlar ve deneyimli sağlık ekibi"
+    titleKey: "home.features.technology.title",
+    descriptionKey: "home.features.technology.description"
   },
   {
     icon: <Stethoscope className="h-8 w-8 text-primary" />,
-    title: "Modern Teknoloji",
-    description: "En son teknoloji ve steril operasyon ortamı"
+    titleKey: "home.features.care.title",
+    descriptionKey: "home.features.care.description"
   },
   {
     icon: <Clock className="h-8 w-8 text-primary" />,
-    title: "Hızlı İyileşme",
-    description: "Minimal invaziv teknikler ile hızlı iyileşme süreci"
+    titleKey: "home.features.recovery.title",
+    descriptionKey: "home.features.recovery.description"
   },
   {
     icon: <Award className="h-8 w-8 text-primary" />,
-    title: "Garantili Sonuç",
-    description: "Yüksek hasta memnuniyeti ve garantili sonuçlar"
+    titleKey: "home.features.guarantee.title",
+    descriptionKey: "home.features.guarantee.description"
   },
   {
     icon: <HeartHandshake className="h-8 w-8 text-primary" />,
-    title: "Kişisel Yaklaşım",
-    description: "Her hastaya özel tasarlanmış tedavi planı"
+    titleKey: "home.features.approach.title",
+    descriptionKey: "home.features.approach.description"
   },
   {
     icon: <Building2 className="h-8 w-8 text-primary" />,
-    title: "Modern Klinik",
-    description: "Tam donanımlı, konforlu klinik ortamı"
+    titleKey: "home.features.clinic.title",
+    descriptionKey: "home.features.clinic.description"
   },
   {
     icon: <Map className="h-8 w-8 text-primary" />,
-    title: "Merkezi Konum",
-    description: "Tiflis'in merkezinde kolay ulaşılabilir lokasyon"
+    titleKey: "home.features.location.title",
+    descriptionKey: "home.features.location.description"
   }
 ];
 
 const faqItems = [
   {
-    question: "Saç ekimi operasyonu ne kadar sürer?",
-    answer: "Saç ekimi operasyonu ortalama 6-8 saat sürer. Bu süre ekilecek greft sayısına ve kullanılan tekniğe göre değişiklik gösterebilir. İşlem lokal anestezi altında gerçekleştirilir."
+    questionKey: "faq.items.0.question",
+    answerKey: "faq.items.0.answer"
   },
   {
-    question: "Saç ekimi sonrası iyileşme süreci nasıldır?",
-    answer: "İyileşme süreci kişiden kişiye değişmekle birlikte, genellikle ilk 2 hafta kritik önem taşır. 3. günden itibaren işe dönülebilir. Tam iyileşme ve sonuçların görülmesi 6-12 ay arasında sürer."
+    questionKey: "faq.items.1.question",
+    answerKey: "faq.items.1.answer"
   },
   {
-    question: "Saç ekimi kalıcı bir çözüm müdür?",
-    answer: "Evet, saç ekimi kalıcı bir çözümdür. Ekilen saçlar genetik olarak dökülmeye dirençli bölgeden alındığı için ömür boyu dökülmeden kalır. Ancak var olan saçların korunması için gerekli bakımın yapılması önemlidir."
+    questionKey: "faq.items.2.question",
+    answerKey: "faq.items.2.answer"
   },
   {
-    question: "Saç ekimi için yaş sınırı var mıdır?",
-    answer: "Saç ekimi için ideal yaş aralığı 25-55'tir. Ancak her vaka bireysel olarak değerlendirilir. Önemli olan saç kaybının stabil hale gelmiş olması ve yeterli donör alanının bulunmasıdır."
+    questionKey: "faq.items.3.question",
+    answerKey: "faq.items.3.answer"
   },
   {
-    question: "Operasyon sonrası günlük yaşama ne zaman dönülebilir?",
-    answer: "Operasyondan 3 gün sonra günlük yaşama dönülebilir. Ancak spor, yüzme gibi aktiviteler için 1 ay beklenmesi önerilir. İlk 2 hafta güneş, terleme ve darbelere karşı dikkatli olunmalıdır."
+    questionKey: "faq.items.4.question",
+    answerKey: "faq.items.4.answer"
   }
 ];
 
 export default function Home() {
+  const { t } = useTranslation('common');
   const { data: services, isLoading } = useQuery({
     queryKey: ["/api/services"],
   });
@@ -95,11 +97,10 @@ export default function Home() {
             className="text-center max-w-3xl mx-auto mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Neden Bizi Tercih Etmelisiniz?
+              {t('home.features.title')}
             </h2>
             <p className="text-lg text-gray-600">
-              Yılların deneyimi, modern teknoloji ve uzman kadromuzla
-              sizlere en iyi hizmeti sunuyoruz
+              {t('home.features.subtitle')}
             </p>
           </motion.div>
 
@@ -116,8 +117,8 @@ export default function Home() {
                 <div className="mb-4 inline-block p-3 bg-primary/10 rounded-lg">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-2">{t(feature.titleKey)}</h3>
+                <p className="text-gray-600">{t(feature.descriptionKey)}</p>
               </motion.div>
             ))}
           </div>
@@ -148,10 +149,10 @@ export default function Home() {
             className="text-center max-w-3xl mx-auto mb-16"
           >
             <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
-              Profesyonel Saç Ekimi ve Estetik Hizmetleri
+              {t('home.hero.title')}
             </h1>
             <p className="text-lg text-gray-600">
-              Modern teknoloji ve uzman kadromuzla doğal ve kalıcı sonuçlar için yanınızdayız
+              {t('home.hero.subtitle')}
             </p>
           </motion.div>
 
@@ -228,7 +229,7 @@ export default function Home() {
                           variant="ghost"
                           className="w-full group/btn hover:bg-primary hover:text-white"
                         >
-                          <span>Detaylı Bilgi</span>
+                          <span>{t('buttons.learnMore')}</span>
                           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                         </Button>
                       </Link>
@@ -258,10 +259,10 @@ export default function Home() {
             className="text-center max-w-3xl mx-auto mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Sıkça Sorulan Sorular
+              {t('faq.title')}
             </h2>
             <p className="text-lg text-gray-600">
-              Saç ekimi hakkında merak ettiğiniz tüm sorulara uzman ekibimizden yanıtlar
+              {t('faq.subtitle')}
             </p>
           </motion.div>
 
@@ -279,12 +280,12 @@ export default function Home() {
                     <AccordionTrigger className="px-6 py-4 hover:bg-gray-50 transition-colors">
                       <div className="flex items-center gap-3 text-left">
                         <PlusCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                        <span className="font-medium">{item.question}</span>
+                        <span className="font-medium">{t(item.questionKey)}</span>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-4">
                       <div className="pl-8 text-gray-600">
-                        {item.answer}
+                        {t(item.answerKey)}
                       </div>
                     </AccordionContent>
                   </AccordionItem>
