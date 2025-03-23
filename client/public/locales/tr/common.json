@@ -2,18 +2,42 @@
   "nav": {
     "home": "Ana Sayfa",
     "services": "Hizmetler",
-    "about": "Hakkımızda",
-    "contact": "İletişim",
-    "blog": "Blog",
-    "appointments": "Randevu Al",
     "gallery": "Galeri",
     "products": "Ürünler",
+    "blog": "Blog",
+    "contact": "İletişim",
+    "appointments": "Randevu Al",
     "patientPortal": "Hasta Portalı",
     "userMenu": "Kullanıcı Menüsü",
     "menu": "Menü",
     "doctors": "Doktorlarımız",
     "press": "Basında Biz",
     "brand": "Prime Health"
+  },
+  "header": {
+    "menu": {
+      "open": "Menüyü aç",
+      "close": "Menüyü kapat",
+      "main": "Ana menü",
+      "user": "Kullanıcı menüsü"
+    },
+    "search": {
+      "placeholder": "Ara...",
+      "button": "Ara",
+      "noResults": "Sonuç bulunamadı"
+    },
+    "buttons": {
+      "appointment": "Randevu Al",
+      "consultation": "Ücretsiz Danışmanlık",
+      "contact": "İletişime Geç"
+    },
+    "userMenu": {
+      "profile": "Profilim",
+      "appointments": "Randevularım",
+      "dashboard": "Kontrol Paneli",
+      "settings": "Ayarlar",
+      "logout": "Çıkış Yap"
+    }
   },
   "ui": {
     "dialog": {
@@ -563,31 +587,6 @@
     },
     "copyright": "© {year} Tüm hakları saklıdır",
     "brand": "Hair Clinic Tiflis"
-  },
-  "header": {
-    "menu": {
-      "open": "Menüyü aç",
-      "close": "Menüyü kapat",
-      "main": "Ana menü",
-      "user": "Kullanıcı menüsü"
-    },
-    "search": {
-      "placeholder": "Ara...",
-      "button": "Ara",
-      "noResults": "Sonuç bulunamadı"
-    },
-    "buttons": {
-      "appointment": "Randevu Al",
-      "consultation": "Ücretsiz Danışmanlık",
-      "contact": "İletişime Geç"
-    },
-    "userMenu": {
-      "profile": "Profilim",
-      "appointments": "Randevularım",
-      "dashboard": "Kontrol Paneli",
-      "settings": "Ayarlar",
-      "logout": "Çıkış Yap"
-    }
   },
   "seo": {
     "defaultTitle": "Hair Clinic Tiflis - Saç Ekimi ve Estetik Tedavi Merkezi",

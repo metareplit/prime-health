@@ -83,7 +83,7 @@ export default function Header({ children }: HeaderProps) {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="relative h-9 w-9 rounded-full">
                     <User className="h-5 w-5" />
-                    <span className="sr-only">{t('nav.userMenu')}</span>
+                    <span className="sr-only">{t('header.menu.user')}</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
@@ -112,7 +112,7 @@ export default function Header({ children }: HeaderProps) {
                     onClick={() => logoutMutation.mutate()}
                   >
                     <LogOut className="mr-2 h-4 w-4" />
-                    {t('auth.logout')}
+                    {t('header.userMenu.logout')}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -129,7 +129,7 @@ export default function Header({ children }: HeaderProps) {
 
             <Link href="/randevu">
               <Button className="hidden md:inline-flex">
-                {t('nav.appointments')}
+                {t('header.buttons.appointment')}
               </Button>
             </Link>
 
@@ -138,7 +138,7 @@ export default function Header({ children }: HeaderProps) {
               <SheetTrigger asChild>
                 <Button variant="ghost" className="md:hidden h-9 w-9 p-0">
                   <Menu className="h-5 w-5" />
-                  <span className="sr-only">{t('nav.menu')}</span>
+                  <span className="sr-only">{t('header.menu.open')}</span>
                 </Button>
               </SheetTrigger>
               <SheetContent side="right">
@@ -176,7 +176,7 @@ export default function Header({ children }: HeaderProps) {
                     </>
                   )}
                   <Link href="/randevu">
-                    <Button className="w-full">{t('nav.appointments')}</Button>
+                    <Button className="w-full">{t('header.buttons.appointment')}</Button>
                   </Link>
                 </div>
               </SheetContent>
