@@ -13,6 +13,7 @@ import {
   Clock,
 } from "lucide-react";
 import type { Appointment, Message } from "@shared/schema";
+import { Metadata } from "@/components/ui/metadata";
 
 export default function PatientDashboard() {
   const { data: upcomingAppointments } = useQuery<Appointment[]>({
@@ -25,6 +26,12 @@ export default function PatientDashboard() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Metadata
+        title="Hasta Portalı - Kontrol Paneli"
+        description="Tedavi sürecinizi takip edin. Randevularınızı yönetin, mesajlarınızı görüntüleyin ve tedavi görsellerinizi yükleyin."
+        keywords="hasta portali, randevu takip, tedavi süreci, saç ekimi takip"
+        type="website"
+      />
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

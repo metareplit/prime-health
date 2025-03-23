@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Clock, Check, HelpCircle, ArrowRight, ListChecks, Info } from "lucide-react"; //Restored import
+import { Clock, Check, HelpCircle, ArrowRight, ListChecks, Info } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Service } from "@shared/schema";
 import { Metadata } from "@/components/ui/metadata";
@@ -31,11 +31,12 @@ export default function Services() {
 
   return (
     <div className="min-h-screen">
-      {/* SEO Meta Tags */}
       <Metadata
-        title="Saç Ekimi ve Estetik Hizmetleri | Hair Clinic Tiflis"
-        description="Gürcistan Tiflis'te profesyonel saç ekimi, sakal ekimi, kaş ekimi ve saç bakım hizmetleri. Modern teknoloji ve uzman kadromuzla yanınızdayız."
+        title="Saç Ekimi ve Estetik Hizmetleri"
+        description="Profesyonel saç ekimi, sakal ekimi, kaş ekimi ve saç bakım hizmetleri. Modern teknoloji ve uzman kadromuzla yanınızdayız."
         keywords="saç ekimi, sakal ekimi, kaş ekimi, prp tedavisi, mezoterapi, tiflis saç ekimi, gürcistan saç ekimi"
+        type="website"
+        image="/images/services/hair-transplant.jpg"
       />
 
       {/* Hero Section */}
