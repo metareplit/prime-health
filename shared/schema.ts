@@ -1,4 +1,4 @@
-import { pgTable, text, serial, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, timestamp, boolean, integer } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -88,9 +88,9 @@ export const contactInfo = pgTable("contact_info", {
   type: text("type").notNull(), // address, phone, email, social
   label: text("label").notNull(),
   value: text("value").notNull(),
-  icon: text("icon"), // Lucide icon name
-  order: serial("order").default(0),
-  isActive: text("is_active").default("true"),
+  icon: text("icon"),
+  order: integer("order").default(0),
+  isActive: boolean("is_active").default(true),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
@@ -100,8 +100,8 @@ export const messages = pgTable("messages", {
   senderId: serial("sender_id").notNull().references(() => users.id),
   receiverId: serial("receiver_id").notNull().references(() => users.id),
   content: text("content").notNull(),
-  attachments: text("attachments").array().default([]), // URLs to attached files
-  isRead: text("is_read").default("false"),
+  attachments: text("attachments").array(),
+  isRead: boolean("is_read").default(false),
   readAt: timestamp("read_at"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
