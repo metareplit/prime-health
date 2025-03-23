@@ -88,7 +88,19 @@ export default function SuccessStories() {
       if ("id" in editingStory) {
         updateMutation.mutate(editingStory as SuccessStory);
       } else {
-        createMutation.mutate(editingStory as Omit<SuccessStory, "id">);
+        const storyData = {
+          ...editingStory,
+          treatmentDate: new Date().toISOString(),
+          beforeImages: editingStory.beforeImages || [],
+          afterImages: editingStory.afterImages || [],
+          age: editingStory.age || null,
+          testimonial: editingStory.testimonial || null,
+          recoveryTime: editingStory.recoveryTime || null,
+          satisfaction: editingStory.satisfaction || 5,
+          featured: editingStory.featured || false,
+          published: editingStory.published || false,
+        };
+        createMutation.mutate(storyData as Omit<SuccessStory, "id">);
       }
     }
   };
@@ -96,14 +108,14 @@ export default function SuccessStories() {
   const handleCreate = () => {
     setEditingStory({
       patientName: "",
-      age: undefined,
+      age: null,
       treatmentType: "",
       description: "",
-      testimonial: "",
+      testimonial: null,
       beforeImages: [],
       afterImages: [],
       treatmentDate: new Date().toISOString(),
-      recoveryTime: "",
+      recoveryTime: null,
       satisfaction: 5,
       featured: false,
       published: false,
@@ -153,11 +165,11 @@ export default function SuccessStories() {
                   <label className="text-sm font-medium">Yaş</label>
                   <Input
                     type="number"
-                    value={editingStory.age}
+                    value={editingStory.age || ""}
                     onChange={(e) =>
                       setEditingStory({
                         ...editingStory,
-                        age: parseInt(e.target.value),
+                        age: e.target.value ? parseInt(e.target.value) : null,
                       })
                     }
                     placeholder="Yaş..."
@@ -197,11 +209,11 @@ export default function SuccessStories() {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Hasta Yorumu</label>
                 <Textarea
-                  value={editingStory.testimonial}
+                  value={editingStory.testimonial || ""}
                   onChange={(e) =>
                     setEditingStory({
                       ...editingStory,
-                      testimonial: e.target.value,
+                      testimonial: e.target.value || null,
                     })
                   }
                   placeholder="Hasta yorumu..."
