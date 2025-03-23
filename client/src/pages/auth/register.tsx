@@ -57,6 +57,16 @@ export default function Register() {
 
   async function onSubmit(values: z.infer<typeof registerSchema>) {
     try {
+      // Telefon numarası minimum uzunluk kontrolü
+      if (values.phone.length < 8) {
+        toast({
+          title: "Hata",
+          description: "Geçersiz telefon numarası formatı",
+          variant: "destructive",
+        });
+        return;
+      }
+
       const res = await apiRequest("POST", "/api/auth/register", {
         ...values,
         dateOfBirth: new Date(values.dateOfBirth),
@@ -80,7 +90,7 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-primary/5 to-transparent">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -152,12 +162,30 @@ export default function Register() {
                   <FormLabel>Telefon</FormLabel>
                   <FormControl>
                     <PhoneInput
-                      country={'tr'}
+                      specialLabel=""
+                      enableSearch
+                      searchPlaceholder="Ülke ara..."
+                      searchNotFound="Ülke bulunamadı"
                       value={field.value}
                       onChange={phone => field.onChange(phone)}
-                      inputClass="w-full !p-6 !h-10 !text-base"
-                      containerClass="!w-full"
-                      buttonClass="!h-10"
+                      inputStyle={{
+                        width: '100%',
+                        height: '40px',
+                        fontSize: '16px',
+                        paddingLeft: '48px'
+                      }}
+                      containerStyle={{
+                        width: '100%'
+                      }}
+                      buttonStyle={{
+                        backgroundColor: 'transparent',
+                        borderRadius: '6px 0 0 6px',
+                        border: '1px solid #e2e8f0',
+                        borderRight: 'none'
+                      }}
+                      dropdownStyle={{
+                        width: '300px'
+                      }}
                       placeholder="(555) 555-5555"
                     />
                   </FormControl>
