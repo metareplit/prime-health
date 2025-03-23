@@ -19,8 +19,16 @@ export default function AdminSuccessStories() {
 
   const createMutation = useMutation({
     mutationFn: async (data: Omit<SuccessStory, "id">) => {
-      const res = await apiRequest("POST", "/api/success-stories", data);
-      return res.json();
+      try {
+        const res = await apiRequest("POST", "/api/success-stories", data);
+        if (!res.ok) {
+          const error = await res.json();
+          throw new Error(error.message || "Başarı hikayesi oluşturulamadı");
+        }
+        return res.json();
+      } catch (error: any) {
+        throw new Error(error.message || "Başarı hikayesi oluşturulamadı");
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/success-stories"] });
@@ -30,12 +38,27 @@ export default function AdminSuccessStories() {
       });
       setEditingStory(null);
     },
+    onError: (error: Error) => {
+      toast({
+        title: "Hata",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
   });
 
   const updateMutation = useMutation({
     mutationFn: async (data: SuccessStory) => {
-      const res = await apiRequest("PATCH", `/api/success-stories/${data.id}`, data);
-      return res.json();
+      try {
+        const res = await apiRequest("PATCH", `/api/success-stories/${data.id}`, data);
+        if (!res.ok) {
+          const error = await res.json();
+          throw new Error(error.message || "Başarı hikayesi güncellenemedi");
+        }
+        return res.json();
+      } catch (error: any) {
+        throw new Error(error.message || "Başarı hikayesi güncellenemedi");
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/success-stories"] });
@@ -44,6 +67,13 @@ export default function AdminSuccessStories() {
         description: "Başarı hikayesi güncellendi.",
       });
       setEditingStory(null);
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Hata",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 
@@ -80,13 +110,22 @@ export default function AdminSuccessStories() {
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingStory) return;
 
+    if (!editingStory.patientName || !editingStory.treatmentType || !editingStory.description) {
+      toast({
+        title: "Hata",
+        description: "Lütfen gerekli alanları doldurun.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const storyData = {
       ...editingStory,
-      treatmentDate: new Date(),
+      treatmentDate: new Date().toISOString(),
       beforeImages: editingStory.beforeImages || [],
       afterImages: editingStory.afterImages || [],
       age: editingStory.age || null,
@@ -97,10 +136,14 @@ export default function AdminSuccessStories() {
       published: editingStory.published || false,
     };
 
-    if ("id" in editingStory) {
-      updateMutation.mutate(storyData as SuccessStory);
-    } else {
-      createMutation.mutate(storyData as Omit<SuccessStory, "id">);
+    try {
+      if ("id" in editingStory) {
+        await updateMutation.mutateAsync(storyData as SuccessStory);
+      } else {
+        await createMutation.mutateAsync(storyData as Omit<SuccessStory, "id">);
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
     }
   };
 
@@ -113,7 +156,7 @@ export default function AdminSuccessStories() {
       testimonial: null,
       beforeImages: [],
       afterImages: [],
-      treatmentDate: new Date(),
+      treatmentDate: new Date().toISOString(),
       recoveryTime: null,
       satisfaction: 5,
       featured: false,
@@ -157,6 +200,7 @@ export default function AdminSuccessStories() {
                       })
                     }
                     placeholder="Hasta adı..."
+                    required
                   />
                 </div>
 
@@ -187,6 +231,7 @@ export default function AdminSuccessStories() {
                     })
                   }
                   placeholder="Tedavi tipi..."
+                  required
                 />
               </div>
 
@@ -202,6 +247,7 @@ export default function AdminSuccessStories() {
                   }
                   placeholder="Tedavi süreci hakkında detaylı bilgi..."
                   rows={4}
+                  required
                 />
               </div>
 
@@ -228,7 +274,9 @@ export default function AdminSuccessStories() {
                 >
                   İptal
                 </Button>
-                <Button type="submit">Kaydet</Button>
+                <Button type="submit" disabled={createMutation.isPending || updateMutation.isPending}>
+                  {createMutation.isPending || updateMutation.isPending ? "Kaydediliyor..." : "Kaydet"}
+                </Button>
               </div>
             </form>
           </CardContent>
