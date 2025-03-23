@@ -197,5 +197,53 @@
       "createButton": "Create Appointment",
       "contactNote": "* After your appointment is confirmed, our team will contact you to determine the most suitable time."
     }
+  },
+  "products": {
+    "title": "Professional Hair Care Products",
+    "subtitle": "Specially formulated products for the best results after hair transplantation",
+    "search": "Search products...",
+    "categories": {
+      "shampoos": {
+        "title": "Hair Care Shampoos",
+        "description": "Specially formulated shampoos for post-hair transplant care"
+      },
+      "serums": {
+        "title": "Hair Growth Serums",
+        "description": "Special serums supporting hair growth"
+      },
+      "masks": {
+        "title": "Hair Care Masks",
+        "description": "Masks providing intensive care and repair"
+      },
+      "vitamins": {
+        "title": "Hair Care Vitamins",
+        "description": "Vitamin supplements supporting hair health from within"
+      },
+      "tonics": {
+        "title": "Hair Care Tonics",
+        "description": "Tonics that revitalize and nourish the scalp"
+      },
+      "creams": {
+        "title": "Hair Care Creams",
+        "description": "Creams for daily care and moisturizing"
+      }
+    },
+    "product": {
+      "ingredients": "Ingredients",
+      "benefits": "Benefits",
+      "instructions": "Usage Instructions",
+      "warnings": "Warnings",
+      "hairTypes": {
+        "all": "All Hair Types",
+        "oily": "Oily",
+        "dry": "Dry",
+        "normal": "Normal",
+        "mixed": "Mixed",
+        "damaged": "Damaged",
+        "sensitive": "Sensitive",
+        "thin": "Thin",
+        "thick": "Thick"
+      }
+    }
   }
 }

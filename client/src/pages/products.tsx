@@ -9,12 +9,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Metadata } from "@/components/ui/metadata";
+import { useTranslation } from "react-i18next";
 
 const productCategories = [
   {
     id: "sampuanlar",
-    title: "Saç Bakım Şampuanları",
-    description: "Saç ekimi sonrası özel olarak formüle edilmiş şampuanlar",
+    titleKey: "products.categories.shampoos.title",
+    descriptionKey: "products.categories.shampoos.description",
     products: [
       {
         id: 1,
@@ -120,8 +121,8 @@ const productCategories = [
   },
   {
     id: "serumlar",
-    title: "Saç Büyütme Serumları",
-    description: "Saç büyümesini destekleyen özel serumlar",
+    titleKey: "products.categories.serums.title",
+    descriptionKey: "products.categories.serums.description",
     products: [
       {
         id: 1,
@@ -223,32 +224,32 @@ const productCategories = [
   },
   {
     id: "maskeler",
-    title: "Saç Bakım Maskeleri",
-    description: "Yoğun bakım ve onarım sağlayan maskeler",
+    titleKey: "products.categories.masks.title",
+    descriptionKey: "products.categories.masks.description",
     products: [
       // 6 adet maske eklenecek...
     ]
   },
   {
     id: "vitaminler",
-    title: "Saç Bakım Vitaminleri",
-    description: "Saç sağlığını içten destekleyen vitamin takviyeleri",
+    titleKey: "products.categories.vitamins.title",
+    descriptionKey: "products.categories.vitamins.description",
     products: [
       // 6 adet vitamin eklenecek...
     ]
   },
   {
     id: "tonikler",
-    title: "Saç Bakım Tonikleri",
-    description: "Saç derisini canlandıran ve besleyen tonikler",
+    titleKey: "products.categories.tonics.title",
+    descriptionKey: "products.categories.tonics.description",
     products: [
       // 6 adet tonik eklenecek...
     ]
   },
   {
     id: "kremler",
-    title: "Saç Bakım Kremleri",
-    description: "Günlük bakım ve nemlendirme için kremler",
+    titleKey: "products.categories.creams.title",
+    descriptionKey: "products.categories.creams.description",
     products: [
       // 6 adet krem eklenecek...
     ]
@@ -259,12 +260,13 @@ export default function Products() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedHairType, setSelectedHairType] = useState<string[]>([]);
   const [selectedPhase, setSelectedPhase] = useState<string[]>([]);
+  const { t } = useTranslation('common');
 
   return (
     <div className="min-h-screen bg-background">
       <Metadata
-        title="Profesyonel Saç Bakım Ürünleri | Hair Clinic"
-        description="Saç ekimi sonrası özel bakım ürünleri. Profesyonel saç bakım ürünleri hakkında detaylı bilgi ve kullanım talimatları."
+        title={t('products.title')}
+        description={t('products.subtitle')}
         keywords="saç bakım ürünleri, saç ekimi şampuanı, saç serumu, saç vitamini"
       />
 
@@ -278,10 +280,10 @@ export default function Products() {
             className="max-w-3xl mx-auto text-center"
           >
             <h1 className="text-3xl md:text-4xl font-bold mb-4">
-              Profesyonel Saç Bakım Ürünleri
+              {t('products.title')}
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Saç ekimi sonrası en iyi sonucu almak için özel olarak formüle edilmiş ürünler
+              {t('products.subtitle')}
             </p>
 
             {/* Arama ve Filtreleme */}
@@ -290,7 +292,7 @@ export default function Products() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="Ürün ara..."
+                  placeholder={t('products.search')}
                   className="pl-10"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -312,7 +314,7 @@ export default function Products() {
                   value={category.id}
                   className="data-[state=active]:bg-primary"
                 >
-                  {category.title}
+                  {t(category.titleKey)}
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -348,7 +350,7 @@ export default function Products() {
                                 <div className="flex flex-wrap gap-1">
                                   {product.hairType.map((type) => (
                                     <Badge key={type} variant="secondary" className="text-xs">
-                                      {type}
+                                      {t(`products.product.hairTypes.${type.toLowerCase()}`)}
                                     </Badge>
                                   ))}
                                 </div>
@@ -386,7 +388,7 @@ export default function Products() {
                               <div>
                                 <h4 className="font-semibold flex items-center gap-2 mb-3">
                                   <Droplet className="h-5 w-5 text-primary" />
-                                  İçerik Maddeleri
+                                  {t('products.product.ingredients')}
                                 </h4>
                                 <ul className="grid grid-cols-2 gap-2">
                                   {product.ingredients.map((ingredient, idx) => (
@@ -403,7 +405,7 @@ export default function Products() {
                                   <AccordionTrigger>
                                     <span className="flex items-center gap-2">
                                       <Check className="h-5 w-5 text-primary" />
-                                      Faydaları
+                                      {t('products.product.benefits')}
                                     </span>
                                   </AccordionTrigger>
                                   <AccordionContent>
@@ -422,7 +424,7 @@ export default function Products() {
                                   <AccordionTrigger>
                                     <span className="flex items-center gap-2">
                                       <Clock className="h-5 w-5 text-primary" />
-                                      Kullanım Talimatları
+                                      {t('products.product.instructions')}
                                     </span>
                                   </AccordionTrigger>
                                   <AccordionContent>
@@ -443,7 +445,7 @@ export default function Products() {
                                   <AccordionTrigger>
                                     <span className="flex items-center gap-2">
                                       <AlertCircle className="h-5 w-5 text-primary" />
-                                      Uyarılar
+                                      {t('products.product.warnings')}
                                     </span>
                                   </AccordionTrigger>
                                   <AccordionContent>

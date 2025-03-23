@@ -12,6 +12,54 @@
     "userMenu": "Kullanıcı Menüsü",
     "menu": "Menü"
   },
+  "products": {
+    "title": "Profesyonel Saç Bakım Ürünleri",
+    "subtitle": "Saç ekimi sonrası en iyi sonucu almak için özel olarak formüle edilmiş ürünler",
+    "search": "Ürün ara...",
+    "categories": {
+      "shampoos": {
+        "title": "Saç Bakım Şampuanları",
+        "description": "Saç ekimi sonrası özel olarak formüle edilmiş şampuanlar"
+      },
+      "serums": {
+        "title": "Saç Büyütme Serumları",
+        "description": "Saç büyümesini destekleyen özel serumlar"
+      },
+      "masks": {
+        "title": "Saç Bakım Maskeleri",
+        "description": "Yoğun bakım ve onarım sağlayan maskeler"
+      },
+      "vitamins": {
+        "title": "Saç Bakım Vitaminleri",
+        "description": "Saç sağlığını içten destekleyen vitamin takviyeleri"
+      },
+      "tonics": {
+        "title": "Saç Bakım Tonikleri",
+        "description": "Saç derisini canlandıran ve besleyen tonikler"
+      },
+      "creams": {
+        "title": "Saç Bakım Kremleri",
+        "description": "Günlük bakım ve nemlendirme için kremler"
+      }
+    },
+    "product": {
+      "ingredients": "İçerik Maddeleri",
+      "benefits": "Faydaları",
+      "instructions": "Kullanım Talimatları",
+      "warnings": "Uyarılar",
+      "hairTypes": {
+        "all": "Tüm Saç Tipleri",
+        "oily": "Yağlı",
+        "dry": "Kuru",
+        "normal": "Normal",
+        "mixed": "Karma",
+        "damaged": "Yıpranmış",
+        "sensitive": "Hassas",
+        "thin": "İnce Telli",
+        "thick": "Kalın Telli"
+      }
+    }
+  },
   "auth": {
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
