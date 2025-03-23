@@ -51,6 +51,7 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   updateUser(id: number, data: Partial<User>): Promise<User>;
   authenticateUser(username: string, password: string): Promise<User | null>;
+  getUserByEmail(email: string): Promise<User | undefined>;
 
   // Posts methods
   getPosts(): Promise<Post[]>;
@@ -168,6 +169,11 @@ export class DatabaseStorage implements IStorage {
   async authenticateUser(username: string, password: string): Promise<User | null> {
     const user = await this.getUserByUsername(username);
     if (!user || user.password !== password) return null;
+    return user;
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
     return user;
   }
 

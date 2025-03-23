@@ -115,7 +115,6 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Registration endpoint with automatic patient role assignment
   app.post("/api/auth/register", async (req: Request, res: Response) => {
     try {
       const userData = insertUserSchema.parse({
