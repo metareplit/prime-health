@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Clock, Check, HelpCircle, ArrowRight, ListChecks, Info, Filter } from "lucide-react";
+import { Clock, Check, HelpCircle, ArrowRight, ListChecks, Info } from "lucide-react"; //Restored import
 import { motion } from "framer-motion";
 import type { Service } from "@shared/schema";
 import { Metadata } from "@/components/ui/metadata";
