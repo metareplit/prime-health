@@ -138,15 +138,15 @@ export const services = pgTable("services", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-// Appointments table
+// Appointments table with enhanced features
 export const appointments = pgTable("appointments", {
   id: serial("id").primaryKey(),
   patientId: serial("patient_id").notNull().references(() => users.id),
-  doctorId: serial("doctor_id").notNull().references(() => users.id),
+  doctorId: serial("doctor_id").references(() => users.id),
   serviceId: serial("service_id").notNull().references(() => services.id),
   date: timestamp("date").notNull(),
   time: text("time").notNull(),
-  status: text("status").notNull(), // pending, confirmed, completed, cancelled
+  status: text("status").notNull().default("pending"), // pending, confirmed, completed, cancelled
   type: text("type").notNull(), // initial, followup, control
   notes: text("notes"),
   patientNotes: text("patient_notes"), // Notes from patient
@@ -218,7 +218,18 @@ export const insertContactInfoSchema = createInsertSchema(contactInfo).extend({
 
 export const insertPatientImageSchema = createInsertSchema(patientImages);
 export const insertServiceSchema = createInsertSchema(services);
-export const insertAppointmentSchema = createInsertSchema(appointments);
+export const insertAppointmentSchema = createInsertSchema(appointments).extend({
+  date: z.date().min(new Date(), "Randevu tarihi geçmiş bir tarih olamaz"),
+  time: z.string().min(1, "Randevu saati gereklidir"),
+  type: z.enum(["initial", "followup", "control"], {
+    errorMap: () => ({ message: "Geçersiz randevu tipi" }),
+  }),
+  status: z.enum(["pending", "confirmed", "completed", "cancelled"], {
+    errorMap: () => ({ message: "Geçersiz randevu durumu" }),
+  }),
+  patientNotes: z.string().optional(),
+  documents: z.array(z.string()).optional().default([]),
+});
 export const insertPostSchema = createInsertSchema(posts);
 export const insertProductSchema = createInsertSchema(products);
 export const insertMediaSchema = createInsertSchema(media);
