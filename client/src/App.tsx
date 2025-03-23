@@ -118,10 +118,10 @@ function Router() {
         )}
       </Route>
 
-      <Route path="/admin/success-stories"> {/* Added route */}
-        {() => (
+      <Route path="/admin/success-stories">
+        {(params) => (
           <AdminLayout title="Başarı Hikayeleri">
-            <AdminSuccessStories />
+            <AdminSuccessStories params={params}/>
           </AdminLayout>
         )}
       </Route>
