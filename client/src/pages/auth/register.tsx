@@ -23,6 +23,8 @@ import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { apiRequest } from "@/lib/queryClient";
 import { UserRole, Gender } from "@shared/schema";
+import PhoneInput from "react-phone-input-2";
+import 'react-phone-input-2/lib/style.css';
 
 const registerSchema = z.object({
   firstName: z.string().min(2, "Ad en az 2 karakter olmalıdır"),
@@ -149,7 +151,15 @@ export default function Register() {
                 <FormItem>
                   <FormLabel>Telefon</FormLabel>
                   <FormControl>
-                    <Input placeholder="+90 555 555 5555" {...field} />
+                    <PhoneInput
+                      country={'tr'}
+                      value={field.value}
+                      onChange={phone => field.onChange(phone)}
+                      inputClass="w-full !p-6 !h-10 !text-base"
+                      containerClass="!w-full"
+                      buttonClass="!h-10"
+                      placeholder="(555) 555-5555"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
