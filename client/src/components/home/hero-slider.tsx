@@ -14,7 +14,7 @@ export default function HeroSlider() {
     queryKey: ["/api/sliders"],
   });
 
-  const activeSliders = sliders?.filter(slider => slider.isActive === "true") || [];
+  const activeSliders = sliders?.filter(slider => slider.isActive === true) || [];
 
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
@@ -52,8 +52,6 @@ export default function HeroSlider() {
 
   return (
     <div className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
-
       <div className="embla" ref={emblaRef}>
         <div className="embla__container">
           {activeSliders.map((slider) => (
@@ -67,25 +65,6 @@ export default function HeroSlider() {
                     backgroundPosition: 'center'
                   }}
                 />
-                <div className="absolute inset-0 bg-black/30" />
-                <div className="absolute inset-0 flex items-center justify-center text-center text-white p-6">
-                  <div className="max-w-2xl">
-                    <h2 className="text-4xl font-bold mb-4">{slider.title}</h2>
-                    {slider.description && (
-                      <p className="text-lg mb-6">{slider.description}</p>
-                    )}
-                    {slider.buttonText && slider.buttonUrl && (
-                      <Button 
-                        variant="outline" 
-                        size="lg" 
-                        className="bg-white/10 hover:bg-white/20 border-white text-white"
-                        onClick={() => window.location.href = slider.buttonUrl}
-                      >
-                        {slider.buttonText}
-                      </Button>
-                    )}
-                  </div>
-                </div>
               </div>
             </div>
           ))}
