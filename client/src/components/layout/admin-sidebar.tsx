@@ -14,6 +14,7 @@ import {
   MessageSquare,
   BellRing,
   Activity,
+  Mail,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
@@ -56,7 +57,6 @@ export function Sidebar() {
         </div>
 
         <nav className="flex-1 p-4 space-y-6 overflow-y-auto">
-          {/* Ana Sayfa ve Analitikler */}
           <div>
             <div className="mb-3 px-4 text-xs font-semibold tracking-wider text-muted-foreground/70 uppercase">
               Genel Bakış
@@ -83,7 +83,6 @@ export function Sidebar() {
             </div>
           </div>
 
-          {/* İçerik Yönetimi */}
           <div>
             <div className="mb-3 px-4 text-xs font-semibold tracking-wider text-muted-foreground/70 uppercase">
               İçerik Yönetimi
@@ -110,7 +109,6 @@ export function Sidebar() {
             </div>
           </div>
 
-          {/* Kullanıcı ve Randevu Yönetimi */}
           <div>
             <div className="mb-3 px-4 text-xs font-semibold tracking-wider text-muted-foreground/70 uppercase">
               Kullanıcı Yönetimi
@@ -137,7 +135,6 @@ export function Sidebar() {
             </div>
           </div>
 
-          {/* Sistem */}
           <div>
             <div className="mb-3 px-4 text-xs font-semibold tracking-wider text-muted-foreground/70 uppercase">
               Sistem
@@ -148,6 +145,12 @@ export function Sidebar() {
                 label="Bildirimler"
                 href="/admin/notifications"
                 active={pathname.startsWith("/admin/notifications")}
+              />
+              <SidebarItem
+                icon={<Mail className="h-4 w-4" />}
+                label="Email Şablonları"
+                href="/admin/email-templates"
+                active={pathname.startsWith("/admin/email-templates")}
               />
               <SidebarItem
                 icon={<Activity className="h-4 w-4" />}

@@ -37,6 +37,7 @@ import PatientImages from "@/pages/patient/images";
 import PatientAppointments from "@/pages/patient/appointments";
 import PatientProfile from "@/pages/patient/profile";
 import NotFound from "@/pages/not-found";
+import AdminEmailTemplates from "@/pages/admin/email-templates";
 
 function Router() {
   return (
@@ -152,6 +153,13 @@ function Router() {
         {() => (
           <AdminLayout title="Ayarlar">
             <AdminSettings />
+          </AdminLayout>
+        )}
+      </Route>
+      <Route path="/admin/email-templates">
+        {() => (
+          <AdminLayout title="Email Şablonları">
+            <AdminEmailTemplates />
           </AdminLayout>
         )}
       </Route>

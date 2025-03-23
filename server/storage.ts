@@ -1,13 +1,13 @@
 import { 
   users, posts, products, media, settings, services,
-  messages, patientImages, appointments,
+  messages, patientImages, appointments, emailTemplates,
   type User, type Post, type Product, type Media, type Setting, type Service,
-  type Message, type PatientImage, type Appointment,
+  type Message, type PatientImage, type Appointment, type EmailTemplate,
   type InsertUser, type InsertPost, type InsertProduct, type InsertMedia, type InsertSetting, type InsertService,
-  type InsertMessage, type InsertPatientImage, type InsertAppointment
+  type InsertMessage, type InsertPatientImage, type InsertAppointment, type InsertEmailTemplate
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, or } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import session from "express-session";
 import connectPg from "connect-pg-simple";
 
@@ -66,6 +66,12 @@ export interface IStorage {
   getUserAppointments(userId: number): Promise<Appointment[]>;
   createAppointment(appointment: InsertAppointment): Promise<Appointment>;
   updateAppointmentStatus(id: number, status: string): Promise<Appointment>;
+
+  // Email Template methods
+  getAllEmailTemplates(): Promise<EmailTemplate[]>;
+  createEmailTemplate(template: InsertEmailTemplate): Promise<EmailTemplate>;
+  updateEmailTemplate(id: number, data: Partial<EmailTemplate>): Promise<EmailTemplate>;
+  deleteEmailTemplate(id: number): Promise<void>;
 
   sessionStore: any;
 }
@@ -245,7 +251,7 @@ export class DatabaseStorage implements IStorage {
     return await db
       .select()
       .from(messages)
-      .where(or(eq(messages.senderId, userId), eq(messages.receiverId, userId)));
+      .where(eq(messages.senderId, userId));
   }
 
   async createMessage(message: InsertMessage): Promise<Message> {
@@ -286,6 +292,29 @@ export class DatabaseStorage implements IStorage {
       .where(eq(appointments.id, id))
       .returning();
     return updatedAppointment;
+  }
+
+  // Email Template methods
+  async getAllEmailTemplates(): Promise<EmailTemplate[]> {
+    return await db.select().from(emailTemplates);
+  }
+
+  async createEmailTemplate(template: InsertEmailTemplate): Promise<EmailTemplate> {
+    const [newTemplate] = await db.insert(emailTemplates).values(template).returning();
+    return newTemplate;
+  }
+
+  async updateEmailTemplate(id: number, data: Partial<EmailTemplate>): Promise<EmailTemplate> {
+    const [updatedTemplate] = await db
+      .update(emailTemplates)
+      .set(data)
+      .where(eq(emailTemplates.id, id))
+      .returning();
+    return updatedTemplate;
+  }
+
+  async deleteEmailTemplate(id: number): Promise<void> {
+    await db.delete(emailTemplates).where(eq(emailTemplates.id, id));
   }
 }
 

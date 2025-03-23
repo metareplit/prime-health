@@ -137,6 +137,18 @@ export const appointments = pgTable("appointments", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+// Email şablonları tablosu
+export const emailTemplates = pgTable("email_templates", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  subject: text("subject").notNull(),
+  body: text("body").notNull(),
+  type: text("type").notNull(), // appointment_reminder, welcome, custom
+  variables: text("variables").array(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 // Schema validations with extended rules
 export const insertUserSchema = createInsertSchema(users).extend({
   email: z.string().email("Geçerli bir e-posta adresi giriniz"),
@@ -152,6 +164,7 @@ export const insertPostSchema = createInsertSchema(posts);
 export const insertProductSchema = createInsertSchema(products);
 export const insertMediaSchema = createInsertSchema(media);
 export const insertSettingSchema = createInsertSchema(settings);
+export const insertEmailTemplateSchema = createInsertSchema(emailTemplates);
 
 // Types
 export type User = typeof users.$inferSelect;
@@ -163,6 +176,7 @@ export type Post = typeof posts.$inferSelect;
 export type Product = typeof products.$inferSelect;
 export type Media = typeof media.$inferSelect;
 export type Setting = typeof settings.$inferSelect;
+export type EmailTemplate = typeof emailTemplates.$inferSelect;
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type InsertMessage = z.infer<typeof insertMessageSchema>;
@@ -173,6 +187,7 @@ export type InsertPost = z.infer<typeof insertPostSchema>;
 export type InsertProduct = z.infer<typeof insertProductSchema>;
 export type InsertMedia = z.infer<typeof insertMediaSchema>;
 export type InsertSetting = z.infer<typeof insertSettingSchema>;
+export type InsertEmailTemplate = z.infer<typeof insertEmailTemplateSchema>;
 
 // Geriye dönük uyumluluk için alias
 export const insertPatientSchema = insertUserSchema;
