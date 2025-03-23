@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { apiRequest } from "@/lib/queryClient";
+import { UserRole } from "@shared/schema";
 
 const registerSchema = z.object({
   username: z.string().min(1, "Kullanıcı adı gereklidir"),
@@ -27,7 +28,7 @@ const registerSchema = z.object({
 export default function Register() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
-  
+
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -41,12 +42,15 @@ export default function Register() {
 
   async function onSubmit(values: z.infer<typeof registerSchema>) {
     try {
-      const res = await apiRequest("POST", "/api/auth/register", values);
-      
+      const res = await apiRequest("POST", "/api/auth/register", {
+        ...values,
+        role: UserRole.PATIENT // Automatically set role to patient
+      });
+
       if (res.ok) {
         toast({
           title: "Kayıt başarılı!",
-          description: "Giriş yapabilirsiniz.",
+          description: "Hasta portalına giriş yapabilirsiniz.",
         });
         setLocation("/auth/login");
       }
@@ -151,7 +155,7 @@ export default function Register() {
             />
 
             <Button type="submit" className="w-full">
-              Kayıt Ol
+              Hasta Kaydı Oluştur
             </Button>
           </form>
         </Form>

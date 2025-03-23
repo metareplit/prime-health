@@ -2,6 +2,15 @@ import { pgTable, text, serial, timestamp, boolean, integer } from "drizzle-orm/
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+// User roles enum
+export const UserRole = {
+  ADMIN: "admin",
+  DOCTOR: "doctor",
+  PATIENT: "patient",
+} as const;
+
+export type UserRoleType = typeof UserRole[keyof typeof UserRole];
+
 // Extended User model with patient-specific fields
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -10,13 +19,13 @@ export const users = pgTable("users", {
   email: text("email").notNull().unique(),
   fullName: text("full_name").notNull(),
   phone: text("phone").notNull(),
-  role: text("role").notNull().default("patient"), // patient, doctor, admin
+  role: text("role").notNull().default(UserRole.PATIENT),
   profileImage: text("profile_image"),
   dateOfBirth: timestamp("date_of_birth"),
   gender: text("gender"),
   address: text("address"),
-  medicalHistory: text("medical_history"), // Stores detailed medical history
-  preferences: text("preferences"), // Stores user preferences
+  medicalHistory: text("medical_history"),
+  preferences: text("preferences"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -203,6 +212,7 @@ export const insertUserSchema = createInsertSchema(users).extend({
   email: z.string().email("Geçerli bir e-posta adresi giriniz"),
   phone: z.string().min(10, "Geçerli bir telefon numarası giriniz"),
   password: z.string().min(8, "Şifre en az 8 karakter olmalıdır"),
+  role: z.enum([UserRole.ADMIN, UserRole.DOCTOR, UserRole.PATIENT]).default(UserRole.PATIENT),
 });
 
 export const insertMessageSchema = createInsertSchema(messages).extend({

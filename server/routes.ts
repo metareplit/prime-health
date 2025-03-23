@@ -115,9 +115,28 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Registration endpoint with automatic patient role assignment
   app.post("/api/auth/register", async (req: Request, res: Response) => {
     try {
-      const userData = insertUserSchema.parse(req.body);
+      const userData = insertUserSchema.parse({
+        ...req.body,
+        role: "patient" // Force role to be patient for all registrations
+      });
+
+      const existingUser = await storage.getUserByUsername(userData.username);
+      if (existingUser) {
+        return res.status(400).json({ 
+          message: "Bu kullanıcı adı zaten kullanımda" 
+        });
+      }
+
+      const existingEmail = await storage.getUserByEmail(userData.email);
+      if (existingEmail) {
+        return res.status(400).json({ 
+          message: "Bu e-posta adresi zaten kullanımda" 
+        });
+      }
+
       const user = await storage.createUser(userData);
       res.status(201).json(user);
     } catch (error) {
