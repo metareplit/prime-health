@@ -192,8 +192,8 @@ export const sliders = pgTable("sliders", {
   imageUrl: text("image_url").notNull(),
   buttonText: text("button_text"),
   buttonUrl: text("button_url"),
-  order: serial("order").default(0),
-  isActive: text("is_active").default("true"),
+  order: integer("order").default(0),
+  isActive: boolean("is_active").default(true),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -251,7 +251,7 @@ export const sliderSchema = z.object({
   buttonText: z.string().optional(),
   buttonUrl: z.string().optional(),
   order: z.number().default(0),
-  isActive: z.string().default("true"),
+  isActive: z.boolean().default(true),
   createdAt: z.date().default(() => new Date()),
   updatedAt: z.date().default(() => new Date())
 });

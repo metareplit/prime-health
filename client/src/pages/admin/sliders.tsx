@@ -4,14 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest, queryClient } from "@/lib/queryClient";
 import { Slider } from "@shared/schema";
-import { Plus, Pencil, Trash2, Upload } from "lucide-react";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { Plus, Pencil, Trash2, Upload, Loader2 } from "lucide-react";
 
 export default function AdminSliders() {
   const { toast } = useToast();
   const [editingSlider, setEditingSlider] = useState<Partial<Slider> | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   const { data: sliders, isLoading } = useQuery<Slider[]>({
     queryKey: ["/api/sliders"],
@@ -37,8 +38,9 @@ export default function AdminSliders() {
   const createMutation = useMutation({
     mutationFn: async (data: Omit<Slider, "id">) => {
       try {
+        setIsUploading(true);
         let imageUrl = data.imageUrl;
-        
+
         if (selectedFile) {
           imageUrl = await uploadImage(selectedFile);
         }
@@ -56,6 +58,8 @@ export default function AdminSliders() {
         return res.json();
       } catch (error) {
         throw error;
+      } finally {
+        setIsUploading(false);
       }
     },
     onSuccess: () => {
@@ -79,6 +83,15 @@ export default function AdminSliders() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      // Dosya boyutu kontrolü
+      if (file.size > 5 * 1024 * 1024) { // 5MB
+        toast({
+          title: "Hata",
+          description: "Dosya boyutu 5MB'dan büyük olamaz.",
+          variant: "destructive",
+        });
+        return;
+      }
       setSelectedFile(file);
     }
   };
@@ -91,6 +104,15 @@ export default function AdminSliders() {
       toast({
         title: "Hata",
         description: "Lütfen başlık girin.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!editingSlider.imageUrl && !selectedFile) {
+      toast({
+        title: "Hata",
+        description: "Lütfen bir resim seçin.",
         variant: "destructive",
       });
       return;
@@ -119,7 +141,7 @@ export default function AdminSliders() {
       buttonText: "",
       buttonUrl: "",
       order: 0,
-      isActive: "true",
+      isActive: true,
       createdAt: now,
       updatedAt: now,
     });
@@ -138,6 +160,19 @@ export default function AdminSliders() {
     },
   });
 
+  const toggleActiveMutation = useMutation({
+    mutationFn: async ({ id, isActive }: { id: number; isActive: boolean }) => {
+      await apiRequest("PATCH", `/api/sliders/${id}`, { isActive });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/sliders"] });
+      toast({
+        title: "Başarılı",
+        description: "Slider durumu güncellendi.",
+      });
+    },
+  });
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -151,7 +186,9 @@ export default function AdminSliders() {
       {editingSlider && (
         <Card>
           <CardHeader>
-            <CardTitle>Yeni Slider</CardTitle>
+            <CardTitle>
+              {editingSlider.id ? "Slider Düzenle" : "Yeni Slider"}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -218,7 +255,13 @@ export default function AdminSliders() {
                   type="file"
                   accept="image/*"
                   onChange={handleFileChange}
+                  className="cursor-pointer"
                 />
+                {selectedFile && (
+                  <p className="text-sm text-muted-foreground">
+                    Seçilen dosya: {selectedFile.name}
+                  </p>
+                )}
               </div>
 
               <div className="flex gap-2 justify-end">
@@ -229,11 +272,19 @@ export default function AdminSliders() {
                     setEditingSlider(null);
                     setSelectedFile(null);
                   }}
+                  disabled={isUploading}
                 >
                   İptal
                 </Button>
-                <Button type="submit" disabled={createMutation.isPending}>
-                  {createMutation.isPending ? "Kaydediliyor..." : "Kaydet"}
+                <Button type="submit" disabled={isUploading}>
+                  {isUploading ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Yükleniyor...
+                    </>
+                  ) : (
+                    "Kaydet"
+                  )}
                 </Button>
               </div>
             </form>
@@ -243,6 +294,7 @@ export default function AdminSliders() {
 
       {isLoading ? (
         <div className="text-center py-8 text-muted-foreground">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
           Yükleniyor...
         </div>
       ) : sliders?.length === 0 ? (
@@ -256,14 +308,24 @@ export default function AdminSliders() {
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="font-semibold">
-                      {slider.title}
-                    </h3>
+                    <h3 className="font-semibold">{slider.title}</h3>
                     <p className="text-sm text-muted-foreground mt-1">
                       {slider.description}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
+                    <Button
+                      variant={slider.isActive ? "default" : "secondary"}
+                      size="sm"
+                      onClick={() =>
+                        toggleActiveMutation.mutate({
+                          id: slider.id,
+                          isActive: !slider.isActive,
+                        })
+                      }
+                    >
+                      {slider.isActive ? "Aktif" : "Pasif"}
+                    </Button>
                     <Button
                       variant="ghost"
                       size="sm"
@@ -277,7 +339,11 @@ export default function AdminSliders() {
                       size="sm"
                       className="text-red-500 hover:text-red-600"
                       onClick={() => {
-                        if (window.confirm("Bu slider'ı silmek istediğinize emin misiniz?")) {
+                        if (
+                          window.confirm(
+                            "Bu slider'ı silmek istediğinize emin misiniz?"
+                          )
+                        ) {
                           deleteMutation.mutate(slider.id);
                         }
                       }}
