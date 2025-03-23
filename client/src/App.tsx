@@ -214,7 +214,9 @@ function Router() {
       <Route path="/">
         {() => (
           <div className="min-h-screen flex flex-col">
-            <Header />
+            <Header>
+              <LanguageSwitcher />
+            </Header>
             <main className="flex-grow">
               <Home />
             </main>
@@ -228,7 +230,7 @@ function Router() {
         {() => (
           <div className="min-h-screen flex flex-col">
             <Header>
-              <LanguageSwitcher/>
+              <LanguageSwitcher />
             </Header>
             <main className="flex-grow">
               <Switch>

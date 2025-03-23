@@ -74,7 +74,7 @@ export default function Header({ children }: HeaderProps) {
 
           {/* Right Side: Auth, Language & Actions */}
           <div className="flex items-center gap-2">
-            <div className="relative flex items-center">
+            <div className="relative flex items-center mr-4">
               {children} {/* Language Switcher */}
             </div>
 
