@@ -349,16 +349,17 @@ export class DatabaseStorage implements IStorage {
   // Appointments methods
   async getUserAppointments(userId: number): Promise<Appointment[]> {
     try {
-      const userAppointments = await db
+      const result = await db
         .select()
         .from(appointments)
-        .where(eq(appointments.patientId, userId));
+        .where(eq(appointments.patientId, userId))
+        .orderBy(appointments.createdAt);
 
-      console.log('Fetched user appointments:', userAppointments);
-      return userAppointments;
+      console.log('Fetched user appointments:', result);
+      return result;
     } catch (error) {
       console.error('Error in getUserAppointments:', error);
-      return [];
+      throw error;
     }
   }
 
@@ -389,16 +390,16 @@ export class DatabaseStorage implements IStorage {
 
   async getAllAppointments(): Promise<Appointment[]> {
     try {
-      const appointments = await db
+      const result = await db
         .select()
         .from(appointments)
         .orderBy(appointments.createdAt);
 
-      console.log('Fetched all appointments:', appointments);
-      return appointments;
+      console.log('Fetched all appointments:', result);
+      return result;
     } catch (error) {
       console.error('Error in getAllAppointments:', error);
-      return [];
+      throw error; 
     }
   }
 
