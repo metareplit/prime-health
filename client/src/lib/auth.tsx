@@ -78,9 +78,9 @@ function useLogoutMutation() {
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data: user, isLoading } = useQuery<User | null>({
+  const { data: user, isLoading: queryLoading } = useQuery<User | null>({
     queryKey: ['/api/user/profile'],
     queryFn: async () => {
       try {
@@ -98,13 +98,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logoutMutation = useLogoutMutation();
 
   useEffect(() => {
-    setLoading(isLoading);
-  }, [isLoading]);
+    setIsLoading(queryLoading);
+  }, [queryLoading]);
 
   return (
     <AuthContext.Provider value={{ 
       user: user ?? null,
-      loading,
+      loading: isLoading,
       loginMutation,
       registerMutation,
       logoutMutation
