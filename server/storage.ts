@@ -348,15 +348,34 @@ export class DatabaseStorage implements IStorage {
 
   // Appointments methods
   async getUserAppointments(userId: number): Promise<Appointment[]> {
-    return await db
-      .select()
-      .from(appointments)
-      .where(eq(appointments.patientId, userId));
+    try {
+      const userAppointments = await db
+        .select()
+        .from(appointments)
+        .where(eq(appointments.patientId, userId));
+
+      console.log('Fetched user appointments:', userAppointments);
+      return userAppointments;
+    } catch (error) {
+      console.error('Error in getUserAppointments:', error);
+      return [];
+    }
   }
 
   async createAppointment(appointment: InsertAppointment): Promise<Appointment> {
-    const [newAppointment] = await db.insert(appointments).values(appointment).returning();
-    return newAppointment;
+    try {
+      console.log('Creating appointment with data:', appointment);
+      const [newAppointment] = await db
+        .insert(appointments)
+        .values(appointment)
+        .returning();
+
+      console.log('Created appointment:', newAppointment);
+      return newAppointment;
+    } catch (error) {
+      console.error('Error in createAppointment:', error);
+      throw error;
+    }
   }
 
   async updateAppointmentStatus(id: number, status: string): Promise<Appointment> {
@@ -369,7 +388,18 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getAllAppointments(): Promise<Appointment[]> {
-    return await db.select().from(appointments).orderBy(appointments.createdAt);
+    try {
+      const appointments = await db
+        .select()
+        .from(appointments)
+        .orderBy(appointments.createdAt);
+
+      console.log('Fetched all appointments:', appointments);
+      return appointments;
+    } catch (error) {
+      console.error('Error in getAllAppointments:', error);
+      return [];
+    }
   }
 
   async updateAppointment(id: number, data: Partial<Appointment>): Promise<Appointment> {

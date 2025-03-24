@@ -523,15 +523,15 @@ export async function registerRoutes(app: Express) {
     try {
       // Admin tüm randevuları, normal kullanıcılar sadece kendi randevularını görebilir
       const user = await storage.getUser(req.session.userId as number);
-      console.log('Fetching appointments for user:', user?.id, 'role:', user?.role);
+      console.log('User requesting appointments:', { id: user?.id, role: user?.role });
 
       let appointments;
       if (user?.role === 'admin') {
         appointments = await storage.getAllAppointments();
-        console.log('Admin appointments fetched:', appointments?.length);
+        console.log('Admin appointments fetched:', appointments);
       } else {
         appointments = await storage.getUserAppointments(req.session.userId as number);
-        console.log('User appointments fetched:', appointments?.length);
+        console.log('User appointments fetched:', appointments);
       }
 
       res.json(appointments);
@@ -547,7 +547,7 @@ export async function registerRoutes(app: Express) {
       const appointmentData = insertAppointmentSchema.parse({
         ...req.body,
         patientId: req.session.userId as number,
-        status: 'pending', // Yeni randevular için varsayılan durum
+        status: 'pending',
         createdAt: new Date(),
         updatedAt: new Date()
       });
@@ -560,47 +560,6 @@ export async function registerRoutes(app: Express) {
       console.error('Error creating appointment:', error);
       const validationError = fromZodError(error);
       res.status(400).json({ message: validationError.message });
-    }
-  });
-
-  app.patch("/api/appointments/:id/status", requireAuth, async (req: AuthRequest, res: Response) => {
-    try {
-      const { id } = req.params;
-      const { status } = req.body;
-
-      if (!["pending", "confirmed", "completed", "cancelled"].includes(status)) {
-        return res.status(400).json({ message: "Geçersiz durum" });
-      }
-
-      const appointment = await storage.updateAppointmentStatus(parseInt(id), status);
-      if (!appointment) {
-        return res.status(404).json({ message: "Randevu bulunamadı" });
-      }
-
-      res.json(appointment);
-    } catch (error) {
-      res.status(500).json({ message: "Randevu durumu güncellenirken bir hata oluştu" });
-    }
-  });
-
-  app.patch("/api/appointments/:id", requireAuth, async (req: AuthRequest, res: Response) => {
-    try {
-      const { id } = req.params;
-      const { doctorId, doctorNotes } = req.body;
-
-      const appointment = await storage.updateAppointment(parseInt(id), {
-        doctorId: doctorId ? parseInt(doctorId) : undefined,
-        doctorNotes,
-        updatedAt: new Date()
-      });
-
-      if (!appointment) {
-        return res.status(404).json({ message: "Randevu bulunamadı" });
-      }
-
-      res.json(appointment);
-    } catch (error) {
-      res.status(500).json({ message: "Randevu güncellenirken bir hata oluştu" });
     }
   });
 

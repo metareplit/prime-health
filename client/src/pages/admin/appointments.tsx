@@ -25,34 +25,37 @@ export default function AdminAppointments() {
   const [doctorNotes, setDoctorNotes] = useState("");
   const [selectedDoctor, setSelectedDoctor] = useState<string>("");
 
-  // Query hooks with better error handling and auto-refresh
-  const { data: appointments, isLoading, error } = useQuery<Appointment[]>({
+  // Randevuları getir
+  const { data: appointments, isLoading: appointmentsLoading, error: appointmentsError } = useQuery<Appointment[]>({
     queryKey: ["/api/appointments"],
-    refetchInterval: 30000, // Her 30 saniyede bir otomatik yenileme
-    retry: 3, // Hata durumunda 3 kez tekrar dene
+    refetchInterval: 10000, // Her 10 saniyede bir yenile
   });
 
-  const { data: patients } = useQuery<User[]>({
-    queryKey: ["/api/users/patients"],
+  // Hastaları getir
+  const { data: patients, isLoading: patientsLoading } = useQuery<User[]>({
+    queryKey: ["/api/users"],
   });
 
+  // Doktorları getir
   const { data: doctors } = useQuery<User[]>({
-    queryKey: ["/api/users/doctors"],
+    queryKey: ["/api/users"],
   });
 
+  // Hizmetleri getir
   const { data: services } = useQuery<Service[]>({
     queryKey: ["/api/services"],
   });
 
   useEffect(() => {
-    if (error) {
+    // Hata durumunda kullanıcıyı bilgilendir
+    if (appointmentsError) {
       toast({
         title: "Hata",
         description: "Randevular yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin.",
         variant: "destructive",
       });
     }
-  }, [error, toast]);
+  }, [appointmentsError, toast]);
 
   const updateAppointmentMutation = useMutation({
     mutationFn: async (data: Partial<Appointment>) => {
@@ -98,12 +101,12 @@ export default function AdminAppointments() {
                          patient?.email?.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesStatus = statusFilter === "all" || appointment.status === statusFilter;
-    const matchesDate = !dateFilter || appointment.date?.startsWith(dateFilter);
+    const matchesDate = !dateFilter || new Date(appointment.date).toISOString().split('T')[0] === dateFilter;
 
     return matchesSearch && matchesStatus && matchesDate;
   });
 
-  if (isLoading) {
+  if (appointmentsLoading || patientsLoading) {
     return (
       <div className="flex items-center justify-center min-h-[500px]">
         <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
@@ -160,61 +163,68 @@ export default function AdminAppointments() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {filteredAppointments?.map((appointment) => {
-                const patient = patients?.find(p => p.id === appointment.patientId);
-                const service = services?.find(s => s.id === appointment.serviceId);
+              {filteredAppointments?.length === 0 ? (
+                <div className="text-center py-8 text-muted-foreground">
+                  <Calendar className="h-12 w-12 mx-auto mb-4 opacity-20" />
+                  <p>Henüz randevu bulunmuyor.</p>
+                </div>
+              ) : (
+                filteredAppointments?.map((appointment) => {
+                  const patient = patients?.find(p => p.id === appointment.patientId);
+                  const service = services?.find(s => s.id === appointment.serviceId);
 
-                return (
-                  <div
-                    key={appointment.id}
-                    className={`p-4 border rounded-lg cursor-pointer transition-colors ${
-                      selectedAppointment?.id === appointment.id
-                        ? "border-primary bg-primary/5"
-                        : "hover:bg-muted"
-                    }`}
-                    onClick={() => setSelectedAppointment(appointment)}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">
-                          {patient?.firstName} {patient?.lastName}
-                        </p>
-                        <p className="text-sm text-muted-foreground">{service?.name}</p>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                          <Calendar className="h-4 w-4" />
-                          {new Date(appointment.date).toLocaleDateString()} {appointment.time}
+                  return (
+                    <div
+                      key={appointment.id}
+                      className={`p-4 border rounded-lg cursor-pointer transition-colors ${
+                        selectedAppointment?.id === appointment.id
+                          ? "border-primary bg-primary/5"
+                          : "hover:bg-muted"
+                      }`}
+                      onClick={() => setSelectedAppointment(appointment)}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium">
+                            {patient?.firstName} {patient?.lastName}
+                          </p>
+                          <p className="text-sm text-muted-foreground">{service?.name}</p>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                            <Calendar className="h-4 w-4" />
+                            {new Date(appointment.date).toLocaleDateString()} {appointment.time}
+                          </div>
+                        </div>
+                        <div>
+                          {appointment.status === "confirmed" && (
+                            <div className="flex items-center text-green-600">
+                              <CheckCircle className="h-4 w-4 mr-1" />
+                              <span className="text-sm">Onaylandı</span>
+                            </div>
+                          )}
+                          {appointment.status === "pending" && (
+                            <div className="flex items-center text-yellow-600">
+                              <Clock className="h-4 w-4 mr-1" />
+                              <span className="text-sm">Beklemede</span>
+                            </div>
+                          )}
+                          {appointment.status === "cancelled" && (
+                            <div className="flex items-center text-red-600">
+                              <XCircle className="h-4 w-4 mr-1" />
+                              <span className="text-sm">İptal Edildi</span>
+                            </div>
+                          )}
+                          {appointment.status === "completed" && (
+                            <div className="flex items-center text-green-600">
+                              <CheckCircle className="h-4 w-4 mr-1" />
+                              <span className="text-sm">Tamamlandı</span>
+                            </div>
+                          )}
                         </div>
                       </div>
-                      <div>
-                        {appointment.status === "confirmed" && (
-                          <div className="flex items-center text-green-600">
-                            <CheckCircle className="h-4 w-4 mr-1" />
-                            <span className="text-sm">Onaylandı</span>
-                          </div>
-                        )}
-                        {appointment.status === "pending" && (
-                          <div className="flex items-center text-yellow-600">
-                            <Clock className="h-4 w-4 mr-1" />
-                            <span className="text-sm">Beklemede</span>
-                          </div>
-                        )}
-                        {appointment.status === "cancelled" && (
-                          <div className="flex items-center text-red-600">
-                            <XCircle className="h-4 w-4 mr-1" />
-                            <span className="text-sm">İptal Edildi</span>
-                          </div>
-                        )}
-                        {appointment.status === "completed" && (
-                          <div className="flex items-center text-green-600">
-                            <CheckCircle className="h-4 w-4 mr-1" />
-                            <span className="text-sm">Tamamlandı</span>
-                          </div>
-                        )}
-                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              )}
             </div>
           </CardContent>
         </Card>
