@@ -21,6 +21,8 @@ import multer from 'multer';
 import path from 'path';
 import express from 'express';
 import fs from 'fs'; // Import fs module
+import rateLimit from 'express-rate-limit'; // Import rateLimit
+import notificationsRouter from './routes/notifications';
 
 // Auth Middleware Types
 interface AuthRequest extends Request {
@@ -618,6 +620,17 @@ export async function registerRoutes(app: Express) {
       res.status(400).json({ message: "Slider sırası güncellenirken bir hata oluştu" });
     }
   });
+
+  // Notifications routes
+  app.use('/api/notifications', notificationsRouter);
+
+  // SMS endpoint'leri için rate limiting ekleyelim
+  const smsLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 dakika
+    max: 10 // IP başına limit
+  });
+
+  app.use('/api/notifications/send-sms', smsLimiter);
 
   const httpServer = createServer(app);
   return httpServer;
