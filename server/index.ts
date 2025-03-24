@@ -5,6 +5,11 @@ import { setupVite, serveStatic, log } from "./vite";
 import { storage } from "./storage";
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+// ES Modules için __dirname alternatifi
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 declare module "express-session" {
   interface SessionData {
@@ -80,9 +85,15 @@ app.use((req, res, next) => {
       log('Created public directory');
     }
 
-    // Use static serving for now to avoid Vite setup issues
-    serveStatic(app);
-    log('Static file serving configured');
+    // Development modunda Vite HMR kullan
+    if (process.env.NODE_ENV !== 'production') {
+      await setupVite(app, server);
+      log('Vite development server configured');
+    } else {
+      // Production modunda static file serving kullan
+      serveStatic(app);
+      log('Static file serving configured');
+    }
 
     // Error handling middleware
     app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
