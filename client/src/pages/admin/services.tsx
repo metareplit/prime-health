@@ -97,6 +97,8 @@ export default function AdminServices() {
           faqs: editingService.faqs || [],
           featured: editingService.featured || false,
           order: services?.length || 0,
+          createdAt: new Date(),
+          updatedAt: new Date()
         } as Service;
         createMutation.mutate(newService);
       }
@@ -120,6 +122,101 @@ export default function AdminServices() {
     });
   };
 
+  // Add initial services if none exist
+  const addInitialServices = async () => {
+    const initialServices = [
+      {
+        name: "Sapphire FUE Saç Ekimi",
+        description: "En son teknoloji ile doğal ve kalıcı sonuçlar için Safir uçlu özel penler kullanılarak yapılan saç ekimi yöntemi",
+        longDescription: "Safir FUE saç ekimi, geleneksel FUE tekniğinin daha gelişmiş bir versiyonudur. Safir uçlu özel penler kullanılarak yapılan bu işlem, daha hassas açılar ve daha küçük kanallar oluşturulmasına olanak sağlar. Bu da iyileşme sürecini hızlandırır ve daha doğal sonuçlar elde edilmesini sağlar.",
+        benefits: ["Daha hızlı iyileşme süreci", "Minimal skar oluşumu", "Doğal görünüm", "Konforlu uygulama"],
+        process: ["Ücretsiz konsültasyon", "Saç analizi", "Planlama", "Lokal anestezi", "Greft toplama", "Kanal açma", "Greft yerleştirme"],
+        faqs: [],
+        duration: "6-8 saat",
+        price: "2500€'dan başlayan",
+        imageUrl: "/uploads/sapphire-fue.jpg",
+        slug: "sapphire-fue-sac-ekimi",
+        featured: true,
+        order: 0,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: "DHI Saç Ekimi",
+        description: "Greftlerin özel bir kalem yardımıyla direkt olarak yerleştirildiği ileri teknoloji saç ekimi yöntemi",
+        longDescription: "DHI (Direct Hair Implantation) tekniği, greftlerin özel bir implanter kalem yardımıyla direkt olarak yerleştirildiği modern bir saç ekimi yöntemidir. Bu yöntem, daha yüksek tutunma oranı ve daha doğal saç çıkış açıları sağlar.",
+        benefits: ["Kanal açma işlemi yok", "Yüksek tutunma oranı", "Minimal travma", "Doğal açılar"],
+        process: ["Detaylı konsültasyon", "Saç analizi", "Planlama", "Lokal anestezi", "Greft toplama", "DHI implantasyon"],
+        faqs: [],
+        duration: "6-8 saat",
+        price: "3000€'dan başlayan",
+        imageUrl: "/uploads/dhi-technique.jpg",
+        slug: "dhi-sac-ekimi",
+        featured: true,
+        order: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: "Sakal ve Bıyık Ekimi",
+        description: "Yüz bölgesinde istenilen dolgunluk ve görünümü elde etmek için uygulanan hassas ekim işlemi",
+        longDescription: "Sakal ve bıyık ekimi, yüz bölgesinde kalıcı ve doğal görünümlü sonuçlar elde etmek için uygulanan özel bir işlemdir. FUE veya DHI teknikleri kullanılarak yapılan bu işlem, seyrek veya hiç olmayan sakal/bıyık bölgelerinde tam bir görünüm sağlar.",
+        benefits: ["Kalıcı çözüm", "Doğal görünüm", "Kişiye özel tasarım", "Minimal iz"],
+        process: ["Yüz analizi", "Tasarım", "Lokal anestezi", "Greft toplama", "Yerleştirme"],
+        faqs: [],
+        duration: "4-6 saat",
+        price: "1500€'dan başlayan",
+        imageUrl: "/uploads/beard-transplant.jpg",
+        slug: "sakal-biyik-ekimi",
+        featured: false,
+        order: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: "Kaş Ekimi",
+        description: "Seyrek veya şekilsiz kaşlar için doğal ve kalıcı çözüm sunan hassas ekim işlemi",
+        longDescription: "Kaş ekimi, seyrek, asimetrik veya hasarlı kaşların onarımı için uygulanan özel bir işlemdir. DHI tekniği kullanılarak yapılan bu işlem, kaşların doğal akışına ve yönüne uygun şekilde tasarlanır ve uygulanır.",
+        benefits: ["Kalıcı sonuç", "Doğal görünüm", "Kişiye özel tasarım", "İnce detay"],
+        process: ["Kaş analizi", "3D tasarım", "Lokal anestezi", "Greft toplama", "Hassas yerleştirme"],
+        faqs: [],
+        duration: "3-4 saat",
+        price: "1000€'dan başlayan",
+        imageUrl: "/uploads/eyebrow-transplant.jpg",
+        slug: "kas-ekimi",
+        featured: false,
+        order: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: "PRP Tedavisi",
+        description: "Kişinin kendi kanından elde edilen trombositten zengin plazma ile saç büyümesini ve güçlenmesini destekleyen tedavi",
+        longDescription: "PRP (Platelet Rich Plasma) tedavisi, kişinin kendi kanından elde edilen trombositten zengin plazmanın saç köklerine enjekte edilmesi işlemidir. Bu doğal tedavi yöntemi, saç büyümesini uyarır, dökülmeyi azaltır ve mevcut saçları güçlendirir.",
+        benefits: ["Doğal yöntem", "Hızlı uygulama", "Minimal risk", "Etkili sonuç"],
+        process: ["Kan alımı", "PRP hazırlama", "Lokal anestezi", "Uygulama"],
+        faqs: [],
+        duration: "45 dakika",
+        price: "300€'dan başlayan",
+        imageUrl: "/uploads/prp-treatment.jpg",
+        slug: "prp-tedavisi",
+        featured: false,
+        order: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+    ];
+
+    for (const service of initialServices) {
+      await createMutation.mutateAsync(service);
+    }
+
+    toast({
+      title: "Başarılı",
+      description: "Örnek hizmetler başarıyla eklendi.",
+    });
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -129,10 +226,18 @@ export default function AdminServices() {
             Klinik hizmetlerini yönetin ve düzenleyin
           </p>
         </div>
-        <Button onClick={handleCreate}>
-          <Plus className="h-4 w-4 mr-2" />
-          Yeni Hizmet
-        </Button>
+        <div className="flex gap-2">
+          {services?.length === 0 && (
+            <Button onClick={addInitialServices}>
+              <Plus className="h-4 w-4 mr-2" />
+              Örnek Hizmetleri Ekle
+            </Button>
+          )}
+          <Button onClick={handleCreate}>
+            <Plus className="h-4 w-4 mr-2" />
+            Yeni Hizmet
+          </Button>
+        </div>
       </div>
 
       {editingService && (
