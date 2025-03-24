@@ -521,29 +521,43 @@ export async function registerRoutes(app: Express) {
   // Appointments endpoints
   app.get("/api/appointments", requireAuth, async (req: AuthRequest, res: Response) => {
     try {
-      // Admin can see all appointments, regular users see only their own
+      // Admin tüm randevuları, normal kullanıcılar sadece kendi randevularını görebilir
       const user = await storage.getUser(req.session.userId as number);
-      const appointments = user?.role === 'admin' 
-        ? await storage.getAllAppointments()
-        : await storage.getUserAppointments(req.session.userId as number);
+      console.log('Fetching appointments for user:', user?.id, 'role:', user?.role);
+
+      let appointments;
+      if (user?.role === 'admin') {
+        appointments = await storage.getAllAppointments();
+        console.log('Admin appointments fetched:', appointments?.length);
+      } else {
+        appointments = await storage.getUserAppointments(req.session.userId as number);
+        console.log('User appointments fetched:', appointments?.length);
+      }
+
       res.json(appointments);
     } catch (error) {
+      console.error('Error fetching appointments:', error);
       res.status(500).json({ message: "Randevular alınırken bir hata oluştu" });
     }
   });
 
   app.post("/api/appointments", requireAuth, async (req: AuthRequest, res: Response) => {
     try {
+      console.log('Creating appointment with data:', req.body);
       const appointmentData = insertAppointmentSchema.parse({
         ...req.body,
         patientId: req.session.userId as number,
-        status: 'pending', // Default status for new appointments
+        status: 'pending', // Yeni randevular için varsayılan durum
         createdAt: new Date(),
         updatedAt: new Date()
       });
+
       const appointment = await storage.createAppointment(appointmentData);
+      console.log('Appointment created:', appointment);
+
       res.status(201).json(appointment);
     } catch (error) {
+      console.error('Error creating appointment:', error);
       const validationError = fromZodError(error);
       res.status(400).json({ message: validationError.message });
     }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -25,10 +25,11 @@ export default function AdminAppointments() {
   const [doctorNotes, setDoctorNotes] = useState("");
   const [selectedDoctor, setSelectedDoctor] = useState<string>("");
 
-  // Enable automatic background refetching
-  const { data: appointments, isLoading } = useQuery<Appointment[]>({
+  // Query hooks with better error handling and auto-refresh
+  const { data: appointments, isLoading, error } = useQuery<Appointment[]>({
     queryKey: ["/api/appointments"],
-    refetchInterval: 30000, // Refetch every 30 seconds
+    refetchInterval: 30000, // Her 30 saniyede bir otomatik yenileme
+    retry: 3, // Hata durumunda 3 kez tekrar dene
   });
 
   const { data: patients } = useQuery<User[]>({
@@ -43,10 +44,20 @@ export default function AdminAppointments() {
     queryKey: ["/api/services"],
   });
 
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Hata",
+        description: "Randevular yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin.",
+        variant: "destructive",
+      });
+    }
+  }, [error, toast]);
+
   const updateAppointmentMutation = useMutation({
     mutationFn: async (data: Partial<Appointment>) => {
       const res = await apiRequest(
-        "PATCH", 
+        "PATCH",
         `/api/appointments/${selectedAppointment?.id}`,
         data
       );
