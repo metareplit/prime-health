@@ -137,37 +137,7 @@
   "auth": {
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
-    "logout": "Çıkış Yap",
-    "login": {
-      "title": "Giriş Yap",
-      "subtitle": "Hesabınıza giriş yapın",
-      "rememberMe": "Beni hatırla",
-      "forgotPassword": "Şifremi unuttum",
-      "noAccount": "Hesabınız yok mu?",
-      "createAccount": "Hesap oluştur"
-    },
-    "register": {
-      "title": "Kayıt Ol",
-      "subtitle": "Yeni hesap oluşturun",
-      "haveAccount": "Zaten hesabınız var mı?",
-      "terms": "Şartlar ve koşulları",
-      "privacy": "Gizlilik politikasını",
-      "agreeTerms": "kabul ediyorum"
-    },
-    "form": {
-      "email": "E-posta",
-      "password": "Şifre",
-      "confirmPassword": "Şifreyi onayla",
-      "firstName": "Ad",
-      "lastName": "Soyad",
-      "phone": "Telefon"
-    },
-    "errors": {
-      "invalidEmail": "Geçersiz e-posta adresi",
-      "passwordMismatch": "Şifreler eşleşmiyor",
-      "weakPassword": "Şifre çok zayıf",
-      "required": "Bu alan zorunludur"
-    }
+    "logout": "Çıkış Yap"
   },
   "validation": {
     "required": "Bu alan zorunludur",
