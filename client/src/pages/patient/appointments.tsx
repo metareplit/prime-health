@@ -54,6 +54,7 @@ export default function PatientAppointments() {
       return res.json();
     },
     onSuccess: () => {
+      // Hem hasta hem de admin panelindeki randevu listelerini güncelle
       queryClient.invalidateQueries({ queryKey: ["/api/appointments"] });
       setIsCreating(false);
       resetForm();

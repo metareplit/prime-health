@@ -25,8 +25,10 @@ export default function AdminAppointments() {
   const [doctorNotes, setDoctorNotes] = useState("");
   const [selectedDoctor, setSelectedDoctor] = useState<string>("");
 
+  // Enable automatic background refetching
   const { data: appointments, isLoading } = useQuery<Appointment[]>({
     queryKey: ["/api/appointments"],
+    refetchInterval: 30000, // Refetch every 30 seconds
   });
 
   const { data: patients } = useQuery<User[]>({
