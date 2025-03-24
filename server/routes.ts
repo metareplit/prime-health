@@ -520,15 +520,26 @@ export async function registerRoutes(app: Express) {
 
   // Appointments endpoints
   app.get("/api/appointments", requireAuth, async (req: AuthRequest, res: Response) => {
-    const appointments = await storage.getUserAppointments(req.session.userId as number);
-    res.json(appointments);
+    try {
+      // Admin can see all appointments, regular users see only their own
+      const user = await storage.getUser(req.session.userId as number);
+      const appointments = user?.role === 'admin' 
+        ? await storage.getAllAppointments()
+        : await storage.getUserAppointments(req.session.userId as number);
+      res.json(appointments);
+    } catch (error) {
+      res.status(500).json({ message: "Randevular alınırken bir hata oluştu" });
+    }
   });
 
   app.post("/api/appointments", requireAuth, async (req: AuthRequest, res: Response) => {
     try {
       const appointmentData = insertAppointmentSchema.parse({
         ...req.body,
-        patientId: req.session.userId as number
+        patientId: req.session.userId as number,
+        status: 'pending', // Default status for new appointments
+        createdAt: new Date(),
+        updatedAt: new Date()
       });
       const appointment = await storage.createAppointment(appointmentData);
       res.status(201).json(appointment);
@@ -539,21 +550,43 @@ export async function registerRoutes(app: Express) {
   });
 
   app.patch("/api/appointments/:id/status", requireAuth, async (req: AuthRequest, res: Response) => {
-    const { id } = req.params;
-    const { status } = req.body;
-
-    if (!["pending", "confirmed", "completed", "cancelled"].includes(status)) {
-      return res.status(400).json({ message: "Geçersiz durum" });
-    }
-
     try {
-      const appointment = await storage.updateAppointmentStatus(
-        parseInt(id),
-        status
-      );
+      const { id } = req.params;
+      const { status } = req.body;
+
+      if (!["pending", "confirmed", "completed", "cancelled"].includes(status)) {
+        return res.status(400).json({ message: "Geçersiz durum" });
+      }
+
+      const appointment = await storage.updateAppointmentStatus(parseInt(id), status);
+      if (!appointment) {
+        return res.status(404).json({ message: "Randevu bulunamadı" });
+      }
+
       res.json(appointment);
     } catch (error) {
-      res.status(404).json({ message: "Randevu bulunamadı" });
+      res.status(500).json({ message: "Randevu durumu güncellenirken bir hata oluştu" });
+    }
+  });
+
+  app.patch("/api/appointments/:id", requireAuth, async (req: AuthRequest, res: Response) => {
+    try {
+      const { id } = req.params;
+      const { doctorId, doctorNotes } = req.body;
+
+      const appointment = await storage.updateAppointment(parseInt(id), {
+        doctorId: doctorId ? parseInt(doctorId) : undefined,
+        doctorNotes,
+        updatedAt: new Date()
+      });
+
+      if (!appointment) {
+        return res.status(404).json({ message: "Randevu bulunamadı" });
+      }
+
+      res.json(appointment);
+    } catch (error) {
+      res.status(500).json({ message: "Randevu güncellenirken bir hata oluştu" });
     }
   });
 
