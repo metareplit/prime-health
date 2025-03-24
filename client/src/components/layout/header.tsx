@@ -115,18 +115,22 @@ export default function Header({ children }: HeaderProps) {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <div className="hidden md:flex items-center gap-2">
+              <div className="hidden md:flex items-center space-x-3">
                 <Link href="/auth/login">
-                  <Button variant="ghost">{t('auth.login')}</Button>
+                  <Button variant="ghost" size="sm" className="px-4">
+                    {t('auth.login')}
+                  </Button>
                 </Link>
                 <Link href="/auth/register">
-                  <Button variant="secondary">{t('auth.register')}</Button>
+                  <Button variant="outline" size="sm" className="px-4">
+                    {t('auth.register')}
+                  </Button>
                 </Link>
               </div>
             )}
 
             <Link href="/randevu">
-              <Button className="hidden md:inline-flex">
+              <Button variant="default" size="sm" className="hidden md:inline-flex px-4">
                 {t('header.buttons.appointment')}
               </Button>
             </Link>
@@ -177,14 +181,14 @@ export default function Header({ children }: HeaderProps) {
                           </Button>
                         </Link>
                         <Link href="/auth/register">
-                          <Button variant="secondary" className="w-full justify-start">
+                          <Button variant="outline" className="w-full justify-start">
                             {t('auth.register')}
                           </Button>
                         </Link>
                       </>
                     )}
                     <Link href="/randevu">
-                      <Button className="w-full">
+                      <Button variant="default" className="w-full">
                         {t('header.buttons.appointment')}
                       </Button>
                     </Link>
