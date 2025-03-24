@@ -100,6 +100,8 @@ export interface IStorage {
   getUserAppointments(userId: number): Promise<Appointment[]>;
   createAppointment(appointment: InsertAppointment): Promise<Appointment>;
   updateAppointmentStatus(id: number, status: string): Promise<Appointment>;
+  getAllAppointments(): Promise<Appointment[]>;
+  updateAppointment(id: number, data: Partial<Appointment>): Promise<Appointment>;
 
   // Email Template methods
   getAllEmailTemplates(): Promise<EmailTemplate[]>;
@@ -361,6 +363,19 @@ export class DatabaseStorage implements IStorage {
     const [updatedAppointment] = await db
       .update(appointments)
       .set({ status })
+      .where(eq(appointments.id, id))
+      .returning();
+    return updatedAppointment;
+  }
+
+  async getAllAppointments(): Promise<Appointment[]> {
+    return await db.select().from(appointments).orderBy(appointments.createdAt);
+  }
+
+  async updateAppointment(id: number, data: Partial<Appointment>): Promise<Appointment> {
+    const [updatedAppointment] = await db
+      .update(appointments)
+      .set(data)
       .where(eq(appointments.id, id))
       .returning();
     return updatedAppointment;

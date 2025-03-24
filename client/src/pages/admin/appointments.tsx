@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Calendar, Clock, CheckCircle, XCircle, Search, Upload, Loader2 } from "lucide-react";
+import { Calendar, Clock, CheckCircle, XCircle, Search, Loader2 } from "lucide-react";
 import type { Appointment, User, Service } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 
@@ -23,9 +23,7 @@ export default function AdminAppointments() {
   const [dateFilter, setDateFilter] = useState("");
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
   const [doctorNotes, setDoctorNotes] = useState("");
-  const [documents, setDocuments] = useState<File[]>([]);
   const [selectedDoctor, setSelectedDoctor] = useState<string>("");
-  const [isUploading, setIsUploading] = useState(false);
 
   const { data: appointments, isLoading } = useQuery<Appointment[]>({
     queryKey: ["/api/appointments"],
@@ -45,23 +43,10 @@ export default function AdminAppointments() {
 
   const updateAppointmentMutation = useMutation({
     mutationFn: async (data: Partial<Appointment>) => {
-      setIsUploading(true);
-      const formData = new FormData();
-      
-      Object.entries(data).forEach(([key, value]) => {
-        if (value !== undefined) {
-          formData.append(key, value.toString());
-        }
-      });
-
-      documents.forEach(file => {
-        formData.append("documents", file);
-      });
-
       const res = await apiRequest(
         "PATCH", 
         `/api/appointments/${selectedAppointment?.id}`,
-        formData
+        data
       );
       return res.json();
     },
@@ -69,7 +54,6 @@ export default function AdminAppointments() {
       queryClient.invalidateQueries({ queryKey: ["/api/appointments"] });
       setSelectedAppointment(null);
       setDoctorNotes("");
-      setDocuments([]);
       toast({
         title: "Başarılı",
         description: "Randevu başarıyla güncellendi.",
@@ -81,9 +65,6 @@ export default function AdminAppointments() {
         description: "Güncelleme sırasında bir hata oluştu: " + error.message,
         variant: "destructive",
       });
-    },
-    onSettled: () => {
-      setIsUploading(false);
     },
   });
 
@@ -97,33 +78,14 @@ export default function AdminAppointments() {
     updateAppointmentMutation.mutate({ doctorId: parseInt(selectedDoctor) });
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const files = Array.from(e.target.files);
-      const totalSize = files.reduce((acc, file) => acc + file.size, 0);
-      const maxSize = 10 * 1024 * 1024; // 10MB
-
-      if (totalSize > maxSize) {
-        toast({
-          title: "Hata",
-          description: "Toplam dosya boyutu 10MB'ı geçemez.",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      setDocuments(files);
-    }
-  };
-
   const filteredAppointments = appointments?.filter(appointment => {
     const patient = patients?.find(p => p.id === appointment.patientId);
-    const matchesSearch = 
-      patient?.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      patient?.email?.toLowerCase().includes(searchTerm.toLowerCase());
-    
+    const matchesSearch = patient?.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         patient?.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         patient?.email?.toLowerCase().includes(searchTerm.toLowerCase());
+
     const matchesStatus = statusFilter === "all" || appointment.status === statusFilter;
-    const matchesDate = !dateFilter || appointment.date.startsWith(dateFilter);
+    const matchesDate = !dateFilter || appointment.date?.startsWith(dateFilter);
 
     return matchesSearch && matchesStatus && matchesDate;
   });
@@ -164,9 +126,9 @@ export default function AdminAppointments() {
               <SelectContent>
                 <SelectItem value="all">Tümü</SelectItem>
                 <SelectItem value="pending">Bekleyen</SelectItem>
-                <SelectItem value="confirmed">Onaylanan</SelectItem>
-                <SelectItem value="completed">Tamamlanan</SelectItem>
-                <SelectItem value="cancelled">İptal Edilen</SelectItem>
+                <SelectItem value="confirmed">Onaylandı</SelectItem>
+                <SelectItem value="completed">Tamamlandı</SelectItem>
+                <SelectItem value="cancelled">İptal Edildi</SelectItem>
               </SelectContent>
             </Select>
             <Input
@@ -188,7 +150,7 @@ export default function AdminAppointments() {
               {filteredAppointments?.map((appointment) => {
                 const patient = patients?.find(p => p.id === appointment.patientId);
                 const service = services?.find(s => s.id === appointment.serviceId);
-                
+
                 return (
                   <div
                     key={appointment.id}
@@ -201,30 +163,35 @@ export default function AdminAppointments() {
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium">{patient?.fullName}</p>
+                        <p className="font-medium">
+                          {patient?.firstName} {patient?.lastName}
+                        </p>
                         <p className="text-sm text-muted-foreground">{service?.name}</p>
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
                           <Calendar className="h-4 w-4" />
-                          {new Date(appointment.date).toLocaleDateString()} - {appointment.time}
+                          {new Date(appointment.date).toLocaleDateString()} {appointment.time}
                         </div>
                       </div>
                       <div>
-                        {appointment.status === "confirmed" ? (
+                        {appointment.status === "confirmed" && (
                           <div className="flex items-center text-green-600">
                             <CheckCircle className="h-4 w-4 mr-1" />
                             <span className="text-sm">Onaylandı</span>
                           </div>
-                        ) : appointment.status === "pending" ? (
+                        )}
+                        {appointment.status === "pending" && (
                           <div className="flex items-center text-yellow-600">
                             <Clock className="h-4 w-4 mr-1" />
                             <span className="text-sm">Beklemede</span>
                           </div>
-                        ) : appointment.status === "cancelled" ? (
+                        )}
+                        {appointment.status === "cancelled" && (
                           <div className="flex items-center text-red-600">
                             <XCircle className="h-4 w-4 mr-1" />
                             <span className="text-sm">İptal Edildi</span>
                           </div>
-                        ) : (
+                        )}
+                        {appointment.status === "completed" && (
                           <div className="flex items-center text-green-600">
                             <CheckCircle className="h-4 w-4 mr-1" />
                             <span className="text-sm">Tamamlandı</span>
@@ -284,7 +251,7 @@ export default function AdminAppointments() {
                               key={doctor.id}
                               value={doctor.id.toString()}
                             >
-                              {doctor.fullName}
+                              {doctor.firstName} {doctor.lastName}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -308,22 +275,6 @@ export default function AdminAppointments() {
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Döküman Yükle</label>
-                    <Input
-                      type="file"
-                      multiple
-                      onChange={handleFileChange}
-                      accept=".pdf,.doc,.docx,image/*"
-                      className="cursor-pointer"
-                    />
-                    {documents.length > 0 && (
-                      <p className="text-sm text-muted-foreground">
-                        Seçilen dosya sayısı: {documents.length}
-                      </p>
-                    )}
-                  </div>
-
                   <Button
                     className="w-full"
                     onClick={() => {
@@ -332,16 +283,8 @@ export default function AdminAppointments() {
                         doctorNotes,
                       });
                     }}
-                    disabled={isUploading}
                   >
-                    {isUploading ? (
-                      <>
-                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                        Güncelleniyor...
-                      </>
-                    ) : (
-                      "Değişiklikleri Kaydet"
-                    )}
+                    Değişiklikleri Kaydet
                   </Button>
                 </div>
 
