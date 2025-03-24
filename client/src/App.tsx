@@ -45,6 +45,8 @@ import NotFound from "@/pages/not-found";
 import AdminServices from "@/pages/admin/services";
 import AdminContact from "@/pages/admin/contact";
 import AdminMessages from "@/pages/admin/messages"; // Added import
+import AdminAppointments from "@/pages/admin/appointments"; // Added import
+
 
 function Router() {
   return (
@@ -56,6 +58,15 @@ function Router() {
         {() => (
           <AdminLayout title="Dashboard">
             <AdminDashboard />
+          </AdminLayout>
+        )}
+      </Route>
+
+      {/* Add proper route for admin appointments */}
+      <Route path="/admin/appointments">
+        {() => (
+          <AdminLayout title="Randevu Yönetimi">
+            <AdminAppointments />
           </AdminLayout>
         )}
       </Route>
@@ -208,6 +219,7 @@ function Router() {
           </AdminLayout>
         )}
       </Route> {/* Added Route */}
+
 
 
       {/* Public Routes */}
