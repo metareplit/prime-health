@@ -71,7 +71,7 @@ export default function Header({ children }: HeaderProps) {
           </div>
 
           {/* Right Side: Auth, Language & Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 md:gap-4">
             <div className="relative flex items-center mr-2 md:mr-4">
               {children} {/* Language Switcher */}
             </div>
@@ -79,8 +79,8 @@ export default function Header({ children }: HeaderProps) {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                    <User className="h-5 w-5" />
+                  <Button variant="ghost" className="relative h-8 w-8 md:h-9 md:w-9 rounded-full">
+                    <User className="h-4 w-4 md:h-5 md:w-5" />
                     <span className="sr-only">{t('header.menu.user')}</span>
                   </Button>
                 </DropdownMenuTrigger>
