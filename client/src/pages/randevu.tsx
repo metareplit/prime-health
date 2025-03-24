@@ -10,13 +10,22 @@ import { useNotifications } from "@/hooks/use-notifications";
 import { useAuth } from "@/lib/auth";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const appointmentSchema = z.object({
   phone: z.string().min(10, "Geçerli bir telefon numarası giriniz"),
   name: z.string().min(2, "İsim en az 2 karakter olmalıdır"),
+  age: z.string().min(1, "Yaş bilgisi zorunludur"),
+  medicalHistory: z.string().optional(),
+  serviceType: z.enum(['sac-ekimi', 'sakal-ekimi', 'kas-ekimi', 'prp'], {
+    required_error: "Lütfen bir hizmet seçin",
+  }),
 });
 
 type AppointmentFormData = z.infer<typeof appointmentSchema>;
@@ -32,6 +41,9 @@ export default function Appointment() {
     defaultValues: {
       name: user ? `${user.firstName} ${user.lastName}` : '',
       phone: '',
+      age: '',
+      medicalHistory: '',
+      serviceType: undefined,
     },
   });
 
@@ -51,7 +63,7 @@ export default function Appointment() {
       templateData: {
         name: data.name,
         date: formattedDate,
-        time: '10:00' // Bu sabit değer yerine seçilen saat kullanılabilir
+        time: '10:00'
       }
     });
   };
@@ -128,7 +140,103 @@ export default function Appointment() {
                         <FormItem>
                           <FormLabel>Telefon</FormLabel>
                           <FormControl>
-                            <Input {...field} type="tel" placeholder="+90" />
+                            <PhoneInput
+                              country={'tr'}
+                              value={field.value}
+                              onChange={(phone) => field.onChange(phone)}
+                              inputClass="!w-full !h-10 !text-base !px-10"
+                              containerClass="!w-full"
+                              buttonClass="!h-10 !w-10 !border !border-input"
+                              dropdownClass="!w-[300px]"
+                              preferredCountries={['tr', 'ru', 'ge', 'az']}
+                              enableSearch={true}
+                              searchPlaceholder="Ülke Ara..."
+                              searchNotFound="Ülke bulunamadı"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="age"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Yaşınız</FormLabel>
+                          <FormControl>
+                            <Input {...field} type="number" min="18" max="100" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="medicalHistory"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Önceki Hastalıklar / Sağlık Durumu</FormLabel>
+                          <FormControl>
+                            <Textarea 
+                              {...field} 
+                              placeholder="Varsa önceki hastalıklarınızı veya mevcut sağlık durumunuzu belirtiniz..."
+                              className="resize-none"
+                              rows={3}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="serviceType"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Hizmet Alanı</FormLabel>
+                          <FormControl>
+                            <RadioGroup
+                              onValueChange={field.onChange}
+                              value={field.value}
+                              className="grid grid-cols-2 gap-4"
+                            >
+                              <FormItem className="flex items-center space-x-2">
+                                <FormControl>
+                                  <RadioGroupItem value="sac-ekimi" />
+                                </FormControl>
+                                <FormLabel className="font-normal cursor-pointer">
+                                  Saç Ekimi
+                                </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-2">
+                                <FormControl>
+                                  <RadioGroupItem value="sakal-ekimi" />
+                                </FormControl>
+                                <FormLabel className="font-normal cursor-pointer">
+                                  Sakal Ekimi
+                                </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-2">
+                                <FormControl>
+                                  <RadioGroupItem value="kas-ekimi" />
+                                </FormControl>
+                                <FormLabel className="font-normal cursor-pointer">
+                                  Kaş Ekimi
+                                </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-2">
+                                <FormControl>
+                                  <RadioGroupItem value="prp" />
+                                </FormControl>
+                                <FormLabel className="font-normal cursor-pointer">
+                                  PRP Tedavisi
+                                </FormLabel>
+                              </FormItem>
+                            </RadioGroup>
                           </FormControl>
                           <FormMessage />
                         </FormItem>
