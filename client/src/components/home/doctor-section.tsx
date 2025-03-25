@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Award, Calendar, Star, CheckCircle } from "lucide-react";
+import { Award, Calendar, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export default function DoctorSection() {
@@ -43,13 +43,6 @@ export default function DoctorSection() {
                   e.currentTarget.src = '/images/default-doctor.svg';
                 }}
               />
-            </div>
-            <div className="absolute -bottom-4 -right-4 bg-white rounded-xl p-3 shadow-lg">
-              <div className="flex items-center gap-2">
-                <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                <span className="font-semibold text-sm">4.9/5</span>
-                <span className="text-muted-foreground text-sm">({t('doctor.reviewCount')})</span>
-              </div>
             </div>
           </motion.div>
 
