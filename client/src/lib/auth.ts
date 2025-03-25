@@ -54,6 +54,7 @@ function useLoginMutation() {
 
 function useLogoutMutation() {
   const { toast } = useToast();
+
   return useMutation({
     mutationFn: async () => {
       const response = await apiRequest("POST", "/api/auth/logout");
@@ -91,16 +92,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const loginMutation = useLoginMutation();
   const logoutMutation = useLogoutMutation();
 
+  const contextValue: AuthContextType = {
+    user: user || null,
+    isLoading,
+    error: error || null,
+    loginMutation,
+    logoutMutation,
+  };
+
   return (
-    <AuthContext.Provider
-      value={{
-        user: user || null,
-        isLoading,
-        error: error || null,
-        loginMutation,
-        logoutMutation,
-      }}
-    >
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );
