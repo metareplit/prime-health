@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import ServiceCard from "@/components/services/service-card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import HeroSlider from "@/components/home/hero-slider";
+import HeroSlider from "@/components/home/hero-slider"; // Import HeroSlider
 import { motion } from "framer-motion";
 import { Shield, Users, Stethoscope, Clock, Award, HeartHandshake, Building2, Map, ArrowRight, CheckCircle, PlusCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -83,8 +83,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Slider Section */}
-      <HeroSlider />
+      {/* Hero Slider Section - explicitly add it before other sections */}
+      <section className="relative w-full">
+        <HeroSlider />
+      </section>
 
       {/* Why Choose Us Section */}
       <section className="py-20 bg-gradient-to-b from-primary/5 to-transparent">
@@ -176,7 +178,6 @@ export default function Home() {
                   viewport={{ once: true }}
                   className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
                 >
-                  {/* Service Image */}
                   <div className="relative h-64 overflow-hidden">
                     <img
                       src={service.imageUrl || '/images/hair-transplant.svg'}
@@ -197,7 +198,6 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Service Content */}
                   <div className="p-6">
                     <h3 className="text-2xl font-semibold mb-3 group-hover:text-primary transition-colors">
                       {service.name}
@@ -206,7 +206,6 @@ export default function Home() {
                       {service.description}
                     </p>
 
-                    {/* Service Features */}
                     <div className="space-y-2 mb-6">
                       {service.process?.slice(0, 3).map((step, idx) => (
                         <div
@@ -219,7 +218,6 @@ export default function Home() {
                       ))}
                     </div>
 
-                    {/* Action Button */}
                     <div className="pt-4 border-t">
                       <Link href={`/hizmetler/${service.slug}`}>
                         <Button
