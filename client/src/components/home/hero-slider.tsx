@@ -3,21 +3,33 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 const slides = [
   {
     image: "/images/slider/h.png",
-    title: "Uzman Kadromuz",
-    subtitle: "Deneyimli Ekibimizle Hizmetinizdeyiz"
+    title: "Modern Tıbbi Teknoloji",
+    subtitle: "En Son Teknoloji ile Güvenilir Tedavi"
+  },
+  {
+    image: "/images/slider/doctor2.png",
+    title: "Uzman Hekim Kadromuz",
+    subtitle: "Alanında Uzman ve Deneyimli Ekibimiz"
+  },
+  {
+    image: "/images/slider/doctor3.png",
+    title: "Profesyonel Bakım",
+    subtitle: "Kişiselleştirilmiş Tedavi Yaklaşımı"
   },
   {
     image: "/images/slider/clinic.webp",
     title: "Prime Health Klinik",
-    subtitle: "Sağlıklı ve Güzel Bir Görünüm İçin Yanınızdayız"
+    subtitle: "Sağlığınız İçin En İyi Çözümler"
   }
 ];
 
 export default function HeroSlider() {
+  const { t } = useTranslation('common');
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -58,7 +70,7 @@ export default function HeroSlider() {
                 alt={slide.title}
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
@@ -66,19 +78,19 @@ export default function HeroSlider() {
                   transition={{ duration: 0.8 }}
                   className="text-center text-white px-4"
                 >
-                  <h1 className="text-4xl md:text-6xl font-bold mb-4">
+                  <h1 className="text-4xl md:text-6xl font-bold mb-4 text-shadow-lg">
                     {slide.title}
                   </h1>
-                  <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+                  <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-shadow">
                     {slide.subtitle}
                   </p>
                   <Button 
                     size="lg"
                     variant="outline"
-                    className="bg-white/10 hover:bg-white/20 border-white text-white"
+                    className="bg-white/10 hover:bg-white/20 border-white text-white shadow-lg hover:scale-105 transition-all duration-300"
                     onClick={() => window.location.href = '/randevu'}
                   >
-                    Randevu Al
+                    {t('buttons.appointment')}
                   </Button>
                 </motion.div>
               </div>
