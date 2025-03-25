@@ -14,27 +14,27 @@ import { useQuery } from "@tanstack/react-query";
 // Product categories structure
 const categories = [
   {
-    id: "sampuanlar",
+    id: "sampuan",
     titleKey: "products.categories.shampoos.title",
     descriptionKey: "products.categories.shampoos.description",
   },
   {
-    id: "serumlar",
+    id: "serum",
     titleKey: "products.categories.serums.title",
     descriptionKey: "products.categories.serums.description",
   },
   {
-    id: "vitaminler",
+    id: "vitamin",
     titleKey: "products.categories.vitamins.title",
     descriptionKey: "products.categories.vitamins.description",
   },
   {
-    id: "tonikler",
+    id: "tonik",
     titleKey: "products.categories.tonics.title",
     descriptionKey: "products.categories.tonics.description",
   },
   {
-    id: "kremler",
+    id: "krem",
     titleKey: "products.categories.creams.title",
     descriptionKey: "products.categories.creams.description",
   }
@@ -119,7 +119,7 @@ export default function Products() {
 
       {/* Ürünler Section */}
       <section className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="sampuanlar" className="w-full">
+        <Tabs defaultValue="sampuan" className="w-full">
           <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-4 border-b">
             <TabsList className="flex flex-wrap justify-center gap-2">
               {categories.map((category) => (
@@ -137,7 +137,7 @@ export default function Products() {
           {categories.map((category) => (
             <TabsContent key={category.id} value={category.id}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
-                {(productsByCategory[category.id] || [])
+                {(productsByCategory[category.id.toLowerCase()] || [])
                   .filter((product: any) =>
                     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     product.description.toLowerCase().includes(searchTerm.toLowerCase())
@@ -155,7 +155,7 @@ export default function Products() {
                             <CardContent className="p-4">
                               <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 mb-4">
                                 <img
-                                  src={product.images?.[0] || product.image_url}
+                                  src={product.images?.[0] || `/images/products/${product.category.toLowerCase()}/${product.slug}.webp`}
                                   alt={product.name}
                                   className="w-full h-full object-contain"
                                 />
@@ -182,7 +182,7 @@ export default function Products() {
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-8">
                               <img
-                                src={product.images?.[0] || product.image_url}
+                                src={product.images?.[0] || `/images/products/${product.category.toLowerCase()}/${product.slug}.webp`}
                                 alt={product.name}
                                 className="w-full h-full object-contain"
                               />
