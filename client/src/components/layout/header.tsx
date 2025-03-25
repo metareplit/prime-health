@@ -8,6 +8,7 @@ import {
 import { Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./language-switcher";
+import { useRef } from "react";
 
 interface HeaderProps {
   children?: React.ReactNode;
@@ -15,6 +16,11 @@ interface HeaderProps {
 
 export default function Header({ children }: HeaderProps) {
   const { t } = useTranslation('common');
+  const sheetTriggerRef = useRef<HTMLButtonElement>(null);
+
+  const handleNavigate = () => {
+    sheetTriggerRef.current?.click();
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -75,7 +81,7 @@ export default function Header({ children }: HeaderProps) {
             {/* Mobile Menu */}
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" className="md:hidden h-9 w-9 p-0">
+                <Button variant="ghost" className="md:hidden h-9 w-9 p-0" ref={sheetTriggerRef}>
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">{t('header.menu.open')}</span>
                 </Button>
@@ -89,28 +95,28 @@ export default function Header({ children }: HeaderProps) {
                   </div>
                   <nav className="flex-1 overflow-y-auto">
                     <div className="grid gap-4 p-6">
-                      <Link href="/">
+                      <Link href="/" onClick={handleNavigate}>
                         <span className="block text-sm font-medium cursor-pointer hover:text-primary">{t('nav.home')}</span>
                       </Link>
-                      <Link href="/hizmetler">
+                      <Link href="/hizmetler" onClick={handleNavigate}>
                         <span className="block text-sm font-medium cursor-pointer hover:text-primary">{t('nav.services')}</span>
                       </Link>
-                      <Link href="/galeri">
+                      <Link href="/galeri" onClick={handleNavigate}>
                         <span className="block text-sm font-medium cursor-pointer hover:text-primary">{t('nav.gallery')}</span>
                       </Link>
-                      <Link href="/urunler">
+                      <Link href="/urunler" onClick={handleNavigate}>
                         <span className="block text-sm font-medium cursor-pointer hover:text-primary">{t('nav.products')}</span>
                       </Link>
-                      <Link href="/blog">
+                      <Link href="/blog" onClick={handleNavigate}>
                         <span className="block text-sm font-medium cursor-pointer hover:text-primary">{t('nav.blog')}</span>
                       </Link>
-                      <Link href="/iletisim">
+                      <Link href="/iletisim" onClick={handleNavigate}>
                         <span className="block text-sm font-medium cursor-pointer hover:text-primary">{t('nav.contact')}</span>
                       </Link>
                     </div>
                   </nav>
                   <div className="p-6 border-t">
-                    <Link href="/randevu">
+                    <Link href="/randevu" onClick={handleNavigate}>
                       <Button variant="default" className="w-full">
                         {t('header.buttons.appointment')}
                       </Button>
