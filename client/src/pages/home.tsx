@@ -83,7 +83,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section with Slider */}
+      {/* Hero Slider Section */}
       <HeroSlider />
 
       {/* Why Choose Us Section */}
