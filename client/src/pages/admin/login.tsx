@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2 } from "lucide-react";
+import { Loader2, Lock, User } from "lucide-react";
 
 export default function AdminLogin() {
   const { loginMutation } = useAuth();
@@ -17,58 +17,66 @@ export default function AdminLogin() {
     e.preventDefault();
     try {
       const user = await loginMutation.mutateAsync({ username, password });
-      console.log("Login response:", user); // Debug log
       if (user && user.role === "admin") {
-        setLocation("/admin/services"); // Direkt olarak hizmetler sayfasına yönlendir
-      } else {
-        setLocation("/"); // Admin değilse ana sayfaya yönlendir
+        setLocation("/admin/services");
       }
     } catch (error) {
-      console.error("Login error:", error); // Hata loglaması
+      console.error("Login error:", error);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <Card className="w-full max-w-md p-8">
-        <div className="space-y-6">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold">Admin Girişi</h1>
-            <p className="text-sm text-muted-foreground mt-2">
-              Yönetim paneline erişmek için giriş yapın
-            </p>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-50 to-white">
+      <div className="w-full max-w-md px-4">
+        <div className="text-center mb-8">
+          <div className="inline-block p-2 bg-primary/10 rounded-xl mb-4">
+            <Lock className="w-8 h-8 text-primary" />
           </div>
+          <h1 className="text-2xl font-bold text-gray-900">Admin Paneli</h1>
+          <p className="text-sm text-gray-600 mt-2">
+            Yönetim paneline erişmek için giriş yapın
+          </p>
+        </div>
 
+        <Card className="p-6 shadow-lg border-0">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium" htmlFor="username">
-                Kullanıcı Adı
-              </label>
-              <Input
-                id="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                <Input
+                  id="username"
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="pl-10"
+                  placeholder="Kullanıcı adı"
+                  required
+                  autoComplete="username"
+                  autoFocus
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium" htmlFor="password">
-                Şifre
-              </label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="pl-10"
+                  placeholder="Şifre"
+                  required
+                  autoComplete="current-password"
+                />
+              </div>
             </div>
 
             <Button
               type="submit"
-              className="w-full"
+              className="w-full bg-primary hover:bg-primary/90"
+              size="lg"
               disabled={loginMutation.isPending}
             >
               {loginMutation.isPending ? (
@@ -80,17 +88,21 @@ export default function AdminLogin() {
                 "Giriş Yap"
               )}
             </Button>
-          </form>
 
-          {loginMutation.isError && (
-            <Alert variant="destructive">
-              <AlertDescription>
-                Kullanıcı adı veya şifre hatalı
-              </AlertDescription>
-            </Alert>
-          )}
-        </div>
-      </Card>
+            {loginMutation.isError && (
+              <Alert variant="destructive" className="mt-4">
+                <AlertDescription>
+                  Kullanıcı adı veya şifre hatalı. Lütfen bilgilerinizi kontrol edip tekrar deneyin.
+                </AlertDescription>
+              </Alert>
+            )}
+          </form>
+        </Card>
+
+        <p className="text-center text-sm text-gray-600 mt-4">
+          © {new Date().getFullYear()} Hair Clinic. Tüm hakları saklıdır.
+        </p>
+      </div>
     </div>
   );
 }
