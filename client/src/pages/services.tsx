@@ -24,6 +24,147 @@ const item = {
   show: { opacity: 1, y: 0 }
 };
 
+const ServiceCard = ({ service }: { service: Service }) => {
+  // Fallback image for services that don't have an image
+  const fallbackImage = "/images/hair-transplant.svg";
+
+  return (
+    <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 relative">
+      <div className="relative overflow-hidden aspect-video">
+        <img
+          src={service.imageUrl || fallbackImage}
+          alt={service.name}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = fallbackImage;
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+          <Button 
+            variant="secondary" 
+            size="sm" 
+            className="w-full bg-white/90 hover:bg-white"
+            asChild
+          >
+            <Link href={`/randevu?service=${service.slug}`}>
+              Randevu Al
+            </Link>
+          </Button>
+        </div>
+      </div>
+
+      <CardHeader className="flex-grow">
+        <CardTitle className="text-xl font-bold flex items-center justify-between">
+          {service.name}
+          <span className="flex items-center text-sm font-normal text-primary">
+            <Clock className="h-4 w-4 mr-1" />
+            {service.duration}
+          </span>
+        </CardTitle>
+        <p className="text-gray-600 text-sm mt-2">{service.description}</p>
+      </CardHeader>
+
+      <CardContent>
+        <Tabs defaultValue="details" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 mb-4">
+            <TabsTrigger value="details" className="text-xs">
+              <Info className="h-3 w-3 mr-1" /> Detaylar
+            </TabsTrigger>
+            <TabsTrigger value="benefits" className="text-xs">
+              <Check className="h-3 w-3 mr-1" /> Avantajlar
+            </TabsTrigger>
+            <TabsTrigger value="faq" className="text-xs">
+              <HelpCircle className="h-3 w-3 mr-1" /> SSS
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="details" className="mt-2">
+            <div className="space-y-2">
+              <h3 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                <ListChecks className="h-4 w-4 text-primary" />
+                İşlem Süreci
+              </h3>
+              <ol className="space-y-1 text-sm">
+                {service.process?.slice(0, 4).map((step, idx) => (
+                  <motion.li
+                    key={idx}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="flex items-center gap-2 p-2 rounded hover:bg-gray-50"
+                  >
+                    <span className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs flex-shrink-0">
+                      {idx + 1}
+                    </span>
+                    <span className="text-gray-600">{step}</span>
+                  </motion.li>
+                ))}
+              </ol>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="benefits" className="mt-2">
+            <motion.ul 
+              className="grid grid-cols-1 gap-2"
+              variants={container}
+              initial="hidden"
+              animate="show"
+            >
+              {service.benefits?.slice(0, 4).map((benefit, idx) => (
+                <motion.li
+                  key={idx}
+                  variants={item}
+                  className="flex items-center gap-2 text-sm p-2 rounded hover:bg-gray-50"
+                >
+                  <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
+                  <span className="text-gray-600">{benefit}</span>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </TabsContent>
+
+          <TabsContent value="faq" className="mt-2">
+            <Accordion type="single" collapsible>
+              {service.faqs?.slice(0, 3).map((faq, idx) => {
+                const [question, answer] = faq.split("|");
+                return (
+                  <AccordionItem 
+                    key={idx} 
+                    value={`item-${idx}`}
+                    className="border-b last:border-0"
+                  >
+                    <AccordionTrigger className="text-sm hover:text-primary transition-colors">
+                      {question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-sm text-gray-600">
+                      {answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                );
+              })}
+            </Accordion>
+          </TabsContent>
+        </Tabs>
+
+        <div className="mt-4 pt-4 border-t">
+          <Button 
+            size="sm"
+            className="w-full group hover:translate-y-[-1px] transition-all duration-300"
+            asChild
+          >
+            <Link href="/iletisim">
+              <span>Ücretsiz Danışma</span>
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
 export default function Services() {
   const { data: services, isLoading } = useQuery<Service[]>({
     queryKey: ["/api/services"],
@@ -90,137 +231,7 @@ export default function Services() {
                 variants={item}
                 className="group"
               >
-                <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 relative">
-                  <div className="relative overflow-hidden aspect-video">
-                    {service.imageUrl && (
-                      <img
-                        src={service.imageUrl}
-                        alt={service.name}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <Button 
-                        variant="secondary" 
-                        size="sm" 
-                        className="w-full bg-white/90 hover:bg-white"
-                        asChild
-                      >
-                        <Link href={`/randevu?service=${service.slug}`}>
-                          Randevu Al
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-
-                  <CardHeader className="flex-grow">
-                    <CardTitle className="text-xl font-bold flex items-center justify-between">
-                      {service.name}
-                      <span className="flex items-center text-sm font-normal text-primary">
-                        <Clock className="h-4 w-4 mr-1" />
-                        {service.duration}
-                      </span>
-                    </CardTitle>
-                    <p className="text-gray-600 text-sm mt-2">{service.description}</p>
-                  </CardHeader>
-
-                  <CardContent>
-                    <Tabs defaultValue="details" className="w-full">
-                      <TabsList className="grid w-full grid-cols-3 mb-4">
-                        <TabsTrigger value="details" className="text-xs">
-                          <Info className="h-3 w-3 mr-1" /> Detaylar
-                        </TabsTrigger>
-                        <TabsTrigger value="benefits" className="text-xs">
-                          <Check className="h-3 w-3 mr-1" /> Avantajlar
-                        </TabsTrigger>
-                        <TabsTrigger value="faq" className="text-xs">
-                          <HelpCircle className="h-3 w-3 mr-1" /> SSS
-                        </TabsTrigger>
-                      </TabsList>
-
-                      <TabsContent value="details" className="mt-2">
-                        <div className="space-y-2">
-                          <h3 className="font-semibold text-sm mb-2 flex items-center gap-2">
-                            <ListChecks className="h-4 w-4 text-primary" />
-                            İşlem Süreci
-                          </h3>
-                          <ol className="space-y-1 text-sm">
-                            {service.process?.slice(0, 4).map((step, idx) => (
-                              <motion.li
-                                key={idx}
-                                initial={{ opacity: 0, x: -10 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="flex items-center gap-2 p-2 rounded hover:bg-gray-50"
-                              >
-                                <span className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs flex-shrink-0">
-                                  {idx + 1}
-                                </span>
-                                <span className="text-gray-600">{step}</span>
-                              </motion.li>
-                            ))}
-                          </ol>
-                        </div>
-                      </TabsContent>
-
-                      <TabsContent value="benefits" className="mt-2">
-                        <motion.ul 
-                          className="grid grid-cols-1 gap-2"
-                          variants={container}
-                          initial="hidden"
-                          animate="show"
-                        >
-                          {service.benefits?.slice(0, 4).map((benefit, idx) => (
-                            <motion.li
-                              key={idx}
-                              variants={item}
-                              className="flex items-center gap-2 text-sm p-2 rounded hover:bg-gray-50"
-                            >
-                              <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
-                              <span className="text-gray-600">{benefit}</span>
-                            </motion.li>
-                          ))}
-                        </motion.ul>
-                      </TabsContent>
-
-                      <TabsContent value="faq" className="mt-2">
-                        <Accordion type="single" collapsible>
-                          {service.faqs?.slice(0, 3).map((faq, idx) => {
-                            const [question, answer] = faq.split("|");
-                            return (
-                              <AccordionItem 
-                                key={idx} 
-                                value={`item-${idx}`}
-                                className="border-b last:border-0"
-                              >
-                                <AccordionTrigger className="text-sm hover:text-primary transition-colors">
-                                  {question}
-                                </AccordionTrigger>
-                                <AccordionContent className="text-sm text-gray-600">
-                                  {answer}
-                                </AccordionContent>
-                              </AccordionItem>
-                            );
-                          })}
-                        </Accordion>
-                      </TabsContent>
-                    </Tabs>
-
-                    <div className="mt-4 pt-4 border-t">
-                      <Button 
-                        size="sm"
-                        className="w-full group hover:translate-y-[-1px] transition-all duration-300"
-                        asChild
-                      >
-                        <Link href="/iletisim">
-                          <span>Ücretsiz Danışma</span>
-                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                <ServiceCard service={service} />
               </motion.div>
             ))}
           </motion.div>
