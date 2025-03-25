@@ -88,15 +88,16 @@ export default function DoctorSection() {
               </div>
             </div>
 
-            <div className="flex justify-center pt-3">
+            <div className="flex justify-center pt-6">
               <Button 
                 size="lg" 
-                className="w-full sm:w-auto px-8"
+                className="group relative overflow-hidden px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                 asChild
               >
                 <Link href="/randevu">
-                  <Calendar className="mr-2 h-5 w-5" />
-                  {t('buttons.appointment')}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent group-hover:translate-x-full transition-transform duration-300" />
+                  <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="text-lg">Hemen Randevu Oluştur</span>
                 </Link>
               </Button>
             </div>
