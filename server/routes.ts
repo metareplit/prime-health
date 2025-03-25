@@ -53,6 +53,34 @@ const upload = multer({
   }
 });
 
+// Hizmetler için multer konfigürasyonu
+const serviceUpload = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      // uploads klasörünü kontrol et ve oluştur
+      if (!fs.existsSync('uploads')) {
+        fs.mkdirSync('uploads', { recursive: true });
+      }
+      cb(null, 'uploads/');
+    },
+    filename: (_req, file, cb) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      cb(null, `service-${uniqueSuffix}${path.extname(file.originalname)}`);
+    }
+  }),
+  fileFilter: (_req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Desteklenmeyen dosya türü'));
+    }
+  },
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB
+  }
+});
+
 export async function registerRoutes(app: Express) {
   // Static file serving - uploads dizinini statik olarak servis et
   app.use('/uploads', express.static('uploads'));
@@ -335,80 +363,6 @@ export async function registerRoutes(app: Express) {
   });
 
 
-  // Settings endpoints
-  app.get("/api/settings", async (_req: Request, res: Response) => {
-    try {
-      const settings = await storage.getSettings();
-      res.json(settings);
-    } catch (error) {
-      res.status(500).json({ message: "Ayarlar alınırken bir hata oluştu" });
-    }
-  });
-
-  app.patch("/api/settings/:key", requireAdmin, async (req: Request, res: Response) => {
-    try {
-      const setting = await storage.updateSetting(req.params.key, req.body.value);
-      res.json(setting);
-    } catch (error) {
-      res.status(400).json({ message: "Ayar güncellenirken bir hata oluştu" });
-    }
-  });
-
-  // User profile endpoints
-  app.get("/api/user/profile", requireAuth, async (req: AuthRequest, res: Response) => {
-    const user = await storage.getUserById(req.session.userId as number);
-    res.json(user);
-  });
-
-  app.patch("/api/user/profile", requireAuth, async (req: AuthRequest, res: Response) => {
-    try {
-      const user = await storage.updateUser(req.session.userId as number, req.body);
-      res.json(user);
-    } catch (error) {
-      res.status(400).json({ message: "Profil güncellenirken bir hata oluştu" });
-    }
-  });
-
-  // Messages endpoints
-  app.get("/api/messages", requireAuth, async (req: AuthRequest, res: Response) => {
-    const messages = await storage.getUserMessages(req.session.userId as number);
-    res.json(messages);
-  });
-
-  app.post("/api/messages", requireAuth, async (req: AuthRequest, res: Response) => {
-    try {
-      const messageData = insertMessageSchema.parse({
-        ...req.body,
-        senderId: req.session.userId as number
-      });
-      const message = await storage.createMessage(messageData);
-      res.status(201).json(message);
-    } catch (error) {
-      const validationError = fromZodError(error);
-      res.status(400).json({ message: validationError.message });
-    }
-  });
-
-  // Patient images endpoints
-  app.get("/api/patient-images", requireAuth, async (req: AuthRequest, res: Response) => {
-    const images = await storage.getPatientImages(req.session.userId as number);
-    res.json(images);
-  });
-
-  app.post("/api/patient-images", requireAuth, async (req: AuthRequest, res: Response) => {
-    try {
-      const imageData = insertPatientImageSchema.parse({
-        ...req.body,
-        patientId: req.session.userId as number
-      });
-      const image = await storage.createPatientImage(imageData);
-      res.status(201).json(image);
-    } catch (error) {
-      const validationError = fromZodError(error);
-      res.status(400).json({ message: validationError.message });
-    }
-  });
-
   // Services endpoints
   app.get("/api/services", async (_req: Request, res: Response) => {
     try {
@@ -419,26 +373,56 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.post("/api/services", requireAdmin, async (req: Request, res: Response) => {
+  app.post("/api/services", requireAdmin, serviceUpload.single('image'), async (req: Request, res: Response) => {
     try {
-      const serviceData = insertServiceSchema.parse(req.body);
-      const service = await storage.createService(serviceData);
+      const serviceData = {
+        ...req.body,
+        imageUrl: req.file ? `/uploads/${req.file.filename}` : null,
+        benefits: req.body.benefits ? JSON.parse(req.body.benefits) : [],
+        process: req.body.process ? JSON.parse(req.body.process) : [],
+        faqs: req.body.faqs ? JSON.parse(req.body.faqs) : [],
+        featured: req.body.featured === 'true',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+
+      console.log('Creating service with data:', serviceData);
+
+      const validatedData = insertServiceSchema.parse(serviceData);
+      const service = await storage.createService(validatedData);
       res.status(201).json(service);
     } catch (error) {
-      const validationError = fromZodError(error);
-      res.status(400).json({ message: validationError.message });
+      console.error('Error creating service:', error);
+      if (error instanceof Error) {
+        res.status(400).json({ message: error.message });
+      } else {
+        res.status(500).json({ message: "Hizmet oluşturulurken bir hata oluştu" });
+      }
     }
   });
 
-  app.patch("/api/services/:id", requireAdmin, async (req: Request, res: Response) => {
+  app.patch("/api/services/:id", requireAdmin, serviceUpload.single('image'), async (req: Request, res: Response) => {
     try {
       const id = parseInt(req.params.id);
-      const service = await storage.updateService(id, req.body);
+      const serviceData = {
+        ...req.body,
+        imageUrl: req.file ? `/uploads/${req.file.filename}` : undefined,
+        benefits: req.body.benefits ? JSON.parse(req.body.benefits) : undefined,
+        process: req.body.process ? JSON.parse(req.body.process) : undefined,
+        faqs: req.body.faqs ? JSON.parse(req.body.faqs) : undefined,
+        featured: req.body.featured === 'true',
+        updatedAt: new Date()
+      };
+
+      console.log('Updating service with data:', serviceData);
+
+      const service = await storage.updateService(id, serviceData);
       if (!service) {
         return res.status(404).json({ message: "Hizmet bulunamadı" });
       }
       res.json(service);
     } catch (error) {
+      console.error('Error updating service:', error);
       res.status(400).json({ message: "Hizmet güncellenirken bir hata oluştu" });
     }
   });

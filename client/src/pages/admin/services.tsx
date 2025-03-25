@@ -23,9 +23,14 @@ export default function AdminServices() {
   const createMutation = useMutation({
     mutationFn: async (data: Omit<Service, "id">) => {
       const formData = new FormData();
+
+      // JSON verilerini stringe çevir
+      const jsonFields = ['benefits', 'process', 'faqs'];
       Object.entries(data).forEach(([key, value]) => {
-        if (key !== 'imageUrl') {
-          formData.append(key, value as string);
+        if (jsonFields.includes(key)) {
+          formData.append(key, JSON.stringify(value));
+        } else if (key !== 'imageUrl') {
+          formData.append(key, String(value));
         }
       });
 
@@ -33,11 +38,7 @@ export default function AdminServices() {
         formData.append('image', selectedImage);
       }
 
-      const res = await apiRequest("POST", "/api/services", formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const res = await apiRequest("POST", "/api/services", formData);
       return res.json();
     },
     onSuccess: () => {
@@ -55,9 +56,14 @@ export default function AdminServices() {
   const updateMutation = useMutation({
     mutationFn: async (data: Service) => {
       const formData = new FormData();
+
+      // JSON verilerini stringe çevir
+      const jsonFields = ['benefits', 'process', 'faqs'];
       Object.entries(data).forEach(([key, value]) => {
-        if (key !== 'imageUrl') {
-          formData.append(key, value as string);
+        if (jsonFields.includes(key)) {
+          formData.append(key, JSON.stringify(value));
+        } else if (key !== 'imageUrl') {
+          formData.append(key, String(value));
         }
       });
 
@@ -65,11 +71,7 @@ export default function AdminServices() {
         formData.append('image', selectedImage);
       }
 
-      const res = await apiRequest("PATCH", `/api/services/${data.id}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const res = await apiRequest("PATCH", `/api/services/${data.id}`, formData);
       return res.json();
     },
     onSuccess: () => {
