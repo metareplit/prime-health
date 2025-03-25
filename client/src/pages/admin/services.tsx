@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -380,13 +381,25 @@ export default function AdminServices() {
                                 <GripVertical className="h-5 w-5" />
                               </div>
                               <div className="flex items-center gap-4">
-                                {service.imageUrl && (
+                                <div className="relative h-64 overflow-hidden">
                                   <img
-                                    src={service.imageUrl}
+                                    src={service.imageUrl || '/images/services/primehealth1.png'}
                                     alt={service.name}
-                                    className="w-16 h-16 object-cover rounded"
+                                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                    onError={(e) => {
+                                      const target = e.target as HTMLImageElement;
+                                      target.src = '/images/services/primehealth1.png';
+                                    }}
                                   />
-                                )}
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                  <div className="absolute bottom-4 left-4">
+                                    {service.featured && (
+                                      <Badge variant="secondary" className="bg-white/90 text-primary hover:bg-white">
+                                        Öne Çıkan
+                                      </Badge>
+                                    )}
+                                  </div>
+                                </div>
                                 <div>
                                   <h3 className="font-semibold flex items-center gap-2">
                                     {service.name}

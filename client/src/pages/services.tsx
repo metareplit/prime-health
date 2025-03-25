@@ -26,7 +26,7 @@ const item = {
 
 const ServiceCard = ({ service }: { service: Service }) => {
   // Fallback image for services that don't have an image
-  const fallbackImage = "/images/hair-transplant.svg";
+  const fallbackImage = "/images/services/primehealth1.png";
 
   return (
     <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 relative">
