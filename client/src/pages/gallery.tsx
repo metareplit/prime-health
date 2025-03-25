@@ -106,50 +106,44 @@ export default function Gallery() {
 
           <TabsContent value="oncesi-sonrasi">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {galleryItems.map((category) => (
-                <TabsContent key={category.category} value={category.category}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {category.items.map((item) => (
-                      <motion.div
-                        key={item.id}
-                        layout
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="group cursor-pointer"
-                        onClick={() => setSelectedCase(item)}
-                      >
-                        <div className="relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
-                          <div className="relative aspect-[4/3]">
-                            <BeforeAfterSlider
-                              beforeImage={item.beforeImage}
-                              afterImage={item.afterImage}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                          </div>
-                          <div className="p-4">
-                            <div className="flex items-center justify-between mb-2">
-                              <h3 className="font-semibold text-lg">{item.description}</h3>
-                              <Badge variant="secondary" className="text-xs">
-                                {item.procedureDetails.technique}
-                              </Badge>
-                            </div>
-                            <div className="flex items-center gap-4 text-sm text-gray-600">
-                              <div className="flex items-center gap-1">
-                                <Calendar className="h-4 w-4" />
-                                <span>{item.procedureDetails.duration}</span>
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <Star className="h-4 w-4 text-yellow-500" />
-                                <span>{item.results.satisfaction}</span>
-                              </div>
-                            </div>
-                          </div>
+              {galleryItems.map((item) => (
+                <motion.div
+                  key={item.id}
+                  layout
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="group cursor-pointer"
+                  onClick={() => setSelectedCase(item)}
+                >
+                  <div className="relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="relative aspect-[4/3]">
+                      <BeforeAfterSlider
+                        beforeImage={item.beforeImage}
+                        afterImage={item.afterImage}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                    <div className="p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="font-semibold text-lg">{item.description}</h3>
+                        <Badge variant="secondary" className="text-xs">
+                          {item.procedureDetails.technique}
+                        </Badge>
+                      </div>
+                      <div className="flex items-center gap-4 text-sm text-gray-600">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-4 w-4" />
+                          <span>{item.procedureDetails.duration}</span>
                         </div>
-                      </motion.div>
-                    ))}
+                        <div className="flex items-center gap-1">
+                          <Star className="h-4 w-4 text-yellow-500" />
+                          <span>{item.results.satisfaction}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </TabsContent>
+                </motion.div>
               ))}
             </div>
           </TabsContent>
