@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
+import { setupTelegramWebhook } from './services/telegram';
 import { 
   insertAppointmentSchema, 
   insertPostSchema,
@@ -10,38 +11,7 @@ import { fromZodError } from "zod-validation-error";
 import path from 'path';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
-import { TelegramClient } from 'telegram';
-import { StringSession } from 'telegram/sessions';
-import fs from 'fs';
 import multer from 'multer';
-
-// Initialize Telegram client in a non-blocking way
-const initializeTelegram = async () => {
-  try {
-    const apiId = await storage.getSettingValue('telegram_api_id');
-    const apiHash = await storage.getSettingValue('telegram_api_hash');
-    const botToken = await storage.getSettingValue('telegram_bot_token');
-
-    if (!apiId || !apiHash || !botToken) {
-      console.log('Telegram credentials not configured yet');
-      return null;
-    }
-
-    const client = new TelegramClient(
-      new StringSession(''), 
-      parseInt(apiId), 
-      apiHash,
-      { connectionRetries: 5 }
-    );
-
-    await client.start({ botAuthToken: botToken });
-    console.log('Telegram client initialized successfully');
-    return client;
-  } catch (error) {
-    console.error('Error initializing Telegram client:', error);
-    return null;
-  }
-};
 
 // Multer setup
 const upload = multer({
@@ -71,8 +41,21 @@ export async function registerRoutes(app: Express) {
   // Trust proxy - required for rate limiting behind reverse proxy
   app.set('trust proxy', 1);
 
-  // Initialize Telegram client in background
-  initializeTelegram().catch(console.error);
+  // Telegram webhook setup - özel bir yol ile webhook'u başlat
+  const webhookPath = '/telegram-webhook';
+  const bot = setupTelegramWebhook(app, webhookPath);
+
+  // Webhook URL'sini ayarla
+  if (process.env.NODE_ENV === 'production') {
+    const domain = process.env.DOMAIN || 'your-domain.com';
+    await bot.telegram.setWebhook(`https://${domain}${webhookPath}`);
+    console.log('Telegram webhook set for production');
+  } else {
+    // Development ortamında webhook'u devre dışı bırak, polling kullan
+    await bot.telegram.deleteWebhook();
+    bot.launch().catch(console.error);
+    console.log('Telegram bot started in polling mode for development');
+  }
 
   // Rate limiting configuration
   const limiter = rateLimit({
