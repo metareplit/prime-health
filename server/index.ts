@@ -14,6 +14,7 @@ const __dirname = path.dirname(__filename);
 declare module "express-session" {
   interface SessionData {
     userId: number;
+    userRole: string;
   }
 }
 
@@ -27,18 +28,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(
   session({
     store: storage.sessionStore,
-    secret: "your-secret-key",
+    secret: process.env.SESSION_SECRET || "your-secret-key",
     resave: false,
     saveUninitialized: false,
     cookie: {
       secure: process.env.NODE_ENV === "production",
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      sameSite: 'lax'
     },
   })
 );
 
-// Logging middleware
+// Logging middleware with detailed error logging
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -54,12 +56,21 @@ app.use((req, res, next) => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+
+      // Add session info to logs for debugging
+      if (req.session) {
+        logLine += ` [Session: userId=${req.session.userId}, role=${req.session.userRole}]`;
       }
 
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "…";
+      if (capturedJsonResponse) {
+        // Don't log sensitive data
+        const sanitizedResponse = { ...capturedJsonResponse };
+        if (sanitizedResponse.password) delete sanitizedResponse.password;
+        logLine += ` :: ${JSON.stringify(sanitizedResponse)}`;
+      }
+
+      if (logLine.length > 120) {
+        logLine = logLine.slice(0, 119) + "…";
       }
 
       log(logLine);
@@ -98,12 +109,22 @@ app.use((req, res, next) => {
       log('Static file serving configured');
     }
 
-    // Error handling middleware
-    app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-      console.error('Server error:', err);
+    // Error handling middleware with detailed logging
+    app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
+      console.error('Server error:', {
+        error: err,
+        stack: err.stack,
+        path: req.path,
+        method: req.method,
+        session: req.session
+      });
+
       const status = err.status || err.statusCode || 500;
       const message = err.message || "Internal Server Error";
-      res.status(status).json({ message });
+      res.status(status).json({ 
+        message,
+        error: process.env.NODE_ENV === 'development' ? err.stack : undefined
+      });
     });
 
     // Start server
