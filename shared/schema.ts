@@ -113,8 +113,8 @@ export const settings = pgTable("settings", {
   id: serial("id").primaryKey(),
   key: text("key").notNull().unique(),
   value: text("value").notNull(),
-  type: text("type").notNull(), // text, json, number, boolean
-  group: text("group").notNull(), // general, contact, seo, social
+  type: text("type").notNull(), // text, secret, number, boolean
+  group: text("group").notNull(), // telegram, admin, general
   label: text("label").notNull(),
   description: text("description"),
   updatedAt: timestamp("updated_at").defaultNow(),
@@ -340,6 +340,64 @@ export const successStories = pgTable("success_stories", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
+
+// Settings için Zod şeması
+export const settingSchema = z.object({
+  key: z.string(),
+  value: z.string(),
+  type: z.enum(["text", "secret", "number", "boolean"]),
+  group: z.enum(["telegram", "admin", "general"]),
+  label: z.string(),
+  description: z.string().optional(),
+  updatedAt: z.date().optional(),
+});
+
+export type Setting = typeof settings.$inferSelect;
+export type InsertSetting = z.infer<typeof settingSchema>;
+
+// Telegram ve Admin ayarları için default değerler
+export const defaultSettings = [
+  {
+    key: "telegram_api_id",
+    value: "",
+    type: "secret",
+    group: "telegram",
+    label: "Telegram API ID",
+    description: "Telegram API geliştirici portalından alınan API ID"
+  },
+  {
+    key: "telegram_api_hash",
+    value: "",
+    type: "secret",
+    group: "telegram",
+    label: "Telegram API Hash",
+    description: "Telegram API geliştirici portalından alınan API Hash"
+  },
+  {
+    key: "telegram_bot_token",
+    value: "",
+    type: "secret",
+    group: "telegram",
+    label: "Bot Token",
+    description: "BotFather'dan alınan bot token"
+  },
+  {
+    key: "telegram_chat_id",
+    value: "",
+    type: "secret",
+    group: "telegram",
+    label: "Chat ID",
+    description: "Bildirimlerin gönderileceği chat ID"
+  },
+  {
+    key: "admin_key",
+    value: "",
+    type: "secret",
+    group: "admin",
+    label: "Admin Anahtarı",
+    description: "Admin paneline erişim için güvenlik anahtarı"
+  }
+];
 
 // Success Stories şeması
 export const successStorySchema = z.object({

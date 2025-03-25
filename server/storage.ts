@@ -35,6 +35,7 @@ import {
   sliders,
   type Slider,
   type InsertSlider,
+  defaultSettings,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
@@ -76,7 +77,9 @@ export interface IStorage {
   // Settings methods
   getSettings(): Promise<Setting[]>;
   getSettingByKey(key: string): Promise<Setting | undefined>;
+  getSettingValue(key: string): Promise<string>;
   updateSetting(key: string, value: string): Promise<Setting>;
+  initializeDefaultSettings(): Promise<void>;
 
   // Services methods
   getAllServices(): Promise<Service[]>;
@@ -136,6 +139,9 @@ export class DatabaseStorage implements IStorage {
       },
       createTableIfMissing: true,
     });
+
+    // Initialize default settings on startup
+    this.initializeDefaultSettings().catch(console.error);
   }
 
   // User methods
@@ -261,21 +267,81 @@ export class DatabaseStorage implements IStorage {
 
   // Settings methods
   async getSettings(): Promise<Setting[]> {
-    return await db.select().from(settings);
+    try {
+      return await db.select().from(settings);
+    } catch (error) {
+      console.error('Error fetching settings:', error);
+      return [];
+    }
   }
 
   async getSettingByKey(key: string): Promise<Setting | undefined> {
-    const [setting] = await db.select().from(settings).where(eq(settings.key, key));
-    return setting;
+    try {
+      const [setting] = await db.select().from(settings).where(eq(settings.key, key));
+      return setting;
+    } catch (error) {
+      console.error(`Error fetching setting with key ${key}:`, error);
+      return undefined;
+    }
+  }
+
+  async getSettingValue(key: string): Promise<string> {
+    try {
+      const setting = await this.getSettingByKey(key);
+      return setting?.value || '';
+    } catch (error) {
+      console.error(`Error getting setting value for key ${key}:`, error);
+      return '';
+    }
   }
 
   async updateSetting(key: string, value: string): Promise<Setting> {
-    const [updatedSetting] = await db
-      .update(settings)
-      .set({ value })
-      .where(eq(settings.key, key))
-      .returning();
-    return updatedSetting;
+    try {
+      const existing = await this.getSettingByKey(key);
+
+      if (!existing) {
+        // If setting doesn't exist, create it
+        const [newSetting] = await db.insert(settings)
+          .values({
+            key,
+            value,
+            type: 'text',
+            group: 'general',
+            label: key,
+            updatedAt: new Date()
+          })
+          .returning();
+        return newSetting;
+      }
+
+      // Update existing setting
+      const [updatedSetting] = await db
+        .update(settings)
+        .set({ value, updatedAt: new Date() })
+        .where(eq(settings.key, key))
+        .returning();
+      return updatedSetting;
+    } catch (error) {
+      console.error(`Error updating setting ${key}:`, error);
+      throw error;
+    }
+  }
+
+  async initializeDefaultSettings(): Promise<void> {
+    try {
+      for (const setting of defaultSettings) {
+        const existing = await this.getSettingByKey(setting.key);
+        if (!existing) {
+          await db.insert(settings).values({
+            ...setting,
+            updatedAt: new Date()
+          });
+          console.log(`Initialized default setting: ${setting.key}`);
+        }
+      }
+    } catch (error) {
+      console.error('Error initializing default settings:', error);
+    }
   }
 
   // Services methods
@@ -399,7 +465,7 @@ export class DatabaseStorage implements IStorage {
       return result;
     } catch (error) {
       console.error('Error in getAllAppointments:', error);
-      throw error; 
+      throw error;
     }
   }
 

@@ -5,10 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Eye, EyeOff, Save } from "lucide-react";
+import { useState } from "react";
 
 export default function AdminSettings() {
   const { toast } = useToast();
-  
+  const [showSecrets, setShowSecrets] = useState(false);
+
   const { data: settings, isLoading } = useQuery<Setting[]>({
     queryKey: ["/api/settings"],
   });
@@ -34,41 +38,135 @@ export default function AdminSettings() {
     },
   });
 
+  // Ayarları gruplara ayır
+  const getSettingsByGroup = (group: string) => {
+    return settings?.filter(setting => setting.group === group) || [];
+  };
+
+  const handleToggleSecrets = () => {
+    setShowSecrets(!showSecrets);
+  };
+
+  const renderSettingInput = (setting: Setting) => {
+    const isSecret = setting.type === 'secret';
+    return (
+      <div className="flex gap-2" key={setting.key}>
+        <Input
+          type={isSecret && !showSecrets ? "password" : "text"}
+          defaultValue={setting.value}
+          placeholder={setting.label}
+          onBlur={(e) =>
+            updateSetting.mutate({
+              key: setting.key,
+              value: e.target.value,
+            })
+          }
+        />
+      </div>
+    );
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Site Ayarları</h1>
+        <div>
+          <h1 className="text-3xl font-bold">Site Ayarları</h1>
+          <p className="text-muted-foreground">
+            Sistem yapılandırması ve entegrasyon ayarları
+          </p>
+        </div>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handleToggleSecrets}
+        >
+          {showSecrets ? (
+            <EyeOff className="h-4 w-4" />
+          ) : (
+            <Eye className="h-4 w-4" />
+          )}
+        </Button>
       </div>
 
       {isLoading ? (
         <div>Yükleniyor...</div>
       ) : (
-        <div className="grid gap-4">
-          {settings?.map((setting) => (
-            <Card key={setting.key}>
+        <Tabs defaultValue="telegram" className="space-y-4">
+          <TabsList>
+            <TabsTrigger value="telegram">Telegram Ayarları</TabsTrigger>
+            <TabsTrigger value="admin">Admin Ayarları</TabsTrigger>
+            <TabsTrigger value="general">Genel Ayarlar</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="telegram">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-lg">{setting.label}</CardTitle>
+                <CardTitle>Telegram Bot Yapılandırması</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
-                <p className="text-sm text-muted-foreground">
-                  {setting.description}
-                </p>
-                <div className="flex gap-2">
-                  <Input
-                    type="text"
-                    defaultValue={setting.value}
-                    onBlur={(e) =>
-                      updateSetting.mutate({
-                        key: setting.key,
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </div>
+              <CardContent className="space-y-4">
+                {getSettingsByGroup('telegram').map((setting) => (
+                  <div key={setting.key} className="space-y-2">
+                    <label className="text-sm font-medium">
+                      {setting.label}
+                      {setting.description && (
+                        <span className="text-xs text-muted-foreground ml-2">
+                          ({setting.description})
+                        </span>
+                      )}
+                    </label>
+                    {renderSettingInput(setting)}
+                  </div>
+                ))}
               </CardContent>
             </Card>
-          ))}
-        </div>
+          </TabsContent>
+
+          <TabsContent value="admin">
+            <Card>
+              <CardHeader>
+                <CardTitle>Admin Paneli Ayarları</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {getSettingsByGroup('admin').map((setting) => (
+                  <div key={setting.key} className="space-y-2">
+                    <label className="text-sm font-medium">
+                      {setting.label}
+                      {setting.description && (
+                        <span className="text-xs text-muted-foreground ml-2">
+                          ({setting.description})
+                        </span>
+                      )}
+                    </label>
+                    {renderSettingInput(setting)}
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="general">
+            <Card>
+              <CardHeader>
+                <CardTitle>Genel Site Ayarları</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {getSettingsByGroup('general').map((setting) => (
+                  <div key={setting.key} className="space-y-2">
+                    <label className="text-sm font-medium">
+                      {setting.label}
+                      {setting.description && (
+                        <span className="text-xs text-muted-foreground ml-2">
+                          ({setting.description})
+                        </span>
+                      )}
+                    </label>
+                    {renderSettingInput(setting)}
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       )}
     </div>
   );
