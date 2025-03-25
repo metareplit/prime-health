@@ -36,7 +36,7 @@ export default function Services() {
         description="Profesyonel saç ekimi, sakal ekimi, kaş ekimi ve saç bakım hizmetleri. Modern teknoloji ve uzman kadromuzla yanınızdayız."
         keywords="saç ekimi, sakal ekimi, kaş ekimi, prp tedavisi, mezoterapi, tiflis saç ekimi, gürcistan saç ekimi"
         type="website"
-        image="/images/services/hair-transplant.jpg"
+        image="/images/services/sapphire-fue.jpg"
       />
 
       {/* Hero Section */}
@@ -92,11 +92,13 @@ export default function Services() {
               >
                 <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 relative">
                   <div className="relative overflow-hidden aspect-video">
-                    <img
-                      src={service.imageUrl}
-                      alt={service.name}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
+                    {service.imageUrl && (
+                      <img
+                        src={service.imageUrl}
+                        alt={service.name}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                       <Button 
@@ -144,7 +146,7 @@ export default function Services() {
                             İşlem Süreci
                           </h3>
                           <ol className="space-y-1 text-sm">
-                            {service.process.slice(0, 4).map((step, idx) => (
+                            {service.process?.slice(0, 4).map((step, idx) => (
                               <motion.li
                                 key={idx}
                                 initial={{ opacity: 0, x: -10 }}
@@ -169,7 +171,7 @@ export default function Services() {
                           initial="hidden"
                           animate="show"
                         >
-                          {service.benefits.slice(0, 4).map((benefit, idx) => (
+                          {service.benefits?.slice(0, 4).map((benefit, idx) => (
                             <motion.li
                               key={idx}
                               variants={item}
@@ -184,7 +186,7 @@ export default function Services() {
 
                       <TabsContent value="faq" className="mt-2">
                         <Accordion type="single" collapsible>
-                          {service.faqs.slice(0, 3).map((faq, idx) => {
+                          {service.faqs?.slice(0, 3).map((faq, idx) => {
                             const [question, answer] = faq.split("|");
                             return (
                               <AccordionItem 
