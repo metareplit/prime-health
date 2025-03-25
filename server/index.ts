@@ -72,9 +72,10 @@ app.use((req, res, next) => {
 // Main application setup
 (async () => {
   try {
-    log('Starting server...');
+    log('Starting server initialization...');
 
     // Register routes first
+    log('Registering routes...');
     const server = await registerRoutes(app);
     log('Routes registered successfully');
 
@@ -87,10 +88,12 @@ app.use((req, res, next) => {
 
     // Development modunda Vite HMR kullan
     if (process.env.NODE_ENV !== 'production') {
+      log('Setting up Vite development server...');
       await setupVite(app, server);
       log('Vite development server configured');
     } else {
       // Production modunda static file serving kullan
+      log('Setting up static file serving...');
       serveStatic(app);
       log('Static file serving configured');
     }
@@ -105,12 +108,14 @@ app.use((req, res, next) => {
 
     // Start server
     const port = 5000;
+    log(`Attempting to start server on port ${port}...`);
+
     server.listen({
       port,
       host: "0.0.0.0",
       reusePort: true,
     }, () => {
-      log(`Server running on port ${port}`);
+      log(`Server successfully started and listening on port ${port}`);
     });
 
   } catch (error) {

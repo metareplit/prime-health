@@ -2,23 +2,50 @@ import { Telegraf } from 'telegraf';
 import type { Appointment, Service, User } from '@shared/schema';
 import { storage } from '../storage';
 
-if (!process.env.TELEGRAM_BOT_TOKEN) {
-  throw new Error('TELEGRAM_BOT_TOKEN environment variable is required');
-}
+// Bot initialization
+const initializeBot = () => {
+  try {
+    if (!process.env.TELEGRAM_BOT_TOKEN) {
+      throw new Error('TELEGRAM_BOT_TOKEN environment variable is required');
+    }
 
-const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
-const ADMIN_CHAT_ID = "5631870985";
+    const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
+    const ADMIN_CHAT_ID = "5631870985";
 
-// Bot başlatma
-bot.command('start', (ctx) => {
-  if (ctx.chat.id.toString() === ADMIN_CHAT_ID) {
-    ctx.reply('Hoş geldiniz! Randevu bildirimleri buraya gelecektir.');
+    // Bot başlatma
+    bot.command('start', (ctx) => {
+      if (ctx.chat.id.toString() === ADMIN_CHAT_ID) {
+        ctx.reply('Hoş geldiniz! Randevu bildirimleri buraya gelecektir.');
+      }
+    });
+
+    // Bot'u başlat
+    bot.launch().catch(err => {
+      console.error('Telegram bot başlatılamadı:', err);
+    });
+
+    // Graceful stop
+    process.once('SIGINT', () => bot.stop('SIGINT'));
+    process.once('SIGTERM', () => bot.stop('SIGTERM'));
+
+    return bot;
+  } catch (error) {
+    console.error('Failed to initialize Telegram bot:', error);
+    return null;
   }
-});
+};
+
+const bot = initializeBot();
+const ADMIN_CHAT_ID = "5631870985";
 
 // Randevu mesajı formatı
 export const sendAppointmentNotification = async (appointmentId: number) => {
   try {
+    if (!bot) {
+      console.error('Telegram bot is not initialized');
+      return;
+    }
+
     const appointment = await storage.getAppointment(appointmentId);
     if (!appointment) throw new Error('Randevu bulunamadı');
 
@@ -90,12 +117,3 @@ ${getStatusEmoji(appointment.status)} ${
 🕒 Oluşturulma Tarihi: ${formatDate(appointment.createdAt || new Date())}
 `;
 };
-
-// Bot'u başlat
-bot.launch().catch(err => {
-  console.error('Telegram bot başlatılamadı:', err);
-});
-
-// Graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'));
-process.once('SIGTERM', () => bot.stop('SIGTERM'));
