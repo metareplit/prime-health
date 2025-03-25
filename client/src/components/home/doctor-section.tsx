@@ -88,25 +88,15 @@ export default function DoctorSection() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 pt-3">
+            <div className="flex justify-center pt-3">
               <Button 
-                size="sm" 
-                className="group"
+                size="lg" 
+                className="w-full sm:w-auto px-8"
                 asChild
               >
                 <Link href="/randevu">
-                  <Calendar className="mr-2 h-4 w-4" />
+                  <Calendar className="mr-2 h-5 w-5" />
                   {t('buttons.appointment')}
-                </Link>
-              </Button>
-              <Button 
-                variant="outline" 
-                size="sm"
-                className="group"
-                asChild
-              >
-                <Link href="/hakkimizda">
-                  Daha Fazla Bilgi
                 </Link>
               </Button>
             </div>
