@@ -178,15 +178,22 @@ export default function Home() {
                 >
                   {/* Service Image */}
                   <div className="relative h-64 overflow-hidden">
-                    <div
-                      className="absolute inset-0 bg-cover bg-center transform group-hover:scale-110 transition-transform duration-700"
-                      style={{ backgroundImage: `url(${service.imageUrl})` }}
+                    <img
+                      src={service.imageUrl || '/images/hair-transplant.svg'}
+                      alt={service.name}
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = '/images/hair-transplant.svg';
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="absolute bottom-4 left-4">
-                      <Badge variant="secondary" className="bg-white/90 text-primary hover:bg-white">
-                        {service.category}
-                      </Badge>
+                      {service.featured && (
+                        <Badge variant="secondary" className="bg-white/90 text-primary hover:bg-white">
+                          Öne Çıkan
+                        </Badge>
+                      )}
                     </div>
                   </div>
 
@@ -199,25 +206,15 @@ export default function Home() {
                       {service.description}
                     </p>
 
-                    {/* Service Stats */}
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      {service.stats?.map((stat, idx) => (
-                        <div key={idx} className="text-center p-3 rounded-lg bg-gray-50">
-                          <div className="text-2xl font-bold text-primary">{stat.value}</div>
-                          <div className="text-sm text-gray-600">{stat.label}</div>
-                        </div>
-                      ))}
-                    </div>
-
                     {/* Service Features */}
                     <div className="space-y-2 mb-6">
-                      {service.features?.slice(0, 4).map((feature, idx) => (
+                      {service.process?.slice(0, 3).map((step, idx) => (
                         <div
                           key={idx}
                           className="flex items-center gap-2 text-sm text-gray-600 p-2 rounded-lg hover:bg-gray-50 transition-colors"
                         >
                           <CheckCircle className="h-4 w-4 text-primary" />
-                          <span>{feature}</span>
+                          <span>{step}</span>
                         </div>
                       ))}
                     </div>
@@ -234,12 +231,6 @@ export default function Home() {
                         </Button>
                       </Link>
                     </div>
-                  </div>
-
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                   </div>
                 </motion.div>
               ))}
