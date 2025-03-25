@@ -13,6 +13,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import BeforeAfterSlider from "@/components/gallery/before-after-slider";
 import ThreeDComparison from "@/components/gallery/three-d-comparison";
 import { SuccessStories } from "@/components/gallery/success-stories";
+import { ClinicGallery } from "@/components/gallery/clinic-gallery";
 
 // Define case interface
 interface Case {
@@ -87,67 +88,75 @@ export default function Gallery() {
 
       <div className="container mx-auto px-4 py-8">
         {/* Kategoriler ve Sonuçlar */}
-        <Tabs defaultValue="sac-ekimi" className="w-full">
+        <Tabs defaultValue="oncesi-sonrasi" className="w-full">
           <TabsList className="relative flex justify-center mb-8 p-1 bg-white rounded-full shadow-sm border overflow-x-auto">
-            {galleryItems.map((category) => (
-              <TabsTrigger
-                key={category.category}
-                value={category.category}
-                className="relative rounded-full px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-primary data-[state=active]:text-white"
-              >
-                <span className="flex items-center gap-2">
-                  {categoryIcons[category.category]}
-                  {t(`gallery.categories.${category.category}`)}
-                </span>
-              </TabsTrigger>
-            ))}
+            <TabsTrigger
+              value="oncesi-sonrasi"
+              className="relative rounded-full px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-primary data-[state=active]:text-white"
+            >
+              Öncesi ve Sonrası
+            </TabsTrigger>
+            <TabsTrigger
+              value="klinik"
+              className="relative rounded-full px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-primary data-[state=active]:text-white"
+            >
+              Klinik Görselleri
+            </TabsTrigger>
           </TabsList>
 
-          {galleryItems.map((category) => (
-            <TabsContent key={category.category} value={category.category}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {category.items.map((item) => (
-                  <motion.div
-                    key={item.id}
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="group cursor-pointer"
-                    onClick={() => setSelectedCase(item)}
-                  >
-                    <div className="relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
-                      <div className="relative aspect-[4/3]">
-                        <BeforeAfterSlider
-                          beforeImage={item.beforeImage}
-                          afterImage={item.afterImage}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      </div>
-                      <div className="p-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <h3 className="font-semibold text-lg">{item.description}</h3>
-                          <Badge variant="secondary" className="text-xs">
-                            {item.procedureDetails.technique}
-                          </Badge>
-                        </div>
-                        <div className="flex items-center gap-4 text-sm text-gray-600">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-4 w-4" />
-                            <span>{item.procedureDetails.duration}</span>
+          <TabsContent value="oncesi-sonrasi">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {galleryItems.map((category) => (
+                <TabsContent key={category.category} value={category.category}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {category.items.map((item) => (
+                      <motion.div
+                        key={item.id}
+                        layout
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="group cursor-pointer"
+                        onClick={() => setSelectedCase(item)}
+                      >
+                        <div className="relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
+                          <div className="relative aspect-[4/3]">
+                            <BeforeAfterSlider
+                              beforeImage={item.beforeImage}
+                              afterImage={item.afterImage}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                           </div>
-                          <div className="flex items-center gap-1">
-                            <Star className="h-4 w-4 text-yellow-500" />
-                            <span>{item.results.satisfaction}</span>
+                          <div className="p-4">
+                            <div className="flex items-center justify-between mb-2">
+                              <h3 className="font-semibold text-lg">{item.description}</h3>
+                              <Badge variant="secondary" className="text-xs">
+                                {item.procedureDetails.technique}
+                              </Badge>
+                            </div>
+                            <div className="flex items-center gap-4 text-sm text-gray-600">
+                              <div className="flex items-center gap-1">
+                                <Calendar className="h-4 w-4" />
+                                <span>{item.procedureDetails.duration}</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <Star className="h-4 w-4 text-yellow-500" />
+                                <span>{item.results.satisfaction}</span>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </TabsContent>
-          ))}
+                      </motion.div>
+                    ))}
+                  </div>
+                </TabsContent>
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="klinik">
+            <ClinicGallery />
+          </TabsContent>
         </Tabs>
 
         {/* Başarı Hikayeleri */}
