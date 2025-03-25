@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 export default function DoctorSection() {
   const { t } = useTranslation('common');
-  
+
   return (
     <section className="py-20 relative overflow-hidden">
       {/* Background Elements */}
@@ -35,8 +35,8 @@ export default function DoctorSection() {
           >
             <div className="aspect-square rounded-2xl overflow-hidden">
               <img
-                src="/images/doctor.jpg"
-                alt="Dr. Mehmet Yılmaz"
+                src="/attached_assets/alicaliskan-Photoroom.png"
+                alt="Dr. Ali Çalışkan"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -58,7 +58,7 @@ export default function DoctorSection() {
             className="space-y-6"
           >
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">Dr. Mehmet Yılmaz</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-2">Dr. Ali Çalışkan</h2>
               <p className="text-xl text-primary font-medium">Saç Ekimi ve Estetik Cerrahi Uzmanı</p>
             </div>
 
