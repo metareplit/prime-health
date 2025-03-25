@@ -58,9 +58,12 @@ const categories = [
 
 export default function Products() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(false); // Default to false
 
   useEffect(() => {
+    // Set initial value
+    setIsMobile(window.innerWidth < 768);
+
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
