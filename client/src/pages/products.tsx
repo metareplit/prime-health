@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Package, Sprout, Pill, FlaskConical, Check, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Metadata } from "@/components/ui/metadata";
 import { useQuery } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
@@ -15,36 +15,42 @@ const categories = [
   {
     id: "all",
     title: "Tüm Ürünler",
+    shortTitle: "Tümü",
     description: "Tüm VitHair ürünleri",
     icon: Package
   },
   {
     id: "monthly-sets",
     title: "Monthly Sets",
+    shortTitle: "Setler",
     description: "Aylık bakım setleri",
     icon: Package
   },
   {
     id: "shampoo-and-foam",
     title: "Shampoo and Foam",
+    shortTitle: "Şampuan",
     description: "Şampuan ve köpük ürünleri",
     icon: Package
   },
   {
     id: "spray",
     title: "Spray",
+    shortTitle: "Sprey",
     description: "Sprey ürünleri",
     icon: Sprout
   },
   {
     id: "tablet",
     title: "Tablet",
+    shortTitle: "Tablet",
     description: "Tablet ürünleri",
     icon: Pill
   },
   {
     id: "mesotherapy-and-prp",
     title: "Mesotherapy and PRP",
+    shortTitle: "Mezoterapi",
     description: "Mezoterapi ve PRP ürünleri",
     icon: FlaskConical
   }
@@ -52,6 +58,13 @@ const categories = [
 
 export default function Products() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Fetch products from API
   const { data: products = [], isLoading } = useQuery({
@@ -75,7 +88,6 @@ export default function Products() {
       return normalizedCategory === categoryId;
     });
   };
-
 
   if (isLoading) {
     return (
@@ -116,7 +128,7 @@ export default function Products() {
                 <Input
                   type="search"
                   placeholder="Ürün ara..."
-                  className="pl-10 h-10 md:h-11"
+                  className="pl-10 h-11"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -129,29 +141,38 @@ export default function Products() {
       {/* Products Section - Mobile Optimized */}
       <section className="container mx-auto px-4 py-6 md:py-8">
         <Tabs defaultValue="all" className="w-full">
-          <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-3 md:py-4 border-b">
-            <TabsList className="flex overflow-x-auto gap-1.5 w-full justify-start md:justify-center md:flex-wrap no-scrollbar pb-2 md:pb-0">
+          <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-4">
+            <TabsList className="grid grid-cols-3 md:grid-cols-6 gap-2 w-full p-1">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
                   className={cn(
-                    "min-w-[120px] h-auto py-2.5 px-4 rounded-full transition-all",
+                    "min-h-[64px] md:min-h-[48px] transition-all duration-200",
+                    "flex flex-col md:flex-row items-center justify-center gap-2",
+                    "bg-background/50 hover:bg-background/80",
                     "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
-                    "data-[state=active]:shadow-sm hover:bg-muted/80",
-                    "flex items-center gap-2 whitespace-nowrap text-sm"
+                    "data-[state=active]:scale-[0.98] data-[state=active]:shadow-sm",
+                    "rounded-xl p-2 md:p-3",
+                    "relative overflow-hidden"
                   )}
                 >
-                  <category.icon className="h-4 w-4 flex-shrink-0" />
-                  <span className="truncate">{category.title}</span>
+                  <category.icon className="h-6 w-6 md:h-5 md:w-5" />
+                  <span className="text-xs font-medium line-clamp-1">
+                    {isMobile ? category.shortTitle : category.title}
+                  </span>
                 </TabsTrigger>
               ))}
             </TabsList>
           </div>
 
           {categories.map((category) => (
-            <TabsContent key={category.id} value={category.id} className="focus-visible:outline-none">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mt-6 md:mt-8">
+            <TabsContent 
+              key={category.id} 
+              value={category.id} 
+              className="focus-visible:outline-none mt-4 md:mt-6"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
                 {getProductsByCategory(category.id)
                   .filter((product: any) =>
                     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -211,7 +232,7 @@ export default function Products() {
                                 </p>
                               </div>
 
-                              {/* Faydalar */}
+                              {/* Benefits section */}
                               {product.benefits && product.benefits.length > 0 && (
                                 <div>
                                   <h4 className="font-semibold mb-2 md:mb-3 text-base md:text-lg">
@@ -228,7 +249,7 @@ export default function Products() {
                                 </div>
                               )}
 
-                              {/* Kullanım Talimatları */}
+                              {/* Usage Instructions section */}
                               {product.usage_instructions && product.usage_instructions.length > 0 && (
                                 <div>
                                   <h4 className="font-semibold mb-2 md:mb-3 text-base md:text-lg">
