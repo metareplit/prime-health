@@ -134,7 +134,7 @@ export default function AdminServices() {
         faqs: [],
         duration: "6-8 saat",
         price: "2500€'dan başlayan",
-        imageUrl: "/uploads/sapphire-fue.jpg",
+        imageUrl: "/images/services/sapphire-fue.jpg",
         slug: "sapphire-fue-sac-ekimi",
         featured: true,
         order: 0,
