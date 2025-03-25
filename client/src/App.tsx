@@ -46,7 +46,7 @@ import AdminServices from "@/pages/admin/services";
 import AdminContact from "@/pages/admin/contact";
 import AdminMessages from "@/pages/admin/messages"; // Added import
 import AdminAppointments from "@/pages/admin/appointments"; // Added import
-
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 
 function Router() {
   return (
@@ -57,6 +57,7 @@ function Router() {
       <Route path="/admin">
         {() => (
           <AdminLayout title="Dashboard">
+            <ScrollToTop />
             <AdminDashboard />
           </AdminLayout>
         )}
@@ -221,7 +222,6 @@ function Router() {
       </Route> {/* Added Route */}
 
 
-
       {/* Public Routes */}
       <Route path="/">
         {() => (
@@ -230,6 +230,7 @@ function Router() {
               <LanguageSwitcher />
             </Header>
             <main className="flex-grow">
+              <ScrollToTop />
               <Home />
             </main>
             <Footer />
@@ -245,6 +246,7 @@ function Router() {
               <LanguageSwitcher />
             </Header>
             <main className="flex-grow">
+              <ScrollToTop />
               <Switch>
                 <Route path="/hizmetler" component={Services} />
                 <Route path="/galeri" component={Gallery} />
