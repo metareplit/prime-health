@@ -16,16 +16,14 @@ export default function AdminLogin() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const user = await loginMutation.mutateAsync({ 
-        username: username.trim(), 
-        password: password.trim() 
-      });
+      const user = await loginMutation.mutateAsync({ username, password });
+      console.log("Login response:", user); // Debug için
 
       if (user && user.role === "admin") {
-        setLocation("/admin");
+        setLocation("/admin"); // AdminDashboard'a yönlendir
       } else {
-        console.error("User is not admin:", user);
-        setLocation("/");
+        console.log("User is not admin:", user); // Debug için
+        setLocation("/"); // Admin değilse ana sayfaya yönlendir
       }
     } catch (error) {
       console.error("Login error:", error);

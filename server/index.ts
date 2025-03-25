@@ -1,11 +1,11 @@
 import express, { type Request, Response, NextFunction } from "express";
+import session from "express-session";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { storage } from "./storage";
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { setupAuth } from "./auth";
 
 // ES Modules için __dirname alternatifi
 const __filename = fileURLToPath(import.meta.url);
@@ -23,8 +23,20 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Auth ve session kurulumu
-setupAuth(app);
+// Session middleware setup - before any routes
+app.use(
+  session({
+    store: storage.sessionStore,
+    secret: "your-secret-key",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    },
+  })
+);
 
 // Logging middleware
 app.use((req, res, next) => {
@@ -60,54 +72,54 @@ app.use((req, res, next) => {
 // Main application setup
 (async () => {
   try {
-    log('Sunucu başlatılıyor...');
+    log('Starting server initialization...');
 
     // Register routes first
-    log('API rotaları kaydediliyor...');
+    log('Registering routes...');
     const server = await registerRoutes(app);
-    log('API rotaları başarıyla kaydedildi');
+    log('Routes registered successfully');
 
     // Create public directory if it doesn't exist
     const publicDir = path.join(__dirname, 'public');
     if (!fs.existsSync(publicDir)) {
       fs.mkdirSync(publicDir, { recursive: true });
-      log('Public dizini oluşturuldu');
+      log('Created public directory');
     }
 
     // Development modunda Vite HMR kullan
     if (process.env.NODE_ENV !== 'production') {
-      log('Vite geliştirme sunucusu ayarlanıyor...');
+      log('Setting up Vite development server...');
       await setupVite(app, server);
-      log('Vite geliştirme sunucusu yapılandırıldı');
+      log('Vite development server configured');
     } else {
       // Production modunda static file serving kullan
-      log('Statik dosya sunumu ayarlanıyor...');
+      log('Setting up static file serving...');
       serveStatic(app);
-      log('Statik dosya sunumu yapılandırıldı');
+      log('Static file serving configured');
     }
 
     // Error handling middleware
     app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-      console.error('Sunucu hatası:', err);
+      console.error('Server error:', err);
       const status = err.status || err.statusCode || 500;
-      const message = err.message || "Sunucu Hatası";
+      const message = err.message || "Internal Server Error";
       res.status(status).json({ message });
     });
 
     // Start server
-    const port = process.env.PORT || 5000;
-    log(`Sunucu ${port} portunda başlatılıyor...`);
+    const port = 5000;
+    log(`Attempting to start server on port ${port}...`);
 
     server.listen({
       port,
       host: "0.0.0.0",
       reusePort: true,
     }, () => {
-      log(`Sunucu başarıyla başlatıldı ve ${port} portunu dinliyor`);
+      log(`Server successfully started and listening on port ${port}`);
     });
 
   } catch (error) {
-    console.error('Sunucu başlatılamadı:', error);
+    console.error('Failed to start server:', error);
     process.exit(1);
   }
 })();
