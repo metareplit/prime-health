@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 
 const slides = [
   {
-    image: "/attached_assets/h.png",
+    image: "/images/slider/h.png",
     title: "Uzman Kadromuz",
     subtitle: "Deneyimli Ekibimizle Hizmetinizdeyiz"
   },
   {
-    image: "/attached_assets/1200x800.webp",
+    image: "/images/slider/clinic.webp",
     title: "Prime Health Klinik",
     subtitle: "Sağlıklı ve Güzel Bir Görünüm İçin Yanınızdayız"
   }
