@@ -93,8 +93,8 @@ export default function Products() {
         keywords="vithair, saç bakım, şampuan, sprey, tablet, mezoterapi"
       />
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-primary/5 to-transparent py-12">
+      {/* Hero Section - Mobile Optimized */}
+      <section className="relative bg-gradient-to-b from-primary/5 to-transparent py-8 md:py-12">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -102,21 +102,21 @@ export default function Products() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">
+            <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">
               VitHair Profesyonel Saç Bakım Ürünleri
             </h1>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 px-4">
               Saç sağlığınız için geliştirilmiş profesyonel çözümler
             </p>
 
-            {/* Search */}
-            <div className="flex gap-4 max-w-md mx-auto">
+            {/* Search - Mobile Optimized */}
+            <div className="flex gap-3 max-w-md mx-auto px-4">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
                   placeholder="Ürün ara..."
-                  className="pl-10"
+                  className="pl-10 h-10 md:h-11"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -126,19 +126,19 @@ export default function Products() {
         </div>
       </section>
 
-      {/* Products Section */}
-      <section className="container mx-auto px-4 py-8">
+      {/* Products Section - Mobile Optimized */}
+      <section className="container mx-auto px-4 py-6 md:py-8">
         <Tabs defaultValue="all" className="w-full">
-          <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-4 border-b">
-            <TabsList className="flex flex-wrap justify-center gap-2">
+          <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-3 md:py-4 border-b">
+            <TabsList className="flex flex-nowrap overflow-x-auto gap-2 p-1 w-full justify-start md:justify-center md:flex-wrap scrollbar-none">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
-                  className="data-[state=active]:bg-primary flex items-center gap-2"
+                  className="data-[state=active]:bg-primary flex items-center gap-2 whitespace-nowrap px-3 py-1.5"
                 >
                   <category.icon className="h-4 w-4" />
-                  {category.title}
+                  <span className="text-sm">{category.title}</span>
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -146,7 +146,7 @@ export default function Products() {
 
           {categories.map((category) => (
             <TabsContent key={category.id} value={category.id}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mt-6 md:mt-8">
                 {getProductsByCategory(category.id)
                   .filter((product: any) =>
                     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -161,21 +161,24 @@ export default function Products() {
                     >
                       <Dialog>
                         <DialogTrigger asChild>
-                          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
-                            <CardContent className="p-4">
-                              <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 mb-4">
+                          <Card className="cursor-pointer hover:shadow-lg transition-shadow h-full">
+                            <CardContent className="p-3 md:p-4 flex flex-col h-full">
+                              <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 mb-3 md:mb-4">
                                 <img
                                   src={product.images?.[0]}
                                   alt={product.name}
                                   className="w-full h-full object-contain"
+                                  loading="lazy"
                                 />
                               </div>
-                              <div className="space-y-2">
-                                <Badge variant="secondary" className="text-xs">
+                              <div className="space-y-2 flex-1">
+                                <Badge variant="secondary" className="text-xs mb-2">
                                   {product.category}
                                 </Badge>
-                                <h3 className="font-semibold">{product.name}</h3>
-                                <p className="text-sm text-muted-foreground line-clamp-2">
+                                <h3 className="font-semibold text-sm md:text-base line-clamp-2">
+                                  {product.name}
+                                </h3>
+                                <p className="text-xs md:text-sm text-muted-foreground line-clamp-2">
                                   {product.description}
                                 </p>
                               </div>
@@ -183,21 +186,22 @@ export default function Products() {
                           </Card>
                         </DialogTrigger>
 
-                        <DialogContent className="max-w-3xl">
-                          <DialogHeader>
-                            <DialogTitle>{product.name}</DialogTitle>
+                        <DialogContent className="sm:max-w-[90vw] md:max-w-3xl p-0">
+                          <DialogHeader className="p-4 md:p-6 border-b">
+                            <DialogTitle className="text-lg md:text-xl">{product.name}</DialogTitle>
                           </DialogHeader>
-                          <div className="grid md:grid-cols-2 gap-6">
-                            <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-8">
+                          <div className="grid md:grid-cols-2 gap-4 md:gap-6 p-4 md:p-6">
+                            <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 md:p-8">
                               <img
                                 src={product.images?.[0]}
                                 alt={product.name}
                                 className="w-full h-full object-contain"
+                                loading="lazy"
                               />
                             </div>
-                            <div className="space-y-6">
+                            <div className="space-y-4 md:space-y-6">
                               <div>
-                                <p className="text-muted-foreground mb-4">
+                                <p className="text-sm md:text-base text-muted-foreground mb-4">
                                   {product.description}
                                 </p>
                               </div>
@@ -205,12 +209,14 @@ export default function Products() {
                               {/* Faydalar */}
                               {product.benefits && product.benefits.length > 0 && (
                                 <div>
-                                  <h4 className="font-semibold mb-3">Faydaları</h4>
+                                  <h4 className="font-semibold mb-2 md:mb-3 text-base md:text-lg">
+                                    Faydaları
+                                  </h4>
                                   <ul className="grid gap-2">
                                     {product.benefits.map((benefit: string, idx: number) => (
                                       <li key={idx} className="flex items-center gap-2 text-sm">
-                                        <Check className="h-4 w-4 text-green-500" />
-                                        {benefit}
+                                        <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
+                                        <span>{benefit}</span>
                                       </li>
                                     ))}
                                   </ul>
@@ -220,12 +226,14 @@ export default function Products() {
                               {/* Kullanım Talimatları */}
                               {product.usage_instructions && product.usage_instructions.length > 0 && (
                                 <div>
-                                  <h4 className="font-semibold mb-3">Kullanım Talimatları</h4>
+                                  <h4 className="font-semibold mb-2 md:mb-3 text-base md:text-lg">
+                                    Kullanım Talimatları
+                                  </h4>
                                   <ul className="grid gap-2">
                                     {product.usage_instructions.map((instruction: string, idx: number) => (
                                       <li key={idx} className="flex items-center gap-2 text-sm">
-                                        <Check className="h-4 w-4 text-primary" />
-                                        {instruction}
+                                        <Check className="h-4 w-4 text-primary flex-shrink-0" />
+                                        <span>{instruction}</span>
                                       </li>
                                     ))}
                                   </ul>
