@@ -76,14 +76,14 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2 text-gray-600">
                 <Phone className="h-4 w-4" />
-                <a href="tel:+995123456789" className="hover:text-primary transition-colors">
-                  {t('contact.phone.number1')}
+                <a href="tel:+995555003044" className="hover:text-primary transition-colors">
+                  +995 555 003 044
                 </a>
               </li>
               <li className="flex items-center gap-2 text-gray-600">
                 <Mail className="h-4 w-4" />
-                <a href="mailto:info@primehealth.com" className="hover:text-primary transition-colors">
-                  {t('contact.email.address')}
+                <a href="mailto:primehealthtblisi@gmail.com" className="hover:text-primary transition-colors">
+                  primehealthtblisi@gmail.com
                 </a>
               </li>
             </ul>
