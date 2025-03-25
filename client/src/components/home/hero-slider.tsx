@@ -87,7 +87,7 @@ export default function HeroSlider() {
                   >
                     <Link href="/randevu">
                       <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-                      <span className="text-lg">{t('buttons.appointment')}</span>
+                      <span className="text-lg">Hemen Randevu Al</span>
                     </Link>
                   </Button>
                 </motion.div>
@@ -97,7 +97,6 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* Navigation Buttons */}
       <Button
         variant="outline"
         size="icon"
@@ -116,7 +115,6 @@ export default function HeroSlider() {
         <ArrowRight className="h-4 w-4" />
       </Button>
 
-      {/* Dots */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
         {scrollSnaps.map((_, index) => (
           <button
