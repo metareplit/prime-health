@@ -78,19 +78,33 @@ const adminAuth = (req: Request, res: Response, next: any) => {
   next();
 };
 
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
-});
-
 export async function registerRoutes(app: Express) {
+  // Trust proxy - required for rate limiting behind reverse proxy
+  app.set('trust proxy', 1);
+
   // Initialize Telegram client
   telegramClient = await initializeTelegramClient();
 
+  // Rate limiting configuration
+  const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 1000, // Limit each IP to 1000 requests per windowMs
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    message: 'Too many requests from this IP, please try again later',
+    skip: (req) => {
+      // Skip rate limiting for static files and development assets
+      return req.path.startsWith('/assets/') || 
+             req.path.startsWith('/@vite/') || 
+             req.path.startsWith('/@react-refresh');
+    }
+  });
+
+  // Apply rate limiting to API routes only
+  app.use('/api', limiter);
+
   // Static file serving
   app.use('/uploads', express.static('uploads'));
-  app.use(limiter);
 
   // Posts endpoints
   app.get("/api/posts", async (_req: Request, res: Response) => {
