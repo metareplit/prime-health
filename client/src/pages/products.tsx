@@ -110,94 +110,74 @@ export default function Products() {
         keywords="vithair, saç bakım, şampuan, sprey, tablet, mezoterapi"
       />
 
-      <section className="relative bg-gradient-to-b from-primary/5 to-transparent py-8 md:py-12">
+      {/* Search Section */}
+      <section className="relative bg-gradient-to-b from-primary/5 to-transparent py-8">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="max-w-3xl mx-auto text-center"
+            className="max-w-xl mx-auto"
           >
-            <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">
-              VitHair Profesyonel Saç Bakım Ürünleri
-            </h1>
-            <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8">
-              Saç sağlığınız için geliştirilmiş profesyonel çözümler
-            </p>
-
-            <div className="flex gap-3 max-w-md mx-auto">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Ürün ara..."
-                  className="pl-10 h-11"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Ürün ara..."
+                className="pl-10 h-12"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-6 md:py-8">
-        <Tabs defaultValue="all" className="w-full space-y-8" value={selectedCategory} onValueChange={setSelectedCategory}>
-          <div className="bg-background/80 backdrop-blur-sm p-4">
-            <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      {/* Categories and Products */}
+      <section className="container mx-auto px-4">
+        <Tabs defaultValue="all" value={selectedCategory} onValueChange={setSelectedCategory}>
+          {/* Categories */}
+          <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm shadow-sm mb-8">
+            <TabsList className="w-full h-auto flex items-center justify-start gap-2 p-4 overflow-x-auto hide-scrollbar">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
                   className={cn(
-                    "relative flex flex-col items-start gap-2 p-4 h-full transition-all duration-300",
-                    "hover:bg-muted/50 rounded-lg",
-                    "data-[state=active]:text-primary data-[state=active]:bg-muted",
-                    "border-l-2 border-transparent data-[state=active]:border-primary",
-                    "group text-left"
+                    "flex items-center gap-2 px-4 py-2 min-w-fit",
+                    "bg-background hover:bg-muted rounded-lg transition-colors",
+                    "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
+                    "border border-border data-[state=active]:border-primary"
                   )}
                 >
-                  <div className={cn(
-                    "p-2 rounded-lg transition-colors",
-                    category.color,
-                    "group-hover:opacity-80",
-                    "data-[state=active]:opacity-100"
-                  )}>
-                    <category.icon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <span className="font-medium block">
-                      {isMobile ? category.shortTitle : category.title}
-                    </span>
-                    <span className="text-xs text-muted-foreground hidden md:block">
-                      {category.description}
-                    </span>
-                  </div>
+                  <category.icon className="h-4 w-4" />
+                  <span className="whitespace-nowrap">
+                    {isMobile ? category.shortTitle : category.title}
+                  </span>
                 </TabsTrigger>
               ))}
             </TabsList>
           </div>
 
-          <div>
-            {categories.map((category) => (
-              <TabsContent
-                key={category.id}
-                value={category.id}
-                className="focus-visible:outline-none mt-8"
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-                  {getProductsByCategory(category.id)
-                    .filter((product: any) =>
-                      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                      product.description.toLowerCase().includes(searchTerm.toLowerCase())
-                    )
-                    .map((product: any) => (
-                      <ProductCard key={product.id} product={product} />
-                    ))}
-                </div>
-              </TabsContent>
-            ))}
-          </div>
+          {/* Products Grid */}
+          {categories.map((category) => (
+            <TabsContent
+              key={category.id}
+              value={category.id}
+              className="focus-visible:outline-none"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                {getProductsByCategory(category.id)
+                  .filter((product: any) =>
+                    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    product.description.toLowerCase().includes(searchTerm.toLowerCase())
+                  )
+                  .map((product: any) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+              </div>
+            </TabsContent>
+          ))}
         </Tabs>
       </section>
     </div>
