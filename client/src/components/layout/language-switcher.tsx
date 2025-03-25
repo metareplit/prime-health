@@ -8,8 +8,8 @@ export default function LanguageSwitcher() {
   const languages = [
     { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
     { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'ar', name: 'العربية', flag: '🇸🇦' },
-    { code: 'de', name: 'Deutsch', flag: '🇩🇪' }
+    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+    { code: 'ka', name: 'ქართული', flag: '🇬🇪' }
   ];
 
   const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
