@@ -13,7 +13,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [, setLocation] = useLocation();
+  const [, navigate] = useLocation();
   const { toast } = useToast();
 
   const loginMutation = useMutation({
@@ -29,17 +29,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         throw new Error(error.message || 'Giriş başarısız');
       }
 
-      return response.json();
+      const data = await response.json();
+      return data;
     },
     onSuccess: (data) => {
-      // Kullanıcı admin ise state'i güncelle ve yönlendir
       if (data.role === 'admin') {
         setIsAdmin(true);
-        setLocation('/admin');
-        toast({
-          title: "Giriş başarılı",
-          description: "Yönetici paneline yönlendiriliyorsunuz...",
-        });
+        // Yönlendirmeyi setTimeout ile geciktirerek state güncellemesinin tamamlanmasını bekleyelim
+        setTimeout(() => {
+          navigate('/admin');
+          toast({
+            title: "Giriş başarılı",
+            description: "Hoş geldiniz!",
+          });
+        }, 100);
       } else {
         toast({
           title: "Erişim reddedildi",
@@ -64,7 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logoutMutation = useMutation({
     mutationFn: async () => {
       setIsAdmin(false);
-      setLocation('/admin/login');
+      navigate('/admin/login');
     },
     onSuccess: () => {
       toast({
