@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
+import { setupAuthRoutes, adminAuth } from './auth';
 import { 
   insertAppointmentSchema, 
   insertPostSchema,
@@ -40,7 +41,6 @@ export async function registerRoutes(app: Express) {
   // Trust proxy - required for rate limiting behind reverse proxy
   app.set('trust proxy', 1);
 
-
   // Rate limiting configuration
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -57,6 +57,9 @@ export async function registerRoutes(app: Express) {
 
   // Apply rate limiting to API routes only
   app.use('/api', limiter);
+
+  // Setup authentication routes
+  setupAuthRoutes(app);
 
   // Static file serving
   app.use('/uploads', express.static('uploads'));
@@ -124,19 +127,8 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Create HTTP server
   const httpServer = createServer(app);
-
   return httpServer;
 }
-
-// Admin authentication middleware
-const adminAuth = (req: Request, res: Response, next: any) => {
-  const adminKey = req.headers['x-admin-key'];
-  if (adminKey !== process.env.ADMIN_KEY) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-  next();
-};
 
 import type { Request, Response } from "express";
