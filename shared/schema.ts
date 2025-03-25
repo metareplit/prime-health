@@ -40,7 +40,7 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-// Blog posts table
+// Blog posts table with enhanced SEO features
 export const posts = pgTable("posts", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -57,6 +57,11 @@ export const posts = pgTable("posts", {
   seoDescription: text("seo_description"),
   category: text("category"),
   tags: text("tags").array(),
+  readingTime: text("reading_time"),
+  metaKeywords: text("meta_keywords"),
+  canonical: text("canonical_url"),
+  ogImage: text("og_image"),
+  structuredData: text("structured_data")
 });
 
 // Update products table boolean fields
@@ -252,7 +257,23 @@ export const insertAppointmentSchema = createInsertSchema(appointments).extend({
   patientNotes: z.string().optional(),
   documents: z.array(z.string()).optional().default([]),
 });
-export const insertPostSchema = createInsertSchema(posts);
+
+// Export the insert schema with validations
+export const insertPostSchema = createInsertSchema(posts).extend({
+  title: z.string().min(1, "Başlık gereklidir"),
+  slug: z.string().min(1, "URL gereklidir"),
+  content: z.string().min(1, "İçerik gereklidir"),
+  excerpt: z.string().min(1, "Özet gereklidir"),
+  seoTitle: z.string().optional(),
+  seoDescription: z.string().optional(),
+  category: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+  metaKeywords: z.string().optional(),
+  canonical: z.string().optional(),
+  ogImage: z.string().optional(),
+  structuredData: z.string().optional()
+});
+
 export const insertProductSchema = createInsertSchema(products);
 export const insertMediaSchema = createInsertSchema(media);
 export const insertSettingSchema = createInsertSchema(settings);
@@ -420,3 +441,4 @@ export const successStorySchema = z.object({
 // Export types
 export type SuccessStory = typeof successStories.$inferSelect;
 export type InsertSuccessStory = z.infer<typeof successStorySchema>;
+export type InsertPost = z.infer<typeof insertPostSchema>;

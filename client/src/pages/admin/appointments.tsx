@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Calendar, Clock, CheckCircle, XCircle, Search, Loader2 } from "lucide-react";
-import type { Appointment, User, Service } from "@shared/schema";
+import type { Appointment, Service } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 
 export default function AdminAppointments() {
@@ -23,22 +23,11 @@ export default function AdminAppointments() {
   const [dateFilter, setDateFilter] = useState("");
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
   const [doctorNotes, setDoctorNotes] = useState("");
-  const [selectedDoctor, setSelectedDoctor] = useState<string>("");
 
   // Randevuları getir
-  const { data: appointments, isLoading: appointmentsLoading, error: appointmentsError } = useQuery<Appointment[]>({
+  const { data: appointments, isLoading: appointmentsLoading } = useQuery<Appointment[]>({
     queryKey: ["/api/appointments"],
     refetchInterval: 10000, // Her 10 saniyede bir yenile
-  });
-
-  // Hastaları getir
-  const { data: patients, isLoading: patientsLoading } = useQuery<User[]>({
-    queryKey: ["/api/users"],
-  });
-
-  // Doktorları getir
-  const { data: doctors } = useQuery<User[]>({
-    queryKey: ["/api/users"],
   });
 
   // Hizmetleri getir
@@ -46,22 +35,11 @@ export default function AdminAppointments() {
     queryKey: ["/api/services"],
   });
 
-  useEffect(() => {
-    // Hata durumunda kullanıcıyı bilgilendir
-    if (appointmentsError) {
-      toast({
-        title: "Hata",
-        description: "Randevular yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin.",
-        variant: "destructive",
-      });
-    }
-  }, [appointmentsError, toast]);
-
   const updateAppointmentMutation = useMutation({
     mutationFn: async (data: Partial<Appointment>) => {
       const res = await apiRequest(
         "PATCH",
-        `/api/appointments/${selectedAppointment?.id}`,
+        `/api/appointments/${selectedAppointment?.id}/status`,
         data
       );
       return res.json();
@@ -89,16 +67,9 @@ export default function AdminAppointments() {
     updateAppointmentMutation.mutate({ status });
   };
 
-  const handleDoctorAssign = async () => {
-    if (!selectedAppointment || !selectedDoctor) return;
-    updateAppointmentMutation.mutate({ doctorId: parseInt(selectedDoctor) });
-  };
-
   const filteredAppointments = appointments?.filter(appointment => {
-    const patient = patients?.find(p => p.id === appointment.patientId);
-    const matchesSearch = patient?.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         patient?.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         patient?.email?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = appointment.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                       appointment.phone?.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesStatus = statusFilter === "all" || appointment.status === statusFilter;
     const matchesDate = !dateFilter || new Date(appointment.date).toISOString().split('T')[0] === dateFilter;
@@ -106,7 +77,7 @@ export default function AdminAppointments() {
     return matchesSearch && matchesStatus && matchesDate;
   });
 
-  if (appointmentsLoading || patientsLoading) {
+  if (appointmentsLoading) {
     return (
       <div className="flex items-center justify-center min-h-[500px]">
         <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
@@ -117,7 +88,12 @@ export default function AdminAppointments() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Randevu Yönetimi</h1>
+        <div>
+          <h1 className="text-2xl font-bold">Randevu Yönetimi</h1>
+          <p className="text-muted-foreground">
+            Randevuları görüntüleyin ve yönetin
+          </p>
+        </div>
       </div>
 
       <Card>
@@ -131,7 +107,7 @@ export default function AdminAppointments() {
               <Input
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Hasta ara..."
+                placeholder="İsim veya telefon ile ara..."
                 className="pl-9"
               />
             </div>
@@ -170,7 +146,6 @@ export default function AdminAppointments() {
                 </div>
               ) : (
                 filteredAppointments?.map((appointment) => {
-                  const patient = patients?.find(p => p.id === appointment.patientId);
                   const service = services?.find(s => s.id === appointment.serviceId);
 
                   return (
@@ -186,7 +161,7 @@ export default function AdminAppointments() {
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="font-medium">
-                            {patient?.firstName} {patient?.lastName}
+                            {appointment.name}
                           </p>
                           <p className="text-sm text-muted-foreground">{service?.name}</p>
                           <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
@@ -259,36 +234,6 @@ export default function AdminAppointments() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Doktor Ataması</label>
-                    <div className="flex gap-2">
-                      <Select
-                        value={selectedDoctor}
-                        onValueChange={setSelectedDoctor}
-                      >
-                        <SelectTrigger className="flex-1">
-                          <SelectValue placeholder="Doktor seçin" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {doctors?.map((doctor) => (
-                            <SelectItem
-                              key={doctor.id}
-                              value={doctor.id.toString()}
-                            >
-                              {doctor.firstName} {doctor.lastName}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <Button
-                        onClick={handleDoctorAssign}
-                        disabled={!selectedDoctor}
-                      >
-                        Ata
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
                     <label className="text-sm font-medium">Doktor Notları</label>
                     <Textarea
                       value={doctorNotes}
@@ -311,11 +256,11 @@ export default function AdminAppointments() {
                   </Button>
                 </div>
 
-                {selectedAppointment.patientNotes && (
+                {selectedAppointment.notes && (
                   <div className="pt-4 border-t">
                     <p className="text-sm font-medium mb-2">Hasta Notları:</p>
                     <p className="text-sm text-muted-foreground">
-                      {selectedAppointment.patientNotes}
+                      {selectedAppointment.notes}
                     </p>
                   </div>
                 )}
