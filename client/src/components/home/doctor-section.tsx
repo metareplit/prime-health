@@ -35,7 +35,7 @@ export default function DoctorSection() {
           >
             <div className="aspect-[3/4] rounded-2xl overflow-hidden">
               <img
-                src="/attached_assets/alicaliskan-Photoroom.png"
+                src="/images/doctors/alicaliskan-Photoroom.png"
                 alt="Dr. Ali Çalışkan"
                 className="w-full h-full object-cover"
                 onError={(e) => {
