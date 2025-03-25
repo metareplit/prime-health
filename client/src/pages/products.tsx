@@ -2,12 +2,11 @@ import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Star, Package, Sprout, Pill, FlaskConical, Check, Search, ShoppingCart, Info } from "lucide-react";
+import { Star, Package, Sprout, Pill, FlaskConical, Check, Search, ShoppingCart } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { Metadata } from "@/components/ui/metadata";
-import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 
@@ -53,7 +52,6 @@ const categories = [
 
 export default function Products() {
   const [searchTerm, setSearchTerm] = useState("");
-  const { t } = useTranslation('common');
 
   // Fetch products from API
   const { data: products = [], isLoading } = useQuery({
@@ -248,21 +246,6 @@ export default function Products() {
                                   {product.review_count} değerlendirme
                                 </p>
                               </div>
-
-                              {/* Ürün Detayları */}
-                              {product.specifications && (
-                                <div>
-                                  <h4 className="font-semibold mb-3">Ürün Detayları</h4>
-                                  <ul className="grid gap-2">
-                                    {Object.entries(product.specifications).map(([key, value]: [string, any]) => (
-                                      <li key={key} className="flex items-center gap-2 text-sm">
-                                        <Info className="h-4 w-4 text-primary" />
-                                        <span className="font-medium">{key}:</span> {value}
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              )}
 
                               {/* Faydalar */}
                               {product.benefits && product.benefits.length > 0 && (
