@@ -107,6 +107,7 @@ export async function registerRoutes(app: Express) {
 
       const user = await storage.getUserByUsername(username);
       if (!user) {
+        console.log("User not found:", username);
         return res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
       }
 
@@ -115,12 +116,12 @@ export async function registerRoutes(app: Express) {
         id: user.id,
         username: user.username,
         role: user.role,
-        firstName: user.firstName,
-        lastName: user.lastName
+        password: user.password // Only for debugging
       });
 
       // Test için direkt karşılaştırma
       if (password !== user.password) {
+        console.log("Password mismatch. Got:", password, "Expected:", user.password);
         return res.status(401).json({ message: "Geçersiz kullanıcı adı veya şifre" });
       }
 
