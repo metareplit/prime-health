@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { User } from "@shared/schema";
+import type { User } from "@shared/schema";
 import { apiRequest, queryClient } from "./queryClient";
 import { useToast } from "@/hooks/use-toast";
 
@@ -25,14 +25,9 @@ function useLoginMutation() {
   return useMutation({
     mutationFn: async (credentials: LoginCredentials) => {
       const response = await apiRequest("POST", "/api/auth/login", credentials);
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || "Giriş başarısız");
-      }
       return response.json();
     },
     onSuccess: (user: User) => {
-      // Sadece admin rolünü kabul et
       if (user.role !== "admin") {
         throw new Error("Bu panel sadece yöneticiler içindir");
       }
@@ -92,16 +87,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const loginMutation = useLoginMutation();
   const logoutMutation = useLogoutMutation();
 
-  const contextValue: AuthContextType = {
+  const value: AuthContextType = {
     user: user || null,
     isLoading,
-    error: error || null,
+    error: error as Error | null,
     loginMutation,
     logoutMutation,
   };
 
   return (
-    <AuthContext.Provider value={contextValue}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
