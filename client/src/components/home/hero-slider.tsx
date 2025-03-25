@@ -1,25 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { Slider } from "@shared/schema";
+import { Button } from "@/components/ui/button";
 
 export default function HeroSlider() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
-
-  const { data: sliders, isLoading } = useQuery<Slider[]>({
-    queryKey: ["/api/sliders"],
-  });
-
-  // Debug: Log slider data
-  useEffect(() => {
-    console.log('Slider data:', sliders);
-  }, [sliders]);
-
-  const activeSliders = sliders?.filter(slider => slider.is_active === true) || [];
 
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
@@ -46,32 +34,42 @@ export default function HeroSlider() {
     };
   }, [emblaApi, onSelect]);
 
-  if (isLoading) {
-    return <div className="h-[50vh] bg-muted animate-pulse" />;
-  }
-
-  if (!activeSliders.length) {
-    return null;
-  }
-
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden group">
       <div className="embla" ref={emblaRef}>
-        <div className="embla__container">
-          {activeSliders.map((slider) => (
-            <div key={slider.id} className="embla__slide relative">
-              <div className="relative h-[50vh] min-h-[400px] w-full">
-                <div 
-                  className="absolute inset-0"
-                  style={{
-                    backgroundImage: `url(${slider.image_url})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                />
-              </div>
+        <div className="embla__container h-[600px] md:h-[700px]">
+          <div className="embla__slide relative w-full flex-[0_0_100%]">
+            <div 
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `url(/attached_assets/1200x800.webp)`
+              }}
+            />
+            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-center text-white px-4"
+              >
+                <h1 className="text-4xl md:text-6xl font-bold mb-4">
+                  Prime Health Klinik
+                </h1>
+                <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+                  Sağlıklı ve Güzel Bir Görünüm İçin Yanınızdayız
+                </p>
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  className="bg-white/10 hover:bg-white/20 border-white text-white"
+                  onClick={() => window.location.href = '/randevu'}
+                >
+                  Randevu Al
+                </Button>
+              </motion.div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
 
@@ -79,7 +77,7 @@ export default function HeroSlider() {
       <Button
         variant="outline"
         size="icon"
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+        className="absolute left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/10 hover:bg-white/20 border-white text-white"
         onClick={scrollPrev}
       >
         <ArrowLeft className="h-4 w-4" />
@@ -88,7 +86,7 @@ export default function HeroSlider() {
       <Button
         variant="outline"
         size="icon"
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+        className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/10 hover:bg-white/20 border-white text-white"
         onClick={scrollNext}
       >
         <ArrowRight className="h-4 w-4" />
@@ -96,7 +94,7 @@ export default function HeroSlider() {
 
       {/* Dots */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-        {scrollSnaps.map((_, index) => (
+        {/*{scrollSnaps.map((_, index) => (
           <button
             key={index}
             className={`w-2 h-2 rounded-full transition-all ${
@@ -104,7 +102,7 @@ export default function HeroSlider() {
             }`}
             onClick={() => emblaApi?.scrollTo(index)}
           />
-        ))}
+        ))}*/}
       </div>
     </div>
   );

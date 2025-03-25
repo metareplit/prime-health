@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import ServiceCard from "@/components/services/service-card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import HeroSlider from "@/components/home/hero-slider"; // Import HeroSlider
+import HeroSlider from "@/components/home/hero-slider";
 import { motion } from "framer-motion";
 import { Shield, Users, Stethoscope, Clock, Award, HeartHandshake, Building2, Map, ArrowRight, CheckCircle, PlusCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -83,10 +83,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Slider Section - explicitly add it before other sections */}
-      <section className="relative w-full">
-        <HeroSlider />
-      </section>
+      {/* Hero Slider Section */}
+      <HeroSlider />
 
       {/* Why Choose Us Section */}
       <section className="py-20 bg-gradient-to-b from-primary/5 to-transparent">
