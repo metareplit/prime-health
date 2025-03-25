@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "@/lib/auth";
-import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -8,25 +7,23 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, Lock, User } from "lucide-react";
 
 export default function AdminLogin() {
-  const { loginMutation } = useAuth();
-  const [, setLocation] = useLocation();
+  const { login } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const user = await loginMutation.mutateAsync({ username, password });
-      console.log("Login response:", user); // Debug için
+    setIsLoading(true);
+    setError(null);
 
-      if (user && user.role === "admin") {
-        setLocation("/admin"); // AdminDashboard'a yönlendir
-      } else {
-        console.log("User is not admin:", user); // Debug için
-        setLocation("/"); // Admin değilse ana sayfaya yönlendir
-      }
+    try {
+      await login(username, password);
     } catch (error) {
-      console.error("Login error:", error);
+      setError(error instanceof Error ? error.message : "Giriş başarısız");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -58,6 +55,7 @@ export default function AdminLogin() {
                   required
                   autoComplete="username"
                   autoFocus
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -74,6 +72,7 @@ export default function AdminLogin() {
                   placeholder="Şifre"
                   required
                   autoComplete="current-password"
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -82,9 +81,9 @@ export default function AdminLogin() {
               type="submit"
               className="w-full bg-primary hover:bg-primary/90"
               size="lg"
-              disabled={loginMutation.isPending}
+              disabled={isLoading}
             >
-              {loginMutation.isPending ? (
+              {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Giriş yapılıyor...
@@ -94,11 +93,9 @@ export default function AdminLogin() {
               )}
             </Button>
 
-            {loginMutation.isError && (
+            {error && (
               <Alert variant="destructive" className="mt-4">
-                <AlertDescription>
-                  Kullanıcı adı veya şifre hatalı. Lütfen bilgilerinizi kontrol edip tekrar deneyin.
-                </AlertDescription>
+                <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
           </form>
