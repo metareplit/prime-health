@@ -62,7 +62,6 @@ export default function ContactPage() {
                     <div>
                       <h3 className="font-medium text-lg mb-2">{t('contact.phone.title')}</h3>
                       <p className="text-gray-600 text-lg">{t('contact.phone.number1')}</p>
-                      <p className="text-gray-600 text-lg">{t('contact.phone.number2')}</p>
                     </div>
                   </div>
 
