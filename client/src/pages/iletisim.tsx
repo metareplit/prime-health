@@ -144,14 +144,14 @@ export default function ContactPage() {
             <Card className="h-full">
               <CardContent className="p-0">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.232948447819!2d28.987875815415816!3d41.052587579297466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab703f3ea0007%3A0xe81c3e8f8ef5e926!2zxZ5pxZ9saSwgxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1645789056789!5m2!1str!2str"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2978.5447754789347!2d44.784928715544385!3d41.71514097923691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40440d4d840d70d9%3A0xc19f34f41e017af7!2s59%20Tsotne%20Dadiani%20St%2C%20T&#39;bilisi%2C%20Georgia!5e0!3m2!1sen!2sus!4v1616418919855!5m2!1sen!2sus"
                   width="100%"
                   height="100%"
                   style={{ border: 0, minHeight: "600px" }}
                   allowFullScreen
                   loading="lazy"
                   className="rounded-lg"
-                  title="Google Maps"
+                  title="Google Maps - Prime Health Location"
                 ></iframe>
               </CardContent>
             </Card>
