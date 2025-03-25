@@ -89,6 +89,7 @@ export interface IStorage {
   updateService(id: number, data: Partial<Service>): Promise<Service>;
   deleteService(id: number): Promise<void>;
   updateServiceOrder(id: number, order: number): Promise<Service>;
+  getService(id: number): Promise<Service | undefined>;
 
 
   // Messages methods
@@ -104,6 +105,7 @@ export interface IStorage {
   createAppointment(appointment: InsertAppointment): Promise<Appointment>;
   updateAppointmentStatus(id: number, status: string): Promise<Appointment>;
   getAllAppointments(): Promise<Appointment[]>;
+  getAppointment(id: number): Promise<Appointment | undefined>;
   updateAppointment(id: number, data: Partial<Appointment>): Promise<Appointment>;
 
   // Email Template methods
@@ -386,6 +388,19 @@ export class DatabaseStorage implements IStorage {
     return updatedService;
   }
 
+  async getService(id: number): Promise<Service | undefined> {
+    try {
+      const [service] = await db
+        .select()
+        .from(services)
+        .where(eq(services.id, id));
+      return service;
+    } catch (error) {
+      console.error('Error in getService:', error);
+      throw error;
+    }
+  }
+
   // Messages methods
   async getUserMessages(userId: number): Promise<Message[]> {
     return await db
@@ -476,6 +491,18 @@ export class DatabaseStorage implements IStorage {
       .where(eq(appointments.id, id))
       .returning();
     return updatedAppointment;
+  }
+  async getAppointment(id: number): Promise<Appointment | undefined> {
+    try {
+      const [appointment] = await db
+        .select()
+        .from(appointments)
+        .where(eq(appointments.id, id));
+      return appointment;
+    } catch (error) {
+      console.error('Error in getAppointment:', error);
+      throw error;
+    }
   }
 
   // Email Template methods

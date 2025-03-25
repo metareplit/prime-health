@@ -112,6 +112,7 @@ app.use((req, res, next) => {
     }, () => {
       log(`Server running on port ${port}`);
     });
+
   } catch (error) {
     console.error('Failed to start server:', error);
     process.exit(1);

@@ -1,10 +1,10 @@
-import type { Express, Request, Response } from "express";
+import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
 import { 
   insertAppointmentSchema, 
   insertPostSchema,
-  insertSliderSchema // Added import for slider schema
+  insertSliderSchema
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import path from 'path';
@@ -14,6 +14,34 @@ import { TelegramClient } from 'telegram';
 import { StringSession } from 'telegram/sessions';
 import fs from 'fs';
 import multer from 'multer';
+
+// Initialize Telegram client in a non-blocking way
+const initializeTelegram = async () => {
+  try {
+    const apiId = await storage.getSettingValue('telegram_api_id');
+    const apiHash = await storage.getSettingValue('telegram_api_hash');
+    const botToken = await storage.getSettingValue('telegram_bot_token');
+
+    if (!apiId || !apiHash || !botToken) {
+      console.log('Telegram credentials not configured yet');
+      return null;
+    }
+
+    const client = new TelegramClient(
+      new StringSession(''), 
+      parseInt(apiId), 
+      apiHash,
+      { connectionRetries: 5 }
+    );
+
+    await client.start({ botAuthToken: botToken });
+    console.log('Telegram client initialized successfully');
+    return client;
+  } catch (error) {
+    console.error('Error initializing Telegram client:', error);
+    return null;
+  }
+};
 
 // Multer setup
 const upload = multer({
@@ -39,62 +67,21 @@ const upload = multer({
   }
 });
 
-// Telegram client instance
-let telegramClient: TelegramClient | null = null;
-
-// Function to initialize or reinitialize Telegram client
-async function initializeTelegramClient() {
-  try {
-    const apiId = await storage.getSettingValue('telegram_api_id');
-    const apiHash = await storage.getSettingValue('telegram_api_hash');
-    const botToken = await storage.getSettingValue('telegram_bot_token');
-
-    if (!apiId || !apiHash || !botToken) {
-      console.log('Telegram credentials not configured yet');
-      return null;
-    }
-
-    const client = new TelegramClient(
-      new StringSession(''), 
-      parseInt(apiId), 
-      apiHash,
-      { connectionRetries: 5 }
-    );
-
-    await client.start({ botAuthToken: botToken });
-    console.log('Telegram client initialized successfully');
-    return client;
-  } catch (error) {
-    console.error('Error initializing Telegram client:', error);
-    return null;
-  }
-}
-
-// Admin authentication middleware
-const adminAuth = (req: Request, res: Response, next: any) => {
-  const adminKey = req.headers['x-admin-key'];
-  if (adminKey !== process.env.ADMIN_KEY) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-  next();
-};
-
 export async function registerRoutes(app: Express) {
   // Trust proxy - required for rate limiting behind reverse proxy
   app.set('trust proxy', 1);
 
-  // Initialize Telegram client
-  telegramClient = await initializeTelegramClient();
+  // Initialize Telegram client in background
+  initializeTelegram().catch(console.error);
 
   // Rate limiting configuration
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 1000, // Limit each IP to 1000 requests per windowMs
-    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    standardHeaders: true,
+    legacyHeaders: false,
     message: 'Too many requests from this IP, please try again later',
     skip: (req) => {
-      // Skip rate limiting for static files and development assets
       return req.path.startsWith('/assets/') || 
              req.path.startsWith('/@vite/') || 
              req.path.startsWith('/@react-refresh');
@@ -159,9 +146,9 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.post("/api/sliders", adminAuth, upload.single('image'), async (req: Request, res: Response) => { //Added multer middleware
+  app.post("/api/sliders", adminAuth, upload.single('image'), async (req: Request, res: Response) => { 
     try {
-      const sliderData = insertSliderSchema.parse({...req.body, image: req.file?.filename}); //Added image to sliderData
+      const sliderData = insertSliderSchema.parse({...req.body, image: req.file?.filename}); 
       const slider = await storage.createSlider(sliderData);
       res.status(201).json(slider);
     } catch (error) {
@@ -170,6 +157,19 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Create HTTP server
   const httpServer = createServer(app);
+
   return httpServer;
 }
+
+// Admin authentication middleware
+const adminAuth = (req: Request, res: Response, next: any) => {
+  const adminKey = req.headers['x-admin-key'];
+  if (adminKey !== process.env.ADMIN_KEY) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  next();
+};
+
+import type { Request, Response } from "express";
