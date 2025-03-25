@@ -144,32 +144,38 @@ export default function Products() {
       <section className="container mx-auto px-4 py-6 md:py-8">
         <Tabs defaultValue="all" className="w-full" value={selectedCategory} onValueChange={setSelectedCategory}>
           <div>
-            <TabsList className="relative flex justify-center mb-8 p-1 bg-white rounded-full shadow-sm border overflow-x-auto md:sticky md:top-0 md:z-50 md:bg-background/80 md:backdrop-blur-sm">
+            <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 p-0 bg-transparent">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
                   className={cn(
-                    "flex-col gap-2 p-4 h-auto min-h-[100px] transition-all duration-200",
+                    "flex flex-col items-center gap-2 p-4 h-auto transition-all duration-200",
                     "data-[state=active]:bg-primary/10 hover:bg-primary/5",
-                    "rounded-lg border border-transparent hover:border-primary/20",
-                    "relative overflow-hidden group"
+                    "rounded-xl border border-transparent hover:border-primary/20",
+                    "relative overflow-hidden group min-h-[120px] md:min-h-[140px]"
                   )}
                 >
                   <div className={cn(
                     "absolute inset-0 opacity-5 transition-opacity group-hover:opacity-10",
                     category.color
                   )} />
-                  <category.icon className="h-6 w-6 mb-2" />
-                  <div className="text-center">
-                    <span className="font-medium block">
-                      {isMobile ? category.shortTitle : category.title}
-                    </span>
-                    {!isMobile && (
-                      <span className="text-xs text-muted-foreground block mt-1">
+                  <div className="relative z-10 flex flex-col items-center gap-2">
+                    <div className={cn(
+                      "p-3 rounded-full transition-colors",
+                      "group-hover:bg-primary/10",
+                      "data-[state=active]:bg-primary/20"
+                    )}>
+                      <category.icon className="h-6 w-6 md:h-8 md:w-8" />
+                    </div>
+                    <div className="text-center">
+                      <span className="font-medium block">
+                        {isMobile ? category.shortTitle : category.title}
+                      </span>
+                      <span className="text-xs text-muted-foreground block mt-1 line-clamp-2">
                         {category.description}
                       </span>
-                    )}
+                    </div>
                   </div>
                 </TabsTrigger>
               ))}
