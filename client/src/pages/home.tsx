@@ -3,6 +3,7 @@ import ServiceCard from "@/components/services/service-card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import HeroSlider from "@/components/home/hero-slider";
+import DoctorSection from "@/components/home/doctor-section"; // Add import
 import { motion } from "framer-motion";
 import { Shield, Users, Stethoscope, Clock, Award, HeartHandshake, Building2, Map, ArrowRight, CheckCircle, PlusCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -85,6 +86,9 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Slider Section */}
       <HeroSlider />
+
+      {/* Doctor Section - Add here after slider */}
+      <DoctorSection />
 
       {/* Why Choose Us Section */}
       <section className="py-20 bg-gradient-to-b from-primary/5 to-transparent">
