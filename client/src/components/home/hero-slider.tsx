@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/button";
 
 const slides = [
   {
-    image: "/attached_assets/1200x800.webp",
-    title: "Prime Health Klinik",
-    subtitle: "Sağlıklı ve Güzel Bir Görünüm İçin Yanınızdayız"
-  },
-  {
     image: "/attached_assets/h.png",
     title: "Uzman Kadromuz",
     subtitle: "Deneyimli Ekibimizle Hizmetinizdeyiz"
+  },
+  {
+    image: "/attached_assets/1200x800.webp",
+    title: "Prime Health Klinik",
+    subtitle: "Sağlıklı ve Güzel Bir Görünüm İçin Yanınızdayız"
   }
 ];
 
@@ -53,11 +53,10 @@ export default function HeroSlider() {
         <div className="embla__container h-[600px] md:h-[700px]">
           {slides.map((slide, index) => (
             <div key={index} className="embla__slide relative w-full flex-[0_0_100%]">
-              <div 
-                className="absolute inset-0 bg-cover bg-center"
-                style={{
-                  backgroundImage: `url(${slide.image})`
-                }}
+              <img 
+                src={slide.image}
+                alt={slide.title}
+                className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-black/30" />
               <div className="absolute inset-0 flex items-center justify-center">
