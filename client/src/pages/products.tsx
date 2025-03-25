@@ -143,8 +143,8 @@ export default function Products() {
 
       <section className="container mx-auto px-4 py-6 md:py-8">
         <Tabs defaultValue="all" className="w-full" value={selectedCategory} onValueChange={setSelectedCategory}>
-          <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b">
-            <TabsList className="h-auto p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+          <div>
+            <TabsList className="relative flex justify-center mb-8 p-1 bg-white rounded-full shadow-sm border overflow-x-auto md:sticky md:top-0 md:z-50 md:bg-background/80 md:backdrop-blur-sm">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
@@ -178,8 +178,8 @@ export default function Products() {
 
           <div className="mt-6">
             {categories.map((category) => (
-              <TabsContent 
-                key={category.id} 
+              <TabsContent
+                key={category.id}
                 value={category.id}
                 className="focus-visible:outline-none"
               >
