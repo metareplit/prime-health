@@ -72,7 +72,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-gray-600">
                 <MapPin className="h-4 w-4" />
-                <span>{t('contact.address.line1')}</span>
+                <span>Tsotne Dadiani 59, Tbilisi, Georgia</span>
               </li>
               <li className="flex items-center gap-2 text-gray-600">
                 <Phone className="h-4 w-4" />
