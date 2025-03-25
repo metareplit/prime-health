@@ -31,13 +31,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       return response.json();
     },
-    onSuccess: () => {
-      setIsAdmin(true);
-      setLocation('/admin');
-      toast({
-        title: "Giriş başarılı",
-        description: "Hoş geldiniz!",
-      });
+    onSuccess: (data) => {
+      // Kullanıcı admin ise state'i güncelle ve yönlendir
+      if (data.role === 'admin') {
+        setIsAdmin(true);
+        setLocation('/admin');
+        toast({
+          title: "Giriş başarılı",
+          description: "Yönetici paneline yönlendiriliyorsunuz...",
+        });
+      } else {
+        toast({
+          title: "Erişim reddedildi",
+          description: "Yönetici yetkiniz bulunmuyor.",
+          variant: "destructive",
+        });
+      }
     },
     onError: (error: Error) => {
       toast({
@@ -54,27 +63,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logoutMutation = useMutation({
     mutationFn: async () => {
-      const response = await fetch('/api/auth/logout', {
-        method: 'POST',
-      });
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Çıkış başarısız');
-      }
+      setIsAdmin(false);
+      setLocation('/admin/login');
     },
     onSuccess: () => {
-      setIsAdmin(false);
-      setLocation('/');
       toast({
         title: "Çıkış başarılı",
         description: "Güle güle!",
-      });
-    },
-    onError: (error: Error) => {
-      toast({
-        title: "Çıkış başarısız",
-        description: error.message,
-        variant: "destructive",
       });
     },
   });

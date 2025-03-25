@@ -1,18 +1,19 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
-import { AuthProvider } from "@/lib/auth";
+import { AuthProvider, useAuth } from "@/lib/auth";
 import { AdminLayout } from "@/components/layout/admin-layout";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
-import "./lib/i18n"; // i18n başlatma
+import "./lib/i18n";
+import React, { useEffect } from 'react';
 import AdminDashboard from "@/pages/admin/dashboard";
 import AdminAnalytics from "@/pages/admin/analytics";
 import AdminSEO from "@/pages/admin/seo";
 import AdminPosts from "@/pages/admin/posts";
 import AdminProducts from "@/pages/admin/products";
 import AdminMedia from "@/pages/admin/media";
-import AdminSliders from "@/pages/admin/sliders"; // Slider yönetimi için import
+import AdminSliders from "@/pages/admin/sliders";
 import AdminUsers from "@/pages/admin/users";
 import AdminSettings from "@/pages/admin/settings";
 import AdminNotifications from "@/pages/admin/notifications";
@@ -44,182 +45,239 @@ import PatientProfile from "@/pages/patient/profile";
 import NotFound from "@/pages/not-found";
 import AdminServices from "@/pages/admin/services";
 import AdminContact from "@/pages/admin/contact";
-import AdminMessages from "@/pages/admin/messages"; // Added import
-import AdminAppointments from "@/pages/admin/appointments"; // Added import
+import AdminMessages from "@/pages/admin/messages";
+import AdminAppointments from "@/pages/admin/appointments";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
+
+// Protected Route Component
+function ProtectedAdminRoute({ children }: { children: React.ReactNode }) {
+  const { isAdmin } = useAuth();
+  const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    if (!isAdmin) {
+      setLocation('/admin/login');
+    }
+  }, [isAdmin, setLocation]);
+
+  if (!isAdmin) return null;
+  return <>{children}</>;
+}
 
 function Router() {
   return (
     <Switch>
-      {/* Admin Routes */}
+      {/* Admin Login Route */}
       <Route path="/admin/login" component={AdminLogin} />
 
+      {/* Protected Admin Routes */}
       <Route path="/admin">
         {() => (
-          <AdminLayout title="Dashboard">
-            <ScrollToTop />
-            <AdminDashboard />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Dashboard">
+              <ScrollToTop />
+              <AdminDashboard />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
-      {/* Add proper route for admin appointments */}
       <Route path="/admin/appointments">
         {() => (
-          <AdminLayout title="Randevu Yönetimi">
-            <AdminAppointments />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Randevu Yönetimi">
+              <AdminAppointments />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/analytics">
         {() => (
-          <AdminLayout title="Analitikler">
-            <AdminAnalytics />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Analitikler">
+              <AdminAnalytics />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/seo">
         {() => (
-          <AdminLayout title="SEO Yönetimi">
-            <AdminSEO />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="SEO Yönetimi">
+              <AdminSEO />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/posts">
         {() => (
-          <AdminLayout title="Blog Yazıları">
-            <AdminPosts />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Blog Yazıları">
+              <AdminPosts />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/posts/new">
         {() => (
-          <AdminLayout title="Yeni Blog Yazısı">
-            <AdminPostNew />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Yeni Blog Yazısı">
+              <AdminPostNew />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/posts/:id">
         {(params) => (
-          <AdminLayout title="Blog Yazısı Düzenle">
-            <AdminPostEdit params={params} />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Blog Yazısı Düzenle">
+              <AdminPostEdit params={params} />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/products">
         {() => (
-          <AdminLayout title="Ürünler">
-            <AdminProducts />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Ürünler">
+              <AdminProducts />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/products/new">
         {() => (
-          <AdminLayout title="Yeni Ürün">
-            <AdminProductNew />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Yeni Ürün">
+              <AdminProductNew />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/products/:id">
         {(params) => (
-          <AdminLayout title="Ürün Düzenle">
-            <AdminProductEdit params={params} />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Ürün Düzenle">
+              <AdminProductEdit params={params} />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/before-after">
         {() => (
-          <AdminLayout title="Öncesi ve Sonrası">
-            <AdminBeforeAfter />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Öncesi ve Sonrası">
+              <AdminBeforeAfter />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/sliders">
         {() => (
-          <AdminLayout title="Slider Yönetimi">
-            <AdminSliders />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Slider Yönetimi">
+              <AdminSliders />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/media">
         {() => (
-          <AdminLayout title="Medya">
-            <AdminMedia />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Medya">
+              <AdminMedia />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/users">
         {() => (
-          <AdminLayout title="Kullanıcılar">
-            <AdminUsers />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Kullanıcılar">
+              <AdminUsers />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/notifications">
         {() => (
-          <AdminLayout title="Bildirimler">
-            <AdminNotifications />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Bildirimler">
+              <AdminNotifications />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/system">
         {() => (
-          <AdminLayout title="Sistem Durumu">
-            <AdminSystem />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Sistem Durumu">
+              <AdminSystem />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/settings">
         {() => (
-          <AdminLayout title="Ayarlar">
-            <AdminSettings />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Ayarlar">
+              <AdminSettings />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
 
       <Route path="/admin/email-templates">
         {() => (
-          <AdminLayout title="Email Şablonları">
-            <AdminEmailTemplates />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Email Şablonları">
+              <AdminEmailTemplates />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
       <Route path="/admin/services">
         {() => (
-          <AdminLayout title="Hizmetler">
-            <AdminServices />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Hizmetler">
+              <AdminServices />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
       <Route path="/admin/contact">
         {() => (
-          <AdminLayout title="İletişim Bilgileri">
-            <AdminContact />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="İletişim Bilgileri">
+              <AdminContact />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
       </Route>
-      <Route path="/admin/messages"> {/* Added Route */}
+      <Route path="/admin/messages">
         {() => (
-          <AdminLayout title="Mesajlar">
-            <AdminMessages />
-          </AdminLayout>
+          <ProtectedAdminRoute>
+            <AdminLayout title="Mesajlar">
+              <AdminMessages />
+            </AdminLayout>
+          </ProtectedAdminRoute>
         )}
-      </Route> {/* Added Route */}
+      </Route>
 
 
       {/* Public Routes */}
