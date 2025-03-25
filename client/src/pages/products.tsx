@@ -1,266 +1,80 @@
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Check, AlertCircle, Droplet, Clock, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Metadata } from "@/components/ui/metadata";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "@tanstack/react-query";
 
-const productCategories = [
+// Product categories structure
+const categories = [
   {
     id: "sampuanlar",
     titleKey: "products.categories.shampoos.title",
     descriptionKey: "products.categories.shampoos.description",
-    products: [
-      {
-        id: 1,
-        name: "Biotin Güçlendirici Şampuan",
-        description: "Saç ekimi sonrası kullanım için özel olarak geliştirilmiş biotin içerikli şampuan",
-        image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc",
-        hairType: ["Yağlı", "Normal", "Karma"],
-        usagePhase: "Saç ekimi sonrası 15. günden itibaren",
-        ingredients: [
-          "Biotin",
-          "Keratin",
-          "Panthenol",
-          "Aloe Vera",
-          "E Vitamini",
-          "Argan Yağı"
-        ],
-        benefits: [
-          "Saç köklerini güçlendirir",
-          "Yeni saç büyümesini destekler",
-          "Saç derisini nemlendirir",
-          "pH dengesini korur"
-        ],
-        instructions: [
-          "Saçınızı ılık su ile ıslatın",
-          "Az miktarda şampuan kullanın",
-          "Nazikçe masaj yapın",
-          "2-3 dakika bekletin",
-          "İyice durulayın"
-        ],
-        warnings: [
-          "Göz ile temasından kaçının",
-          "Yalnızca harici kullanım içindir",
-          "Tahriş durumunda kullanımı bırakın"
-        ]
-      },
-      {
-        id: 2,
-        name: "Keratin Onarıcı Şampuan",
-        description: "Yıpranmış saçlar için keratin protein kompleksi içeren özel formül",
-        image: "https://images.unsplash.com/photo-1619451334792-150fd785ee74",
-        hairType: ["Kuru", "Yıpranmış"],
-        usagePhase: "Saç ekimi sonrası 1. aydan itibaren",
-        ingredients: [
-          "Keratin Kompleksi",
-          "Silk Protein",
-          "Argan Yağı",
-          "Jojoba Yağı",
-          "B5 Vitamini",
-          "Collagen"
-        ],
-        benefits: [
-          "Saç tellerini onarır",
-          "Kırılmaları önler",
-          "Yumuşaklık sağlar",
-          "Elektriklenmeyi azaltır"
-        ],
-        instructions: [
-          "Saçı iyice ıslatın",
-          "Şampuanı saç boyuna uygulayın",
-          "3-4 dakika bekletin",
-          "Detaylıca durulayın"
-        ],
-        warnings: [
-          "Saç derisi hassasiyeti durumunda kullanmayın",
-          "Çocuklardan uzak tutun",
-          "Göz ile temasından kaçının"
-        ]
-      },
-      {
-        id: 3,
-        name: "Kafein Kompleks Şampuan",
-        description: "Saç büyümesini hızlandıran kafein ve bitki özleri içeren formül",
-        image: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e",
-        hairType: ["Tüm Saç Tipleri"],
-        usagePhase: "Saç ekimi sonrası 3. haftadan itibaren",
-        ingredients: [
-          "Kafein",
-          "Saw Palmetto",
-          "Biberiye Özü",
-          "Ginseng",
-          "Biotin",
-          "Niacinamide"
-        ],
-        benefits: [
-          "Saç büyümesini uyarır",
-          "Kan dolaşımını artırır",
-          "Saç köklerini besler",
-          "DHT blokeri etkisi gösterir"
-        ],
-        instructions: [
-          "Günlük kullanım için uygundur",
-          "Saç derisine masaj yaparak uygulayın",
-          "2 dakika bekletin",
-          "İyice durulayın"
-        ],
-        warnings: [
-          "Kafeine hassasiyeti olanlar kullanmamalıdır",
-          "Açık yaralara uygulamayın",
-          "Doktor kontrolünde kullanın"
-        ]
-      }
-    ]
   },
   {
     id: "serumlar",
     titleKey: "products.categories.serums.title",
     descriptionKey: "products.categories.serums.description",
-    products: [
-      {
-        id: 1,
-        name: "Peptit Kompleks Serum",
-        description: "Saç büyümesini hızlandıran ve güçlendiren peptit bazlı serum",
-        image: "https://images.unsplash.com/photo-1626784215021-2e39ccf971cd",
-        hairType: ["Tüm Saç Tipleri"],
-        usagePhase: "Saç ekimi sonrası 1. aydan itibaren",
-        ingredients: [
-          "Peptitler",
-          "Biotin",
-          "Kafein",
-          "Ginseng Özü",
-          "Hyaluronik Asit"
-        ],
-        benefits: [
-          "Saç büyümesini uyarır",
-          "Saç köklerini güçlendirir",
-          "Kan dolaşımını artırır",
-          "Saç dökülmesini azaltır"
-        ],
-        instructions: [
-          "Temiz saç derisine uygulayın",
-          "Her bölgeye 2-3 damla damlatın",
-          "Nazikçe masaj yapın",
-          "Günde 1-2 kez uygulayın"
-        ],
-        warnings: [
-          "Hamilelik ve emzirme döneminde kullanmayın",
-          "Alerjik reaksiyon durumunda kullanımı bırakın",
-          "Gözle temastan kaçının"
-        ]
-      },
-      {
-        id: 2,
-        name: "Yoğun Bakım Serum",
-        description: "Saç köklerini besleyen ve güçlendiren yoğun bakım serumu",
-        image: "https://images.unsplash.com/photo-1617897903246-719242758050",
-        hairType: ["İnce Telli", "Zayıf"],
-        usagePhase: "Saç ekimi sonrası 2. aydan itibaren",
-        ingredients: [
-          "Keratinöz Peptitler",
-          "Collagen",
-          "B5 Vitamini",
-          "E Vitamini",
-          "Argan Yağı"
-        ],
-        benefits: [
-          "Saç tellerini kalınlaştırır",
-          "Kırılmaları önler",
-          "Parlaklık sağlar",
-          "Saç yapısını güçlendirir"
-        ],
-        instructions: [
-          "Akşam uygulanması önerilir",
-          "4-5 damla kullanın",
-          "Saç diplerine masaj yapın",
-          "Durulamayın"
-        ],
-        warnings: [
-          "Yalnızca harici kullanım içindir",
-          "Güneş ışığından koruyun",
-          "Aşırı kullanımdan kaçının"
-        ]
-      },
-      {
-        id: 3,
-        name: "Canlandırıcı Saç Serumu",
-        description: "Doğal bitki özleri ile saç derisini canlandıran serum",
-        image: "https://images.unsplash.com/photo-1612817288484-6f916006741a",
-        hairType: ["Hassas", "Yıpranmış"],
-        usagePhase: "Saç ekimi sonrası 3. aydan itibaren",
-        ingredients: [
-          "Biberiye Özü",
-          "Aloe Vera",
-          "Mentol",
-          "Kafein",
-          "Panthenol"
-        ],
-        benefits: [
-          "Saç derisini canlandırır",
-          "Serinletici etki sağlar",
-          "Kaşıntıyı azaltır",
-          "Saç büyümesini destekler"
-        ],
-        instructions: [
-          "Sabah ve akşam uygulayın",
-          "Saç derisine masaj yapın",
-          "5 dakika bekletin",
-          "Durulamayın"
-        ],
-        warnings: [
-          "Hassas ciltlerde test edilmeli",
-          "Göz çevresine uygulamayın",
-          "Tahriş durumunda kullanmayın"
-        ]
-      }
-    ]
-  },
-  {
-    id: "maskeler",
-    titleKey: "products.categories.masks.title",
-    descriptionKey: "products.categories.masks.description",
-    products: [
-      // 6 adet maske eklenecek...
-    ]
   },
   {
     id: "vitaminler",
     titleKey: "products.categories.vitamins.title",
     descriptionKey: "products.categories.vitamins.description",
-    products: [
-      // 6 adet vitamin eklenecek...
-    ]
   },
   {
     id: "tonikler",
     titleKey: "products.categories.tonics.title",
     descriptionKey: "products.categories.tonics.description",
-    products: [
-      // 6 adet tonik eklenecek...
-    ]
   },
   {
     id: "kremler",
     titleKey: "products.categories.creams.title",
     descriptionKey: "products.categories.creams.description",
-    products: [
-      // 6 adet krem eklenecek...
-    ]
   }
 ];
 
 export default function Products() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedHairType, setSelectedHairType] = useState<string[]>([]);
-  const [selectedPhase, setSelectedPhase] = useState<string[]>([]);
   const { t } = useTranslation('common');
+
+  // Fetch products from API
+  const { data: products = [], isLoading } = useQuery({
+    queryKey: ['/api/products'],
+    queryFn: async () => {
+      const response = await fetch('/api/products');
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+      const data = await response.json();
+      console.log('Fetched products:', data); // Debug log
+      return data;
+    }
+  });
+
+  // Group products by category
+  const productsByCategory = products.reduce((acc: any, product: any) => {
+    const category = product.category?.toLowerCase() || 'other';
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(product);
+    return acc;
+  }, {});
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -308,7 +122,7 @@ export default function Products() {
         <Tabs defaultValue="sampuanlar" className="w-full">
           <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-4 border-b">
             <TabsList className="flex flex-wrap justify-center gap-2">
-              {productCategories.map((category) => (
+              {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
@@ -320,15 +134,15 @@ export default function Products() {
             </TabsList>
           </div>
 
-          {productCategories.map((category) => (
+          {categories.map((category) => (
             <TabsContent key={category.id} value={category.id}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
-                {category.products
-                  .filter(product =>
+                {(productsByCategory[category.id] || [])
+                  .filter((product: any) =>
                     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     product.description.toLowerCase().includes(searchTerm.toLowerCase())
                   )
-                  .map((product) => (
+                  .map((product: any) => (
                     <motion.div
                       key={product.id}
                       initial={{ opacity: 0, y: 20 }}
@@ -341,18 +155,16 @@ export default function Products() {
                             <CardContent className="p-4">
                               <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 mb-4">
                                 <img
-                                  src={product.image}
+                                  src={product.images?.[0] || product.image_url}
                                   alt={product.name}
                                   className="w-full h-full object-contain"
                                 />
                               </div>
                               <div className="space-y-2">
                                 <div className="flex flex-wrap gap-1">
-                                  {product.hairType.map((type) => (
-                                    <Badge key={type} variant="secondary" className="text-xs">
-                                      {t(`products.product.hairTypes.${type.toLowerCase()}`)}
-                                    </Badge>
-                                  ))}
+                                  <Badge variant="secondary" className="text-xs">
+                                    {product.category}
+                                  </Badge>
                                 </div>
                                 <h3 className="font-semibold">{product.name}</h3>
                                 <p className="text-sm text-muted-foreground line-clamp-2">
@@ -370,96 +182,57 @@ export default function Products() {
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-8">
                               <img
-                                src={product.image}
+                                src={product.images?.[0] || product.image_url}
                                 alt={product.name}
                                 className="w-full h-full object-contain"
                               />
                             </div>
                             <div className="space-y-6">
                               <div>
-                                <Badge variant="outline" className="mb-2">
-                                  {product.usagePhase}
-                                </Badge>
                                 <p className="text-muted-foreground">
-                                  {product.description}
+                                  {product.long_description || product.description}
                                 </p>
                               </div>
 
-                              <div>
-                                <h4 className="font-semibold flex items-center gap-2 mb-3">
-                                  <Droplet className="h-5 w-5 text-primary" />
-                                  {t('products.product.ingredients')}
-                                </h4>
-                                <ul className="grid grid-cols-2 gap-2">
-                                  {product.ingredients.map((ingredient, idx) => (
-                                    <li key={idx} className="flex items-center gap-2 text-sm">
-                                      <Check className="h-4 w-4 text-green-500" />
-                                      {ingredient}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
+                              {product.specifications && (
+                                <div>
+                                  <h4 className="font-semibold flex items-center gap-2 mb-3">
+                                    <Droplet className="h-5 w-5 text-primary" />
+                                    {t('products.product.ingredients')}
+                                  </h4>
+                                  <ul className="grid grid-cols-2 gap-2">
+                                    {Object.entries(product.specifications).map(([key, value]: [string, any]) => (
+                                      <li key={key} className="flex items-center gap-2 text-sm">
+                                        <Check className="h-4 w-4 text-green-500" />
+                                        {value}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
 
-                              <Accordion type="single" collapsible className="w-full">
-                                <AccordionItem value="benefits">
-                                  <AccordionTrigger>
-                                    <span className="flex items-center gap-2">
-                                      <Check className="h-5 w-5 text-primary" />
-                                      {t('products.product.benefits')}
-                                    </span>
-                                  </AccordionTrigger>
-                                  <AccordionContent>
-                                    <ul className="space-y-2">
-                                      {product.benefits.map((benefit, idx) => (
-                                        <li key={idx} className="flex items-center gap-2 text-sm">
-                                          <Check className="h-4 w-4 text-green-500" />
-                                          {benefit}
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </AccordionContent>
-                                </AccordionItem>
-
-                                <AccordionItem value="instructions">
-                                  <AccordionTrigger>
-                                    <span className="flex items-center gap-2">
-                                      <Clock className="h-5 w-5 text-primary" />
-                                      {t('products.product.instructions')}
-                                    </span>
-                                  </AccordionTrigger>
-                                  <AccordionContent>
-                                    <ol className="space-y-2">
-                                      {product.instructions.map((instruction, idx) => (
-                                        <li key={idx} className="flex items-center gap-2 text-sm">
-                                          <span className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs flex-shrink-0">
-                                            {idx + 1}
-                                          </span>
-                                          {instruction}
-                                        </li>
-                                      ))}
-                                    </ol>
-                                  </AccordionContent>
-                                </AccordionItem>
-
-                                <AccordionItem value="warnings">
-                                  <AccordionTrigger>
-                                    <span className="flex items-center gap-2">
-                                      <AlertCircle className="h-5 w-5 text-primary" />
-                                      {t('products.product.warnings')}
-                                    </span>
-                                  </AccordionTrigger>
-                                  <AccordionContent>
-                                    <ul className="space-y-2">
-                                      {product.warnings.map((warning, idx) => (
-                                        <li key={idx} className="flex items-center gap-2 text-sm text-red-600">
-                                          <AlertCircle className="h-4 w-4" />
-                                          {warning}
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </AccordionContent>
-                                </AccordionItem>
-                              </Accordion>
+                              {product.benefits && (
+                                <Accordion type="single" collapsible className="w-full">
+                                  <AccordionItem value="benefits">
+                                    <AccordionTrigger>
+                                      <span className="flex items-center gap-2">
+                                        <Check className="h-5 w-5 text-primary" />
+                                        {t('products.product.benefits')}
+                                      </span>
+                                    </AccordionTrigger>
+                                    <AccordionContent>
+                                      <ul className="space-y-2">
+                                        {product.benefits.map((benefit: string, idx: number) => (
+                                          <li key={idx} className="flex items-center gap-2 text-sm">
+                                            <Check className="h-4 w-4 text-green-500" />
+                                            {benefit}
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </AccordionContent>
+                                  </AccordionItem>
+                                </Accordion>
+                              )}
                             </div>
                           </div>
                         </DialogContent>
