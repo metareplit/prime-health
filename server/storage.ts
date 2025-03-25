@@ -6,10 +6,7 @@ import {
   settings,
   services,
   messages,
-  patientImages,
-  appointments,
-  emailTemplates,
-  beforeAfter,
+  sliders,
   type User,
   type Post,
   type Product,
@@ -17,10 +14,7 @@ import {
   type Setting,
   type Service,
   type Message,
-  type PatientImage,
-  type Appointment,
-  type EmailTemplate,
-  type BeforeAfter,
+  type Slider,
   type InsertUser,
   type InsertPost,
   type InsertProduct,
@@ -28,12 +22,6 @@ import {
   type InsertSetting,
   type InsertService,
   type InsertMessage,
-  type InsertPatientImage,
-  type InsertAppointment,
-  type InsertEmailTemplate,
-  type InsertBeforeAfter,
-  sliders,
-  type Slider,
   type InsertSlider,
   defaultSettings,
 } from "@shared/schema";
@@ -45,14 +33,11 @@ import connectPg from "connect-pg-simple";
 const PostgresSessionStore = connectPg(session);
 
 export interface IStorage {
-  // User methods
+  // User methods (only for admin)
   getUser(id: number): Promise<User | undefined>;
-  getUserById(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   updateUser(id: number, data: Partial<User>): Promise<User>;
-  authenticateUser(username: string, password: string): Promise<User | null>;
-  getUserByEmail(email: string): Promise<User | undefined>;
 
   // Posts methods
   getPosts(): Promise<Post[]>;
@@ -91,35 +76,11 @@ export interface IStorage {
   updateServiceOrder(id: number, order: number): Promise<Service>;
   getService(id: number): Promise<Service | undefined>;
 
-
   // Messages methods
-  getUserMessages(userId: number): Promise<Message[]>;
   createMessage(message: InsertMessage): Promise<Message>;
-
-  // Patient Images methods
-  getPatientImages(patientId: number): Promise<PatientImage[]>;
-  createPatientImage(image: InsertPatientImage): Promise<PatientImage>;
-
-  // Appointments methods
-  getUserAppointments(userId: number): Promise<Appointment[]>;
-  createAppointment(appointment: InsertAppointment): Promise<Appointment>;
-  updateAppointmentStatus(id: number, status: string): Promise<Appointment>;
-  getAllAppointments(): Promise<Appointment[]>;
-  getAppointment(id: number): Promise<Appointment | undefined>;
-  updateAppointment(id: number, data: Partial<Appointment>): Promise<Appointment>;
-
-  // Email Template methods
-  getAllEmailTemplates(): Promise<EmailTemplate[]>;
-  createEmailTemplate(template: InsertEmailTemplate): Promise<EmailTemplate>;
-  updateEmailTemplate(id: number, data: Partial<EmailTemplate>): Promise<EmailTemplate>;
-  deleteEmailTemplate(id: number): Promise<void>;
-
-  // Before After methods
-  getAllBeforeAfter(): Promise<BeforeAfter[]>;
-  getBeforeAfterById(id: number): Promise<BeforeAfter | undefined>;
-  createBeforeAfter(data: InsertBeforeAfter): Promise<BeforeAfter>;
-  updateBeforeAfter(id: number, data: Partial<BeforeAfter>): Promise<BeforeAfter>;
-  deleteBeforeAfter(id: number): Promise<void>;
+  getMessages(): Promise<Message[]>;
+  getMessageById(id: number): Promise<Message | undefined>;
+  updateMessageStatus(id: number, isRead: boolean): Promise<Message>;
 
   // Slider methods
   getAllSliders(): Promise<Slider[]>;
@@ -128,11 +89,12 @@ export interface IStorage {
   updateSlider(id: number, data: Partial<Slider>): Promise<Slider>;
   deleteSlider(id: number): Promise<void>;
   updateSliderOrder(id: number, order: number): Promise<Slider>;
-  sessionStore: any;
+
+  sessionStore: session.Store;
 }
 
 export class DatabaseStorage implements IStorage {
-  sessionStore: any;
+  sessionStore: session.Store;
 
   constructor() {
     this.sessionStore = new PostgresSessionStore({
@@ -142,17 +104,11 @@ export class DatabaseStorage implements IStorage {
       createTableIfMissing: true,
     });
 
-    // Initialize default settings on startup
     this.initializeDefaultSettings().catch(console.error);
   }
 
   // User methods
   async getUser(id: number): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user;
-  }
-
-  async getUserById(id: number): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id));
     return user;
   }
@@ -174,22 +130,6 @@ export class DatabaseStorage implements IStorage {
       .where(eq(users.id, id))
       .returning();
     return updatedUser;
-  }
-
-  async authenticateUser(username: string, password: string): Promise<User | null> {
-    const user = await this.getUserByUsername(username);
-    if (!user || user.password !== password) return null;
-    return user;
-  }
-
-  async getUserByEmail(email: string): Promise<User | undefined> {
-    try {
-      const [user] = await db.select().from(users).where(eq(users.email, email));
-      return user;
-    } catch (error) {
-      console.error('Error in getUserByEmail:', error);
-      return undefined;
-    }
   }
 
   // Posts methods
@@ -302,7 +242,6 @@ export class DatabaseStorage implements IStorage {
       const existing = await this.getSettingByKey(key);
 
       if (!existing) {
-        // If setting doesn't exist, create it
         const [newSetting] = await db.insert(settings)
           .values({
             key,
@@ -316,7 +255,6 @@ export class DatabaseStorage implements IStorage {
         return newSetting;
       }
 
-      // Update existing setting
       const [updatedSetting] = await db
         .update(settings)
         .set({ value, updatedAt: new Date() })
@@ -402,164 +340,27 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Messages methods
-  async getUserMessages(userId: number): Promise<Message[]> {
-    return await db
-      .select()
-      .from(messages)
-      .where(eq(messages.senderId, userId));
-  }
-
   async createMessage(message: InsertMessage): Promise<Message> {
     const [newMessage] = await db.insert(messages).values(message).returning();
     return newMessage;
   }
 
-  // Patient Images methods
-  async getPatientImages(patientId: number): Promise<PatientImage[]> {
-    return await db
-      .select()
-      .from(patientImages)
-      .where(eq(patientImages.patientId, patientId));
+  async getMessages(): Promise<Message[]> {
+    return await db.select().from(messages).orderBy(messages.createdAt);
   }
 
-  async createPatientImage(image: InsertPatientImage): Promise<PatientImage> {
-    const [newImage] = await db.insert(patientImages).values(image).returning();
-    return newImage;
+  async getMessageById(id: number): Promise<Message | undefined> {
+    const [message] = await db.select().from(messages).where(eq(messages.id, id));
+    return message;
   }
 
-  // Appointments methods
-  async getUserAppointments(userId: number): Promise<Appointment[]> {
-    try {
-      const result = await db
-        .select()
-        .from(appointments)
-        .where(eq(appointments.patientId, userId))
-        .orderBy(appointments.createdAt);
-
-      console.log('Fetched user appointments:', result);
-      return result;
-    } catch (error) {
-      console.error('Error in getUserAppointments:', error);
-      throw error;
-    }
-  }
-
-  async createAppointment(appointment: InsertAppointment): Promise<Appointment> {
-    try {
-      console.log('Creating appointment with data:', appointment);
-      const [newAppointment] = await db
-        .insert(appointments)
-        .values(appointment)
-        .returning();
-
-      console.log('Created appointment:', newAppointment);
-      return newAppointment;
-    } catch (error) {
-      console.error('Error in createAppointment:', error);
-      throw error;
-    }
-  }
-
-  async updateAppointmentStatus(id: number, status: string): Promise<Appointment> {
-    const [updatedAppointment] = await db
-      .update(appointments)
-      .set({ status })
-      .where(eq(appointments.id, id))
+  async updateMessageStatus(id: number, isRead: boolean): Promise<Message> {
+    const [updatedMessage] = await db
+      .update(messages)
+      .set({ isRead, readAt: isRead ? new Date() : null })
+      .where(eq(messages.id, id))
       .returning();
-    return updatedAppointment;
-  }
-
-  async getAllAppointments(): Promise<Appointment[]> {
-    try {
-      const result = await db
-        .select()
-        .from(appointments)
-        .orderBy(appointments.createdAt);
-
-      console.log('Fetched all appointments:', result);
-      return result;
-    } catch (error) {
-      console.error('Error in getAllAppointments:', error);
-      throw error;
-    }
-  }
-
-  async updateAppointment(id: number, data: Partial<Appointment>): Promise<Appointment> {
-    const [updatedAppointment] = await db
-      .update(appointments)
-      .set(data)
-      .where(eq(appointments.id, id))
-      .returning();
-    return updatedAppointment;
-  }
-  async getAppointment(id: number): Promise<Appointment | undefined> {
-    try {
-      const [appointment] = await db
-        .select()
-        .from(appointments)
-        .where(eq(appointments.id, id));
-      return appointment;
-    } catch (error) {
-      console.error('Error in getAppointment:', error);
-      throw error;
-    }
-  }
-
-  // Email Template methods
-  async getAllEmailTemplates(): Promise<EmailTemplate[]> {
-    return await db.select().from(emailTemplates);
-  }
-
-  async createEmailTemplate(template: InsertEmailTemplate): Promise<EmailTemplate> {
-    const [newTemplate] = await db.insert(emailTemplates).values(template).returning();
-    return newTemplate;
-  }
-
-  async updateEmailTemplate(id: number, data: Partial<EmailTemplate>): Promise<EmailTemplate> {
-    const [updatedTemplate] = await db
-      .update(emailTemplates)
-      .set(data)
-      .where(eq(emailTemplates.id, id))
-      .returning();
-    return updatedTemplate;
-  }
-
-  async deleteEmailTemplate(id: number): Promise<void> {
-    await db.delete(emailTemplates).where(eq(emailTemplates.id, id));
-  }
-
-  // Before After methods
-  async getAllBeforeAfter(): Promise<BeforeAfter[]> {
-    return await db.select().from(beforeAfter).orderBy(beforeAfter.createdAt);
-  }
-
-  async getBeforeAfterById(id: number): Promise<BeforeAfter | undefined> {
-    const [item] = await db
-      .select()
-      .from(beforeAfter)
-      .where(eq(beforeAfter.id, id));
-    return item;
-  }
-
-  async createBeforeAfter(data: InsertBeforeAfter): Promise<BeforeAfter> {
-    const [newItem] = await db
-      .insert(beforeAfter)
-      .values(data)
-      .returning();
-    return newItem;
-  }
-
-  async updateBeforeAfter(id: number, data: Partial<BeforeAfter>): Promise<BeforeAfter> {
-    const [updatedItem] = await db
-      .update(beforeAfter)
-      .set({ ...data, updatedAt: new Date() })
-      .where(eq(beforeAfter.id, id))
-      .returning();
-    return updatedItem;
-  }
-
-  async deleteBeforeAfter(id: number): Promise<void> {
-    await db.delete(beforeAfter).where(eq(beforeAfter.id, id));
+    return updatedMessage;
   }
 
   // Slider methods

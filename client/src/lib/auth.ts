@@ -21,17 +21,21 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 function useLoginMutation() {
   const { toast } = useToast();
-  
+
   return useMutation({
     mutationFn: async (credentials: LoginCredentials) => {
       const response = await apiRequest("POST", "/api/auth/login", credentials);
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.message || "Login failed");
+        throw new Error(error.message || "Giriş başarısız");
       }
       return response.json();
     },
     onSuccess: (user: User) => {
+      // Sadece admin rolünü kabul et
+      if (user.role !== "admin") {
+        throw new Error("Bu panel sadece yöneticiler içindir");
+      }
       queryClient.setQueryData(["/api/auth/user"], user);
       toast({
         title: "Giriş başarılı",
@@ -49,10 +53,27 @@ function useLoginMutation() {
 }
 
 function useLogoutMutation() {
+  const { toast } = useToast();
   return useMutation({
     mutationFn: async () => {
-      await apiRequest("POST", "/api/auth/logout");
+      const response = await apiRequest("POST", "/api/auth/logout");
+      if (!response.ok) {
+        throw new Error("Çıkış yapılamadı");
+      }
       queryClient.setQueryData(["/api/auth/user"], null);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Çıkış başarılı",
+        description: "Güvenli bir şekilde çıkış yaptınız",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        variant: "destructive",
+        title: "Çıkış başarısız",
+        description: error.message,
+      });
     },
   });
 }
@@ -88,7 +109,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error("useAuth hook AuthProvider içinde kullanılmalıdır");
   }
   return context;
 }

@@ -1,9 +1,7 @@
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
-import { setupTelegramWebhook } from './services/telegram';
 import { 
-  insertAppointmentSchema, 
   insertPostSchema,
   insertSliderSchema
 } from "@shared/schema";
@@ -13,7 +11,7 @@ import express from 'express';
 import rateLimit from 'express-rate-limit';
 import multer from 'multer';
 import type { Request, Response } from "express";
-import { hashPassword } from './auth'; // Added import statement
+import { hashPassword } from './auth';
 
 // Multer setup
 const upload = multer({
@@ -42,22 +40,6 @@ const upload = multer({
 export async function registerRoutes(app: Express) {
   // Trust proxy - required for rate limiting behind reverse proxy
   app.set('trust proxy', 1);
-
-  // Telegram webhook setup - özel bir yol ile webhook'u başlat
-  const webhookPath = '/telegram-webhook';
-  const bot = setupTelegramWebhook(app, webhookPath);
-
-  // Webhook URL'sini ayarla
-  if (process.env.NODE_ENV === 'production') {
-    const domain = process.env.DOMAIN || 'your-domain.com';
-    await bot.telegram.setWebhook(`https://${domain}${webhookPath}`);
-    console.log('Telegram webhook set for production');
-  } else {
-    // Development ortamında webhook'u devre dışı bırak, polling kullan
-    await bot.telegram.deleteWebhook();
-    bot.launch().catch(console.error);
-    console.log('Telegram bot started in polling mode for development');
-  }
 
   // Rate limiting configuration
   const limiter = rateLimit({
@@ -89,7 +71,6 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-
   // Products endpoints
   app.get("/api/products", async (_req: Request, res: Response) => {
     try {
@@ -110,21 +91,10 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Appointments endpoints with improved Telegram integration
-  app.get("/api/appointments", adminAuth, async (req: Request, res: Response) => {
-    try {
-      const appointments = await storage.getAllAppointments();
-      res.json(appointments);
-    } catch (error) {
-      console.error('Error fetching appointments:', error);
-      res.status(500).json({ message: "Randevular alınırken bir hata oluştu" });
-    }
-  });
-
   // Slider endpoints
   app.get("/api/sliders", async (_req: Request, res: Response) => {
     try {
-      const sliders = await storage.getSliders();
+      const sliders = await storage.getAllSliders();
       res.json(sliders);
     } catch (error) {
       res.status(500).json({ message: "Slider verileri alınırken bir hata oluştu" });
@@ -137,7 +107,7 @@ export async function registerRoutes(app: Express) {
       const slider = await storage.createSlider(sliderData);
       res.status(201).json(slider);
     } catch (error) {
-      const validationError = fromZodError(error);
+      const validationError = fromZodError(error as any);
       res.status(400).json({ message: validationError.message });
     }
   });
@@ -159,10 +129,7 @@ export async function registerRoutes(app: Express) {
         firstName: "Admin",
         lastName: "User",
         email: "admin@primehealth.com",
-        phone: "+905555555555",
         role: "admin",
-        dateOfBirth: new Date("1990-01-01"),
-        gender: "other"
       });
 
       res.status(201).json({ message: "Admin user created successfully" });

@@ -1,5 +1,4 @@
 import express, { type Request, Response, NextFunction } from "express";
-import session from "express-session";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { storage } from "./storage";
@@ -61,54 +60,54 @@ app.use((req, res, next) => {
 // Main application setup
 (async () => {
   try {
-    log('Starting server initialization...');
+    log('Sunucu başlatılıyor...');
 
     // Register routes first
-    log('Registering routes...');
+    log('API rotaları kaydediliyor...');
     const server = await registerRoutes(app);
-    log('Routes registered successfully');
+    log('API rotaları başarıyla kaydedildi');
 
     // Create public directory if it doesn't exist
     const publicDir = path.join(__dirname, 'public');
     if (!fs.existsSync(publicDir)) {
       fs.mkdirSync(publicDir, { recursive: true });
-      log('Created public directory');
+      log('Public dizini oluşturuldu');
     }
 
     // Development modunda Vite HMR kullan
     if (process.env.NODE_ENV !== 'production') {
-      log('Setting up Vite development server...');
+      log('Vite geliştirme sunucusu ayarlanıyor...');
       await setupVite(app, server);
-      log('Vite development server configured');
+      log('Vite geliştirme sunucusu yapılandırıldı');
     } else {
       // Production modunda static file serving kullan
-      log('Setting up static file serving...');
+      log('Statik dosya sunumu ayarlanıyor...');
       serveStatic(app);
-      log('Static file serving configured');
+      log('Statik dosya sunumu yapılandırıldı');
     }
 
     // Error handling middleware
     app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-      console.error('Server error:', err);
+      console.error('Sunucu hatası:', err);
       const status = err.status || err.statusCode || 500;
-      const message = err.message || "Internal Server Error";
+      const message = err.message || "Sunucu Hatası";
       res.status(status).json({ message });
     });
 
     // Start server
-    const port = 5000;
-    log(`Attempting to start server on port ${port}...`);
+    const port = process.env.PORT || 5000;
+    log(`Sunucu ${port} portunda başlatılıyor...`);
 
     server.listen({
       port,
       host: "0.0.0.0",
       reusePort: true,
     }, () => {
-      log(`Server successfully started and listening on port ${port}`);
+      log(`Sunucu başarıyla başlatıldı ve ${port} portunu dinliyor`);
     });
 
   } catch (error) {
-    console.error('Failed to start server:', error);
+    console.error('Sunucu başlatılamadı:', error);
     process.exit(1);
   }
 })();
