@@ -144,13 +144,13 @@ export default function Products() {
       <section className="container mx-auto px-4 py-6 md:py-8">
         <Tabs defaultValue="all" className="w-full" value={selectedCategory} onValueChange={setSelectedCategory}>
           <div>
-            <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 p-0 bg-transparent">
+            <TabsList className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 p-0 bg-transparent">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
                   className={cn(
-                    "flex flex-col items-center gap-2 p-4 h-auto transition-all duration-200",
+                    "flex flex-col items-center gap-2 p-4 md:p-6 h-auto transition-all duration-200",
                     "data-[state=active]:bg-primary/10 hover:bg-primary/5",
                     "rounded-xl border border-transparent hover:border-primary/20",
                     "relative overflow-hidden group min-h-[120px] md:min-h-[140px]"
@@ -160,19 +160,19 @@ export default function Products() {
                     "absolute inset-0 opacity-5 transition-opacity group-hover:opacity-10",
                     category.color
                   )} />
-                  <div className="relative z-10 flex flex-col items-center gap-2">
+                  <div className="relative z-10 flex flex-col items-center gap-3 w-full">
                     <div className={cn(
                       "p-3 rounded-full transition-colors",
                       "group-hover:bg-primary/10",
                       "data-[state=active]:bg-primary/20"
                     )}>
-                      <category.icon className="h-6 w-6 md:h-8 md:w-8" />
+                      <category.icon className="h-7 w-7 md:h-8 md:w-8" />
                     </div>
-                    <div className="text-center">
-                      <span className="font-medium block">
+                    <div className="text-center space-y-1 w-full px-2">
+                      <span className="font-medium block text-base truncate">
                         {isMobile ? category.shortTitle : category.title}
                       </span>
-                      <span className="text-xs text-muted-foreground block mt-1 line-clamp-2">
+                      <span className="text-sm text-muted-foreground block line-clamp-2 min-h-[2.5rem]">
                         {category.description}
                       </span>
                     </div>
