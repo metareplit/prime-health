@@ -77,7 +77,7 @@ export default function Products() {
   };
 
   // Yıldız puanı gösterimi için yardımcı fonksiyon
-  const renderStars = (rating: number) => {
+  const renderStars = (rating: number = 5) => {
     return (
       <div className="flex items-center gap-1">
         {[...Array(5)].map((_, i) => (
@@ -197,7 +197,7 @@ export default function Products() {
                                 </p>
                                 <div className="flex items-center justify-between">
                                   <p className="font-semibold text-primary">
-                                    {product.price?.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' })}
+                                    {product.price ? product.price.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' }) : ''}
                                   </p>
                                   {product.stock > 0 ? (
                                     <Badge variant="outline" className="text-green-500">Stokta</Badge>
@@ -205,9 +205,9 @@ export default function Products() {
                                     <Badge variant="outline" className="text-red-500">Tükendi</Badge>
                                   )}
                                 </div>
-                                {renderStars(product.ratings)}
+                                {renderStars(product.ratings || 5)}
                                 <p className="text-sm text-muted-foreground">
-                                  {product.review_count} değerlendirme
+                                  {product.review_count || 0} değerlendirme
                                 </p>
                               </div>
                             </CardContent>
@@ -233,7 +233,7 @@ export default function Products() {
                                 </p>
                                 <div className="flex items-center justify-between mb-4">
                                   <p className="text-2xl font-bold text-primary">
-                                    {product.price?.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' })}
+                                    {product.price ? product.price.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' }) : ''}
                                   </p>
                                   {product.stock > 0 ? (
                                     <Badge variant="outline" className="text-green-500">Stokta: {product.stock}</Badge>
@@ -241,9 +241,9 @@ export default function Products() {
                                     <Badge variant="outline" className="text-red-500">Tükendi</Badge>
                                   )}
                                 </div>
-                                {renderStars(product.ratings)}
+                                {renderStars(product.ratings || 5)}
                                 <p className="text-sm text-muted-foreground">
-                                  {product.review_count} değerlendirme
+                                  {product.review_count || 0} değerlendirme
                                 </p>
                               </div>
 
@@ -280,7 +280,7 @@ export default function Products() {
                               {/* Sepete Ekle Butonu */}
                               <button
                                 className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors"
-                                disabled={product.stock <= 0}
+                                disabled={!product.stock || product.stock <= 0}
                               >
                                 <ShoppingCart className="h-4 w-4" />
                                 {product.stock > 0 ? 'Sepete Ekle' : 'Tükendi'}
