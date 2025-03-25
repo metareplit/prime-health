@@ -15,30 +15,35 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
+async function handleResponse(response: Response) {
+  const contentType = response.headers.get("content-type");
+  if (!contentType || !contentType.includes("application/json")) {
+    // If response is not JSON, throw error with appropriate message
+    throw new Error("Sunucu yanıtı geçersiz. Lütfen daha sonra tekrar deneyin.");
+  }
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || 'İşlem başarısız');
+  }
+  return data;
+}
+
 function useLoginMutation() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
 
   return useMutation({
     mutationFn: async ({ username, password }: { username: string; password: string }) => {
-      const res = await fetch('/api/auth/login', {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
-        credentials: 'include' // Important for session cookies
+        credentials: 'include'
       });
-
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.message || 'Giriş başarısız');
-      }
-
-      const user = await res.json();
-      return user;
+      return handleResponse(response);
     },
     onSuccess: (user) => {
       queryClient.setQueryData(['/api/user/profile'], user);
-      // Admin users should be redirected to admin dashboard
       if (user.role === 'admin') {
         setLocation('/admin');
       } else {
@@ -65,20 +70,13 @@ function useRegisterMutation() {
 
   return useMutation({
     mutationFn: async (userData: Partial<User>) => {
-      const res = await fetch('/api/auth/register', {
+      const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
         credentials: 'include'
       });
-
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.message || 'Kayıt başarısız');
-      }
-
-      const user = await res.json();
-      return user;
+      return handleResponse(response);
     },
     onSuccess: (user) => {
       queryClient.setQueryData(['/api/user/profile'], user);
@@ -104,15 +102,11 @@ function useLogoutMutation() {
 
   return useMutation({
     mutationFn: async () => {
-      const res = await fetch('/api/auth/logout', { 
+      const response = await fetch('/api/auth/logout', {
         method: 'POST',
         credentials: 'include'
       });
-
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.message || 'Çıkış başarısız');
-      }
+      return handleResponse(response);
     },
     onSuccess: () => {
       queryClient.setQueryData(['/api/user/profile'], null);
@@ -140,43 +134,38 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     queryKey: ['/api/user/profile'],
     queryFn: async () => {
       try {
-        const res = await fetch('/api/user/profile', {
+        const response = await fetch('/api/user/profile', {
           credentials: 'include'
         });
-        if (!res.ok) {
-          if (res.status !== 401) {
-            const error = await res.json();
-            toast({
-              title: "Oturum hatası",
-              description: error.message,
-              variant: "destructive",
-            });
-          }
+        if (response.status === 401) {
           return null;
         }
-        return res.json();
+        return handleResponse(response);
       } catch (error) {
         console.error('Profile fetch error:', error);
+        if (error instanceof Error) {
+          toast({
+            title: "Oturum hatası",
+            description: error.message,
+            variant: "destructive",
+          });
+        }
         return null;
       }
     },
   });
-
-  const loginMutation = useLoginMutation();
-  const registerMutation = useRegisterMutation();
-  const logoutMutation = useLogoutMutation();
 
   useEffect(() => {
     setIsLoading(queryLoading);
   }, [queryLoading]);
 
   return (
-    <AuthContext.Provider value={{ 
+    <AuthContext.Provider value={{
       user: user ?? null,
       loading: isLoading,
-      loginMutation,
-      registerMutation,
-      logoutMutation
+      loginMutation: useLoginMutation(),
+      registerMutation: useRegisterMutation(),
+      logoutMutation: useLogoutMutation()
     }}>
       {children}
     </AuthContext.Provider>
