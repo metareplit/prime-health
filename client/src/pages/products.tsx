@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Star, Package, Sprout, Pill, FlaskConical, Check, Search, ShoppingCart } from "lucide-react";
+import { Package, Sprout, Pill, FlaskConical, Check, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
@@ -76,23 +76,6 @@ export default function Products() {
     });
   };
 
-  // Yıldız puanı gösterimi için yardımcı fonksiyon
-  const renderStars = (rating: number = 5) => {
-    return (
-      <div className="flex items-center gap-1">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            className={cn(
-              "h-4 w-4",
-              i < Math.floor(rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
-            )}
-          />
-        ))}
-        <span className="text-sm text-muted-foreground ml-1">({rating.toFixed(1)})</span>
-      </div>
-    );
-  };
 
   if (isLoading) {
     return (
@@ -195,20 +178,6 @@ export default function Products() {
                                 <p className="text-sm text-muted-foreground line-clamp-2">
                                   {product.description}
                                 </p>
-                                <div className="flex items-center justify-between">
-                                  <p className="font-semibold text-primary">
-                                    {product.price ? product.price.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' }) : ''}
-                                  </p>
-                                  {product.stock > 0 ? (
-                                    <Badge variant="outline" className="text-green-500">Stokta</Badge>
-                                  ) : (
-                                    <Badge variant="outline" className="text-red-500">Tükendi</Badge>
-                                  )}
-                                </div>
-                                {renderStars(product.ratings || 5)}
-                                <p className="text-sm text-muted-foreground">
-                                  {product.review_count || 0} değerlendirme
-                                </p>
                               </div>
                             </CardContent>
                           </Card>
@@ -230,20 +199,6 @@ export default function Products() {
                               <div>
                                 <p className="text-muted-foreground mb-4">
                                   {product.description}
-                                </p>
-                                <div className="flex items-center justify-between mb-4">
-                                  <p className="text-2xl font-bold text-primary">
-                                    {product.price ? product.price.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' }) : ''}
-                                  </p>
-                                  {product.stock > 0 ? (
-                                    <Badge variant="outline" className="text-green-500">Stokta: {product.stock}</Badge>
-                                  ) : (
-                                    <Badge variant="outline" className="text-red-500">Tükendi</Badge>
-                                  )}
-                                </div>
-                                {renderStars(product.ratings || 5)}
-                                <p className="text-sm text-muted-foreground">
-                                  {product.review_count || 0} değerlendirme
                                 </p>
                               </div>
 
@@ -276,15 +231,6 @@ export default function Products() {
                                   </ul>
                                 </div>
                               )}
-
-                              {/* Sepete Ekle Butonu */}
-                              <button
-                                className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors"
-                                disabled={!product.stock || product.stock <= 0}
-                              >
-                                <ShoppingCart className="h-4 w-4" />
-                                {product.stock > 0 ? 'Sepete Ekle' : 'Tükendi'}
-                              </button>
                             </div>
                           </div>
                         </DialogContent>
