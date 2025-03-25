@@ -63,11 +63,11 @@ export default function DoctorSection() {
           >
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-2">Dr. Ali Çalışkan</h2>
-              <p className="text-lg text-primary font-medium">Saç Ekimi ve Estetik Cerrahi Uzmanı</p>
+              <p className="text-lg text-primary font-medium">Saç Ekim Uzmanı</p>
             </div>
 
             <p className="text-gray-600">
-              20 yılı aşkın deneyimi ile saç ekimi ve estetik cerrahi alanında uzmanlaşmış, 
+              10 yılı aşkın deneyimi ile saç ekimi ve estetik cerrahi alanında uzmanlaşmış, 
               binlerce başarılı operasyona imza atmış değerli bir hekimdir.
             </p>
 
@@ -76,13 +76,13 @@ export default function DoctorSection() {
                 <Award className="h-5 w-5 text-primary flex-shrink-0" />
                 <div>
                   <h4 className="font-medium text-sm">Uzman Hekim</h4>
-                  <p className="text-xs text-gray-600">20+ Yıl Deneyim</p>
+                  <p className="text-xs text-gray-600">10+ Yıl Deneyim</p>
                 </div>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
                 <div>
-                  <h4 className="font-medium text-sm">10.000+ Operasyon</h4>
+                  <h4 className="font-medium text-sm">500+ Operasyon</h4>
                   <p className="text-xs text-gray-600">Başarılı Sonuçlar</p>
                 </div>
               </div>
