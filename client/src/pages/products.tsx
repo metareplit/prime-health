@@ -14,29 +14,34 @@ import { useQuery } from "@tanstack/react-query";
 // Product categories structure
 const categories = [
   {
-    id: "sampuan",
-    titleKey: "products.categories.shampoos.title",
-    descriptionKey: "products.categories.shampoos.description",
+    id: "all",
+    titleKey: "Hepsi",
+    descriptionKey: "Tüm Ürünler",
   },
   {
-    id: "serum",
-    titleKey: "products.categories.serums.title",
-    descriptionKey: "products.categories.serums.description",
+    id: "monthly-sets",
+    titleKey: "Monthly Sets",
+    descriptionKey: "Aylık Bakım Setleri",
   },
   {
-    id: "vitamin",
-    titleKey: "products.categories.vitamins.title",
-    descriptionKey: "products.categories.vitamins.description",
+    id: "shampoo-foam",
+    titleKey: "Shampoo and Foam",
+    descriptionKey: "Şampuan ve Köpük Ürünleri",
   },
   {
-    id: "tonik",
-    titleKey: "products.categories.tonics.title",
-    descriptionKey: "products.categories.tonics.description",
+    id: "spray",
+    titleKey: "Spray",
+    descriptionKey: "Sprey Ürünleri",
   },
   {
-    id: "krem",
-    titleKey: "products.categories.creams.title",
-    descriptionKey: "products.categories.creams.description",
+    id: "tablet",
+    titleKey: "Tablet",
+    descriptionKey: "Tablet Ürünleri",
+  },
+  {
+    id: "mesotherapy",
+    titleKey: "Mesotherapy and PRP",
+    descriptionKey: "Mezoterapi ve PRP Ürünleri",
   }
 ];
 
@@ -53,20 +58,21 @@ export default function Products() {
         throw new Error('Failed to fetch products');
       }
       const data = await response.json();
-      console.log('Fetched products:', data); // Debug log
+      console.log('Fetched products:', data);
       return data;
     }
   });
 
-  // Group products by category
-  const productsByCategory = products.reduce((acc: any, product: any) => {
-    const category = product.category?.toLowerCase() || 'other';
-    if (!acc[category]) {
-      acc[category] = [];
+  // Filter products by category
+  const getProductsByCategory = (categoryId: string) => {
+    if (categoryId === 'all') {
+      return products;
     }
-    acc[category].push(product);
-    return acc;
-  }, {});
+    return products.filter((product: any) => {
+      const normalizedCategory = product.category.toLowerCase().replace(/\s+/g, '-');
+      return normalizedCategory === categoryId;
+    });
+  };
 
   if (isLoading) {
     return (
@@ -81,7 +87,7 @@ export default function Products() {
       <Metadata
         title={t('products.title')}
         description={t('products.subtitle')}
-        keywords="saç bakım ürünleri, saç ekimi şampuanı, saç serumu, saç vitamini"
+        keywords="saç bakım ürünleri, şampuan, sprey, tablet, mezoterapi"
       />
 
       {/* Hero Section */}
@@ -119,7 +125,7 @@ export default function Products() {
 
       {/* Ürünler Section */}
       <section className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="sampuan" className="w-full">
+        <Tabs defaultValue="all" className="w-full">
           <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-4 border-b">
             <TabsList className="flex flex-wrap justify-center gap-2">
               {categories.map((category) => (
@@ -128,7 +134,7 @@ export default function Products() {
                   value={category.id}
                   className="data-[state=active]:bg-primary"
                 >
-                  {t(category.titleKey)}
+                  {category.titleKey}
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -137,7 +143,7 @@ export default function Products() {
           {categories.map((category) => (
             <TabsContent key={category.id} value={category.id}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
-                {(productsByCategory[category.id.toLowerCase()] || [])
+                {getProductsByCategory(category.id)
                   .filter((product: any) =>
                     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     product.description.toLowerCase().includes(searchTerm.toLowerCase())
@@ -155,7 +161,7 @@ export default function Products() {
                             <CardContent className="p-4">
                               <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 mb-4">
                                 <img
-                                  src={product.images?.[0] || `/images/products/${product.category.toLowerCase()}/${product.slug}.webp`}
+                                  src={product.images?.[0] || `/images/products/${product.category.toLowerCase().replace(/\s+/g, '-')}/${product.slug}.webp`}
                                   alt={product.name}
                                   className="w-full h-full object-contain"
                                 />
@@ -182,7 +188,7 @@ export default function Products() {
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-8">
                               <img
-                                src={product.images?.[0] || `/images/products/${product.category.toLowerCase()}/${product.slug}.webp`}
+                                src={product.images?.[0] || `/images/products/${product.category.toLowerCase().replace(/\s+/g, '-')}/${product.slug}.webp`}
                                 alt={product.name}
                                 className="w-full h-full object-contain"
                               />
