@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { 
   insertAppointmentSchema, 
   insertPostSchema,
+  insertSliderSchema // Added import for slider schema
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import path from 'path';
@@ -148,6 +149,26 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Slider endpoints
+  app.get("/api/sliders", async (_req: Request, res: Response) => {
+    try {
+      const sliders = await storage.getSliders();
+      res.json(sliders);
+    } catch (error) {
+      res.status(500).json({ message: "Slider verileri alınırken bir hata oluştu" });
+    }
+  });
+
+  app.post("/api/sliders", adminAuth, upload.single('image'), async (req: Request, res: Response) => { //Added multer middleware
+    try {
+      const sliderData = insertSliderSchema.parse({...req.body, image: req.file?.filename}); //Added image to sliderData
+      const slider = await storage.createSlider(sliderData);
+      res.status(201).json(slider);
+    } catch (error) {
+      const validationError = fromZodError(error);
+      res.status(400).json({ message: validationError.message });
+    }
+  });
 
   const httpServer = createServer(app);
   return httpServer;
