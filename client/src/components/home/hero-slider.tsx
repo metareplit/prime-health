@@ -1,30 +1,26 @@
 import { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import { useTranslation } from "react-i18next";
 
 const slides = [
   {
-    image: "/images/slider/h.png",
+    image: "/images/slider/medical-tech.png",
     title: "Modern Tıbbi Teknoloji",
     subtitle: "En Son Teknoloji ile Güvenilir Tedavi"
   },
   {
-    image: "/images/slider/doctor2.png",
+    image: "/images/slider/expert-team.png",
     title: "Uzman Hekim Kadromuz",
     subtitle: "Alanında Uzman ve Deneyimli Ekibimiz"
   },
   {
-    image: "/images/slider/doctor3.png",
+    image: "/images/slider/professional-care.png",
     title: "Profesyonel Bakım",
     subtitle: "Kişiselleştirilmiş Tedavi Yaklaşımı"
-  },
-  {
-    image: "/images/slider/clinic.webp",
-    title: "Prime Health Klinik",
-    subtitle: "Sağlığınız İçin En İyi Çözümler"
   }
 ];
 
@@ -85,12 +81,14 @@ export default function HeroSlider() {
                     {slide.subtitle}
                   </p>
                   <Button 
-                    size="lg"
-                    variant="outline"
-                    className="bg-white/10 hover:bg-white/20 border-white text-white shadow-lg hover:scale-105 transition-all duration-300"
-                    onClick={() => window.location.href = '/randevu'}
+                    size="lg" 
+                    className="group relative overflow-hidden px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                    asChild
                   >
-                    {t('buttons.appointment')}
+                    <Link href="/randevu">
+                      <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                      <span className="text-lg">{t('buttons.appointment')}</span>
+                    </Link>
                   </Button>
                 </motion.div>
               </div>
