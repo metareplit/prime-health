@@ -16,53 +16,59 @@ const categories = [
     title: "Tüm Ürünler",
     shortTitle: "Tümü",
     description: "Tüm VitHair ürünleri",
-    icon: Package
+    icon: Package,
+    color: "bg-purple-500"
   },
   {
     id: "monthly-sets",
     title: "Monthly Sets",
     shortTitle: "Setler",
     description: "Aylık bakım setleri",
-    icon: Package
+    icon: Package,
+    color: "bg-blue-500"
   },
   {
     id: "shampoo-and-foam",
     title: "Shampoo and Foam",
     shortTitle: "Şampuan",
     description: "Şampuan ve köpük ürünleri",
-    icon: Package
+    icon: Package,
+    color: "bg-green-500"
   },
   {
     id: "spray",
     title: "Spray",
     shortTitle: "Sprey",
     description: "Sprey ürünleri",
-    icon: Sprout
+    icon: Sprout,
+    color: "bg-yellow-500"
   },
   {
     id: "tablet",
     title: "Tablet",
     shortTitle: "Tablet",
     description: "Tablet ürünleri",
-    icon: Pill
+    icon: Pill,
+    color: "bg-red-500"
   },
   {
     id: "mesotherapy-and-prp",
     title: "Mesotherapy and PRP",
     shortTitle: "Mezoterapi",
     description: "Mezoterapi ve PRP ürünleri",
-    icon: FlaskConical
+    icon: FlaskConical,
+    color: "bg-indigo-500"
   }
 ];
 
 export default function Products() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isMobile, setIsMobile] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
     const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -136,25 +142,35 @@ export default function Products() {
       </section>
 
       <section className="container mx-auto px-4 py-6 md:py-8">
-        <Tabs defaultValue="all" className="w-full">
-          <div className="sticky top-0 z-50 bg-background border-b">
-            <TabsList className="flex overflow-x-auto md:grid md:grid-cols-6 gap-2 p-4 w-full no-scrollbar">
+        <Tabs defaultValue="all" className="w-full" value={selectedCategory} onValueChange={setSelectedCategory}>
+          <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b">
+            <TabsList className="h-auto p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
                   className={cn(
-                    "flex-shrink-0 min-w-[120px] md:min-w-0",
-                    "flex items-center gap-2 p-2 md:p-3",
-                    "bg-background/50 hover:bg-background/80",
-                    "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
-                    "rounded-lg transition-all"
+                    "flex-col gap-2 p-4 h-auto min-h-[100px] transition-all duration-200",
+                    "data-[state=active]:bg-primary/10 hover:bg-primary/5",
+                    "rounded-lg border border-transparent hover:border-primary/20",
+                    "relative overflow-hidden group"
                   )}
                 >
-                  <category.icon className="h-5 w-5" />
-                  <span className="text-sm">
-                    {isMobile ? category.shortTitle : category.title}
-                  </span>
+                  <div className={cn(
+                    "absolute inset-0 opacity-5 transition-opacity group-hover:opacity-10",
+                    category.color
+                  )} />
+                  <category.icon className="h-6 w-6 mb-2" />
+                  <div className="text-center">
+                    <span className="font-medium block">
+                      {isMobile ? category.shortTitle : category.title}
+                    </span>
+                    {!isMobile && (
+                      <span className="text-xs text-muted-foreground block mt-1">
+                        {category.description}
+                      </span>
+                    )}
+                  </div>
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -195,13 +211,13 @@ function ProductCard({ product }: { product: any }) {
     >
       <Dialog>
         <DialogTrigger asChild>
-          <Card className="cursor-pointer hover:shadow-lg transition-shadow h-full">
+          <Card className="cursor-pointer group hover:shadow-lg transition-all duration-300 h-full border-transparent hover:border-primary/20">
             <CardContent className="p-3 md:p-4 flex flex-col h-full">
-              <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 mb-3 md:mb-4">
+              <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 mb-3 md:mb-4 group-hover:from-primary/10 group-hover:to-primary/20 transition-all duration-300">
                 <img
                   src={product.images?.[0]}
                   alt={product.name}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
               </div>
@@ -209,7 +225,7 @@ function ProductCard({ product }: { product: any }) {
                 <Badge variant="secondary" className="text-xs mb-2">
                   {product.category}
                 </Badge>
-                <h3 className="font-semibold text-sm md:text-base line-clamp-2">
+                <h3 className="font-semibold text-sm md:text-base line-clamp-2 group-hover:text-primary transition-colors">
                   {product.name}
                 </h3>
                 <p className="text-xs md:text-sm text-muted-foreground line-clamp-2">
