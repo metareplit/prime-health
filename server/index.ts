@@ -6,6 +6,7 @@ import { storage } from "./storage";
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { setupAuth } from "./auth";
 
 // ES Modules için __dirname alternatifi
 const __filename = fileURLToPath(import.meta.url);
@@ -23,20 +24,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Session middleware setup - before any routes
-app.use(
-  session({
-    store: storage.sessionStore,
-    secret: "your-secret-key",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: process.env.NODE_ENV === "production",
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    },
-  })
-);
+// Auth ve session kurulumu
+setupAuth(app);
 
 // Logging middleware
 app.use((req, res, next) => {
