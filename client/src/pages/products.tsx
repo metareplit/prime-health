@@ -144,39 +144,28 @@ export default function Products() {
       <section className="container mx-auto px-4 py-6 md:py-8">
         <Tabs defaultValue="all" className="w-full space-y-8" value={selectedCategory} onValueChange={setSelectedCategory}>
           <div className="bg-background/80 backdrop-blur-sm py-4">
-            <TabsList className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 p-0 bg-transparent">
+            <TabsList className="relative flex justify-center p-1 bg-white rounded-full shadow-sm border overflow-x-auto hide-scrollbar">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
                   className={cn(
-                    "flex flex-col items-center gap-2 p-4 md:p-6 h-auto transition-all duration-200",
-                    "data-[state=active]:bg-primary/10 hover:bg-primary/5",
-                    "rounded-xl border border-transparent hover:border-primary/20",
-                    "relative overflow-hidden group min-h-[120px] md:min-h-[140px]"
+                    "relative flex items-center gap-2 px-6 py-3 transition-all duration-300",
+                    "data-[state=active]:text-primary",
+                    "rounded-full"
                   )}
                 >
-                  <div className={cn(
-                    "absolute inset-0 opacity-5 transition-opacity group-hover:opacity-10",
-                    category.color
-                  )} />
-                  <div className="relative z-10 flex flex-col items-center gap-3 w-full">
-                    <div className={cn(
-                      "p-3 rounded-full transition-colors",
-                      "group-hover:bg-primary/10",
-                      "data-[state=active]:bg-primary/20"
-                    )}>
-                      <category.icon className="h-7 w-7 md:h-8 md:w-8" />
-                    </div>
-                    <div className="text-center space-y-1 w-full px-2">
-                      <span className="font-medium block text-base truncate">
-                        {isMobile ? category.shortTitle : category.title}
-                      </span>
-                      <span className="text-sm text-muted-foreground block line-clamp-2 min-h-[2.5rem]">
-                        {category.description}
-                      </span>
-                    </div>
-                  </div>
+                  <category.icon className="h-4 w-4" />
+                  <span className="font-medium whitespace-nowrap">
+                    {isMobile ? category.shortTitle : category.title}
+                  </span>
+                  {selectedCategory === category.id && (
+                    <motion.div
+                      layoutId="activeTabIndicator"
+                      className="absolute inset-0 bg-primary/10 -z-10 rounded-full"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
                 </TabsTrigger>
               ))}
             </TabsList>
