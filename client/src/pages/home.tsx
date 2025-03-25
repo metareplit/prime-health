@@ -3,7 +3,7 @@ import ServiceCard from "@/components/services/service-card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import HeroSlider from "@/components/home/hero-slider";
-import DoctorSection from "@/components/home/doctor-section"; // Add import
+import DoctorSection from "@/components/home/doctor-section"; 
 import { motion } from "framer-motion";
 import { Shield, Users, Stethoscope, Clock, Award, HeartHandshake, Building2, Map, ArrowRight, CheckCircle, PlusCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -87,9 +87,6 @@ export default function Home() {
       {/* Hero Slider Section */}
       <HeroSlider />
 
-      {/* Doctor Section - Add here after slider */}
-      <DoctorSection />
-
       {/* Why Choose Us Section */}
       <section className="py-20 bg-gradient-to-b from-primary/5 to-transparent">
         <div className="container mx-auto px-4">
@@ -128,6 +125,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Doctor Section - Moved here after Why Choose Us section */}
+      <DoctorSection />
 
       {/* Services Section */}
       <section className="relative overflow-hidden py-20 bg-gradient-to-b from-primary/5 to-transparent">
