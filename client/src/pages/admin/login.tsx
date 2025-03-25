@@ -17,13 +17,14 @@ export default function AdminLogin() {
     e.preventDefault();
     try {
       const user = await loginMutation.mutateAsync({ username, password });
-      if (user.role === "admin") {
-        setLocation("/admin");
+      console.log("Login response:", user); // Debug log
+      if (user && user.role === "admin") {
+        setLocation("/admin/services"); // Direkt olarak hizmetler sayfasına yönlendir
       } else {
-        setLocation("/");
+        setLocation("/"); // Admin değilse ana sayfaya yönlendir
       }
     } catch (error) {
-      // Hata zaten toast ile gösteriliyor
+      console.error("Login error:", error); // Hata loglaması
     }
   };
 
