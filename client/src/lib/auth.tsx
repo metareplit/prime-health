@@ -1,19 +1,17 @@
 import { createContext, useContext, useState } from 'react';
-import { useLocation } from 'wouter';
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 
 interface AuthContextType {
   isAdmin: boolean;
   login: (username: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [, navigate] = useLocation();
   const { toast } = useToast();
 
   const loginMutation = useMutation({
@@ -35,14 +33,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     onSuccess: (data) => {
       if (data.role === 'admin') {
         setIsAdmin(true);
-        // Ensure state is updated before navigation
-        Promise.resolve().then(() => {
-          // Using root admin path for dashboard
-          navigate('/admin');
-          toast({
-            title: "Giriş başarılı",
-            description: "Hoş geldiniz!",
-          });
+        toast({
+          title: "Giriş başarılı",
+          description: "Hoş geldiniz!",
         });
       } else {
         toast({
@@ -65,21 +58,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await loginMutation.mutateAsync({ username, password });
   };
 
-  const logoutMutation = useMutation({
-    mutationFn: async () => {
-      setIsAdmin(false);
-      navigate('/admin/login');
-    },
-    onSuccess: () => {
-      toast({
-        title: "Çıkış başarılı",
-        description: "Güle güle!",
-      });
-    },
-  });
-
   const logout = () => {
-    logoutMutation.mutate();
+    setIsAdmin(false);
+    toast({
+      title: "Çıkış başarılı",
+      description: "Güle güle!",
+    });
   };
 
   return (

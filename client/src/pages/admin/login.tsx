@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "@/lib/auth";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -8,6 +9,7 @@ import { Loader2, Lock, User } from "lucide-react";
 
 export default function AdminLogin() {
   const { login } = useAuth();
+  const [, navigate] = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [username, setUsername] = useState("");
@@ -20,6 +22,8 @@ export default function AdminLogin() {
 
     try {
       await login(username, password);
+      // Explicitly navigate after successful login
+      navigate('/admin');
     } catch (error) {
       setError(error instanceof Error ? error.message : "Giriş başarısız");
     } finally {
