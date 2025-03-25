@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Eye, EyeOff, Save } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 
 export default function AdminSettings() {
@@ -91,35 +91,11 @@ export default function AdminSettings() {
       {isLoading ? (
         <div>Yükleniyor...</div>
       ) : (
-        <Tabs defaultValue="telegram" className="space-y-4">
+        <Tabs defaultValue="admin" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="telegram">Telegram Ayarları</TabsTrigger>
             <TabsTrigger value="admin">Admin Ayarları</TabsTrigger>
             <TabsTrigger value="general">Genel Ayarlar</TabsTrigger>
           </TabsList>
-
-          <TabsContent value="telegram">
-            <Card>
-              <CardHeader>
-                <CardTitle>Telegram Bot Yapılandırması</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {getSettingsByGroup('telegram').map((setting) => (
-                  <div key={setting.key} className="space-y-2">
-                    <label className="text-sm font-medium">
-                      {setting.label}
-                      {setting.description && (
-                        <span className="text-xs text-muted-foreground ml-2">
-                          ({setting.description})
-                        </span>
-                      )}
-                    </label>
-                    {renderSettingInput(setting)}
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </TabsContent>
 
           <TabsContent value="admin">
             <Card>

@@ -1,7 +1,6 @@
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
-import { setupTelegramWebhook } from './services/telegram';
 import { 
   insertAppointmentSchema, 
   insertPostSchema,
@@ -41,21 +40,6 @@ export async function registerRoutes(app: Express) {
   // Trust proxy - required for rate limiting behind reverse proxy
   app.set('trust proxy', 1);
 
-  // Telegram webhook setup - özel bir yol ile webhook'u başlat
-  const webhookPath = '/telegram-webhook';
-  const bot = setupTelegramWebhook(app, webhookPath);
-
-  // Webhook URL'sini ayarla
-  if (process.env.NODE_ENV === 'production') {
-    const domain = process.env.DOMAIN || 'your-domain.com';
-    await bot.telegram.setWebhook(`https://${domain}${webhookPath}`);
-    console.log('Telegram webhook set for production');
-  } else {
-    // Development ortamında webhook'u devre dışı bırak, polling kullan
-    await bot.telegram.deleteWebhook();
-    bot.launch().catch(console.error);
-    console.log('Telegram bot started in polling mode for development');
-  }
 
   // Rate limiting configuration
   const limiter = rateLimit({
@@ -108,7 +92,7 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Appointments endpoints with improved Telegram integration
+  // Appointments endpoints
   app.get("/api/appointments", adminAuth, async (req: Request, res: Response) => {
     try {
       const appointments = await storage.getAllAppointments();
