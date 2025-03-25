@@ -35,14 +35,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     onSuccess: (data) => {
       if (data.role === 'admin') {
         setIsAdmin(true);
-        // Yönlendirmeyi setTimeout ile geciktirerek state güncellemesinin tamamlanmasını bekleyelim
-        setTimeout(() => {
+        // Ensure state is updated before navigation
+        Promise.resolve().then(() => {
+          // Using root admin path for dashboard
           navigate('/admin');
           toast({
             title: "Giriş başarılı",
             description: "Hoş geldiniz!",
           });
-        }, 100);
+        });
       } else {
         toast({
           title: "Erişim reddedildi",
