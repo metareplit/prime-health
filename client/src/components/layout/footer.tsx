@@ -82,7 +82,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2 text-gray-600">
                 <Mail className="h-4 w-4" />
-                <a href="mailto:info@hairclinic.com" className="hover:text-primary transition-colors">
+                <a href="mailto:info@primehealth.com" className="hover:text-primary transition-colors">
                   {t('contact.email.address')}
                 </a>
               </li>
@@ -129,7 +129,7 @@ export default function Footer() {
 
         {/* Alt Footer */}
         <div className="py-6 border-t text-center text-sm text-gray-500">
-          <p className="mb-2">{t('footer.copyright', { year: currentYear })}</p>
+          <p className="mb-2">© {currentYear} Prime Health. Tüm hakları saklıdır.</p>
           <div className="flex justify-center gap-4">
             <Link href="/gizlilik">
               <a className="hover:text-primary transition-colors">{t('footer.company.privacy')}</a>

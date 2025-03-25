@@ -32,7 +32,7 @@ export default function AdminLogin() {
           <div className="inline-block p-2 bg-primary/10 rounded-xl mb-4">
             <Lock className="w-8 h-8 text-primary" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Admin Paneli</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Prime Health Admin</h1>
           <p className="text-sm text-gray-600 mt-2">
             Yönetim paneline erişmek için giriş yapın
           </p>
@@ -100,7 +100,7 @@ export default function AdminLogin() {
         </Card>
 
         <p className="text-center text-sm text-gray-600 mt-4">
-          © {new Date().getFullYear()} Hair Clinic. Tüm hakları saklıdır.
+          © {new Date().getFullYear()} Prime Health. Tüm hakları saklıdır.
         </p>
       </div>
     </div>
