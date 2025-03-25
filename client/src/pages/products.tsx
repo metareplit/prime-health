@@ -143,29 +143,23 @@ export default function Products() {
 
       <section className="container mx-auto px-4 py-6 md:py-8">
         <Tabs defaultValue="all" className="w-full space-y-8" value={selectedCategory} onValueChange={setSelectedCategory}>
-          <div className="bg-background/80 backdrop-blur-sm py-4">
-            <TabsList className="relative flex justify-center p-1 bg-white rounded-full shadow-sm border overflow-x-auto hide-scrollbar">
+          <div className="bg-background/80 backdrop-blur-sm py-2">
+            <TabsList className="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
                   className={cn(
-                    "relative flex items-center gap-2 px-6 py-3 transition-all duration-300",
-                    "data-[state=active]:text-primary",
-                    "rounded-full"
+                    "relative flex items-center gap-2 px-4 py-2 transition-all duration-300",
+                    "hover:text-primary rounded-none border-b-2 border-transparent",
+                    "data-[state=active]:border-primary data-[state=active]:text-primary",
+                    "min-w-fit whitespace-nowrap"
                   )}
                 >
                   <category.icon className="h-4 w-4" />
-                  <span className="font-medium whitespace-nowrap">
+                  <span className="font-medium">
                     {isMobile ? category.shortTitle : category.title}
                   </span>
-                  {selectedCategory === category.id && (
-                    <motion.div
-                      layoutId="activeTabIndicator"
-                      className="absolute inset-0 bg-primary/10 -z-10 rounded-full"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                    />
-                  )}
                 </TabsTrigger>
               ))}
             </TabsList>
