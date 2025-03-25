@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./language-switcher";
 
 interface HeaderProps {
   children?: React.ReactNode;
@@ -63,9 +64,7 @@ export default function Header({ children }: HeaderProps) {
 
           {/* Right Side: Language & Actions */}
           <div className="flex items-center gap-2 md:gap-4">
-            <div className="relative flex items-center mr-2 md:mr-4">
-              {children} {/* Language Switcher */}
-            </div>
+            <LanguageSwitcher />
 
             <Link href="/randevu">
               <Button variant="default" size="sm" className="hidden md:inline-flex px-4">
