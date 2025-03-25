@@ -13,6 +13,7 @@ import express from 'express';
 import rateLimit from 'express-rate-limit';
 import multer from 'multer';
 import type { Request, Response } from "express";
+import { hashPassword } from './auth'; // Added import statement
 
 // Multer setup
 const upload = multer({
@@ -150,10 +151,11 @@ export async function registerRoutes(app: Express) {
         return res.status(400).json({ message: "Admin user already exists" });
       }
 
-      // Create admin user
+      // Create admin user with hashed password
+      const hashedPassword = await hashPassword("Admin123!");
       const adminUser = await storage.createUser({
         username: "admin",
-        password: "Admin123!", // This should be changed after first login
+        password: hashedPassword,
         firstName: "Admin",
         lastName: "User",
         email: "admin@primehealth.com",
