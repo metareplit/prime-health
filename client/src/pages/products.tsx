@@ -2,8 +2,7 @@ import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Check, AlertCircle, Droplet, Clock, Search } from "lucide-react";
+import { Check, Search, Package, Sprout, Pill, FlaskConical } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
@@ -15,33 +14,39 @@ import { useQuery } from "@tanstack/react-query";
 const categories = [
   {
     id: "all",
-    titleKey: "Hepsi",
-    descriptionKey: "Tüm Ürünler",
+    title: "Tüm Ürünler",
+    description: "Tüm VitHair ürünleri",
+    icon: Package
   },
   {
     id: "monthly-sets",
-    titleKey: "Monthly Sets",
-    descriptionKey: "Aylık Bakım Setleri",
+    title: "Monthly Sets",
+    description: "Aylık bakım setleri",
+    icon: Package
   },
   {
-    id: "shampoo-foam",
-    titleKey: "Shampoo and Foam",
-    descriptionKey: "Şampuan ve Köpük Ürünleri",
+    id: "shampoo-and-foam",
+    title: "Shampoo and Foam",
+    description: "Şampuan ve köpük ürünleri",
+    icon: Package
   },
   {
     id: "spray",
-    titleKey: "Spray",
-    descriptionKey: "Sprey Ürünleri",
+    title: "Spray",
+    description: "Sprey ürünleri",
+    icon: Sprout
   },
   {
     id: "tablet",
-    titleKey: "Tablet",
-    descriptionKey: "Tablet Ürünleri",
+    title: "Tablet",
+    description: "Tablet ürünleri",
+    icon: Pill
   },
   {
-    id: "mesotherapy",
-    titleKey: "Mesotherapy and PRP",
-    descriptionKey: "Mezoterapi ve PRP Ürünleri",
+    id: "mesotherapy-and-prp",
+    title: "Mesotherapy and PRP",
+    description: "Mezoterapi ve PRP ürünleri",
+    icon: FlaskConical
   }
 ];
 
@@ -58,7 +63,6 @@ export default function Products() {
         throw new Error('Failed to fetch products');
       }
       const data = await response.json();
-      console.log('Fetched products:', data);
       return data;
     }
   });
@@ -85,9 +89,9 @@ export default function Products() {
   return (
     <div className="min-h-screen bg-background">
       <Metadata
-        title={t('products.title')}
-        description={t('products.subtitle')}
-        keywords="saç bakım ürünleri, şampuan, sprey, tablet, mezoterapi"
+        title="VitHair Products"
+        description="VitHair profesyonel saç bakım ürünleri"
+        keywords="vithair, saç bakım, şampuan, sprey, tablet, mezoterapi"
       />
 
       {/* Hero Section */}
@@ -100,19 +104,19 @@ export default function Products() {
             className="max-w-3xl mx-auto text-center"
           >
             <h1 className="text-3xl md:text-4xl font-bold mb-4">
-              {t('products.title')}
+              VitHair Profesyonel Saç Bakım Ürünleri
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              {t('products.subtitle')}
+              Saç sağlığınız için geliştirilmiş profesyonel çözümler
             </p>
 
-            {/* Arama ve Filtreleme */}
+            {/* Search */}
             <div className="flex gap-4 max-w-md mx-auto">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder={t('products.search')}
+                  placeholder="Ürün ara..."
                   className="pl-10"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -123,7 +127,7 @@ export default function Products() {
         </div>
       </section>
 
-      {/* Ürünler Section */}
+      {/* Products Section */}
       <section className="container mx-auto px-4 py-8">
         <Tabs defaultValue="all" className="w-full">
           <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-4 border-b">
@@ -132,9 +136,10 @@ export default function Products() {
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
-                  className="data-[state=active]:bg-primary"
+                  className="data-[state=active]:bg-primary flex items-center gap-2"
                 >
-                  {category.titleKey}
+                  <category.icon className="h-4 w-4" />
+                  {category.title}
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -161,20 +166,21 @@ export default function Products() {
                             <CardContent className="p-4">
                               <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 mb-4">
                                 <img
-                                  src={product.images?.[0] || `/images/products/${product.category.toLowerCase().replace(/\s+/g, '-')}/${product.slug}.webp`}
+                                  src={product.images?.[0]}
                                   alt={product.name}
                                   className="w-full h-full object-contain"
                                 />
                               </div>
                               <div className="space-y-2">
-                                <div className="flex flex-wrap gap-1">
-                                  <Badge variant="secondary" className="text-xs">
-                                    {product.category}
-                                  </Badge>
-                                </div>
+                                <Badge variant="secondary" className="text-xs">
+                                  {product.category}
+                                </Badge>
                                 <h3 className="font-semibold">{product.name}</h3>
                                 <p className="text-sm text-muted-foreground line-clamp-2">
                                   {product.description}
+                                </p>
+                                <p className="font-semibold text-primary">
+                                  {product.price?.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' })}
                                 </p>
                               </div>
                             </CardContent>
@@ -188,56 +194,33 @@ export default function Products() {
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-8">
                               <img
-                                src={product.images?.[0] || `/images/products/${product.category.toLowerCase().replace(/\s+/g, '-')}/${product.slug}.webp`}
+                                src={product.images?.[0]}
                                 alt={product.name}
                                 className="w-full h-full object-contain"
                               />
                             </div>
                             <div className="space-y-6">
                               <div>
-                                <p className="text-muted-foreground">
-                                  {product.long_description || product.description}
+                                <p className="text-muted-foreground mb-4">
+                                  {product.description}
+                                </p>
+                                <p className="text-2xl font-bold text-primary">
+                                  {product.price?.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' })}
                                 </p>
                               </div>
 
                               {product.specifications && (
                                 <div>
-                                  <h4 className="font-semibold flex items-center gap-2 mb-3">
-                                    <Droplet className="h-5 w-5 text-primary" />
-                                    {t('products.product.ingredients')}
-                                  </h4>
-                                  <ul className="grid grid-cols-2 gap-2">
+                                  <h4 className="font-semibold mb-3">Ürün Detayları</h4>
+                                  <ul className="grid gap-2">
                                     {Object.entries(product.specifications).map(([key, value]: [string, any]) => (
                                       <li key={key} className="flex items-center gap-2 text-sm">
                                         <Check className="h-4 w-4 text-green-500" />
-                                        {value}
+                                        <span className="font-medium">{key}:</span> {value}
                                       </li>
                                     ))}
                                   </ul>
                                 </div>
-                              )}
-
-                              {product.benefits && (
-                                <Accordion type="single" collapsible className="w-full">
-                                  <AccordionItem value="benefits">
-                                    <AccordionTrigger>
-                                      <span className="flex items-center gap-2">
-                                        <Check className="h-5 w-5 text-primary" />
-                                        {t('products.product.benefits')}
-                                      </span>
-                                    </AccordionTrigger>
-                                    <AccordionContent>
-                                      <ul className="space-y-2">
-                                        {product.benefits.map((benefit: string, idx: number) => (
-                                          <li key={idx} className="flex items-center gap-2 text-sm">
-                                            <Check className="h-4 w-4 text-green-500" />
-                                            {benefit}
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    </AccordionContent>
-                                  </AccordionItem>
-                                </Accordion>
                               )}
                             </div>
                           </div>

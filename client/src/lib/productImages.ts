@@ -1,26 +1,25 @@
 // Product images paths
 export const productImages = {
-  // Şampuanlar
-  'vithair-sampuan': '/products/sampuanlar/vithair-sampuan.webp',
-  'vithair-sampuan-2': '/products/sampuanlar/vithair-sampuan-2.webp',
-  'vithair-sampuan-3': '/products/sampuanlar/vithair-sampuan-3.webp',
+  // Monthly Sets
+  'vithair-3-month-set': '/images/products/monthly-sets/vithair-3-month-set.webp',
+  'vithair-6-month-set': '/images/products/monthly-sets/vithair-6-month-set.webp',
 
-  // Serumlar
-  'vithair-serum': '/products/serumlar/vithair-serum.webp',
-  'vithair-serum-2': '/products/serumlar/vithair-serum-2.webp',
+  // Shampoo and Foam
+  'vithair-professional-shampoo': '/images/products/shampoo-and-foam/vithair-professional-shampoo.webp',
+  'vithair-foam-treatment': '/images/products/shampoo-and-foam/vithair-foam-treatment.webp',
 
-  // Vitaminler
-  'vithair-vitamin': '/products/vitaminler/vithair-vitamin.webp',
-  'vithair-vitamin-2': '/products/vitaminler/vithair-vitamin-2.webp',
+  // Spray
+  'vithair-professional-spray': '/images/products/spray/vithair-professional-spray.webp',
+  'vithair-intensive-spray': '/images/products/spray/vithair-intensive-spray.webp',
 
-  // Tonikler
-  'vithair-tonik': '/products/tonikler/vithair-tonik.webp',
-  'vithair-tonik-2': '/products/tonikler/vithair-tonik-2.webp',
+  // Tablet
+  'vithair-hair-growth-tablets': '/images/products/tablet/vithair-hair-growth-tablets.webp',
+  'vithair-biotin-complex': '/images/products/tablet/vithair-biotin-complex.webp',
 
-  // Kremler
-  'vithair-krem': '/products/kremler/vithair-krem.webp',
-  'vithair-krem-2': '/products/kremler/vithair-krem-2.webp'
+  // Mesotherapy and PRP
+  'vithair-mesotherapy-solution': '/images/products/mesotherapy/vithair-mesotherapy-solution.webp',
+  'vithair-prp-kit': '/images/products/mesotherapy/vithair-prp-kit.webp'
 };
 
 // Default product image path
-export const defaultProductImage = '/products/default-product.webp';
+export const defaultProductImage = '/images/products/default-product.webp';
