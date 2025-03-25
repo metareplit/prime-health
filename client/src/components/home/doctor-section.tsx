@@ -38,6 +38,10 @@ export default function DoctorSection() {
                 src="/attached_assets/alicaliskan-Photoroom.png"
                 alt="Dr. Ali Çalışkan"
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  console.error("Failed to load doctor image");
+                  e.currentTarget.src = '/images/default-doctor.svg';
+                }}
               />
             </div>
             <div className="absolute -bottom-6 -right-6 bg-white rounded-xl p-4 shadow-lg">
