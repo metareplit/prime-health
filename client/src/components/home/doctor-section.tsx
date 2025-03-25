@@ -33,7 +33,7 @@ export default function DoctorSection() {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="aspect-square rounded-2xl overflow-hidden">
+            <div className="aspect-[3/4] rounded-2xl overflow-hidden">
               <img
                 src="/attached_assets/alicaliskan-Photoroom.png"
                 alt="Dr. Ali Çalışkan"
