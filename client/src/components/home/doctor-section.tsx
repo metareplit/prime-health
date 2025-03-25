@@ -8,7 +8,7 @@ export default function DoctorSection() {
   const { t } = useTranslation('common');
 
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-12 relative overflow-hidden">
       {/* Background Elements */}
       <motion.div 
         initial={{ opacity: 0, scale: 0.8 }}
@@ -24,7 +24,7 @@ export default function DoctorSection() {
       />
 
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
           {/* Doctor Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -33,7 +33,7 @@ export default function DoctorSection() {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="aspect-[3/4] rounded-2xl overflow-hidden">
+            <div className="aspect-[3/4] rounded-2xl overflow-hidden max-w-md mx-auto">
               <img
                 src="/images/doctors/alicaliskan-Photoroom.png"
                 alt="Dr. Ali Çalışkan"
@@ -44,11 +44,11 @@ export default function DoctorSection() {
                 }}
               />
             </div>
-            <div className="absolute -bottom-6 -right-6 bg-white rounded-xl p-4 shadow-lg">
+            <div className="absolute -bottom-4 -right-4 bg-white rounded-xl p-3 shadow-lg">
               <div className="flex items-center gap-2">
-                <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                <span className="font-semibold">4.9/5</span>
-                <span className="text-muted-foreground">({t('doctor.reviewCount')})</span>
+                <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                <span className="font-semibold text-sm">4.9/5</span>
+                <span className="text-muted-foreground text-sm">({t('doctor.reviewCount')})</span>
               </div>
             </div>
           </motion.div>
@@ -59,49 +59,49 @@ export default function DoctorSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-4"
           >
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">Dr. Ali Çalışkan</h2>
-              <p className="text-xl text-primary font-medium">Saç Ekimi ve Estetik Cerrahi Uzmanı</p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">Dr. Ali Çalışkan</h2>
+              <p className="text-lg text-primary font-medium">Saç Ekimi ve Estetik Cerrahi Uzmanı</p>
             </div>
 
-            <p className="text-gray-600 text-lg">
+            <p className="text-gray-600">
               20 yılı aşkın deneyimi ile saç ekimi ve estetik cerrahi alanında uzmanlaşmış, 
               binlerce başarılı operasyona imza atmış değerli bir hekimdir.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-start gap-3">
-                <Award className="h-6 w-6 text-primary flex-shrink-0" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="flex items-start gap-2">
+                <Award className="h-5 w-5 text-primary flex-shrink-0" />
                 <div>
-                  <h4 className="font-medium">Uzman Hekim</h4>
-                  <p className="text-sm text-gray-600">20+ Yıl Deneyim</p>
+                  <h4 className="font-medium text-sm">Uzman Hekim</h4>
+                  <p className="text-xs text-gray-600">20+ Yıl Deneyim</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-6 w-6 text-primary flex-shrink-0" />
+              <div className="flex items-start gap-2">
+                <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
                 <div>
-                  <h4 className="font-medium">10.000+ Operasyon</h4>
-                  <p className="text-sm text-gray-600">Başarılı Sonuçlar</p>
+                  <h4 className="font-medium text-sm">10.000+ Operasyon</h4>
+                  <p className="text-xs text-gray-600">Başarılı Sonuçlar</p>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 pt-3">
               <Button 
-                size="lg" 
+                size="sm" 
                 className="group"
                 asChild
               >
                 <Link href="/randevu">
-                  <Calendar className="mr-2 h-5 w-5" />
+                  <Calendar className="mr-2 h-4 w-4" />
                   {t('buttons.appointment')}
                 </Link>
               </Button>
               <Button 
                 variant="outline" 
-                size="lg"
+                size="sm"
                 className="group"
                 asChild
               >
