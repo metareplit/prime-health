@@ -130,22 +130,27 @@ export default function Products() {
       <section className="container mx-auto px-4 py-6 md:py-8">
         <Tabs defaultValue="all" className="w-full">
           <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-3 md:py-4 border-b">
-            <TabsList className="flex flex-nowrap overflow-x-auto gap-2 p-1 w-full justify-start md:justify-center md:flex-wrap scrollbar-none">
+            <TabsList className="flex overflow-x-auto gap-1.5 w-full justify-start md:justify-center md:flex-wrap no-scrollbar pb-2 md:pb-0">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
-                  className="data-[state=active]:bg-primary flex items-center gap-2 whitespace-nowrap px-3 py-1.5"
+                  className={cn(
+                    "min-w-[120px] h-auto py-2.5 px-4 rounded-full transition-all",
+                    "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
+                    "data-[state=active]:shadow-sm hover:bg-muted/80",
+                    "flex items-center gap-2 whitespace-nowrap text-sm"
+                  )}
                 >
-                  <category.icon className="h-4 w-4" />
-                  <span className="text-sm">{category.title}</span>
+                  <category.icon className="h-4 w-4 flex-shrink-0" />
+                  <span className="truncate">{category.title}</span>
                 </TabsTrigger>
               ))}
             </TabsList>
           </div>
 
           {categories.map((category) => (
-            <TabsContent key={category.id} value={category.id}>
+            <TabsContent key={category.id} value={category.id} className="focus-visible:outline-none">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mt-6 md:mt-8">
                 {getProductsByCategory(category.id)
                   .filter((product: any) =>
