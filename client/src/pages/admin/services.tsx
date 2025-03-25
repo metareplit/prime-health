@@ -7,12 +7,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Service } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
-import { Plus, Star, GripVertical, Pencil, Trash2, Upload, Clock, DollarSign } from "lucide-react";
+import { Plus, Star, GripVertical, Pencil, Trash2, Upload, Clock } from "lucide-react";
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 
 export default function AdminServices() {
   const { toast } = useToast();
   const [editingService, setEditingService] = useState<Partial<Service> | null>(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const { data: services, isLoading } = useQuery<Service[]>({
     queryKey: ["/api/services"],
@@ -20,7 +22,22 @@ export default function AdminServices() {
 
   const createMutation = useMutation({
     mutationFn: async (data: Omit<Service, "id">) => {
-      const res = await apiRequest("POST", "/api/services", data);
+      const formData = new FormData();
+      Object.entries(data).forEach(([key, value]) => {
+        if (key !== 'imageUrl') {
+          formData.append(key, value as string);
+        }
+      });
+
+      if (selectedImage) {
+        formData.append('image', selectedImage);
+      }
+
+      const res = await apiRequest("POST", "/api/services", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       return res.json();
     },
     onSuccess: () => {
@@ -30,12 +47,29 @@ export default function AdminServices() {
         description: "Hizmet başarıyla oluşturuldu.",
       });
       setEditingService(null);
+      setSelectedImage(null);
+      setImagePreview(null);
     },
   });
 
   const updateMutation = useMutation({
     mutationFn: async (data: Service) => {
-      const res = await apiRequest("PATCH", `/api/services/${data.id}`, data);
+      const formData = new FormData();
+      Object.entries(data).forEach(([key, value]) => {
+        if (key !== 'imageUrl') {
+          formData.append(key, value as string);
+        }
+      });
+
+      if (selectedImage) {
+        formData.append('image', selectedImage);
+      }
+
+      const res = await apiRequest("PATCH", `/api/services/${data.id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       return res.json();
     },
     onSuccess: () => {
@@ -45,43 +79,21 @@ export default function AdminServices() {
         description: "Hizmet başarıyla güncellendi.",
       });
       setEditingService(null);
+      setSelectedImage(null);
+      setImagePreview(null);
     },
   });
 
-  const deleteMutation = useMutation({
-    mutationFn: async (id: number) => {
-      await apiRequest("DELETE", `/api/services/${id}`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/services"] });
-      toast({
-        title: "Başarılı",
-        description: "Hizmet başarıyla silindi.",
-      });
-    },
-  });
-
-  const reorderMutation = useMutation({
-    mutationFn: async ({ id, order }: { id: number; order: number }) => {
-      const res = await apiRequest("PATCH", `/api/services/${id}/reorder`, { order });
-      return res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/services"] });
-    },
-  });
-
-  const handleDragEnd = (result: DropResult) => {
-    if (!result.destination || !services) return;
-
-    const items = Array.from(services);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    // Update order for all affected items
-    items.forEach((item, index) => {
-      reorderMutation.mutate({ id: item.id, order: index });
-    });
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -114,7 +126,6 @@ export default function AdminServices() {
       process: [],
       faqs: [],
       duration: "",
-      price: "",
       imageUrl: "",
       slug: "",
       featured: false,
@@ -122,100 +133,42 @@ export default function AdminServices() {
     });
   };
 
-  // Add initial services if none exist
-  const addInitialServices = async () => {
-    const initialServices = [
-      {
-        name: "Sapphire FUE Saç Ekimi",
-        description: "En son teknoloji ile doğal ve kalıcı sonuçlar için Safir uçlu özel penler kullanılarak yapılan saç ekimi yöntemi",
-        longDescription: "Safir FUE saç ekimi, geleneksel FUE tekniğinin daha gelişmiş bir versiyonudur. Safir uçlu özel penler kullanılarak yapılan bu işlem, daha hassas açılar ve daha küçük kanallar oluşturulmasına olanak sağlar. Bu da iyileşme sürecini hızlandırır ve daha doğal sonuçlar elde edilmesini sağlar.",
-        benefits: ["Daha hızlı iyileşme süreci", "Minimal skar oluşumu", "Doğal görünüm", "Konforlu uygulama"],
-        process: ["Ücretsiz konsültasyon", "Saç analizi", "Planlama", "Lokal anestezi", "Greft toplama", "Kanal açma", "Greft yerleştirme"],
-        faqs: [],
-        duration: "6-8 saat",
-        price: "2500€'dan başlayan",
-        imageUrl: "/images/hair-transplant.svg",
-        slug: "sapphire-fue-sac-ekimi",
-        featured: true,
-        order: 0,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        name: "DHI Saç Ekimi",
-        description: "Greftlerin özel bir kalem yardımıyla direkt olarak yerleştirildiği ileri teknoloji saç ekimi yöntemi",
-        longDescription: "DHI (Direct Hair Implantation) tekniği, greftlerin özel bir implanter kalem yardımıyla direkt olarak yerleştirildiği modern bir saç ekimi yöntemidir. Bu yöntem, daha yüksek tutunma oranı ve daha doğal saç çıkış açıları sağlar.",
-        benefits: ["Kanal açma işlemi yok", "Yüksek tutunma oranı", "Minimal travma", "Doğal açılar"],
-        process: ["Detaylı konsültasyon", "Saç analizi", "Planlama", "Lokal anestezi", "Greft toplama", "DHI implantasyon"],
-        faqs: [],
-        duration: "6-8 saat",
-        price: "3000€'dan başlayan",
-        imageUrl: "/images/hair-transplant.svg",
-        slug: "dhi-sac-ekimi",
-        featured: true,
-        order: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        name: "Sakal ve Bıyık Ekimi",
-        description: "Yüz bölgesinde istenilen dolgunluk ve görünümü elde etmek için uygulanan hassas ekim işlemi",
-        longDescription: "Sakal ve bıyık ekimi, yüz bölgesinde kalıcı ve doğal görünümlü sonuçlar elde etmek için uygulanan özel bir işlemdir. FUE veya DHI teknikleri kullanılarak yapılan bu işlem, seyrek veya hiç olmayan sakal/bıyık bölgelerinde tam bir görünüm sağlar.",
-        benefits: ["Kalıcı çözüm", "Doğal görünüm", "Kişiye özel tasarım", "Minimal iz"],
-        process: ["Yüz analizi", "Tasarım", "Lokal anestezi", "Greft toplama", "Yerleştirme"],
-        faqs: [],
-        duration: "4-6 saat",
-        price: "1500€'dan başlayan",
-        imageUrl: "/images/beard-transplant.svg",
-        slug: "sakal-biyik-ekimi",
-        featured: false,
-        order: 2,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        name: "Kaş Ekimi",
-        description: "Seyrek veya şekilsiz kaşlar için doğal ve kalıcı çözüm sunan hassas ekim işlemi",
-        longDescription: "Kaş ekimi, seyrek, asimetrik veya hasarlı kaşların onarımı için uygulanan özel bir işlemdir. DHI tekniği kullanılarak yapılan bu işlem, kaşların doğal akışına ve yönüne uygun şekilde tasarlanır ve uygulanır.",
-        benefits: ["Kalıcı sonuç", "Doğal görünüm", "Kişiye özel tasarım", "İnce detay"],
-        process: ["Kaş analizi", "3D tasarım", "Lokal anestezi", "Greft toplama", "Hassas yerleştirme"],
-        faqs: [],
-        duration: "3-4 saat",
-        price: "1000€'dan başlayan",
-        imageUrl: "/images/eyebrow-transplant.svg",
-        slug: "kas-ekimi",
-        featured: false,
-        order: 3,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        name: "PRP Tedavisi",
-        description: "Kişinin kendi kanından elde edilen trombositten zengin plazma ile saç büyümesini ve güçlenmesini destekleyen tedavi",
-        longDescription: "PRP (Platelet Rich Plasma) tedavisi, kişinin kendi kanından elde edilen trombositten zengin plazmanın saç köklerine enjekte edilmesi işlemidir. Bu doğal tedavi yöntemi, saç büyümesini uyarır, dökülmeyi azaltır ve mevcut saçları güçlendirir.",
-        benefits: ["Doğal yöntem", "Hızlı uygulama", "Minimal risk", "Etkili sonuç"],
-        process: ["Kan alımı", "PRP hazırlama", "Lokal anestezi", "Uygulama"],
-        faqs: [],
-        duration: "45 dakika",
-        price: "300€'dan başlayan",
-        imageUrl: "/images/prp-treatment.svg",
-        slug: "prp-tedavisi",
-        featured: false,
-        order: 4,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }
-    ];
+  const handleDragEnd = (result: DropResult) => {
+    if (!result.destination || !services) return;
 
-    for (const service of initialServices) {
-      await createMutation.mutateAsync(service);
-    }
+    const items = Array.from(services);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
 
-    toast({
-      title: "Başarılı",
-      description: "Örnek hizmetler başarıyla eklendi.",
+    // Update order for all affected items
+    items.forEach((item, index) => {
+      reorderMutation.mutate({ id: item.id, order: index });
     });
   };
+
+  const reorderMutation = useMutation({
+    mutationFn: async ({ id, order }: { id: number; order: number }) => {
+      const res = await apiRequest("PATCH", `/api/services/${id}/reorder`, { order });
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/services"] });
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: number) => {
+      await apiRequest("DELETE", `/api/services/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/services"] });
+      toast({
+        title: "Başarılı",
+        description: "Hizmet başarıyla silindi.",
+      });
+    },
+  });
+
 
   return (
     <div className="space-y-6">
@@ -226,18 +179,10 @@ export default function AdminServices() {
             Klinik hizmetlerini yönetin ve düzenleyin
           </p>
         </div>
-        <div className="flex gap-2">
-          {services?.length === 0 && (
-            <Button onClick={addInitialServices}>
-              <Plus className="h-4 w-4 mr-2" />
-              Örnek Hizmetleri Ekle
-            </Button>
-          )}
-          <Button onClick={handleCreate}>
-            <Plus className="h-4 w-4 mr-2" />
-            Yeni Hizmet
-          </Button>
-        </div>
+        <Button onClick={handleCreate}>
+          <Plus className="h-4 w-4 mr-2" />
+          Yeni Hizmet
+        </Button>
       </div>
 
       {editingService && (
@@ -313,51 +258,65 @@ export default function AdminServices() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Süre</label>
-                  <div className="relative">
-                    <Clock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      value={editingService.duration}
-                      onChange={(e) =>
-                        setEditingService({
-                          ...editingService,
-                          duration: e.target.value,
-                        })
-                      }
-                      placeholder="Örn: 45 dakika"
-                      className="pl-10"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Fiyat</label>
-                  <div className="relative">
-                    <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      value={editingService.price}
-                      onChange={(e) =>
-                        setEditingService({
-                          ...editingService,
-                          price: e.target.value,
-                        })
-                      }
-                      placeholder="2500€'dan başlayan"
-                      className="pl-10"
-                    />
-                  </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Süre</label>
+                <div className="relative">
+                  <Clock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    value={editingService.duration}
+                    onChange={(e) =>
+                      setEditingService({
+                        ...editingService,
+                        duration: e.target.value,
+                      })
+                    }
+                    placeholder="Örn: 45 dakika"
+                    className="pl-10"
+                  />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium">Görsel</label>
                 <div className="border rounded-lg p-4">
-                  <Button variant="outline" className="w-full">
-                    <Upload className="h-4 w-4 mr-2" />
-                    Görsel Yükle
-                  </Button>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="hidden"
+                    id="service-image"
+                  />
+                  {imagePreview ? (
+                    <div className="relative">
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        className="w-full h-48 object-cover rounded-lg"
+                      />
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        size="sm"
+                        className="absolute top-2 right-2"
+                        onClick={() => {
+                          setSelectedImage(null);
+                          setImagePreview(null);
+                        }}
+                      >
+                        Kaldır
+                      </Button>
+                    </div>
+                  ) : (
+                    <label
+                      htmlFor="service-image"
+                      className="cursor-pointer block"
+                    >
+                      <Button variant="outline" className="w-full">
+                        <Upload className="h-4 w-4 mr-2" />
+                        Görsel Yükle
+                      </Button>
+                    </label>
+                  )}
                 </div>
               </div>
 
@@ -365,7 +324,11 @@ export default function AdminServices() {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={() => setEditingService(null)}
+                  onClick={() => {
+                    setEditingService(null);
+                    setSelectedImage(null);
+                    setImagePreview(null);
+                  }}
                 >
                   İptal
                 </Button>
@@ -414,25 +377,30 @@ export default function AdminServices() {
                               >
                                 <GripVertical className="h-5 w-5" />
                               </div>
-                              <div>
-                                <h3 className="font-semibold flex items-center gap-2">
-                                  {service.name}
-                                  {service.featured && (
-                                    <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                                  )}
-                                </h3>
-                                <p className="text-sm text-muted-foreground mt-1">
-                                  {service.description}
-                                </p>
-                                <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
-                                  <span className="flex items-center gap-1">
-                                    <Clock className="h-4 w-4" />
-                                    {service.duration}
-                                  </span>
-                                  <span className="flex items-center gap-1">
-                                    <DollarSign className="h-4 w-4" />
-                                    {service.price}
-                                  </span>
+                              <div className="flex items-center gap-4">
+                                {service.imageUrl && (
+                                  <img
+                                    src={service.imageUrl}
+                                    alt={service.name}
+                                    className="w-16 h-16 object-cover rounded"
+                                  />
+                                )}
+                                <div>
+                                  <h3 className="font-semibold flex items-center gap-2">
+                                    {service.name}
+                                    {service.featured && (
+                                      <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
+                                    )}
+                                  </h3>
+                                  <p className="text-sm text-muted-foreground mt-1">
+                                    {service.description}
+                                  </p>
+                                  <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
+                                    <span className="flex items-center gap-1">
+                                      <Clock className="h-4 w-4" />
+                                      {service.duration}
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
