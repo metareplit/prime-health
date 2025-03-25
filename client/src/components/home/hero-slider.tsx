@@ -14,7 +14,12 @@ export default function HeroSlider() {
     queryKey: ["/api/sliders"],
   });
 
-  const activeSliders = sliders?.filter(slider => slider.isActive === true) || [];
+  // Debug: Log slider data
+  useEffect(() => {
+    console.log('Slider data:', sliders);
+  }, [sliders]);
+
+  const activeSliders = sliders?.filter(slider => slider.is_active === true) || [];
 
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
@@ -31,7 +36,6 @@ export default function HeroSlider() {
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on('select', onSelect);
 
-    // Otomatik geçiş
     const autoplayInterval = setInterval(() => {
       emblaApi.scrollNext();
     }, 5000);
@@ -60,7 +64,7 @@ export default function HeroSlider() {
                 <div 
                   className="absolute inset-0"
                   style={{
-                    backgroundImage: `url(${slider.imageUrl})`,
+                    backgroundImage: `url(${slider.image_url})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                   }}
