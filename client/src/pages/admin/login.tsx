@@ -17,8 +17,10 @@ export default function AdminLogin() {
     e.preventDefault();
     try {
       const user = await loginMutation.mutateAsync({ username, password });
+      console.log("Login response:", user); // Debug için
+
       if (user && user.role === "admin") {
-        setLocation("/admin/services");
+        window.location.href = "/admin/services"; // Window.location ile direkt yönlendirme
       }
     } catch (error) {
       console.error("Login error:", error);
