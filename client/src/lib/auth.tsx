@@ -18,7 +18,9 @@ const AuthContext = createContext<AuthContextType | null>(null);
 async function handleResponse(response: Response) {
   const contentType = response.headers.get("content-type");
   if (!contentType || !contentType.includes("application/json")) {
-    // If response is not JSON, throw error with appropriate message
+    // If response is not JSON, log the response for debugging
+    const text = await response.text();
+    console.error('Invalid response type:', contentType, 'Response:', text.substring(0, 200));
     throw new Error("Sunucu yanıtı geçersiz. Lütfen daha sonra tekrar deneyin.");
   }
   const data = await response.json();

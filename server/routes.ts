@@ -38,7 +38,7 @@ const upload = multer({
 });
 
 export async function registerRoutes(app: Express) {
-  // Trust proxy - required for rate limiting behind reverse proxy
+  // Trust proxy - required for rate limiting
   app.set('trust proxy', 1);
 
   // Rate limiting configuration
@@ -55,13 +55,19 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // All API routes should be registered before Vite middleware
+  app.use('/api/*', (req, res, next) => {
+    res.setHeader('Content-Type', 'application/json');
+    next();
+  });
+
   // Apply rate limiting to API routes only
   app.use('/api', limiter);
 
   // Setup authentication routes
   setupAuthRoutes(app);
 
-  // Static file serving
+  // Static file serving for uploads
   app.use('/uploads', express.static('uploads'));
 
   // Posts endpoints
@@ -73,7 +79,6 @@ export async function registerRoutes(app: Express) {
       res.status(500).json({ message: "Blog yazıları alınırken bir hata oluştu" });
     }
   });
-
 
   // Products endpoints
   app.get("/api/products", async (_req: Request, res: Response) => {
@@ -109,7 +114,7 @@ export async function registerRoutes(app: Express) {
   // Slider endpoints
   app.get("/api/sliders", async (_req: Request, res: Response) => {
     try {
-      const sliders = await storage.getSliders();
+      const sliders = await storage.getAllSliders();
       res.json(sliders);
     } catch (error) {
       res.status(500).json({ message: "Slider verileri alınırken bir hata oluştu" });

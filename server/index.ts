@@ -40,12 +40,13 @@ app.use(
   })
 );
 
-// Logging middleware with detailed error logging
+// Logging middleware
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
   let capturedJsonResponse: Record<string, any> | undefined = undefined;
 
+  // Intercept JSON responses
   const originalResJson = res.json;
   res.json = function (bodyJson, ...args) {
     capturedJsonResponse = bodyJson;
@@ -57,20 +58,13 @@ app.use((req, res, next) => {
     if (path.startsWith("/api")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
 
-      // Add session info to logs for debugging
+      // Add session info to logs
       if (req.session) {
         logLine += ` [Session: userId=${req.session.userId}, role=${req.session.userRole}]`;
       }
 
       if (capturedJsonResponse) {
-        // Don't log sensitive data
-        const sanitizedResponse = { ...capturedJsonResponse };
-        if (sanitizedResponse.password) delete sanitizedResponse.password;
-        logLine += ` :: ${JSON.stringify(sanitizedResponse)}`;
-      }
-
-      if (logLine.length > 120) {
-        logLine = logLine.slice(0, 119) + "…";
+        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
 
       log(logLine);
@@ -85,7 +79,7 @@ app.use((req, res, next) => {
   try {
     log('Starting server initialization...');
 
-    // Register routes first
+    // Register API routes first, before Vite middleware
     log('Registering routes...');
     const server = await registerRoutes(app);
     log('Routes registered successfully');
@@ -97,19 +91,18 @@ app.use((req, res, next) => {
       log('Created public directory');
     }
 
-    // Development modunda Vite HMR kullan
+    // Set up Vite or static serving after API routes
     if (process.env.NODE_ENV !== 'production') {
       log('Setting up Vite development server...');
       await setupVite(app, server);
       log('Vite development server configured');
     } else {
-      // Production modunda static file serving kullan
       log('Setting up static file serving...');
       serveStatic(app);
       log('Static file serving configured');
     }
 
-    // Error handling middleware with detailed logging
+    // Error handling middleware
     app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
       console.error('Server error:', {
         error: err,
@@ -118,6 +111,9 @@ app.use((req, res, next) => {
         method: req.method,
         session: req.session
       });
+
+      // Set proper content type
+      res.setHeader('Content-Type', 'application/json');
 
       const status = err.status || err.statusCode || 500;
       const message = err.message || "Internal Server Error";
