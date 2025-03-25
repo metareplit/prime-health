@@ -1,23 +1,26 @@
-// Product images in base64 format for better performance
+// Product images paths
 export const productImages = {
   // Şampuanlar
-  'hair-vita-sampuan': '/products/sampuanlar/hair-vita-sampuan.webp',
-  'hair-protection-sampuan': '/products/sampuanlar/hair-protection-sampuan.webp',
-  'fiber-sampuan': '/products/sampuanlar/fiber-sampuan.webp',
-  
+  'vithair-sampuan': '/products/sampuanlar/vithair-sampuan.webp',
+  'vithair-sampuan-2': '/products/sampuanlar/vithair-sampuan-2.webp',
+  'vithair-sampuan-3': '/products/sampuanlar/vithair-sampuan-3.webp',
+
   // Serumlar
-  'hair-protection-serum': '/products/serumlar/hair-protection-serum.webp',
-  'hair-vita-serum-plus': '/products/serumlar/hair-vita-serum-plus.webp',
-  
+  'vithair-serum': '/products/serumlar/vithair-serum.webp',
+  'vithair-serum-2': '/products/serumlar/vithair-serum-2.webp',
+
   // Vitaminler
-  'hair-vita-plus': '/products/vitaminler/hair-vita-plus.webp',
-  'hair-vita-complex': '/products/vitaminler/hair-vita-complex.webp',
-  
+  'vithair-vitamin': '/products/vitaminler/vithair-vitamin.webp',
+  'vithair-vitamin-2': '/products/vitaminler/vithair-vitamin-2.webp',
+
   // Tonikler
-  'hair-protection-sprey': '/products/tonikler/hair-protection-sprey.webp',
-  'hair-vita-professional': '/products/tonikler/hair-vita-professional.webp',
-  
+  'vithair-tonik': '/products/tonikler/vithair-tonik.webp',
+  'vithair-tonik-2': '/products/tonikler/vithair-tonik-2.webp',
+
   // Kremler
-  'hair-vita-krem': '/products/kremler/hair-vita-krem.webp',
-  'hair-protection-krem': '/products/kremler/hair-protection-krem.webp'
+  'vithair-krem': '/products/kremler/vithair-krem.webp',
+  'vithair-krem-2': '/products/kremler/vithair-krem-2.webp'
 };
+
+// Default product image path
+export const defaultProductImage = '/products/default-product.webp';
