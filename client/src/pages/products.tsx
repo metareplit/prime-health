@@ -10,7 +10,7 @@ import { Metadata } from "@/components/ui/metadata";
 import { useQuery } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 
-// Product categories structure
+// Product categories structure remains the same
 const categories = [
   {
     id: "all",
@@ -58,7 +58,8 @@ const categories = [
 
 export default function Products() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [isMobile, setIsMobile] = useState(false); // Default to false
+  const [isMobile, setIsMobile] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     // Set initial value
@@ -144,12 +145,17 @@ export default function Products() {
       {/* Products Section - Mobile Optimized */}
       <section className="container mx-auto px-4 py-6 md:py-8">
         <Tabs defaultValue="all" className="w-full">
-          <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-4">
+          <div className={cn(
+            "sticky top-0 bg-background/95 backdrop-blur-sm z-10 py-4",
+            "transition-all duration-300",
+            isOpen ? "h-auto" : "h-0 overflow-hidden"
+          )}>
             <TabsList className="grid grid-cols-3 md:grid-cols-6 gap-2 w-full p-1">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
+                  onClick={() => isMobile && setIsOpen(false)}
                   className={cn(
                     "min-h-[64px] md:min-h-[48px] transition-all duration-200",
                     "flex flex-col md:flex-row items-center justify-center gap-2",
@@ -168,6 +174,16 @@ export default function Products() {
               ))}
             </TabsList>
           </div>
+
+          {/* Show/Hide Categories Button for Mobile */}
+          {isMobile && (
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="fixed bottom-4 right-4 z-20 bg-primary text-primary-foreground rounded-full p-3 shadow-lg"
+            >
+              <Package className="h-6 w-6" />
+            </button>
+          )}
 
           {categories.map((category) => (
             <TabsContent 
