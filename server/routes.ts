@@ -12,6 +12,7 @@ import path from 'path';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import multer from 'multer';
+import type { Request, Response } from "express";
 
 // Multer setup
 const upload = multer({
@@ -140,6 +141,35 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Add admin user creation route
+  app.post("/api/admin/setup", async (req: Request, res: Response) => {
+    try {
+      // Check if admin exists
+      const adminExists = await storage.getUserByUsername("admin");
+      if (adminExists) {
+        return res.status(400).json({ message: "Admin user already exists" });
+      }
+
+      // Create admin user
+      const adminUser = await storage.createUser({
+        username: "admin",
+        password: "Admin123!", // This should be changed after first login
+        firstName: "Admin",
+        lastName: "User",
+        email: "admin@primehealth.com",
+        phone: "+905555555555",
+        role: "admin",
+        dateOfBirth: new Date("1990-01-01"),
+        gender: "other"
+      });
+
+      res.status(201).json({ message: "Admin user created successfully" });
+    } catch (error) {
+      console.error("Error creating admin user:", error);
+      res.status(500).json({ message: "Error creating admin user" });
+    }
+  });
+
   // Create HTTP server
   const httpServer = createServer(app);
 
@@ -154,5 +184,3 @@ const adminAuth = (req: Request, res: Response, next: any) => {
   }
   next();
 };
-
-import type { Request, Response } from "express";
