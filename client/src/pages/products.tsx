@@ -2,13 +2,14 @@ import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Check, Search, Package, Sprout, Pill, FlaskConical } from "lucide-react";
+import { Star, Package, Sprout, Pill, FlaskConical, Check, Search, ShoppingCart, Info } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { Metadata } from "@/components/ui/metadata";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
+import { cn } from "@/lib/utils";
 
 // Product categories structure
 const categories = [
@@ -62,8 +63,7 @@ export default function Products() {
       if (!response.ok) {
         throw new Error('Failed to fetch products');
       }
-      const data = await response.json();
-      return data;
+      return response.json();
     }
   });
 
@@ -76,6 +76,24 @@ export default function Products() {
       const normalizedCategory = product.category.toLowerCase().replace(/\s+/g, '-');
       return normalizedCategory === categoryId;
     });
+  };
+
+  // Yıldız puanı gösterimi için yardımcı fonksiyon
+  const renderStars = (rating: number) => {
+    return (
+      <div className="flex items-center gap-1">
+        {[...Array(5)].map((_, i) => (
+          <Star
+            key={i}
+            className={cn(
+              "h-4 w-4",
+              i < Math.floor(rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+            )}
+          />
+        ))}
+        <span className="text-sm text-muted-foreground ml-1">({rating.toFixed(1)})</span>
+      </div>
+    );
   };
 
   if (isLoading) {
@@ -179,8 +197,19 @@ export default function Products() {
                                 <p className="text-sm text-muted-foreground line-clamp-2">
                                   {product.description}
                                 </p>
-                                <p className="font-semibold text-primary">
-                                  {product.price?.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' })}
+                                <div className="flex items-center justify-between">
+                                  <p className="font-semibold text-primary">
+                                    {product.price?.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' })}
+                                  </p>
+                                  {product.stock > 0 ? (
+                                    <Badge variant="outline" className="text-green-500">Stokta</Badge>
+                                  ) : (
+                                    <Badge variant="outline" className="text-red-500">Tükendi</Badge>
+                                  )}
+                                </div>
+                                {renderStars(product.ratings)}
+                                <p className="text-sm text-muted-foreground">
+                                  {product.review_count} değerlendirme
                                 </p>
                               </div>
                             </CardContent>
@@ -204,24 +233,75 @@ export default function Products() {
                                 <p className="text-muted-foreground mb-4">
                                   {product.description}
                                 </p>
-                                <p className="text-2xl font-bold text-primary">
-                                  {product.price?.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' })}
+                                <div className="flex items-center justify-between mb-4">
+                                  <p className="text-2xl font-bold text-primary">
+                                    {product.price?.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' })}
+                                  </p>
+                                  {product.stock > 0 ? (
+                                    <Badge variant="outline" className="text-green-500">Stokta: {product.stock}</Badge>
+                                  ) : (
+                                    <Badge variant="outline" className="text-red-500">Tükendi</Badge>
+                                  )}
+                                </div>
+                                {renderStars(product.ratings)}
+                                <p className="text-sm text-muted-foreground">
+                                  {product.review_count} değerlendirme
                                 </p>
                               </div>
 
+                              {/* Ürün Detayları */}
                               {product.specifications && (
                                 <div>
                                   <h4 className="font-semibold mb-3">Ürün Detayları</h4>
                                   <ul className="grid gap-2">
                                     {Object.entries(product.specifications).map(([key, value]: [string, any]) => (
                                       <li key={key} className="flex items-center gap-2 text-sm">
-                                        <Check className="h-4 w-4 text-green-500" />
+                                        <Info className="h-4 w-4 text-primary" />
                                         <span className="font-medium">{key}:</span> {value}
                                       </li>
                                     ))}
                                   </ul>
                                 </div>
                               )}
+
+                              {/* Faydalar */}
+                              {product.benefits && product.benefits.length > 0 && (
+                                <div>
+                                  <h4 className="font-semibold mb-3">Faydaları</h4>
+                                  <ul className="grid gap-2">
+                                    {product.benefits.map((benefit: string, idx: number) => (
+                                      <li key={idx} className="flex items-center gap-2 text-sm">
+                                        <Check className="h-4 w-4 text-green-500" />
+                                        {benefit}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+
+                              {/* Kullanım Talimatları */}
+                              {product.usage_instructions && product.usage_instructions.length > 0 && (
+                                <div>
+                                  <h4 className="font-semibold mb-3">Kullanım Talimatları</h4>
+                                  <ul className="grid gap-2">
+                                    {product.usage_instructions.map((instruction: string, idx: number) => (
+                                      <li key={idx} className="flex items-center gap-2 text-sm">
+                                        <Check className="h-4 w-4 text-primary" />
+                                        {instruction}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+
+                              {/* Sepete Ekle Butonu */}
+                              <button
+                                className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors"
+                                disabled={product.stock <= 0}
+                              >
+                                <ShoppingCart className="h-4 w-4" />
+                                {product.stock > 0 ? 'Sepete Ekle' : 'Tükendi'}
+                              </button>
                             </div>
                           </div>
                         </DialogContent>
