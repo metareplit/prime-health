@@ -4,6 +4,19 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const slides = [
+  {
+    image: "/attached_assets/1200x800.webp",
+    title: "Prime Health Klinik",
+    subtitle: "Sağlıklı ve Güzel Bir Görünüm İçin Yanınızdayız"
+  },
+  {
+    image: "/attached_assets/h.png",
+    title: "Uzman Kadromuz",
+    subtitle: "Deneyimli Ekibimizle Hizmetinizdeyiz"
+  }
+];
+
 export default function HeroSlider() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -38,38 +51,40 @@ export default function HeroSlider() {
     <div className="relative overflow-hidden group">
       <div className="embla" ref={emblaRef}>
         <div className="embla__container h-[600px] md:h-[700px]">
-          <div className="embla__slide relative w-full flex-[0_0_100%]">
-            <div 
-              className="absolute inset-0 bg-cover bg-center"
-              style={{
-                backgroundImage: `url(/attached_assets/1200x800.webp)`
-              }}
-            />
-            <div className="absolute inset-0 bg-black/30" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-center text-white px-4"
-              >
-                <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                  Prime Health Klinik
-                </h1>
-                <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
-                  Sağlıklı ve Güzel Bir Görünüm İçin Yanınızdayız
-                </p>
-                <Button 
-                  size="lg"
-                  variant="outline"
-                  className="bg-white/10 hover:bg-white/20 border-white text-white"
-                  onClick={() => window.location.href = '/randevu'}
+          {slides.map((slide, index) => (
+            <div key={index} className="embla__slide relative w-full flex-[0_0_100%]">
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{
+                  backgroundImage: `url(${slide.image})`
+                }}
+              />
+              <div className="absolute inset-0 bg-black/30" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  className="text-center text-white px-4"
                 >
-                  Randevu Al
-                </Button>
-              </motion.div>
+                  <h1 className="text-4xl md:text-6xl font-bold mb-4">
+                    {slide.title}
+                  </h1>
+                  <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+                    {slide.subtitle}
+                  </p>
+                  <Button 
+                    size="lg"
+                    variant="outline"
+                    className="bg-white/10 hover:bg-white/20 border-white text-white"
+                    onClick={() => window.location.href = '/randevu'}
+                  >
+                    Randevu Al
+                  </Button>
+                </motion.div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
 
@@ -94,7 +109,7 @@ export default function HeroSlider() {
 
       {/* Dots */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-        {/*{scrollSnaps.map((_, index) => (
+        {scrollSnaps.map((_, index) => (
           <button
             key={index}
             className={`w-2 h-2 rounded-full transition-all ${
@@ -102,7 +117,7 @@ export default function HeroSlider() {
             }`}
             onClick={() => emblaApi?.scrollTo(index)}
           />
-        ))}*/}
+        ))}
       </div>
     </div>
   );
