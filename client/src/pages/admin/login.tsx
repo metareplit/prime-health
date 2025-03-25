@@ -20,7 +20,10 @@ export default function AdminLogin() {
       console.log("Login response:", user); // Debug için
 
       if (user && user.role === "admin") {
-        window.location.href = "/admin/services"; // Window.location ile direkt yönlendirme
+        setLocation("/admin"); // AdminDashboard'a yönlendir
+      } else {
+        console.log("User is not admin:", user); // Debug için
+        setLocation("/"); // Admin değilse ana sayfaya yönlendir
       }
     } catch (error) {
       console.error("Login error:", error);
