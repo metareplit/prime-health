@@ -497,7 +497,6 @@
       "personalInfo": "Kişisel Bilgiler",
       "notes": "Notlar",
       "success": "Randevunuz başarıyla oluşturuldu",
-      "confirmation": "Randevu onayı e-posta ile gönderilecektir",
       "submit": "Randevu Oluştur",
       "notesPlaceholder": "Eklemek istediğiniz notlar...",
       "error": "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin."

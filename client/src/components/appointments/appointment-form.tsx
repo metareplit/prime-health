@@ -52,28 +52,36 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
       const res = await apiRequest("POST", "/api/appointments", data);
       return res.json();
     },
-    onSuccess: () => {
+  });
+
+  const onSubmit = async (data: any) => {
+    try {
+      if (selectedService) {
+        await createAppointment.mutateAsync({
+          fullName: data.fullName,
+          phone: data.phone,
+          email: data.email,
+          date: new Date(data.date).toISOString(),
+          time: data.time,
+          status: "confirmed",
+          serviceId: selectedService.id,
+          notes: data.notes,
+        });
+      }
+
       queryClient.invalidateQueries({ queryKey: ["/api/appointments"] });
+
       toast({
         title: "Başarılı!",
         description: "Randevunuz başarıyla oluşturuldu.",
       });
+
       form.reset();
-    },
-    onError: (error: Error) => {
+    } catch (error) {
       toast({
         variant: "destructive",
         title: "Hata!",
-        description: "Randevu oluşturulurken bir hata oluştu: " + error.message,
-      });
-    },
-  });
-
-  const onSubmit = (data: any) => {
-    if (selectedService) {
-      createAppointment.mutate({
-        ...data,
-        serviceId: selectedService.id,
+        description: "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.",
       });
     }
   };
