@@ -170,13 +170,12 @@ export const appointments = pgTable("appointments", {
   phone: text("phone").notNull(),
   date: timestamp("date").notNull(),
   time: text("time").notNull(),
-  status: text("status").notNull().default("confirmed"), // confirmed, completed, cancelled
-  type: text("type").notNull(), // initial, followup, control
+  status: text("status").notNull().default("confirmed"),
+  type: text("type").notNull().default("initial"),
   notes: text("notes"),
-  patientId: serial("patient_id").references(() => users.id).notNull(),
+  patientId: serial("patient_id").references(() => users.id),
   doctorId: serial("doctor_id").references(() => users.id),
-  serviceId: serial("service_id").notNull().references(() => services.id),
-  documents: text("documents").array(),
+  serviceId: serial("service_id").references(() => services.id),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -253,14 +252,9 @@ export const insertAppointmentSchema = createInsertSchema(appointments).extend({
   fullName: z.string().min(2, "Ad Soyad gereklidir"),
   email: z.string().email("Geçerli bir email adresi giriniz"),
   phone: z.string().min(10, "Geçerli bir telefon numarası giriniz"),
-  type: z.enum(["initial", "followup", "control"], {
-    errorMap: () => ({ message: "Geçersiz randevu tipi" }),
-  }),
-  status: z.enum(["confirmed", "completed", "cancelled"], {
-    errorMap: () => ({ message: "Geçersiz randevu durumu" }),
-  }).default("confirmed"),
+  type: z.enum(["initial", "followup", "control"]).default("initial"),
+  status: z.enum(["confirmed", "completed", "cancelled"]).default("confirmed"),
   notes: z.string().optional(),
-  documents: z.array(z.string()).optional().default([]),
 });
 
 // Export the insert schema with validations

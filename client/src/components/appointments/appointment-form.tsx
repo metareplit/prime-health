@@ -48,45 +48,31 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
 
   const createAppointment = useMutation({
     mutationFn: async (data: any) => {
-      console.log("Gönderilen randevu verisi:", data); // Debug için log
       const res = await apiRequest("POST", "/api/appointments", data);
       return res.json();
     },
-  });
-
-  const onSubmit = async (data: any) => {
-    try {
-      if (selectedService) {
-        const appointmentData = {
-          fullName: data.fullName,
-          phone: data.phone,
-          email: data.email,
-          date: new Date(data.date).toISOString(),
-          time: data.time,
-          status: "confirmed",
-          type: "initial",
-          serviceId: selectedService.id,
-          notes: data.notes || "",
-        };
-
-        console.log("Oluşturulan randevu:", appointmentData); // Debug için log
-        await createAppointment.mutateAsync(appointmentData);
-      }
-
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/appointments"] });
-
       toast({
         title: "Başarılı!",
         description: "Randevunuz başarıyla oluşturuldu.",
       });
-
       form.reset();
-    } catch (error) {
-      console.error("Randevu oluşturma hatası:", error); // Debug için log
+    },
+    onError: (error: Error) => {
       toast({
         variant: "destructive",
         title: "Hata!",
         description: "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.",
+      });
+    },
+  });
+
+  const onSubmit = (data: any) => {
+    if (selectedService) {
+      createAppointment.mutate({
+        ...data,
+        serviceId: selectedService.id,
       });
     }
   };
