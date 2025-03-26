@@ -5,10 +5,21 @@ import { sendAppointmentNotification } from '../services/telegram';
 
 const router = Router();
 
-// Telegram chat ID - Bu ID'yi bot ile etkileşime geçtiğinizde alabilirsiniz
+// Telegram chat ID
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '';
 
-// Yeni randevu oluşturma
+// Tüm randevuları getir
+router.get('/appointments', async (req, res) => {
+  try {
+    const appointments = await storage.getAllAppointments();
+    res.json(appointments);
+  } catch (error: any) {
+    console.error('Get appointments error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Yeni randevu oluştur
 router.post('/appointments', async (req, res) => {
   try {
     const appointmentData = insertAppointmentSchema.parse(req.body);
@@ -26,7 +37,7 @@ router.post('/appointments', async (req, res) => {
   }
 });
 
-// Randevu durumunu güncelleme
+// Randevu durumunu güncelle
 router.patch('/appointments/:id/status', async (req, res) => {
   try {
     const { id } = req.params;
