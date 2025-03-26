@@ -36,7 +36,7 @@ export function formatAppointmentMessage(appointment: Appointment): string {
     month: 'long',
     day: 'numeric'
   });
-  
+
   const formattedTime = appointmentDate.toLocaleTimeString('tr-TR', {
     hour: '2-digit',
     minute: '2-digit'
@@ -58,10 +58,15 @@ export function formatAppointmentMessage(appointment: Appointment): string {
   return `
 <b>🗓️ Yeni Randevu Bildirimi</b>
 
-📅 Tarih: ${formattedDate}
-⏰ Saat: ${formattedTime}
-👤 Hasta ID: #${appointment.patientId}
-📋 Durum: ${statusText}
+👤 Hasta Bilgileri:
+- Ad Soyad: ${appointment.fullName}
+- Telefon: ${appointment.phone}
+- E-posta: ${appointment.email}
+
+📅 Randevu Detayları:
+- Tarih: ${formattedDate}
+- Saat: ${formattedTime}
+- Durum: ${statusText}
 
 ${appointment.notes ? `📝 Notlar: ${appointment.notes}` : ''}
 `;
