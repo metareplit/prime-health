@@ -32,6 +32,7 @@ import PatientAppointments from "@/pages/patient/appointments";
 import PatientProfile from "@/pages/patient/profile";
 import NotFound from "@/pages/not-found";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
+import AdminAppointmentNew from "@/pages/admin/appointments/new";
 
 // Protected Route Component
 function ProtectedAdminRoute({ children }: { children: React.ReactNode }) {
@@ -71,6 +72,16 @@ function Router() {
           <ProtectedAdminRoute>
             <AdminLayout title="Randevu Yönetimi">
               <AdminAppointments />
+            </AdminLayout>
+          </ProtectedAdminRoute>
+        )}
+      </Route>
+
+      <Route path="/admin/appointments/new">
+        {() => (
+          <ProtectedAdminRoute>
+            <AdminLayout title="Yeni Randevu">
+              <AdminAppointmentNew />
             </AdminLayout>
           </ProtectedAdminRoute>
         )}
