@@ -8,12 +8,18 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, Lock, User } from "lucide-react";
 
 export default function AdminLogin() {
-  const { login } = useAuth();
+  const { login, isAdmin } = useAuth();
   const [, navigate] = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  // If already logged in as admin, redirect to dashboard
+  if (isAdmin) {
+    navigate('/admin');
+    return null;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,8 +28,7 @@ export default function AdminLogin() {
 
     try {
       await login(username, password);
-      // Explicitly navigate after successful login
-      navigate('/admin');
+      // Login successful, navigate will happen in AuthProvider
     } catch (error) {
       setError(error instanceof Error ? error.message : "Giriş başarısız");
     } finally {

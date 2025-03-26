@@ -1,6 +1,6 @@
 import { Sidebar } from "./admin-sidebar";
-import { Calendar, FileText, LogOut } from "lucide-react";
-import { Link, useLocation } from "wouter";
+import { Calendar, FileText, LogOut, Loader2 } from "lucide-react";
+import { Link, useLocation, Redirect } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 
@@ -10,7 +10,7 @@ interface AdminLayoutProps {
 }
 
 export function AdminLayout({ children, title = "Dashboard" }: AdminLayoutProps) {
-  const { logout, user, loading } = useAuth();
+  const { logout, isAdmin, loading } = useAuth();
   const [location] = useLocation();
 
   if (loading) {
@@ -21,8 +21,8 @@ export function AdminLayout({ children, title = "Dashboard" }: AdminLayoutProps)
     );
   }
 
-  // Redirect if not authenticated or not admin
-  if (!user || user.role !== "admin") {
+  // If not admin, redirect to login
+  if (!isAdmin) {
     return <Redirect to="/admin/login" />;
   }
 

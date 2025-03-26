@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import { useLocation } from 'wouter';
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 
@@ -12,6 +13,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [, navigate] = useLocation();
   const { toast } = useToast();
 
   const loginMutation = useMutation({
@@ -30,36 +32,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const data = await response.json();
       return data;
     },
-    onSuccess: (data) => {
-      if (data.role === 'admin') {
-        setIsAdmin(true);
-        toast({
-          title: "Giriş başarılı",
-          description: "Hoş geldiniz!",
-        });
-      } else {
-        toast({
-          title: "Erişim reddedildi",
-          description: "Yönetici yetkiniz bulunmuyor.",
-          variant: "destructive",
-        });
-      }
-    },
-    onError: (error: Error) => {
-      toast({
-        title: "Giriş başarısız",
-        description: error.message,
-        variant: "destructive",
-      });
-    },
   });
 
   const login = async (username: string, password: string) => {
-    await loginMutation.mutateAsync({ username, password });
+    const result = await loginMutation.mutateAsync({ username, password });
+
+    if (result.role === 'admin') {
+      setIsAdmin(true);
+      navigate('/admin');
+      toast({
+        title: "Giriş başarılı",
+        description: "Hoş geldiniz!",
+      });
+    } else {
+      toast({
+        title: "Erişim reddedildi",
+        description: "Yönetici yetkiniz bulunmuyor.",
+        variant: "destructive",
+      });
+    }
   };
 
   const logout = () => {
     setIsAdmin(false);
+    navigate('/admin/login');
     toast({
       title: "Çıkış başarılı",
       description: "Güle güle!",
