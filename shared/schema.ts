@@ -162,20 +162,21 @@ export const patientImages = pgTable("patient_images", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-// Appointments table with enhanced features
+// Appointments table schema update
 export const appointments = pgTable("appointments", {
   id: serial("id").primaryKey(),
-  patientId: serial("patient_id").notNull().references(() => users.id),
-  doctorId: serial("doctor_id").references(() => users.id),
-  serviceId: serial("service_id").notNull().references(() => services.id),
+  fullName: text("full_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
   date: timestamp("date").notNull(),
   time: text("time").notNull(),
-  status: text("status").notNull().default("pending"), // pending, confirmed, completed, cancelled
+  status: text("status").notNull().default("confirmed"), // confirmed, completed, cancelled
   type: text("type").notNull(), // initial, followup, control
   notes: text("notes"),
-  patientNotes: text("patient_notes"), // Notes from patient
-  doctorNotes: text("doctor_notes"), // Private notes for doctor
-  documents: text("documents").array(), // URLs to related documents
+  patientId: serial("patient_id").references(() => users.id).notNull(),
+  doctorId: serial("doctor_id").references(() => users.id),
+  serviceId: serial("service_id").notNull().references(() => services.id),
+  documents: text("documents").array(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -245,16 +246,20 @@ export const insertContactInfoSchema = createInsertSchema(contactInfo).extend({
 
 export const insertPatientImageSchema = createInsertSchema(patientImages);
 export const insertServiceSchema = createInsertSchema(services);
+// Update appointment schema
 export const insertAppointmentSchema = createInsertSchema(appointments).extend({
   date: z.date().min(new Date(), "Randevu tarihi geçmiş bir tarih olamaz"),
   time: z.string().min(1, "Randevu saati gereklidir"),
+  fullName: z.string().min(2, "Ad Soyad gereklidir"),
+  email: z.string().email("Geçerli bir email adresi giriniz"),
+  phone: z.string().min(10, "Geçerli bir telefon numarası giriniz"),
   type: z.enum(["initial", "followup", "control"], {
     errorMap: () => ({ message: "Geçersiz randevu tipi" }),
   }),
-  status: z.enum(["pending", "confirmed", "completed", "cancelled"], {
+  status: z.enum(["confirmed", "completed", "cancelled"], {
     errorMap: () => ({ message: "Geçersiz randevu durumu" }),
-  }),
-  patientNotes: z.string().optional(),
+  }).default("confirmed"),
+  notes: z.string().optional(),
   documents: z.array(z.string()).optional().default([]),
 });
 

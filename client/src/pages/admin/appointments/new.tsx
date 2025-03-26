@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useLocation } from "wouter";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function NewAppointment() {
   const { toast } = useToast();
@@ -16,10 +17,13 @@ export default function NewAppointment() {
   const form = useForm({
     resolver: zodResolver(insertAppointmentSchema),
     defaultValues: {
-      patientId: "",
+      fullName: "",
+      email: "",
+      phone: "",
       date: new Date().toISOString().split('T')[0],
-      status: "pending",
+      time: "09:00",
       notes: "",
+      status: "confirmed", // Direkt onaylı olarak oluştur
     },
   });
 
@@ -46,7 +50,13 @@ export default function NewAppointment() {
   });
 
   const onSubmit = (data: any) => {
-    createAppointment.mutate(data);
+    // Tarih ve saati birleştir
+    const appointmentDateTime = new Date(data.date + 'T' + data.time);
+    const formData = {
+      ...data,
+      date: appointmentDateTime.toISOString(),
+    };
+    createAppointment.mutate(formData);
   };
 
   return (
@@ -67,35 +77,80 @@ export default function NewAppointment() {
         <CardContent>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium">Hasta ID</label>
+              <label className="text-sm font-medium">Ad Soyad</label>
               <Input
-                {...form.register("patientId")}
-                type="number"
-                placeholder="Hasta ID giriniz"
+                {...form.register("fullName")}
+                placeholder="Hasta adı ve soyadı"
               />
-              {form.formState.errors.patientId && (
+              {form.formState.errors.fullName && (
                 <p className="text-sm text-red-500">
-                  {form.formState.errors.patientId.message}
+                  {form.formState.errors.fullName.message}
                 </p>
               )}
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Randevu Tarihi</label>
+              <label className="text-sm font-medium">E-posta</label>
               <Input
-                {...form.register("date")}
-                type="date"
+                {...form.register("email")}
+                type="email"
+                placeholder="E-posta adresi"
               />
-              {form.formState.errors.date && (
+              {form.formState.errors.email && (
                 <p className="text-sm text-red-500">
-                  {form.formState.errors.date.message}
+                  {form.formState.errors.email.message}
                 </p>
               )}
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Telefon</label>
+              <Input
+                {...form.register("phone")}
+                placeholder="Telefon numarası"
+              />
+              {form.formState.errors.phone && (
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.phone.message}
+                </p>
+              )}
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Tarih</label>
+                <Input
+                  {...form.register("date")}
+                  type="date"
+                  min={new Date().toISOString().split('T')[0]}
+                />
+                {form.formState.errors.date && (
+                  <p className="text-sm text-red-500">
+                    {form.formState.errors.date.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Saat</label>
+                <Input
+                  {...form.register("time")}
+                  type="time"
+                  min="09:00"
+                  max="18:00"
+                  step="1800"
+                />
+                {form.formState.errors.time && (
+                  <p className="text-sm text-red-500">
+                    {form.formState.errors.time.message}
+                  </p>
+                )}
+              </div>
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-medium">Notlar</label>
-              <Input
+              <Textarea
                 {...form.register("notes")}
                 placeholder="Randevu ile ilgili notlar..."
               />

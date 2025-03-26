@@ -67,9 +67,11 @@ export default function AdminAppointments() {
     updateAppointmentMutation.mutate({ status });
   };
 
+  // Appointments tablosunda gösterilecek alanları güncelle
   const filteredAppointments = appointments?.filter(appointment => {
-    const matchesSearch = appointment.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                       appointment.phone?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = appointment.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                       appointment.phone?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                       appointment.email?.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesStatus = statusFilter === "all" || appointment.status === statusFilter;
     const matchesDate = !dateFilter || new Date(appointment.date).toISOString().split('T')[0] === dateFilter;
@@ -160,10 +162,15 @@ export default function AdminAppointments() {
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="font-medium">
-                            {appointment.name}
-                          </p>
-                          <p className="text-sm text-muted-foreground">{service?.name}</p>
+                          {/* Görüntüleme kısmında hasta bilgilerini göster */}
+                          <div className="flex items-center gap-2">
+                            <div>
+                              <p className="font-medium">{appointment.fullName}</p>
+                              <p className="text-sm text-muted-foreground">{appointment.phone}</p>
+                              <p className="text-sm text-muted-foreground">{appointment.email}</p>
+                            </div>
+                          </div>
+                          <p className="text-sm text-muted-foreground mt-1">{service?.name}</p>
                           <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
                             <Calendar className="h-4 w-4" />
                             {new Date(appointment.date).toLocaleDateString()} {appointment.time}
