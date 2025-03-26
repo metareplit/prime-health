@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { insertPatientSchema, insertAppointmentSchema } from "@shared/schema";
+import { useMutation } from "@tanstack/react-query";
+import { insertAppointmentSchema } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import PhoneInput from 'react-phone-input-2';
@@ -21,9 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { motion, AnimatePresence } from "framer-motion";
-import { User, Phone, CalendarDays, FileText, CheckCircle2, ArrowRight } from "lucide-react";
+import { User, Phone, CalendarDays, FileText, CheckCircle2 } from "lucide-react";
 import type { Service } from "@shared/schema";
 
 interface AppointmentFormProps {
@@ -36,19 +34,19 @@ const timeSlots = [
 
 export default function AppointmentForm({ selectedService }: AppointmentFormProps) {
   const { toast } = useToast();
-  const queryClient = useQueryClient();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   const form = useForm({
-    resolver: zodResolver(insertPatientSchema),
+    resolver: zodResolver(insertAppointmentSchema),
     defaultValues: {
-      step: "personal",
-      name: "",
-      phone: "",
+      fullName: "",
       email: "",
-      preferredDate: new Date(),
-      preferredTime: "",
+      phone: "",
+      date: new Date(),
+      time: "",
       notes: "",
+      type: "initial",
+      status: "confirmed",
     },
   });
 
@@ -57,246 +55,166 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
       const res = await apiRequest("POST", "/api/appointments", data);
       return res.json();
     },
-  });
-
-  const onSubmit = async (data: any) => {
-    try {
-      if (selectedService) {
-        await createAppointment.mutateAsync({
-          fullName: data.name,
-          phone: data.phone,
-          email: data.email,
-          date: new Date(data.preferredDate).toISOString(),
-          time: data.preferredTime,
-          status: "confirmed",
-          serviceId: selectedService.id,
-          notes: data.notes,
-        });
-      }
-
-      queryClient.invalidateQueries({ queryKey: ["/api/appointments"] });
-
+    onSuccess: () => {
       toast({
-        title: t('appointment.book.success'),
-        description: t('Randevunuz başarıyla oluşturuldu. En kısa sürede sizinle iletişime geçeceğiz.'),
+        title: "Başarılı!",
+        description: "Randevunuz başarıyla oluşturuldu. En kısa sürede sizinle iletişime geçeceğiz.",
       });
-
       form.reset();
-    } catch (error) {
+    },
+    onError: (error: Error) => {
       toast({
         variant: "destructive",
-        title: t('ui.toast.error'),
-        description: t('appointment.book.error'),
+        title: "Hata!",
+        description: "Randevu oluşturulurken bir hata oluştu: " + error.message,
+      });
+    },
+  });
+
+  const onSubmit = (data: any) => {
+    if (selectedService) {
+      createAppointment.mutate({
+        ...data,
+        serviceId: selectedService.id,
       });
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <Tabs value={form.watch("step")} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-8">
-          <TabsTrigger value="personal" className="data-[state=active]:bg-primary data-[state=active]:text-white">
-            <User className="h-4 w-4 mr-2" />
-            {t('appointment.book.personalInfo')}
-          </TabsTrigger>
-          <TabsTrigger value="appointment" className="data-[state=active]:bg-primary data-[state=active]:text-white">
-            <CalendarDays className="h-4 w-4 mr-2" />
-            {t('appointment.book.title')}
-          </TabsTrigger>
-        </TabsList>
-
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-2xl font-semibold text-center">
+          Randevu Oluştur
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <AnimatePresence mode="wait">
-              <TabsContent value="personal">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-2xl font-semibold text-center">
-                      {t('appointment.book.personalInfo')}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-6 space-y-6">
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      className="space-y-6"
-                    >
-                      <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t('auth.form.fullName')}</FormLabel>
-                            <FormControl>
-                              <Input 
-                                placeholder={t('auth.form.fullName')} 
-                                {...field} 
-                                className="bg-white/50 backdrop-blur-sm"
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="fullName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Ad Soyad</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Ad Soyad" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>E-posta</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="email" placeholder="E-posta adresiniz" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Telefon</FormLabel>
+                  <FormControl>
+                    <PhoneInput
+                      country={'tr'}
+                      value={field.value}
+                      onChange={phone => field.onChange(phone)}
+                      inputClass="w-full !h-10"
+                      containerClass="!w-full"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="date"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Tarih</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="date"
+                        {...field}
+                        min={new Date().toISOString().split('T')[0]}
                       />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                      <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t('auth.form.email')}</FormLabel>
-                            <FormControl>
-                              <Input 
-                                type="email"
-                                placeholder={t('auth.form.email')} 
-                                {...field} 
-                                className="bg-white/50 backdrop-blur-sm"
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+              <FormField
+                control={form.control}
+                name="time"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Saat</FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Saat seçin" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {timeSlots.map((time) => (
+                          <SelectItem key={time} value={time}>
+                            {time}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
-                      <FormField
-                        control={form.control}
-                        name="phone"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t('auth.form.phone')}</FormLabel>
-                            <FormControl>
-                              <div className="react-tel-input">
-                                <PhoneInput
-                                  country={'tr'}
-                                  value={field.value}
-                                  onChange={phone => field.onChange(phone)}
-                                  inputClass="w-full !h-10 !bg-white/50 backdrop-blur-sm !border-input !pl-[48px]"
-                                  containerClass="!w-full"
-                                  buttonClass="!border-input !h-10 !bg-white/50"
-                                  searchClass="!bg-white"
-                                  dropdownClass="!bg-white"
-                                />
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+            <FormField
+              control={form.control}
+              name="notes"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Notlar</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      placeholder="Randevu ile ilgili eklemek istediğiniz notlar..."
+                      className="min-h-[100px]"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-                      <Button
-                        type="button"
-                        className="w-full bg-primary/90 hover:bg-primary"
-                        onClick={() => form.setValue("step", "appointment")}
-                      >
-                        {t('buttons.continue')}
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </motion.div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="appointment">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-2xl font-semibold text-center">
-                      {t('appointment.book.title')}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-6 space-y-6">
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      className="space-y-6"
-                    >
-                      <FormField
-                        control={form.control}
-                        name="preferredDate"
-                        render={({ field }) => (
-                          <FormItem className="flex flex-col">
-                            <FormLabel>{t('appointment.book.selectDate')}</FormLabel>
-                            <FormControl>
-                              <div className="border rounded-lg p-4 bg-white/50 backdrop-blur-sm">
-                                <Calendar
-                                  mode="single"
-                                  selected={field.value}
-                                  onSelect={field.onChange}
-                                  className="mx-auto"
-                                />
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="preferredTime"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t('appointment.book.selectTime')}</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                              <FormControl>
-                                <SelectTrigger className="bg-white/50 backdrop-blur-sm">
-                                  <SelectValue placeholder={t('appointment.book.selectTime')} />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {timeSlots.map((time) => (
-                                  <SelectItem key={time} value={time}>
-                                    {time}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="notes"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t('appointment.book.notes')}</FormLabel>
-                            <FormControl>
-                              <Textarea
-                                placeholder={t('appointment.book.notesPlaceholder')}
-                                className="min-h-[100px] bg-white/50 backdrop-blur-sm"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <Button
-                        type="submit"
-                        className="w-full bg-primary/90 hover:bg-primary"
-                        disabled={createAppointment.isPending}
-                      >
-                        {createAppointment.isPending ? (
-                          t('form.loading')
-                        ) : (
-                          <>
-                            {t('appointment.book.submit')}
-                            <CheckCircle2 className="ml-2 h-4 w-4" />
-                          </>
-                        )}
-                      </Button>
-                    </motion.div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </AnimatePresence>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={createAppointment.isPending}
+            >
+              {createAppointment.isPending ? (
+                "Randevu Oluşturuluyor..."
+              ) : (
+                "Randevu Oluştur"
+              )}
+            </Button>
           </form>
         </Form>
-      </Tabs>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
