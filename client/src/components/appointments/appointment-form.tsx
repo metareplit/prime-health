@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { insertAppointmentSchema } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import PhoneInput from 'react-phone-input-2';
 import { useTranslation } from "react-i18next";
 import 'react-phone-input-2/lib/style.css';
@@ -18,10 +18,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { User, Phone, CalendarDays, FileText, CheckCircle2 } from "lucide-react";
 import type { Service } from "@shared/schema";
 
 interface AppointmentFormProps {
@@ -34,7 +32,6 @@ const timeSlots = [
 
 export default function AppointmentForm({ selectedService }: AppointmentFormProps) {
   const { toast } = useToast();
-  const { t } = useTranslation();
 
   const form = useForm({
     resolver: zodResolver(insertAppointmentSchema),
@@ -56,9 +53,10 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
       return res.json();
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/appointments"] });
       toast({
         title: "Başarılı!",
-        description: "Randevunuz başarıyla oluşturuldu. En kısa sürede sizinle iletişime geçeceğiz.",
+        description: "Randevunuz başarıyla oluşturuldu.",
       });
       form.reset();
     },
