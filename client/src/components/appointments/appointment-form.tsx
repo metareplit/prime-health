@@ -14,19 +14,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar } from "@/components/ui/calendar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Phone, CalendarDays, Clock, FileText, CheckCircle2, ArrowRight } from "lucide-react";
+import { User, Phone, CalendarDays, FileText, CheckCircle2, ArrowRight } from "lucide-react";
 import type { Service } from "@shared/schema";
 
 interface AppointmentFormProps {
@@ -35,16 +32,6 @@ interface AppointmentFormProps {
 
 const timeSlots = [
   "09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"
-];
-
-const genderOptions = [
-  { label: "Erkek", value: "male" },
-  { label: "Kadın", value: "female" },
-];
-
-const communicationPreferences = [
-  { id: "whatsapp", label: "WhatsApp" },
-  { id: "phone", label: "Telefon" },
 ];
 
 export default function AppointmentForm({ selectedService }: AppointmentFormProps) {
@@ -58,21 +45,10 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
       step: "personal",
       name: "",
       phone: "",
-      age: "",
-      gender: "",
-      communicationPreferences: [],
-      previousTreatments: "",
-      medicalConditions: "",
+      email: "",
       preferredDate: new Date(),
       preferredTime: "",
       notes: "",
-    },
-  });
-
-  const createPatient = useMutation({
-    mutationFn: async (data: any) => {
-      const res = await apiRequest("POST", "/api/patients", data);
-      return res.json();
     },
   });
 
@@ -85,15 +61,15 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
 
   const onSubmit = async (data: any) => {
     try {
-      const patient = await createPatient.mutateAsync(data);
-
       if (selectedService) {
         await createAppointment.mutateAsync({
-          patientId: patient.id,
-          serviceId: selectedService.id,
+          fullName: data.name,
+          phone: data.phone,
+          email: data.email,
           date: new Date(data.preferredDate).toISOString(),
           time: data.preferredTime,
-          status: "pending",
+          status: "confirmed",
+          serviceId: selectedService.id,
           notes: data.notes,
         });
       }
@@ -102,7 +78,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
 
       toast({
         title: t('appointment.book.success'),
-        description: t('appointment.book.confirmation'),
+        description: t('Randevunuz başarıyla oluşturuldu. En kısa sürede sizinle iletişime geçeceğiz.'),
       });
 
       form.reset();
@@ -118,14 +94,10 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
   return (
     <div className="max-w-2xl mx-auto">
       <Tabs value={form.watch("step")} className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-8">
+        <TabsList className="grid w-full grid-cols-2 mb-8">
           <TabsTrigger value="personal" className="data-[state=active]:bg-primary data-[state=active]:text-white">
             <User className="h-4 w-4 mr-2" />
             {t('appointment.book.personalInfo')}
-          </TabsTrigger>
-          <TabsTrigger value="medical" className="data-[state=active]:bg-primary data-[state=active]:text-white">
-            <FileText className="h-4 w-4 mr-2" />
-            {t('patient.profile.medicalHistory')}
           </TabsTrigger>
           <TabsTrigger value="appointment" className="data-[state=active]:bg-primary data-[state=active]:text-white">
             <CalendarDays className="h-4 w-4 mr-2" />
@@ -155,10 +127,10 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         name="name"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>{t('auth.form.firstName')}</FormLabel>
+                            <FormLabel>{t('auth.form.fullName')}</FormLabel>
                             <FormControl>
                               <Input 
-                                placeholder={t('auth.form.firstName')} 
+                                placeholder={t('auth.form.fullName')} 
                                 {...field} 
                                 className="bg-white/50 backdrop-blur-sm"
                               />
@@ -168,48 +140,24 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                         )}
                       />
 
-                      <div className="grid grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="age"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>{t('gallery.patientDetails.age')}</FormLabel>
-                              <FormControl>
-                                <Input 
-                                  type="number" 
-                                  placeholder={t('gallery.patientDetails.age')} 
-                                  {...field} 
-                                  className="bg-white/50 backdrop-blur-sm"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name="gender"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>{t('gallery.patientDetails.gender')}</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <FormControl>
-                                  <SelectTrigger className="bg-white/50 backdrop-blur-sm">
-                                    <SelectValue placeholder={t('form.select')} />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  <SelectItem value="male">{t('patient.gender.male')}</SelectItem>
-                                  <SelectItem value="female">{t('patient.gender.female')}</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>{t('auth.form.email')}</FormLabel>
+                            <FormControl>
+                              <Input 
+                                type="email"
+                                placeholder={t('auth.form.email')} 
+                                {...field} 
+                                className="bg-white/50 backdrop-blur-sm"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
                       <FormField
                         control={form.control}
@@ -230,113 +178,6 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                                   dropdownClass="!bg-white"
                                 />
                               </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="communicationPreferences"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t('appointment.communicationPreferences')}</FormLabel>
-                            <div className="grid grid-cols-2 gap-4 mt-2">
-                              {communicationPreferences.map((item) => (
-                                <FormField
-                                  key={item.id}
-                                  control={form.control}
-                                  name="communicationPreferences"
-                                  render={({ field }) => (
-                                    <FormItem key={item.id}>
-                                      <FormControl>
-                                        <div className="flex items-center space-x-2 p-3 rounded-lg border bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-colors">
-                                          <Checkbox
-                                            checked={field.value?.includes(item.id)}
-                                            onCheckedChange={(checked) => {
-                                              return checked
-                                                ? field.onChange([...field.value, item.id])
-                                                : field.onChange(
-                                                    field.value?.filter((value) => value !== item.id)
-                                                  );
-                                            }}
-                                          />
-                                          <FormLabel className="text-sm font-normal cursor-pointer">
-                                            {item.label}
-                                          </FormLabel>
-                                        </div>
-                                      </FormControl>
-                                    </FormItem>
-                                  )}
-                                />
-                              ))}
-                            </div>
-                            <FormDescription>
-                              {t('appointment.communicationPreferencesDescription')}
-                            </FormDescription>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <Button
-                        type="button"
-                        className="w-full bg-primary/90 hover:bg-primary"
-                        onClick={() => form.setValue("step", "medical")}
-                      >
-                        {t('buttons.continue')}
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </motion.div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="medical">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-2xl font-semibold text-center">
-                      {t('patient.profile.medicalHistory')}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-6 space-y-6">
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      className="space-y-6"
-                    >
-                      <FormField
-                        control={form.control}
-                        name="previousTreatments"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t('patient.medicalHistory.previousTreatments')}</FormLabel>
-                            <FormControl>
-                              <Textarea
-                                placeholder={t('patient.medicalHistory.previousTreatmentsPlaceholder')}
-                                className="min-h-[100px] bg-white/50 backdrop-blur-sm"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="medicalConditions"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t('patient.medicalHistory.conditions')}</FormLabel>
-                            <FormControl>
-                              <Textarea
-                                placeholder={t('patient.medicalHistory.conditionsPlaceholder')}
-                                className="min-h-[100px] bg-white/50 backdrop-blur-sm"
-                                {...field}
-                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -437,9 +278,9 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                       <Button
                         type="submit"
                         className="w-full bg-primary/90 hover:bg-primary"
-                        disabled={createPatient.isPending || createAppointment.isPending}
+                        disabled={createAppointment.isPending}
                       >
-                        {createPatient.isPending || createAppointment.isPending ? (
+                        {createAppointment.isPending ? (
                           t('form.loading')
                         ) : (
                           <>
