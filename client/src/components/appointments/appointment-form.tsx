@@ -5,7 +5,6 @@ import { insertAppointmentSchema } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import PhoneInput from 'react-phone-input-2';
-import { useTranslation } from "react-i18next";
 import 'react-phone-input-2/lib/style.css';
 import {
   Form,
@@ -39,8 +38,8 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
       fullName: "",
       email: "",
       phone: "",
-      date: new Date(),
-      time: "",
+      date: new Date().toISOString().split('T')[0],
+      time: "09:00",
       notes: "",
       type: "initial",
       status: "confirmed",
@@ -49,6 +48,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
 
   const createAppointment = useMutation({
     mutationFn: async (data: any) => {
+      console.log("Gönderilen randevu verisi:", data); // Debug için log
       const res = await apiRequest("POST", "/api/appointments", data);
       return res.json();
     },
@@ -57,16 +57,20 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
   const onSubmit = async (data: any) => {
     try {
       if (selectedService) {
-        await createAppointment.mutateAsync({
+        const appointmentData = {
           fullName: data.fullName,
           phone: data.phone,
           email: data.email,
           date: new Date(data.date).toISOString(),
           time: data.time,
           status: "confirmed",
+          type: "initial",
           serviceId: selectedService.id,
-          notes: data.notes,
-        });
+          notes: data.notes || "",
+        };
+
+        console.log("Oluşturulan randevu:", appointmentData); // Debug için log
+        await createAppointment.mutateAsync(appointmentData);
       }
 
       queryClient.invalidateQueries({ queryKey: ["/api/appointments"] });
@@ -78,6 +82,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
 
       form.reset();
     } catch (error) {
+      console.error("Randevu oluşturma hatası:", error); // Debug için log
       toast({
         variant: "destructive",
         title: "Hata!",

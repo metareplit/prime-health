@@ -22,8 +22,12 @@ router.get('/appointments', async (req, res) => {
 // Yeni randevu oluştur
 router.post('/appointments', async (req, res) => {
   try {
+    console.log('Gelen randevu verisi:', req.body); // Debug için log
     const appointmentData = insertAppointmentSchema.parse(req.body);
+    console.log('Parse edilmiş randevu verisi:', appointmentData); // Debug için log
+
     const appointment = await storage.createAppointment(appointmentData);
+    console.log('Oluşturulan randevu:', appointment); // Debug için log
 
     // Telegram bildirimi gönder
     if (TELEGRAM_CHAT_ID) {
