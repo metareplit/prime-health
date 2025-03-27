@@ -11,6 +11,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import BeforeAfterSlider from "@/components/gallery/before-after-slider";
 import { SuccessStories } from "@/components/gallery/success-stories";
 import { ClinicGallery } from "@/components/gallery/clinic-gallery";
+import { ClinicVideos } from "@/components/gallery/clinic-videos";
 
 // Define case interface
 interface Case {
@@ -136,6 +137,12 @@ export default function Gallery() {
             >
               {t('gallery.tabs.clinic')}
             </TabsTrigger>
+            <TabsTrigger
+              value="videolar"
+              className="relative rounded-full px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-primary data-[state=active]:text-white"
+            >
+              {t('gallery.tabs.videos')}
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="oncesi-sonrasi">
@@ -192,6 +199,10 @@ export default function Gallery() {
 
           <TabsContent value="klinik">
             <ClinicGallery />
+          </TabsContent>
+
+          <TabsContent value="videolar">
+            <ClinicVideos />
           </TabsContent>
         </Tabs>
 
