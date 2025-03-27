@@ -144,6 +144,7 @@ function Router() {
               <ScrollToTop />
               <Switch>
                 <Route path="/hizmetler" component={Services} />
+                <Route path="/gallery" component={Gallery} />
                 <Route path="/galeri" component={Gallery} />
                 <Route path="/urunler" component={Products} />
                 <Route path="/iletisim" component={Contact} />
