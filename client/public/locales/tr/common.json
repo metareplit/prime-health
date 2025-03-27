@@ -251,6 +251,33 @@
   "services": {
     "title": "Hizmetlerimiz",
     "description": "Modern teknoloji ve uzman kadromuzla sunduğumuz tedavi seçenekleri",
+    "serviceItems": {
+      "1": {
+        "name": "Saç Ekimi",
+        "description": "Doğal ve kalıcı saç ekimi çözümleri",
+        "process": ["Ücretsiz konsültasyon", "Saç analizi", "Planlama", "Greft ekimi", "Sonrası bakım"]
+      },
+      "2": {
+        "name": "Sakal Ekimi",
+        "description": "Kalıcı ve doğal görünümlü sakal ekimi çözümleri",
+        "process": ["Yüz analizi", "Sakal tasarımı", "Lokal anestezi", "Greft ekimi", "Kontrol ve bakım"]
+      },
+      "3": {
+        "name": "Kaş Ekimi",
+        "description": "Doğal ve kalıcı kaş ekimi uygulaması",
+        "process": ["Kaş analizi", "Tasarım", "Lokal anestezi", "Hassas ekim", "Bakım önerileri"]
+      },
+      "4": {
+        "name": "PRP Tedavisi",
+        "description": "Kendi kanınızdan elde edilen trombositlerle saç büyümesini uyarma",
+        "process": ["Kan alımı", "PRP hazırlama", "Saçlı deri temizliği", "PRP enjeksiyonu", "Bakım önerileri"]
+      },
+      "5": {
+        "name": "Mezoterapi",
+        "description": "Saç köklerini besleyen vitamin ve mineral enjeksiyonu",
+        "process": ["Saç analizi", "Solüsyon hazırlama", "Saçlı deri temizliği", "Mikro enjeksiyonlar", "Bakım tavsiyeleri"]
+      }
+    },
     "categories": {
       "hair": {
         "title": "Saç Ekimi",

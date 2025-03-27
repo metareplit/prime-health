@@ -30,6 +30,12 @@ const slides = [
     titleKey: "slider.title4",
     descriptionKey: "slider.description4",
     buttonTextKey: "slider.button4"
+  },
+  {
+    image: "/images/slider/primehealth5.png", // Added new medical tech image
+    titleKey: "slider.title5",
+    descriptionKey: "slider.description5",
+    buttonTextKey: "slider.button5"
   }
 ];
 

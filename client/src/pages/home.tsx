@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useTranslation } from "react-i18next";
 import Features from "@/components/home/features";
+import React, { useState, useEffect } from "react";
 
 const features = [
   {
@@ -89,9 +90,53 @@ export default function Home() {
     process?: string[];
   }
 
-  const { data: services = [], isLoading } = useQuery<Service[]>({
+  // Locale servislerini kullanmak için state değişkeni
+  const { i18n } = useTranslation('common');
+  const currentLanguage = i18n.language;
+
+  // API'den gelen orjinal servisleri al
+  const { data: apiServices = [], isLoading: isApiServicesLoading } = useQuery<Service[]>({
     queryKey: ["/api/services"],
   });
+
+  // Çeviri dosyalarından gelen servisler
+  const [services, setServices] = useState<Service[]>([]);
+  
+  useEffect(() => {
+    // Tüm servis öğelerini çeviri dosyasından al
+    const serviceItems = Array.from({ length: 5 }, (_, i) => {
+      const serviceIndex = i + 1;
+      
+      // process array'ini oluştur
+      let processArray: string[] = [];
+      try {
+        const processObj = t(`services.serviceItems.${serviceIndex}.process`, { returnObjects: true });
+        if (Array.isArray(processObj)) {
+          processArray = processObj.map(item => String(item));
+        }
+      } catch (error) {
+        console.error("Process array error:", error);
+      }
+      
+      return {
+        id: serviceIndex,
+        name: t(`services.serviceItems.${serviceIndex}.name`),
+        description: t(`services.serviceItems.${serviceIndex}.description`),
+        process: processArray,
+        imageUrl: apiServices.find(s => s.id === serviceIndex)?.imageUrl || `/images/services/primehealth${serviceIndex}.png`,
+        slug: apiServices.find(s => s.id === serviceIndex)?.slug || 
+              (serviceIndex === 1 ? 'sac-ekimi' : 
+               serviceIndex === 2 ? 'sakal-ekimi' : 
+               serviceIndex === 3 ? 'kas-ekimi' : 
+               serviceIndex === 4 ? 'prp-tedavisi' : 'mezoterapi'),
+        featured: apiServices.find(s => s.id === serviceIndex)?.featured || (serviceIndex <= 3)
+      };
+    });
+    
+    setServices(serviceItems);
+  }, [t, apiServices, currentLanguage]);
+  
+  const isLoading = isApiServicesLoading;
 
   return (
     <div className="min-h-screen">

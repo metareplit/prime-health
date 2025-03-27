@@ -27,7 +27,10 @@
     "button3": "Meet Our Team",
     "title4": "Modern Clinic",
     "description4": "State-of-the-art equipment and comfortable environment",
-    "button4": "Virtual Tour"
+    "button4": "Virtual Tour",
+    "title5": "Advanced Hair Analysis",
+    "description5": "Comprehensive scalp analysis and personalized treatment plans",
+    "button5": "Book Your Analysis"
   },
   "auth": {
     "login": {
@@ -201,6 +204,33 @@
   "services": {
     "title": "Our Services",
     "description": "Treatment options we offer with modern technology and expert staff",
+    "serviceItems": {
+      "1": {
+        "name": "Hair Transplantation",
+        "description": "Natural and permanent hair transplantation solutions",
+        "process": ["Free consultation", "Hair analysis", "Planning", "Graft implantation", "Aftercare"]
+      },
+      "2": {
+        "name": "Beard Transplantation",
+        "description": "Permanent and natural-looking beard transplantation solutions",
+        "process": ["Face analysis", "Beard design", "Local anesthesia", "Graft implantation", "Monitoring and care"]
+      },
+      "3": {
+        "name": "Eyebrow Transplantation",
+        "description": "Natural and permanent eyebrow transplantation application",
+        "process": ["Eyebrow analysis", "Design", "Local anesthesia", "Precision implantation", "Care recommendations"]
+      },
+      "4": {
+        "name": "PRP Treatment",
+        "description": "Stimulating hair growth with platelets obtained from your own blood",
+        "process": ["Blood collection", "PRP preparation", "Scalp cleansing", "PRP injection", "Care recommendations"]
+      },
+      "5": {
+        "name": "Mesotherapy",
+        "description": "Vitamin and mineral injection nourishing hair follicles",
+        "process": ["Hair analysis", "Solution preparation", "Scalp cleansing", "Micro injections", "Care recommendations"]
+      }
+    },
     "categories": {
       "hair": {
         "title": "Hair Transplantation",
