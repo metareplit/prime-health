@@ -548,6 +548,52 @@
     "tabs": {
       "beforeAfter": "Before and After",
       "clinic": "Clinic Gallery",
+      "videos": "Clinic Videos",
+      "success": "Success Stories"
+    },
+    "videos": {
+      "title": "Clinic Video Gallery",
+      "subtitle": "Videos from our clinic showing operations and treatment processes",
+      "operationProcess": {
+        "title": "Operation Process",
+        "description": "Video showing stages of hair transplantation operation"
+      },
+      "hairlineDesign": {
+        "title": "Hairline Design",
+        "description": "Custom hairline design process"
+      },
+      "graftExtraction": {
+        "title": "Graft Extraction Process",
+        "description": "Process of collecting grafts from donor area"
+      },
+      "implantationProcess": {
+        "title": "Implantation Process",
+        "description": "Technique and process of implanting hair grafts"
+      },
+      "clinicTour": {
+        "title": "Clinic Tour",
+        "description": "Explore all areas of our modern clinic"
+      },
+      "patientExperience": {
+        "title": "Patient Experience",
+        "description": "Experiences of our patients throughout the process"
+      },
+      "teamAtWork": {
+        "title": "Team at Work",
+        "description": "Our professional team during work moments"
+      },
+      "aftercareProcess": {
+        "title": "Aftercare Process",
+        "description": "Post-operation care instructions and healing process"
+      },
+      "dhiTechnique": {
+        "title": "DHI Technique",
+        "description": "Application of DHI (Direct Hair Implantation) technique"
+      },
+      "fueTechnique": {
+        "title": "FUE Technique",
+        "description": "Demonstration of FUE (Follicular Unit Extraction) technique"
+      }
     },
     "labels": {
       "photo": "Photo",

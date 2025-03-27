@@ -516,7 +516,52 @@
     "tabs": {
       "beforeAfter": "Öncesi ve Sonrası",
       "clinic": "Klinik Görselleri",
+      "videos": "Klinik Videoları",
       "success": "Başarı Hikayeleri"
+    },
+    "videos": {
+      "title": "Klinik Video Galerisi",
+      "subtitle": "Kliniğimizin operasyon anlarından görüntüler ve tedavi süreçleri",
+      "operationProcess": {
+        "title": "Operasyon Süreci",
+        "description": "Saç ekimi operasyonunun aşamalarını gösteren video"
+      },
+      "hairlineDesign": {
+        "title": "Saç Çizgisi Tasarımı",
+        "description": "Kişiye özel saç çizgisi tasarlama süreci"
+      },
+      "graftExtraction": {
+        "title": "Greft Çıkarım İşlemi",
+        "description": "Donör bölgeden greftlerin toplanma süreci"
+      },
+      "implantationProcess": {
+        "title": "Ekim İşlemi",
+        "description": "Saç greftlerinin yerleştirilme tekniği ve süreci"
+      },
+      "clinicTour": {
+        "title": "Klinik Turu",
+        "description": "Modern kliniğimizin tüm alanlarını keşfedin"
+      },
+      "patientExperience": {
+        "title": "Hasta Deneyimi",
+        "description": "Hastalarımızın tüm süreç boyunca deneyimleri"
+      },
+      "teamAtWork": {
+        "title": "Çalışan Ekibimiz",
+        "description": "Profesyonel ekibimizin çalışma anları"
+      },
+      "aftercareProcess": {
+        "title": "Sonrası Bakım Süreci",
+        "description": "Operasyon sonrası bakım talimatları ve iyileşme süreci"
+      },
+      "dhiTechnique": {
+        "title": "DHI Tekniği",
+        "description": "DHI (Direct Hair Implantation) tekniğinin uygulanması"
+      },
+      "fueTechnique": {
+        "title": "FUE Tekniği",
+        "description": "FUE (Follicular Unit Extraction) tekniğinin gösterimi"
+      }
     },
     "labels": {
       "photo": "Fotoğraf",
