@@ -26,7 +26,7 @@ const slides = [
     buttonTextKey: "slider.button3"
   },
   {
-    image: "/images/slider/modern-clinic.png",
+    image: "/images/slider/modern-clinic.png", // Updated image path
     titleKey: "slider.title4",
     descriptionKey: "slider.description4",
     buttonTextKey: "slider.button4"
