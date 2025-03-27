@@ -102,80 +102,80 @@
     "confirm": "Onayla"
   },
   "products": {
-    "title": "Profesyonel Saç Bakım Ürünleri",
-    "subtitle": "Saç ekimi sonrası en iyi sonucu almak için özel olarak formüle edilmiş ürünler",
-    "search": "Ürün ara...",
+    "title": "Professional Hair Care Products",
+    "subtitle": "Products specially formulated to get the best results after hair transplantation",
+    "search": "Search products...",
     "categories": {
       "all": {
-        "title": "Tüm Ürünler",
-        "shortTitle": "Tümü",
-        "description": "Tüm VitHair ürünleri"
+        "title": "All Products",
+        "shortTitle": "All",
+        "description": "All VitHair products"
       },
       "monthlySets": {
-        "title": "Aylık Bakım Setleri",
-        "shortTitle": "Setler",
-        "description": "Aylık bakım setleri"
+        "title": "Monthly Care Sets",
+        "shortTitle": "Sets",
+        "description": "Monthly care sets"
       },
       "shampooAndFoam": {
-        "title": "Şampuan ve Köpük",
-        "shortTitle": "Şampuan",
-        "description": "Şampuan ve köpük ürünleri"
+        "title": "Shampoo and Foam",
+        "shortTitle": "Shampoo",
+        "description": "Shampoo and foam products"
       },
       "spray": {
-        "title": "Sprey",
-        "shortTitle": "Sprey",
-        "description": "Sprey ürünleri"
+        "title": "Spray",
+        "shortTitle": "Spray",
+        "description": "Spray products"
       },
       "tablet": {
         "title": "Tablet",
         "shortTitle": "Tablet",
-        "description": "Tablet ürünleri"
+        "description": "Tablet products"
       },
       "mesotherapyAndPrp": {
-        "title": "Mezoterapi ve PRP",
-        "shortTitle": "Mezoterapi",
-        "description": "Mezoterapi ve PRP ürünleri"
+        "title": "Mesotherapy and PRP",
+        "shortTitle": "Mesotherapy",
+        "description": "Mesotherapy and PRP products"
       },
       "shampoos": {
-        "title": "Saç Bakım Şampuanları",
-        "description": "Saç ekimi sonrası özel olarak formüle edilmiş şampuanlar"
+        "title": "Hair Care Shampoos",
+        "description": "Shampoos specially formulated for post-hair transplant"
       },
       "serums": {
-        "title": "Saç Büyütme Serumları",
-        "description": "Saç büyümesini destekleyen özel serumlar"
+        "title": "Hair Growth Serums",
+        "description": "Special serums that support hair growth"
       },
       "masks": {
-        "title": "Saç Bakım Maskeleri",
-        "description": "Yoğun bakım ve onarım sağlayan maskeler"
+        "title": "Hair Care Masks",
+        "description": "Masks providing intensive care and repair"
       },
       "vitamins": {
-        "title": "Saç Bakım Vitaminleri",
-        "description": "Saç sağlığını içten destekleyen vitamin takviyeleri"
+        "title": "Hair Care Vitamins",
+        "description": "Vitamin supplements that support hair health from within"
       },
       "tonics": {
-        "title": "Saç Bakım Tonikleri",
-        "description": "Saç derisini canlandıran ve besleyen tonikler"
+        "title": "Hair Care Tonics",
+        "description": "Tonics that revitalize and nourish the scalp"
       },
       "creams": {
-        "title": "Saç Bakım Kremleri",
-        "description": "Günlük bakım ve nemlendirme için kremler"
+        "title": "Hair Care Creams",
+        "description": "Creams for daily care and hydration"
       }
     },
     "product": {
-      "ingredients": "İçerik Maddeleri",
-      "benefits": "Faydaları",
-      "instructions": "Kullanım Talimatları",
-      "warnings": "Uyarılar",
+      "ingredients": "Ingredients",
+      "benefits": "Benefits",
+      "instructions": "Usage Instructions",
+      "warnings": "Warnings",
       "hairTypes": {
-        "all": "Tüm Saç Tipleri",
-        "oily": "Yağlı",
-        "dry": "Kuru",
+        "all": "All Hair Types",
+        "oily": "Oily",
+        "dry": "Dry",
         "normal": "Normal",
-        "mixed": "Karma",
-        "damaged": "Yıpranmış",
-        "sensitive": "Hassas",
-        "thin": "İnce Telli",
-        "thick": "Kalın Telli"
+        "mixed": "Mixed",
+        "damaged": "Damaged",
+        "sensitive": "Sensitive",
+        "thin": "Thin",
+        "thick": "Thick"
       }
     }
   },
