@@ -1,105 +1,105 @@
 {
   "nav": {
-    "home": "Ana Sayfa",
-    "services": "Hizmetler",
-    "gallery": "Galeri",
-    "products": "Ürünler",
-    "blog": "Blog",
-    "contact": "İletişim",
-    "appointments": "Randevu Al",
-    "patientPortal": "Hasta Portalı",
-    "userMenu": "Kullanıcı Menüsü",
-    "menu": "Menü",
-    "doctors": "Doktorlarımız",
-    "press": "Basında Biz",
+    "home": "Главная",
+    "services": "Услуги",
+    "gallery": "Галерея",
+    "products": "Продукты",
+    "blog": "Блог",
+    "contact": "Контакты",
+    "appointments": "Записаться",
+    "patientPortal": "Портал пациента",
+    "userMenu": "Меню пользователя",
+    "menu": "Меню",
+    "doctors": "Наши врачи",
+    "press": "Пресса",
     "brand": "Prime Health"
   },
   "slider": {
-    "title1": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
-    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
-    "button1": "Ücretsiz Konsültasyon",
-    "title2": "Doğal ve Kalıcı Sonuçlar",
-    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
-    "button2": "Sonuçları Görün",
-    "title3": "Profesyonel Kadro",
-    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
-    "button3": "Ekibimizle Tanışın",
-    "title4": "Modern Klinik",
-    "description4": "Son teknoloji ekipman ve konforlu ortam",
-    "button4": "Sanal Tur"
+    "title1": "Клиника-эксперт в трансплантации волос и эстетических процедурах",
+    "description1": "Получите наилучшие результаты с нашими современными технологиями и командой экспертов",
+    "button1": "Бесплатная консультация",
+    "title2": "Естественные и постоянные результаты",
+    "description2": "Гарантированные результаты с техниками DHI и Sapphire FUE",
+    "button2": "Посмотреть результаты",
+    "title3": "Профессиональная команда",
+    "description3": "Опытные врачи и квалифицированный медицинский персонал",
+    "button3": "Познакомьтесь с нашей командой",
+    "title4": "Современная клиника",
+    "description4": "Современное оборудование и комфортная обстановка",
+    "button4": "Виртуальный тур"
   },
   "header": {
     "menu": {
-      "open": "Menüyü aç",
-      "close": "Menüyü kapat",
-      "main": "Ana menü",
-      "user": "Kullanıcı menüsü"
+      "open": "Открыть меню",
+      "close": "Закрыть меню",
+      "main": "Главное меню",
+      "user": "Меню пользователя"
     },
     "search": {
-      "placeholder": "Ara...",
-      "button": "Ara",
-      "noResults": "Sonuç bulunamadı"
+      "placeholder": "Поиск...",
+      "button": "Искать",
+      "noResults": "Ничего не найдено"
     },
     "buttons": {
-      "appointment": "Randevu Al",
-      "consultation": "Ücretsiz Danışmanlık",
-      "contact": "İletişime Geç"
+      "appointment": "Записаться",
+      "consultation": "Бесплатная консультация",
+      "contact": "Связаться с нами"
     },
     "userMenu": {
-      "profile": "Profilim",
-      "appointments": "Randevularım",
-      "dashboard": "Kontrol Paneli",
-      "settings": "Ayarlar",
-      "logout": "Çıkış Yap"
+      "profile": "Мой профиль",
+      "appointments": "Мои записи",
+      "dashboard": "Панель управления",
+      "settings": "Настройки",
+      "logout": "Выйти"
     }
   },
   "ui": {
     "dialog": {
-      "close": "Kapat"
+      "close": "Закрыть"
     },
     "command": {
-      "search": "Ara...",
-      "empty": "Sonuç bulunamadı.",
-      "shortcut": "Kısayol"
+      "search": "Поиск...",
+      "empty": "Результаты не найдены.",
+      "shortcut": "Ярлык"
     },
     "table": {
-      "empty": "Veri bulunamadı.",
-      "loading": "Yükleniyor...",
-      "previous": "Önceki",
-      "next": "Sonraki",
-      "rowsPerPage": "Sayfa başına satır:",
+      "empty": "Данные не найдены.",
+      "loading": "Загрузка...",
+      "previous": "Предыдущий",
+      "next": "Следующий",
+      "rowsPerPage": "Строк на странице:",
       "of": "/",
-      "more": "Daha Fazla"
+      "more": "Больше"
     },
     "form": {
-      "required": "Bu alan zorunludur",
-      "invalid": "Geçersiz değer",
-      "select": "Seçiniz"
+      "required": "Это поле обязательно",
+      "invalid": "Неверное значение",
+      "select": "Выберите"
     },
     "toast": {
-      "success": "Başarılı",
-      "error": "Hata",
-      "info": "Bilgi",
-      "warning": "Uyarı",
-      "close": "Kapat"
+      "success": "Успешно",
+      "error": "Ошибка",
+      "info": "Информация",
+      "warning": "Предупреждение",
+      "close": "Закрыть"
     }
   },
   "buttons": {
-    "submit": "Gönder",
-    "cancel": "İptal",
-    "save": "Kaydet",
-    "continue": "Devam Et",
-    "back": "Geri",
-    "edit": "Düzenle",
-    "upload": "Yükle",
-    "readMore": "Devamını Oku",
-    "learnMore": "Daha Fazla Bilgi",
-    "getStarted": "Hemen Başla",
-    "contactUs": "Bize Ulaşın",
-    "close": "Kapat",
-    "delete": "Sil",
-    "appointment": "Randevu Al",
-    "confirm": "Onayla"
+    "submit": "Отправить",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "continue": "Продолжить",
+    "back": "Назад",
+    "edit": "Редактировать",
+    "upload": "Загрузить",
+    "readMore": "Читать дальше",
+    "learnMore": "Узнать больше",
+    "getStarted": "Начать",
+    "contactUs": "Связаться с нами",
+    "close": "Закрыть",
+    "delete": "Удалить",
+    "appointment": "Записаться",
+    "confirm": "Подтвердить"
   },
   "products": {
     "title": "Профессиональные средства по уходу за волосами",
@@ -180,100 +180,100 @@
     }
   },
   "auth": {
-    "login": "Giriş Yap",
-    "register": "Kayıt Ol",
-    "logout": "Çıkış Yap"
+    "login": "Войти",
+    "register": "Зарегистрироваться",
+    "logout": "Выйти"
   },
   "validation": {
-    "required": "Bu alan zorunludur",
-    "email": "Geçerli bir e-posta adresi giriniz",
-    "phone": "Geçerli bir telefon numarası giriniz",
-    "minLength": "En az {{count}} karakter giriniz",
-    "maxLength": "En fazla {{count}} karakter giriniz",
-    "passwordMatch": "Şifreler eşleşmiyor",
-    "invalidDate": "Geçerli bir tarih giriniz",
-    "futureDate": "Gelecek bir tarih seçiniz",
-    "numeric": "Sadece sayı giriniz",
-    "url": "Geçerli bir URL giriniz"
+    "required": "Это поле обязательно",
+    "email": "Введите действительный адрес электронной почты",
+    "phone": "Введите действительный номер телефона",
+    "minLength": "Введите не менее {{count}} символов",
+    "maxLength": "Введите не более {{count}} символов",
+    "passwordMatch": "Пароли не совпадают",
+    "invalidDate": "Введите действительную дату",
+    "futureDate": "Выберите дату в будущем",
+    "numeric": "Введите только цифры",
+    "url": "Введите действительный URL"
   },
   "home": {
     "hero": {
-      "title": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
-      "subtitle": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
-      "cta": "Ücretsiz Konsültasyon"
+      "title": "Клиника-эксперт в трансплантации волос и эстетических процедурах",
+      "subtitle": "Получите наилучшие результаты с помощью современных технологий и нашей команды экспертов",
+      "cta": "Бесплатная консультация"
     },
     "services": {
-      "title": "Hizmetlerimiz",
-      "subtitle": "Uzman kadromuz ve modern teknolojimizle sizlere sunduğumuz kapsamlı tedavi seçenekleri"
+      "title": "Наши услуги",
+      "subtitle": "Комплексные варианты лечения, предлагаемые нашим профессиональным персоналом и современными технологиями"
     },
     "doctor": {
-      "title": "Dr. Ali Çalışkan",
-      "position": "Saç Ekim Uzmanı",
-      "description": "10 yılı aşkın deneyimi ile saç ekimi ve estetik cerrahi alanında uzmanlaşmış, binlerce başarılı operasyona imza atmış değerli bir hekimdir.",
-      "expert": "Uzman Hekim",
-      "experience": "10+ Yıl Deneyim",
-      "operations": "500+ Operasyon",
-      "results": "Başarılı Sonuçlar",
-      "appointment": "Hemen Randevu Oluştur"
+      "title": "Др. Али Чалышкан",
+      "position": "Специалист по трансплантации волос",
+      "description": "Ценный врач, специализирующийся на трансплантации волос и эстетической хирургии с более чем 10-летним опытом, провёл тысячи успешных операций.",
+      "expert": "Врач-специалист",
+      "experience": "10+ лет опыта",
+      "operations": "500+ операций",
+      "results": "Успешные результаты",
+      "appointment": "Записаться на консультацию сейчас"
     },
     "features": {
-      "title": "Neden Bizi Seçmelisiniz?",
-      "subtitle": "Size en iyi hizmeti sunmak için çalışıyoruz",
+      "title": "Почему стоит выбрать нас?",
+      "subtitle": "Мы стремимся предоставить вам лучший сервис",
       "expertise": {
-        "title": "Uzman Kadro",
-        "description": "Alanında uzman doktorlarımız ve deneyimli ekibimizle yanınızdayız"
+        "title": "Команда экспертов",
+        "description": "Наши специализированные врачи и опытная команда к вашим услугам"
       },
       "technology": {
-        "title": "Modern Teknoloji",
-        "description": "En son teknolojik cihazlar ve yöntemlerle tedavi"
+        "title": "Современные технологии",
+        "description": "Лечение с использованием новейших технологических устройств и методов"
       },
       "care": {
-        "title": "Kişisel Bakım",
-        "description": "Her hastaya özel tedavi planı ve sürekli takip"
+        "title": "Индивидуальный уход",
+        "description": "Индивидуальный план лечения и постоянное наблюдение для каждого пациента"
       },
       "recovery": {
-        "title": "Hızlı İyileşme",
-        "description": "Minimal invaziv teknikler ile hızlı iyileşme süreci"
+        "title": "Быстрое восстановление",
+        "description": "Быстрый процесс восстановления с минимально инвазивными техниками"
       },
       "guarantee": {
-        "title": "Garantili Sonuç",
-        "description": "Yüksek hasta memnuniyeti ve garantili sonuçlar"
+        "title": "Гарантированный результат",
+        "description": "Высокая удовлетворенность пациентов и гарантированные результаты"
       },
       "approach": {
-        "title": "Kişisel Yaklaşım",
-        "description": "Her hastaya özel tasarlanmış tedavi planı"
+        "title": "Персональный подход",
+        "description": "План лечения, разработанный специально для каждого пациента"
       },
       "clinic": {
-        "title": "Modern Klinik",
-        "description": "Tam donanımlı, konforlu klinik ortamı"
+        "title": "Современная клиника",
+        "description": "Полностью оборудованная, комфортная клиническая среда"
       },
       "location": {
-        "title": "Merkezi Konum",
-        "description": "Kolay ulaşılabilir merkezi lokasyon"
+        "title": "Центральное расположение",
+        "description": "Легко доступное центральное расположение"
       }
     },
     "doctors": {
-      "title": "Uzman Doktorlarımız",
-      "subtitle": "Alanında uzman ve deneyimli doktor kadromuz",
-      "viewProfile": "Profili İncele",
-      "specialties": "Uzmanlık Alanları",
-      "experience": "Deneyim",
-      "education": "Eğitim",
-      "languages": "Konuştuğu Diller"
+      "title": "Наши специалисты",
+      "subtitle": "Наша команда опытных и специализированных врачей",
+      "viewProfile": "Просмотреть профиль",
+      "specialties": "Специализации",
+      "experience": "Опыт",
+      "education": "Образование",
+      "languages": "Языки"
     },
 
     "testimonials": {
-      "title": "Hasta Yorumları",
-      "subtitle": "Başarı hikayelerimiz ve mutlu hastalarımız",
-      "verified": "Doğrulanmış Hasta",
-      "readMore": "Devamını Oku"
+      "title": "Отзывы пациентов",
+      "subtitle": "Наши истории успеха и довольные пациенты",
+      "verified": "Проверенный пациент",
+      "readMore": "Читать дальше"
     },
     "stats": {
-      "title": "Rakamlarla Biz",
-      "happyPatients": "Mutlu Hasta",
-      "experience": "Yıllık Deneyim",
-      "procedures": "Başarılı İşlem",
-      "experts": "Uzman Doktor"
+      "title": "Мы в цифрах",
+      "happyPatients": "Довольных пациентов",
+      "experience": "Лет опыта",
+      "procedures": "Успешных процедур",
+      "experts": "Врачей-специалистов"
     }
   },
   "services": {
