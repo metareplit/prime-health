@@ -455,6 +455,93 @@
       }
     }
   },
+  "gallery": {
+    "title": "პაციენტის შედეგების გალერეა",
+    "subtitle": "ჩვენს პროფესიონალურ თმის გადანერგვის კლინიკაში ჩატარებული ოპერაციების შედეგები",
+    "search": {
+      "placeholder": "პაციენტის შედეგების ძიება...",
+      "noResults": "შედეგები ვერ მოიძებნა"
+    },
+    "tabs": {
+      "beforeAfter": "მანამდე და შემდეგ",
+      "clinic": "კლინიკის გალერეა",
+      "videos": "კლინიკის ვიდეოები",
+      "success": "წარმატების ისტორიები"
+    },
+    "videos": {
+      "title": "კლინიკის ვიდეო გალერეა",
+      "subtitle": "ვიდეოები ჩვენი კლინიკიდან, რომლებიც აჩვენებს ოპერაციებსა და მკურნალობის პროცესებს",
+      "operationProcess": {
+        "title": "ოპერაციის პროცესი",
+        "description": "ვიდეო, რომელიც აჩვენებს თმის გადანერგვის ოპერაციის ეტაპებს"
+      },
+      "hairlineDesign": {
+        "title": "თმის ხაზის დიზაინი",
+        "description": "ინდივიდუალური თმის ხაზის დიზაინის პროცესი"
+      },
+      "graftExtraction": {
+        "title": "გრაფტის ექსტრაქციის პროცესი",
+        "description": "დონორის არეალიდან გრაფტების შეგროვების პროცესი"
+      },
+      "implantationProcess": {
+        "title": "იმპლანტაციის პროცესი",
+        "description": "თმის გრაფტების იმპლანტაციის ტექნიკა და პროცესი"
+      },
+      "clinicTour": {
+        "title": "კლინიკის ტური",
+        "description": "ჩვენი თანამედროვე კლინიკის ყველა არეალის დათვალიერება"
+      },
+      "patientExperience": {
+        "title": "პაციენტების გამოცდილება",
+        "description": "ჩვენი პაციენტების გამოცდილება მთელი პროცესის განმავლობაში"
+      },
+      "teamAtWork": {
+        "title": "სამუშაო გუნდი",
+        "description": "ჩვენი პროფესიონალი გუნდის სამუშაო მომენტები"
+      },
+      "aftercareProcess": {
+        "title": "ოპერაციის შემდგომი მოვლის პროცესი",
+        "description": "ოპერაციის შემდგომი მოვლის ინსტრუქციები და აღდგენის პროცესი"
+      },
+      "dhiTechnique": {
+        "title": "DHI ტექნიკა",
+        "description": "DHI (Direct Hair Implantation) ტექნიკის გამოყენება"
+      },
+      "fueTechnique": {
+        "title": "FUE ტექნიკა",
+        "description": "FUE (Follicular Unit Extraction) ტექნიკის დემონსტრაცია"
+      }
+    },
+    "labels": {
+      "photo": "ფოტო",
+      "video": "ვიდეო",
+      "videoNotSupported": "თქვენი ბრაუზერი არ უჭერს მხარს ვიდეოს გადახვევას."
+    },
+    "buttons": {
+      "consult": "უფასო კონსულტაცია",
+      "share": "გაზიარება"
+    },
+    "caseDescriptions": {
+      "sixMonthResult": "6 თვის შედეგი",
+      "eightMonthResult": "8 თვის შედეგი",
+      "twelveMonthResult": "12 თვის შედეგი"
+    },
+    "techniques": {
+      "safirFUE": "საფირის FUE",
+      "dhi": "DHI",
+      "classicFUE": "კლასიკური FUE"
+    },
+    "durations": {
+      "sixHours": "6 საათი",
+      "sevenHours": "7 საათი",
+      "eightHours": "8 საათი"
+    },
+    "satisfactions": {
+      "verySatisfied": "ძალიან კმაყოფილი",
+      "satisfied": "კმაყოფილი",
+      "extremelySatisfied": "უკიდურესად კმაყოფილი"
+    }
+  },
   "faq": {
     "title": "ხშირად დასმული კითხვები",
     "subtitle": "პასუხები ჩვენი ექსპერტების გუნდისგან თქვენს ყველა კითხვაზე თმის გადანერგვის შესახებ",
