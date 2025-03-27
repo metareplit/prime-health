@@ -548,6 +548,84 @@
     "tabs": {
       "beforeAfter": "Before and After",
       "clinic": "Clinic Gallery",
+    },
+    "labels": {
+      "photo": "Photo",
+      "video": "Video",
+      "videoNotSupported": "Your browser does not support video playback."
+    },
+    "buttons": {
+      "consult": "Free Consultation"
+    },
+    "caseDescriptions": {
+      "sixMonthResult": "6 month result",
+      "eightMonthResult": "8 month result",
+      "twelveMonthResult": "12 month result"
+    },
+    "techniques": {
+      "safirFUE": "Sapphire FUE",
+      "dhi": "DHI"
+    },
+    "durations": {
+      "sixHours": "6 hours",
+      "sevenHours": "7 hours",
+      "eightHours": "8 hours"
+    },
+    "satisfactions": {
+      "satisfied": "Satisfied",
+      "verySatisfied": "Very satisfied",
+      "extremelySatisfied": "Extremely satisfied"
+    },
+    "clinic": {
+      "hairTransplantProcedure": {
+        "title": "Hair Transplant Procedure",
+        "description": "Hair transplant operation with our expert team"
+      },
+      "operationMoment": {
+        "title": "Operation Moment",
+        "description": "Hair transplant procedure with modern equipment"
+      },
+      "clinicWork": {
+        "title": "Clinic Work",
+        "description": "Our expert doctors during operation"
+      },
+      "hairTransplantTechniques": {
+        "title": "Hair Transplant Techniques",
+        "description": "Hair transplant application with precise procedures"
+      },
+      "operatingRoom": {
+        "title": "Operating Room",
+        "description": "Hair transplant procedure in our modern operating room"
+      },
+      "teamWork": {
+        "title": "Team Work",
+        "description": "Our professional team during work"
+      },
+      "expertDoctors": {
+        "title": "Expert Doctors",
+        "description": "Our experienced doctors during operation"
+      },
+      "hairlineDesign": {
+        "title": "Hairline Design",
+        "description": "Personalized hairline design and application"
+      },
+      "operationDetails": {
+        "title": "Operation Details",
+        "description": "Meticulously performed hair transplant operation"
+      },
+      "microFUETechnique": {
+        "title": "Micro FUE Technique",
+        "description": "Hair transplant application with Micro FUE technique"
+      },
+      "surgicalMagnification": {
+        "title": "Surgical Magnification",
+        "description": "Precise procedure with high magnification devices"
+      },
+      "operationPreparation": {
+        "title": "Operation Preparation",
+        "description": "Operation preparation in a sterile environment"
+      }
+    },
       "success": "Success Stories"
     },
     "caseDescriptions": {

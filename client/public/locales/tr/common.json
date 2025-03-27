@@ -518,6 +518,83 @@
       "clinic": "Klinik Görselleri",
       "success": "Başarı Hikayeleri"
     },
+    "labels": {
+      "photo": "Fotoğraf",
+      "video": "Video",
+      "videoNotSupported": "Tarayıcınız video oynatmayı desteklemiyor."
+    },
+    "buttons": {
+      "consult": "Ücretsiz Konsültasyon"
+    },
+    "caseDescriptions": {
+      "sixMonthResult": "6 ay sonrası sonuç",
+      "eightMonthResult": "8 ay sonrası sonuç",
+      "twelveMonthResult": "12 ay sonrası sonuç"
+    },
+    "techniques": {
+      "safirFUE": "Safir FUE",
+      "dhi": "DHI"
+    },
+    "durations": {
+      "sixHours": "6 saat",
+      "sevenHours": "7 saat",
+      "eightHours": "8 saat"
+    },
+    "satisfactions": {
+      "satisfied": "Memnun",
+      "verySatisfied": "Çok memnun",
+      "extremelySatisfied": "Son derece memnun"
+    },
+    "clinic": {
+      "hairTransplantProcedure": {
+        "title": "Saç Ekimi İşlemi",
+        "description": "Uzman ekibimizle saç ekimi operasyonu"
+      },
+      "operationMoment": {
+        "title": "Operasyon Anı",
+        "description": "Modern cihazlarımızla saç ekimi prosedürü"
+      },
+      "clinicWork": {
+        "title": "Klinik Çalışma",
+        "description": "Uzman doktorlarımız operasyon sırasında"
+      },
+      "hairTransplantTechniques": {
+        "title": "Saç Ekimi Teknikleri",
+        "description": "Hassas işlemlerle saç ekimi uygulaması"
+      },
+      "operatingRoom": {
+        "title": "Operasyon Odası",
+        "description": "Modern operasyon odamızda saç ekimi işlemi"
+      },
+      "teamWork": {
+        "title": "Ekip Çalışması",
+        "description": "Profesyonel ekibimiz çalışma anında"
+      },
+      "expertDoctors": {
+        "title": "Uzman Doktorlarımız",
+        "description": "Deneyimli doktorlarımız operasyon sırasında"
+      },
+      "hairlineDesign": {
+        "title": "Saç Çizgisi Tasarımı",
+        "description": "Kişiye özel saç çizgisi tasarımı ve uygulaması"
+      },
+      "operationDetails": {
+        "title": "Operasyon Detayları",
+        "description": "Titizlikle yapılan saç ekimi operasyonu"
+      },
+      "microFUETechnique": {
+        "title": "Mikro FUE Tekniği",
+        "description": "Mikro FUE tekniği ile saç ekimi uygulaması"
+      },
+      "surgicalMagnification": {
+        "title": "Cerrahi Magnifikasyon",
+        "description": "Yüksek magnifikasyon cihazlarıyla hassas işlem"
+      },
+      "operationPreparation": {
+        "title": "Operasyon Hazırlığı",
+        "description": "Steril ortamda operasyon hazırlığı"
+      }
+    },
     "caseDescriptions": {
       "sixMonthResult": "6 ay sonrası sonuç",
       "eightMonthResult": "8 ay sonrası sonuç",
