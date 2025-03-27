@@ -52,6 +52,19 @@ export default function Gallery() {
       results: {
         satisfaction: t('gallery.satisfactions.verySatisfied')
       }
+    },
+    {
+      id: 2,
+      beforeImage: "/images/before-after/IMG-20250325-WA0040.jpg",
+      afterImage: "/images/before-after/IMG-20250325-WA0041.jpg",
+      description: t('gallery.caseDescriptions.nineMonthResult'),
+      procedureDetails: {
+        technique: t('gallery.techniques.safirFUE'),
+        duration: t('gallery.durations.sixHours')
+      },
+      results: {
+        satisfaction: t('gallery.satisfactions.extremelySatisfied')
+      }
     }
   ];
 
