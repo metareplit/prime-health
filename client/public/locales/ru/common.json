@@ -623,151 +623,151 @@
     },
     "clinic": {
       "hairTransplantProcedure": {
-        "title": "Saç Ekimi İşlemi",
-        "description": "Uzman ekibimizle saç ekimi operasyonu"
+        "title": "Процедура Трансплантации Волос",
+        "description": "Операция по трансплантации волос с нашей командой экспертов"
       },
       "operationMoment": {
-        "title": "Operasyon Anı",
-        "description": "Modern cihazlarımızla saç ekimi prosedürü"
+        "title": "Момент Операции",
+        "description": "Процедура трансплантации волос с нашим современным оборудованием"
       },
       "clinicWork": {
-        "title": "Klinik Çalışma",
-        "description": "Uzman doktorlarımız operasyon sırasında"
+        "title": "Клиническая Работа",
+        "description": "Наши врачи-специалисты во время операции"
       },
       "hairTransplantTechniques": {
-        "title": "Saç Ekimi Teknikleri",
-        "description": "Hassas işlemlerle saç ekimi uygulaması"
+        "title": "Техники Трансплантации Волос",
+        "description": "Применение трансплантации волос с деликатными процедурами"
       },
       "operatingRoom": {
-        "title": "Operasyon Odası",
-        "description": "Modern operasyon odamızda saç ekimi işlemi"
+        "title": "Операционная",
+        "description": "Процедура трансплантации волос в нашей современной операционной"
       },
       "teamWork": {
-        "title": "Ekip Çalışması",
-        "description": "Profesyonel ekibimiz çalışma anında"
+        "title": "Командная Работа",
+        "description": "Наша профессиональная команда в действии"
       },
       "expertDoctors": {
-        "title": "Uzman Doktorlarımız",
-        "description": "Deneyimli doktorlarımız operasyon sırasında"
+        "title": "Наши Врачи-Эксперты",
+        "description": "Наши опытные врачи во время операции"
       },
       "hairlineDesign": {
-        "title": "Saç Çizgisi Tasarımı",
-        "description": "Kişiye özel saç çizgisi tasarımı ve uygulaması"
+        "title": "Дизайн Линии Роста Волос",
+        "description": "Индивидуальный дизайн и применение линии роста волос"
       },
       "operationDetails": {
-        "title": "Operasyon Detayları",
-        "description": "Titizlikle yapılan saç ekimi operasyonu"
+        "title": "Детали Операции",
+        "description": "Тщательно выполненная операция по трансплантации волос"
       },
       "microFUETechnique": {
-        "title": "Mikro FUE Tekniği",
-        "description": "Mikro FUE tekniği ile saç ekimi uygulaması"
+        "title": "Техника Микро-FUE",
+        "description": "Применение трансплантации волос с техникой микро-FUE"
       },
       "surgicalMagnification": {
-        "title": "Cerrahi Magnifikasyon",
-        "description": "Yüksek magnifikasyon cihazlarıyla hassas işlem"
+        "title": "Хирургическое Увеличение",
+        "description": "Деликатная процедура с устройствами высокого увеличения"
       },
       "operationPreparation": {
-        "title": "Operasyon Hazırlığı",
-        "description": "Steril ortamda operasyon hazırlığı"
+        "title": "Подготовка к Операции",
+        "description": "Подготовка к операции в стерильной среде"
       },
       "precisionTechnique": {
-        "title": "Hassas Ekim Tekniği",
-        "description": "Her greft için optimal açı ve derinlikte hassas ekim"
+        "title": "Техника Точной Имплантации",
+        "description": "Точная имплантация с оптимальным углом и глубиной для каждого графта"
       },
       "professionalCare": {
-        "title": "Profesyonel Bakım",
-        "description": "Deneyimli sağlık ekibimizle profesyonel hasta bakımı"
+        "title": "Профессиональный Уход",
+        "description": "Профессиональный уход за пациентами с нашей опытной медицинской командой"
       },
       "modernTreatment": {
-        "title": "Modern Tedavi",
-        "description": "Çağdaş saç ekimi teknikleri ve ekipmanları"
+        "title": "Современное Лечение",
+        "description": "Современные техники и оборудование для трансплантации волос"
       },
       "treatmentPreparation": {
-        "title": "Tedavi Hazırlığı",
-        "description": "Saç ekimi öncesi hazırlık aşaması"
+        "title": "Подготовка к Лечению",
+        "description": "Фаза подготовки перед трансплантацией волос"
       },
       "detailedAnalysis": {
-        "title": "Detaylı Analiz",
-        "description": "Kişiye özel saç analizi ve planlama"
+        "title": "Детальный Анализ",
+        "description": "Персонализированный анализ волос и планирование"
       },
       "clinicEnvironment": {
-        "title": "Klinik Ortamı",
-        "description": "Steril ve konforlu tedavi alanlarımız"
+        "title": "Среда Клиники",
+        "description": "Наши стерильные и комфортные зоны лечения"
       },
       "advancedEquipment": {
-        "title": "İleri Teknoloji",
-        "description": "Son teknoloji saç ekimi cihazlarımız"
+        "title": "Передовые Технологии",
+        "description": "Наше современное оборудование для трансплантации волос"
       },
       "patientConsultation": {
-        "title": "Hasta Danışmanlığı",
-        "description": "Kişisel ihtiyaçlar doğrultusunda profesyonel konsültasyon"
+        "title": "Консультация Пациентов",
+        "description": "Профессиональная консультация в соответствии с личными потребностями"
       }
     },
     "caseDescriptions": {
-      "sixMonthResult": "6 ay sonrası sonuç",
-      "eightMonthResult": "8 ay sonrası sonuç",
-      "twelveMonthResult": "12 ay sonrası sonuç"
+      "sixMonthResult": "Результат через 6 месяцев",
+      "eightMonthResult": "Результат через 8 месяцев",
+      "twelveMonthResult": "Результат через 12 месяцев"
     },
     "techniques": {
-      "safirFUE": "Safir FUE",
+      "safirFUE": "Сапфировый FUE",
       "dhi": "DHI",
-      "classicFUE": "Klasik FUE"
+      "classicFUE": "Классический FUE"
     },
     "durations": {
-      "sixHours": "6 saat",
-      "sevenHours": "7 saat",
-      "eightHours": "8 saat"
+      "sixHours": "6 часов",
+      "sevenHours": "7 часов",
+      "eightHours": "8 часов"
     },
     "satisfactions": {
-      "verySatisfied": "Çok memnun",
-      "satisfied": "Memnun",
-      "extremelySatisfied": "Son derece memnun"
+      "verySatisfied": "Очень удовлетворен",
+      "satisfied": "Удовлетворен",
+      "extremelySatisfied": "Крайне удовлетворен"
     },
     "categories": {
-      "sac-ekimi": "Saç Ekimi",
-      "sakal-ekimi": "Sakal Ekimi",
-      "kas-ekimi": "Kaş Ekimi"
+      "sac-ekimi": "Трансплантация Волос",
+      "sakal-ekimi": "Трансплантация Бороды",
+      "kas-ekimi": "Трансплантация Бровей"
     },
     "patientDetails": {
-      "title": "Hasta Bilgileri",
-      "before": "Öncesi",
-      "after": "Sonrası",
-      "age": "Yaş",
-      "gender": "Cinsiyet",
-      "problemArea": "Problem Bölgesi",
-      "diagnosis": "Teşhis",
-      "hairLossStage": "Saç Dökülme Evresi"
+      "title": "Информация о Пациенте",
+      "before": "До",
+      "after": "После",
+      "age": "Возраст",
+      "gender": "Пол",
+      "problemArea": "Проблемная Область",
+      "diagnosis": "Диагноз",
+      "hairLossStage": "Стадия Выпадения Волос"
     },
     "procedureDetails": {
-      "title": "İşlem Detayları",
-      "technique": "Teknik",
-      "grafts": "Greft Sayısı",
-      "duration": "Süre",
-      "anesthesia": "Anestezi",
-      "recoveryTime": "İyileşme Süresi"
+      "title": "Детали Процедуры",
+      "technique": "Техника",
+      "grafts": "Количество Графтов",
+      "duration": "Продолжительность",
+      "anesthesia": "Анестезия",
+      "recoveryTime": "Время Восстановления"
     },
     "results": {
-      "title": "Sonuçlar",
-      "satisfaction": "Memnuniyet",
-      "density": "Yoğunluk",
-      "survivalRate": "Tutma Oranı",
-      "naturalness": "Doğallık",
-      "finalResult": "Final Sonucu"
+      "title": "Результаты",
+      "satisfaction": "Удовлетворенность",
+      "density": "Плотность",
+      "survivalRate": "Коэффициент Приживаемости",
+      "naturalness": "Естественность",
+      "finalResult": "Итоговый Результат"
     },
     "testimonial": {
-      "title": "Hasta Yorumu",
-      "doctorNote": "Doktor Notu"
+      "title": "Отзыв Пациента",
+      "doctorNote": "Заметка Врача"
     },
     "buttons": {
-      "share": "Paylaş",
-      "consult": "Danışmanlık Al",
-      "view3d": "3D Görünüm",
-      "view2d": "2D Görünüm"
+      "share": "Поделиться",
+      "consult": "Получить Консультацию",
+      "view3d": "3D Просмотр",
+      "view2d": "2D Просмотр"
     },
     "filters": {
-      "all": "Tümü",
-      "latest": "En Yeni",
-      "popular": "En Beğenilen"
+      "all": "Все",
+      "latest": "Последние",
+      "popular": "Популярные"
     }
   },
   "appointment": {

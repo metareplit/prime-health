@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -8,7 +8,33 @@ import {
 import { Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./language-switcher";
-import { useRef } from "react";
+import { useRef, ReactNode } from "react";
+
+// Language-aware link component
+function LanguageLink({ href, children, onClick }: { href: string, children: ReactNode, onClick?: () => void }) {
+  const { i18n } = useTranslation();
+  const [, navigate] = useLocation();
+  
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const lang = i18n.language || 'tr';
+    
+    // Don't add language prefix to admin routes
+    if (href.startsWith('/admin')) {
+      navigate(href);
+    } else {
+      navigate(`/${lang}${href}`);
+    }
+    
+    if (onClick) onClick();
+  };
+  
+  return (
+    <a href={href} onClick={handleClick} className="cursor-pointer">
+      {children}
+    </a>
+  );
+}
 
 interface HeaderProps {
   children?: React.ReactNode;
@@ -27,44 +53,44 @@ export default function Header({ children }: HeaderProps) {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-4 md:gap-8">
-            <Link href="/">
+            <LanguageLink href="/">
               <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent cursor-pointer">
                 {t('nav.brand')}
               </span>
-            </Link>
+            </LanguageLink>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-4 md:gap-6">
-              <Link href="/">
+              <LanguageLink href="/">
                 <span className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">
                   {t('nav.home')}
                 </span>
-              </Link>
-              <Link href="/hizmetler">
+              </LanguageLink>
+              <LanguageLink href="/hizmetler">
                 <span className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">
                   {t('nav.services')}
                 </span>
-              </Link>
-              <Link href="/galeri">
+              </LanguageLink>
+              <LanguageLink href="/galeri">
                 <span className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">
                   {t('nav.gallery')}
                 </span>
-              </Link>
-              <Link href="/urunler">
+              </LanguageLink>
+              <LanguageLink href="/urunler">
                 <span className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">
                   {t('nav.products')}
                 </span>
-              </Link>
-              <Link href="/blog">
+              </LanguageLink>
+              <LanguageLink href="/blog">
                 <span className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">
                   {t('nav.blog')}
                 </span>
-              </Link>
-              <Link href="/iletisim">
+              </LanguageLink>
+              <LanguageLink href="/iletisim">
                 <span className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">
                   {t('nav.contact')}
                 </span>
-              </Link>
+              </LanguageLink>
             </nav>
           </div>
 
@@ -72,11 +98,11 @@ export default function Header({ children }: HeaderProps) {
           <div className="flex items-center gap-2 md:gap-4">
             <LanguageSwitcher />
 
-            <Link href="/randevu">
+            <LanguageLink href="/randevu">
               <Button variant="default" size="sm" className="hidden md:inline-flex px-4">
                 {t('header.buttons.appointment')}
               </Button>
-            </Link>
+            </LanguageLink>
 
             {/* Mobile Menu */}
             <Sheet>
@@ -95,32 +121,32 @@ export default function Header({ children }: HeaderProps) {
                   </div>
                   <nav className="flex-1 overflow-y-auto">
                     <div className="grid gap-4 p-6">
-                      <Link href="/" onClick={handleNavigate}>
+                      <LanguageLink href="/" onClick={handleNavigate}>
                         <span className="block text-sm font-medium cursor-pointer hover:text-primary">{t('nav.home')}</span>
-                      </Link>
-                      <Link href="/hizmetler" onClick={handleNavigate}>
+                      </LanguageLink>
+                      <LanguageLink href="/hizmetler" onClick={handleNavigate}>
                         <span className="block text-sm font-medium cursor-pointer hover:text-primary">{t('nav.services')}</span>
-                      </Link>
-                      <Link href="/galeri" onClick={handleNavigate}>
+                      </LanguageLink>
+                      <LanguageLink href="/galeri" onClick={handleNavigate}>
                         <span className="block text-sm font-medium cursor-pointer hover:text-primary">{t('nav.gallery')}</span>
-                      </Link>
-                      <Link href="/urunler" onClick={handleNavigate}>
+                      </LanguageLink>
+                      <LanguageLink href="/urunler" onClick={handleNavigate}>
                         <span className="block text-sm font-medium cursor-pointer hover:text-primary">{t('nav.products')}</span>
-                      </Link>
-                      <Link href="/blog" onClick={handleNavigate}>
+                      </LanguageLink>
+                      <LanguageLink href="/blog" onClick={handleNavigate}>
                         <span className="block text-sm font-medium cursor-pointer hover:text-primary">{t('nav.blog')}</span>
-                      </Link>
-                      <Link href="/iletisim" onClick={handleNavigate}>
+                      </LanguageLink>
+                      <LanguageLink href="/iletisim" onClick={handleNavigate}>
                         <span className="block text-sm font-medium cursor-pointer hover:text-primary">{t('nav.contact')}</span>
-                      </Link>
+                      </LanguageLink>
                     </div>
                   </nav>
                   <div className="p-6 border-t">
-                    <Link href="/randevu" onClick={handleNavigate}>
+                    <LanguageLink href="/randevu" onClick={handleNavigate}>
                       <Button variant="default" className="w-full">
                         {t('header.buttons.appointment')}
                       </Button>
-                    </Link>
+                    </LanguageLink>
                   </div>
                 </div>
               </SheetContent>

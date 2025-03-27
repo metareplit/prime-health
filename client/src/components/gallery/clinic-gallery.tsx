@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
 import { PlayCircle } from "lucide-react";
+import { LanguageLink } from "@/lib/languageRouter";
 
 // Klinik görsel verileri ID'leri - veritabanından gelecek şekilde yapılandırıldı
 type ClinicImage = {

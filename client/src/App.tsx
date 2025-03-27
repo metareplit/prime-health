@@ -1,10 +1,11 @@
-import { Switch, Route, useLocation } from "wouter";
+import { Switch, Route, useLocation, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider, useAuth } from "@/lib/auth";
 import { AdminLayout } from "@/components/layout/admin-layout";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
+import { LanguageRouter, LanguageLink } from "@/lib/languageRouter";
 import "./lib/i18n";
 import React, { useEffect } from 'react';
 import AdminDashboard from "@/pages/admin/dashboard";
@@ -33,6 +34,18 @@ import PatientProfile from "@/pages/patient/profile";
 import NotFound from "@/pages/not-found";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import AdminAppointmentNew from "@/pages/admin/appointments/new";
+
+// Component to handle root redirects
+function RootRedirect() {
+  const [, navigate] = useLocation();
+  
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem('i18nextLng') || 'tr';
+    navigate(`/${storedLanguage}`);
+  }, [navigate]);
+  
+  return null;
+}
 
 // Protected Route Component
 function ProtectedAdminRoute({ children }: { children: React.ReactNode }) {
@@ -117,9 +130,9 @@ function Router() {
         )}
       </Route>
 
-      {/* Public Routes */}
-      <Route path="/">
-        {() => (
+      {/* Language-Based Routes */}
+      <Route path="/:lang">
+        {(params) => (
           <div className="min-h-screen flex flex-col">
             <Header>
               <LanguageSwitcher />
@@ -133,9 +146,12 @@ function Router() {
         )}
       </Route>
 
-      {/* Other Public Routes */}
-      <Route path="*">
-        {() => (
+      {/* Redirect root to language prefix */}
+      <Route path="/" component={RootRedirect} />
+
+      {/* Other Language-Based Routes */}
+      <Route path="/:lang/*">
+        {(params) => (
           <div className="min-h-screen flex flex-col">
             <Header>
               <LanguageSwitcher />
@@ -143,25 +159,34 @@ function Router() {
             <main className="flex-grow">
               <ScrollToTop />
               <Switch>
-                <Route path="/hizmetler" component={Services} />
-                <Route path="/gallery" component={Gallery} />
-                <Route path="/galeri" component={Gallery} />
-                <Route path="/urunler" component={Products} />
-                <Route path="/iletisim" component={Contact} />
-                <Route path="/randevu" component={Appointment} />
-                <Route path="/blog" component={Blog} />
-                <Route path="/blog/:slug" component={BlogPost} />
+                <Route path="/:lang/hizmetler" component={Services} />
+                <Route path="/:lang/services" component={Services} />
+                <Route path="/:lang/gallery" component={Gallery} />
+                <Route path="/:lang/galeri" component={Gallery} />
+                <Route path="/:lang/urunler" component={Products} />
+                <Route path="/:lang/products" component={Products} />
+                <Route path="/:lang/iletisim" component={Contact} />
+                <Route path="/:lang/contact" component={Contact} />
+                <Route path="/:lang/randevu" component={Appointment} />
+                <Route path="/:lang/appointment" component={Appointment} />
+                <Route path="/:lang/blog" component={Blog} />
+                <Route path="/:lang/blog/:slug" component={BlogPost} />
 
                 {/* Auth Routes */}
-                <Route path="/auth/login" component={Login} />
-                <Route path="/auth/register" component={Register} />
+                <Route path="/:lang/auth/login" component={Login} />
+                <Route path="/:lang/auth/register" component={Register} />
 
                 {/* Patient Portal Routes */}
-                <Route path="/hasta-portali" component={PatientDashboard} />
-                <Route path="/hasta-portali/mesajlar" component={PatientMessages} />
-                <Route path="/hasta-portali/gorseller" component={PatientImages} />
-                <Route path="/hasta-portali/randevular" component={PatientAppointments} />
-                <Route path="/hasta-portali/profil" component={PatientProfile} />
+                <Route path="/:lang/hasta-portali" component={PatientDashboard} />
+                <Route path="/:lang/patient-portal" component={PatientDashboard} />
+                <Route path="/:lang/hasta-portali/mesajlar" component={PatientMessages} />
+                <Route path="/:lang/patient-portal/messages" component={PatientMessages} />
+                <Route path="/:lang/hasta-portali/gorseller" component={PatientImages} />
+                <Route path="/:lang/patient-portal/images" component={PatientImages} />
+                <Route path="/:lang/hasta-portali/randevular" component={PatientAppointments} />
+                <Route path="/:lang/patient-portal/appointments" component={PatientAppointments} />
+                <Route path="/:lang/hasta-portali/profil" component={PatientProfile} />
+                <Route path="/:lang/patient-portal/profile" component={PatientProfile} />
 
                 <Route component={NotFound} />
               </Switch>
@@ -178,8 +203,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <Router />
-        <Toaster />
+        <LanguageRouter>
+          <Router />
+          <Toaster />
+        </LanguageRouter>
       </AuthProvider>
     </QueryClientProvider>
   );

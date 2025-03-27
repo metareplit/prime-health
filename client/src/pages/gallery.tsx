@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Star, ArrowRight, Camera, Users, Clock } from "lucide-react";
-import { Link } from "wouter";
+import { LanguageLink } from "@/lib/languageRouter";
 import { Metadata } from "@/components/ui/metadata";
 import { useTranslation } from "react-i18next";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -172,10 +172,10 @@ export default function Gallery() {
                     </CardContent>
                     <CardFooter className="px-4 pb-4 pt-0">
                       <Button asChild size="sm" className="w-full gap-2">
-                        <Link href="/randevu">
+                        <LanguageLink href="/randevu">
                           {t('gallery.buttons.consult')}
                           <ArrowRight className="h-4 w-4" />
-                        </Link>
+                        </LanguageLink>
                       </Button>
                     </CardFooter>
                   </Card>

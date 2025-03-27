@@ -5,6 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
 
 const languages = [
@@ -32,10 +33,23 @@ const languages = [
 
 export function LanguageSwitcher() {
   const { i18n } = useTranslation();
+  const [location, setLocation] = useLocation();
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
     localStorage.setItem('i18nextLng', lng);
+    
+    // Update URL to include language prefix
+    const pathParts = location.split('/').filter(Boolean);
+    
+    // Remove current language prefix if it exists
+    if (pathParts.length > 0 && ['tr', 'en', 'ru', 'ka'].includes(pathParts[0])) {
+      pathParts.shift();
+    }
+    
+    // Create new path with the selected language prefix
+    const newPath = `/${lng}${pathParts.length > 0 ? '/' + pathParts.join('/') : ''}`;
+    setLocation(newPath);
   };
 
   const currentLanguage = languages.find(lang => lang.code === i18n.language);

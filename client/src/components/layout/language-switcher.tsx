@@ -1,9 +1,11 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "wouter";
 
 export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
+  const [location, setLocation] = useLocation();
 
   const languages = [
     { code: 'tr', name: 'Türkçe', flag: '/flags/tr.svg' },
@@ -13,6 +15,28 @@ export default function LanguageSwitcher() {
   ];
 
   const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    localStorage.setItem('i18nextLng', lng);
+    
+    // Check if this is an admin route
+    if (location.startsWith('/admin')) {
+      return;
+    }
+    
+    // Update URL to include language prefix
+    const pathParts = location.split('/').filter(Boolean);
+    
+    // Remove current language prefix if it exists
+    if (pathParts.length > 0 && ['tr', 'en', 'ru', 'ka'].includes(pathParts[0])) {
+      pathParts.shift();
+    }
+    
+    // Create new path with the selected language prefix
+    const newPath = `/${lng}${pathParts.length > 0 ? '/' + pathParts.join('/') : ''}`;
+    setLocation(newPath);
+  };
 
   return (
     <DropdownMenu>
@@ -33,7 +57,7 @@ export default function LanguageSwitcher() {
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.code}
-            onClick={() => i18n.changeLanguage(language.code)}
+            onClick={() => changeLanguage(language.code)}
             className="flex items-center gap-2 cursor-pointer hover:bg-accent/50 transition-colors duration-200"
           >
             <img 
