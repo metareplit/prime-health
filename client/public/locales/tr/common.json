@@ -593,6 +593,38 @@
       "operationPreparation": {
         "title": "Operasyon Hazırlığı",
         "description": "Steril ortamda operasyon hazırlığı"
+      },
+      "precisionTechnique": {
+        "title": "Hassas Ekim Tekniği",
+        "description": "Her greft için optimal açı ve derinlikte hassas ekim"
+      },
+      "professionalCare": {
+        "title": "Profesyonel Bakım",
+        "description": "Deneyimli sağlık ekibimizle profesyonel hasta bakımı"
+      },
+      "modernTreatment": {
+        "title": "Modern Tedavi",
+        "description": "Çağdaş saç ekimi teknikleri ve ekipmanları"
+      },
+      "treatmentPreparation": {
+        "title": "Tedavi Hazırlığı",
+        "description": "Saç ekimi öncesi hazırlık aşaması"
+      },
+      "detailedAnalysis": {
+        "title": "Detaylı Analiz",
+        "description": "Kişiye özel saç analizi ve planlama"
+      },
+      "clinicEnvironment": {
+        "title": "Klinik Ortamı",
+        "description": "Steril ve konforlu tedavi alanlarımız"
+      },
+      "advancedEquipment": {
+        "title": "İleri Teknoloji",
+        "description": "Son teknoloji saç ekimi cihazlarımız"
+      },
+      "patientConsultation": {
+        "title": "Hasta Danışmanlığı",
+        "description": "Kişisel ihtiyaçlar doğrultusunda profesyonel konsültasyon"
       }
     },
     "caseDescriptions": {

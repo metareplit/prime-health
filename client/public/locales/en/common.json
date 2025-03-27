@@ -624,6 +624,38 @@
       "operationPreparation": {
         "title": "Operation Preparation",
         "description": "Operation preparation in a sterile environment"
+      },
+      "precisionTechnique": {
+        "title": "Precision Implantation Technique",
+        "description": "Precise implantation at optimal angle and depth for each graft"
+      },
+      "professionalCare": {
+        "title": "Professional Care",
+        "description": "Professional patient care with our experienced healthcare team"
+      },
+      "modernTreatment": {
+        "title": "Modern Treatment",
+        "description": "Contemporary hair transplantation techniques and equipment"
+      },
+      "treatmentPreparation": {
+        "title": "Treatment Preparation",
+        "description": "Preparation phase before hair transplantation"
+      },
+      "detailedAnalysis": {
+        "title": "Detailed Analysis",
+        "description": "Personalized hair analysis and planning"
+      },
+      "clinicEnvironment": {
+        "title": "Clinic Environment",
+        "description": "Our sterile and comfortable treatment areas"
+      },
+      "advancedEquipment": {
+        "title": "Advanced Technology",
+        "description": "State-of-the-art hair transplantation devices"
+      },
+      "patientConsultation": {
+        "title": "Patient Consultation",
+        "description": "Professional consultation according to personal needs"
       }
     },
       "success": "Success Stories"

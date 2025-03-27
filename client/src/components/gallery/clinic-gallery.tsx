@@ -97,6 +97,62 @@ const clinicImages: ClinicImage[] = [
   {
     id: 12,
     type: "image",
+    url: "/images/clinic/IMG-20250325-WA0058.jpg",
+    titleKey: "gallery.clinic.precisionTechnique.title",
+    descriptionKey: "gallery.clinic.precisionTechnique.description"
+  },
+  {
+    id: 13,
+    type: "image",
+    url: "/images/clinic/IMG-20250325-WA0059.jpg",
+    titleKey: "gallery.clinic.professionalCare.title",
+    descriptionKey: "gallery.clinic.professionalCare.description"
+  },
+  {
+    id: 14,
+    type: "image",
+    url: "/images/clinic/IMG-20250325-WA0060.jpg",
+    titleKey: "gallery.clinic.modernTreatment.title",
+    descriptionKey: "gallery.clinic.modernTreatment.description"
+  },
+  {
+    id: 15,
+    type: "image",
+    url: "/images/clinic/IMG-20250325-WA0061.jpg",
+    titleKey: "gallery.clinic.treatmentPreparation.title",
+    descriptionKey: "gallery.clinic.treatmentPreparation.description"
+  },
+  {
+    id: 16,
+    type: "image",
+    url: "/images/clinic/IMG-20250325-WA0062.jpg",
+    titleKey: "gallery.clinic.detailedAnalysis.title",
+    descriptionKey: "gallery.clinic.detailedAnalysis.description"
+  },
+  {
+    id: 17,
+    type: "image",
+    url: "/images/clinic/IMG-20250325-WA0063.jpg",
+    titleKey: "gallery.clinic.clinicEnvironment.title",
+    descriptionKey: "gallery.clinic.clinicEnvironment.description"
+  },
+  {
+    id: 18,
+    type: "image",
+    url: "/images/clinic/IMG-20250325-WA0064.jpg",
+    titleKey: "gallery.clinic.advancedEquipment.title",
+    descriptionKey: "gallery.clinic.advancedEquipment.description"
+  },
+  {
+    id: 19,
+    type: "image",
+    url: "/images/clinic/IMG-20250325-WA0065.jpg",
+    titleKey: "gallery.clinic.patientConsultation.title",
+    descriptionKey: "gallery.clinic.patientConsultation.description"
+  },
+  {
+    id: 20,
+    type: "image",
     url: "/images/clinic/IMG-20250325-WA0066.jpg",
     titleKey: "gallery.clinic.operationPreparation.title",
     descriptionKey: "gallery.clinic.operationPreparation.description"
