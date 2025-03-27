@@ -9,18 +9,27 @@ import { useTranslation } from "react-i18next";
 const slides = [
   {
     image: "/images/slider/medical-tech.png",
-    title: "Modern Tıbbi Teknoloji",
-    subtitle: "En Son Teknoloji ile Güvenilir Tedavi"
+    titleKey: "slider.title1",
+    descriptionKey: "slider.description1",
+    buttonTextKey: "slider.button1"
   },
   {
     image: "/images/slider/expert-team.png",
-    title: "Uzman Hekim Kadromuz",
-    subtitle: "Alanında Uzman ve Deneyimli Ekibimiz"
+    titleKey: "slider.title2",
+    descriptionKey: "slider.description2",
+    buttonTextKey: "slider.button2"
   },
   {
     image: "/images/slider/professional-care.png",
-    title: "Profesyonel Bakım",
-    subtitle: "Kişiselleştirilmiş Tedavi Yaklaşımı"
+    titleKey: "slider.title3",
+    descriptionKey: "slider.description3",
+    buttonTextKey: "slider.button3"
+  },
+  {
+    image: "/images/slider/modern-clinic.png",
+    titleKey: "slider.title4",
+    descriptionKey: "slider.description4",
+    buttonTextKey: "slider.button4"
   }
 ];
 
@@ -63,7 +72,7 @@ export default function HeroSlider() {
             <div key={index} className="embla__slide relative w-full flex-[0_0_100%]">
               <img 
                 src={slide.image}
-                alt={slide.title}
+                alt={t(slide.titleKey)}
                 className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
@@ -75,10 +84,10 @@ export default function HeroSlider() {
                   className="text-center text-white px-4"
                 >
                   <h1 className="text-4xl md:text-6xl font-bold mb-4 text-shadow-lg">
-                    {slide.title}
+                    {t(slide.titleKey)}
                   </h1>
                   <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-shadow">
-                    {slide.subtitle}
+                    {t(slide.descriptionKey)}
                   </p>
                   <Button 
                     size="lg" 
@@ -87,7 +96,7 @@ export default function HeroSlider() {
                   >
                     <Link href="/randevu">
                       <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-                      <span className="text-lg">Hemen Randevu Al</span>
+                      <span className="text-lg">{t(slide.buttonTextKey)}</span>
                     </Link>
                   </Button>
                 </motion.div>
