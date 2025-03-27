@@ -364,82 +364,82 @@
     }
   },
   "blog": {
-    "title": "Blog",
-    "subtitle": "Uzman kadromuzdan güncel bilgiler, tedavi süreçleri ve başarı hikayeleri",
-    "search": "Blog yazılarında ara...",
+    "title": "ბლოგი",
+    "subtitle": "უახლესი ინფორმაცია, მკურნალობის პროცესები და წარმატების ისტორიები ჩვენი ექსპერტი გუნდისგან",
+    "search": "ბლოგის სტატიებში ძიება...",
     "categories": {
-      "all": "Tümü",
-      "hairTransplant": "Saç Ekimi",
-      "beardTransplant": "Sakal Ekimi",
-      "eyebrowTransplant": "Kaş Ekimi",
-      "aesthetics": "Estetik",
-      "dermatology": "Dermatoloji",
-      "aftercare": "Bakım",
-      "treatment": "Tedavi Süreci"
+      "all": "ყველა",
+      "hairTransplant": "თმის გადანერგვა",
+      "beardTransplant": "წვერის გადანერგვა",
+      "eyebrowTransplant": "წარბის გადანერგვა",
+      "aesthetics": "ესთეტიკა",
+      "dermatology": "დერმატოლოგია",
+      "aftercare": "მოვლა",
+      "treatment": "მკურნალობის პროცესი"
     },
-    "readMore": "Devamını Oku",
+    "readMore": "მეტის წაკითხვა",
     "share": {
-      "title": "Bu Yazıyı Paylaş",
-      "copied": "Bağlantı kopyalandı"
+      "title": "გააზიარეთ ეს სტატია",
+      "copied": "ბმული დაკოპირებულია"
     },
     "author": {
-      "about": "Yazar Hakkında",
-      "articles": "Diğer Yazıları"
+      "about": "ავტორის შესახებ",
+      "articles": "სხვა სტატიები"
     },
-    "relatedPosts": "Benzer Yazılar",
+    "relatedPosts": "მსგავსი სტატიები",
     "comments": {
-      "title": "Yorumlar",
-      "noComments": "Henüz yorum yapılmamış",
-      "writeComment": "Yorum Yaz",
-      "submit": "Gönder"
+      "title": "კომენტარები",
+      "noComments": "ჯერ კომენტარები არ არის",
+      "writeComment": "კომენტარის დაწერა",
+      "submit": "გაგზავნა"
     },
     "search": {
-      "title": "Blog'da Ara",
-      "placeholder": "Arama yapmak için yazın...",
-      "noResults": "Sonuç bulunamadı",
-      "trending": "Popüler Konular"
+      "title": "ბლოგში ძიება",
+      "placeholder": "ჩაწერეთ საძიებო სიტყვა...",
+      "noResults": "შედეგები არ მოიძებნა",
+      "trending": "პოპულარული თემები"
     },
     "filters": {
-      "latest": "En Yeni",
-      "popular": "Popüler",
-      "category": "Kategori"
+      "latest": "უახლესი",
+      "popular": "პოპულარული",
+      "category": "კატეგორია"
     },
-    "readTime": "{{minutes}} dakika okuma",
-    "publishDate": "{{date}} tarihinde yayınlandı",
+    "readTime": "{{minutes}} წუთის საკითხავი",
+    "publishDate": "გამოქვეყნებულია {{date}}",
     "authorInfo": {
-      "title": "Yazar Hakkında",
-      "credentials": "Uzmanlık Alanları",
-      "experience": "Deneyim"
+      "title": "ავტორის შესახებ",
+      "credentials": "სპეციალობები",
+      "experience": "გამოცდილება"
     },
     "engagement": {
-      "likes": "Beğeni",
-      "comments": "Yorum",
-      "shares": "Paylaşım"
+      "likes": "მოწონება",
+      "comments": "კომენტარი",
+      "shares": "გაზიარება"
     }
   },
   "faq": {
-    "title": "Sıkça Sorulan Sorular",
-    "subtitle": "Saç ekimi hakkında merak ettiğiniz tüm sorulara uzman ekibimizden yanıtlar",
+    "title": "ხშირად დასმული კითხვები",
+    "subtitle": "პასუხები ყველა კითხვაზე თმის გადანერგვის შესახებ ჩვენი ექსპერტი გუნდისგან",
     "items": {
       "0": {
-        "question": "Saç ekimi operasyonu ne kadar sürer?",
-        "answer": "Saç ekimi operasyonu ortalama 6-8 saat sürer. Bu süre ekilecek greft sayısına ve kullanılan tekniğe göre değişiklik gösterebilir. İşlem lokal anestezi altında gerçekleştirilir."
+        "question": "რამდენ ხანს გრძელდება თმის გადანერგვის ოპერაცია?",
+        "answer": "თმის გადანერგვის ოპერაცია საშუალოდ 6-8 საათი გრძელდება. ეს დრო შეიძლება შეიცვალოს გადასანერგი გრაფტების რაოდენობისა და გამოყენებული ტექნიკის მიხედვით. პროცედურა ტარდება ლოკალური ანესთეზიის ქვეშ."
       },
       "1": {
-        "question": "Saç ekimi sonrası iyileşme süreci nasıldır?",
-        "answer": "İyileşme süreci kişiden kişiye değişmekle birlikte, genellikle ilk 2 hafta kritik önem taşır. 3. günden itibaren işe dönülebilir. Tam iyileşme ve sonuçların görülmesi 6-12 ay arasında sürer."
+        "question": "როგორია თმის გადანერგვის შემდგომი აღდგენის პროცესი?",
+        "answer": "აღდგენის პროცესი განსხვავდება ინდივიდუალურად, მაგრამ ჩვეულებრივ პირველი 2 კვირა კრიტიკულად მნიშვნელოვანია. მე-3 დღიდან შესაძლებელია სამსახურში დაბრუნება. სრული აღდგენა და შედეგების დანახვა 6-12 თვის განმავლობაში ხდება."
       },
       "2": {
-        "question": "Saç ekimi kalıcı bir çözüm müdür?",
-        "answer": "Evet, saç ekimi kalıcı bir çözümdür. Ekilen saçlar genetik olarak dökülmeye dirençli bölgeden alındığı için ömür boyu dökülmeden kalır. Ancak var olan saçların korunması için gerekli bakımın yapılması önemlidir."
+        "question": "არის თუ არა თმის გადანერგვა მუდმივი გადაწყვეტილება?",
+        "answer": "დიახ, თმის გადანერგვა არის მუდმივი გადაწყვეტილება. გადანერგილი თმა აღებულია გენეტიკურად ცვენის მიმართ მდგრადი უბნიდან, ამიტომ ის მთელი ცხოვრების განმავლობაში რჩება. თუმცა, მნიშვნელოვანია არსებული თმის შენარჩუნება სათანადო მოვლით."
       },
       "3": {
-        "question": "Saç ekimi için yaş sınırı var mıdır?",
-        "answer": "Saç ekimi için ideal yaş aralığı 25-55'tir. Ancak her vaka bireysel olarak değerlendirilir. Önemli olan saç kaybının stabil hale gelmiş olması ve yeterli donör alanının bulunmasıdır."
+        "question": "არსებობს თუ არა ასაკობრივი შეზღუდვა თმის გადანერგვისთვის?",
+        "answer": "თმის გადანერგვისთვის იდეალური ასაკობრივი დიაპაზონი 25-55 წელია. თუმცა, თითოეული შემთხვევა ინდივიდუალურად ფასდება. მნიშვნელოვანია, რომ თმის ცვენა იყოს სტაბილური და არსებობდეს საკმარისი დონორი უბანი."
       },
       "4": {
-        "question": "Operasyon sonrası günlük yaşama ne zaman dönülebilir?",
-        "answer": "Operasyondan 3 gün sonra günlük yaşama dönülebilir. Ancak spor, yüzme gibi aktiviteler için 1 ay beklenmesi önerilir. İlk 2 hafta güneş, terleme ve darbelere karşı dikkatli olunmalıdır."
+        "question": "როდის შეიძლება დაბრუნება ყოველდღიურ ცხოვრებაში ოპერაციის შემდეგ?",
+        "answer": "ოპერაციიდან 3 დღის შემდეგ შესაძლებელია ყოველდღიურ ცხოვრებაში დაბრუნება. თუმცა, სპორტისა და ცურვის მსგავსი აქტივობებისთვის რეკომენდებულია 1 თვის დაცდა. პირველი 2 კვირის განმავლობაში უნდა იყოთ ფრთხილად მზის, ოფლიანობისა და დარტყმების მიმართ."
       }
     }
   },
@@ -511,43 +511,43 @@
     }
   },
   "contact": {
-    "title": "İletişim",
-    "subtitle": "Size yardımcı olmaktan mutluluk duyarız. İstediğiniz zaman bizimle iletişime geçebilirsiniz.",
+    "title": "კონტაქტი",
+    "subtitle": "ჩვენ სიამოვნებით დაგეხმარებით. შეგიძლიათ დაგვიკავშირდეთ ნებისმიერ დროს.",
     "address": {
-      "title": "Adres",
-      "line1": "Tsotne Dadiani 59",
-      "line2": "Tiflis, Gürcistan"
+      "title": "მისამართი",
+      "line1": "წოწნე დადიანი 59",
+      "line2": "თბილისი, საქართველო"
     },
     "phone": {
-      "title": "Telefon",
+      "title": "ტელეფონი",
       "number1": "+995 555 003 044"
     },
     "email": {
-      "title": "E-posta",
+      "title": "ელ-ფოსტა",
       "address": "primehealthtblisi@gmail.com"
     },
     "workingHours": {
-      "title": "Çalışma Saatleri",
-      "weekdays": "Pazartesi - Cumartesi: 09:00 - 18:00",
-      "weekend": "Pazar: Kapalı"
+      "title": "სამუშაო საათები",
+      "weekdays": "ორშაბათი - შაბათი: 09:00 - 18:00",
+      "weekend": "კვირა: დახურულია"
     },
     "socialMedia": {
-      "title": "Sosyal Medya",
-      "followUs": "Bizi takip edin"
+      "title": "სოციალური მედია",
+      "followUs": "გამოგვყევით"
     }
   },
   "gallery": {
-    "title": "Hasta Sonuçları Galerisi",
-    "subtitle": "Profesyonel saç ekimi kliniğimizde gerçekleştirilen operasyonların öncesi ve sonrası sonuçları",
+    "title": "პაციენტების შედეგების გალერეა",
+    "subtitle": "ჩვენს პროფესიონალურ თმის გადანერგვის კლინიკაში ჩატარებული ოპერაციების შედეგები მკურნალობამდე და შემდეგ",
     "search": {
-      "placeholder": "Hasta sonuçlarında ara...",
-      "noResults": "Sonuç bulunamadı"
+      "placeholder": "მოძებნეთ პაციენტის შედეგები...",
+      "noResults": "შედეგები არ მოიძებნა"
     },
     "tabs": {
-      "beforeAfter": "Öncesi ve Sonrası",
-      "clinic": "Klinik Görselleri",
-      "videos": "Klinik Videoları",
-      "success": "Başarı Hikayeleri"
+      "beforeAfter": "მკურნალობამდე და შემდეგ",
+      "clinic": "კლინიკის ფოტოები",
+      "videos": "კლინიკის ვიდეოები",
+      "success": "წარმატების ისტორიები"
     },
     "videos": {
       "title": "Klinik Video Galerisi",
@@ -772,39 +772,39 @@
   },
   "appointment": {
     "book": {
-      "title": "Randevu Al",
-      "subtitle": "Size en uygun tarih ve saati seçin",
-      "selectDate": "Tarih seçin",
-      "selectTime": "Saat seçin",
-      "selectService": "Hizmet seçin",
-      "personalInfo": "Kişisel Bilgiler",
-      "notes": "Notlar",
-      "success": "Randevunuz başarıyla oluşturuldu",
-      "submit": "Randevu Oluştur",
-      "notesPlaceholder": "Eklemek istediğiniz notlar...",
-      "error": "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin."
+      "title": "ჯავშანი",
+      "subtitle": "აირჩიეთ თქვენთვის შესაფერისი თარიღი და დრო",
+      "selectDate": "აირჩიეთ თარიღი",
+      "selectTime": "აირჩიეთ დრო",
+      "selectService": "აირჩიეთ სერვისი",
+      "personalInfo": "პირადი ინფორმაცია",
+      "notes": "შენიშვნები",
+      "success": "თქვენი ჯავშანი წარმატებით შეიქმნა",
+      "submit": "ჯავშნის შექმნა",
+      "notesPlaceholder": "შენიშვნები, რომლებიც გსურთ დაამატოთ...",
+      "error": "ჯავშნის შექმნისას მოხდა შეცდომა. გთხოვთ სცადოთ თავიდან."
     },
     "status": {
-      "pending": "Bekliyor",
-      "confirmed": "Onaylandı",
-      "cancelled": "İptal Edildi",
-      "completed": "Tamamlandı"
+      "pending": "მოლოდინში",
+      "confirmed": "დადასტურებული",
+      "cancelled": "გაუქმებული",
+      "completed": "დასრულებული"
     }
   },
   "form": {
-    "submit": "Gönder",
-    "cancel": "İptal",
-    "save": "Kaydet",
-    "edit": "Düzenle",
-    "delete": "Sil",
-    "search": "Ara",
-    "filter": "Filtrele",
-    "reset": "Sıfırla",
-    "loading": "İşleminiz devam ediyor...",
-    "success": "İşlem başarılı",
-    "error": "Bir hata oluştu",
-    "required": "* Zorunlu alan",
-    "optional": "(Opsiyonel)"
+    "submit": "გაგზავნა",
+    "cancel": "გაუქმება",
+    "save": "შენახვა",
+    "edit": "რედაქტირება",
+    "delete": "წაშლა",
+    "search": "ძიება",
+    "filter": "ფილტრი",
+    "reset": "გადატვირთვა",
+    "loading": "დამუშავება მიმდინარეობს...",
+    "success": "ოპერაცია წარმატებულია",
+    "error": "მოხდა შეცდომა",
+    "required": "* აუცილებელი ველი",
+    "optional": "(არჩევითი)"
   },
   "footer": {
     "company": {
