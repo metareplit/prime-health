@@ -7,7 +7,7 @@ import { Metadata } from "@/components/ui/metadata";
 import { Clock, Calendar as CalendarIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useNotifications } from "@/hooks/use-notifications";
-import { useAuth } from "@/lib/auth";
+
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -34,12 +34,11 @@ export default function Appointment() {
   const { t } = useTranslation('common');
   const [date, setDate] = useState<Date | undefined>(new Date());
   const { sendSMSMutation } = useNotifications();
-  const { user } = useAuth();
 
   const form = useForm<AppointmentFormData>({
     resolver: zodResolver(appointmentSchema),
     defaultValues: {
-      name: user ? `${user.firstName} ${user.lastName}` : '',
+      name: '',
       phone: '',
       age: '',
       medicalHistory: '',
@@ -124,7 +123,7 @@ export default function Appointment() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>İsim Soyisim</FormLabel>
+                          <FormLabel>{t('appointment.book.fullName')}</FormLabel>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
@@ -138,7 +137,7 @@ export default function Appointment() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Telefon</FormLabel>
+                          <FormLabel>{t('appointment.book.phone')}</FormLabel>
                           <FormControl>
                             <PhoneInput
                               country={'tr'}
@@ -150,8 +149,8 @@ export default function Appointment() {
                               dropdownClass="!w-[300px]"
                               preferredCountries={['tr', 'ru', 'ge', 'az']}
                               enableSearch={true}
-                              searchPlaceholder="Ülke Ara..."
-                              searchNotFound="Ülke bulunamadı"
+                              searchPlaceholder={t('appointment.book.searchCountry')}
+                              searchNotFound={t('appointment.book.countryNotFound')}
                             />
                           </FormControl>
                           <FormMessage />
@@ -164,7 +163,7 @@ export default function Appointment() {
                       name="age"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Yaşınız</FormLabel>
+                          <FormLabel>{t('appointment.book.age')}</FormLabel>
                           <FormControl>
                             <Input {...field} type="number" min="18" max="100" />
                           </FormControl>
@@ -178,11 +177,11 @@ export default function Appointment() {
                       name="medicalHistory"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Önceki Hastalıklar / Sağlık Durumu</FormLabel>
+                          <FormLabel>{t('appointment.book.medicalHistory')}</FormLabel>
                           <FormControl>
                             <Textarea 
                               {...field} 
-                              placeholder="Varsa önceki hastalıklarınızı veya mevcut sağlık durumunuzu belirtiniz..."
+                              placeholder={t('appointment.book.medicalHistoryPlaceholder')}
                               className="resize-none"
                               rows={3}
                             />
@@ -197,7 +196,7 @@ export default function Appointment() {
                       name="serviceType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Hizmet Alanı</FormLabel>
+                          <FormLabel>{t('appointment.book.serviceType')}</FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -209,7 +208,7 @@ export default function Appointment() {
                                   <RadioGroupItem value="sac-ekimi" />
                                 </FormControl>
                                 <FormLabel className="font-normal cursor-pointer">
-                                  Saç Ekimi
+                                  {t('services.categories.hair.title')}
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-2">
@@ -217,7 +216,7 @@ export default function Appointment() {
                                   <RadioGroupItem value="sakal-ekimi" />
                                 </FormControl>
                                 <FormLabel className="font-normal cursor-pointer">
-                                  Sakal Ekimi
+                                  {t('services.categories.beard.title')}
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-2">
@@ -225,7 +224,7 @@ export default function Appointment() {
                                   <RadioGroupItem value="kas-ekimi" />
                                 </FormControl>
                                 <FormLabel className="font-normal cursor-pointer">
-                                  Kaş Ekimi
+                                  {t('services.categories.eyebrow.title')}
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-2">
@@ -233,7 +232,7 @@ export default function Appointment() {
                                   <RadioGroupItem value="prp" />
                                 </FormControl>
                                 <FormLabel className="font-normal cursor-pointer">
-                                  PRP Tedavisi
+                                  {t('services.categories.prp.title')}
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
@@ -261,11 +260,11 @@ export default function Appointment() {
                       size="lg"
                       disabled={sendSMSMutation.isPending}
                     >
-                      {sendSMSMutation.isPending ? "Gönderiliyor..." : t('patient.appointments.createButton')}
+                      {sendSMSMutation.isPending ? t('appointment.book.sending') : t('appointment.book.submit')}
                     </Button>
 
                     <p className="text-sm text-gray-500 text-center">
-                      {t('patient.appointments.contactNote')}
+                      {t('appointment.book.contactNote')}
                     </p>
                   </CardContent>
                 </Card>

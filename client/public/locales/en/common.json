@@ -808,36 +808,36 @@
   },
   "footer": {
     "company": {
-      "title": "Şirket",
-      "about": "Hakkımızda",
-      "careers": "Kariyer",
-      "privacy": "Gizlilik Politikası",
-      "terms": "Kullanım Şartları"
+      "title": "Company",
+      "about": "About Us",
+      "careers": "Careers",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use"
     },
     "social": {
-      "title": "Sosyal Medya",
-      "followUs": "Bizi Takip Edin",
-      "facebook": "Facebook'ta Takip Et",
-      "instagram": "Instagram'da Takip Et",
-      "twitter": "Twitter'da Takip Et",
-      "youtube": "Youtube'da Takip Et"
+      "title": "Social Media",
+      "followUs": "Follow Us",
+      "facebook": "Follow on Facebook",
+      "instagram": "Follow on Instagram",
+      "twitter": "Follow on Twitter",
+      "youtube": "Follow on Youtube"
     },
     "contact": {
-      "title": "İletişim",
-      "address": "Adres",
-      "phone": "Telefon",
-      "email": "E-posta"
+      "title": "Contact",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email"
     },
     "newsletter": {
-      "title": "Bülten",
-      "subtitle": "Güncel gelişmelerden haberdar olun",
-      "placeholder": "E-posta adresiniz",
-      "subscribe": "Abone Ol",
-      "success": "Başarıyla abone oldunuz",
-      "error": "Bir hata oluştu"
+      "title": "Newsletter",
+      "subtitle": "Stay updated with our latest news",
+      "placeholder": "Your email address",
+      "subscribe": "Subscribe",
+      "success": "Successfully subscribed",
+      "error": "An error occurred"
     },
-    "copyright": "© {year} Tüm hakları saklıdır",
-    "brand": "Hair Clinic Tiflis"
+    "copyright": "© {year} All rights reserved",
+    "brand": "Hair Clinic Tbilisi"
   },
   "seo": {
     "defaultTitle": "Hair Clinic Tiflis - Saç Ekimi ve Estetik Tedavi Merkezi",

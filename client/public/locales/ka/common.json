@@ -808,36 +808,36 @@
   },
   "footer": {
     "company": {
-      "title": "Şirket",
-      "about": "Hakkımızda",
-      "careers": "Kariyer",
-      "privacy": "Gizlilik Politikası",
-      "terms": "Kullanım Şartları"
+      "title": "კომპანია",
+      "about": "ჩვენს შესახებ",
+      "careers": "კარიერა",
+      "privacy": "კონფიდენციალურობის პოლიტიკა",
+      "terms": "გამოყენების პირობები"
     },
     "social": {
-      "title": "Sosyal Medya",
-      "followUs": "Bizi Takip Edin",
-      "facebook": "Facebook'ta Takip Et",
-      "instagram": "Instagram'da Takip Et",
-      "twitter": "Twitter'da Takip Et",
-      "youtube": "Youtube'da Takip Et"
+      "title": "სოციალური მედია",
+      "followUs": "გამოგვყევით",
+      "facebook": "გამოგვყევით Facebook-ზე",
+      "instagram": "გამოგვყევით Instagram-ზე",
+      "twitter": "გამოგვყევით Twitter-ზე",
+      "youtube": "გამოგვყევით Youtube-ზე"
     },
     "contact": {
-      "title": "İletişim",
-      "address": "Adres",
-      "phone": "Telefon",
-      "email": "E-posta"
+      "title": "კონტაქტი",
+      "address": "მისამართი",
+      "phone": "ტელეფონი",
+      "email": "ელ-ფოსტა"
     },
     "newsletter": {
-      "title": "Bülten",
-      "subtitle": "Güncel gelişmelerden haberdar olun",
-      "placeholder": "E-posta adresiniz",
-      "subscribe": "Abone Ol",
-      "success": "Başarıyla abone oldunuz",
-      "error": "Bir hata oluştu"
+      "title": "სიახლეები",
+      "subtitle": "მიიღეთ უახლესი სიახლეები",
+      "placeholder": "თქვენი ელ-ფოსტა",
+      "subscribe": "გამოწერა",
+      "success": "წარმატებით გამოწერილია",
+      "error": "დაფიქსირდა შეცდომა"
     },
-    "copyright": "© {year} Tüm hakları saklıdır",
-    "brand": "Hair Clinic Tiflis"
+    "copyright": "© {year} ყველა უფლება დაცულია",
+    "brand": "თმის კლინიკა თბილისი"
   },
   "seo": {
     "defaultTitle": "Hair Clinic Tiflis - Saç Ekimi ve Estetik Tedavi Merkezi",
