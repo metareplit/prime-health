@@ -511,29 +511,29 @@
     }
   },
   "contact": {
-    "title": "İletişim",
-    "subtitle": "Size yardımcı olmaktan mutluluk duyarız. İstediğiniz zaman bizimle iletişime geçebilirsiniz.",
+    "title": "კონტაქტი",
+    "subtitle": "ჩვენ მოხარულნი ვართ დაგეხმაროთ. შეგიძლიათ დაგვიკავშირდეთ ნებისმიერ დროს.",
     "address": {
-      "title": "Adres",
-      "line1": "Tsotne Dadiani 59",
-      "line2": "Tiflis, Gürcistan"
+      "title": "მისამართი",
+      "line1": "ცოტნე დადიანის 59",
+      "line2": "თბილისი, საქართველო"
     },
     "phone": {
-      "title": "Telefon",
+      "title": "ტელეფონი",
       "number1": "+995 555 003 044"
     },
     "email": {
-      "title": "E-posta",
+      "title": "ელ-ფოსტა",
       "address": "primehealthtblisi@gmail.com"
     },
     "workingHours": {
-      "title": "Çalışma Saatleri",
-      "weekdays": "Pazartesi - Cumartesi: 09:00 - 18:00",
-      "weekend": "Pazar: Kapalı"
+      "title": "სამუშაო საათები",
+      "weekdays": "ორშაბათი - შაბათი: 09:00 - 18:00",
+      "weekend": "კვირა: დასვენება"
     },
     "socialMedia": {
-      "title": "Sosyal Medya",
-      "followUs": "Bizi takip edin"
+      "title": "სოციალური მედია",
+      "followUs": "გამოგვყევით"
     }
   },
   "gallery": {
