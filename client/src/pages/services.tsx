@@ -34,23 +34,83 @@ const ServiceCard = ({ service }: { service: Service }) => {
   // Get the localized service name and description based on current language
   const getLocalizedServiceName = () => {
     if (currentLang === 'tr') return service.name;
-    if (currentLang === 'en' && t(`services.serviceItems.${service.id}.name`)) 
-      return t(`services.serviceItems.${service.id}.name`);
-    if (currentLang === 'ru' && t(`services.serviceItems.${service.id}.name`)) 
-      return t(`services.serviceItems.${service.id}.name`);
-    if (currentLang === 'ka' && t(`services.serviceItems.${service.id}.name`)) 
-      return t(`services.serviceItems.${service.id}.name`);
+    
+    const translationKey = `services.serviceItems.${service.id}.name`;
+    const translation = t(translationKey);
+    
+    // Çeviri anahtarının kendisi görünmesini engelle
+    if (translation && translation !== translationKey) {
+      return translation;
+    }
+    
+    // Sabit çeviriler
+    if (service.id === 1) {
+      if (currentLang === 'en') return "Hair Transplantation";
+      if (currentLang === 'ru') return "Трансплантация волос";
+      if (currentLang === 'ka') return "თმის გადანერგვა";
+    }
+    else if (service.id === 2) {
+      if (currentLang === 'en') return "Beard Transplantation";
+      if (currentLang === 'ru') return "Пересадка бороды";
+      if (currentLang === 'ka') return "წვერის გადანერგვა";
+    }
+    else if (service.id === 3) {
+      if (currentLang === 'en') return "Eyebrow Transplantation";
+      if (currentLang === 'ru') return "Пересадка бровей";
+      if (currentLang === 'ka') return "წარბების გადანერგვა";
+    }
+    else if (service.id === 4) {
+      if (currentLang === 'en') return "PRP Treatment";
+      if (currentLang === 'ru') return "PRP терапия";
+      if (currentLang === 'ka') return "PRP თერაპია";
+    }
+    else if (service.id === 5) {
+      if (currentLang === 'en') return "Mesotherapy";
+      if (currentLang === 'ru') return "Мезотерапия";
+      if (currentLang === 'ka') return "მეზოთერაპია";
+    }
+    
     return service.name;
   };
 
   const getLocalizedServiceDescription = () => {
     if (currentLang === 'tr') return service.description;
-    if (currentLang === 'en' && t(`services.serviceItems.${service.id}.description`)) 
-      return t(`services.serviceItems.${service.id}.description`);
-    if (currentLang === 'ru' && t(`services.serviceItems.${service.id}.description`)) 
-      return t(`services.serviceItems.${service.id}.description`);
-    if (currentLang === 'ka' && t(`services.serviceItems.${service.id}.description`)) 
-      return t(`services.serviceItems.${service.id}.description`);
+    
+    const translationKey = `services.serviceItems.${service.id}.description`;
+    const translation = t(translationKey);
+    
+    // Çeviri anahtarının kendisi görünmesini engelle
+    if (translation && translation !== translationKey) {
+      return translation;
+    }
+    
+    // Sabit çeviriler
+    if (service.id === 1) {
+      if (currentLang === 'en') return "Permanent and natural hair transplantation with Sapphire FUE technique";
+      if (currentLang === 'ru') return "Постоянная и естественная трансплантация волос по технике Sapphire FUE";
+      if (currentLang === 'ka') return "მუდმივი და ბუნებრივი თმის გადანერგვა Sapphire FUE ტექნიკით";
+    }
+    else if (service.id === 2) {
+      if (currentLang === 'en') return "Permanent and natural beard transplantation solutions";
+      if (currentLang === 'ru') return "Постоянные и естественные решения для пересадки бороды";
+      if (currentLang === 'ka') return "მუდმივი და ბუნებრივი წვერის გადანერგვის გადაწყვეტილებები";
+    }
+    else if (service.id === 3) {
+      if (currentLang === 'en') return "Natural and permanent eyebrow transplantation procedure";
+      if (currentLang === 'ru') return "Естественная и постоянная процедура пересадки бровей";
+      if (currentLang === 'ka') return "ბუნებრივი და მუდმივი წარბების გადანერგვის პროცედურა";
+    }
+    else if (service.id === 4) {
+      if (currentLang === 'en') return "Stimulating hair growth with platelets derived from your own blood";
+      if (currentLang === 'ru') return "Стимулирование роста волос тромбоцитами из собственной крови";
+      if (currentLang === 'ka') return "თმის ზრდის სტიმულირება თქვენი საკუთარი სისხლიდან მიღებული თრომბოციტებით";
+    }
+    else if (service.id === 5) {
+      if (currentLang === 'en') return "Vitamin and mineral injection that nourishes hair follicles";
+      if (currentLang === 'ru') return "Инъекция витаминов и минералов, питающая волосяные фолликулы";
+      if (currentLang === 'ka') return "ვიტამინებისა და მინერალების ინექცია, რომელიც კვებავს თმის ფოლიკულებს";
+    }
+    
     return service.description;
   };
 
@@ -59,15 +119,95 @@ const ServiceCard = ({ service }: { service: Service }) => {
     if (!defaultValue) return '';
 
     if (currentLang === 'tr') return defaultValue;
-    if (currentLang !== 'tr' && t(`services.serviceItems.${service.id}.process.${index}`)) 
-      return t(`services.serviceItems.${service.id}.process.${index}`);
     
-    // Fallback to translation based on process array
+    // İngilizce, Rusça ve Gürcüce çevirileri için
+    const translationKey = `services.serviceItems.${service.id}.process.${index}`;
+    const translation = t(translationKey);
+    
+    // Çeviri anahtarının kendisi görünmesini engelle
+    if (translation && translation !== translationKey) {
+      return translation;
+    }
+    
+    // Alternatif çeviri yöntemi
     const translatedProcess = t(`services.serviceItems.${service.id}.process`);
     if (translatedProcess && Array.isArray(translatedProcess) && translatedProcess[index]) {
       return translatedProcess[index];
     }
     
+    // Sabit çeviriler - Saç ekimi
+    if (service.id === 1) {
+      if (currentLang === 'en' && index < 5) {
+        const process = [
+          "Free consultation", "Hair analysis", "Planning", "Graft implantation", "Aftercare"
+        ];
+        return process[index] || defaultValue;
+      }
+      
+      if (currentLang === 'ru' && index < 5) {
+        const process = [
+          "Бесплатная консультация", "Анализ волос", "Планирование", "Имплантация графтов", "Послеоперационный уход"
+        ];
+        return process[index] || defaultValue;
+      }
+      
+      if (currentLang === 'ka' && index < 5) {
+        const process = [
+          "უფასო კონსულტაცია", "თმის ანალიზი", "დაგეგმვა", "გრაფტების იმპლანტაცია", "შემდგომი მოვლა"
+        ];
+        return process[index] || defaultValue;
+      }
+    }
+    
+    // Sakal ekimi
+    if (service.id === 2) {
+      if (currentLang === 'en' && index < 5) {
+        const process = [
+          "Facial analysis", "Beard design", "Local anesthesia", "Graft implantation", "Aftercare"
+        ];
+        return process[index] || defaultValue;
+      }
+      
+      if (currentLang === 'ru' && index < 5) {
+        const process = [
+          "Анализ лица", "Дизайн бороды", "Местная анестезия", "Имплантация графтов", "Послеоперационный уход"
+        ];
+        return process[index] || defaultValue;
+      }
+      
+      if (currentLang === 'ka' && index < 5) {
+        const process = [
+          "სახის ანალიზი", "წვერის დიზაინი", "ლოკალური ანესთეზია", "გრაფტების იმპლანტაცია", "შემდგომი მოვლა"
+        ];
+        return process[index] || defaultValue;
+      }
+    }
+    
+    // Kaş ekimi
+    if (service.id === 3) {
+      if (currentLang === 'en' && index < 5) {
+        const process = [
+          "Eyebrow analysis", "Design", "Local anesthesia", "Precise implantation", "Aftercare recommendations"
+        ];
+        return process[index] || defaultValue;
+      }
+      
+      if (currentLang === 'ru' && index < 5) {
+        const process = [
+          "Анализ бровей", "Дизайн", "Местная анестезия", "Точная имплантация", "Рекомендации по уходу"
+        ];
+        return process[index] || defaultValue;
+      }
+      
+      if (currentLang === 'ka' && index < 5) {
+        const process = [
+          "წარბების ანალიზი", "დიზაინი", "ლოკალური ანესთეზია", "ზუსტი იმპლანტაცია", "მოვლის რეკომენდაციები"
+        ];
+        return process[index] || defaultValue;
+      }
+    }
+    
+    // Sabit çeviriler - Diğer hizmetler için
     return defaultValue;
   };
   
@@ -76,8 +216,37 @@ const ServiceCard = ({ service }: { service: Service }) => {
     if (!defaultValue) return '';
 
     if (currentLang === 'tr') return defaultValue;
-    if (currentLang !== 'tr' && t(`services.serviceItems.${service.id}.benefits.${index}`)) 
-      return t(`services.serviceItems.${service.id}.benefits.${index}`);
+    
+    // İngilizce, Rusça ve Gürcüce çevirileri için
+    const translationKey = `services.serviceItems.${service.id}.benefits.${index}`;
+    const translation = t(translationKey);
+    
+    // Çeviri anahtarının kendisi görünmesini engelle
+    if (translation && translation !== translationKey) {
+      return translation;
+    }
+    
+    // Alternatif çeviri yöntemi dene
+    if (currentLang === 'en' && index < 4) {
+      const benefits = [
+        "Permanent solution", "Natural appearance", "Minimal scarring", "Quick recovery"
+      ];
+      return benefits[index] || defaultValue;
+    }
+    
+    if (currentLang === 'ru' && index < 4) {
+      const benefits = [
+        "Постоянное решение", "Естественный вид", "Минимальные следы", "Быстрое восстановление"
+      ];
+      return benefits[index] || defaultValue;
+    }
+    
+    if (currentLang === 'ka' && index < 4) {
+      const benefits = [
+        "მუდმივი გადაწყვეტა", "ბუნებრივი იერსახე", "მინიმალური კვალი", "სწრაფი აღდგენა"
+      ];
+      return benefits[index] || defaultValue;
+    }
     
     return defaultValue;
   };
@@ -92,14 +261,172 @@ const ServiceCard = ({ service }: { service: Service }) => {
     // Try to get translated FAQ
     const faqIndex = service.faqs?.indexOf(faq);
     if (faqIndex !== undefined && faqIndex >= 0) {
-      const translatedQuestion = t(`services.serviceItems.${service.id}.faqs.${faqIndex}.question`);
-      const translatedAnswer = t(`services.serviceItems.${service.id}.faqs.${faqIndex}.answer`);
+      const questionKey = `services.serviceItems.${service.id}.faqs.${faqIndex}.question`;
+      const answerKey = `services.serviceItems.${service.id}.faqs.${faqIndex}.answer`;
       
-      if (translatedQuestion && translatedAnswer) {
+      const translatedQuestion = t(questionKey);
+      const translatedAnswer = t(answerKey);
+      
+      // Çeviri anahtarının kendisi görünmesini engelle
+      if (translatedQuestion && translatedQuestion !== questionKey && 
+          translatedAnswer && translatedAnswer !== answerKey) {
         return { 
           question: translatedQuestion, 
           answer: translatedAnswer 
         };
+      }
+    }
+    
+    // Saç ekimi için sabit çeviriler
+    if (service.id === 1 && faqIndex !== undefined) {
+      if (currentLang === 'en') {
+        if (faqIndex === 0) {
+          return {
+            question: "Is hair transplantation permanent?",
+            answer: "Yes, it is a lifelong solution."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "How long does the procedure take?",
+            answer: "It takes about 6-8 hours on average."
+          };
+        }
+      } else if (currentLang === 'ru') {
+        if (faqIndex === 0) {
+          return {
+            question: "Трансплантация волос - это навсегда?",
+            answer: "Да, это пожизненное решение."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "Сколько длится процедура?",
+            answer: "В среднем 6-8 часов."
+          };
+        }
+      } else if (currentLang === 'ka') {
+        if (faqIndex === 0) {
+          return {
+            question: "არის თუ არა თმის გადანერგვა მუდმივი?",
+            answer: "დიახ, ეს არის სამუდამო გადაწყვეტილება."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "რამდენ ხანს გრძელდება პროცედურა?",
+            answer: "საშუალოდ 6-8 საათი."
+          };
+        }
+      }
+    }
+    
+    // Sakal ekimi için sabit çeviriler
+    if (service.id === 2 && faqIndex !== undefined) {
+      if (currentLang === 'en') {
+        if (faqIndex === 0) {
+          return {
+            question: "Is beard transplantation permanent?",
+            answer: "Yes, it is a lifelong solution."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "How long does the procedure take?",
+            answer: "On average 3-4 hours."
+          };
+        } else if (faqIndex === 2) {
+          return {
+            question: "When can I shave?",
+            answer: "You can shave 15 days after the procedure."
+          };
+        }
+      } else if (currentLang === 'ru') {
+        if (faqIndex === 0) {
+          return {
+            question: "Пересадка бороды - это навсегда?",
+            answer: "Да, это пожизненное решение."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "Сколько длится процедура?",
+            answer: "В среднем 3-4 часа."
+          };
+        } else if (faqIndex === 2) {
+          return {
+            question: "Когда я смогу бриться?",
+            answer: "Вы можете бриться через 15 дней после процедуры."
+          };
+        }
+      } else if (currentLang === 'ka') {
+        if (faqIndex === 0) {
+          return {
+            question: "არის თუ არა წვერის გადანერგვა მუდმივი?",
+            answer: "დიახ, ეს არის სამუდამო გადაწყვეტილება."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "რამდენ ხანს გრძელდება პროცედურა?",
+            answer: "საშუალოდ 3-4 საათი."
+          };
+        } else if (faqIndex === 2) {
+          return {
+            question: "როდის შემიძლია გაპარსვა?",
+            answer: "შეგიძლიათ გაიპარსოთ პროცედურიდან 15 დღის შემდეგ."
+          };
+        }
+      }
+    }
+    
+    // Kaş ekimi için sabit çeviriler
+    if (service.id === 3 && faqIndex !== undefined) {
+      if (currentLang === 'en') {
+        if (faqIndex === 0) {
+          return {
+            question: "When will the result be visible?",
+            answer: "Your new eyebrows will start growing within 3-4 months."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "Will it look natural?",
+            answer: "Yes, the result will be harmonious with your existing eyebrows and look natural."
+          };
+        } else if (faqIndex === 2) {
+          return {
+            question: "How should I care for it?",
+            answer: "You will need to follow special care instructions during the first week."
+          };
+        }
+      } else if (currentLang === 'ru') {
+        if (faqIndex === 0) {
+          return {
+            question: "Когда будет виден результат?",
+            answer: "Новые брови начнут расти через 3-4 месяца."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "Будет ли выглядеть естественно?",
+            answer: "Да, результат будет гармонировать с существующими бровями и выглядеть естественно."
+          };
+        } else if (faqIndex === 2) {
+          return {
+            question: "Как ухаживать?",
+            answer: "В течение первой недели необходимо следовать особым инструкциям по уходу."
+          };
+        }
+      } else if (currentLang === 'ka') {
+        if (faqIndex === 0) {
+          return {
+            question: "როდის იქნება შედეგი ხილული?",
+            answer: "თქვენი ახალი წარბები დაიწყებს ზრდას 3-4 თვის განმავლობაში."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "ბუნებრივად გამოიყურება?",
+            answer: "დიახ, შედეგი იქნება ჰარმონიული თქვენს არსებულ წარბებთან და გამოიყურება ბუნებრივად."
+          };
+        } else if (faqIndex === 2) {
+          return {
+            question: "როგორ უნდა მოვუაროთ?",
+            answer: "პირველი კვირის განმავლობაში საჭიროა მოვლის სპეციალური ინსტრუქციების დაცვა."
+          };
+        }
       }
     }
     
