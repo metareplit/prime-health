@@ -21,6 +21,26 @@
       "clinic": "კლინიკის გალერეა",
       "success": "წარმატების ისტორიები"
     },
+    "caseDescriptions": {
+      "sixMonthResult": "6 თვის შედეგი",
+      "eightMonthResult": "8 თვის შედეგი",
+      "twelveMonthResult": "12 თვის შედეგი"
+    },
+    "techniques": {
+      "safirFUE": "საფირის FUE",
+      "dhi": "DHI",
+      "classicFUE": "კლასიკური FUE"
+    },
+    "durations": {
+      "sixHours": "6 საათი",
+      "sevenHours": "7 საათი",
+      "eightHours": "8 საათი"
+    },
+    "satisfactions": {
+      "verySatisfied": "ძალიან კმაყოფილი",
+      "satisfied": "კმაყოფილი",
+      "extremelySatisfied": "უკიდურესად კმაყოფილი"
+    },
     "categories": {
       "sac-ekimi": "თმის გადანერგვა",
       "sakal-ekimi": "წვერის გადანერგვა",

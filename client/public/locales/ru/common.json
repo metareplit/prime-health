@@ -21,6 +21,26 @@
       "clinic": "Галерея клиники",
       "success": "Истории успеха"
     },
+    "caseDescriptions": {
+      "sixMonthResult": "Результат через 6 месяцев",
+      "eightMonthResult": "Результат через 8 месяцев",
+      "twelveMonthResult": "Результат через 12 месяцев"
+    },
+    "techniques": {
+      "safirFUE": "Сапфировый FUE",
+      "dhi": "DHI",
+      "classicFUE": "Классический FUE"
+    },
+    "durations": {
+      "sixHours": "6 часов",
+      "sevenHours": "7 часов",
+      "eightHours": "8 часов"
+    },
+    "satisfactions": {
+      "verySatisfied": "Очень доволен",
+      "satisfied": "Доволен",
+      "extremelySatisfied": "Чрезвычайно доволен"
+    },
     "categories": {
       "sac-ekimi": "Трансплантация волос",
       "sakal-ekimi": "Трансплантация бороды",

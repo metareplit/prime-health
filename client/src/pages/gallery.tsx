@@ -37,6 +37,49 @@ const categoryIcons: Record<string, JSX.Element> = {
 export default function Gallery() {
   const { t } = useTranslation('common');
 
+  // Galeri öğeleri - t fonksiyonu burada kullanılabilir
+  const items = [
+    {
+      id: 1,
+      beforeImage: "/images/slider/medical-tech.png",
+      afterImage: "/images/slider/expert-team.png",
+      description: t('gallery.caseDescriptions.sixMonthResult'),
+      procedureDetails: {
+        technique: t('gallery.techniques.safirFUE'),
+        duration: t('gallery.durations.eightHours')
+      },
+      results: {
+        satisfaction: t('gallery.satisfactions.verySatisfied')
+      }
+    },
+    {
+      id: 2,
+      beforeImage: "/images/slider/expert-team.png",
+      afterImage: "/images/slider/professional-care.png",
+      description: t('gallery.caseDescriptions.eightMonthResult'),
+      procedureDetails: {
+        technique: t('gallery.techniques.dhi'),
+        duration: t('gallery.durations.sevenHours')
+      },
+      results: {
+        satisfaction: t('gallery.satisfactions.satisfied')
+      }
+    },
+    {
+      id: 3,
+      beforeImage: "/images/slider/medical-tech.png",
+      afterImage: "/images/slider/professional-care.png",
+      description: t('gallery.caseDescriptions.twelveMonthResult'),
+      procedureDetails: {
+        technique: t('gallery.techniques.safirFUE'),
+        duration: t('gallery.durations.sixHours')
+      },
+      results: {
+        satisfaction: t('gallery.satisfactions.extremelySatisfied')
+      }
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <Metadata
@@ -97,7 +140,7 @@ export default function Gallery() {
 
           <TabsContent value="oncesi-sonrasi">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {galleryItems.map((item) => (
+              {items.map((item) => (
                 <motion.div
                   key={item.id}
                   layout
@@ -161,44 +204,4 @@ export default function Gallery() {
   );
 }
 
-const galleryItems: Case[] = [
-  {
-    id: 1,
-    beforeImage: "/images/slider/medical-tech.png",
-    afterImage: "/images/slider/expert-team.png",
-    description: "6 ay sonrası sonuç",
-    procedureDetails: {
-      technique: "Safir FUE",
-      duration: "8 saat"
-    },
-    results: {
-      satisfaction: "Çok memnun"
-    }
-  },
-  {
-    id: 2,
-    beforeImage: "/images/slider/expert-team.png",
-    afterImage: "/images/slider/professional-care.png",
-    description: "8 ay sonrası sonuç",
-    procedureDetails: {
-      technique: "DHI",
-      duration: "7 saat"
-    },
-    results: {
-      satisfaction: "Memnun"
-    }
-  },
-  {
-    id: 3,
-    beforeImage: "/images/slider/medical-tech.png",
-    afterImage: "/images/slider/professional-care.png",
-    description: "12 ay sonrası sonuç",
-    procedureDetails: {
-      technique: "Safir FUE",
-      duration: "6 saat"
-    },
-    results: {
-      satisfaction: "Çok memnun"
-    }
-  }
-];
+// Bu fonksiyon artık kullanılmıyor ve kaldırıldı

@@ -518,6 +518,26 @@
       "clinic": "Klinik Görselleri",
       "success": "Başarı Hikayeleri"
     },
+    "caseDescriptions": {
+      "sixMonthResult": "6 ay sonrası sonuç",
+      "eightMonthResult": "8 ay sonrası sonuç",
+      "twelveMonthResult": "12 ay sonrası sonuç"
+    },
+    "techniques": {
+      "safirFUE": "Safir FUE",
+      "dhi": "DHI",
+      "classicFUE": "Klasik FUE"
+    },
+    "durations": {
+      "sixHours": "6 saat",
+      "sevenHours": "7 saat",
+      "eightHours": "8 saat"
+    },
+    "satisfactions": {
+      "verySatisfied": "Çok memnun",
+      "satisfied": "Memnun",
+      "extremelySatisfied": "Son derece memnun"
+    },
     "categories": {
       "sac-ekimi": "Saç Ekimi",
       "sakal-ekimi": "Sakal Ekimi",

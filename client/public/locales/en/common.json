@@ -550,6 +550,26 @@
       "clinic": "Clinic Gallery",
       "success": "Success Stories"
     },
+    "caseDescriptions": {
+      "sixMonthResult": "6 month result",
+      "eightMonthResult": "8 month result",
+      "twelveMonthResult": "12 month result"
+    },
+    "techniques": {
+      "safirFUE": "Sapphire FUE",
+      "dhi": "DHI",
+      "classicFUE": "Classic FUE"
+    },
+    "durations": {
+      "sixHours": "6 hours",
+      "sevenHours": "7 hours",
+      "eightHours": "8 hours"
+    },
+    "satisfactions": {
+      "verySatisfied": "Very satisfied",
+      "satisfied": "Satisfied",
+      "extremelySatisfied": "Extremely satisfied"
+    },
     "categories": {
       "sac-ekimi": "Hair Transplantation",
       "sakal-ekimi": "Beard Transplantation",
