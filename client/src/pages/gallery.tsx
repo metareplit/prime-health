@@ -42,8 +42,8 @@ export default function Gallery() {
   const items = [
     {
       id: 1,
-      beforeImage: "/images/slider/medical-tech.png",
-      afterImage: "/images/slider/expert-team.png",
+      beforeImage: "/images/before-after/IMG-20250325-WA0087.jpg",
+      afterImage: "/images/before-after/IMG-20250325-WA0083.jpg",
       description: t('gallery.caseDescriptions.sixMonthResult'),
       procedureDetails: {
         technique: t('gallery.techniques.safirFUE'),
@@ -55,8 +55,8 @@ export default function Gallery() {
     },
     {
       id: 2,
-      beforeImage: "/images/slider/expert-team.png",
-      afterImage: "/images/slider/professional-care.png",
+      beforeImage: "/images/before-after/IMG-20250325-WA0060.jpg",
+      afterImage: "/images/before-after/IMG-20250325-WA0059.jpg",
       description: t('gallery.caseDescriptions.eightMonthResult'),
       procedureDetails: {
         technique: t('gallery.techniques.dhi'),
@@ -68,8 +68,8 @@ export default function Gallery() {
     },
     {
       id: 3,
-      beforeImage: "/images/slider/medical-tech.png",
-      afterImage: "/images/slider/professional-care.png",
+      beforeImage: "/images/before-after/IMG-20250325-WA0062.jpg",
+      afterImage: "/images/before-after/IMG-20250325-WA0061.jpg",
       description: t('gallery.caseDescriptions.twelveMonthResult'),
       procedureDetails: {
         technique: t('gallery.techniques.safirFUE'),
@@ -77,6 +77,45 @@ export default function Gallery() {
       },
       results: {
         satisfaction: t('gallery.satisfactions.extremelySatisfied')
+      }
+    },
+    {
+      id: 4,
+      beforeImage: "/images/before-after/IMG-20250325-WA0064.jpg",
+      afterImage: "/images/before-after/IMG-20250325-WA0063.jpg",
+      description: t('gallery.caseDescriptions.fourMonthResult'),
+      procedureDetails: {
+        technique: t('gallery.techniques.safirFUE'),
+        duration: t('gallery.durations.sixHours')
+      },
+      results: {
+        satisfaction: t('gallery.satisfactions.extremelySatisfied')
+      }
+    },
+    {
+      id: 5,
+      beforeImage: "/images/before-after/IMG-20250325-WA0046.jpg",
+      afterImage: "/images/before-after/IMG-20250325-WA0065.jpg",
+      description: t('gallery.caseDescriptions.nineMonthResult'),
+      procedureDetails: {
+        technique: t('gallery.techniques.dhi'),
+        duration: t('gallery.durations.fiveHours')
+      },
+      results: {
+        satisfaction: t('gallery.satisfactions.verySatisfied')
+      }
+    },
+    {
+      id: 6,
+      beforeImage: "/images/before-after/IMG-20250325-WA0048.jpg",
+      afterImage: "/images/before-after/IMG-20250325-WA0047.jpg",
+      description: t('gallery.caseDescriptions.tenMonthResult'),
+      procedureDetails: {
+        technique: t('gallery.techniques.safirFUE'),
+        duration: t('gallery.durations.sevenHours')
+      },
+      results: {
+        satisfaction: t('gallery.satisfactions.verySatisfied')
       }
     }
   ];

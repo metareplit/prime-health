@@ -8,6 +8,7 @@ import {
   insertSliderSchema
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
+import { ZodError } from "zod";
 import path from 'path';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
@@ -100,6 +101,49 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Before-After endpoints
+  app.get("/api/before-after", async (_req: Request, res: Response) => {
+    try {
+      const items = await storage.getAllBeforeAfter();
+      res.json(items);
+    } catch (error) {
+      console.error('Error fetching before-after items:', error);
+      res.status(500).json({ message: "Öncesi sonrası öğeleri alınırken bir hata oluştu" });
+    }
+  });
+
+  app.post("/api/before-after", adminAuth, async (req: Request, res: Response) => {
+    try {
+      const newItem = await storage.createBeforeAfter(req.body);
+      res.status(201).json(newItem);
+    } catch (error) {
+      console.error('Error creating before-after item:', error);
+      res.status(500).json({ message: "Öncesi sonrası öğesi oluşturulurken bir hata oluştu" });
+    }
+  });
+
+  app.put("/api/before-after/:id", adminAuth, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const updatedItem = await storage.updateBeforeAfter(id, req.body);
+      res.json(updatedItem);
+    } catch (error) {
+      console.error('Error updating before-after item:', error);
+      res.status(500).json({ message: "Öncesi sonrası öğesi güncellenirken bir hata oluştu" });
+    }
+  });
+
+  app.delete("/api/before-after/:id", adminAuth, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteBeforeAfter(id);
+      res.status(204).send();
+    } catch (error) {
+      console.error('Error deleting before-after item:', error);
+      res.status(500).json({ message: "Öncesi sonrası öğesi silinirken bir hata oluştu" });
+    }
+  });
+
   // Appointments endpoints
   app.get("/api/appointments", adminAuth, async (req: Request, res: Response) => {
     try {
@@ -126,9 +170,14 @@ export async function registerRoutes(app: Express) {
       const sliderData = insertSliderSchema.parse({...req.body, image: req.file?.filename}); 
       const slider = await storage.createSlider(sliderData);
       res.status(201).json(slider);
-    } catch (error) {
-      const validationError = fromZodError(error);
-      res.status(400).json({ message: validationError.message });
+    } catch (error: any) {
+      // Check if it's a ZodError
+      if (error instanceof ZodError) {
+        const validationError = fromZodError(error);
+        res.status(400).json({ message: validationError.message });
+      } else {
+        res.status(400).json({ message: error.message || 'Bilinmeyen bir hata oluştu' });
+      }
     }
   });
 
