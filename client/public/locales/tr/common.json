@@ -227,14 +227,7 @@
       "education": "Eğitim",
       "languages": "Konuştuğu Diller"
     },
-    "services": {
-      "title": "Hizmetlerimiz",
-      "subtitle": "Size sunduğumuz tedavi seçenekleri",
-      "viewAll": "Tüm Hizmetleri Gör",
-      "featured": "Öne Çıkan",
-      "learnMore": "Detaylı Bilgi",
-      "bookNow": "Randevu Al"
-    },
+
     "testimonials": {
       "title": "Hasta Yorumları",
       "subtitle": "Başarı hikayelerimiz ve mutlu hastalarımız",
@@ -641,10 +634,7 @@
         "title": "Hair Clinic Tiflis - Saç Ekimi ve Estetik Tedavi Merkezi",
         "description": "Gürcistan Tiflis'te modern teknoloji ve uzman kadromuzla saç ekimi, sakal ekimi ve estetik tedavi hizmetleri"
       },
-      "services": {
-        "title": "Saç Ekimi ve Estetik Tedavi Hizmetlerimiz",
-        "description": "DHI ve Safir FUE teknikleriyle doğal ve kalıcı saç ekimi sonuçları"
-      },
+
       "blog": {
         "title": "Saç Ekimi ve Estetik Blog",
         "description": "Saç ekimi, sakal ekimi ve estetik tedaviler hakkında uzman bilgileri"
@@ -751,6 +741,9 @@
     "button3": "Ekibimizle Tanışın",
     "title4": "Modern Klinik",
     "description4": "Son teknoloji donanım ve konforlu ortam",
-    "button4": "Sanal Tur"
+    "button4": "Sanal Tur",
+    "title5": "Gelişmiş Cilt Bakımı",
+    "description5": "Kişiye özel yenilikçi cilt bakım çözümleri",
+    "button5": "Tedavileri Keşfedin"
   }
 }

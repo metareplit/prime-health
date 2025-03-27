@@ -240,17 +240,7 @@ export default function Home() {
                       ))}
                     </div>
 
-                    <div className="pt-4 border-t">
-                      <Link href={`/hizmetler/${service.slug}`}>
-                        <Button
-                          variant="ghost"
-                          className="w-full group/btn hover:bg-primary hover:text-white"
-                        >
-                          <span>{t('home.services.learnMore')}</span>
-                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                        </Button>
-                      </Link>
-                    </div>
+                    {/* Daha fazla bilgi butonu kaldırıldı */}
                   </div>
                 </motion.div>
               ))}
