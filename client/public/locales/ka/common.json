@@ -198,167 +198,167 @@
   },
   "home": {
     "hero": {
-      "title": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
-      "subtitle": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
-      "cta": "Ücretsiz Konsültasyon"
+      "title": "თმის გადანერგვისა და ესთეტიკური მკურნალობის სპეციალისტი კლინიკა",
+      "subtitle": "მიიღეთ საუკეთესო შედეგები ჩვენი თანამედროვე ტექნოლოგიებით და ექსპერტთა გუნდით",
+      "cta": "უფასო კონსულტაცია"
     },
     "services": {
-      "title": "Hizmetlerimiz",
-      "subtitle": "Uzman kadromuz ve modern teknolojimizle sizlere sunduğumuz kapsamlı tedavi seçenekleri"
+      "title": "ჩვენი სერვისები",
+      "subtitle": "ყოვლისმომცველი სამკურნალო ვარიანტები შემოთავაზებული ჩვენი ექსპერტი გუნდისა და თანამედროვე ტექნოლოგიების მიერ"
     },
     "doctor": {
-      "title": "Dr. Ali Çalışkan",
-      "position": "Saç Ekim Uzmanı",
-      "description": "10 yılı aşkın deneyimi ile saç ekimi ve estetik cerrahi alanında uzmanlaşmış, binlerce başarılı operasyona imza atmış değerli bir hekimdir.",
-      "expert": "Uzman Hekim",
-      "experience": "10+ Yıl Deneyim",
-      "operations": "500+ Operasyon",
-      "results": "Başarılı Sonuçlar",
-      "appointment": "Hemen Randevu Oluştur"
+      "title": "დოქტორი ალი ჩალიშკანი",
+      "position": "თმის გადანერგვის სპეციალისტი",
+      "description": "10 წელზე მეტი გამოცდილებით თმის გადანერგვისა და ესთეტიკური ქირურგიის სფეროში, ათასობით წარმატებული ოპერაციის ჩამტარებელი ღირსეული ექიმი.",
+      "expert": "ექსპერტი ექიმი",
+      "experience": "10+ წლის გამოცდილება",
+      "operations": "500+ ოპერაცია",
+      "results": "წარმატებული შედეგები",
+      "appointment": "დაჯავშნეთ ახლავე"
     },
     "features": {
-      "title": "Neden Bizi Seçmelisiniz?",
-      "subtitle": "Size en iyi hizmeti sunmak için çalışıyoruz",
+      "title": "რატომ უნდა აგვირჩიოთ?",
+      "subtitle": "ჩვენ ვმუშაობთ, რომ მოგაწოდოთ საუკეთესო მომსახურება",
       "expertise": {
-        "title": "Uzman Kadro",
-        "description": "Alanında uzman doktorlarımız ve deneyimli ekibimizle yanınızdayız"
+        "title": "ექსპერტთა გუნდი",
+        "description": "ჩვენ ვართ თქვენთან ერთად ჩვენი ექსპერტი ექიმებითა და გამოცდილი გუნდით"
       },
       "technology": {
-        "title": "Modern Teknoloji",
-        "description": "En son teknolojik cihazlar ve yöntemlerle tedavi"
+        "title": "თანამედროვე ტექნოლოგია",
+        "description": "მკურნალობა უახლესი ტექნოლოგიური მოწყობილობებითა და მეთოდებით"
       },
       "care": {
-        "title": "Kişisel Bakım",
-        "description": "Her hastaya özel tedavi planı ve sürekli takip"
+        "title": "პერსონალური ზრუნვა",
+        "description": "ინდივიდუალური მკურნალობის გეგმა და მუდმივი მონიტორინგი ყველა პაციენტისთვის"
       },
       "recovery": {
-        "title": "Hızlı İyileşme",
-        "description": "Minimal invaziv teknikler ile hızlı iyileşme süreci"
+        "title": "სწრაფი აღდგენა",
+        "description": "სწრაფი გამოჯანმრთელების პროცესი მინიმალურად ინვაზიური ტექნიკით"
       },
       "guarantee": {
-        "title": "Garantili Sonuç",
-        "description": "Yüksek hasta memnuniyeti ve garantili sonuçlar"
+        "title": "გარანტირებული შედეგი",
+        "description": "მაღალი პაციენტის კმაყოფილება და გარანტირებული შედეგები"
       },
       "approach": {
-        "title": "Kişisel Yaklaşım",
-        "description": "Her hastaya özel tasarlanmış tedavi planı"
+        "title": "პერსონალური მიდგომა",
+        "description": "ინდივიდუალურად შემუშავებული მკურნალობის გეგმა ყოველი პაციენტისთვის"
       },
       "clinic": {
-        "title": "Modern Klinik",
-        "description": "Tam donanımlı, konforlu klinik ortamı"
+        "title": "თანამედროვე კლინიკა",
+        "description": "სრულად აღჭურვილი, კომფორტული კლინიკური გარემო"
       },
       "location": {
-        "title": "Merkezi Konum",
-        "description": "Kolay ulaşılabilir merkezi lokasyon"
+        "title": "ცენტრალური მდებარეობა",
+        "description": "ადვილად მისაღწევი ცენტრალური მდებარეობა"
       }
     },
     "doctors": {
-      "title": "Uzman Doktorlarımız",
-      "subtitle": "Alanında uzman ve deneyimli doktor kadromuz",
-      "viewProfile": "Profili İncele",
-      "specialties": "Uzmanlık Alanları",
-      "experience": "Deneyim",
-      "education": "Eğitim",
-      "languages": "Konuştuğu Diller"
+      "title": "ჩვენი ექსპერტი ექიმები",
+      "subtitle": "ჩვენი ექსპერტი და გამოცდილი ექიმების გუნდი",
+      "viewProfile": "პროფილის ნახვა",
+      "specialties": "სპეციალობები",
+      "experience": "გამოცდილება",
+      "education": "განათლება",
+      "languages": "საუბრობს ენებზე"
     },
 
     "testimonials": {
-      "title": "Hasta Yorumları",
-      "subtitle": "Başarı hikayelerimiz ve mutlu hastalarımız",
-      "verified": "Doğrulanmış Hasta",
-      "readMore": "Devamını Oku"
+      "title": "პაციენტების მიმოხილვები",
+      "subtitle": "ჩვენი წარმატების ისტორიები და ბედნიერი პაციენტები",
+      "verified": "დადასტურებული პაციენტი",
+      "readMore": "მეტის წაკითხვა"
     },
     "stats": {
-      "title": "Rakamlarla Biz",
-      "happyPatients": "Mutlu Hasta",
-      "experience": "Yıllık Deneyim",
-      "procedures": "Başarılı İşlem",
-      "experts": "Uzman Doktor"
+      "title": "ჩვენ რიცხვებში",
+      "happyPatients": "კმაყოფილი პაციენტი",
+      "experience": "წლის გამოცდილება",
+      "procedures": "წარმატებული პროცედურა",
+      "experts": "ექსპერტი ექიმი"
     }
   },
   "services": {
-    "title": "Hizmetlerimiz",
-    "description": "Modern teknoloji ve uzman kadromuzla sunduğumuz tedavi seçenekleri",
-    "metaTitle": "Saç Ekimi ve Estetik Hizmetleri",
-    "metaDescription": "Profesyonel saç ekimi, sakal ekimi, kaş ekimi ve saç bakım hizmetleri. Modern teknoloji ve uzman kadromuzla yanınızdayız.",
-    "metaKeywords": "saç ekimi, sakal ekimi, kaş ekimi, prp tedavisi, mezoterapi, tiflis saç ekimi, gürcistan saç ekimi",
+    "title": "ჩვენი სერვისები",
+    "description": "სამკურნალო ვარიანტები, შემოთავაზებული ჩვენი თანამედროვე ტექნოლოგიებითა და ექსპერტი გუნდით",
+    "metaTitle": "თმის გადანერგვისა და ესთეტიკური სერვისები",
+    "metaDescription": "პროფესიონალური თმის გადანერგვა, წვერის გადანერგვა, წარბის გადანერგვა და თმის მოვლის სერვისები. ჩვენ თქვენთან ვართ ჩვენი თანამედროვე ტექნოლოგიებითა და ექსპერტი გუნდით.",
+    "metaKeywords": "თმის გადანერგვა, წვერის გადანერგვა, წარბის გადანერგვა, prp მკურნალობა, მეზოთერაპია, თბილისის თმის გადანერგვა, საქართველოს თმის გადანერგვა",
     "tabs": {
-      "details": "Detaylar",
-      "benefits": "Avantajlar",
-      "faq": "SSS"
+      "details": "დეტალები",
+      "benefits": "უპირატესობები",
+      "faq": "ხშირად დასმული კითხვები"
     },
-    "processTitle": "İşlem Süreci",
-    "freeConsultation": "Ücretsiz Danışma",
+    "processTitle": "პროცედურის პროცესი",
+    "freeConsultation": "უფასო კონსულტაცია",
     "serviceItems": {
       "1": {
-        "name": "Saç Ekimi",
-        "description": "Doğal ve kalıcı saç ekimi çözümleri",
-        "process": ["Ücretsiz konsültasyon", "Saç analizi", "Planlama", "Greft ekimi", "Sonrası bakım"]
+        "name": "თმის გადანერგვა",
+        "description": "ბუნებრივი და მუდმივი თმის გადანერგვის გადაწყვეტილებები",
+        "process": ["უფასო კონსულტაცია", "თმის ანალიზი", "დაგეგმვა", "გრაფტების იმპლანტაცია", "შემდგომი მოვლა"]
       },
       "2": {
-        "name": "Sakal Ekimi",
-        "description": "Kalıcı ve doğal görünümlü sakal ekimi çözümleri",
-        "process": ["Yüz analizi", "Sakal tasarımı", "Lokal anestezi", "Greft ekimi", "Kontrol ve bakım"]
+        "name": "წვერის გადანერგვა",
+        "description": "მუდმივი და ბუნებრივად გამოყურებადი წვერის გადანერგვის გადაწყვეტილებები",
+        "process": ["სახის ანალიზი", "წვერის დიზაინი", "ლოკალური ანესთეზია", "გრაფტების იმპლანტაცია", "კონტროლი და მოვლა"]
       },
       "3": {
-        "name": "Kaş Ekimi",
-        "description": "Doğal ve kalıcı kaş ekimi uygulaması",
-        "process": ["Kaş analizi", "Tasarım", "Lokal anestezi", "Hassas ekim", "Bakım önerileri"]
+        "name": "წარბის გადანერგვა",
+        "description": "ბუნებრივი და მუდმივი წარბის გადანერგვის პროცედურა",
+        "process": ["წარბის ანალიზი", "დიზაინი", "ლოკალური ანესთეზია", "ზუსტი იმპლანტაცია", "მოვლის რეკომენდაციები"]
       },
       "4": {
-        "name": "PRP Tedavisi",
-        "description": "Kendi kanınızdan elde edilen trombositlerle saç büyümesini uyarma",
-        "process": ["Kan alımı", "PRP hazırlama", "Saçlı deri temizliği", "PRP enjeksiyonu", "Bakım önerileri"]
+        "name": "PRP მკურნალობა",
+        "description": "თქვენი საკუთარი სისხლიდან მიღებული თრომბოციტებით თმის ზრდის სტიმულირება",
+        "process": ["სისხლის აღება", "PRP მომზადება", "სკალპის გაწმენდა", "PRP ინექცია", "მოვლის რეკომენდაციები"]
       },
       "5": {
-        "name": "Mezoterapi",
-        "description": "Saç köklerini besleyen vitamin ve mineral enjeksiyonu",
-        "process": ["Saç analizi", "Solüsyon hazırlama", "Saçlı deri temizliği", "Mikro enjeksiyonlar", "Bakım tavsiyeleri"]
+        "name": "მეზოთერაპია",
+        "description": "თმის ფესვების გამაძლიერებელი ვიტამინისა და მინერალების ინექცია",
+        "process": ["თმის ანალიზი", "ხსნარის მომზადება", "სკალპის გაწმენდა", "მიკრო ინექციები", "მოვლის რჩევები"]
       }
     },
     "categories": {
       "hair": {
-        "title": "Saç Ekimi",
-        "description": "DHI ve Safir FUE teknikleriyle doğal ve kalıcı sonuçlar"
+        "title": "თმის გადანერგვა",
+        "description": "ბუნებრივი და მუდმივი შედეგები DHI და საფირის FUE ტექნიკებით"
       },
       "beard": {
-        "title": "Sakal Ekimi",
-        "description": "Yüz hatlarınıza uygun doğal sakal görünümü"
+        "title": "წვერის გადანერგვა",
+        "description": "ბუნებრივი წვერის გარეგნობა მორგებული თქვენს სახის ნაკვთებზე"
       },
       "eyebrow": {
-        "title": "Kaş Ekimi",
-        "description": "Kaş yapınıza özel tasarım ve uygulama"
+        "title": "წარბის გადანერგვა",
+        "description": "სპეციალური დიზაინი და გამოყენება თქვენი წარბის სტრუქტურისთვის"
       },
       "prp": {
-        "title": "PRP Tedavisi",
-        "description": "Saç ve cilt gençleştirme tedavileri"
+        "title": "PRP მკურნალობა",
+        "description": "თმისა და კანის გაახალგაზრდავების მკურნალობა"
       }
     },
     "consultation": {
-      "title": "Ücretsiz Konsültasyon",
-      "description": "Size en uygun tedavi yöntemini belirlemek için hemen randevu alın",
-      "button": "Randevu Al"
+      "title": "უფასო კონსულტაცია",
+      "description": "დაჯავშნეთ ახლავე, რათა განვსაზღვროთ თქვენთვის ყველაზე შესაფერისი მკურნალობის მეთოდი",
+      "button": "დაჯავშნეთ"
     },
     "details": {
-      "duration": "Süre",
-      "recovery": "İyileşme Süresi",
-      "anesthesia": "Anestezi",
-      "hospital": "Hastanede Kalış",
-      "results": "Sonuçlar",
-      "recommendation": "Öneriler"
+      "duration": "ხანგრძლივობა",
+      "recovery": "აღდგენის პერიოდი",
+      "anesthesia": "ანესთეზია",
+      "hospital": "საავადმყოფოში დარჩენა",
+      "results": "შედეგები",
+      "recommendation": "რეკომენდაციები"
     },
     "treatments": {
       "hair": {
         "technique": {
-          "dhi": "DHI Tekniği",
-          "fue": "Safir FUE Tekniği",
-          "description": "En son teknoloji ve doğal sonuçlar"
+          "dhi": "DHI ტექნიკა",
+          "fue": "საფირის FUE ტექნიკა",
+          "description": "უახლესი ტექნოლოგია და ბუნებრივი შედეგები"
         },
         "process": {
-          "planning": "Planlama",
-          "extraction": "Greft Alımı",
-          "implantation": "Ekim İşlemi",
-          "aftercare": "Sonrası Bakım"
+          "planning": "დაგეგმვა",
+          "extraction": "გრაფტების გამოღება",
+          "implantation": "იმპლანტაციის პროცესი",
+          "aftercare": "შემდგომი მოვლა"
         }
       }
     }
