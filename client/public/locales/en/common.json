@@ -712,5 +712,19 @@
         "description": "Get in touch with us for free consultation and detailed information"
       }
     }
+  },
+  "slider": {
+    "title1": "Expert Hair Transplant and Aesthetic Treatments",
+    "description1": "Get the best results with modern technology and our expert team",
+    "button1": "Free Consultation",
+    "title2": "Natural and Permanent Results",
+    "description2": "DHI and Sapphire FUE techniques with guaranteed results",
+    "button2": "View Results",
+    "title3": "Professional Team",
+    "description3": "Expert doctors and experienced medical staff",
+    "button3": "Meet Our Team",
+    "title4": "Modern Clinic",
+    "description4": "State-of-the-art facilities and comfortable environment",
+    "button4": "Virtual Tour"
   }
 }

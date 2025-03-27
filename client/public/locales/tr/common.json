@@ -662,5 +662,22 @@
         "attachment": "Dosya Ekle"
       }
     }
+  },
+  "slider": {
+    "title1": "Uzman Saç Ekimi ve Estetik Tedaviler",
+    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
+    "button1": "Ücretsiz Danışmanlık",
+
+    "title2": "Doğal ve Kalıcı Sonuçlar",
+    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
+    "button2": "Sonuçları Görün",
+
+    "title3": "Profesyonel Ekip",
+    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
+    "button3": "Ekibimizle Tanışın",
+
+    "title4": "Modern Klinik",
+    "description4": "Son teknoloji donanım ve konforlu ortam",
+    "button4": "Sanal Tur"
   }
 }
