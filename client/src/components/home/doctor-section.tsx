@@ -55,28 +55,27 @@ export default function DoctorSection() {
             className="space-y-4"
           >
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">Dr. Ali Çalışkan</h2>
-              <p className="text-lg text-primary font-medium">Saç Ekim Uzmanı</p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">{t('home.doctor.title')}</h2>
+              <p className="text-lg text-primary font-medium">{t('home.doctor.position')}</p>
             </div>
 
             <p className="text-gray-600">
-              10 yılı aşkın deneyimi ile saç ekimi ve estetik cerrahi alanında uzmanlaşmış, 
-              binlerce başarılı operasyona imza atmış değerli bir hekimdir.
+              {t('home.doctor.description')}
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="flex items-start gap-2">
                 <Award className="h-5 w-5 text-primary flex-shrink-0" />
                 <div>
-                  <h4 className="font-medium text-sm">Uzman Hekim</h4>
-                  <p className="text-xs text-gray-600">10+ Yıl Deneyim</p>
+                  <h4 className="font-medium text-sm">{t('home.doctor.expert')}</h4>
+                  <p className="text-xs text-gray-600">{t('home.doctor.experience')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
                 <div>
-                  <h4 className="font-medium text-sm">500+ Operasyon</h4>
-                  <p className="text-xs text-gray-600">Başarılı Sonuçlar</p>
+                  <h4 className="font-medium text-sm">{t('home.doctor.operations')}</h4>
+                  <p className="text-xs text-gray-600">{t('home.doctor.results')}</p>
                 </div>
               </div>
             </div>
@@ -90,7 +89,7 @@ export default function DoctorSection() {
                 <Link href="/randevu">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent group-hover:translate-x-full transition-transform duration-300" />
                   <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-                  <span className="text-lg">Hemen Randevu Oluştur</span>
+                  <span className="text-lg">{t('home.doctor.appointment')}</span>
                 </Link>
               </Button>
             </div>

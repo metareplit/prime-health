@@ -79,7 +79,17 @@ const faqItems = [
 
 export default function Home() {
   const { t } = useTranslation('common');
-  const { data: services = [], isLoading } = useQuery<any[]>({
+  interface Service {
+    id: number;
+    name: string;
+    description: string;
+    imageUrl?: string;
+    slug: string;
+    featured?: boolean;
+    process?: string[];
+  }
+
+  const { data: services = [], isLoading } = useQuery<Service[]>({
     queryKey: ["/api/services"],
   });
 
@@ -174,7 +184,7 @@ export default function Home() {
                     </p>
 
                     <div className="space-y-2 mb-6">
-                      {service.process?.slice(0, 3).map((step, idx) => (
+                      {service.process?.slice(0, 3).map((step: string, idx: number) => (
                         <div
                           key={idx}
                           className="flex items-center gap-2 text-sm text-gray-600 p-2 rounded-lg hover:bg-gray-50 transition-colors"
