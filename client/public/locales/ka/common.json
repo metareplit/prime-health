@@ -102,80 +102,80 @@
     "confirm": "Onayla"
   },
   "products": {
-    "title": "Profesyonel Saç Bakım Ürünleri",
-    "subtitle": "Saç ekimi sonrası en iyi sonucu almak için özel olarak formüle edilmiş ürünler",
-    "search": "Ürün ara...",
+    "title": "პროფესიონალური თმის მოვლის პროდუქტები",
+    "subtitle": "სპეციალურად შექმნილი პროდუქტები თმის გადანერგვის შემდეგ საუკეთესო შედეგების მისაღწევად",
+    "search": "პროდუქტების ძიება...",
     "categories": {
       "all": {
-        "title": "Tüm Ürünler",
-        "shortTitle": "Tümü",
-        "description": "Tüm VitHair ürünleri"
+        "title": "ყველა პროდუქტი",
+        "shortTitle": "ყველა",
+        "description": "ყველა VitHair პროდუქტი"
       },
       "monthlySets": {
-        "title": "Aylık Bakım Setleri",
-        "shortTitle": "Setler",
-        "description": "Aylık bakım setleri"
+        "title": "ყოველთვიური მოვლის ნაკრებები",
+        "shortTitle": "ნაკრებები",
+        "description": "ყოველთვიური მოვლის ნაკრებები"
       },
       "shampooAndFoam": {
-        "title": "Şampuan ve Köpük",
-        "shortTitle": "Şampuan",
-        "description": "Şampuan ve köpük ürünleri"
+        "title": "შამპუნი და ქაფი",
+        "shortTitle": "შამპუნი",
+        "description": "შამპუნისა და ქაფის პროდუქტები"
       },
       "spray": {
-        "title": "Sprey",
-        "shortTitle": "Sprey",
-        "description": "Sprey ürünleri"
+        "title": "სპრეი",
+        "shortTitle": "სპრეი",
+        "description": "სპრეის პროდუქტები"
       },
       "tablet": {
-        "title": "Tablet",
-        "shortTitle": "Tablet",
-        "description": "Tablet ürünleri"
+        "title": "ტაბლეტი",
+        "shortTitle": "ტაბლეტი",
+        "description": "ტაბლეტის პროდუქტები"
       },
       "mesotherapyAndPrp": {
-        "title": "Mezoterapi ve PRP",
-        "shortTitle": "Mezoterapi",
-        "description": "Mezoterapi ve PRP ürünleri"
+        "title": "მეზოთერაპია და PRP",
+        "shortTitle": "მეზოთერაპია",
+        "description": "მეზოთერაპიისა და PRP პროდუქტები"
       },
       "shampoos": {
-        "title": "Saç Bakım Şampuanları",
-        "description": "Saç ekimi sonrası özel olarak formüle edilmiş şampuanlar"
+        "title": "თმის მოვლის შამპუნები",
+        "description": "სპეციალურად ფორმულირებული შამპუნები თმის გადანერგვის შემდეგ"
       },
       "serums": {
-        "title": "Saç Büyütme Serumları",
-        "description": "Saç büyümesini destekleyen özel serumlar"
+        "title": "თმის ზრდის შრატები",
+        "description": "სპეციალური შრატები, რომლებიც ხელს უწყობს თმის ზრდას"
       },
       "masks": {
-        "title": "Saç Bakım Maskeleri",
-        "description": "Yoğun bakım ve onarım sağlayan maskeler"
+        "title": "თმის მოვლის ნიღბები",
+        "description": "ნიღბები ინტენსიური მოვლისა და აღდგენისთვის"
       },
       "vitamins": {
-        "title": "Saç Bakım Vitaminleri",
-        "description": "Saç sağlığını içten destekleyen vitamin takviyeleri"
+        "title": "თმის მოვლის ვიტამინები",
+        "description": "ვიტამინის დანამატები, რომლებიც შიგნიდან უჭერს მხარს თმის ჯანმრთელობას"
       },
       "tonics": {
-        "title": "Saç Bakım Tonikleri",
-        "description": "Saç derisini canlandıran ve besleyen tonikler"
+        "title": "თმის მოვლის ტონიკები",
+        "description": "ტონიკები, რომლებიც აცოცხლებს და კვებავს თავის კანს"
       },
       "creams": {
-        "title": "Saç Bakım Kremleri",
-        "description": "Günlük bakım ve nemlendirme için kremler"
+        "title": "თმის მოვლის კრემები",
+        "description": "კრემები ყოველდღიური მოვლისა და დატენიანებისთვის"
       }
     },
     "product": {
-      "ingredients": "İçerik Maddeleri",
-      "benefits": "Faydaları",
-      "instructions": "Kullanım Talimatları",
-      "warnings": "Uyarılar",
+      "ingredients": "ინგრედიენტები",
+      "benefits": "სარგებელი",
+      "instructions": "გამოყენების ინსტრუქცია",
+      "warnings": "გაფრთხილებები",
       "hairTypes": {
-        "all": "Tüm Saç Tipleri",
-        "oily": "Yağlı",
-        "dry": "Kuru",
-        "normal": "Normal",
-        "mixed": "Karma",
-        "damaged": "Yıpranmış",
-        "sensitive": "Hassas",
-        "thin": "İnce Telli",
-        "thick": "Kalın Telli"
+        "all": "ყველა ტიპის თმა",
+        "oily": "ცხიმიანი",
+        "dry": "მშრალი",
+        "normal": "ნორმალური",
+        "mixed": "შერეული",
+        "damaged": "დაზიანებული",
+        "sensitive": "მგრძნობიარე",
+        "thin": "თხელი",
+        "thick": "სქელი"
       }
     }
   },

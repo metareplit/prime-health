@@ -102,80 +102,80 @@
     "confirm": "Onayla"
   },
   "products": {
-    "title": "Profesyonel Saç Bakım Ürünleri",
-    "subtitle": "Saç ekimi sonrası en iyi sonucu almak için özel olarak formüle edilmiş ürünler",
-    "search": "Ürün ara...",
+    "title": "Профессиональные средства по уходу за волосами",
+    "subtitle": "Специально разработанные продукты для наилучших результатов после пересадки волос",
+    "search": "Поиск товаров...",
     "categories": {
       "all": {
-        "title": "Tüm Ürünler",
-        "shortTitle": "Tümü",
-        "description": "Tüm VitHair ürünleri"
+        "title": "Все товары",
+        "shortTitle": "Все",
+        "description": "Все продукты VitHair"
       },
       "monthlySets": {
-        "title": "Aylık Bakım Setleri",
-        "shortTitle": "Setler",
-        "description": "Aylık bakım setleri"
+        "title": "Месячные наборы",
+        "shortTitle": "Наборы",
+        "description": "Месячные наборы по уходу"
       },
       "shampooAndFoam": {
-        "title": "Şampuan ve Köpük",
-        "shortTitle": "Şampuan",
-        "description": "Şampuan ve köpük ürünleri"
+        "title": "Шампунь и пена",
+        "shortTitle": "Шампунь",
+        "description": "Шампуни и пенные продукты"
       },
       "spray": {
-        "title": "Sprey",
-        "shortTitle": "Sprey",
-        "description": "Sprey ürünleri"
+        "title": "Спрей",
+        "shortTitle": "Спрей",
+        "description": "Спреи для волос"
       },
       "tablet": {
-        "title": "Tablet",
-        "shortTitle": "Tablet",
-        "description": "Tablet ürünleri"
+        "title": "Таблетки",
+        "shortTitle": "Таблетки",
+        "description": "Таблетки для волос"
       },
       "mesotherapyAndPrp": {
-        "title": "Mezoterapi ve PRP",
-        "shortTitle": "Mezoterapi",
-        "description": "Mezoterapi ve PRP ürünleri"
+        "title": "Мезотерапия и PRP",
+        "shortTitle": "Мезотерапия",
+        "description": "Продукты для мезотерапии и PRP"
       },
       "shampoos": {
-        "title": "Saç Bakım Şampuanları",
-        "description": "Saç ekimi sonrası özel olarak formüle edilmiş şampuanlar"
+        "title": "Шампуни для волос",
+        "description": "Шампуни, специально разработанные для ухода после пересадки волос"
       },
       "serums": {
-        "title": "Saç Büyütme Serumları",
-        "description": "Saç büyümesini destekleyen özel serumlar"
+        "title": "Сыворотки для роста волос",
+        "description": "Специальные сыворотки, стимулирующие рост волос"
       },
       "masks": {
-        "title": "Saç Bakım Maskeleri",
-        "description": "Yoğun bakım ve onarım sağlayan maskeler"
+        "title": "Маски для волос",
+        "description": "Маски для интенсивного ухода и восстановления"
       },
       "vitamins": {
-        "title": "Saç Bakım Vitaminleri",
-        "description": "Saç sağlığını içten destekleyen vitamin takviyeleri"
+        "title": "Витамины для волос",
+        "description": "Витаминные добавки для поддержки здоровья волос изнутри"
       },
       "tonics": {
-        "title": "Saç Bakım Tonikleri",
-        "description": "Saç derisini canlandıran ve besleyen tonikler"
+        "title": "Тоники для волос",
+        "description": "Тоники, оживляющие и питающие кожу головы"
       },
       "creams": {
-        "title": "Saç Bakım Kremleri",
-        "description": "Günlük bakım ve nemlendirme için kremler"
+        "title": "Кремы для ухода за волосами",
+        "description": "Кремы для ежедневного ухода и увлажнения"
       }
     },
     "product": {
-      "ingredients": "İçerik Maddeleri",
-      "benefits": "Faydaları",
-      "instructions": "Kullanım Talimatları",
-      "warnings": "Uyarılar",
+      "ingredients": "Ингредиенты",
+      "benefits": "Преимущества",
+      "instructions": "Инструкция по применению",
+      "warnings": "Предупреждения",
       "hairTypes": {
-        "all": "Tüm Saç Tipleri",
-        "oily": "Yağlı",
-        "dry": "Kuru",
-        "normal": "Normal",
-        "mixed": "Karma",
-        "damaged": "Yıpranmış",
-        "sensitive": "Hassas",
-        "thin": "İnce Telli",
-        "thick": "Kalın Telli"
+        "all": "Все типы волос",
+        "oily": "Жирные",
+        "dry": "Сухие",
+        "normal": "Нормальные",
+        "mixed": "Комбинированные",
+        "damaged": "Поврежденные",
+        "sensitive": "Чувствительные",
+        "thin": "Тонкие",
+        "thick": "Густые"
       }
     }
   },
