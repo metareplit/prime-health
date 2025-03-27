@@ -1,53 +1,53 @@
 {
   "nav": {
-    "home": "მთავარი",
-    "services": "სერვისები",
-    "gallery": "გალერეა",
-    "products": "პროდუქტები",
-    "blog": "ბლოგი",
-    "contact": "კონტაქტი",
-    "appointments": "ჯავშანი",
-    "patientPortal": "პაციენტის პორტალი",
-    "userMenu": "მომხმარებლის მენიუ",
-    "menu": "მენიუ",
-    "doctors": "ჩვენი ექიმები",
-    "press": "პრესა",
+    "home": "Ana Sayfa",
+    "services": "Hizmetler",
+    "gallery": "Galeri",
+    "products": "Ürünler",
+    "blog": "Blog",
+    "contact": "İletişim",
+    "appointments": "Randevu Al",
+    "patientPortal": "Hasta Portalı",
+    "userMenu": "Kullanıcı Menüsü",
+    "menu": "Menü",
+    "doctors": "Doktorlarımız",
+    "press": "Basında Biz",
     "brand": "Prime Health"
   },
   "slider": {
-    "title1": "ექსპერტი კლინიკა თმის გადანერგვისა და ესთეტიკური პროცედურებისთვის",
-    "description1": "მიიღეთ საუკეთესო შედეგები ჩვენი თანამედროვე ტექნოლოგიებით და ექსპერტი გუნდით",
-    "button1": "უფასო კონსულტაცია",
-    "title2": "ბუნებრივი და მუდმივი შედეგები",
-    "description2": "გარანტირებული შედეგები DHI და Sapphire FUE ტექნოლოგიებით",
-    "button2": "იხილეთ შედეგები",
-    "title3": "პროფესიონალი გუნდი",
-    "description3": "ექსპერტი ექიმები და გამოცდილი სამედიცინო პერსონალი",
-    "button3": "გაიცანით ჩვენი გუნდი",
-    "title4": "თანამედროვე კლინიკა",
-    "description4": "უახლესი აღჭურვილობა და კომფორტული გარემო",
-    "button4": "ვირტუალური ტური"
+    "title1": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
+    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
+    "button1": "Ücretsiz Konsültasyon",
+    "title2": "Doğal ve Kalıcı Sonuçlar",
+    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
+    "button2": "Sonuçları Görün",
+    "title3": "Profesyonel Kadro",
+    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
+    "button3": "Ekibimizle Tanışın",
+    "title4": "Modern Klinik",
+    "description4": "Son teknoloji ekipman ve konforlu ortam",
+    "button4": "Sanal Tur"
   },
   "header": {
     "menu": {
-      "open": "მენიუს გახსნა",
-      "close": "მენიუს დახურვა",
-      "main": "მთავარი მენიუ",
-      "user": "მომხმარებლის მენიუ"
+      "open": "Menüyü aç",
+      "close": "Menüyü kapat",
+      "main": "Ana menü",
+      "user": "Kullanıcı menüsü"
     },
     "search": {
-      "placeholder": "ძიება...",
-      "button": "ძიება",
-      "noResults": "შედეგები არ მოიძებნა"
+      "placeholder": "Ara...",
+      "button": "Ara",
+      "noResults": "Sonuç bulunamadı"
     },
     "buttons": {
-      "appointment": "ჯავშანი",
-      "consultation": "უფასო კონსულტაცია",
-      "contact": "დაგვიკავშირდით"
+      "appointment": "Randevu Al",
+      "consultation": "Ücretsiz Danışmanlık",
+      "contact": "İletişime Geç"
     },
     "userMenu": {
-      "profile": "ჩემი პროფილი",
-      "appointments": "ჩემი ჯავშნები",
+      "profile": "Profilim",
+      "appointments": "Randevularım",
       "dashboard": "Kontrol Paneli",
       "settings": "Ayarlar",
       "logout": "Çıkış Yap"
@@ -808,36 +808,36 @@
   },
   "footer": {
     "company": {
-      "title": "კომპანია",
-      "about": "ჩვენს შესახებ",
-      "careers": "კარიერა",
-      "privacy": "კონფიდენციალურობის პოლიტიკა",
-      "terms": "გამოყენების პირობები"
+      "title": "Şirket",
+      "about": "Hakkımızda",
+      "careers": "Kariyer",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Kullanım Şartları"
     },
     "social": {
-      "title": "სოციალური მედია",
-      "followUs": "გამოგვყევით",
-      "facebook": "გამოგვყევით Facebook-ზე",
-      "instagram": "გამოგვყევით Instagram-ზე",
-      "twitter": "გამოგვყევით Twitter-ზე",
-      "youtube": "გამოგვყევით Youtube-ზე"
+      "title": "Sosyal Medya",
+      "followUs": "Bizi Takip Edin",
+      "facebook": "Facebook'ta Takip Et",
+      "instagram": "Instagram'da Takip Et",
+      "twitter": "Twitter'da Takip Et",
+      "youtube": "Youtube'da Takip Et"
     },
     "contact": {
-      "title": "კონტაქტი",
-      "address": "მისამართი",
-      "phone": "ტელეფონი",
-      "email": "ელ-ფოსტა"
+      "title": "İletişim",
+      "address": "Adres",
+      "phone": "Telefon",
+      "email": "E-posta"
     },
     "newsletter": {
-      "title": "სიახლეები",
-      "subtitle": "მიიღეთ უახლესი სიახლეები",
-      "placeholder": "თქვენი ელ-ფოსტა",
-      "subscribe": "გამოწერა",
-      "success": "წარმატებით გამოწერილია",
-      "error": "დაფიქსირდა შეცდომა"
+      "title": "Bülten",
+      "subtitle": "Güncel gelişmelerden haberdar olun",
+      "placeholder": "E-posta adresiniz",
+      "subscribe": "Abone Ol",
+      "success": "Başarıyla abone oldunuz",
+      "error": "Bir hata oluştu"
     },
-    "copyright": "© {year} ყველა უფლება დაცულია",
-    "brand": "თმის კლინიკა თბილისი"
+    "copyright": "© {year} Tüm hakları saklıdır",
+    "brand": "Hair Clinic Tiflis"
   },
   "seo": {
     "defaultTitle": "Hair Clinic Tiflis - Saç Ekimi ve Estetik Tedavi Merkezi",
