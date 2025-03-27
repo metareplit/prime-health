@@ -511,29 +511,29 @@
     }
   },
   "contact": {
-    "title": "Contact",
-    "subtitle": "We are happy to help you. You can contact us anytime.",
+    "title": "İletişim",
+    "subtitle": "Size yardımcı olmaktan mutluluk duyarız. İstediğiniz zaman bizimle iletişime geçebilirsiniz.",
     "address": {
-      "title": "Address",
+      "title": "Adres",
       "line1": "Tsotne Dadiani 59",
-      "line2": "Tbilisi, Georgia"
+      "line2": "Tiflis, Gürcistan"
     },
     "phone": {
-      "title": "Phone",
+      "title": "Telefon",
       "number1": "+995 555 003 044"
     },
     "email": {
-      "title": "Email",
+      "title": "E-posta",
       "address": "primehealthtblisi@gmail.com"
     },
     "workingHours": {
-      "title": "Working Hours",
-      "weekdays": "Monday - Saturday: 09:00 - 18:00",
-      "weekend": "Sunday: Closed"
+      "title": "Çalışma Saatleri",
+      "weekdays": "Pazartesi - Cumartesi: 09:00 - 18:00",
+      "weekend": "Pazar: Kapalı"
     },
     "socialMedia": {
-      "title": "Social Media",
-      "followUs": "Follow us"
+      "title": "Sosyal Medya",
+      "followUs": "Bizi takip edin"
     }
   },
   "gallery": {
