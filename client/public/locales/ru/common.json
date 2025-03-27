@@ -277,169 +277,169 @@
     }
   },
   "services": {
-    "title": "Hizmetlerimiz",
-    "description": "Modern teknoloji ve uzman kadromuzla sunduğumuz tedavi seçenekleri",
-    "metaTitle": "Saç Ekimi ve Estetik Hizmetleri",
-    "metaDescription": "Profesyonel saç ekimi, sakal ekimi, kaş ekimi ve saç bakım hizmetleri. Modern teknoloji ve uzman kadromuzla yanınızdayız.",
-    "metaKeywords": "saç ekimi, sakal ekimi, kaş ekimi, prp tedavisi, mezoterapi, tiflis saç ekimi, gürcistan saç ekimi",
+    "title": "Наши услуги",
+    "description": "Варианты лечения, предлагаемые с использованием современных технологий и нашей командой экспертов",
+    "metaTitle": "Услуги по трансплантации волос и эстетике",
+    "metaDescription": "Профессиональные услуги по трансплантации волос, бороды, бровей и уходу за волосами. Мы с вами с нашими современными технологиями и командой экспертов.",
+    "metaKeywords": "трансплантация волос, трансплантация бороды, трансплантация бровей, лечение PRP, мезотерапия, трансплантация волос в Тбилиси, трансплантация волос в Грузии",
     "tabs": {
-      "details": "Detaylar",
-      "benefits": "Avantajlar",
-      "faq": "SSS"
+      "details": "Детали",
+      "benefits": "Преимущества",
+      "faq": "ЧЗВ"
     },
-    "processTitle": "İşlem Süreci",
-    "freeConsultation": "Ücretsiz Danışma",
+    "processTitle": "Процесс процедуры",
+    "freeConsultation": "Бесплатная консультация",
     "serviceItems": {
       "1": {
-        "name": "Saç Ekimi",
-        "description": "Doğal ve kalıcı saç ekimi çözümleri",
-        "process": ["Ücretsiz konsültasyon", "Saç analizi", "Planlama", "Greft ekimi", "Sonrası bakım"]
+        "name": "Трансплантация волос",
+        "description": "Естественные и постоянные решения по трансплантации волос",
+        "process": ["Бесплатная консультация", "Анализ волос", "Планирование", "Имплантация графтов", "Послеоперационный уход"]
       },
       "2": {
-        "name": "Sakal Ekimi",
-        "description": "Kalıcı ve doğal görünümlü sakal ekimi çözümleri",
-        "process": ["Yüz analizi", "Sakal tasarımı", "Lokal anestezi", "Greft ekimi", "Kontrol ve bakım"]
+        "name": "Трансплантация бороды",
+        "description": "Решения по трансплантации бороды с постоянным и естественным внешним видом",
+        "process": ["Анализ лица", "Дизайн бороды", "Местная анестезия", "Имплантация графтов", "Контроль и уход"]
       },
       "3": {
-        "name": "Kaş Ekimi",
-        "description": "Doğal ve kalıcı kaş ekimi uygulaması",
-        "process": ["Kaş analizi", "Tasarım", "Lokal anestezi", "Hassas ekim", "Bakım önerileri"]
+        "name": "Трансплантация бровей",
+        "description": "Естественная и постоянная процедура трансплантации бровей",
+        "process": ["Анализ бровей", "Дизайн", "Местная анестезия", "Деликатная имплантация", "Рекомендации по уходу"]
       },
       "4": {
-        "name": "PRP Tedavisi",
-        "description": "Kendi kanınızdan elde edilen trombositlerle saç büyümesini uyarma",
-        "process": ["Kan alımı", "PRP hazırlama", "Saçlı deri temizliği", "PRP enjeksiyonu", "Bakım önerileri"]
+        "name": "PRP терапия",
+        "description": "Стимуляция роста волос тромбоцитами, полученными из вашей крови",
+        "process": ["Забор крови", "Подготовка PRP", "Очистка кожи головы", "Инъекция PRP", "Рекомендации по уходу"]
       },
       "5": {
-        "name": "Mezoterapi",
-        "description": "Saç köklerini besleyen vitamin ve mineral enjeksiyonu",
-        "process": ["Saç analizi", "Solüsyon hazırlama", "Saçlı deri temizliği", "Mikro enjeksiyonlar", "Bakım tavsiyeleri"]
+        "name": "Мезотерапия",
+        "description": "Инъекция витаминов и минералов, питающая корни волос",
+        "process": ["Анализ волос", "Подготовка раствора", "Очистка кожи головы", "Микроинъекции", "Рекомендации по уходу"]
       }
     },
     "categories": {
       "hair": {
-        "title": "Saç Ekimi",
-        "description": "DHI ve Safir FUE teknikleriyle doğal ve kalıcı sonuçlar"
+        "title": "Трансплантация волос",
+        "description": "Естественные и постоянные результаты с техниками DHI и Sapphire FUE"
       },
       "beard": {
-        "title": "Sakal Ekimi",
-        "description": "Yüz hatlarınıza uygun doğal sakal görünümü"
+        "title": "Трансплантация бороды",
+        "description": "Естественный вид бороды, соответствующий вашим чертам лица"
       },
       "eyebrow": {
-        "title": "Kaş Ekimi",
-        "description": "Kaş yapınıza özel tasarım ve uygulama"
+        "title": "Трансплантация бровей",
+        "description": "Специальный дизайн и применение для структуры ваших бровей"
       },
       "prp": {
-        "title": "PRP Tedavisi",
-        "description": "Saç ve cilt gençleştirme tedavileri"
+        "title": "PRP терапия",
+        "description": "Лечение для омоложения волос и кожи"
       }
     },
     "consultation": {
-      "title": "Ücretsiz Konsültasyon",
-      "description": "Size en uygun tedavi yöntemini belirlemek için hemen randevu alın",
-      "button": "Randevu Al"
+      "title": "Бесплатная консультация",
+      "description": "Запишитесь на прием сейчас, чтобы определить наиболее подходящий для вас способ лечения",
+      "button": "Записаться на прием"
     },
     "details": {
-      "duration": "Süre",
-      "recovery": "İyileşme Süresi",
-      "anesthesia": "Anestezi",
-      "hospital": "Hastanede Kalış",
-      "results": "Sonuçlar",
-      "recommendation": "Öneriler"
+      "duration": "Продолжительность",
+      "recovery": "Время восстановления",
+      "anesthesia": "Анестезия",
+      "hospital": "Пребывание в больнице",
+      "results": "Результаты",
+      "recommendation": "Рекомендации"
     },
     "treatments": {
       "hair": {
         "technique": {
-          "dhi": "DHI Tekniği",
-          "fue": "Safir FUE Tekniği",
-          "description": "En son teknoloji ve doğal sonuçlar"
+          "dhi": "Техника DHI",
+          "fue": "Техника Sapphire FUE",
+          "description": "Новейшие технологии и естественные результаты"
         },
         "process": {
-          "planning": "Planlama",
-          "extraction": "Greft Alımı",
-          "implantation": "Ekim İşlemi",
-          "aftercare": "Sonrası Bakım"
+          "planning": "Планирование",
+          "extraction": "Извлечение графтов",
+          "implantation": "Процесс имплантации",
+          "aftercare": "Послеоперационный уход"
         }
       }
     }
   },
   "blog": {
-    "title": "Blog",
-    "subtitle": "Uzman kadromuzdan güncel bilgiler, tedavi süreçleri ve başarı hikayeleri",
-    "search": "Blog yazılarında ara...",
+    "title": "Блог",
+    "subtitle": "Актуальная информация, процессы лечения и истории успеха от наших экспертов",
+    "search": "Поиск в блоге...",
     "categories": {
-      "all": "Tümü",
-      "hairTransplant": "Saç Ekimi",
-      "beardTransplant": "Sakal Ekimi",
-      "eyebrowTransplant": "Kaş Ekimi",
-      "aesthetics": "Estetik",
-      "dermatology": "Dermatoloji",
-      "aftercare": "Bakım",
-      "treatment": "Tedavi Süreci"
+      "all": "Все",
+      "hairTransplant": "Трансплантация волос",
+      "beardTransplant": "Трансплантация бороды",
+      "eyebrowTransplant": "Трансплантация бровей",
+      "aesthetics": "Эстетика",
+      "dermatology": "Дерматология",
+      "aftercare": "Уход",
+      "treatment": "Процесс лечения"
     },
-    "readMore": "Devamını Oku",
+    "readMore": "Читать дальше",
     "share": {
-      "title": "Bu Yazıyı Paylaş",
-      "copied": "Bağlantı kopyalandı"
+      "title": "Поделиться статьей",
+      "copied": "Ссылка скопирована"
     },
     "author": {
-      "about": "Yazar Hakkında",
-      "articles": "Diğer Yazıları"
+      "about": "Об авторе",
+      "articles": "Другие статьи"
     },
-    "relatedPosts": "Benzer Yazılar",
+    "relatedPosts": "Похожие статьи",
     "comments": {
-      "title": "Yorumlar",
-      "noComments": "Henüz yorum yapılmamış",
-      "writeComment": "Yorum Yaz",
-      "submit": "Gönder"
+      "title": "Комментарии",
+      "noComments": "Комментариев пока нет",
+      "writeComment": "Написать комментарий",
+      "submit": "Отправить"
     },
     "search": {
-      "title": "Blog'da Ara",
-      "placeholder": "Arama yapmak için yazın...",
-      "noResults": "Sonuç bulunamadı",
-      "trending": "Popüler Konular"
+      "title": "Поиск в блоге",
+      "placeholder": "Введите для поиска...",
+      "noResults": "Результаты не найдены",
+      "trending": "Популярные темы"
     },
     "filters": {
-      "latest": "En Yeni",
-      "popular": "Popüler",
-      "category": "Kategori"
+      "latest": "Новейшие",
+      "popular": "Популярные",
+      "category": "Категория"
     },
-    "readTime": "{{minutes}} dakika okuma",
-    "publishDate": "{{date}} tarihinde yayınlandı",
+    "readTime": "{{minutes}} мин. чтения",
+    "publishDate": "Опубликовано {{date}}",
     "authorInfo": {
-      "title": "Yazar Hakkında",
-      "credentials": "Uzmanlık Alanları",
-      "experience": "Deneyim"
+      "title": "Об авторе",
+      "credentials": "Специализации",
+      "experience": "Опыт"
     },
     "engagement": {
-      "likes": "Beğeni",
-      "comments": "Yorum",
-      "shares": "Paylaşım"
+      "likes": "Лайки",
+      "comments": "Комментарии",
+      "shares": "Поделились"
     }
   },
   "faq": {
-    "title": "Sıkça Sorulan Sorular",
-    "subtitle": "Saç ekimi hakkında merak ettiğiniz tüm sorulara uzman ekibimizden yanıtlar",
+    "title": "Часто Задаваемые Вопросы",
+    "subtitle": "Ответы от нашей команды экспертов на все вопросы о трансплантации волос",
     "items": {
       "0": {
-        "question": "Saç ekimi operasyonu ne kadar sürer?",
-        "answer": "Saç ekimi operasyonu ortalama 6-8 saat sürer. Bu süre ekilecek greft sayısına ve kullanılan tekniğe göre değişiklik gösterebilir. İşlem lokal anestezi altında gerçekleştirilir."
+        "question": "Сколько длится операция по трансплантации волос?",
+        "answer": "Операция по трансплантации волос длится в среднем 6-8 часов. Это время может варьироваться в зависимости от количества пересаживаемых графтов и используемой техники. Процедура проводится под местной анестезией."
       },
       "1": {
-        "question": "Saç ekimi sonrası iyileşme süreci nasıldır?",
-        "answer": "İyileşme süreci kişiden kişiye değişmekle birlikte, genellikle ilk 2 hafta kritik önem taşır. 3. günden itibaren işe dönülebilir. Tam iyileşme ve sonuçların görülmesi 6-12 ay arasında sürer."
+        "question": "Как происходит процесс восстановления после трансплантации волос?",
+        "answer": "Процесс восстановления варьируется от человека к человеку, но обычно первые 2 недели имеют решающее значение. Вы можете вернуться к работе с 3-го дня. Полное восстановление и видимые результаты занимают от 6 до 12 месяцев."
       },
       "2": {
-        "question": "Saç ekimi kalıcı bir çözüm müdür?",
-        "answer": "Evet, saç ekimi kalıcı bir çözümdür. Ekilen saçlar genetik olarak dökülmeye dirençli bölgeden alındığı için ömür boyu dökülmeden kalır. Ancak var olan saçların korunması için gerekli bakımın yapılması önemlidir."
+        "question": "Является ли трансплантация волос постоянным решением?",
+        "answer": "Да, трансплантация волос - это постоянное решение. Пересаженные волосы берутся из генетически устойчивой к выпадению зоны, поэтому они остаются на всю жизнь. Однако важно правильно ухаживать за существующими волосами."
       },
       "3": {
-        "question": "Saç ekimi için yaş sınırı var mıdır?",
-        "answer": "Saç ekimi için ideal yaş aralığı 25-55'tir. Ancak her vaka bireysel olarak değerlendirilir. Önemli olan saç kaybının stabil hale gelmiş olması ve yeterli donör alanının bulunmasıdır."
+        "question": "Существует ли возрастное ограничение для трансплантации волос?",
+        "answer": "Идеальный возрастной диапазон для трансплантации волос составляет 25-55 лет. Однако каждый случай оценивается индивидуально. Важно, чтобы потеря волос стабилизировалась и имелась достаточная донорская зона."
       },
       "4": {
-        "question": "Operasyon sonrası günlük yaşama ne zaman dönülebilir?",
-        "answer": "Operasyondan 3 gün sonra günlük yaşama dönülebilir. Ancak spor, yüzme gibi aktiviteler için 1 ay beklenmesi önerilir. İlk 2 hafta güneş, terleme ve darbelere karşı dikkatli olunmalıdır."
+        "question": "Когда можно вернуться к повседневной жизни после операции?",
+        "answer": "Вы можете вернуться к повседневной жизни через 3 дня после операции. Однако для занятий спортом, плавания и подобных активностей рекомендуется подождать 1 месяц. В течение первых 2 недель следует избегать солнца, потения и ударов."
       }
     }
   },
@@ -511,29 +511,29 @@
     }
   },
   "contact": {
-    "title": "İletişim",
-    "subtitle": "Size yardımcı olmaktan mutluluk duyarız. İstediğiniz zaman bizimle iletişime geçebilirsiniz.",
+    "title": "Контакты",
+    "subtitle": "Мы будем рады вам помочь. Вы можете связаться с нами в любое время.",
     "address": {
-      "title": "Adres",
-      "line1": "Tsotne Dadiani 59",
-      "line2": "Tiflis, Gürcistan"
+      "title": "Адрес",
+      "line1": "Цотне Дадиани 59",
+      "line2": "Тбилиси, Грузия"
     },
     "phone": {
-      "title": "Telefon",
+      "title": "Телефон",
       "number1": "+995 555 003 044"
     },
     "email": {
-      "title": "E-posta",
+      "title": "Электронная почта",
       "address": "primehealthtblisi@gmail.com"
     },
     "workingHours": {
-      "title": "Çalışma Saatleri",
-      "weekdays": "Pazartesi - Cumartesi: 09:00 - 18:00",
-      "weekend": "Pazar: Kapalı"
+      "title": "Часы работы",
+      "weekdays": "Понедельник - Суббота: 09:00 - 18:00",
+      "weekend": "Воскресенье: Закрыто"
     },
     "socialMedia": {
-      "title": "Sosyal Medya",
-      "followUs": "Bizi takip edin"
+      "title": "Социальные сети",
+      "followUs": "Подписывайтесь на нас"
     }
   },
   "gallery": {
@@ -772,39 +772,39 @@
   },
   "appointment": {
     "book": {
-      "title": "Randevu Al",
-      "subtitle": "Size en uygun tarih ve saati seçin",
-      "selectDate": "Tarih seçin",
-      "selectTime": "Saat seçin",
-      "selectService": "Hizmet seçin",
-      "personalInfo": "Kişisel Bilgiler",
-      "notes": "Notlar",
-      "success": "Randevunuz başarıyla oluşturuldu",
-      "submit": "Randevu Oluştur",
-      "notesPlaceholder": "Eklemek istediğiniz notlar...",
-      "error": "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin."
+      "title": "Записаться на прием",
+      "subtitle": "Выберите наиболее подходящие для вас дату и время",
+      "selectDate": "Выберите дату",
+      "selectTime": "Выберите время",
+      "selectService": "Выберите услугу",
+      "personalInfo": "Личная информация",
+      "notes": "Примечания",
+      "success": "Ваша запись успешно создана",
+      "submit": "Создать запись",
+      "notesPlaceholder": "Примечания, которые вы хотели бы добавить...",
+      "error": "При создании записи произошла ошибка. Пожалуйста, попробуйте еще раз."
     },
     "status": {
-      "pending": "Bekliyor",
-      "confirmed": "Onaylandı",
-      "cancelled": "İptal Edildi",
-      "completed": "Tamamlandı"
+      "pending": "Ожидается",
+      "confirmed": "Подтверждено",
+      "cancelled": "Отменено",
+      "completed": "Завершено"
     }
   },
   "form": {
-    "submit": "Gönder",
-    "cancel": "İptal",
-    "save": "Kaydet",
-    "edit": "Düzenle",
-    "delete": "Sil",
-    "search": "Ara",
-    "filter": "Filtrele",
-    "reset": "Sıfırla",
-    "loading": "İşleminiz devam ediyor...",
-    "success": "İşlem başarılı",
-    "error": "Bir hata oluştu",
-    "required": "* Zorunlu alan",
-    "optional": "(Opsiyonel)"
+    "submit": "Отправить",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "reset": "Сбросить",
+    "loading": "Ваш запрос обрабатывается...",
+    "success": "Операция выполнена успешно",
+    "error": "Произошла ошибка",
+    "required": "* Обязательное поле",
+    "optional": "(Опционально)"
   },
   "footer": {
     "company": {
