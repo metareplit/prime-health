@@ -595,6 +595,88 @@
         "description": "Demonstration of FUE (Follicular Unit Extraction) technique"
       }
     },
+    "clinic": {
+      "hairTransplantProcedure": {
+        "title": "Hair Transplant Procedure",
+        "description": "Hair transplant operation with our expert team"
+      },
+      "operationMoment": {
+        "title": "Operation Moment",
+        "description": "Hair transplant procedure with modern equipment"
+      },
+      "clinicWork": {
+        "title": "Clinic Work",
+        "description": "Our expert doctors during operation"
+      },
+      "hairTransplantTechniques": {
+        "title": "Hair Transplant Techniques",
+        "description": "Hair transplantation using precise procedures"
+      },
+      "operatingRoom": {
+        "title": "Operating Room",
+        "description": "Hair transplant procedure in our modern operating room"
+      },
+      "teamWork": {
+        "title": "Team Work",
+        "description": "Our professional team during work"
+      },
+      "expertDoctors": {
+        "title": "Expert Doctors",
+        "description": "Our experienced doctors during operation"
+      },
+      "hairlineDesign": {
+        "title": "Hairline Design",
+        "description": "Personalized hairline design and application"
+      },
+      "operationDetails": {
+        "title": "Operation Details",
+        "description": "Meticulously performed hair transplant operation"
+      },
+      "microFUETechnique": {
+        "title": "Micro FUE Technique",
+        "description": "Application of Micro FUE technique for hair transplantation"
+      },
+      "surgicalMagnification": {
+        "title": "Surgical Magnification",
+        "description": "Precise procedure using high magnification devices"
+      },
+      "operationPreparation": {
+        "title": "Operation Preparation",
+        "description": "Preparing for operation in a sterile environment"
+      },
+      "precisionTechnique": {
+        "title": "Precision Implantation Technique",
+        "description": "Precise implantation at optimal angle and depth for each graft"
+      },
+      "professionalCare": {
+        "title": "Professional Care",
+        "description": "Professional patient care with our experienced medical team"
+      },
+      "modernTreatment": {
+        "title": "Modern Treatment",
+        "description": "Modern hair transplant techniques and equipment"
+      },
+      "treatmentPreparation": {
+        "title": "Treatment Preparation",
+        "description": "Preparatory phase before hair transplantation"
+      },
+      "detailedAnalysis": {
+        "title": "Detailed Analysis",
+        "description": "Personalized hair analysis and planning"
+      },
+      "clinicEnvironment": {
+        "title": "Clinic Environment",
+        "description": "Our sterile and comfortable treatment areas"
+      },
+      "advancedEquipment": {
+        "title": "Advanced Technology",
+        "description": "State-of-the-art hair transplant devices"
+      },
+      "patientConsultation": {
+        "title": "Patient Consultation",
+        "description": "Professional consultation according to personal needs"
+      }
+    },
     "labels": {
       "photo": "Photo",
       "video": "Video",
