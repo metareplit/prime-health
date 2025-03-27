@@ -1,53 +1,53 @@
 {
   "nav": {
-    "home": "Ana Sayfa",
-    "services": "Hizmetler",
-    "gallery": "Galeri",
-    "products": "Ürünler",
-    "blog": "Blog",
-    "contact": "İletişim",
-    "appointments": "Randevu Al",
-    "patientPortal": "Hasta Portalı",
-    "userMenu": "Kullanıcı Menüsü",
-    "menu": "Menü",
-    "doctors": "Doktorlarımız",
-    "press": "Basında Biz",
+    "home": "მთავარი",
+    "services": "სერვისები",
+    "gallery": "გალერეა",
+    "products": "პროდუქტები",
+    "blog": "ბლოგი",
+    "contact": "კონტაქტი",
+    "appointments": "ჯავშანი",
+    "patientPortal": "პაციენტის პორტალი",
+    "userMenu": "მომხმარებლის მენიუ",
+    "menu": "მენიუ",
+    "doctors": "ჩვენი ექიმები",
+    "press": "პრესა",
     "brand": "Prime Health"
   },
   "slider": {
-    "title1": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
-    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
-    "button1": "Ücretsiz Konsültasyon",
-    "title2": "Doğal ve Kalıcı Sonuçlar",
-    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
-    "button2": "Sonuçları Görün",
-    "title3": "Profesyonel Kadro",
-    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
-    "button3": "Ekibimizle Tanışın",
-    "title4": "Modern Klinik",
-    "description4": "Son teknoloji ekipman ve konforlu ortam",
-    "button4": "Sanal Tur"
+    "title1": "ექსპერტი კლინიკა თმის გადანერგვისა და ესთეტიკური პროცედურებისთვის",
+    "description1": "მიიღეთ საუკეთესო შედეგები ჩვენი თანამედროვე ტექნოლოგიებით და ექსპერტი გუნდით",
+    "button1": "უფასო კონსულტაცია",
+    "title2": "ბუნებრივი და მუდმივი შედეგები",
+    "description2": "გარანტირებული შედეგები DHI და Sapphire FUE ტექნოლოგიებით",
+    "button2": "იხილეთ შედეგები",
+    "title3": "პროფესიონალი გუნდი",
+    "description3": "ექსპერტი ექიმები და გამოცდილი სამედიცინო პერსონალი",
+    "button3": "გაიცანით ჩვენი გუნდი",
+    "title4": "თანამედროვე კლინიკა",
+    "description4": "უახლესი აღჭურვილობა და კომფორტული გარემო",
+    "button4": "ვირტუალური ტური"
   },
   "header": {
     "menu": {
-      "open": "Menüyü aç",
-      "close": "Menüyü kapat",
-      "main": "Ana menü",
-      "user": "Kullanıcı menüsü"
+      "open": "მენიუს გახსნა",
+      "close": "მენიუს დახურვა",
+      "main": "მთავარი მენიუ",
+      "user": "მომხმარებლის მენიუ"
     },
     "search": {
-      "placeholder": "Ara...",
-      "button": "Ara",
-      "noResults": "Sonuç bulunamadı"
+      "placeholder": "ძიება...",
+      "button": "ძიება",
+      "noResults": "შედეგები არ მოიძებნა"
     },
     "buttons": {
-      "appointment": "Randevu Al",
-      "consultation": "Ücretsiz Danışmanlık",
-      "contact": "İletişime Geç"
+      "appointment": "ჯავშანი",
+      "consultation": "უფასო კონსულტაცია",
+      "contact": "დაგვიკავშირდით"
     },
     "userMenu": {
-      "profile": "Profilim",
-      "appointments": "Randevularım",
+      "profile": "ჩემი პროფილი",
+      "appointments": "ჩემი ჯავშნები",
       "dashboard": "Kontrol Paneli",
       "settings": "Ayarlar",
       "logout": "Çıkış Yap"

@@ -1,53 +1,53 @@
 {
   "nav": {
-    "home": "Ana Sayfa",
-    "services": "Hizmetler",
-    "gallery": "Galeri",
-    "products": "Ürünler",
-    "blog": "Blog",
-    "contact": "İletişim",
-    "appointments": "Randevu Al",
-    "patientPortal": "Hasta Portalı",
-    "userMenu": "Kullanıcı Menüsü",
-    "menu": "Menü",
-    "doctors": "Doktorlarımız",
-    "press": "Basında Biz",
+    "home": "Главная",
+    "services": "Услуги",
+    "gallery": "Галерея",
+    "products": "Продукты",
+    "blog": "Блог",
+    "contact": "Контакты",
+    "appointments": "Записаться",
+    "patientPortal": "Портал пациента",
+    "userMenu": "Меню пользователя",
+    "menu": "Меню",
+    "doctors": "Наши врачи",
+    "press": "Пресса",
     "brand": "Prime Health"
   },
   "slider": {
-    "title1": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
-    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
-    "button1": "Ücretsiz Konsültasyon",
-    "title2": "Doğal ve Kalıcı Sonuçlar",
-    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
-    "button2": "Sonuçları Görün",
-    "title3": "Profesyonel Kadro",
-    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
-    "button3": "Ekibimizle Tanışın",
-    "title4": "Modern Klinik",
-    "description4": "Son teknoloji ekipman ve konforlu ortam",
-    "button4": "Sanal Tur"
+    "title1": "Экспертная клиника по пересадке волос и эстетическим процедурам",
+    "description1": "Получите лучшие результаты с нашими современными технологиями и опытной командой",
+    "button1": "Бесплатная консультация",
+    "title2": "Натуральные и постоянные результаты",
+    "description2": "Гарантированные результаты с технологиями DHI и Sapphire FUE",
+    "button2": "Смотреть результаты",
+    "title3": "Профессиональная команда",
+    "description3": "Опытные врачи и квалифицированный медицинский персонал",
+    "button3": "Познакомиться с нашей командой",
+    "title4": "Современная клиника",
+    "description4": "Современное оборудование и комфортная обстановка",
+    "button4": "Виртуальный тур"
   },
   "header": {
     "menu": {
-      "open": "Menüyü aç",
-      "close": "Menüyü kapat",
-      "main": "Ana menü",
-      "user": "Kullanıcı menüsü"
+      "open": "Открыть меню",
+      "close": "Закрыть меню",
+      "main": "Главное меню",
+      "user": "Меню пользователя"
     },
     "search": {
-      "placeholder": "Ara...",
-      "button": "Ara",
-      "noResults": "Sonuç bulunamadı"
+      "placeholder": "Поиск...",
+      "button": "Поиск",
+      "noResults": "Результаты не найдены"
     },
     "buttons": {
-      "appointment": "Randevu Al",
-      "consultation": "Ücretsiz Danışmanlık",
-      "contact": "İletişime Geç"
+      "appointment": "Записаться",
+      "consultation": "Бесплатная консультация",
+      "contact": "Связаться с нами"
     },
     "userMenu": {
-      "profile": "Profilim",
-      "appointments": "Randevularım",
+      "profile": "Мой профиль",
+      "appointments": "Мои записи",
       "dashboard": "Kontrol Paneli",
       "settings": "Ayarlar",
       "logout": "Çıkış Yap"

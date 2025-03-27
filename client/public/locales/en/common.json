@@ -1,53 +1,53 @@
 {
   "nav": {
-    "home": "Ana Sayfa",
-    "services": "Hizmetler",
-    "gallery": "Galeri",
-    "products": "Ürünler",
+    "home": "Home",
+    "services": "Services",
+    "gallery": "Gallery",
+    "products": "Products",
     "blog": "Blog",
-    "contact": "İletişim",
-    "appointments": "Randevu Al",
-    "patientPortal": "Hasta Portalı",
-    "userMenu": "Kullanıcı Menüsü",
-    "menu": "Menü",
-    "doctors": "Doktorlarımız",
-    "press": "Basında Biz",
+    "contact": "Contact",
+    "appointments": "Get Appointment",
+    "patientPortal": "Patient Portal",
+    "userMenu": "User Menu",
+    "menu": "Menu",
+    "doctors": "Our Doctors",
+    "press": "Press",
     "brand": "Prime Health"
   },
   "slider": {
-    "title1": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
-    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
-    "button1": "Ücretsiz Konsültasyon",
-    "title2": "Doğal ve Kalıcı Sonuçlar",
-    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
-    "button2": "Sonuçları Görün",
-    "title3": "Profesyonel Kadro",
-    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
-    "button3": "Ekibimizle Tanışın",
-    "title4": "Modern Klinik",
-    "description4": "Son teknoloji ekipman ve konforlu ortam",
-    "button4": "Sanal Tur"
+    "title1": "Expert Clinic in Hair Transplantation and Aesthetic Treatments",
+    "description1": "Get the best results with our modern technology and expert team",
+    "button1": "Free Consultation",
+    "title2": "Natural and Permanent Results",
+    "description2": "Guaranteed results with DHI and Sapphire FUE techniques",
+    "button2": "See Results",
+    "title3": "Professional Team",
+    "description3": "Expert doctors and experienced healthcare staff",
+    "button3": "Meet Our Team",
+    "title4": "Modern Clinic",
+    "description4": "State-of-the-art equipment and comfortable environment",
+    "button4": "Virtual Tour"
   },
   "header": {
     "menu": {
-      "open": "Menüyü aç",
-      "close": "Menüyü kapat",
-      "main": "Ana menü",
-      "user": "Kullanıcı menüsü"
+      "open": "Open menu",
+      "close": "Close menu",
+      "main": "Main menu",
+      "user": "User menu"
     },
     "search": {
-      "placeholder": "Ara...",
-      "button": "Ara",
-      "noResults": "Sonuç bulunamadı"
+      "placeholder": "Search...",
+      "button": "Search",
+      "noResults": "No results found"
     },
     "buttons": {
-      "appointment": "Randevu Al",
-      "consultation": "Ücretsiz Danışmanlık",
-      "contact": "İletişime Geç"
+      "appointment": "Get Appointment",
+      "consultation": "Free Consultation",
+      "contact": "Contact Us"
     },
     "userMenu": {
-      "profile": "Profilim",
-      "appointments": "Randevularım",
+      "profile": "My Profile",
+      "appointments": "My Appointments",
       "dashboard": "Kontrol Paneli",
       "settings": "Ayarlar",
       "logout": "Çıkış Yap"
