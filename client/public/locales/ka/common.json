@@ -1,105 +1,105 @@
 {
   "nav": {
-    "home": "Ana Sayfa",
-    "services": "Hizmetler",
-    "gallery": "Galeri",
-    "products": "Ürünler",
-    "blog": "Blog",
-    "contact": "İletişim",
-    "appointments": "Randevu Al",
-    "patientPortal": "Hasta Portalı",
-    "userMenu": "Kullanıcı Menüsü",
-    "menu": "Menü",
-    "doctors": "Doktorlarımız",
-    "press": "Basında Biz",
+    "home": "მთავარი",
+    "services": "სერვისები",
+    "gallery": "გალერეა",
+    "products": "პროდუქტები",
+    "blog": "ბლოგი",
+    "contact": "კონტაქტი",
+    "appointments": "ჯავშანი",
+    "patientPortal": "პაციენტის პორტალი",
+    "userMenu": "მომხმარებლის მენიუ",
+    "menu": "მენიუ",
+    "doctors": "ჩვენი ექიმები",
+    "press": "პრესაში",
     "brand": "Prime Health"
   },
   "slider": {
-    "title1": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
-    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
-    "button1": "Ücretsiz Konsültasyon",
-    "title2": "Doğal ve Kalıcı Sonuçlar",
-    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
-    "button2": "Sonuçları Görün",
-    "title3": "Profesyonel Kadro",
-    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
-    "button3": "Ekibimizle Tanışın",
-    "title4": "Modern Klinik",
-    "description4": "Son teknoloji ekipman ve konforlu ortam",
-    "button4": "Sanal Tur"
+    "title1": "თმის გადანერგვისა და ესთეტიკური მკურნალობის სპეციალისტი კლინიკა",
+    "description1": "მიიღეთ საუკეთესო შედეგები ჩვენი თანამედროვე ტექნოლოგიებითა და ექსპერტთა გუნდით",
+    "button1": "უფასო კონსულტაცია",
+    "title2": "ბუნებრივი და მუდმივი შედეგები",
+    "description2": "გარანტირებული შედეგები DHI და საფირონის FUE ტექნიკებით",
+    "button2": "იხილეთ შედეგები",
+    "title3": "პროფესიონალთა გუნდი",
+    "description3": "გამოცდილი ექიმები და პროფესიონალი სამედიცინო პერსონალი",
+    "button3": "გაიცანით ჩვენი გუნდი",
+    "title4": "თანამედროვე კლინიკა",
+    "description4": "უახლესი ტექნოლოგიების აღჭურვილობა და კომფორტული გარემო",
+    "button4": "ვირტუალური ტური"
   },
   "header": {
     "menu": {
-      "open": "Menüyü aç",
-      "close": "Menüyü kapat",
-      "main": "Ana menü",
-      "user": "Kullanıcı menüsü"
+      "open": "მენიუს გაშლა",
+      "close": "მენიუს დახურვა",
+      "main": "მთავარი მენიუ",
+      "user": "მომხმარებლის მენიუ"
     },
     "search": {
-      "placeholder": "Ara...",
-      "button": "Ara",
-      "noResults": "Sonuç bulunamadı"
+      "placeholder": "ძიება...",
+      "button": "ძიება",
+      "noResults": "შედეგები არ მოიძებნა"
     },
     "buttons": {
-      "appointment": "Randevu Al",
-      "consultation": "Ücretsiz Danışmanlık",
-      "contact": "İletişime Geç"
+      "appointment": "ჯავშანი",
+      "consultation": "უფასო კონსულტაცია",
+      "contact": "დაგვიკავშირდით"
     },
     "userMenu": {
-      "profile": "Profilim",
-      "appointments": "Randevularım",
-      "dashboard": "Kontrol Paneli",
-      "settings": "Ayarlar",
-      "logout": "Çıkış Yap"
+      "profile": "ჩემი პროფილი",
+      "appointments": "ჩემი ჯავშნები",
+      "dashboard": "მართვის პანელი",
+      "settings": "პარამეტრები",
+      "logout": "გასვლა"
     }
   },
   "ui": {
     "dialog": {
-      "close": "Kapat"
+      "close": "დახურვა"
     },
     "command": {
-      "search": "Ara...",
-      "empty": "Sonuç bulunamadı.",
-      "shortcut": "Kısayol"
+      "search": "ძიება...",
+      "empty": "შედეგები არ მოიძებნა.",
+      "shortcut": "მალსახმობი"
     },
     "table": {
-      "empty": "Veri bulunamadı.",
-      "loading": "Yükleniyor...",
-      "previous": "Önceki",
-      "next": "Sonraki",
-      "rowsPerPage": "Sayfa başına satır:",
+      "empty": "მონაცემები არ მოიძებნა.",
+      "loading": "იტვირთება...",
+      "previous": "წინა",
+      "next": "შემდეგი",
+      "rowsPerPage": "სტრიქონი გვერდზე:",
       "of": "/",
-      "more": "Daha Fazla"
+      "more": "მეტი"
     },
     "form": {
-      "required": "Bu alan zorunludur",
-      "invalid": "Geçersiz değer",
-      "select": "Seçiniz"
+      "required": "ეს ველი აუცილებელია",
+      "invalid": "არასწორი მნიშვნელობა",
+      "select": "აირჩიეთ"
     },
     "toast": {
-      "success": "Başarılı",
-      "error": "Hata",
-      "info": "Bilgi",
-      "warning": "Uyarı",
-      "close": "Kapat"
+      "success": "წარმატებული",
+      "error": "შეცდომა",
+      "info": "ინფორმაცია",
+      "warning": "გაფრთხილება",
+      "close": "დახურვა"
     }
   },
   "buttons": {
-    "submit": "Gönder",
-    "cancel": "İptal",
-    "save": "Kaydet",
-    "continue": "Devam Et",
-    "back": "Geri",
-    "edit": "Düzenle",
-    "upload": "Yükle",
-    "readMore": "Devamını Oku",
-    "learnMore": "Daha Fazla Bilgi",
-    "getStarted": "Hemen Başla",
-    "contactUs": "Bize Ulaşın",
-    "close": "Kapat",
-    "delete": "Sil",
-    "appointment": "Randevu Al",
-    "confirm": "Onayla"
+    "submit": "გაგზავნა",
+    "cancel": "გაუქმება",
+    "save": "შენახვა",
+    "continue": "გაგრძელება",
+    "back": "უკან",
+    "edit": "რედაქტირება",
+    "upload": "ატვირთვა",
+    "readMore": "მეტის წაკითხვა",
+    "learnMore": "მეტი ინფორმაცია",
+    "getStarted": "დაწყება",
+    "contactUs": "დაგვიკავშირდით",
+    "close": "დახურვა",
+    "delete": "წაშლა",
+    "appointment": "ჯავშანი",
+    "confirm": "დადასტურება"
   },
   "products": {
     "title": "პროფესიონალური თმის მოვლის პროდუქტები",
@@ -180,21 +180,21 @@
     }
   },
   "auth": {
-    "login": "Giriş Yap",
-    "register": "Kayıt Ol",
-    "logout": "Çıkış Yap"
+    "login": "შესვლა",
+    "register": "რეგისტრაცია",
+    "logout": "გასვლა"
   },
   "validation": {
-    "required": "Bu alan zorunludur",
-    "email": "Geçerli bir e-posta adresi giriniz",
-    "phone": "Geçerli bir telefon numarası giriniz",
-    "minLength": "En az {{count}} karakter giriniz",
-    "maxLength": "En fazla {{count}} karakter giriniz",
-    "passwordMatch": "Şifreler eşleşmiyor",
-    "invalidDate": "Geçerli bir tarih giriniz",
-    "futureDate": "Gelecek bir tarih seçiniz",
-    "numeric": "Sadece sayı giriniz",
-    "url": "Geçerli bir URL giriniz"
+    "required": "ეს ველი აუცილებელია",
+    "email": "გთხოვთ, შეიყვანოთ სწორი ელფოსტის მისამართი",
+    "phone": "გთხოვთ, შეიყვანოთ სწორი ტელეფონის ნომერი",
+    "minLength": "გთხოვთ, შეიყვანოთ მინიმუმ {{count}} სიმბოლო",
+    "maxLength": "გთხოვთ, შეიყვანოთ მაქსიმუმ {{count}} სიმბოლო",
+    "passwordMatch": "პაროლები არ ემთხვევა",
+    "invalidDate": "გთხოვთ, შეიყვანოთ სწორი თარიღი",
+    "futureDate": "გთხოვთ, აირჩიოთ მომავალი თარიღი",
+    "numeric": "გთხოვთ, შეიყვანოთ მხოლოდ რიცხვები",
+    "url": "გთხოვთ, შეიყვანოთ სწორი URL"
   },
   "home": {
     "hero": {
