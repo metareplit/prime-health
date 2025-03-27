@@ -8,6 +8,7 @@ import { Clock, Check, HelpCircle, ArrowRight, ListChecks, Info } from "lucide-r
 import { motion } from "framer-motion";
 import type { Service } from "@shared/schema";
 import { Metadata } from "@/components/ui/metadata";
+import { useTranslation } from "react-i18next";
 
 const container = {
   hidden: { opacity: 0 },
@@ -25,6 +26,7 @@ const item = {
 };
 
 const ServiceCard = ({ service }: { service: Service }) => {
+  const { t } = useTranslation('common');
   // Fallback image for services that don't have an image
   const fallbackImage = "/images/services/primehealth1.png";
 
@@ -49,7 +51,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
             asChild
           >
             <Link href={`/randevu?service=${service.slug}`}>
-              Randevu Al
+              {t('buttons.appointment')}
             </Link>
           </Button>
         </div>
@@ -70,13 +72,13 @@ const ServiceCard = ({ service }: { service: Service }) => {
         <Tabs defaultValue="details" className="w-full">
           <TabsList className="grid w-full grid-cols-3 mb-4">
             <TabsTrigger value="details" className="text-xs">
-              <Info className="h-3 w-3 mr-1" /> Detaylar
+              <Info className="h-3 w-3 mr-1" /> {t('services.tabs.details')}
             </TabsTrigger>
             <TabsTrigger value="benefits" className="text-xs">
-              <Check className="h-3 w-3 mr-1" /> Avantajlar
+              <Check className="h-3 w-3 mr-1" /> {t('services.tabs.benefits')}
             </TabsTrigger>
             <TabsTrigger value="faq" className="text-xs">
-              <HelpCircle className="h-3 w-3 mr-1" /> SSS
+              <HelpCircle className="h-3 w-3 mr-1" /> {t('services.tabs.faq')}
             </TabsTrigger>
           </TabsList>
 
@@ -84,7 +86,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
             <div className="space-y-2">
               <h3 className="font-semibold text-sm mb-2 flex items-center gap-2">
                 <ListChecks className="h-4 w-4 text-primary" />
-                İşlem Süreci
+                {t('services.processTitle')}
               </h3>
               <ol className="space-y-1 text-sm">
                 {service.process?.slice(0, 4).map((step, idx) => (
@@ -155,7 +157,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
             asChild
           >
             <Link href="/iletisim">
-              <span>Ücretsiz Danışma</span>
+              <span>{t('services.freeConsultation')}</span>
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
@@ -166,6 +168,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
 };
 
 export default function Services() {
+  const { t } = useTranslation('common');
   const { data: services, isLoading } = useQuery<Service[]>({
     queryKey: ["/api/services"],
   });
@@ -173,9 +176,9 @@ export default function Services() {
   return (
     <div className="min-h-screen">
       <Metadata
-        title="Saç Ekimi ve Estetik Hizmetleri"
-        description="Profesyonel saç ekimi, sakal ekimi, kaş ekimi ve saç bakım hizmetleri. Modern teknoloji ve uzman kadromuzla yanınızdayız."
-        keywords="saç ekimi, sakal ekimi, kaş ekimi, prp tedavisi, mezoterapi, tiflis saç ekimi, gürcistan saç ekimi"
+        title={t('services.metaTitle')}
+        description={t('services.metaDescription')}
+        keywords={t('services.metaKeywords')}
         type="website"
         image="/images/services/sapphire-fue.jpg"
       />
@@ -202,10 +205,10 @@ export default function Services() {
             className="max-w-3xl mx-auto text-center"
           >
             <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
-              Profesyonel Saç Ekimi ve Estetik Hizmetleri
+              {t('services.title')}
             </h1>
             <p className="text-lg text-gray-600">
-              Modern teknoloji ve uzman kadromuzla doğal ve kalıcı sonuçlar için yanınızdayız
+              {t('services.description')}
             </p>
           </motion.div>
         </div>

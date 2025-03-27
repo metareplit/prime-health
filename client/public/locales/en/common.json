@@ -78,6 +78,7 @@
     "contactUs": "Contact Us",
     "close": "Close",
     "delete": "Delete",
+    "appointment": "Book Appointment",
     "confirm": "Confirm"
   },
   "validation": {
@@ -204,6 +205,16 @@
   "services": {
     "title": "Our Services",
     "description": "Treatment options we offer with modern technology and expert staff",
+    "metaTitle": "Hair Transplantation and Aesthetic Services",
+    "metaDescription": "Professional hair transplantation, beard transplantation, eyebrow transplantation, and hair care services. We are here with our modern technology and expert staff.",
+    "metaKeywords": "hair transplantation, beard transplantation, eyebrow transplantation, prp treatment, mesotherapy, tbilisi hair transplantation, georgia hair transplantation",
+    "tabs": {
+      "details": "Details",
+      "benefits": "Benefits",
+      "faq": "FAQ"
+    },
+    "processTitle": "Treatment Process",
+    "freeConsultation": "Free Consultation",
     "serviceItems": {
       "1": {
         "name": "Hair Transplantation",

@@ -11,6 +11,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useTranslation } from "react-i18next";
 import Features from "@/components/home/features";
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const features = [
   {
@@ -140,6 +141,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>{t('slider.title1')} | Prime Health</title>
+        <meta name="description" content={t('slider.description1')} />
+        <meta name="keywords" content={t('services.metaKeywords')} />
+      </Helmet>
+      
       {/* Hero Slider Section */}
       <HeroSlider />
 
@@ -211,13 +218,6 @@ export default function Home() {
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="absolute bottom-4 left-4">
-                      {service.featured && (
-                        <Badge variant="secondary" className="bg-white/90 text-primary hover:bg-white">
-                          {t('home.services.featured')}
-                        </Badge>
-                      )}
-                    </div>
                   </div>
 
                   <div className="p-6">

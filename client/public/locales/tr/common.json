@@ -98,6 +98,7 @@
     "contactUs": "Bize Ulaşın",
     "close": "Kapat",
     "delete": "Sil",
+    "appointment": "Randevu Al",
     "confirm": "Onayla"
   },
   "products": {
@@ -251,6 +252,16 @@
   "services": {
     "title": "Hizmetlerimiz",
     "description": "Modern teknoloji ve uzman kadromuzla sunduğumuz tedavi seçenekleri",
+    "metaTitle": "Saç Ekimi ve Estetik Hizmetleri",
+    "metaDescription": "Profesyonel saç ekimi, sakal ekimi, kaş ekimi ve saç bakım hizmetleri. Modern teknoloji ve uzman kadromuzla yanınızdayız.",
+    "metaKeywords": "saç ekimi, sakal ekimi, kaş ekimi, prp tedavisi, mezoterapi, tiflis saç ekimi, gürcistan saç ekimi",
+    "tabs": {
+      "details": "Detaylar",
+      "benefits": "Avantajlar",
+      "faq": "SSS"
+    },
+    "processTitle": "İşlem Süreci",
+    "freeConsultation": "Ücretsiz Danışma",
     "serviceItems": {
       "1": {
         "name": "Saç Ekimi",
