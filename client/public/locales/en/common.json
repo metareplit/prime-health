@@ -1,87 +1,87 @@
 {
   "nav": {
-    "home": "Ana Sayfa",
-    "services": "Hizmetler",
-    "gallery": "Galeri",
-    "products": "Ürünler",
+    "home": "Home",
+    "services": "Services",
+    "gallery": "Gallery",
+    "products": "Products",
     "blog": "Blog",
-    "contact": "İletişim",
-    "appointments": "Randevu Al",
-    "patientPortal": "Hasta Portalı",
-    "userMenu": "Kullanıcı Menüsü",
-    "menu": "Menü",
-    "doctors": "Doktorlarımız",
-    "press": "Basında Biz",
+    "contact": "Contact",
+    "appointments": "Book Appointment",
+    "patientPortal": "Patient Portal",
+    "userMenu": "User Menu",
+    "menu": "Menu",
+    "doctors": "Our Doctors",
+    "press": "Press",
     "brand": "Prime Health"
   },
   "slider": {
-    "title1": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
-    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
-    "button1": "Ücretsiz Konsültasyon",
-    "title2": "Doğal ve Kalıcı Sonuçlar",
-    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
-    "button2": "Sonuçları Görün",
-    "title3": "Profesyonel Kadro",
-    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
-    "button3": "Ekibimizle Tanışın",
-    "title4": "Modern Klinik",
-    "description4": "Son teknoloji ekipman ve konforlu ortam",
-    "button4": "Sanal Tur"
+    "title1": "Expert Clinic in Hair Transplantation and Aesthetic Treatments",
+    "description1": "Achieve the best results with our modern technology and expert staff",
+    "button1": "Free Consultation",
+    "title2": "Natural and Permanent Results",
+    "description2": "Guaranteed results with DHI and Sapphire FUE techniques",
+    "button2": "See Results",
+    "title3": "Professional Team",
+    "description3": "Expert doctors and experienced healthcare professionals",
+    "button3": "Meet Our Team",
+    "title4": "Modern Clinic",
+    "description4": "State-of-the-art equipment and comfortable environment",
+    "button4": "Virtual Tour"
   },
   "header": {
     "menu": {
-      "open": "Menüyü aç",
-      "close": "Menüyü kapat",
-      "main": "Ana menü",
-      "user": "Kullanıcı menüsü"
+      "open": "Open menu",
+      "close": "Close menu",
+      "main": "Main menu",
+      "user": "User menu"
     },
     "search": {
-      "placeholder": "Ara...",
-      "button": "Ara",
-      "noResults": "Sonuç bulunamadı"
+      "placeholder": "Search...",
+      "button": "Search",
+      "noResults": "No results found"
     },
     "buttons": {
-      "appointment": "Randevu Al",
-      "consultation": "Ücretsiz Danışmanlık",
-      "contact": "İletişime Geç"
+      "appointment": "Book Appointment",
+      "consultation": "Free Consultation",
+      "contact": "Contact Us"
     },
     "userMenu": {
-      "profile": "Profilim",
-      "appointments": "Randevularım",
-      "dashboard": "Kontrol Paneli",
-      "settings": "Ayarlar",
-      "logout": "Çıkış Yap"
+      "profile": "My Profile",
+      "appointments": "My Appointments",
+      "dashboard": "Dashboard",
+      "settings": "Settings",
+      "logout": "Logout"
     }
   },
   "ui": {
     "dialog": {
-      "close": "Kapat"
+      "close": "Close"
     },
     "command": {
-      "search": "Ara...",
-      "empty": "Sonuç bulunamadı.",
-      "shortcut": "Kısayol"
+      "search": "Search...",
+      "empty": "No results found.",
+      "shortcut": "Shortcut"
     },
     "table": {
-      "empty": "Veri bulunamadı.",
-      "loading": "Yükleniyor...",
-      "previous": "Önceki",
-      "next": "Sonraki",
-      "rowsPerPage": "Sayfa başına satır:",
-      "of": "/",
-      "more": "Daha Fazla"
+      "empty": "No data found.",
+      "loading": "Loading...",
+      "previous": "Previous",
+      "next": "Next",
+      "rowsPerPage": "Rows per page:",
+      "of": "of",
+      "more": "More"
     },
     "form": {
-      "required": "Bu alan zorunludur",
-      "invalid": "Geçersiz değer",
-      "select": "Seçiniz"
+      "required": "This field is required",
+      "invalid": "Invalid value",
+      "select": "Select"
     },
     "toast": {
-      "success": "Başarılı",
-      "error": "Hata",
-      "info": "Bilgi",
-      "warning": "Uyarı",
-      "close": "Kapat"
+      "success": "Success",
+      "error": "Error",
+      "info": "Information",
+      "warning": "Warning",
+      "close": "Close"
     }
   },
   "buttons": {
@@ -537,237 +537,238 @@
     }
   },
   "gallery": {
-    "title": "Hasta Sonuçları Galerisi",
-    "subtitle": "Profesyonel saç ekimi kliniğimizde gerçekleştirilen operasyonların öncesi ve sonrası sonuçları",
+    "title": "Patient Results Gallery",
+    "subtitle": "Before and after results of operations performed at our professional hair transplant clinic",
     "search": {
-      "placeholder": "Hasta sonuçlarında ara...",
-      "noResults": "Sonuç bulunamadı"
+      "placeholder": "Search patient results...",
+      "noResults": "No results found"
     },
     "tabs": {
-      "beforeAfter": "Öncesi ve Sonrası",
-      "clinic": "Klinik Görselleri",
-      "videos": "Klinik Videoları",
-      "success": "Başarı Hikayeleri"
+      "beforeAfter": "Before and After",
+      "clinic": "Clinic Images",
+      "videos": "Clinic Videos",
+      "success": "Success Stories"
     },
     "videos": {
-      "title": "Klinik Video Galerisi",
-      "subtitle": "Kliniğimizin operasyon anlarından görüntüler ve tedavi süreçleri",
+      "title": "Clinic Video Gallery",
+      "subtitle": "Videos of operation moments and treatment processes at our clinic",
       "operationProcess": {
-        "title": "Operasyon Süreci",
-        "description": "Saç ekimi operasyonunun aşamalarını gösteren video"
+        "title": "Operation Process",
+        "description": "Video showing the stages of hair transplantation surgery"
       },
       "hairlineDesign": {
-        "title": "Saç Çizgisi Tasarımı",
-        "description": "Kişiye özel saç çizgisi tasarlama süreci"
+        "title": "Hairline Design",
+        "description": "The process of designing a personalized hairline"
       },
       "graftExtraction": {
-        "title": "Greft Çıkarım İşlemi",
-        "description": "Donör bölgeden greftlerin toplanma süreci"
+        "title": "Graft Extraction Process",
+        "description": "Process of collecting grafts from the donor area"
       },
       "implantationProcess": {
-        "title": "Ekim İşlemi",
-        "description": "Saç greftlerinin yerleştirilme tekniği ve süreci"
+        "title": "Implantation Process",
+        "description": "Technique and process of placing hair grafts"
       },
       "clinicTour": {
-        "title": "Klinik Turu",
-        "description": "Modern kliniğimizin tüm alanlarını keşfedin"
+        "title": "Clinic Tour",
+        "description": "Explore all areas of our modern clinic"
       },
       "patientExperience": {
-        "title": "Hasta Deneyimi",
-        "description": "Hastalarımızın tüm süreç boyunca deneyimleri"
+        "title": "Patient Experience",
+        "description": "Our patients' experiences throughout the entire process"
       },
       "teamAtWork": {
-        "title": "Çalışan Ekibimiz",
-        "description": "Profesyonel ekibimizin çalışma anları"
+        "title": "Our Team at Work",
+        "description": "Working moments of our professional team"
       },
       "aftercareProcess": {
-        "title": "Sonrası Bakım Süreci",
-        "description": "Operasyon sonrası bakım talimatları ve iyileşme süreci"
+        "title": "Aftercare Process",
+        "description": "Post-operation care instructions and recovery process"
       },
       "dhiTechnique": {
-        "title": "DHI Tekniği",
-        "description": "DHI (Direct Hair Implantation) tekniğinin uygulanması"
+        "title": "DHI Technique",
+        "description": "Application of DHI (Direct Hair Implantation) technique"
       },
       "fueTechnique": {
-        "title": "FUE Tekniği",
-        "description": "FUE (Follicular Unit Extraction) tekniğinin gösterimi"
+        "title": "FUE Technique",
+        "description": "Demonstration of FUE (Follicular Unit Extraction) technique"
       }
     },
     "labels": {
-      "photo": "Fotoğraf",
+      "photo": "Photo",
       "video": "Video",
-      "videoNotSupported": "Tarayıcınız video oynatmayı desteklemiyor."
+      "videoNotSupported": "Your browser does not support video playback."
     },
     "buttons": {
-      "consult": "Ücretsiz Konsültasyon",
-      "share": "Paylaş"
+      "consult": "Free Consultation",
+      "share": "Share"
     },
     "caseDescriptions": {
-      "sixMonthResult": "6 ay sonrası sonuç",
-      "eightMonthResult": "8 ay sonrası sonuç",
-      "twelveMonthResult": "12 ay sonrası sonuç"
+      "sixMonthResult": "Result after 6 months",
+      "eightMonthResult": "Result after 8 months",
+      "twelveMonthResult": "Result after 12 months",
+      "nineMonthResult": "Result after 9 months"
     },
     "techniques": {
-      "safirFUE": "Safir FUE",
+      "safirFUE": "Sapphire FUE",
       "dhi": "DHI"
     },
     "durations": {
-      "sixHours": "6 saat",
-      "sevenHours": "7 saat",
-      "eightHours": "8 saat"
+      "sixHours": "6 hours",
+      "sevenHours": "7 hours",
+      "eightHours": "8 hours"
     },
     "satisfactions": {
-      "satisfied": "Memnun",
-      "verySatisfied": "Çok memnun",
-      "extremelySatisfied": "Son derece memnun"
+      "satisfied": "Satisfied",
+      "verySatisfied": "Very satisfied",
+      "extremelySatisfied": "Extremely satisfied"
     },
     "clinic": {
       "hairTransplantProcedure": {
-        "title": "Saç Ekimi İşlemi",
-        "description": "Uzman ekibimizle saç ekimi operasyonu"
+        "title": "Hair Transplant Procedure",
+        "description": "Hair transplant operation with our expert team"
       },
       "operationMoment": {
-        "title": "Operasyon Anı",
-        "description": "Modern cihazlarımızla saç ekimi prosedürü"
+        "title": "Operation Moment",
+        "description": "Hair transplant procedure with modern equipment"
       },
       "clinicWork": {
-        "title": "Klinik Çalışma",
-        "description": "Uzman doktorlarımız operasyon sırasında"
+        "title": "Clinic Work",
+        "description": "Our expert doctors during operation"
       },
       "hairTransplantTechniques": {
-        "title": "Saç Ekimi Teknikleri",
-        "description": "Hassas işlemlerle saç ekimi uygulaması"
+        "title": "Hair Transplant Techniques",
+        "description": "Hair transplant application with precise procedures"
       },
       "operatingRoom": {
-        "title": "Operasyon Odası",
-        "description": "Modern operasyon odamızda saç ekimi işlemi"
+        "title": "Operating Room",
+        "description": "Hair transplant procedure in our modern operating room"
       },
       "teamWork": {
-        "title": "Ekip Çalışması",
-        "description": "Profesyonel ekibimiz çalışma anında"
+        "title": "Team Work",
+        "description": "Our professional team during work"
       },
       "expertDoctors": {
-        "title": "Uzman Doktorlarımız",
-        "description": "Deneyimli doktorlarımız operasyon sırasında"
+        "title": "Our Expert Doctors",
+        "description": "Our experienced doctors during operation"
       },
       "hairlineDesign": {
-        "title": "Saç Çizgisi Tasarımı",
-        "description": "Kişiye özel saç çizgisi tasarımı ve uygulaması"
+        "title": "Hairline Design",
+        "description": "Personalized hairline design and application"
       },
       "operationDetails": {
-        "title": "Operasyon Detayları",
-        "description": "Titizlikle yapılan saç ekimi operasyonu"
+        "title": "Operation Details",
+        "description": "Meticulously performed hair transplant operation"
       },
       "microFUETechnique": {
-        "title": "Mikro FUE Tekniği",
-        "description": "Mikro FUE tekniği ile saç ekimi uygulaması"
+        "title": "Micro FUE Technique",
+        "description": "Hair transplant application with Micro FUE technique"
       },
       "surgicalMagnification": {
-        "title": "Cerrahi Magnifikasyon",
-        "description": "Yüksek magnifikasyon cihazlarıyla hassas işlem"
+        "title": "Surgical Magnification",
+        "description": "Precise procedure with high magnification devices"
       },
       "operationPreparation": {
-        "title": "Operasyon Hazırlığı",
-        "description": "Steril ortamda operasyon hazırlığı"
+        "title": "Operation Preparation",
+        "description": "Operation preparation in sterile environment"
       },
       "precisionTechnique": {
-        "title": "Hassas Ekim Tekniği",
-        "description": "Her greft için optimal açı ve derinlikte hassas ekim"
+        "title": "Precision Implantation Technique",
+        "description": "Precise implantation at optimal angle and depth for each graft"
       },
       "professionalCare": {
-        "title": "Profesyonel Bakım",
-        "description": "Deneyimli sağlık ekibimizle profesyonel hasta bakımı"
+        "title": "Professional Care",
+        "description": "Professional patient care with our experienced healthcare team"
       },
       "modernTreatment": {
-        "title": "Modern Tedavi",
-        "description": "Çağdaş saç ekimi teknikleri ve ekipmanları"
+        "title": "Modern Treatment",
+        "description": "Contemporary hair transplant techniques and equipment"
       },
       "treatmentPreparation": {
-        "title": "Tedavi Hazırlığı",
-        "description": "Saç ekimi öncesi hazırlık aşaması"
+        "title": "Treatment Preparation",
+        "description": "Pre-hair transplant preparation phase"
       },
       "detailedAnalysis": {
-        "title": "Detaylı Analiz",
-        "description": "Kişiye özel saç analizi ve planlama"
+        "title": "Detailed Analysis",
+        "description": "Personalized hair analysis and planning"
       },
       "clinicEnvironment": {
-        "title": "Klinik Ortamı",
-        "description": "Steril ve konforlu tedavi alanlarımız"
+        "title": "Clinic Environment",
+        "description": "Our sterile and comfortable treatment areas"
       },
       "advancedEquipment": {
-        "title": "İleri Teknoloji",
-        "description": "Son teknoloji saç ekimi cihazlarımız"
+        "title": "Advanced Technology",
+        "description": "State-of-the-art hair transplant devices"
       },
       "patientConsultation": {
-        "title": "Hasta Danışmanlığı",
-        "description": "Kişisel ihtiyaçlar doğrultusunda profesyonel konsültasyon"
+        "title": "Patient Consultation",
+        "description": "Professional consultation according to personal needs"
       }
     },
     "caseDescriptions": {
-      "sixMonthResult": "6 ay sonrası sonuç",
-      "eightMonthResult": "8 ay sonrası sonuç",
-      "twelveMonthResult": "12 ay sonrası sonuç"
+      "sixMonthResult": "Result after 6 months",
+      "eightMonthResult": "Result after 8 months",
+      "twelveMonthResult": "Result after 12 months"
     },
     "techniques": {
-      "safirFUE": "Safir FUE",
+      "safirFUE": "Sapphire FUE",
       "dhi": "DHI",
-      "classicFUE": "Klasik FUE"
+      "classicFUE": "Classic FUE"
     },
     "durations": {
-      "sixHours": "6 saat",
-      "sevenHours": "7 saat",
-      "eightHours": "8 saat"
+      "sixHours": "6 hours",
+      "sevenHours": "7 hours",
+      "eightHours": "8 hours"
     },
     "satisfactions": {
-      "verySatisfied": "Çok memnun",
-      "satisfied": "Memnun",
-      "extremelySatisfied": "Son derece memnun"
+      "verySatisfied": "Very satisfied",
+      "satisfied": "Satisfied",
+      "extremelySatisfied": "Extremely satisfied"
     },
     "categories": {
-      "sac-ekimi": "Saç Ekimi",
-      "sakal-ekimi": "Sakal Ekimi",
-      "kas-ekimi": "Kaş Ekimi"
+      "sac-ekimi": "Hair Transplantation",
+      "sakal-ekimi": "Beard Transplantation",
+      "kas-ekimi": "Eyebrow Transplantation"
     },
     "patientDetails": {
-      "title": "Hasta Bilgileri",
-      "before": "Öncesi",
-      "after": "Sonrası",
-      "age": "Yaş",
-      "gender": "Cinsiyet",
-      "problemArea": "Problem Bölgesi",
-      "diagnosis": "Teşhis",
-      "hairLossStage": "Saç Dökülme Evresi"
+      "title": "Patient Information",
+      "before": "Before",
+      "after": "After",
+      "age": "Age",
+      "gender": "Gender",
+      "problemArea": "Problem Area",
+      "diagnosis": "Diagnosis",
+      "hairLossStage": "Hair Loss Stage"
     },
     "procedureDetails": {
-      "title": "İşlem Detayları",
-      "technique": "Teknik",
-      "grafts": "Greft Sayısı",
-      "duration": "Süre",
-      "anesthesia": "Anestezi",
-      "recoveryTime": "İyileşme Süresi"
+      "title": "Procedure Details",
+      "technique": "Technique",
+      "grafts": "Number of Grafts",
+      "duration": "Duration",
+      "anesthesia": "Anesthesia",
+      "recoveryTime": "Recovery Time"
     },
     "results": {
-      "title": "Sonuçlar",
-      "satisfaction": "Memnuniyet",
-      "density": "Yoğunluk",
-      "survivalRate": "Tutma Oranı",
-      "naturalness": "Doğallık",
-      "finalResult": "Final Sonucu"
+      "title": "Results",
+      "satisfaction": "Satisfaction",
+      "density": "Density",
+      "survivalRate": "Survival Rate",
+      "naturalness": "Naturalness",
+      "finalResult": "Final Result"
     },
     "testimonial": {
-      "title": "Hasta Yorumu",
-      "doctorNote": "Doktor Notu"
+      "title": "Patient Testimonial",
+      "doctorNote": "Doctor's Note"
     },
     "buttons": {
-      "share": "Paylaş",
-      "consult": "Danışmanlık Al",
-      "view3d": "3D Görünüm",
-      "view2d": "2D Görünüm"
+      "share": "Share",
+      "consult": "Get Consultation",
+      "view3d": "3D View",
+      "view2d": "2D View"
     },
     "filters": {
-      "all": "Tümü",
-      "latest": "En Yeni",
-      "popular": "En Beğenilen"
+      "all": "All",
+      "latest": "Latest",
+      "popular": "Most Popular"
     }
   },
   "appointment": {
