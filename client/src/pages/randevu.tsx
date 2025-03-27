@@ -125,7 +125,7 @@ export default function Appointment() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>İsim Soyisim</FormLabel>
+                          <FormLabel>{t('patient.appointments.fullName')}</FormLabel>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
@@ -139,7 +139,7 @@ export default function Appointment() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Telefon</FormLabel>
+                          <FormLabel>{t('patient.appointments.phone')}</FormLabel>
                           <FormControl>
                             <PhoneInput
                               country={'tr'}
@@ -151,8 +151,8 @@ export default function Appointment() {
                               dropdownClass="!w-[300px]"
                               preferredCountries={['tr', 'ru', 'ge', 'az']}
                               enableSearch={true}
-                              searchPlaceholder="Ülke Ara..."
-                              searchNotFound="Ülke bulunamadı"
+                              searchPlaceholder={t('patient.appointments.searchCountry')}
+                              searchNotFound={t('patient.appointments.countryNotFound')}
                             />
                           </FormControl>
                           <FormMessage />
@@ -165,7 +165,7 @@ export default function Appointment() {
                       name="age"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Yaşınız</FormLabel>
+                          <FormLabel>{t('patient.appointments.age')}</FormLabel>
                           <FormControl>
                             <Input {...field} type="number" min="18" max="100" />
                           </FormControl>
@@ -179,11 +179,11 @@ export default function Appointment() {
                       name="medicalHistory"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Önceki Hastalıklar / Sağlık Durumu</FormLabel>
+                          <FormLabel>{t('patient.appointments.medicalHistory')}</FormLabel>
                           <FormControl>
                             <Textarea 
                               {...field} 
-                              placeholder="Varsa önceki hastalıklarınızı veya mevcut sağlık durumunuzu belirtiniz..."
+                              placeholder={t('patient.appointments.medicalHistoryPlaceholder')}
                               className="resize-none"
                               rows={3}
                             />
@@ -198,7 +198,7 @@ export default function Appointment() {
                       name="serviceType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Hizmet Alanı</FormLabel>
+                          <FormLabel>{t('patient.appointments.serviceType')}</FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -210,7 +210,7 @@ export default function Appointment() {
                                   <RadioGroupItem value="sac-ekimi" />
                                 </FormControl>
                                 <FormLabel className="font-normal cursor-pointer">
-                                  Saç Ekimi
+                                  {t('patient.appointments.hairTransplant')}
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-2">
@@ -218,7 +218,7 @@ export default function Appointment() {
                                   <RadioGroupItem value="sakal-ekimi" />
                                 </FormControl>
                                 <FormLabel className="font-normal cursor-pointer">
-                                  Sakal Ekimi
+                                  {t('patient.appointments.beardTransplant')}
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-2">
@@ -226,7 +226,7 @@ export default function Appointment() {
                                   <RadioGroupItem value="kas-ekimi" />
                                 </FormControl>
                                 <FormLabel className="font-normal cursor-pointer">
-                                  Kaş Ekimi
+                                  {t('patient.appointments.eyebrowTransplant')}
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-2">
@@ -234,7 +234,7 @@ export default function Appointment() {
                                   <RadioGroupItem value="prp" />
                                 </FormControl>
                                 <FormLabel className="font-normal cursor-pointer">
-                                  PRP Tedavisi
+                                  {t('patient.appointments.prpTreatment')}
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
