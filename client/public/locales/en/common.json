@@ -545,6 +545,11 @@
       "placeholder": "Search patient results...",
       "noResults": "No results found"
     },
+    "tabs": {
+      "beforeAfter": "Before and After",
+      "clinic": "Clinic Gallery",
+      "success": "Success Stories"
+    },
     "categories": {
       "sac-ekimi": "Hair Transplantation",
       "sakal-ekimi": "Beard Transplantation",

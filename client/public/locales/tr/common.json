@@ -513,6 +513,11 @@
       "placeholder": "Hasta sonuçlarında ara...",
       "noResults": "Sonuç bulunamadı"
     },
+    "tabs": {
+      "beforeAfter": "Öncesi ve Sonrası",
+      "clinic": "Klinik Görselleri",
+      "success": "Başarı Hikayeleri"
+    },
     "categories": {
       "sac-ekimi": "Saç Ekimi",
       "sakal-ekimi": "Sakal Ekimi",

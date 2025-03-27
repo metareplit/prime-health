@@ -94,13 +94,13 @@ export default function Gallery() {
               value="oncesi-sonrasi"
               className="relative rounded-full px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-primary data-[state=active]:text-white"
             >
-              Öncesi ve Sonrası
+              {t('gallery.tabs.beforeAfter')}
             </TabsTrigger>
             <TabsTrigger
               value="klinik"
               className="relative rounded-full px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-primary data-[state=active]:text-white"
             >
-              Klinik Görselleri
+              {t('gallery.tabs.clinic')}
             </TabsTrigger>
           </TabsList>
 
