@@ -26,16 +26,92 @@ const item = {
 };
 
 const ServiceCard = ({ service }: { service: Service }) => {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
+  const currentLang = i18n.language;
   // Fallback image for services that don't have an image
   const fallbackImage = "/images/services/primehealth1.png";
+
+  // Get the localized service name and description based on current language
+  const getLocalizedServiceName = () => {
+    if (currentLang === 'tr') return service.name;
+    if (currentLang === 'en' && t(`services.serviceItems.${service.id}.name`)) 
+      return t(`services.serviceItems.${service.id}.name`);
+    if (currentLang === 'ru' && t(`services.serviceItems.${service.id}.name`)) 
+      return t(`services.serviceItems.${service.id}.name`);
+    if (currentLang === 'ka' && t(`services.serviceItems.${service.id}.name`)) 
+      return t(`services.serviceItems.${service.id}.name`);
+    return service.name;
+  };
+
+  const getLocalizedServiceDescription = () => {
+    if (currentLang === 'tr') return service.description;
+    if (currentLang === 'en' && t(`services.serviceItems.${service.id}.description`)) 
+      return t(`services.serviceItems.${service.id}.description`);
+    if (currentLang === 'ru' && t(`services.serviceItems.${service.id}.description`)) 
+      return t(`services.serviceItems.${service.id}.description`);
+    if (currentLang === 'ka' && t(`services.serviceItems.${service.id}.description`)) 
+      return t(`services.serviceItems.${service.id}.description`);
+    return service.description;
+  };
+
+  const getLocalizedProcess = (index: number) => {
+    const defaultValue = service.process?.[index];
+    if (!defaultValue) return '';
+
+    if (currentLang === 'tr') return defaultValue;
+    if (currentLang !== 'tr' && t(`services.serviceItems.${service.id}.process.${index}`)) 
+      return t(`services.serviceItems.${service.id}.process.${index}`);
+    
+    // Fallback to translation based on process array
+    const translatedProcess = t(`services.serviceItems.${service.id}.process`);
+    if (translatedProcess && Array.isArray(translatedProcess) && translatedProcess[index]) {
+      return translatedProcess[index];
+    }
+    
+    return defaultValue;
+  };
+  
+  const getLocalizedBenefit = (index: number) => {
+    const defaultValue = service.benefits?.[index];
+    if (!defaultValue) return '';
+
+    if (currentLang === 'tr') return defaultValue;
+    if (currentLang !== 'tr' && t(`services.serviceItems.${service.id}.benefits.${index}`)) 
+      return t(`services.serviceItems.${service.id}.benefits.${index}`);
+    
+    return defaultValue;
+  };
+  
+  const getLocalizedFaq = (faq: string) => {
+    if (!faq) return { question: '', answer: '' };
+    
+    const [question, answer] = faq.split("|");
+    
+    if (currentLang === 'tr') return { question, answer };
+    
+    // Try to get translated FAQ
+    const faqIndex = service.faqs?.indexOf(faq);
+    if (faqIndex !== undefined && faqIndex >= 0) {
+      const translatedQuestion = t(`services.serviceItems.${service.id}.faqs.${faqIndex}.question`);
+      const translatedAnswer = t(`services.serviceItems.${service.id}.faqs.${faqIndex}.answer`);
+      
+      if (translatedQuestion && translatedAnswer) {
+        return { 
+          question: translatedQuestion, 
+          answer: translatedAnswer 
+        };
+      }
+    }
+    
+    return { question, answer };
+  };
 
   return (
     <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 relative">
       <div className="relative overflow-hidden aspect-video">
         <img
           src={service.imageUrl || fallbackImage}
-          alt={service.name}
+          alt={getLocalizedServiceName()}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -59,13 +135,13 @@ const ServiceCard = ({ service }: { service: Service }) => {
 
       <CardHeader className="flex-grow">
         <CardTitle className="text-xl font-bold flex items-center justify-between">
-          {service.name}
+          {getLocalizedServiceName()}
           <span className="flex items-center text-sm font-normal text-primary">
             <Clock className="h-4 w-4 mr-1" />
             {service.duration}
           </span>
         </CardTitle>
-        <p className="text-gray-600 text-sm mt-2">{service.description}</p>
+        <p className="text-gray-600 text-sm mt-2">{getLocalizedServiceDescription()}</p>
       </CardHeader>
 
       <CardContent>
@@ -100,7 +176,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
                     <span className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs flex-shrink-0">
                       {idx + 1}
                     </span>
-                    <span className="text-gray-600">{step}</span>
+                    <span className="text-gray-600">{getLocalizedProcess(idx)}</span>
                   </motion.li>
                 ))}
               </ol>
@@ -121,7 +197,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
                   className="flex items-center gap-2 text-sm p-2 rounded hover:bg-gray-50"
                 >
                   <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-600">{benefit}</span>
+                  <span className="text-gray-600">{getLocalizedBenefit(idx)}</span>
                 </motion.li>
               ))}
             </motion.ul>
@@ -130,7 +206,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
           <TabsContent value="faq" className="mt-2">
             <Accordion type="single" collapsible>
               {service.faqs?.slice(0, 3).map((faq, idx) => {
-                const [question, answer] = faq.split("|");
+                const localizedFaq = getLocalizedFaq(faq);
                 return (
                   <AccordionItem 
                     key={idx} 
@@ -138,10 +214,10 @@ const ServiceCard = ({ service }: { service: Service }) => {
                     className="border-b last:border-0"
                   >
                     <AccordionTrigger className="text-sm hover:text-primary transition-colors">
-                      {question}
+                      {localizedFaq.question}
                     </AccordionTrigger>
                     <AccordionContent className="text-sm text-gray-600">
-                      {answer}
+                      {localizedFaq.answer}
                     </AccordionContent>
                   </AccordionItem>
                 );
