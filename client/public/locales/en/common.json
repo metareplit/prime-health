@@ -601,7 +601,8 @@
       "videoNotSupported": "Your browser does not support video playback."
     },
     "buttons": {
-      "consult": "Free Consultation"
+      "consult": "Free Consultation",
+      "share": "Share"
     },
     "caseDescriptions": {
       "sixMonthResult": "6 month result",

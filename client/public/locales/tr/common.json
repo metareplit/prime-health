@@ -569,7 +569,8 @@
       "videoNotSupported": "Tarayıcınız video oynatmayı desteklemiyor."
     },
     "buttons": {
-      "consult": "Ücretsiz Konsültasyon"
+      "consult": "Ücretsiz Konsültasyon",
+      "share": "Paylaş"
     },
     "caseDescriptions": {
       "sixMonthResult": "6 ay sonrası sonuç",
