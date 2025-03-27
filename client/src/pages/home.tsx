@@ -79,7 +79,7 @@ const faqItems = [
 
 export default function Home() {
   const { t } = useTranslation('common');
-  const { data: services, isLoading } = useQuery({
+  const { data: services = [], isLoading } = useQuery<any[]>({
     queryKey: ["/api/services"],
   });
 

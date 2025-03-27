@@ -15,6 +15,20 @@
     "press": "Press",
     "brand": "Prime Health"
   },
+  "slider": {
+    "title1": "Expert Clinic in Hair Transplantation and Aesthetic Treatments",
+    "description1": "Achieve the best results with our modern technology and expert team",
+    "button1": "Free Consultation",
+    "title2": "Natural and Permanent Results",
+    "description2": "Guaranteed results with DHI and Sapphire FUE techniques",
+    "button2": "View Results",
+    "title3": "Professional Team",
+    "description3": "Expert doctors and experienced medical staff",
+    "button3": "Meet Our Team",
+    "title4": "Modern Clinic",
+    "description4": "State-of-the-art equipment and comfortable environment",
+    "button4": "Virtual Tour"
+  },
   "auth": {
     "login": {
       "title": "Login",

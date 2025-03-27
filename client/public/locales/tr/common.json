@@ -14,6 +14,20 @@
     "press": "Basında Biz",
     "brand": "Prime Health"
   },
+  "slider": {
+    "title1": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
+    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
+    "button1": "Ücretsiz Konsültasyon",
+    "title2": "Doğal ve Kalıcı Sonuçlar",
+    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
+    "button2": "Sonuçları Görün",
+    "title3": "Profesyonel Kadro",
+    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
+    "button3": "Ekibimizle Tanışın",
+    "title4": "Modern Klinik",
+    "description4": "Son teknoloji ekipman ve konforlu ortam",
+    "button4": "Sanal Tur"
+  },
   "header": {
     "menu": {
       "open": "Menüyü aç",
