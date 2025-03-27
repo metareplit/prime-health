@@ -537,89 +537,89 @@
     }
   },
   "gallery": {
-    "title": "Hasta Sonuçları Galerisi",
-    "subtitle": "Profesyonel saç ekimi kliniğimizde gerçekleştirilen operasyonların öncesi ve sonrası sonuçları",
+    "title": "Галерея Результатов Пациентов",
+    "subtitle": "Результаты до и после операций, проведенных в нашей профессиональной клинике трансплантации волос",
     "search": {
-      "placeholder": "Hasta sonuçlarında ara...",
-      "noResults": "Sonuç bulunamadı"
+      "placeholder": "Поиск результатов пациентов...",
+      "noResults": "Результаты не найдены"
     },
     "tabs": {
-      "beforeAfter": "Öncesi ve Sonrası",
-      "clinic": "Klinik Görselleri",
-      "videos": "Klinik Videoları",
-      "success": "Başarı Hikayeleri"
+      "beforeAfter": "До и После",
+      "clinic": "Изображения Клиники",
+      "videos": "Видео Клиники",
+      "success": "Истории Успеха"
     },
     "videos": {
-      "title": "Klinik Video Galerisi",
-      "subtitle": "Kliniğimizin operasyon anlarından görüntüler ve tedavi süreçleri",
+      "title": "Галерея Видео Клиники",
+      "subtitle": "Видео моментов операций и процессов лечения в нашей клинике",
       "operationProcess": {
-        "title": "Operasyon Süreci",
-        "description": "Saç ekimi operasyonunun aşamalarını gösteren video"
+        "title": "Процесс Операции",
+        "description": "Видео, показывающее этапы операции по трансплантации волос"
       },
       "hairlineDesign": {
-        "title": "Saç Çizgisi Tasarımı",
-        "description": "Kişiye özel saç çizgisi tasarlama süreci"
+        "title": "Дизайн Линии Волос",
+        "description": "Процесс создания индивидуальной линии волос"
       },
       "graftExtraction": {
-        "title": "Greft Çıkarım İşlemi",
-        "description": "Donör bölgeden greftlerin toplanma süreci"
+        "title": "Процесс Извлечения Графтов",
+        "description": "Процесс сбора графтов из донорской зоны"
       },
       "implantationProcess": {
-        "title": "Ekim İşlemi",
-        "description": "Saç greftlerinin yerleştirilme tekniği ve süreci"
+        "title": "Процесс Имплантации",
+        "description": "Техника и процесс размещения волосяных графтов"
       },
       "clinicTour": {
-        "title": "Klinik Turu",
-        "description": "Modern kliniğimizin tüm alanlarını keşfedin"
+        "title": "Тур по Клинике",
+        "description": "Исследуйте все зоны нашей современной клиники"
       },
       "patientExperience": {
-        "title": "Hasta Deneyimi",
-        "description": "Hastalarımızın tüm süreç boyunca deneyimleri"
+        "title": "Опыт Пациентов",
+        "description": "Опыт наших пациентов на протяжении всего процесса"
       },
       "teamAtWork": {
-        "title": "Çalışan Ekibimiz",
-        "description": "Profesyonel ekibimizin çalışma anları"
+        "title": "Наша Команда в Работе",
+        "description": "Рабочие моменты нашей профессиональной команды"
       },
       "aftercareProcess": {
-        "title": "Sonrası Bakım Süreci",
-        "description": "Operasyon sonrası bakım talimatları ve iyileşme süreci"
+        "title": "Процесс Послеоперационного Ухода",
+        "description": "Инструкции по послеоперационному уходу и процесс восстановления"
       },
       "dhiTechnique": {
-        "title": "DHI Tekniği",
-        "description": "DHI (Direct Hair Implantation) tekniğinin uygulanması"
+        "title": "Техника DHI",
+        "description": "Применение техники DHI (Direct Hair Implantation)"
       },
       "fueTechnique": {
-        "title": "FUE Tekniği",
-        "description": "FUE (Follicular Unit Extraction) tekniğinin gösterimi"
+        "title": "Техника FUE",
+        "description": "Демонстрация техники FUE (Follicular Unit Extraction)"
       }
     },
     "labels": {
-      "photo": "Fotoğraf",
-      "video": "Video",
-      "videoNotSupported": "Tarayıcınız video oynatmayı desteklemiyor."
+      "photo": "Фото",
+      "video": "Видео",
+      "videoNotSupported": "Ваш браузер не поддерживает воспроизведение видео."
     },
     "buttons": {
-      "consult": "Ücretsiz Konsültasyon",
-      "share": "Paylaş"
+      "consult": "Бесплатная Консультация",
+      "share": "Поделиться"
     },
     "caseDescriptions": {
-      "sixMonthResult": "6 ay sonrası sonuç",
-      "eightMonthResult": "8 ay sonrası sonuç",
-      "twelveMonthResult": "12 ay sonrası sonuç"
+      "sixMonthResult": "Результат через 6 месяцев",
+      "eightMonthResult": "Результат через 8 месяцев",
+      "twelveMonthResult": "Результат через 12 месяцев"
     },
     "techniques": {
-      "safirFUE": "Safir FUE",
+      "safirFUE": "Сапфировый FUE",
       "dhi": "DHI"
     },
     "durations": {
-      "sixHours": "6 saat",
-      "sevenHours": "7 saat",
-      "eightHours": "8 saat"
+      "sixHours": "6 часов",
+      "sevenHours": "7 часов",
+      "eightHours": "8 часов"
     },
     "satisfactions": {
-      "satisfied": "Memnun",
-      "verySatisfied": "Çok memnun",
-      "extremelySatisfied": "Son derece memnun"
+      "satisfied": "Удовлетворен",
+      "verySatisfied": "Очень удовлетворен",
+      "extremelySatisfied": "Чрезвычайно удовлетворен"
     },
     "clinic": {
       "hairTransplantProcedure": {
