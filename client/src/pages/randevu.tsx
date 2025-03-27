@@ -34,12 +34,13 @@ export default function Appointment() {
   const { t } = useTranslation('common');
   const [date, setDate] = useState<Date | undefined>(new Date());
   const { sendSMSMutation } = useNotifications();
-  const { user } = useAuth();
+  // Remove user from Auth since our current AuthContext doesn't have it
+  // const { user } = useAuth();
 
   const form = useForm<AppointmentFormData>({
     resolver: zodResolver(appointmentSchema),
     defaultValues: {
-      name: user ? `${user.firstName} ${user.lastName}` : '',
+      name: '',
       phone: '',
       age: '',
       medicalHistory: '',

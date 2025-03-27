@@ -224,8 +224,8 @@ export default function Products() {
           return product.name === key;
         });
         
-        if (nameObj && nameObj[1][currentLanguage]) {
-          productName = nameObj[1][currentLanguage];
+        if (nameObj && nameObj[1] && currentLanguage in nameObj[1]) {
+          productName = nameObj[1][currentLanguage as keyof typeof nameObj[1]];
         }
         
         // Ürün açıklamasını içeren bir JSON objesi varsa o açıklamayı kullan, aksi takdirde originalini kullan
@@ -234,8 +234,8 @@ export default function Products() {
           return product.description === key;
         });
         
-        if (descObj && descObj[1][currentLanguage]) {
-          productDescription = descObj[1][currentLanguage];
+        if (descObj && descObj[1] && currentLanguage in descObj[1]) {
+          productDescription = descObj[1][currentLanguage as keyof typeof descObj[1]];
         }
         
         return {

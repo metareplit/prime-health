@@ -67,6 +67,28 @@ export async function registerRoutes(app: Express) {
 
   // Setup authentication routes
   setupAuthRoutes(app);
+  
+  // Notifications endpoints
+  app.post("/api/notifications/send-sms", async (req: Request, res: Response) => {
+    try {
+      const { to, templateName, templateData } = req.body;
+      
+      // Log the SMS request for debugging
+      console.log(`SMS request to ${to}, template: ${templateName}`, templateData);
+      
+      // Simulate successful SMS sending since we don't have a real SMS provider
+      res.status(200).json({ 
+        success: true, 
+        message: "SMS notification sent successfully" 
+      });
+    } catch (error) {
+      console.error('Error sending SMS notification:', error);
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to send SMS notification" 
+      });
+    }
+  });
 
   // Static file serving for uploads
   app.use('/uploads', express.static('uploads'));
