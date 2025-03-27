@@ -193,14 +193,28 @@
         "description": "Kolay ulaşılabilir merkezi lokasyon"
       }
     },
+    "doctors": {
+      "title": "Uzman Doktorlarımız",
+      "subtitle": "Alanında uzman ve deneyimli doktor kadromuz",
+      "viewProfile": "Profili İncele",
+      "specialties": "Uzmanlık Alanları",
+      "experience": "Deneyim",
+      "education": "Eğitim",
+      "languages": "Konuştuğu Diller"
+    },
     "services": {
       "title": "Hizmetlerimiz",
       "subtitle": "Size sunduğumuz tedavi seçenekleri",
-      "viewAll": "Tüm Hizmetleri Gör"
+      "viewAll": "Tüm Hizmetleri Gör",
+      "featured": "Öne Çıkan",
+      "learnMore": "Detaylı Bilgi",
+      "bookNow": "Randevu Al"
     },
     "testimonials": {
       "title": "Hasta Yorumları",
-      "subtitle": "Başarı hikayelerimiz ve mutlu hastalarımız"
+      "subtitle": "Başarı hikayelerimiz ve mutlu hastalarımız",
+      "verified": "Doğrulanmış Hasta",
+      "readMore": "Devamını Oku"
     },
     "stats": {
       "title": "Rakamlarla Biz",
@@ -667,15 +681,12 @@
     "title1": "Uzman Saç Ekimi ve Estetik Tedaviler",
     "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
     "button1": "Ücretsiz Danışmanlık",
-
     "title2": "Doğal ve Kalıcı Sonuçlar",
     "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
     "button2": "Sonuçları Görün",
-
     "title3": "Profesyonel Ekip",
     "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
     "button3": "Ekibimizle Tanışın",
-
     "title4": "Modern Klinik",
     "description4": "Son teknoloji donanım ve konforlu ortam",
     "button4": "Sanal Tur"

@@ -9,6 +9,7 @@ import { Shield, Users, Stethoscope, Clock, Award, HeartHandshake, Building2, Ma
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useTranslation } from "react-i18next";
+import Features from "@/components/home/features";
 
 const features = [
   {
@@ -87,46 +88,10 @@ export default function Home() {
       {/* Hero Slider Section */}
       <HeroSlider />
 
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-gradient-to-b from-primary/5 to-transparent">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              {t('home.features.title')}
-            </h2>
-            <p className="text-lg text-gray-600">
-              {t('home.features.subtitle')}
-            </p>
-          </motion.div>
+      {/* Features Section */}
+      <Features />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
-              >
-                <div className="mb-4 inline-block p-3 bg-primary/10 rounded-lg">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{t(feature.titleKey)}</h3>
-                <p className="text-gray-600">{t(feature.descriptionKey)}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Doctor Section - Moved here after Why Choose Us section */}
+      {/* Doctor Section */}
       <DoctorSection />
 
       {/* Services Section */}
@@ -153,10 +118,10 @@ export default function Home() {
             className="text-center max-w-3xl mx-auto mb-16"
           >
             <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
-              {t('home.hero.title')}
+              {t('home.services.title')}
             </h1>
             <p className="text-lg text-gray-600">
-              {t('home.hero.subtitle')}
+              {t('home.services.subtitle')}
             </p>
           </motion.div>
 
@@ -194,7 +159,7 @@ export default function Home() {
                     <div className="absolute bottom-4 left-4">
                       {service.featured && (
                         <Badge variant="secondary" className="bg-white/90 text-primary hover:bg-white">
-                          Öne Çıkan
+                          {t('home.services.featured')}
                         </Badge>
                       )}
                     </div>
@@ -226,7 +191,7 @@ export default function Home() {
                           variant="ghost"
                           className="w-full group/btn hover:bg-primary hover:text-white"
                         >
-                          <span>{t('buttons.learnMore')}</span>
+                          <span>{t('home.services.learnMore')}</span>
                           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                         </Button>
                       </Link>

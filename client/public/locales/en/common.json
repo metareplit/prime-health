@@ -117,14 +117,28 @@
         "description": "Easily accessible central location"
       }
     },
+    "doctors": {
+      "title": "Our Expert Doctors",
+      "subtitle": "Expert and experienced medical team",
+      "viewProfile": "View Profile",
+      "specialties": "Specialties",
+      "experience": "Experience",
+      "education": "Education",
+      "languages": "Languages Spoken"
+    },
     "services": {
       "title": "Our Services",
       "subtitle": "Treatment options we offer",
-      "viewAll": "View All Services"
+      "viewAll": "View All Services",
+      "featured": "Featured",
+      "learnMore": "Learn More",
+      "bookNow": "Book Appointment"
     },
     "testimonials": {
       "title": "Patient Reviews",
-      "subtitle": "Our success stories and happy patients"
+      "subtitle": "Our success stories and happy patients",
+      "verified": "Verified Patient",
+      "readMore": "Read More"
     },
     "stats": {
       "title": "Our Numbers",
