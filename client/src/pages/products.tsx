@@ -9,59 +9,21 @@ import { useState, useEffect } from "react";
 import { Metadata } from "@/components/ui/metadata";
 import { useQuery } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
-const categories = [
-  {
-    id: "all",
-    title: "Tüm Ürünler",
-    shortTitle: "Tümü",
-    description: "Tüm VitHair ürünleri",
-    icon: Package,
-    color: "bg-purple-500"
-  },
-  {
-    id: "monthly-sets",
-    title: "Monthly Sets",
-    shortTitle: "Setler",
-    description: "Aylık bakım setleri",
-    icon: Package,
-    color: "bg-blue-500"
-  },
-  {
-    id: "shampoo-and-foam",
-    title: "Shampoo and Foam",
-    shortTitle: "Şampuan",
-    description: "Şampuan ve köpük ürünleri",
-    icon: Package,
-    color: "bg-green-500"
-  },
-  {
-    id: "spray",
-    title: "Spray",
-    shortTitle: "Sprey",
-    description: "Sprey ürünleri",
-    icon: Sprout,
-    color: "bg-yellow-500"
-  },
-  {
-    id: "tablet",
-    title: "Tablet",
-    shortTitle: "Tablet",
-    description: "Tablet ürünleri",
-    icon: Pill,
-    color: "bg-red-500"
-  },
-  {
-    id: "mesotherapy-and-prp",
-    title: "Mesotherapy and PRP",
-    shortTitle: "Mezoterapi",
-    description: "Mezoterapi ve PRP ürünleri",
-    icon: FlaskConical,
-    color: "bg-indigo-500"
-  }
-];
+const getCategoryIcons = () => {
+  return {
+    "all": Package,
+    "monthly-sets": Package,
+    "shampoo-and-foam": Package,
+    "spray": Sprout,
+    "tablet": Pill,
+    "mesotherapy-and-prp": FlaskConical
+  };
+};
 
 export default function Products() {
+  const { t } = useTranslation('common');
   const [searchTerm, setSearchTerm] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -72,6 +34,58 @@ export default function Products() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  
+  // Kategori listesini dile göre oluştur
+  const categories = [
+    {
+      id: "all",
+      title: t('products.categories.all.title'),
+      shortTitle: t('products.categories.all.shortTitle'),
+      description: t('products.categories.all.description'),
+      icon: getCategoryIcons().all,
+      color: "bg-purple-500"
+    },
+    {
+      id: "monthly-sets",
+      title: t('products.categories.monthlySets.title'),
+      shortTitle: t('products.categories.monthlySets.shortTitle'),
+      description: t('products.categories.monthlySets.description'),
+      icon: getCategoryIcons()["monthly-sets"],
+      color: "bg-blue-500"
+    },
+    {
+      id: "shampoo-and-foam",
+      title: t('products.categories.shampooAndFoam.title'),
+      shortTitle: t('products.categories.shampooAndFoam.shortTitle'),
+      description: t('products.categories.shampooAndFoam.description'),
+      icon: getCategoryIcons()["shampoo-and-foam"],
+      color: "bg-green-500"
+    },
+    {
+      id: "spray",
+      title: t('products.categories.spray.title'),
+      shortTitle: t('products.categories.spray.shortTitle'),
+      description: t('products.categories.spray.description'),
+      icon: getCategoryIcons().spray,
+      color: "bg-yellow-500"
+    },
+    {
+      id: "tablet",
+      title: t('products.categories.tablet.title'),
+      shortTitle: t('products.categories.tablet.shortTitle'),
+      description: t('products.categories.tablet.description'),
+      icon: getCategoryIcons().tablet,
+      color: "bg-red-500"
+    },
+    {
+      id: "mesotherapy-and-prp",
+      title: t('products.categories.mesotherapyAndPrp.title'),
+      shortTitle: t('products.categories.mesotherapyAndPrp.shortTitle'),
+      description: t('products.categories.mesotherapyAndPrp.description'),
+      icon: getCategoryIcons()["mesotherapy-and-prp"],
+      color: "bg-indigo-500"
+    }
+  ];
 
   const { data: products = [], isLoading } = useQuery({
     queryKey: ['/api/products'],
@@ -105,8 +119,8 @@ export default function Products() {
   return (
     <div className="min-h-screen bg-background">
       <Metadata
-        title="VitHair Products"
-        description="VitHair profesyonel saç bakım ürünleri"
+        title={t('products.title')}
+        description={t('products.subtitle')}
         keywords="vithair, saç bakım, şampuan, sprey, tablet, mezoterapi"
       />
 
@@ -123,7 +137,7 @@ export default function Products() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
-                placeholder="Ürün ara..."
+                placeholder={t('products.search')}
                 className="pl-10 h-12"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -185,6 +199,8 @@ export default function Products() {
 }
 
 function ProductCard({ product }: { product: any }) {
+  const { t } = useTranslation('common');
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -241,7 +257,7 @@ function ProductCard({ product }: { product: any }) {
               {product.benefits && product.benefits.length > 0 && (
                 <div>
                   <h4 className="font-semibold mb-2 md:mb-3 text-base md:text-lg">
-                    Faydaları
+                    {t('products.product.benefits')}
                   </h4>
                   <ul className="grid gap-2">
                     {product.benefits.map((benefit: string, idx: number) => (
@@ -257,7 +273,7 @@ function ProductCard({ product }: { product: any }) {
               {product.usage_instructions && product.usage_instructions.length > 0 && (
                 <div>
                   <h4 className="font-semibold mb-2 md:mb-3 text-base md:text-lg">
-                    Kullanım Talimatları
+                    {t('products.product.instructions')}
                   </h4>
                   <ul className="grid gap-2">
                     {product.usage_instructions.map((instruction: string, idx: number) => (

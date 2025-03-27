@@ -1,686 +1,963 @@
 {
   "nav": {
-    "home": "მთავარი",
-    "services": "სერვისები",
-    "about": "ჩვენს შესახებ",
-    "contact": "კონტაქტი",
-    "blog": "ბლოგი",
-    "appointments": "ჯავშანი",
-    "gallery": "გალერეა",
-    "products": "პროდუქტები",
-    "patientPortal": "პაციენტის პორტალი",
-    "userMenu": "მომხმარებლის მენიუ",
-    "menu": "მენიუ"
-  },
-  
-  "gallery": {
-    "title": "პაციენტების შედეგების გალერეა",
-    "subtitle": "სურათები მკურნალობამდე და შემდეგ ჩვენი პროფესიონალური თმის გადანერგვის კლინიკაში",
-    "tabs": {
-      "beforeAfter": "მკურნალობამდე და შემდეგ",
-      "clinic": "კლინიკის გალერეა",
-      "videos": "კლინიკის ვიდეოები",
-      "success": "წარმატების ისტორიები"
-    },
-    "videos": {
-      "title": "კლინიკის ვიდეო გალერეა",
-      "subtitle": "ვიდეოები ჩვენი კლინიკიდან, რომლებიც აჩვენებენ ოპერაციებს და მკურნალობის პროცესებს",
-      "operationProcess": {
-        "title": "ოპერაციის პროცესი",
-        "description": "ვიდეო, რომელიც აჩვენებს თმის გადანერგვის ოპერაციის ეტაპებს"
-      },
-      "hairlineDesign": {
-        "title": "თმის ხაზის დიზაინი",
-        "description": "ინდივიდუალური თმის ხაზის დიზაინის პროცესი"
-      },
-      "graftExtraction": {
-        "title": "გრაფტების ექსტრაქციის პროცესი",
-        "description": "დონორი უბნიდან გრაფტების შეგროვების პროცესი"
-      },
-      "implantationProcess": {
-        "title": "იმპლანტაციის პროცესი",
-        "description": "თმის გრაფტების იმპლანტაციის ტექნიკა და პროცესი"
-      },
-      "clinicTour": {
-        "title": "კლინიკის ტური",
-        "description": "შეისწავლეთ ჩვენი თანამედროვე კლინიკის ყველა ზონა"
-      },
-      "patientExperience": {
-        "title": "პაციენტების გამოცდილება",
-        "description": "ჩვენი პაციენტების გამოცდილება მთელი პროცესის განმავლობაში"
-      },
-      "teamAtWork": {
-        "title": "გუნდი მუშაობაში",
-        "description": "ჩვენი პროფესიონალური გუნდი სამუშაო მომენტებში"
-      },
-      "aftercareProcess": {
-        "title": "პოსტოპერაციული მოვლის პროცესი",
-        "description": "ოპერაციის შემდგომი მოვლის ინსტრუქციები და გამოჯანმრთელების პროცესი"
-      },
-      "dhiTechnique": {
-        "title": "DHI ტექნიკა",
-        "description": "DHI (პირდაპირი თმის იმპლანტაცია) ტექნიკის გამოყენება"
-      },
-      "fueTechnique": {
-        "title": "FUE ტექნიკა",
-        "description": "FUE (ფოლიკულარული ერთეულის ექსტრაქცია) ტექნიკის დემონსტრაცია"
-      }
-    },
-    "caseDescriptions": {
-      "sixMonthResult": "6 თვის შედეგი",
-      "eightMonthResult": "8 თვის შედეგი",
-      "twelveMonthResult": "12 თვის შედეგი"
-    },
-    "techniques": {
-      "safirFUE": "საფირის FUE",
-      "dhi": "DHI",
-      "classicFUE": "კლასიკური FUE"
-    },
-    "durations": {
-      "sixHours": "6 საათი",
-      "sevenHours": "7 საათი",
-      "eightHours": "8 საათი"
-    },
-    "satisfactions": {
-      "verySatisfied": "ძალიან კმაყოფილი",
-      "satisfied": "კმაყოფილი",
-      "extremelySatisfied": "უკიდურესად კმაყოფილი"
-    },
-    "categories": {
-      "sac-ekimi": "თმის გადანერგვა",
-      "sakal-ekimi": "წვერის გადანერგვა",
-      "kas-ekimi": "წარბების გადანერგვა"
-    },
-    "patientDetails": {
-      "title": "პაციენტის ინფორმაცია",
-      "before": "მკურნალობამდე",
-      "after": "მკურნალობის შემდეგ",
-      "age": "ასაკი",
-      "gender": "სქესი",
-      "problemArea": "პრობლემური ზონა",
-      "diagnosis": "დიაგნოზი",
-      "hairLossStage": "თმის ცვენის სტადია"
-    },
-    "procedureDetails": {
-      "title": "პროცედურის დეტალები",
-      "technique": "ტექნიკა",
-      "grafts": "გრაფტების რაოდენობა",
-      "duration": "ხანგრძლივობა",
-      "anesthesia": "ანესთეზია",
-      "recoveryTime": "აღდგენის პერიოდი"
-    },
-    "results": {
-      "title": "შედეგები",
-      "satisfaction": "კმაყოფილება",
-      "density": "სიმკვრივე",
-      "survivalRate": "გრაფტების გადარჩენის პროცენტი",
-      "naturalness": "ბუნებრიობა",
-      "finalResult": "საბოლოო შედეგი"
-    },
-    "testimonial": {
-      "title": "პაციენტის შეფასება",
-      "doctorNote": "ექიმის შენიშვნა"
-    },
-    "buttons": {
-      "share": "გაზიარება",
-      "consult": "კონსულტაციის მიღება",
-      "view3d": "3D ხედი",
-      "view2d": "2D ხედი"
-    },
-    "filters": {
-      "all": "ყველა",
-      "latest": "უახლესი",
-      "popular": "პოპულარული"
-    },
-    "clinic": {
-      "hairTransplantProcedure": {
-        "title": "თმის გადანერგვის პროცედურა",
-        "description": "თმის გადანერგვის ოპერაცია ჩვენი ექსპერტების გუნდით"
-      },
-      "operationMoment": {
-        "title": "ოპერაციის მომენტი",
-        "description": "თმის გადანერგვის პროცედურა თანამედროვე აღჭურვილობით"
-      },
-      "clinicWork": {
-        "title": "კლინიკის მუშაობა",
-        "description": "ჩვენი ექსპერტი ექიმები ოპერაციის დროს"
-      },
-      "hairTransplantTechniques": {
-        "title": "თმის გადანერგვის ტექნიკები",
-        "description": "თმის გადანერგვის აპლიკაცია ზუსტი პროცედურებით"
-      },
-      "operatingRoom": {
-        "title": "საოპერაციო ოთახი",
-        "description": "თმის გადანერგვის პროცედურა ჩვენს თანამედროვე საოპერაციო ოთახში"
-      },
-      "teamWork": {
-        "title": "გუნდური მუშაობა",
-        "description": "ჩვენი პროფესიონალური გუნდი მუშაობის დროს"
-      },
-      "expertDoctors": {
-        "title": "ჩვენი ექსპერტი ექიმები",
-        "description": "ჩვენი გამოცდილი ექიმები ოპერაციის დროს"
-      },
-      "hairlineDesign": {
-        "title": "თმის ხაზის დიზაინი",
-        "description": "პერსონალიზებული თმის ხაზის დიზაინი და აპლიკაცია"
-      },
-      "operationDetails": {
-        "title": "ოპერაციის დეტალები",
-        "description": "გულმოდგინედ ჩატარებული თმის გადანერგვის ოპერაცია"
-      },
-      "microFUETechnique": {
-        "title": "მიკრო FUE ტექნიკა",
-        "description": "თმის გადანერგვის აპლიკაცია მიკრო FUE ტექნიკით"
-      },
-      "surgicalMagnification": {
-        "title": "ქირურგიული გადიდება",
-        "description": "ზუსტი პროცედურა მაღალი გადიდების მოწყობილობებით"
-      },
-      "operationPreparation": {
-        "title": "ოპერაციისთვის მომზადება",
-        "description": "ოპერაციისთვის მომზადება სტერილურ გარემოში"
-      },
-      "precisionTechnique": {
-        "title": "ზუსტი იმპლანტაციის ტექნიკა",
-        "description": "ზუსტი იმპლანტაცია ოპტიმალური კუთხით და სიღრმით თითოეული გრაფტისთვის"
-      },
-      "professionalCare": {
-        "title": "პროფესიონალური მოვლა",
-        "description": "პროფესიონალური პაციენტის მოვლა ჩვენი გამოცდილი სამედიცინო გუნდით"
-      },
-      "modernTreatment": {
-        "title": "თანამედროვე მკურნალობა",
-        "description": "თანამედროვე თმის გადანერგვის ტექნიკები და აღჭურვილობა"
-      },
-      "treatmentPreparation": {
-        "title": "მკურნალობისთვის მომზადება",
-        "description": "მოსამზადებელი ფაზა თმის გადანერგვამდე"
-      },
-      "detailedAnalysis": {
-        "title": "დეტალური ანალიზი",
-        "description": "პერსონალიზებული თმის ანალიზი და დაგეგმვა"
-      },
-      "clinicEnvironment": {
-        "title": "კლინიკის გარემო",
-        "description": "ჩვენი სტერილური და კომფორტული სამკურნალო ზონები"
-      },
-      "advancedEquipment": {
-        "title": "მოწინავე ტექნოლოგია",
-        "description": "თანამედროვე თმის გადანერგვის მოწყობილობები"
-      },
-      "patientConsultation": {
-        "title": "პაციენტის კონსულტაცია",
-        "description": "პროფესიონალური კონსულტაცია პირადი საჭიროებების შესაბამისად"
-      }
-    }
-  },
-
-  "auth": {
-    "login": "შესვლა",
-    "register": "რეგისტრაცია",
-    "logout": "გასვლა"
-  },
-  "buttons": {
-    "submit": "გაგზავნა",
-    "cancel": "გაუქმება",
-    "save": "შენახვა",
-    "continue": "გაგრძელება",
-    "back": "უკან",
-    "edit": "რედაქტირება",
-    "upload": "ატვირთვა",
-    "readMore": "მეტის ნახვა",
-    "learnMore": "მეტის გაგება",
-    "getStarted": "დაწყება",
-    "contactUs": "დაგვიკავშირდით",
-    "close": "დახურვა",
-    "delete": "წაშლა",
-    "appointment": "ჯავშნის შექმნა",
-    "confirm": "დადასტურება"
-  },
-  "validation": {
-    "required": "ეს ველი სავალდებულოა",
-    "email": "გთხოვთ შეიყვანოთ სწორი ელ-ფოსტა",
-    "phone": "გთხოვთ შეიყვანოთ სწორი ტელეფონის ნომერი",
-    "minLength": "გთხოვთ შეიყვანოთ მინიმუმ {{count}} სიმბოლო",
-    "maxLength": "გთხოვთ შეიყვანოთ მაქსიმუმ {{count}} სიმბოლო"
-  },
-  "blog": {
-    "title": "თმის გადანერგვისა და ესთეტიკის ბლოგი",
-    "subtitle": "უახლესი ინფორმაცია, მკურნალობის პროცესები და წარმატების ისტორიები ჩვენი ექსპერტი გუნდისგან",
-    "search": "ბლოგის პოსტების ძიება...",
-    "categories": {
-      "all": "ყველა",
-      "hairTransplant": "თმის გადანერგვა",
-      "beardTransplant": "წვერის გადანერგვა",
-      "eyebrowTransplant": "წარბების გადანერგვა",
-      "aftercare": "მოვლა",
-      "treatment": "მკურნალობის პროცესი"
-    }
-  },
-  "patient": {
-    "dashboard": {
-      "title": "პაციენტის პორტალი",
-      "welcome": "მოგესალმებით! აქ შეგიძლიათ თვალი ადევნოთ თქვენს მკურნალობის პროცესს.",
-      "appointments": "ჯავშნები",
-      "upcomingAppointment": "მომავალი ჯავშანი",
-      "messages": "შეტყობინებები",
-      "unreadMessage": "წაუკითხავი შეტყობინება",
-      "images": "ჩემი სურათები",
-      "uploadImages": "მკურნალობის სურათები",
-      "profile": "ჩემი პროფილი",
-      "editProfile": "პროფილის ინფორმაცია",
-      "upcomingAppointments": "მომავალი ჯავშნები",
-      "details": "დეტალები",
-      "newMessage": "ახალი შეტყობინება",
-      "read": "წაკითხვა"
-    },
-    "images": {
-      "title": "ჩემი მკურნალობის სურათები",
-      "description": "თვალი ადევნეთ თქვენს პროგრესს მკურნალობის დროს. უსაფრთხოდ ატვირთეთ და მართეთ თქვენი სურათები მკურნალობამდე და შემდეგ.",
-      "uploadNew": "ახალი სურათის ატვირთვა",
-      "noImages": "თქვენ ჯერ არ აგიტვირთავთ სურათები.",
-      "uploadPrompt": "შეგიძლიათ ატვირთოთ სურათები მკურნალობის პროგრესის თვალყურის სადევნებლად.",
-      "view": "ნახვა",
-      "doctorFeedback": "ხელმისაწვდომია ექიმის უკუკავშირი"
-    },
-    "appointments": {
-      "createTitle": "ონლაინ ჯავშნის შექმნა",
-      "createDescription": "დაჯავშნეთ უფასო კონსულტაცია თქვენთვის მოსახერხებელ დროს. ჩვენი ექსპერტი ექიმები მოგაწვდიან დეტალურ ინფორმაციას თქვენი მკურნალობის პროცესის შესახებ.",
-      "selectDate": "აირჩიეთ თარიღი",
-      "appointmentDetails": "ჯავშნის დეტალები",
-      "selectedDate": "არჩეული თარიღი",
-      "createButton": "ჯავშნის შექმნა",
-      "contactNote": "* ჯავშნის დადასტურების შემდეგ, ჩვენი გუნდი დაგიკავშირდებათ ყველაზე შესაფერისი დროის დასადგენად."
-    }
+    "home": "Ana Sayfa",
+    "services": "Hizmetler",
+    "gallery": "Galeri",
+    "products": "Ürünler",
+    "blog": "Blog",
+    "contact": "İletişim",
+    "appointments": "Randevu Al",
+    "patientPortal": "Hasta Portalı",
+    "userMenu": "Kullanıcı Menüsü",
+    "menu": "Menü",
+    "doctors": "Doktorlarımız",
+    "press": "Basında Biz",
+    "brand": "Prime Health"
   },
   "slider": {
-    "title1": "თმის გადანერგვისა და ესთეტიკის ექსპერტი კლინიკა",
-    "description1": "საუკეთესო შედეგები თანამედროვე ტექნოლოგიებითა და ჩვენი ექსპერტი გუნდით",
-    "button1": "უფასო კონსულტაცია",
-    "title2": "ბუნებრივი და მუდმივი შედეგები",
-    "description2": "DHI და Sapphire FUE ტექნიკები გარანტირებული შედეგებით",
-    "button2": "ნახეთ შედეგები",
-    "title3": "პროფესიონალური გუნდი",
-    "description3": "ექსპერტი ექიმები და გამოცდილი სამედიცინო პერსონალი",
-    "button3": "გაიცანით ჩვენი გუნდი",
-    "title4": "თანამედროვე კლინიკა",
-    "description4": "უახლესი აღჭურვილობა და კომფორტული გარემო",
-    "button4": "ვირტუალური ტური",
-    "title5": "გაუმჯობესებული კანის მკურნალობა",
-    "description5": "ინდივიდუალური ინოვაციური კანის მოვლის გადაწყვეტილებები",
-    "button5": "აღმოაჩინეთ მკურნალობები"
+    "title1": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
+    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
+    "button1": "Ücretsiz Konsültasyon",
+    "title2": "Doğal ve Kalıcı Sonuçlar",
+    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
+    "button2": "Sonuçları Görün",
+    "title3": "Profesyonel Kadro",
+    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
+    "button3": "Ekibimizle Tanışın",
+    "title4": "Modern Klinik",
+    "description4": "Son teknoloji ekipman ve konforlu ortam",
+    "button4": "Sanal Tur"
+  },
+  "header": {
+    "menu": {
+      "open": "Menüyü aç",
+      "close": "Menüyü kapat",
+      "main": "Ana menü",
+      "user": "Kullanıcı menüsü"
+    },
+    "search": {
+      "placeholder": "Ara...",
+      "button": "Ara",
+      "noResults": "Sonuç bulunamadı"
+    },
+    "buttons": {
+      "appointment": "Randevu Al",
+      "consultation": "Ücretsiz Danışmanlık",
+      "contact": "İletişime Geç"
+    },
+    "userMenu": {
+      "profile": "Profilim",
+      "appointments": "Randevularım",
+      "dashboard": "Kontrol Paneli",
+      "settings": "Ayarlar",
+      "logout": "Çıkış Yap"
+    }
+  },
+  "ui": {
+    "dialog": {
+      "close": "Kapat"
+    },
+    "command": {
+      "search": "Ara...",
+      "empty": "Sonuç bulunamadı.",
+      "shortcut": "Kısayol"
+    },
+    "table": {
+      "empty": "Veri bulunamadı.",
+      "loading": "Yükleniyor...",
+      "previous": "Önceki",
+      "next": "Sonraki",
+      "rowsPerPage": "Sayfa başına satır:",
+      "of": "/",
+      "more": "Daha Fazla"
+    },
+    "form": {
+      "required": "Bu alan zorunludur",
+      "invalid": "Geçersiz değer",
+      "select": "Seçiniz"
+    },
+    "toast": {
+      "success": "Başarılı",
+      "error": "Hata",
+      "info": "Bilgi",
+      "warning": "Uyarı",
+      "close": "Kapat"
+    }
+  },
+  "buttons": {
+    "submit": "Gönder",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "continue": "Devam Et",
+    "back": "Geri",
+    "edit": "Düzenle",
+    "upload": "Yükle",
+    "readMore": "Devamını Oku",
+    "learnMore": "Daha Fazla Bilgi",
+    "getStarted": "Hemen Başla",
+    "contactUs": "Bize Ulaşın",
+    "close": "Kapat",
+    "delete": "Sil",
+    "appointment": "Randevu Al",
+    "confirm": "Onayla"
+  },
+  "products": {
+    "title": "Profesyonel Saç Bakım Ürünleri",
+    "subtitle": "Saç ekimi sonrası en iyi sonucu almak için özel olarak formüle edilmiş ürünler",
+    "search": "Ürün ara...",
+    "categories": {
+      "all": {
+        "title": "Tüm Ürünler",
+        "shortTitle": "Tümü",
+        "description": "Tüm VitHair ürünleri"
+      },
+      "monthlySets": {
+        "title": "Aylık Bakım Setleri",
+        "shortTitle": "Setler",
+        "description": "Aylık bakım setleri"
+      },
+      "shampooAndFoam": {
+        "title": "Şampuan ve Köpük",
+        "shortTitle": "Şampuan",
+        "description": "Şampuan ve köpük ürünleri"
+      },
+      "spray": {
+        "title": "Sprey",
+        "shortTitle": "Sprey",
+        "description": "Sprey ürünleri"
+      },
+      "tablet": {
+        "title": "Tablet",
+        "shortTitle": "Tablet",
+        "description": "Tablet ürünleri"
+      },
+      "mesotherapyAndPrp": {
+        "title": "Mezoterapi ve PRP",
+        "shortTitle": "Mezoterapi",
+        "description": "Mezoterapi ve PRP ürünleri"
+      },
+      "shampoos": {
+        "title": "Saç Bakım Şampuanları",
+        "description": "Saç ekimi sonrası özel olarak formüle edilmiş şampuanlar"
+      },
+      "serums": {
+        "title": "Saç Büyütme Serumları",
+        "description": "Saç büyümesini destekleyen özel serumlar"
+      },
+      "masks": {
+        "title": "Saç Bakım Maskeleri",
+        "description": "Yoğun bakım ve onarım sağlayan maskeler"
+      },
+      "vitamins": {
+        "title": "Saç Bakım Vitaminleri",
+        "description": "Saç sağlığını içten destekleyen vitamin takviyeleri"
+      },
+      "tonics": {
+        "title": "Saç Bakım Tonikleri",
+        "description": "Saç derisini canlandıran ve besleyen tonikler"
+      },
+      "creams": {
+        "title": "Saç Bakım Kremleri",
+        "description": "Günlük bakım ve nemlendirme için kremler"
+      }
+    },
+    "product": {
+      "ingredients": "İçerik Maddeleri",
+      "benefits": "Faydaları",
+      "instructions": "Kullanım Talimatları",
+      "warnings": "Uyarılar",
+      "hairTypes": {
+        "all": "Tüm Saç Tipleri",
+        "oily": "Yağlı",
+        "dry": "Kuru",
+        "normal": "Normal",
+        "mixed": "Karma",
+        "damaged": "Yıpranmış",
+        "sensitive": "Hassas",
+        "thin": "İnce Telli",
+        "thick": "Kalın Telli"
+      }
+    }
+  },
+  "auth": {
+    "login": "Giriş Yap",
+    "register": "Kayıt Ol",
+    "logout": "Çıkış Yap"
+  },
+  "validation": {
+    "required": "Bu alan zorunludur",
+    "email": "Geçerli bir e-posta adresi giriniz",
+    "phone": "Geçerli bir telefon numarası giriniz",
+    "minLength": "En az {{count}} karakter giriniz",
+    "maxLength": "En fazla {{count}} karakter giriniz",
+    "passwordMatch": "Şifreler eşleşmiyor",
+    "invalidDate": "Geçerli bir tarih giriniz",
+    "futureDate": "Gelecek bir tarih seçiniz",
+    "numeric": "Sadece sayı giriniz",
+    "url": "Geçerli bir URL giriniz"
+  },
+  "home": {
+    "hero": {
+      "title": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
+      "subtitle": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
+      "cta": "Ücretsiz Konsültasyon"
+    },
+    "services": {
+      "title": "Hizmetlerimiz",
+      "subtitle": "Uzman kadromuz ve modern teknolojimizle sizlere sunduğumuz kapsamlı tedavi seçenekleri"
+    },
+    "doctor": {
+      "title": "Dr. Ali Çalışkan",
+      "position": "Saç Ekim Uzmanı",
+      "description": "10 yılı aşkın deneyimi ile saç ekimi ve estetik cerrahi alanında uzmanlaşmış, binlerce başarılı operasyona imza atmış değerli bir hekimdir.",
+      "expert": "Uzman Hekim",
+      "experience": "10+ Yıl Deneyim",
+      "operations": "500+ Operasyon",
+      "results": "Başarılı Sonuçlar",
+      "appointment": "Hemen Randevu Oluştur"
+    },
+    "features": {
+      "title": "Neden Bizi Seçmelisiniz?",
+      "subtitle": "Size en iyi hizmeti sunmak için çalışıyoruz",
+      "expertise": {
+        "title": "Uzman Kadro",
+        "description": "Alanında uzman doktorlarımız ve deneyimli ekibimizle yanınızdayız"
+      },
+      "technology": {
+        "title": "Modern Teknoloji",
+        "description": "En son teknolojik cihazlar ve yöntemlerle tedavi"
+      },
+      "care": {
+        "title": "Kişisel Bakım",
+        "description": "Her hastaya özel tedavi planı ve sürekli takip"
+      },
+      "recovery": {
+        "title": "Hızlı İyileşme",
+        "description": "Minimal invaziv teknikler ile hızlı iyileşme süreci"
+      },
+      "guarantee": {
+        "title": "Garantili Sonuç",
+        "description": "Yüksek hasta memnuniyeti ve garantili sonuçlar"
+      },
+      "approach": {
+        "title": "Kişisel Yaklaşım",
+        "description": "Her hastaya özel tasarlanmış tedavi planı"
+      },
+      "clinic": {
+        "title": "Modern Klinik",
+        "description": "Tam donanımlı, konforlu klinik ortamı"
+      },
+      "location": {
+        "title": "Merkezi Konum",
+        "description": "Kolay ulaşılabilir merkezi lokasyon"
+      }
+    },
+    "doctors": {
+      "title": "Uzman Doktorlarımız",
+      "subtitle": "Alanında uzman ve deneyimli doktor kadromuz",
+      "viewProfile": "Profili İncele",
+      "specialties": "Uzmanlık Alanları",
+      "experience": "Deneyim",
+      "education": "Eğitim",
+      "languages": "Konuştuğu Diller"
+    },
+
+    "testimonials": {
+      "title": "Hasta Yorumları",
+      "subtitle": "Başarı hikayelerimiz ve mutlu hastalarımız",
+      "verified": "Doğrulanmış Hasta",
+      "readMore": "Devamını Oku"
+    },
+    "stats": {
+      "title": "Rakamlarla Biz",
+      "happyPatients": "Mutlu Hasta",
+      "experience": "Yıllık Deneyim",
+      "procedures": "Başarılı İşlem",
+      "experts": "Uzman Doktor"
+    }
   },
   "services": {
-    "title": "ჩვენი სერვისები",
-    "description": "მკურნალობის ვარიანტები, რომლებსაც ვთავაზობთ თანამედროვე ტექნოლოგიებითა და ექსპერტი გუნდით",
-    "metaTitle": "თმის გადანერგვისა და ესთეტიკის სერვისები",
-    "metaDescription": "პროფესიონალური თმის გადანერგვა, წვერის გადანერგვა, წარბების გადანერგვა და თმის მოვლის სერვისები. ჩვენ ვართ აქ ჩვენი თანამედროვე ტექნოლოგიებით და ექსპერტი გუნდით.",
-    "metaKeywords": "თმის გადანერგვა, წვერის გადანერგვა, წარბების გადანერგვა, PRP თერაპია, მეზოთერაპია, თბილისის თმის გადანერგვა, საქართველოს თმის გადანერგვა",
+    "title": "Hizmetlerimiz",
+    "description": "Modern teknoloji ve uzman kadromuzla sunduğumuz tedavi seçenekleri",
+    "metaTitle": "Saç Ekimi ve Estetik Hizmetleri",
+    "metaDescription": "Profesyonel saç ekimi, sakal ekimi, kaş ekimi ve saç bakım hizmetleri. Modern teknoloji ve uzman kadromuzla yanınızdayız.",
+    "metaKeywords": "saç ekimi, sakal ekimi, kaş ekimi, prp tedavisi, mezoterapi, tiflis saç ekimi, gürcistan saç ekimi",
     "tabs": {
-      "details": "დეტალები",
-      "benefits": "სარგებელი",
-      "faq": "ხშირად დასმული კითხვები"
+      "details": "Detaylar",
+      "benefits": "Avantajlar",
+      "faq": "SSS"
     },
-    "processTitle": "მკურნალობის პროცესი",
-    "freeConsultation": "უფასო კონსულტაცია",
+    "processTitle": "İşlem Süreci",
+    "freeConsultation": "Ücretsiz Danışma",
     "serviceItems": {
       "1": {
-        "name": "თმის გადანერგვა",
-        "description": "ბუნებრივი და მუდმივი თმის გადანერგვის გადაწყვეტილებები",
-        "process": ["უფასო კონსულტაცია", "თმის ანალიზი", "დაგეგმვა", "გრაფტების იმპლანტაცია", "შემდგომი მოვლა"]
+        "name": "Saç Ekimi",
+        "description": "Doğal ve kalıcı saç ekimi çözümleri",
+        "process": ["Ücretsiz konsültasyon", "Saç analizi", "Planlama", "Greft ekimi", "Sonrası bakım"]
       },
       "2": {
-        "name": "წვერის გადანერგვა",
-        "description": "მუდმივი და ბუნებრივად გამოყურებადი წვერის გადანერგვის გადაწყვეტილებები",
-        "process": ["სახის ანალიზი", "წვერის დიზაინი", "ლოკალური ანესთეზია", "გრაფტების იმპლანტაცია", "მონიტორინგი და მოვლა"]
+        "name": "Sakal Ekimi",
+        "description": "Kalıcı ve doğal görünümlü sakal ekimi çözümleri",
+        "process": ["Yüz analizi", "Sakal tasarımı", "Lokal anestezi", "Greft ekimi", "Kontrol ve bakım"]
       },
       "3": {
-        "name": "წარბების გადანერგვა",
-        "description": "ბუნებრივი და მუდმივი წარბების გადანერგვის აპლიკაცია",
-        "process": ["წარბების ანალიზი", "დიზაინი", "ლოკალური ანესთეზია", "პრეციზიული იმპლანტაცია", "მოვლის რეკომენდაციები"]
+        "name": "Kaş Ekimi",
+        "description": "Doğal ve kalıcı kaş ekimi uygulaması",
+        "process": ["Kaş analizi", "Tasarım", "Lokal anestezi", "Hassas ekim", "Bakım önerileri"]
       },
       "4": {
-        "name": "PRP თერაპია",
-        "description": "თმის ზრდის სტიმულირება თქვენი საკუთარი სისხლიდან მიღებული თრომბოციტებით",
-        "process": ["სისხლის აღება", "PRP-ის მომზადება", "თავის კანის გაწმენდა", "PRP ინექცია", "მოვლის რეკომენდაციები"]
+        "name": "PRP Tedavisi",
+        "description": "Kendi kanınızdan elde edilen trombositlerle saç büyümesini uyarma",
+        "process": ["Kan alımı", "PRP hazırlama", "Saçlı deri temizliği", "PRP enjeksiyonu", "Bakım önerileri"]
       },
       "5": {
-        "name": "მეზოთერაპია",
-        "description": "ვიტამინებისა და მინერალების ინექცია თმის ფოლიკულების გასაკვებად",
-        "process": ["თმის ანალიზი", "ხსნარის მომზადება", "თავის კანის გაწმენდა", "მიკრო ინექციები", "მოვლის რეკომენდაციები"]
+        "name": "Mezoterapi",
+        "description": "Saç köklerini besleyen vitamin ve mineral enjeksiyonu",
+        "process": ["Saç analizi", "Solüsyon hazırlama", "Saçlı deri temizliği", "Mikro enjeksiyonlar", "Bakım tavsiyeleri"]
       }
     },
     "categories": {
       "hair": {
-        "title": "თმის გადანერგვა",
-        "description": "ბუნებრივი და მუდმივი შედეგები DHI და Sapphire FUE ტექნიკებით"
+        "title": "Saç Ekimi",
+        "description": "DHI ve Safir FUE teknikleriyle doğal ve kalıcı sonuçlar"
       },
       "beard": {
-        "title": "წვერის გადანერგვა",
-        "description": "თქვენი სახის ნაკვთებისთვის შესაფერისი ბუნებრივი წვერის გარეგნობა"
+        "title": "Sakal Ekimi",
+        "description": "Yüz hatlarınıza uygun doğal sakal görünümü"
       },
       "eyebrow": {
-        "title": "წარბების გადანერგვა",
-        "description": "ინდივიდუალური დიზაინი და გამოყენება თქვენი წარბების სტრუქტურისთვის"
+        "title": "Kaş Ekimi",
+        "description": "Kaş yapınıza özel tasarım ve uygulama"
       },
       "prp": {
-        "title": "PRP თერაპია",
-        "description": "თმისა და კანის გაახალგაზრდავების პროცედურები"
+        "title": "PRP Tedavisi",
+        "description": "Saç ve cilt gençleştirme tedavileri"
       }
     },
     "consultation": {
-      "title": "უფასო კონსულტაცია",
-      "description": "დაჯავშნეთ ახლავე, რათა განისაზღვროს თქვენთვის ყველაზე შესაფერისი მკურნალობის მეთოდი",
-      "button": "ჯავშნის გაკეთება"
+      "title": "Ücretsiz Konsültasyon",
+      "description": "Size en uygun tedavi yöntemini belirlemek için hemen randevu alın",
+      "button": "Randevu Al"
     },
     "details": {
-      "duration": "ხანგრძლივობა",
-      "recovery": "აღდგენის დრო",
-      "anesthesia": "ანესთეზია",
-      "hospital": "საავადმყოფოში დარჩენა",
-      "results": "შედეგები",
-      "recommendation": "რეკომენდაციები"
+      "duration": "Süre",
+      "recovery": "İyileşme Süresi",
+      "anesthesia": "Anestezi",
+      "hospital": "Hastanede Kalış",
+      "results": "Sonuçlar",
+      "recommendation": "Öneriler"
     },
     "treatments": {
       "hair": {
         "technique": {
-          "dhi": "DHI ტექნიკა",
-          "fue": "Sapphire FUE ტექნიკა",
-          "description": "უახლესი ტექნოლოგიები და ბუნებრივი შედეგები"
+          "dhi": "DHI Tekniği",
+          "fue": "Safir FUE Tekniği",
+          "description": "En son teknoloji ve doğal sonuçlar"
         },
         "process": {
-          "planning": "დაგეგმვა",
-          "extraction": "გრაფტის ამოღება",
-          "implantation": "იმპლანტაცია",
-          "aftercare": "შემდგომი მოვლა"
+          "planning": "Planlama",
+          "extraction": "Greft Alımı",
+          "implantation": "Ekim İşlemi",
+          "aftercare": "Sonrası Bakım"
         }
       }
     }
   },
-  "home": {
-    "hero": {
-      "title": "ექსპერტთა კლინიკა თმის გადანერგვასა და ესთეტიკურ პროცედურებში",
-      "subtitle": "მიაღწიეთ საუკეთესო შედეგებს ჩვენი თანამედროვე ტექნოლოგიებითა და ექსპერტთა გუნდით",
-      "cta": "უფასო კონსულტაცია"
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Uzman kadromuzdan güncel bilgiler, tedavi süreçleri ve başarı hikayeleri",
+    "search": "Blog yazılarında ara...",
+    "categories": {
+      "all": "Tümü",
+      "hairTransplant": "Saç Ekimi",
+      "beardTransplant": "Sakal Ekimi",
+      "eyebrowTransplant": "Kaş Ekimi",
+      "aesthetics": "Estetik",
+      "dermatology": "Dermatoloji",
+      "aftercare": "Bakım",
+      "treatment": "Tedavi Süreci"
     },
-    "services": {
-      "title": "ჩვენი სერვისები",
-      "subtitle": "მკურნალობის ფართო არჩევანი, რომელსაც გთავაზობთ ჩვენი ექსპერტთა გუნდი და თანამედროვე ტექნოლოგიები"
+    "readMore": "Devamını Oku",
+    "share": {
+      "title": "Bu Yazıyı Paylaş",
+      "copied": "Bağlantı kopyalandı"
     },
-    "doctor": {
-      "title": "დრ. ალი ჩალიშკანი",
-      "position": "თმის გადანერგვის სპეციალისტი",
-      "description": "ფასეული ექიმი 10 წელზე მეტი გამოცდილებით თმის გადანერგვისა და ესთეტიკური ქირურგიის სფეროში, ათასობით წარმატებული ოპერაციით.",
-      "expert": "ექსპერტი ექიმი",
-      "experience": "10+ წლის გამოცდილება",
-      "operations": "500+ ოპერაცია",
-      "results": "წარმატებული შედეგები",
-      "appointment": "ჯავშნის შექმნა ახლავე"
+    "author": {
+      "about": "Yazar Hakkında",
+      "articles": "Diğer Yazıları"
     },
-    "features": {
-      "title": "რატომ უნდა აგვირჩიოთ?",
-      "subtitle": "ჩვენ ვმუშაობთ, რომ მოგაწოდოთ საუკეთესო სერვისი",
-      "expertise": {
-        "title": "ექსპერტთა გუნდი",
-        "description": "ჩვენ ვართ აქ ჩვენი გამოცდილი ექიმებით და კვალიფიციური გუნდით"
-      },
-      "technology": {
-        "title": "თანამედროვე ტექნოლოგიები",
-        "description": "მკურნალობა უახლესი ტექნოლოგიური მოწყობილობებით და მეთოდებით"
-      },
-      "care": {
-        "title": "ინდივიდუალური მოვლა",
-        "description": "ინდივიდუალური მკურნალობის გეგმა და მუდმივი მონიტორინგი თითოეული პაციენტისთვის"
-      },
-      "recovery": {
-        "title": "სწრაფი აღდგენა",
-        "description": "სწრაფი აღდგენის პროცესი მინიმალურად ინვაზიური ტექნიკებით"
-      },
-      "guarantee": {
-        "title": "გარანტირებული შედეგები",
-        "description": "პაციენტების მაღალი კმაყოფილება და გარანტირებული შედეგები"
-      },
-      "approach": {
-        "title": "პერსონალური მიდგომა",
-        "description": "ინდივიდუალური მკურნალობის გეგმა თითოეული პაციენტისთვის"
-      },
-      "clinic": {
-        "title": "თანამედროვე კლინიკა",
-        "description": "სრულად აღჭურვილი, კომფორტული კლინიკური გარემო"
-      },
-      "location": {
-        "title": "ცენტრალური მდებარეობა",
-        "description": "ადვილად მისადგომი ცენტრალური მდებარეობა"
-      }
-    }
-  },
-  "gallery": {
-    "title": "პაციენტის შედეგების გალერეა",
-    "subtitle": "ჩვენს პროფესიონალურ თმის გადანერგვის კლინიკაში ჩატარებული ოპერაციების შედეგები",
+    "relatedPosts": "Benzer Yazılar",
+    "comments": {
+      "title": "Yorumlar",
+      "noComments": "Henüz yorum yapılmamış",
+      "writeComment": "Yorum Yaz",
+      "submit": "Gönder"
+    },
     "search": {
-      "placeholder": "პაციენტის შედეგების ძიება...",
-      "noResults": "შედეგები ვერ მოიძებნა"
+      "title": "Blog'da Ara",
+      "placeholder": "Arama yapmak için yazın...",
+      "noResults": "Sonuç bulunamadı",
+      "trending": "Popüler Konular"
     },
-    "tabs": {
-      "beforeAfter": "მანამდე და შემდეგ",
-      "clinic": "კლინიკის გალერეა",
-      "videos": "კლინიკის ვიდეოები",
-      "success": "წარმატების ისტორიები"
+    "filters": {
+      "latest": "En Yeni",
+      "popular": "Popüler",
+      "category": "Kategori"
     },
-    "videos": {
-      "title": "კლინიკის ვიდეო გალერეა",
-      "subtitle": "ვიდეოები ჩვენი კლინიკიდან, რომლებიც აჩვენებს ოპერაციებსა და მკურნალობის პროცესებს",
-      "operationProcess": {
-        "title": "ოპერაციის პროცესი",
-        "description": "ვიდეო, რომელიც აჩვენებს თმის გადანერგვის ოპერაციის ეტაპებს"
-      },
-      "hairlineDesign": {
-        "title": "თმის ხაზის დიზაინი",
-        "description": "ინდივიდუალური თმის ხაზის დიზაინის პროცესი"
-      },
-      "graftExtraction": {
-        "title": "გრაფტის ექსტრაქციის პროცესი",
-        "description": "დონორის არეალიდან გრაფტების შეგროვების პროცესი"
-      },
-      "implantationProcess": {
-        "title": "იმპლანტაციის პროცესი",
-        "description": "თმის გრაფტების იმპლანტაციის ტექნიკა და პროცესი"
-      },
-      "clinicTour": {
-        "title": "კლინიკის ტური",
-        "description": "ჩვენი თანამედროვე კლინიკის ყველა არეალის დათვალიერება"
-      },
-      "patientExperience": {
-        "title": "პაციენტების გამოცდილება",
-        "description": "ჩვენი პაციენტების გამოცდილება მთელი პროცესის განმავლობაში"
-      },
-      "teamAtWork": {
-        "title": "სამუშაო გუნდი",
-        "description": "ჩვენი პროფესიონალი გუნდის სამუშაო მომენტები"
-      },
-      "aftercareProcess": {
-        "title": "ოპერაციის შემდგომი მოვლის პროცესი",
-        "description": "ოპერაციის შემდგომი მოვლის ინსტრუქციები და აღდგენის პროცესი"
-      },
-      "dhiTechnique": {
-        "title": "DHI ტექნიკა",
-        "description": "DHI (Direct Hair Implantation) ტექნიკის გამოყენება"
-      },
-      "fueTechnique": {
-        "title": "FUE ტექნიკა",
-        "description": "FUE (Follicular Unit Extraction) ტექნიკის დემონსტრაცია"
-      }
+    "readTime": "{{minutes}} dakika okuma",
+    "publishDate": "{{date}} tarihinde yayınlandı",
+    "authorInfo": {
+      "title": "Yazar Hakkında",
+      "credentials": "Uzmanlık Alanları",
+      "experience": "Deneyim"
     },
-    "labels": {
-      "photo": "ფოტო",
-      "video": "ვიდეო",
-      "videoNotSupported": "თქვენი ბრაუზერი არ უჭერს მხარს ვიდეოს გადახვევას."
-    },
-    "buttons": {
-      "consult": "უფასო კონსულტაცია",
-      "share": "გაზიარება"
-    },
-    "caseDescriptions": {
-      "sixMonthResult": "6 თვის შედეგი",
-      "eightMonthResult": "8 თვის შედეგი",
-      "twelveMonthResult": "12 თვის შედეგი"
-    },
-    "techniques": {
-      "safirFUE": "საფირის FUE",
-      "dhi": "DHI",
-      "classicFUE": "კლასიკური FUE"
-    },
-    "durations": {
-      "sixHours": "6 საათი",
-      "sevenHours": "7 საათი",
-      "eightHours": "8 საათი"
-    },
-    "satisfactions": {
-      "verySatisfied": "ძალიან კმაყოფილი",
-      "satisfied": "კმაყოფილი",
-      "extremelySatisfied": "უკიდურესად კმაყოფილი"
-    },
-    "clinic": {
-      "hairTransplantProcedure": {
-        "title": "თმის გადანერგვის პროცედურა",
-        "description": "თმის გადანერგვის ოპერაცია ჩვენი ექსპერტების გუნდით"
-      },
-      "operationMoment": {
-        "title": "ოპერაციის მომენტი",
-        "description": "თმის გადანერგვის პროცედურა თანამედროვე აღჭურვილობით"
-      },
-      "clinicWork": {
-        "title": "კლინიკის მუშაობა",
-        "description": "ჩვენი ექსპერტი ექიმები ოპერაციის დროს"
-      },
-      "hairTransplantTechniques": {
-        "title": "თმის გადანერგვის ტექნიკები",
-        "description": "თმის გადანერგვის გამოყენება ზუსტი პროცედურებით"
-      },
-      "operatingRoom": {
-        "title": "საოპერაციო ოთახი",
-        "description": "თმის გადანერგვის პროცედურა ჩვენს თანამედროვე საოპერაციო ოთახში"
-      },
-      "teamWork": {
-        "title": "გუნდური მუშაობა",
-        "description": "ჩვენი პროფესიონალი გუნდი მუშაობის დროს"
-      },
-      "expertDoctors": {
-        "title": "ექსპერტი ექიმები",
-        "description": "ჩვენი გამოცდილი ექიმები ოპერაციის დროს"
-      },
-      "hairlineDesign": {
-        "title": "თმის ხაზის დიზაინი",
-        "description": "პერსონალიზებული თმის ხაზის დიზაინი და გამოყენება"
-      },
-      "operationDetails": {
-        "title": "ოპერაციის დეტალები",
-        "description": "გულდასმით შესრულებული თმის გადანერგვის ოპერაცია"
-      },
-      "microFUETechnique": {
-        "title": "მიკრო FUE ტექნიკა",
-        "description": "თმის გადანერგვის მიკრო FUE ტექნიკით"
-      },
-      "surgicalMagnification": {
-        "title": "ქირურგიული გადიდება",
-        "description": "ზუსტი პროცედურა მაღალი გადიდების მოწყობილობებით"
-      },
-      "operationPreparation": {
-        "title": "ოპერაციისთვის მომზადება",
-        "description": "ოპერაციისთვის მომზადება სტერილურ გარემოში"
-      },
-      "precisionTechnique": {
-        "title": "ზუსტი იმპლანტაციის ტექნიკა",
-        "description": "ზუსტი იმპლანტაცია ოპტიმალური კუთხით და სიღრმით თითოეული გრაფტისთვის"
-      },
-      "professionalCare": {
-        "title": "პროფესიონალური მოვლა",
-        "description": "პროფესიონალური პაციენტის მოვლა ჩვენი გამოცდილი ჯანდაცვის გუნდით"
-      },
-      "modernTreatment": {
-        "title": "თანამედროვე მკურნალობა",
-        "description": "თანამედროვე თმის გადანერგვის ტექნიკები და აღჭურვილობა"
-      },
-      "treatmentPreparation": {
-        "title": "მკურნალობის მომზადება",
-        "description": "მოსამზადებელი ფაზა თმის გადანერგვამდე"
-      },
-      "detailedAnalysis": {
-        "title": "დეტალური ანალიზი",
-        "description": "პერსონალიზებული თმის ანალიზი და დაგეგმვა"
-      },
-      "clinicEnvironment": {
-        "title": "კლინიკური გარემო",
-        "description": "ჩვენი სტერილური და კომფორტული სამკურნალო ზონები"
-      },
-      "advancedEquipment": {
-        "title": "მოწინავე ტექნოლოგია",
-        "description": "უახლესი თმის გადანერგვის მოწყობილობები"
-      },
-      "patientConsultation": {
-        "title": "პაციენტის კონსულტაცია",
-        "description": "პროფესიონალური კონსულტაცია პირადი საჭიროებების მიხედვით"
-      }
+    "engagement": {
+      "likes": "Beğeni",
+      "comments": "Yorum",
+      "shares": "Paylaşım"
     }
   },
   "faq": {
-    "title": "ხშირად დასმული კითხვები",
-    "subtitle": "პასუხები ჩვენი ექსპერტების გუნდისგან თქვენს ყველა კითხვაზე თმის გადანერგვის შესახებ",
+    "title": "Sıkça Sorulan Sorular",
+    "subtitle": "Saç ekimi hakkında merak ettiğiniz tüm sorulara uzman ekibimizden yanıtlar",
     "items": {
       "0": {
-        "question": "რამდენ ხანს გრძელდება თმის გადანერგვის ოპერაცია?",
-        "answer": "თმის გადანერგვის ოპერაცია გრძელდება დაახლოებით 6-8 საათი. ეს ხანგრძლივობა შეიძლება შეიცვალოს გადასანერგი გრაფტების რაოდენობისა და გამოყენებული ტექნიკის მიხედვით. პროცედურა ტარდება ლოკალური ანესთეზიის ქვეშ."
+        "question": "Saç ekimi operasyonu ne kadar sürer?",
+        "answer": "Saç ekimi operasyonu ortalama 6-8 saat sürer. Bu süre ekilecek greft sayısına ve kullanılan tekniğe göre değişiklik gösterebilir. İşlem lokal anestezi altında gerçekleştirilir."
       },
       "1": {
-        "question": "როგორია აღდგენის პროცესი თმის გადანერგვის შემდეგ?",
-        "answer": "აღდგენის პროცესი განსხვავდება სხვადასხვა ადამიანისთვის, მაგრამ ზოგადად პირველი 2 კვირა კრიტიკულად მნიშვნელოვანია. თქვენ შეგიძლიათ სამსახურში დაბრუნება მე-3 დღიდან. სრული გამოჯანმრთელება და შედეგების დანახვა 6-12 თვეს მოითხოვს."
+        "question": "Saç ekimi sonrası iyileşme süreci nasıldır?",
+        "answer": "İyileşme süreci kişiden kişiye değişmekle birlikte, genellikle ilk 2 hafta kritik önem taşır. 3. günden itibaren işe dönülebilir. Tam iyileşme ve sonuçların görülmesi 6-12 ay arasında sürer."
       },
       "2": {
-        "question": "არის თუ არა თმის გადანერგვა მუდმივი გადაწყვეტილება?",
-        "answer": "დიახ, თმის გადანერგვა არის მუდმივი გადაწყვეტილება. რადგან გადანერგილი თმა აღებულია გენეტიკურად თმის ცვენისადმი რეზისტენტული უბნიდან, ისინი რჩებიან მთელი ცხოვრების განმავლობაში. თუმცა, მნიშვნელოვანია სათანადო მოვლა არსებული თმის დასაცავად."
+        "question": "Saç ekimi kalıcı bir çözüm müdür?",
+        "answer": "Evet, saç ekimi kalıcı bir çözümdür. Ekilen saçlar genetik olarak dökülmeye dirençli bölgeden alındığı için ömür boyu dökülmeden kalır. Ancak var olan saçların korunması için gerekli bakımın yapılması önemlidir."
       },
       "3": {
-        "question": "არსებობს თუ არა ასაკობრივი შეზღუდვა თმის გადანერგვისთვის?",
-        "answer": "თმის გადანერგვისთვის იდეალური ასაკობრივი დიაპაზონი არის 25-55. თუმცა, თითოეული შემთხვევა ინდივიდუალურად ფასდება. მნიშვნელოვანია, რომ თმის ცვენა სტაბილიზებული იყოს და არსებობდეს საკმარისი დონორის ზონა."
+        "question": "Saç ekimi için yaş sınırı var mıdır?",
+        "answer": "Saç ekimi için ideal yaş aralığı 25-55'tir. Ancak her vaka bireysel olarak değerlendirilir. Önemli olan saç kaybının stabil hale gelmiş olması ve yeterli donör alanının bulunmasıdır."
       },
       "4": {
-        "question": "როდის შეიძლება ყოველდღიურ ცხოვრებაში დაბრუნება ოპერაციის შემდეგ?",
-        "answer": "თქვენ შეგიძლიათ ყოველდღიურ ცხოვრებაში დაბრუნება ოპერაციიდან 3 დღის შემდეგ. თუმცა, რეკომენდებულია 1 თვე დაელოდოთ ისეთი აქტივობებისთვის, როგორიცაა სპორტი და ცურვა. პირველი 2 კვირის განმავლობაში, ყურადღება უნდა მიექცეს მზის ზემოქმედების, ოფლიანობისა და ზეწოლისგან დაცვას."
+        "question": "Operasyon sonrası günlük yaşama ne zaman dönülebilir?",
+        "answer": "Operasyondan 3 gün sonra günlük yaşama dönülebilir. Ancak spor, yüzme gibi aktiviteler için 1 ay beklenmesi önerilir. İlk 2 hafta güneş, terleme ve darbelere karşı dikkatli olunmalıdır."
       }
     }
   },
+  "patient": {
+    "dashboard": {
+      "title": "Hasta Portalı",
+      "welcome": "Hoş geldiniz! Tedavi sürecinizi buradan takip edebilirsiniz.",
+      "appointments": "Randevular",
+      "upcomingAppointment": "Yaklaşan Randevu",
+      "messages": "Mesajlar",
+      "unreadMessage": "Okunmamış Mesaj",
+      "images": "Görsellerim",
+      "uploadImages": "Tedavi Görselleri",
+      "profile": "Profilim",
+      "editProfile": "Profil Bilgileri",
+      "upcomingAppointments": "Yaklaşan Randevular",
+      "details": "Detaylar",
+      "newMessage": "Yeni Mesaj",
+      "read": "Oku"
+    },
+    "images": {
+      "title": "Tedavi Görsellerim",
+      "description": "Tedavi sürecinizdeki gelişimi takip edin. Öncesi ve sonrası görsellerinizi güvenle yükleyin ve yönetin.",
+      "uploadNew": "Yeni Görsel Yükle",
+      "noImages": "Henüz görsel yüklemediniz.",
+      "uploadPrompt": "Tedavi sürecinizi takip etmek için görsel yükleyebilirsiniz.",
+      "view": "Görüntüle",
+      "doctorFeedback": "Doktor yorumu var"
+    },
+    "appointments": {
+      "createTitle": "Online Randevu Oluşturun",
+      "createDescription": "Size en uygun tarih ve saatte ücretsiz danışmanlık için randevu alın. Uzman doktorlarımız tedavi süreciniz hakkında detaylı bilgi versin.",
+      "selectDate": "Tarih Seçin",
+      "appointmentDetails": "Randevu Detayları",
+      "selectedDate": "Seçilen Tarih",
+      "createButton": "Randevu Oluştur",
+      "contactNote": "* Randevunuz onaylandıktan sonra size en uygun saati belirlemek için ekibimiz sizinle iletişime geçecektir."
+    },
+    "portal": {
+      "welcome": "Hoş Geldiniz",
+      "appointments": "Randevularım",
+      "treatments": "Tedavilerim",
+      "documents": "Belgelerim",
+      "messages": "Mesajlarım",
+      "profile": "Profilim"
+    },
+    "profile": {
+      "personalInfo": "Kişisel Bilgiler",
+      "medicalHistory": "Tıbbi Geçmiş",
+      "preferences": "Tercihler",
+      "settings": "Ayarlar",
+      "gender": {
+        "male": "Erkek",
+        "female": "Kadın"
+      },
+      "medicalHistory": {
+        "previousTreatments": "Önceki Tedaviler",
+        "previousTreatmentsPlaceholder": "Varsa daha önce aldığınız tedavileri belirtiniz...",
+        "conditions": "Sağlık Durumu",
+        "conditionsPlaceholder": "Varsa kronik rahatsızlıklarınızı veya düzenli kullandığınız ilaçları belirtiniz..."
+      }
+    },
+    "messages": {
+      "newMessage": "Yeni Mesaj",
+      "inbox": "Gelen Kutusu",
+      "sent": "Gönderilen",
+      "compose": "Mesaj Yaz",
+      "reply": "Yanıtla"
+    }
+  },
+  "contact": {
+    "title": "İletişim",
+    "subtitle": "Size yardımcı olmaktan mutluluk duyarız. İstediğiniz zaman bizimle iletişime geçebilirsiniz.",
+    "address": {
+      "title": "Adres",
+      "line1": "Tsotne Dadiani 59",
+      "line2": "Tiflis, Gürcistan"
+    },
+    "phone": {
+      "title": "Telefon",
+      "number1": "+995 555 003 044"
+    },
+    "email": {
+      "title": "E-posta",
+      "address": "primehealthtblisi@gmail.com"
+    },
+    "workingHours": {
+      "title": "Çalışma Saatleri",
+      "weekdays": "Pazartesi - Cumartesi: 09:00 - 18:00",
+      "weekend": "Pazar: Kapalı"
+    },
+    "socialMedia": {
+      "title": "Sosyal Medya",
+      "followUs": "Bizi takip edin"
+    }
+  },
+  "gallery": {
+    "title": "Hasta Sonuçları Galerisi",
+    "subtitle": "Profesyonel saç ekimi kliniğimizde gerçekleştirilen operasyonların öncesi ve sonrası sonuçları",
+    "search": {
+      "placeholder": "Hasta sonuçlarında ara...",
+      "noResults": "Sonuç bulunamadı"
+    },
+    "tabs": {
+      "beforeAfter": "Öncesi ve Sonrası",
+      "clinic": "Klinik Görselleri",
+      "videos": "Klinik Videoları",
+      "success": "Başarı Hikayeleri"
+    },
+    "videos": {
+      "title": "Klinik Video Galerisi",
+      "subtitle": "Kliniğimizin operasyon anlarından görüntüler ve tedavi süreçleri",
+      "operationProcess": {
+        "title": "Operasyon Süreci",
+        "description": "Saç ekimi operasyonunun aşamalarını gösteren video"
+      },
+      "hairlineDesign": {
+        "title": "Saç Çizgisi Tasarımı",
+        "description": "Kişiye özel saç çizgisi tasarlama süreci"
+      },
+      "graftExtraction": {
+        "title": "Greft Çıkarım İşlemi",
+        "description": "Donör bölgeden greftlerin toplanma süreci"
+      },
+      "implantationProcess": {
+        "title": "Ekim İşlemi",
+        "description": "Saç greftlerinin yerleştirilme tekniği ve süreci"
+      },
+      "clinicTour": {
+        "title": "Klinik Turu",
+        "description": "Modern kliniğimizin tüm alanlarını keşfedin"
+      },
+      "patientExperience": {
+        "title": "Hasta Deneyimi",
+        "description": "Hastalarımızın tüm süreç boyunca deneyimleri"
+      },
+      "teamAtWork": {
+        "title": "Çalışan Ekibimiz",
+        "description": "Profesyonel ekibimizin çalışma anları"
+      },
+      "aftercareProcess": {
+        "title": "Sonrası Bakım Süreci",
+        "description": "Operasyon sonrası bakım talimatları ve iyileşme süreci"
+      },
+      "dhiTechnique": {
+        "title": "DHI Tekniği",
+        "description": "DHI (Direct Hair Implantation) tekniğinin uygulanması"
+      },
+      "fueTechnique": {
+        "title": "FUE Tekniği",
+        "description": "FUE (Follicular Unit Extraction) tekniğinin gösterimi"
+      }
+    },
+    "labels": {
+      "photo": "Fotoğraf",
+      "video": "Video",
+      "videoNotSupported": "Tarayıcınız video oynatmayı desteklemiyor."
+    },
+    "buttons": {
+      "consult": "Ücretsiz Konsültasyon",
+      "share": "Paylaş"
+    },
+    "caseDescriptions": {
+      "sixMonthResult": "6 ay sonrası sonuç",
+      "eightMonthResult": "8 ay sonrası sonuç",
+      "twelveMonthResult": "12 ay sonrası sonuç"
+    },
+    "techniques": {
+      "safirFUE": "Safir FUE",
+      "dhi": "DHI"
+    },
+    "durations": {
+      "sixHours": "6 saat",
+      "sevenHours": "7 saat",
+      "eightHours": "8 saat"
+    },
+    "satisfactions": {
+      "satisfied": "Memnun",
+      "verySatisfied": "Çok memnun",
+      "extremelySatisfied": "Son derece memnun"
+    },
+    "clinic": {
+      "hairTransplantProcedure": {
+        "title": "Saç Ekimi İşlemi",
+        "description": "Uzman ekibimizle saç ekimi operasyonu"
+      },
+      "operationMoment": {
+        "title": "Operasyon Anı",
+        "description": "Modern cihazlarımızla saç ekimi prosedürü"
+      },
+      "clinicWork": {
+        "title": "Klinik Çalışma",
+        "description": "Uzman doktorlarımız operasyon sırasında"
+      },
+      "hairTransplantTechniques": {
+        "title": "Saç Ekimi Teknikleri",
+        "description": "Hassas işlemlerle saç ekimi uygulaması"
+      },
+      "operatingRoom": {
+        "title": "Operasyon Odası",
+        "description": "Modern operasyon odamızda saç ekimi işlemi"
+      },
+      "teamWork": {
+        "title": "Ekip Çalışması",
+        "description": "Profesyonel ekibimiz çalışma anında"
+      },
+      "expertDoctors": {
+        "title": "Uzman Doktorlarımız",
+        "description": "Deneyimli doktorlarımız operasyon sırasında"
+      },
+      "hairlineDesign": {
+        "title": "Saç Çizgisi Tasarımı",
+        "description": "Kişiye özel saç çizgisi tasarımı ve uygulaması"
+      },
+      "operationDetails": {
+        "title": "Operasyon Detayları",
+        "description": "Titizlikle yapılan saç ekimi operasyonu"
+      },
+      "microFUETechnique": {
+        "title": "Mikro FUE Tekniği",
+        "description": "Mikro FUE tekniği ile saç ekimi uygulaması"
+      },
+      "surgicalMagnification": {
+        "title": "Cerrahi Magnifikasyon",
+        "description": "Yüksek magnifikasyon cihazlarıyla hassas işlem"
+      },
+      "operationPreparation": {
+        "title": "Operasyon Hazırlığı",
+        "description": "Steril ortamda operasyon hazırlığı"
+      },
+      "precisionTechnique": {
+        "title": "Hassas Ekim Tekniği",
+        "description": "Her greft için optimal açı ve derinlikte hassas ekim"
+      },
+      "professionalCare": {
+        "title": "Profesyonel Bakım",
+        "description": "Deneyimli sağlık ekibimizle profesyonel hasta bakımı"
+      },
+      "modernTreatment": {
+        "title": "Modern Tedavi",
+        "description": "Çağdaş saç ekimi teknikleri ve ekipmanları"
+      },
+      "treatmentPreparation": {
+        "title": "Tedavi Hazırlığı",
+        "description": "Saç ekimi öncesi hazırlık aşaması"
+      },
+      "detailedAnalysis": {
+        "title": "Detaylı Analiz",
+        "description": "Kişiye özel saç analizi ve planlama"
+      },
+      "clinicEnvironment": {
+        "title": "Klinik Ortamı",
+        "description": "Steril ve konforlu tedavi alanlarımız"
+      },
+      "advancedEquipment": {
+        "title": "İleri Teknoloji",
+        "description": "Son teknoloji saç ekimi cihazlarımız"
+      },
+      "patientConsultation": {
+        "title": "Hasta Danışmanlığı",
+        "description": "Kişisel ihtiyaçlar doğrultusunda profesyonel konsültasyon"
+      }
+    },
+    "caseDescriptions": {
+      "sixMonthResult": "6 ay sonrası sonuç",
+      "eightMonthResult": "8 ay sonrası sonuç",
+      "twelveMonthResult": "12 ay sonrası sonuç"
+    },
+    "techniques": {
+      "safirFUE": "Safir FUE",
+      "dhi": "DHI",
+      "classicFUE": "Klasik FUE"
+    },
+    "durations": {
+      "sixHours": "6 saat",
+      "sevenHours": "7 saat",
+      "eightHours": "8 saat"
+    },
+    "satisfactions": {
+      "verySatisfied": "Çok memnun",
+      "satisfied": "Memnun",
+      "extremelySatisfied": "Son derece memnun"
+    },
+    "categories": {
+      "sac-ekimi": "Saç Ekimi",
+      "sakal-ekimi": "Sakal Ekimi",
+      "kas-ekimi": "Kaş Ekimi"
+    },
+    "patientDetails": {
+      "title": "Hasta Bilgileri",
+      "before": "Öncesi",
+      "after": "Sonrası",
+      "age": "Yaş",
+      "gender": "Cinsiyet",
+      "problemArea": "Problem Bölgesi",
+      "diagnosis": "Teşhis",
+      "hairLossStage": "Saç Dökülme Evresi"
+    },
+    "procedureDetails": {
+      "title": "İşlem Detayları",
+      "technique": "Teknik",
+      "grafts": "Greft Sayısı",
+      "duration": "Süre",
+      "anesthesia": "Anestezi",
+      "recoveryTime": "İyileşme Süresi"
+    },
+    "results": {
+      "title": "Sonuçlar",
+      "satisfaction": "Memnuniyet",
+      "density": "Yoğunluk",
+      "survivalRate": "Tutma Oranı",
+      "naturalness": "Doğallık",
+      "finalResult": "Final Sonucu"
+    },
+    "testimonial": {
+      "title": "Hasta Yorumu",
+      "doctorNote": "Doktor Notu"
+    },
+    "buttons": {
+      "share": "Paylaş",
+      "consult": "Danışmanlık Al",
+      "view3d": "3D Görünüm",
+      "view2d": "2D Görünüm"
+    },
+    "filters": {
+      "all": "Tümü",
+      "latest": "En Yeni",
+      "popular": "En Beğenilen"
+    }
+  },
+  "appointment": {
+    "book": {
+      "title": "Randevu Al",
+      "subtitle": "Size en uygun tarih ve saati seçin",
+      "selectDate": "Tarih seçin",
+      "selectTime": "Saat seçin",
+      "selectService": "Hizmet seçin",
+      "personalInfo": "Kişisel Bilgiler",
+      "notes": "Notlar",
+      "success": "Randevunuz başarıyla oluşturuldu",
+      "submit": "Randevu Oluştur",
+      "notesPlaceholder": "Eklemek istediğiniz notlar...",
+      "error": "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin."
+    },
+    "status": {
+      "pending": "Bekliyor",
+      "confirmed": "Onaylandı",
+      "cancelled": "İptal Edildi",
+      "completed": "Tamamlandı"
+    }
+  },
+  "form": {
+    "submit": "Gönder",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "search": "Ara",
+    "filter": "Filtrele",
+    "reset": "Sıfırla",
+    "loading": "İşleminiz devam ediyor...",
+    "success": "İşlem başarılı",
+    "error": "Bir hata oluştu",
+    "required": "* Zorunlu alan",
+    "optional": "(Opsiyonel)"
+  },
   "footer": {
     "company": {
-      "title": "კომპანია",
-      "about": "ჩვენს შესახებ",
-      "careers": "კარიერა",
-      "privacy": "კონფიდენციალურობის პოლიტიკა",
-      "terms": "გამოყენების პირობები"
+      "title": "Şirket",
+      "about": "Hakkımızda",
+      "careers": "Kariyer",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Kullanım Şartları"
     },
     "social": {
-      "title": "სოციალური მედია",
-      "followUs": "გამოგვყევით",
-      "facebook": "Facebook-ზე გამოყოლა",
-      "instagram": "Instagram-ზე გამოყოლა",
-      "twitter": "Twitter-ზე გამოყოლა",
-      "youtube": "Youtube-ზე გამოყოლა"
+      "title": "Sosyal Medya",
+      "followUs": "Bizi Takip Edin",
+      "facebook": "Facebook'ta Takip Et",
+      "instagram": "Instagram'da Takip Et",
+      "twitter": "Twitter'da Takip Et",
+      "youtube": "Youtube'da Takip Et"
     },
     "contact": {
-      "title": "კონტაქტი",
-      "address": "მისამართი",
-      "phone": "ტელეფონი",
-      "email": "ელ-ფოსტა"
+      "title": "İletişim",
+      "address": "Adres",
+      "phone": "Telefon",
+      "email": "E-posta"
     },
     "newsletter": {
-      "title": "სიახლეები",
-      "subtitle": "მიიღეთ ინფორმაცია ჩვენი უახლესი სიახლეების შესახებ",
-      "placeholder": "თქვენი ელ-ფოსტის მისამართი",
-      "subscribe": "გამოწერა",
-      "success": "წარმატებით გამოიწერეთ",
-      "error": "დაფიქსირდა შეცდომა"
+      "title": "Bülten",
+      "subtitle": "Güncel gelişmelerden haberdar olun",
+      "placeholder": "E-posta adresiniz",
+      "subscribe": "Abone Ol",
+      "success": "Başarıyla abone oldunuz",
+      "error": "Bir hata oluştu"
     },
-    "copyright": "© {year} ყველა უფლება დაცულია",
-    "brand": "თმის გადანერგვის კლინიკა თბილისი"
+    "copyright": "© {year} Tüm hakları saklıdır",
+    "brand": "Hair Clinic Tiflis"
+  },
+  "seo": {
+    "defaultTitle": "Hair Clinic Tiflis - Saç Ekimi ve Estetik Tedavi Merkezi",
+    "defaultDescription": "Gürcistan Tiflis'te modern teknoloji ve uzman kadromuzla saç ekimi, sakal ekimi ve estetik tedavi hizmetleri sunuyoruz.",
+    "defaultKeywords": "saç ekimi, sakal ekimi, kaş ekimi, estetik tedavi, tiflis, gürcistan",
+    "pages": {
+      "home": {
+        "title": "Hair Clinic Tiflis - Saç Ekimi ve Estetik Tedavi Merkezi",
+        "description": "Gürcistan Tiflis'te modern teknoloji ve uzman kadromuzla saç ekimi, sakal ekimi ve estetik tedavi hizmetleri"
+      },
+
+      "blog": {
+        "title": "Saç Ekimi ve Estetik Blog",
+        "description": "Saç ekimi, sakal ekimi ve estetik tedaviler hakkında uzman bilgileri"
+      },
+      "contact": {
+        "title": "İletişim - Hair Clinic Tiflis",
+        "description": "Ücretsiz danışmanlık ve detaylı bilgi için bizimle iletişime geçin"
+      }
+    }
+  },
+  "cookies": {
+    "title": "Çerez Politikası",
+    "message": "Size daha iyi hizmet verebilmek için çerezleri kullanıyoruz",
+    "accept": "Kabul Et",
+    "decline": "Reddet",
+    "preferences": "Tercihlerimi Yönet"
+  },
+  "gdpr": {
+    "title": "KVKK Bildirimi",
+    "message": "Kişisel verileriniz KVKK kapsamında işlenmektedir",
+    "details": "Detaylı Bilgi",
+    "accept": "Anladım"
+  },
+  "notifications": {
+    "title": "Bildirimler",
+    "noNotifications": "Bildiriminiz bulunmuyor",
+    "markAsRead": "Okundu olarak işaretle",
+    "clearAll": "Tümünü Temizle"
+  },
+  "mobile": {
+    "menu": {
+      "open": "Menüyü Aç",
+      "close": "Menüyü Kapat",
+      "back": "Geri",
+      "search": "Ara"
+    },
+    "navigation": {
+      "previous": "Önceki",
+      "next": "Sonraki",
+      "menu": "Menü"
+    }
+  },
+  "social": {
+    "share": {
+      "title": "Paylaş",
+      "facebook": "Facebook'ta Paylaş",
+      "twitter": "Twitter'da Paylaş",
+      "linkedin": "LinkedIn'de Paylaş",
+      "whatsapp": "WhatsApp'ta Paylaş",
+      "copyLink": "Bağlantıyı Kopyala"
+    },
+    "follow": {
+      "title": "Bizi Takip Edin",
+      "facebook": "Facebook'ta Takip Et",
+      "instagram": "Instagram'da Takip Et",
+      "twitter": "Twitter'da Takip Et",
+      "youtube": "Youtube'da Takip Et",
+      "linkedin": "LinkedIn'de Takip Et"
+    }
+  },
+  "testimonials": {
+    "verified": "Doğrulanmış Hasta",
+    "beforeAfter": "Öncesi & Sonrası",
+    "rating": "Değerlendirme",
+    "recommend": "Tavsiye Eder",
+    "experience": "Deneyim",
+    "results": "Sonuçlar",
+    "filters": {
+      "all": "Tüm Yorumlar",
+      "verified": "Doğrulanmış",
+      "withPhotos": "Fotoğraflı"
+    }
+  },
+  "forms": {
+    "consultation": {
+      "title": "Ücretsiz Danışmanlık Formu",
+      "subtitle": "Size özel tedavi planı için formu doldurun",
+      "fields": {
+        "concern": "Tedavi Alanı",
+        "history": "Önceki Tedaviler",
+        "expectations": "Beklentileriniz",
+        "availability": "Uygun Zamanlar"
+      }
+    },
+    "contact": {
+      "success": "Mesajınız başarıyla iletildi",
+      "error": "Mesajınız iletilemedi",
+      "fields": {
+        "subject": "Konu",
+        "message": "Mesajınız",
+        "attachment": "Dosya Ekle"
+      }
+    }
+  },
+  "slider": {
+    "title1": "Uzman Saç Ekimi ve Estetik Tedaviler",
+    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
+    "button1": "Ücretsiz Danışmanlık",
+    "title2": "Doğal ve Kalıcı Sonuçlar",
+    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
+    "button2": "Sonuçları Görün",
+    "title3": "Profesyonel Ekip",
+    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
+    "button3": "Ekibimizle Tanışın",
+    "title4": "Modern Klinik",
+    "description4": "Son teknoloji donanım ve konforlu ortam",
+    "button4": "Sanal Tur",
+    "title5": "Gelişmiş Cilt Bakımı",
+    "description5": "Kişiye özel yenilikçi cilt bakım çözümleri",
+    "button5": "Tedavileri Keşfedin"
   }
 }

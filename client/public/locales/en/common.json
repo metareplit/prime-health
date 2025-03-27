@@ -1,1073 +1,963 @@
 {
   "nav": {
-    "home": "Home",
-    "services": "Services",
-    "about": "About",
-    "contact": "Contact",
+    "home": "Ana Sayfa",
+    "services": "Hizmetler",
+    "gallery": "Galeri",
+    "products": "Ürünler",
     "blog": "Blog",
-    "appointments": "Book Appointment",
-    "gallery": "Gallery",
-    "products": "Products",
-    "patientPortal": "Patient Portal",
-    "userMenu": "User Menu",
-    "menu": "Menu",
-    "doctors": "Our Doctors",
-    "press": "Press",
+    "contact": "İletişim",
+    "appointments": "Randevu Al",
+    "patientPortal": "Hasta Portalı",
+    "userMenu": "Kullanıcı Menüsü",
+    "menu": "Menü",
+    "doctors": "Doktorlarımız",
+    "press": "Basında Biz",
     "brand": "Prime Health"
   },
   "slider": {
-    "title1": "Expert Clinic in Hair Transplantation and Aesthetic Treatments",
-    "description1": "Achieve the best results with our modern technology and expert team",
-    "button1": "Free Consultation",
-    "title2": "Natural and Permanent Results",
-    "description2": "Guaranteed results with DHI and Sapphire FUE techniques",
-    "button2": "View Results",
-    "title3": "Professional Team",
-    "description3": "Expert doctors and experienced medical staff",
-    "button3": "Meet Our Team",
-    "title4": "Modern Clinic",
-    "description4": "State-of-the-art equipment and comfortable environment",
-    "button4": "Virtual Tour",
-    "title5": "Advanced Skin Care",
-    "description5": "Personalized innovative skin care solutions",
-    "button5": "Discover Treatments"
+    "title1": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
+    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
+    "button1": "Ücretsiz Konsültasyon",
+    "title2": "Doğal ve Kalıcı Sonuçlar",
+    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
+    "button2": "Sonuçları Görün",
+    "title3": "Profesyonel Kadro",
+    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
+    "button3": "Ekibimizle Tanışın",
+    "title4": "Modern Klinik",
+    "description4": "Son teknoloji ekipman ve konforlu ortam",
+    "button4": "Sanal Tur"
   },
-  "auth": {
-    "login": {
-      "title": "Login",
-      "subtitle": "Sign in to your account",
-      "rememberMe": "Remember me",
-      "forgotPassword": "Forgot password",
-      "noAccount": "Don't have an account?",
-      "createAccount": "Create account"
+  "header": {
+    "menu": {
+      "open": "Menüyü aç",
+      "close": "Menüyü kapat",
+      "main": "Ana menü",
+      "user": "Kullanıcı menüsü"
     },
-    "register": {
-      "title": "Register",
-      "subtitle": "Create a new account",
-      "haveAccount": "Already have an account?",
-      "terms": "Terms and conditions",
-      "privacy": "Privacy policy",
-      "agreeTerms": "I agree to the"
+    "search": {
+      "placeholder": "Ara...",
+      "button": "Ara",
+      "noResults": "Sonuç bulunamadı"
+    },
+    "buttons": {
+      "appointment": "Randevu Al",
+      "consultation": "Ücretsiz Danışmanlık",
+      "contact": "İletişime Geç"
+    },
+    "userMenu": {
+      "profile": "Profilim",
+      "appointments": "Randevularım",
+      "dashboard": "Kontrol Paneli",
+      "settings": "Ayarlar",
+      "logout": "Çıkış Yap"
+    }
+  },
+  "ui": {
+    "dialog": {
+      "close": "Kapat"
+    },
+    "command": {
+      "search": "Ara...",
+      "empty": "Sonuç bulunamadı.",
+      "shortcut": "Kısayol"
+    },
+    "table": {
+      "empty": "Veri bulunamadı.",
+      "loading": "Yükleniyor...",
+      "previous": "Önceki",
+      "next": "Sonraki",
+      "rowsPerPage": "Sayfa başına satır:",
+      "of": "/",
+      "more": "Daha Fazla"
     },
     "form": {
-      "email": "Email",
-      "password": "Password",
-      "confirmPassword": "Confirm password",
-      "firstName": "Full Name",
-      "lastName": "Last Name",
-      "phone": "Phone"
+      "required": "Bu alan zorunludur",
+      "invalid": "Geçersiz değer",
+      "select": "Seçiniz"
     },
-    "errors": {
-      "invalidEmail": "Invalid email address",
-      "passwordMismatch": "Passwords do not match",
-      "weakPassword": "Password is too weak",
-      "required": "This field is required"
+    "toast": {
+      "success": "Başarılı",
+      "error": "Hata",
+      "info": "Bilgi",
+      "warning": "Uyarı",
+      "close": "Kapat"
     }
   },
   "buttons": {
-    "submit": "Submit",
-    "cancel": "Cancel",
-    "save": "Save",
-    "continue": "Continue",
-    "back": "Back",
-    "edit": "Edit",
-    "upload": "Upload",
-    "readMore": "Read More",
-    "learnMore": "Learn More",
-    "getStarted": "Get Started",
-    "contactUs": "Contact Us",
-    "close": "Close",
-    "delete": "Delete",
-    "appointment": "Book Appointment",
-    "confirm": "Confirm"
+    "submit": "Gönder",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "continue": "Devam Et",
+    "back": "Geri",
+    "edit": "Düzenle",
+    "upload": "Yükle",
+    "readMore": "Devamını Oku",
+    "learnMore": "Daha Fazla Bilgi",
+    "getStarted": "Hemen Başla",
+    "contactUs": "Bize Ulaşın",
+    "close": "Kapat",
+    "delete": "Sil",
+    "appointment": "Randevu Al",
+    "confirm": "Onayla"
+  },
+  "products": {
+    "title": "Profesyonel Saç Bakım Ürünleri",
+    "subtitle": "Saç ekimi sonrası en iyi sonucu almak için özel olarak formüle edilmiş ürünler",
+    "search": "Ürün ara...",
+    "categories": {
+      "all": {
+        "title": "Tüm Ürünler",
+        "shortTitle": "Tümü",
+        "description": "Tüm VitHair ürünleri"
+      },
+      "monthlySets": {
+        "title": "Aylık Bakım Setleri",
+        "shortTitle": "Setler",
+        "description": "Aylık bakım setleri"
+      },
+      "shampooAndFoam": {
+        "title": "Şampuan ve Köpük",
+        "shortTitle": "Şampuan",
+        "description": "Şampuan ve köpük ürünleri"
+      },
+      "spray": {
+        "title": "Sprey",
+        "shortTitle": "Sprey",
+        "description": "Sprey ürünleri"
+      },
+      "tablet": {
+        "title": "Tablet",
+        "shortTitle": "Tablet",
+        "description": "Tablet ürünleri"
+      },
+      "mesotherapyAndPrp": {
+        "title": "Mezoterapi ve PRP",
+        "shortTitle": "Mezoterapi",
+        "description": "Mezoterapi ve PRP ürünleri"
+      },
+      "shampoos": {
+        "title": "Saç Bakım Şampuanları",
+        "description": "Saç ekimi sonrası özel olarak formüle edilmiş şampuanlar"
+      },
+      "serums": {
+        "title": "Saç Büyütme Serumları",
+        "description": "Saç büyümesini destekleyen özel serumlar"
+      },
+      "masks": {
+        "title": "Saç Bakım Maskeleri",
+        "description": "Yoğun bakım ve onarım sağlayan maskeler"
+      },
+      "vitamins": {
+        "title": "Saç Bakım Vitaminleri",
+        "description": "Saç sağlığını içten destekleyen vitamin takviyeleri"
+      },
+      "tonics": {
+        "title": "Saç Bakım Tonikleri",
+        "description": "Saç derisini canlandıran ve besleyen tonikler"
+      },
+      "creams": {
+        "title": "Saç Bakım Kremleri",
+        "description": "Günlük bakım ve nemlendirme için kremler"
+      }
+    },
+    "product": {
+      "ingredients": "İçerik Maddeleri",
+      "benefits": "Faydaları",
+      "instructions": "Kullanım Talimatları",
+      "warnings": "Uyarılar",
+      "hairTypes": {
+        "all": "Tüm Saç Tipleri",
+        "oily": "Yağlı",
+        "dry": "Kuru",
+        "normal": "Normal",
+        "mixed": "Karma",
+        "damaged": "Yıpranmış",
+        "sensitive": "Hassas",
+        "thin": "İnce Telli",
+        "thick": "Kalın Telli"
+      }
+    }
+  },
+  "auth": {
+    "login": "Giriş Yap",
+    "register": "Kayıt Ol",
+    "logout": "Çıkış Yap"
   },
   "validation": {
-    "required": "This field is required",
-    "email": "Please enter a valid email address",
-    "phone": "Please enter a valid phone number",
-    "minLength": "Please enter at least {{count}} characters",
-    "maxLength": "Please enter no more than {{count}} characters",
-    "passwordMatch": "Passwords do not match",
-    "invalidDate": "Please enter a valid date",
-    "futureDate": "Please select a future date",
-    "numeric": "Please enter numbers only",
-    "url": "Please enter a valid URL"
+    "required": "Bu alan zorunludur",
+    "email": "Geçerli bir e-posta adresi giriniz",
+    "phone": "Geçerli bir telefon numarası giriniz",
+    "minLength": "En az {{count}} karakter giriniz",
+    "maxLength": "En fazla {{count}} karakter giriniz",
+    "passwordMatch": "Şifreler eşleşmiyor",
+    "invalidDate": "Geçerli bir tarih giriniz",
+    "futureDate": "Gelecek bir tarih seçiniz",
+    "numeric": "Sadece sayı giriniz",
+    "url": "Geçerli bir URL giriniz"
   },
   "home": {
     "hero": {
-      "title": "Expert Clinic in Hair Transplantation and Aesthetic Treatments",
-      "subtitle": "Achieve the best results with our modern technology and expert team",
-      "cta": "Free Consultation"
+      "title": "Saç Ekimi ve Estetik Tedavilerde Uzman Klinik",
+      "subtitle": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
+      "cta": "Ücretsiz Konsültasyon"
+    },
+    "services": {
+      "title": "Hizmetlerimiz",
+      "subtitle": "Uzman kadromuz ve modern teknolojimizle sizlere sunduğumuz kapsamlı tedavi seçenekleri"
     },
     "doctor": {
       "title": "Dr. Ali Çalışkan",
-      "position": "Hair Transplant Specialist",
-      "description": "A valued physician with over 10 years of experience specializing in hair transplantation and aesthetic surgery, with thousands of successful operations.",
-      "expert": "Expert Physician",
-      "experience": "10+ Years Experience",
-      "operations": "500+ Operations",
-      "results": "Successful Results",
-      "appointment": "Make an Appointment Now"
+      "position": "Saç Ekim Uzmanı",
+      "description": "10 yılı aşkın deneyimi ile saç ekimi ve estetik cerrahi alanında uzmanlaşmış, binlerce başarılı operasyona imza atmış değerli bir hekimdir.",
+      "expert": "Uzman Hekim",
+      "experience": "10+ Yıl Deneyim",
+      "operations": "500+ Operasyon",
+      "results": "Başarılı Sonuçlar",
+      "appointment": "Hemen Randevu Oluştur"
     },
     "features": {
-      "title": "Why Choose Us?",
-      "subtitle": "We work to provide you with the best service",
+      "title": "Neden Bizi Seçmelisiniz?",
+      "subtitle": "Size en iyi hizmeti sunmak için çalışıyoruz",
       "expertise": {
-        "title": "Expert Team",
-        "description": "We are here with our expert doctors and experienced team"
+        "title": "Uzman Kadro",
+        "description": "Alanında uzman doktorlarımız ve deneyimli ekibimizle yanınızdayız"
       },
       "technology": {
-        "title": "Modern Technology",
-        "description": "Treatment with the latest technological devices and methods"
+        "title": "Modern Teknoloji",
+        "description": "En son teknolojik cihazlar ve yöntemlerle tedavi"
       },
       "care": {
-        "title": "Personal Care",
-        "description": "Custom treatment plan and continuous monitoring for each patient"
+        "title": "Kişisel Bakım",
+        "description": "Her hastaya özel tedavi planı ve sürekli takip"
       },
       "recovery": {
-        "title": "Fast Recovery",
-        "description": "Quick recovery process with minimally invasive techniques"
+        "title": "Hızlı İyileşme",
+        "description": "Minimal invaziv teknikler ile hızlı iyileşme süreci"
       },
       "guarantee": {
-        "title": "Guaranteed Results",
-        "description": "High patient satisfaction and guaranteed results"
+        "title": "Garantili Sonuç",
+        "description": "Yüksek hasta memnuniyeti ve garantili sonuçlar"
       },
       "approach": {
-        "title": "Personal Approach",
-        "description": "Customized treatment plan for each patient"
+        "title": "Kişisel Yaklaşım",
+        "description": "Her hastaya özel tasarlanmış tedavi planı"
       },
       "clinic": {
-        "title": "Modern Clinic",
-        "description": "Fully equipped, comfortable clinical environment"
+        "title": "Modern Klinik",
+        "description": "Tam donanımlı, konforlu klinik ortamı"
       },
       "location": {
-        "title": "Central Location",
-        "description": "Easily accessible central location"
+        "title": "Merkezi Konum",
+        "description": "Kolay ulaşılabilir merkezi lokasyon"
       }
     },
     "doctors": {
-      "title": "Our Expert Doctors",
-      "subtitle": "Expert and experienced medical team",
-      "viewProfile": "View Profile",
-      "specialties": "Specialties",
-      "experience": "Experience",
-      "education": "Education",
-      "languages": "Languages Spoken"
+      "title": "Uzman Doktorlarımız",
+      "subtitle": "Alanında uzman ve deneyimli doktor kadromuz",
+      "viewProfile": "Profili İncele",
+      "specialties": "Uzmanlık Alanları",
+      "experience": "Deneyim",
+      "education": "Eğitim",
+      "languages": "Konuştuğu Diller"
     },
-    "services": {
-      "title": "Our Services",
-      "subtitle": "Comprehensive treatment options offered with our expert team and modern technology",
-      "viewAll": "View All Services",
-      "featured": "Featured",
-      "learnMore": "Learn More",
-      "bookNow": "Book Appointment"
-    },
+
     "testimonials": {
-      "title": "Patient Reviews",
-      "subtitle": "Our success stories and happy patients",
-      "verified": "Verified Patient",
-      "readMore": "Read More"
+      "title": "Hasta Yorumları",
+      "subtitle": "Başarı hikayelerimiz ve mutlu hastalarımız",
+      "verified": "Doğrulanmış Hasta",
+      "readMore": "Devamını Oku"
     },
     "stats": {
-      "title": "Our Numbers",
-      "happyPatients": "Happy Patients",
-      "experience": "Years Experience",
-      "procedures": "Successful Procedures",
-      "experts": "Expert Doctors"
-    }
-  },
-  "faq": {
-    "title": "Frequently Asked Questions",
-    "subtitle": "Answers from our expert team to all your questions about hair transplantation",
-    "items": {
-      "0": {
-        "question": "How long does a hair transplant operation take?",
-        "answer": "A hair transplant operation takes approximately 6-8 hours. This duration may vary depending on the number of grafts to be transplanted and the technique used. The procedure is performed under local anesthesia."
-      },
-      "1": {
-        "question": "What is the recovery process like after hair transplantation?",
-        "answer": "While the recovery process varies from person to person, generally the first 2 weeks are critically important. You can return to work from the 3rd day. Complete healing and seeing results takes 6-12 months."
-      },
-      "2": {
-        "question": "Is hair transplantation a permanent solution?",
-        "answer": "Yes, hair transplantation is a permanent solution. Since the transplanted hair is taken from an area genetically resistant to hair loss, it remains without falling out for life. However, it is important to maintain proper care to protect existing hair."
-      },
-      "3": {
-        "question": "Is there an age limit for hair transplantation?",
-        "answer": "The ideal age range for hair transplantation is 25-55. However, each case is evaluated individually. What's important is that hair loss has stabilized and there is sufficient donor area available."
-      },
-      "4": {
-        "question": "When can one return to daily life after the operation?",
-        "answer": "You can return to daily life 3 days after the operation. However, it is recommended to wait 1 month for activities such as sports and swimming. During the first 2 weeks, care should be taken against sun exposure, sweating, and impacts."
-      }
+      "title": "Rakamlarla Biz",
+      "happyPatients": "Mutlu Hasta",
+      "experience": "Yıllık Deneyim",
+      "procedures": "Başarılı İşlem",
+      "experts": "Uzman Doktor"
     }
   },
   "services": {
-    "title": "Our Services",
-    "description": "Treatment options we offer with modern technology and expert staff",
-    "metaTitle": "Hair Transplantation and Aesthetic Services",
-    "metaDescription": "Professional hair transplantation, beard transplantation, eyebrow transplantation, and hair care services. We are here with our modern technology and expert staff.",
-    "metaKeywords": "hair transplantation, beard transplantation, eyebrow transplantation, prp treatment, mesotherapy, tbilisi hair transplantation, georgia hair transplantation",
+    "title": "Hizmetlerimiz",
+    "description": "Modern teknoloji ve uzman kadromuzla sunduğumuz tedavi seçenekleri",
+    "metaTitle": "Saç Ekimi ve Estetik Hizmetleri",
+    "metaDescription": "Profesyonel saç ekimi, sakal ekimi, kaş ekimi ve saç bakım hizmetleri. Modern teknoloji ve uzman kadromuzla yanınızdayız.",
+    "metaKeywords": "saç ekimi, sakal ekimi, kaş ekimi, prp tedavisi, mezoterapi, tiflis saç ekimi, gürcistan saç ekimi",
     "tabs": {
-      "details": "Details",
-      "benefits": "Benefits",
-      "faq": "FAQ"
+      "details": "Detaylar",
+      "benefits": "Avantajlar",
+      "faq": "SSS"
     },
-    "processTitle": "Treatment Process",
-    "freeConsultation": "Free Consultation",
+    "processTitle": "İşlem Süreci",
+    "freeConsultation": "Ücretsiz Danışma",
     "serviceItems": {
       "1": {
-        "name": "Hair Transplantation",
-        "description": "Natural and permanent hair transplantation solutions",
-        "process": ["Free consultation", "Hair analysis", "Planning", "Graft implantation", "Aftercare"]
+        "name": "Saç Ekimi",
+        "description": "Doğal ve kalıcı saç ekimi çözümleri",
+        "process": ["Ücretsiz konsültasyon", "Saç analizi", "Planlama", "Greft ekimi", "Sonrası bakım"]
       },
       "2": {
-        "name": "Beard Transplantation",
-        "description": "Permanent and natural-looking beard transplantation solutions",
-        "process": ["Face analysis", "Beard design", "Local anesthesia", "Graft implantation", "Monitoring and care"]
+        "name": "Sakal Ekimi",
+        "description": "Kalıcı ve doğal görünümlü sakal ekimi çözümleri",
+        "process": ["Yüz analizi", "Sakal tasarımı", "Lokal anestezi", "Greft ekimi", "Kontrol ve bakım"]
       },
       "3": {
-        "name": "Eyebrow Transplantation",
-        "description": "Natural and permanent eyebrow transplantation application",
-        "process": ["Eyebrow analysis", "Design", "Local anesthesia", "Precision implantation", "Care recommendations"]
+        "name": "Kaş Ekimi",
+        "description": "Doğal ve kalıcı kaş ekimi uygulaması",
+        "process": ["Kaş analizi", "Tasarım", "Lokal anestezi", "Hassas ekim", "Bakım önerileri"]
       },
       "4": {
-        "name": "PRP Treatment",
-        "description": "Stimulating hair growth with platelets obtained from your own blood",
-        "process": ["Blood collection", "PRP preparation", "Scalp cleansing", "PRP injection", "Care recommendations"]
+        "name": "PRP Tedavisi",
+        "description": "Kendi kanınızdan elde edilen trombositlerle saç büyümesini uyarma",
+        "process": ["Kan alımı", "PRP hazırlama", "Saçlı deri temizliği", "PRP enjeksiyonu", "Bakım önerileri"]
       },
       "5": {
-        "name": "Mesotherapy",
-        "description": "Vitamin and mineral injection nourishing hair follicles",
-        "process": ["Hair analysis", "Solution preparation", "Scalp cleansing", "Micro injections", "Care recommendations"]
+        "name": "Mezoterapi",
+        "description": "Saç köklerini besleyen vitamin ve mineral enjeksiyonu",
+        "process": ["Saç analizi", "Solüsyon hazırlama", "Saçlı deri temizliği", "Mikro enjeksiyonlar", "Bakım tavsiyeleri"]
       }
     },
     "categories": {
       "hair": {
-        "title": "Hair Transplantation",
-        "description": "Natural and permanent results with DHI and Sapphire FUE techniques"
+        "title": "Saç Ekimi",
+        "description": "DHI ve Safir FUE teknikleriyle doğal ve kalıcı sonuçlar"
       },
       "beard": {
-        "title": "Beard Transplantation",
-        "description": "Natural beard appearance suitable for your facial features"
+        "title": "Sakal Ekimi",
+        "description": "Yüz hatlarınıza uygun doğal sakal görünümü"
       },
       "eyebrow": {
-        "title": "Eyebrow Transplantation",
-        "description": "Custom design and application for your eyebrow structure"
+        "title": "Kaş Ekimi",
+        "description": "Kaş yapınıza özel tasarım ve uygulama"
       },
       "prp": {
-        "title": "PRP Treatment",
-        "description": "Hair and skin rejuvenation treatments"
+        "title": "PRP Tedavisi",
+        "description": "Saç ve cilt gençleştirme tedavileri"
       }
     },
     "consultation": {
-      "title": "Free Consultation",
-      "description": "Book an appointment now to determine the most suitable treatment method for you",
-      "button": "Book Appointment"
+      "title": "Ücretsiz Konsültasyon",
+      "description": "Size en uygun tedavi yöntemini belirlemek için hemen randevu alın",
+      "button": "Randevu Al"
     },
     "details": {
-      "duration": "Duration",
-      "recovery": "Recovery Time",
-      "anesthesia": "Anesthesia",
-      "hospital": "Hospital Stay",
-      "results": "Results",
-      "recommendation": "Recommendations"
+      "duration": "Süre",
+      "recovery": "İyileşme Süresi",
+      "anesthesia": "Anestezi",
+      "hospital": "Hastanede Kalış",
+      "results": "Sonuçlar",
+      "recommendation": "Öneriler"
     },
     "treatments": {
       "hair": {
         "technique": {
-          "dhi": "DHI Technique",
-          "fue": "Sapphire FUE Technique",
-          "description": "Latest technology and natural results"
+          "dhi": "DHI Tekniği",
+          "fue": "Safir FUE Tekniği",
+          "description": "En son teknoloji ve doğal sonuçlar"
         },
         "process": {
-          "planning": "Planning",
-          "extraction": "Graft Extraction",
-          "implantation": "Implantation",
-          "aftercare": "Aftercare"
+          "planning": "Planlama",
+          "extraction": "Greft Alımı",
+          "implantation": "Ekim İşlemi",
+          "aftercare": "Sonrası Bakım"
         }
       }
     }
   },
   "blog": {
     "title": "Blog",
-    "readMore": "Read More",
+    "subtitle": "Uzman kadromuzdan güncel bilgiler, tedavi süreçleri ve başarı hikayeleri",
+    "search": "Blog yazılarında ara...",
     "categories": {
-      "all": "All",
-      "hairTransplant": "Hair Transplant",
-      "beardTransplant": "Beard Transplant",
-      "eyebrowTransplant": "Eyebrow Transplant",
-      "aesthetics": "Aesthetics",
-      "dermatology": "Dermatology",
-      "aftercare": "Aftercare",
-      "treatment": "Treatment Process"
+      "all": "Tümü",
+      "hairTransplant": "Saç Ekimi",
+      "beardTransplant": "Sakal Ekimi",
+      "eyebrowTransplant": "Kaş Ekimi",
+      "aesthetics": "Estetik",
+      "dermatology": "Dermatoloji",
+      "aftercare": "Bakım",
+      "treatment": "Tedavi Süreci"
     },
-    "search": {
-      "title": "Search Blog",
-      "placeholder": "Type to search...",
-      "noResults": "No results found",
-      "trending": "Trending Topics"
-    },
+    "readMore": "Devamını Oku",
     "share": {
-      "title": "Share This Article",
-      "copied": "Link copied"
+      "title": "Bu Yazıyı Paylaş",
+      "copied": "Bağlantı kopyalandı"
     },
     "author": {
-      "about": "About the Author",
-      "articles": "Other Articles"
+      "about": "Yazar Hakkında",
+      "articles": "Diğer Yazıları"
     },
-    "relatedPosts": "Related Posts",
+    "relatedPosts": "Benzer Yazılar",
     "comments": {
-      "title": "Comments",
-      "noComments": "No comments yet",
-      "writeComment": "Write a Comment",
-      "submit": "Submit"
+      "title": "Yorumlar",
+      "noComments": "Henüz yorum yapılmamış",
+      "writeComment": "Yorum Yaz",
+      "submit": "Gönder"
+    },
+    "search": {
+      "title": "Blog'da Ara",
+      "placeholder": "Arama yapmak için yazın...",
+      "noResults": "Sonuç bulunamadı",
+      "trending": "Popüler Konular"
     },
     "filters": {
-      "latest": "Latest",
-      "popular": "Popular",
-      "category": "Category"
+      "latest": "En Yeni",
+      "popular": "Popüler",
+      "category": "Kategori"
     },
-    "readTime": "{{minutes}} min read",
-    "publishDate": "Published on {{date}}",
+    "readTime": "{{minutes}} dakika okuma",
+    "publishDate": "{{date}} tarihinde yayınlandı",
     "authorInfo": {
-      "title": "About the Author",
-      "credentials": "Specializations",
-      "experience": "Experience"
+      "title": "Yazar Hakkında",
+      "credentials": "Uzmanlık Alanları",
+      "experience": "Deneyim"
     },
     "engagement": {
-      "likes": "Likes",
-      "comments": "Comments",
-      "shares": "Shares"
+      "likes": "Beğeni",
+      "comments": "Yorum",
+      "shares": "Paylaşım"
+    }
+  },
+  "faq": {
+    "title": "Sıkça Sorulan Sorular",
+    "subtitle": "Saç ekimi hakkında merak ettiğiniz tüm sorulara uzman ekibimizden yanıtlar",
+    "items": {
+      "0": {
+        "question": "Saç ekimi operasyonu ne kadar sürer?",
+        "answer": "Saç ekimi operasyonu ortalama 6-8 saat sürer. Bu süre ekilecek greft sayısına ve kullanılan tekniğe göre değişiklik gösterebilir. İşlem lokal anestezi altında gerçekleştirilir."
+      },
+      "1": {
+        "question": "Saç ekimi sonrası iyileşme süreci nasıldır?",
+        "answer": "İyileşme süreci kişiden kişiye değişmekle birlikte, genellikle ilk 2 hafta kritik önem taşır. 3. günden itibaren işe dönülebilir. Tam iyileşme ve sonuçların görülmesi 6-12 ay arasında sürer."
+      },
+      "2": {
+        "question": "Saç ekimi kalıcı bir çözüm müdür?",
+        "answer": "Evet, saç ekimi kalıcı bir çözümdür. Ekilen saçlar genetik olarak dökülmeye dirençli bölgeden alındığı için ömür boyu dökülmeden kalır. Ancak var olan saçların korunması için gerekli bakımın yapılması önemlidir."
+      },
+      "3": {
+        "question": "Saç ekimi için yaş sınırı var mıdır?",
+        "answer": "Saç ekimi için ideal yaş aralığı 25-55'tir. Ancak her vaka bireysel olarak değerlendirilir. Önemli olan saç kaybının stabil hale gelmiş olması ve yeterli donör alanının bulunmasıdır."
+      },
+      "4": {
+        "question": "Operasyon sonrası günlük yaşama ne zaman dönülebilir?",
+        "answer": "Operasyondan 3 gün sonra günlük yaşama dönülebilir. Ancak spor, yüzme gibi aktiviteler için 1 ay beklenmesi önerilir. İlk 2 hafta güneş, terleme ve darbelere karşı dikkatli olunmalıdır."
+      }
     }
   },
   "patient": {
     "dashboard": {
-      "title": "Patient Portal",
-      "welcome": "Welcome! You can track your treatment process here.",
-      "appointments": "Appointments",
-      "upcomingAppointment": "Upcoming Appointment",
-      "messages": "Messages",
-      "unreadMessage": "Unread Message",
-      "images": "My Images",
-      "uploadImages": "Treatment Images",
-      "profile": "My Profile",
-      "editProfile": "Profile Information",
-      "upcomingAppointments": "Upcoming Appointments",
-      "details": "Details",
-      "newMessage": "New Message",
-      "read": "Read"
+      "title": "Hasta Portalı",
+      "welcome": "Hoş geldiniz! Tedavi sürecinizi buradan takip edebilirsiniz.",
+      "appointments": "Randevular",
+      "upcomingAppointment": "Yaklaşan Randevu",
+      "messages": "Mesajlar",
+      "unreadMessage": "Okunmamış Mesaj",
+      "images": "Görsellerim",
+      "uploadImages": "Tedavi Görselleri",
+      "profile": "Profilim",
+      "editProfile": "Profil Bilgileri",
+      "upcomingAppointments": "Yaklaşan Randevular",
+      "details": "Detaylar",
+      "newMessage": "Yeni Mesaj",
+      "read": "Oku"
     },
     "images": {
-      "title": "My Treatment Images",
-      "description": "Track your progress during treatment. Securely upload and manage your before and after images.",
-      "uploadNew": "Upload New Image",
-      "noImages": "You haven't uploaded any images yet.",
-      "uploadPrompt": "You can upload images to track your treatment progress.",
-      "view": "View",
-      "doctorFeedback": "Doctor feedback available"
+      "title": "Tedavi Görsellerim",
+      "description": "Tedavi sürecinizdeki gelişimi takip edin. Öncesi ve sonrası görsellerinizi güvenle yükleyin ve yönetin.",
+      "uploadNew": "Yeni Görsel Yükle",
+      "noImages": "Henüz görsel yüklemediniz.",
+      "uploadPrompt": "Tedavi sürecinizi takip etmek için görsel yükleyebilirsiniz.",
+      "view": "Görüntüle",
+      "doctorFeedback": "Doktor yorumu var"
     },
     "appointments": {
-      "createTitle": "Create Online Appointment",
-      "createDescription": "Schedule a free consultation at your convenience. Our expert doctors will provide detailed information about your treatment process.",
-      "selectDate": "Select Date",
-      "appointmentDetails": "Appointment Details",
-      "selectedDate": "Selected Date",
-      "createButton": "Create Appointment",
-      "contactNote": "* After your appointment is confirmed, our team will contact you to determine the most suitable time."
+      "createTitle": "Online Randevu Oluşturun",
+      "createDescription": "Size en uygun tarih ve saatte ücretsiz danışmanlık için randevu alın. Uzman doktorlarımız tedavi süreciniz hakkında detaylı bilgi versin.",
+      "selectDate": "Tarih Seçin",
+      "appointmentDetails": "Randevu Detayları",
+      "selectedDate": "Seçilen Tarih",
+      "createButton": "Randevu Oluştur",
+      "contactNote": "* Randevunuz onaylandıktan sonra size en uygun saati belirlemek için ekibimiz sizinle iletişime geçecektir."
     },
     "portal": {
-      "welcome": "Welcome",
-      "appointments": "My Appointments",
-      "treatments": "My Treatments",
-      "documents": "My Documents",
-      "messages": "My Messages",
-      "profile": "My Profile"
+      "welcome": "Hoş Geldiniz",
+      "appointments": "Randevularım",
+      "treatments": "Tedavilerim",
+      "documents": "Belgelerim",
+      "messages": "Mesajlarım",
+      "profile": "Profilim"
     },
     "profile": {
-      "personalInfo": "Personal Information",
-      "medicalHistory": "Medical History",
-      "preferences": "Preferences",
-      "settings": "Settings",
+      "personalInfo": "Kişisel Bilgiler",
+      "medicalHistory": "Tıbbi Geçmiş",
+      "preferences": "Tercihler",
+      "settings": "Ayarlar",
       "gender": {
-        "male": "Male",
-        "female": "Female"
+        "male": "Erkek",
+        "female": "Kadın"
       },
       "medicalHistory": {
-        "previousTreatments": "Previous Treatments",
-        "previousTreatmentsPlaceholder": "Please specify any previous treatments if applicable...",
-        "conditions": "Medical Conditions",
-        "conditionsPlaceholder": "Please specify any chronic conditions or regular medications if applicable..."
+        "previousTreatments": "Önceki Tedaviler",
+        "previousTreatmentsPlaceholder": "Varsa daha önce aldığınız tedavileri belirtiniz...",
+        "conditions": "Sağlık Durumu",
+        "conditionsPlaceholder": "Varsa kronik rahatsızlıklarınızı veya düzenli kullandığınız ilaçları belirtiniz..."
       }
     },
     "messages": {
-      "newMessage": "New Message",
-      "inbox": "Inbox",
-      "sent": "Sent",
-      "compose": "Compose",
-      "reply": "Reply"
+      "newMessage": "Yeni Mesaj",
+      "inbox": "Gelen Kutusu",
+      "sent": "Gönderilen",
+      "compose": "Mesaj Yaz",
+      "reply": "Yanıtla"
+    }
+  },
+  "contact": {
+    "title": "İletişim",
+    "subtitle": "Size yardımcı olmaktan mutluluk duyarız. İstediğiniz zaman bizimle iletişime geçebilirsiniz.",
+    "address": {
+      "title": "Adres",
+      "line1": "Tsotne Dadiani 59",
+      "line2": "Tiflis, Gürcistan"
+    },
+    "phone": {
+      "title": "Telefon",
+      "number1": "+995 555 003 044"
+    },
+    "email": {
+      "title": "E-posta",
+      "address": "primehealthtblisi@gmail.com"
+    },
+    "workingHours": {
+      "title": "Çalışma Saatleri",
+      "weekdays": "Pazartesi - Cumartesi: 09:00 - 18:00",
+      "weekend": "Pazar: Kapalı"
+    },
+    "socialMedia": {
+      "title": "Sosyal Medya",
+      "followUs": "Bizi takip edin"
+    }
+  },
+  "gallery": {
+    "title": "Hasta Sonuçları Galerisi",
+    "subtitle": "Profesyonel saç ekimi kliniğimizde gerçekleştirilen operasyonların öncesi ve sonrası sonuçları",
+    "search": {
+      "placeholder": "Hasta sonuçlarında ara...",
+      "noResults": "Sonuç bulunamadı"
+    },
+    "tabs": {
+      "beforeAfter": "Öncesi ve Sonrası",
+      "clinic": "Klinik Görselleri",
+      "videos": "Klinik Videoları",
+      "success": "Başarı Hikayeleri"
+    },
+    "videos": {
+      "title": "Klinik Video Galerisi",
+      "subtitle": "Kliniğimizin operasyon anlarından görüntüler ve tedavi süreçleri",
+      "operationProcess": {
+        "title": "Operasyon Süreci",
+        "description": "Saç ekimi operasyonunun aşamalarını gösteren video"
+      },
+      "hairlineDesign": {
+        "title": "Saç Çizgisi Tasarımı",
+        "description": "Kişiye özel saç çizgisi tasarlama süreci"
+      },
+      "graftExtraction": {
+        "title": "Greft Çıkarım İşlemi",
+        "description": "Donör bölgeden greftlerin toplanma süreci"
+      },
+      "implantationProcess": {
+        "title": "Ekim İşlemi",
+        "description": "Saç greftlerinin yerleştirilme tekniği ve süreci"
+      },
+      "clinicTour": {
+        "title": "Klinik Turu",
+        "description": "Modern kliniğimizin tüm alanlarını keşfedin"
+      },
+      "patientExperience": {
+        "title": "Hasta Deneyimi",
+        "description": "Hastalarımızın tüm süreç boyunca deneyimleri"
+      },
+      "teamAtWork": {
+        "title": "Çalışan Ekibimiz",
+        "description": "Profesyonel ekibimizin çalışma anları"
+      },
+      "aftercareProcess": {
+        "title": "Sonrası Bakım Süreci",
+        "description": "Operasyon sonrası bakım talimatları ve iyileşme süreci"
+      },
+      "dhiTechnique": {
+        "title": "DHI Tekniği",
+        "description": "DHI (Direct Hair Implantation) tekniğinin uygulanması"
+      },
+      "fueTechnique": {
+        "title": "FUE Tekniği",
+        "description": "FUE (Follicular Unit Extraction) tekniğinin gösterimi"
+      }
+    },
+    "labels": {
+      "photo": "Fotoğraf",
+      "video": "Video",
+      "videoNotSupported": "Tarayıcınız video oynatmayı desteklemiyor."
+    },
+    "buttons": {
+      "consult": "Ücretsiz Konsültasyon",
+      "share": "Paylaş"
+    },
+    "caseDescriptions": {
+      "sixMonthResult": "6 ay sonrası sonuç",
+      "eightMonthResult": "8 ay sonrası sonuç",
+      "twelveMonthResult": "12 ay sonrası sonuç"
+    },
+    "techniques": {
+      "safirFUE": "Safir FUE",
+      "dhi": "DHI"
+    },
+    "durations": {
+      "sixHours": "6 saat",
+      "sevenHours": "7 saat",
+      "eightHours": "8 saat"
+    },
+    "satisfactions": {
+      "satisfied": "Memnun",
+      "verySatisfied": "Çok memnun",
+      "extremelySatisfied": "Son derece memnun"
+    },
+    "clinic": {
+      "hairTransplantProcedure": {
+        "title": "Saç Ekimi İşlemi",
+        "description": "Uzman ekibimizle saç ekimi operasyonu"
+      },
+      "operationMoment": {
+        "title": "Operasyon Anı",
+        "description": "Modern cihazlarımızla saç ekimi prosedürü"
+      },
+      "clinicWork": {
+        "title": "Klinik Çalışma",
+        "description": "Uzman doktorlarımız operasyon sırasında"
+      },
+      "hairTransplantTechniques": {
+        "title": "Saç Ekimi Teknikleri",
+        "description": "Hassas işlemlerle saç ekimi uygulaması"
+      },
+      "operatingRoom": {
+        "title": "Operasyon Odası",
+        "description": "Modern operasyon odamızda saç ekimi işlemi"
+      },
+      "teamWork": {
+        "title": "Ekip Çalışması",
+        "description": "Profesyonel ekibimiz çalışma anında"
+      },
+      "expertDoctors": {
+        "title": "Uzman Doktorlarımız",
+        "description": "Deneyimli doktorlarımız operasyon sırasında"
+      },
+      "hairlineDesign": {
+        "title": "Saç Çizgisi Tasarımı",
+        "description": "Kişiye özel saç çizgisi tasarımı ve uygulaması"
+      },
+      "operationDetails": {
+        "title": "Operasyon Detayları",
+        "description": "Titizlikle yapılan saç ekimi operasyonu"
+      },
+      "microFUETechnique": {
+        "title": "Mikro FUE Tekniği",
+        "description": "Mikro FUE tekniği ile saç ekimi uygulaması"
+      },
+      "surgicalMagnification": {
+        "title": "Cerrahi Magnifikasyon",
+        "description": "Yüksek magnifikasyon cihazlarıyla hassas işlem"
+      },
+      "operationPreparation": {
+        "title": "Operasyon Hazırlığı",
+        "description": "Steril ortamda operasyon hazırlığı"
+      },
+      "precisionTechnique": {
+        "title": "Hassas Ekim Tekniği",
+        "description": "Her greft için optimal açı ve derinlikte hassas ekim"
+      },
+      "professionalCare": {
+        "title": "Profesyonel Bakım",
+        "description": "Deneyimli sağlık ekibimizle profesyonel hasta bakımı"
+      },
+      "modernTreatment": {
+        "title": "Modern Tedavi",
+        "description": "Çağdaş saç ekimi teknikleri ve ekipmanları"
+      },
+      "treatmentPreparation": {
+        "title": "Tedavi Hazırlığı",
+        "description": "Saç ekimi öncesi hazırlık aşaması"
+      },
+      "detailedAnalysis": {
+        "title": "Detaylı Analiz",
+        "description": "Kişiye özel saç analizi ve planlama"
+      },
+      "clinicEnvironment": {
+        "title": "Klinik Ortamı",
+        "description": "Steril ve konforlu tedavi alanlarımız"
+      },
+      "advancedEquipment": {
+        "title": "İleri Teknoloji",
+        "description": "Son teknoloji saç ekimi cihazlarımız"
+      },
+      "patientConsultation": {
+        "title": "Hasta Danışmanlığı",
+        "description": "Kişisel ihtiyaçlar doğrultusunda profesyonel konsültasyon"
+      }
+    },
+    "caseDescriptions": {
+      "sixMonthResult": "6 ay sonrası sonuç",
+      "eightMonthResult": "8 ay sonrası sonuç",
+      "twelveMonthResult": "12 ay sonrası sonuç"
+    },
+    "techniques": {
+      "safirFUE": "Safir FUE",
+      "dhi": "DHI",
+      "classicFUE": "Klasik FUE"
+    },
+    "durations": {
+      "sixHours": "6 saat",
+      "sevenHours": "7 saat",
+      "eightHours": "8 saat"
+    },
+    "satisfactions": {
+      "verySatisfied": "Çok memnun",
+      "satisfied": "Memnun",
+      "extremelySatisfied": "Son derece memnun"
+    },
+    "categories": {
+      "sac-ekimi": "Saç Ekimi",
+      "sakal-ekimi": "Sakal Ekimi",
+      "kas-ekimi": "Kaş Ekimi"
+    },
+    "patientDetails": {
+      "title": "Hasta Bilgileri",
+      "before": "Öncesi",
+      "after": "Sonrası",
+      "age": "Yaş",
+      "gender": "Cinsiyet",
+      "problemArea": "Problem Bölgesi",
+      "diagnosis": "Teşhis",
+      "hairLossStage": "Saç Dökülme Evresi"
+    },
+    "procedureDetails": {
+      "title": "İşlem Detayları",
+      "technique": "Teknik",
+      "grafts": "Greft Sayısı",
+      "duration": "Süre",
+      "anesthesia": "Anestezi",
+      "recoveryTime": "İyileşme Süresi"
+    },
+    "results": {
+      "title": "Sonuçlar",
+      "satisfaction": "Memnuniyet",
+      "density": "Yoğunluk",
+      "survivalRate": "Tutma Oranı",
+      "naturalness": "Doğallık",
+      "finalResult": "Final Sonucu"
+    },
+    "testimonial": {
+      "title": "Hasta Yorumu",
+      "doctorNote": "Doktor Notu"
+    },
+    "buttons": {
+      "share": "Paylaş",
+      "consult": "Danışmanlık Al",
+      "view3d": "3D Görünüm",
+      "view2d": "2D Görünüm"
+    },
+    "filters": {
+      "all": "Tümü",
+      "latest": "En Yeni",
+      "popular": "En Beğenilen"
     }
   },
   "appointment": {
     "book": {
-      "title": "Book Appointment",
-      "subtitle": "Choose your preferred date and time",
-      "selectDate": "Select date",
-      "selectTime": "Select time",
-      "selectService": "Select service",
-      "personalInfo": "Personal Information",
-      "notes": "Notes",
-      "success": "Your appointment has been successfully created",
-      "confirmation": "Appointment confirmation will be sent via email",
-      "submit": "Create Appointment",
-      "notesPlaceholder": "Any additional notes...",
-      "error": "An error occurred while creating your appointment. Please try again."
+      "title": "Randevu Al",
+      "subtitle": "Size en uygun tarih ve saati seçin",
+      "selectDate": "Tarih seçin",
+      "selectTime": "Saat seçin",
+      "selectService": "Hizmet seçin",
+      "personalInfo": "Kişisel Bilgiler",
+      "notes": "Notlar",
+      "success": "Randevunuz başarıyla oluşturuldu",
+      "submit": "Randevu Oluştur",
+      "notesPlaceholder": "Eklemek istediğiniz notlar...",
+      "error": "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin."
     },
     "status": {
-      "pending": "Pending",
-      "confirmed": "Confirmed",
-      "cancelled": "Cancelled",
-      "completed": "Completed"
-    },
-    "communicationPreferences": "Communication Preferences",
-    "communicationPreferencesDescription": "How would you prefer us to contact you?"
-  },
-  "products": {
-    "title": "Professional Hair Care Products",
-    "subtitle": "Specially formulated products for the best results after hair transplantation",
-    "search": "Search products...",
-    "categories": {
-      "shampoos": {
-        "title": "Hair Care Shampoos",
-        "description": "Specially formulated shampoos for post-hair transplant care"
-      },
-      "serums": {
-        "title": "Hair Growth Serums",
-        "description": "Special serums supporting hair growth"
-      },
-      "masks": {
-        "title": "Hair Care Masks",
-        "description": "Masks providing intensive care and repair"
-      },
-      "vitamins": {
-        "title": "Hair Care Vitamins",
-        "description": "Vitamin supplements supporting hair health from within"
-      },
-      "tonics": {
-        "title": "Hair Care Tonics",
-        "description": "Tonics that revitalize and nourish the scalp"
-      },
-      "creams": {
-        "title": "Hair Care Creams",
-        "description": "Creams for daily care and moisturizing"
-      }
-    },
-    "product": {
-      "ingredients": "Ingredients",
-      "benefits": "Benefits",
-      "instructions": "Usage Instructions",
-      "warnings": "Warnings",
-      "hairTypes": {
-        "all": "All Hair Types",
-        "oily": "Oily",
-        "dry": "Dry",
-        "normal": "Normal",
-        "mixed": "Mixed",
-        "damaged": "Damaged",
-        "sensitive": "Sensitive",
-        "thin": "Thin",
-        "thick": "Thick"
-      }
-    }
-  },
-  "ui": {
-    "dialog": {
-      "close": "Close"
-    },
-    "command": {
-      "search": "Search...",
-      "empty": "No results found.",
-      "shortcut": "Shortcut"
-    },
-    "table": {
-      "empty": "No data found.",
-      "loading": "Loading...",
-      "previous": "Previous",
-      "next": "Next",
-      "rowsPerPage": "Rows per page:",
-      "of": "of",
-      "more": "More"
-    },
-    "form": {
-      "required": "This field is required",
-      "invalid": "Invalid value",
-      "select": "Select"
-    },
-    "toast": {
-      "success": "Success",
-      "error": "Error",
-      "info": "Info",
-      "warning": "Warning",
-      "close": "Close"
-    }
-  },
-  "contact": {
-    "title": "Contact",
-    "subtitle": "We are happy to help you. Feel free to contact us anytime.",
-    "address": {
-      "title": "Address",
-      "line1": "Tsotne Dadiani 59",
-      "line2": "Tbilisi, Georgia"
-    },
-    "phone": {
-      "title": "Phone",
-      "number1": "+995 555 003 044",
-      "number2": "+995 555 003 044"
-    },
-    "email": {
-      "title": "Email",
-      "address": "primehealthtblisi@gmail.com"
-    },
-    "workingHours": {
-      "title": "Working Hours",
-      "weekdays": "Monday - Saturday: 09:00 - 18:00",
-      "weekend": "Sunday: Closed"
-    },
-    "socialMedia": {
-      "title": "Social Media",
-      "followUs": "Follow us"
-    }
-  },
-  "gallery": {
-    "title": "Patient Results Gallery",
-    "subtitle": "Before and after results of operations performed at our professional hair transplant clinic",
-    "search": {
-      "placeholder": "Search patient results...",
-      "noResults": "No results found"
-    },
-    "tabs": {
-      "beforeAfter": "Before and After",
-      "clinic": "Clinic Gallery",
-      "videos": "Clinic Videos",
-      "success": "Success Stories"
-    },
-    "videos": {
-      "title": "Clinic Video Gallery",
-      "subtitle": "Videos from our clinic showing operations and treatment processes",
-      "operationProcess": {
-        "title": "Operation Process",
-        "description": "Video showing stages of hair transplantation operation"
-      },
-      "hairlineDesign": {
-        "title": "Hairline Design",
-        "description": "Custom hairline design process"
-      },
-      "graftExtraction": {
-        "title": "Graft Extraction Process",
-        "description": "Process of collecting grafts from donor area"
-      },
-      "implantationProcess": {
-        "title": "Implantation Process",
-        "description": "Technique and process of implanting hair grafts"
-      },
-      "clinicTour": {
-        "title": "Clinic Tour",
-        "description": "Explore all areas of our modern clinic"
-      },
-      "patientExperience": {
-        "title": "Patient Experience",
-        "description": "Experiences of our patients throughout the process"
-      },
-      "teamAtWork": {
-        "title": "Team at Work",
-        "description": "Our professional team during work moments"
-      },
-      "aftercareProcess": {
-        "title": "Aftercare Process",
-        "description": "Post-operation care instructions and healing process"
-      },
-      "dhiTechnique": {
-        "title": "DHI Technique",
-        "description": "Application of DHI (Direct Hair Implantation) technique"
-      },
-      "fueTechnique": {
-        "title": "FUE Technique",
-        "description": "Demonstration of FUE (Follicular Unit Extraction) technique"
-      }
-    },
-    "clinic": {
-      "hairTransplantProcedure": {
-        "title": "Hair Transplant Procedure",
-        "description": "Hair transplant operation with our expert team"
-      },
-      "operationMoment": {
-        "title": "Operation Moment",
-        "description": "Hair transplant procedure with modern equipment"
-      },
-      "clinicWork": {
-        "title": "Clinic Work",
-        "description": "Our expert doctors during operation"
-      },
-      "hairTransplantTechniques": {
-        "title": "Hair Transplant Techniques",
-        "description": "Hair transplantation using precise procedures"
-      },
-      "operatingRoom": {
-        "title": "Operating Room",
-        "description": "Hair transplant procedure in our modern operating room"
-      },
-      "teamWork": {
-        "title": "Team Work",
-        "description": "Our professional team during work"
-      },
-      "expertDoctors": {
-        "title": "Expert Doctors",
-        "description": "Our experienced doctors during operation"
-      },
-      "hairlineDesign": {
-        "title": "Hairline Design",
-        "description": "Personalized hairline design and application"
-      },
-      "operationDetails": {
-        "title": "Operation Details",
-        "description": "Meticulously performed hair transplant operation"
-      },
-      "microFUETechnique": {
-        "title": "Micro FUE Technique",
-        "description": "Application of Micro FUE technique for hair transplantation"
-      },
-      "surgicalMagnification": {
-        "title": "Surgical Magnification",
-        "description": "Precise procedure using high magnification devices"
-      },
-      "operationPreparation": {
-        "title": "Operation Preparation",
-        "description": "Preparing for operation in a sterile environment"
-      },
-      "precisionTechnique": {
-        "title": "Precision Implantation Technique",
-        "description": "Precise implantation at optimal angle and depth for each graft"
-      },
-      "professionalCare": {
-        "title": "Professional Care",
-        "description": "Professional patient care with our experienced medical team"
-      },
-      "modernTreatment": {
-        "title": "Modern Treatment",
-        "description": "Modern hair transplant techniques and equipment"
-      },
-      "treatmentPreparation": {
-        "title": "Treatment Preparation",
-        "description": "Preparatory phase before hair transplantation"
-      },
-      "detailedAnalysis": {
-        "title": "Detailed Analysis",
-        "description": "Personalized hair analysis and planning"
-      },
-      "clinicEnvironment": {
-        "title": "Clinic Environment",
-        "description": "Our sterile and comfortable treatment areas"
-      },
-      "advancedEquipment": {
-        "title": "Advanced Technology",
-        "description": "State-of-the-art hair transplant devices"
-      },
-      "patientConsultation": {
-        "title": "Patient Consultation",
-        "description": "Professional consultation according to personal needs"
-      }
-    },
-    "labels": {
-      "photo": "Photo",
-      "video": "Video",
-      "videoNotSupported": "Your browser does not support video playback."
-    },
-    "buttons": {
-      "consult": "Free Consultation",
-      "share": "Share"
-    },
-    "caseDescriptions": {
-      "sixMonthResult": "6 month result",
-      "eightMonthResult": "8 month result",
-      "twelveMonthResult": "12 month result"
-    },
-    "techniques": {
-      "safirFUE": "Sapphire FUE",
-      "dhi": "DHI"
-    },
-    "durations": {
-      "sixHours": "6 hours",
-      "sevenHours": "7 hours",
-      "eightHours": "8 hours"
-    },
-    "satisfactions": {
-      "satisfied": "Satisfied",
-      "verySatisfied": "Very satisfied",
-      "extremelySatisfied": "Extremely satisfied"
-    },
-    "clinic": {
-      "hairTransplantProcedure": {
-        "title": "Hair Transplant Procedure",
-        "description": "Hair transplant operation with our expert team"
-      },
-      "operationMoment": {
-        "title": "Operation Moment",
-        "description": "Hair transplant procedure with modern equipment"
-      },
-      "clinicWork": {
-        "title": "Clinic Work",
-        "description": "Our expert doctors during operation"
-      },
-      "hairTransplantTechniques": {
-        "title": "Hair Transplant Techniques",
-        "description": "Hair transplant application with precise procedures"
-      },
-      "operatingRoom": {
-        "title": "Operating Room",
-        "description": "Hair transplant procedure in our modern operating room"
-      },
-      "teamWork": {
-        "title": "Team Work",
-        "description": "Our professional team during work"
-      },
-      "expertDoctors": {
-        "title": "Expert Doctors",
-        "description": "Our experienced doctors during operation"
-      },
-      "hairlineDesign": {
-        "title": "Hairline Design",
-        "description": "Personalized hairline design and application"
-      },
-      "operationDetails": {
-        "title": "Operation Details",
-        "description": "Meticulously performed hair transplant operation"
-      },
-      "microFUETechnique": {
-        "title": "Micro FUE Technique",
-        "description": "Hair transplant application with Micro FUE technique"
-      },
-      "surgicalMagnification": {
-        "title": "Surgical Magnification",
-        "description": "Precise procedure with high magnification devices"
-      },
-      "operationPreparation": {
-        "title": "Operation Preparation",
-        "description": "Operation preparation in a sterile environment"
-      },
-      "precisionTechnique": {
-        "title": "Precision Implantation Technique",
-        "description": "Precise implantation at optimal angle and depth for each graft"
-      },
-      "professionalCare": {
-        "title": "Professional Care",
-        "description": "Professional patient care with our experienced healthcare team"
-      },
-      "modernTreatment": {
-        "title": "Modern Treatment",
-        "description": "Contemporary hair transplantation techniques and equipment"
-      },
-      "treatmentPreparation": {
-        "title": "Treatment Preparation",
-        "description": "Preparation phase before hair transplantation"
-      },
-      "detailedAnalysis": {
-        "title": "Detailed Analysis",
-        "description": "Personalized hair analysis and planning"
-      },
-      "clinicEnvironment": {
-        "title": "Clinic Environment",
-        "description": "Our sterile and comfortable treatment areas"
-      },
-      "advancedEquipment": {
-        "title": "Advanced Technology",
-        "description": "State-of-the-art hair transplantation devices"
-      },
-      "patientConsultation": {
-        "title": "Patient Consultation",
-        "description": "Professional consultation according to personal needs"
-      }
-    },
-      "success": "Success Stories"
-    },
-    "caseDescriptions": {
-      "sixMonthResult": "6 month result",
-      "eightMonthResult": "8 month result",
-      "twelveMonthResult": "12 month result"
-    },
-    "techniques": {
-      "safirFUE": "Sapphire FUE",
-      "dhi": "DHI",
-      "classicFUE": "Classic FUE"
-    },
-    "durations": {
-      "sixHours": "6 hours",
-      "sevenHours": "7 hours",
-      "eightHours": "8 hours"
-    },
-    "satisfactions": {
-      "verySatisfied": "Very satisfied",
-      "satisfied": "Satisfied",
-      "extremelySatisfied": "Extremely satisfied"
-    },
-    "categories": {
-      "sac-ekimi": "Hair Transplantation",
-      "sakal-ekimi": "Beard Transplantation",
-      "kas-ekimi": "Eyebrow Transplantation"
-    },
-    "patientDetails": {
-      "title": "Patient Information",
-      "before": "Before",
-      "after": "After",
-      "age": "Age",
-      "gender": "Gender",
-      "problemArea": "Problem Area",
-      "diagnosis": "Diagnosis",
-      "hairLossStage": "Hair Loss Stage"
-    },
-    "procedureDetails": {
-      "title": "Procedure Details",
-      "technique": "Technique",
-      "grafts": "Graft Count",
-      "duration": "Duration",
-      "anesthesia": "Anesthesia",
-      "recoveryTime": "Recovery Time"
-    },
-    "results": {
-      "title": "Results",
-      "satisfaction": "Satisfaction",
-      "density": "Density",
-      "survivalRate": "Survival Rate",
-      "naturalness": "Naturalness",
-      "finalResult": "Final Result"
-    },
-    "testimonial": {
-      "title": "Patient Testimonial",
-      "doctorNote": "Doctor's Note"
-    },
-    "buttons": {
-      "share": "Share",
-      "consult": "Get Consultation",
-      "view3d": "3D View",
-      "view2d": "2D View"
-    },
-    "filters": {
-      "all": "All",
-      "latest": "Latest",
-      "popular": "Most Popular"
-    }
-  },
-  "footer": {
-    "company": {
-      "title": "Company",
-      "about": "About Us",
-      "careers": "Careers",
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service"
-    },
-    "social": {
-      "title": "Social Media",
-      "followUs": "Follow Us",
-      "facebook": "Follow on Facebook",
-      "instagram": "Follow on Instagram",
-      "twitter": "Follow on Twitter",
-      "youtube": "Follow on Youtube"
-    },
-    "contact": {
-      "title": "Contact",
-      "address": "Address",
-      "phone": "Phone",
-      "email": "Email"
-    },
-    "newsletter": {
-      "title": "Newsletter",
-      "subtitle": "Stay updated with our latest developments",
-      "placeholder": "Your email address",
-      "subscribe": "Subscribe",
-      "success": "Successfully subscribed",
-      "error": "An error occurred"
-    },
-    "copyright": "© {year} All rights reserved",
-    "brand": "Hair Clinic Tbilisi"
-  },
-  "header": {
-    "menu": {
-      "open": "Open menu",
-      "close": "Close menu",
-      "main": "Main menu",
-      "user": "User menu"
-    },
-    "search": {
-      "placeholder": "Search...",
-      "button": "Search",
-      "noResults": "No results found"
-    },
-    "buttons": {
-      "appointment": "Book Appointment",
-      "consultation": "Free Consultation",
-      "contact": "Contact Us"
-    },
-    "userMenu": {
-      "profile": "My Profile",
-      "appointments": "My Appointments",
-      "dashboard": "Dashboard",
-      "settings": "Settings",
-      "logout": "Log Out"
+      "pending": "Bekliyor",
+      "confirmed": "Onaylandı",
+      "cancelled": "İptal Edildi",
+      "completed": "Tamamlandı"
     }
   },
   "form": {
-    "submit": "Submit",
-    "cancel": "Cancel",
-    "save": "Save",
-    "edit": "Edit",
-    "delete": "Delete",
-    "search": "Search",
-    "filter": "Filter",
-    "reset": "Reset",
-    "loading": "Processing...",
-    "success": "Operation successful",
-    "error": "An error occurred",
-    "required": "* Required field",
-    "optional": "(Optional)"
+    "submit": "Gönder",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "search": "Ara",
+    "filter": "Filtrele",
+    "reset": "Sıfırla",
+    "loading": "İşleminiz devam ediyor...",
+    "success": "İşlem başarılı",
+    "error": "Bir hata oluştu",
+    "required": "* Zorunlu alan",
+    "optional": "(Opsiyonel)"
+  },
+  "footer": {
+    "company": {
+      "title": "Şirket",
+      "about": "Hakkımızda",
+      "careers": "Kariyer",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Kullanım Şartları"
+    },
+    "social": {
+      "title": "Sosyal Medya",
+      "followUs": "Bizi Takip Edin",
+      "facebook": "Facebook'ta Takip Et",
+      "instagram": "Instagram'da Takip Et",
+      "twitter": "Twitter'da Takip Et",
+      "youtube": "Youtube'da Takip Et"
+    },
+    "contact": {
+      "title": "İletişim",
+      "address": "Adres",
+      "phone": "Telefon",
+      "email": "E-posta"
+    },
+    "newsletter": {
+      "title": "Bülten",
+      "subtitle": "Güncel gelişmelerden haberdar olun",
+      "placeholder": "E-posta adresiniz",
+      "subscribe": "Abone Ol",
+      "success": "Başarıyla abone oldunuz",
+      "error": "Bir hata oluştu"
+    },
+    "copyright": "© {year} Tüm hakları saklıdır",
+    "brand": "Hair Clinic Tiflis"
   },
   "seo": {
-    "defaultTitle": "Hair Clinic Tbilisi - Hair Transplant and Aesthetic Treatment Center",
-    "defaultDescription": "We provide hair transplant, beard transplant and eyebrow transplant and aesthetic treatment services with modern technology and expert staff in Tbilisi, Georgia.",
-    "defaultKeywords": "hair transplant, beard transplant, eyebrow transplant, aesthetic treatment, tbilisi, georgia",
+    "defaultTitle": "Hair Clinic Tiflis - Saç Ekimi ve Estetik Tedavi Merkezi",
+    "defaultDescription": "Gürcistan Tiflis'te modern teknoloji ve uzman kadromuzla saç ekimi, sakal ekimi ve estetik tedavi hizmetleri sunuyoruz.",
+    "defaultKeywords": "saç ekimi, sakal ekimi, kaş ekimi, estetik tedavi, tiflis, gürcistan",
     "pages": {
       "home": {
-        "title": "Hair Clinic Tbilisi - Hair Transplant and Aesthetic Treatment Center",
-        "description": "Hair transplant, beard transplant and aesthetic treatment services with modern technology and expert staff in Tbilisi, Georgia"
+        "title": "Hair Clinic Tiflis - Saç Ekimi ve Estetik Tedavi Merkezi",
+        "description": "Gürcistan Tiflis'te modern teknoloji ve uzman kadromuzla saç ekimi, sakal ekimi ve estetik tedavi hizmetleri"
       },
-      "services": {
-        "title": "Our Hair Transplant and Aesthetic Treatment Services",
-        "description": "Natural and permanent hair transplant results with DHI and Sapphire FUE techniques"
-      },
+
       "blog": {
-        "title": "Hair Transplant and Aesthetics Blog",
-        "description": "Expert insights about hair transplant, beard transplant and aesthetic treatments"
+        "title": "Saç Ekimi ve Estetik Blog",
+        "description": "Saç ekimi, sakal ekimi ve estetik tedaviler hakkında uzman bilgileri"
       },
       "contact": {
-        "title": "Contact - Hair Clinic Tbilisi",
-        "description": "Get in touch with us for free consultation and detailed information"
+        "title": "İletişim - Hair Clinic Tiflis",
+        "description": "Ücretsiz danışmanlık ve detaylı bilgi için bizimle iletişime geçin"
       }
     }
   },
   "cookies": {
-    "title": "Cookie Policy",
-    "message": "We use cookies to provide you with a better service",
-    "accept": "Accept",
-    "decline": "Decline",
-    "preferences": "Manage Preferences"
+    "title": "Çerez Politikası",
+    "message": "Size daha iyi hizmet verebilmek için çerezleri kullanıyoruz",
+    "accept": "Kabul Et",
+    "decline": "Reddet",
+    "preferences": "Tercihlerimi Yönet"
   },
   "gdpr": {
-    "title": "Privacy Notice",
-    "message": "Your personal data is processed in accordance with GDPR",
-    "details": "Learn More",
-    "accept": "I Understand"
+    "title": "KVKK Bildirimi",
+    "message": "Kişisel verileriniz KVKK kapsamında işlenmektedir",
+    "details": "Detaylı Bilgi",
+    "accept": "Anladım"
   },
   "notifications": {
-    "title": "Notifications",
-    "noNotifications": "No notifications",
-    "markAsRead": "Mark as Read",
-    "clearAll": "Clear All"
+    "title": "Bildirimler",
+    "noNotifications": "Bildiriminiz bulunmuyor",
+    "markAsRead": "Okundu olarak işaretle",
+    "clearAll": "Tümünü Temizle"
   },
   "mobile": {
     "menu": {
-      "open": "Open Menu",
-      "close": "Close Menu",
-      "back": "Back",
-      "search": "Search"
+      "open": "Menüyü Aç",
+      "close": "Menüyü Kapat",
+      "back": "Geri",
+      "search": "Ara"
     },
     "navigation": {
-      "previous": "Previous",
-      "next": "Next",
-      "menu": "Menu"
+      "previous": "Önceki",
+      "next": "Sonraki",
+      "menu": "Menü"
     }
   },
   "social": {
     "share": {
-      "title": "Share",
-      "facebook": "Share on Facebook",
-      "twitter": "Share on Twitter",
-      "linkedin": "Share on LinkedIn",
-      "whatsapp": "Share on WhatsApp",
-      "copyLink": "Copy Link"
+      "title": "Paylaş",
+      "facebook": "Facebook'ta Paylaş",
+      "twitter": "Twitter'da Paylaş",
+      "linkedin": "LinkedIn'de Paylaş",
+      "whatsapp": "WhatsApp'ta Paylaş",
+      "copyLink": "Bağlantıyı Kopyala"
     },
     "follow": {
-      "title": "Follow Us",
-      "facebook": "Follow on Facebook",
-      "instagram": "Follow on Instagram",
-      "twitter": "Follow on Twitter",
-      "youtube": "Follow on Youtube",
-      "linkedin": "Follow on LinkedIn"
+      "title": "Bizi Takip Edin",
+      "facebook": "Facebook'ta Takip Et",
+      "instagram": "Instagram'da Takip Et",
+      "twitter": "Twitter'da Takip Et",
+      "youtube": "Youtube'da Takip Et",
+      "linkedin": "LinkedIn'de Takip Et"
     }
   },
   "testimonials": {
-    "verified": "Verified Patient",
-    "beforeAfter": "Before & After",
-    "rating": "Rating",
-    "recommend": "Would Recommend",
-    "experience": "Experience",
-    "results": "Results",
+    "verified": "Doğrulanmış Hasta",
+    "beforeAfter": "Öncesi & Sonrası",
+    "rating": "Değerlendirme",
+    "recommend": "Tavsiye Eder",
+    "experience": "Deneyim",
+    "results": "Sonuçlar",
     "filters": {
-      "all": "All Reviews",
-      "verified": "Verified",
-      "withPhotos": "With Photos"
+      "all": "Tüm Yorumlar",
+      "verified": "Doğrulanmış",
+      "withPhotos": "Fotoğraflı"
     }
   },
   "forms": {
     "consultation": {
-      "title": "Free Consultation Form",
-      "subtitle": "Fill out the form for your personalized treatment plan",
+      "title": "Ücretsiz Danışmanlık Formu",
+      "subtitle": "Size özel tedavi planı için formu doldurun",
       "fields": {
-        "concern": "Treatment Area",
-        "history": "Previous Treatments",
-        "expectations": "Your Expectations",
-        "availability": "Preferred Times"
+        "concern": "Tedavi Alanı",
+        "history": "Önceki Tedaviler",
+        "expectations": "Beklentileriniz",
+        "availability": "Uygun Zamanlar"
       }
     },
     "contact": {
-      "success": "Your message has been sent successfully",
-      "error": "Failed to send your message",
+      "success": "Mesajınız başarıyla iletildi",
+      "error": "Mesajınız iletilemedi",
       "fields": {
-        "subject": "Subject",
-        "message": "Your Message",
-        "attachment": "Attach File"
-      }
-    }
-  },
-  "seo": {
-    "pages": {
-      "home": {
-        "title": "Hair Clinic Tbilisi - Hair Transplant and Aesthetic Treatment Center",
-        "description": "Hair transplant, beard transplant and aesthetic treatment services with modern technology and expert staff in Tbilisi, Georgia"
-      },
-      "services": {
-        "title": "Our Hair Transplant and Aesthetic Treatment Services",
-        "description": "Natural and permanent hair transplant results with DHI and Sapphire FUE techniques"
-      },
-      "blog": {
-        "title": "Hair Transplant and Aesthetics Blog",
-        "description": "Expert insights about hair transplant, beard transplant and aesthetic treatments"
-      },
-      "contact": {
-        "title": "Contact - Hair Clinic Tbilisi",
-        "description": "Get in touch with us for free consultation and detailed information"
+        "subject": "Konu",
+        "message": "Mesajınız",
+        "attachment": "Dosya Ekle"
       }
     }
   },
   "slider": {
-    "title1": "Expert Hair Transplant and Aesthetic Treatments",
-    "description1": "Get the best results with modern technology and our expert team",
-    "button1": "Free Consultation",
-    "title2": "Natural and Permanent Results",
-    "description2": "DHI and Sapphire FUE techniques with guaranteed results",
-    "button2": "View Results",
-    "title3": "Professional Team",
-    "description3": "Expert doctors and experienced medical staff",
-    "button3": "Meet Our Team",
-    "title4": "Modern Clinic",
-    "description4": "State-of-the-art facilities and comfortable environment",
-    "button4": "Virtual Tour"
+    "title1": "Uzman Saç Ekimi ve Estetik Tedaviler",
+    "description1": "Modern teknoloji ve uzman kadromuzla en iyi sonuçları elde edin",
+    "button1": "Ücretsiz Danışmanlık",
+    "title2": "Doğal ve Kalıcı Sonuçlar",
+    "description2": "DHI ve Safir FUE teknikleriyle garantili sonuçlar",
+    "button2": "Sonuçları Görün",
+    "title3": "Profesyonel Ekip",
+    "description3": "Uzman doktorlar ve deneyimli sağlık personeli",
+    "button3": "Ekibimizle Tanışın",
+    "title4": "Modern Klinik",
+    "description4": "Son teknoloji donanım ve konforlu ortam",
+    "button4": "Sanal Tur",
+    "title5": "Gelişmiş Cilt Bakımı",
+    "description5": "Kişiye özel yenilikçi cilt bakım çözümleri",
+    "button5": "Tedavileri Keşfedin"
   }
 }

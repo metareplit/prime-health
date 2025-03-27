@@ -106,6 +106,36 @@
     "subtitle": "Saç ekimi sonrası en iyi sonucu almak için özel olarak formüle edilmiş ürünler",
     "search": "Ürün ara...",
     "categories": {
+      "all": {
+        "title": "Tüm Ürünler",
+        "shortTitle": "Tümü",
+        "description": "Tüm VitHair ürünleri"
+      },
+      "monthlySets": {
+        "title": "Aylık Bakım Setleri",
+        "shortTitle": "Setler",
+        "description": "Aylık bakım setleri"
+      },
+      "shampooAndFoam": {
+        "title": "Şampuan ve Köpük",
+        "shortTitle": "Şampuan",
+        "description": "Şampuan ve köpük ürünleri"
+      },
+      "spray": {
+        "title": "Sprey",
+        "shortTitle": "Sprey",
+        "description": "Sprey ürünleri"
+      },
+      "tablet": {
+        "title": "Tablet",
+        "shortTitle": "Tablet",
+        "description": "Tablet ürünleri"
+      },
+      "mesotherapyAndPrp": {
+        "title": "Mezoterapi ve PRP",
+        "shortTitle": "Mezoterapi",
+        "description": "Mezoterapi ve PRP ürünleri"
+      },
       "shampoos": {
         "title": "Saç Bakım Şampuanları",
         "description": "Saç ekimi sonrası özel olarak formüle edilmiş şampuanlar"
