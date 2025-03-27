@@ -207,6 +207,54 @@ const ServiceCard = ({ service }: { service: Service }) => {
       }
     }
     
+    // PRP Tedavisi
+    if (service.id === 4) {
+      if (currentLang === 'en' && index < 5) {
+        const process = [
+          "Blood collection", "PRP preparation", "Scalp cleaning", "PRP injection", "Aftercare instructions"
+        ];
+        return process[index] || defaultValue;
+      }
+      
+      if (currentLang === 'ru' && index < 5) {
+        const process = [
+          "Забор крови", "Подготовка PRP", "Очищение кожи головы", "PRP инъекция", "Рекомендации по уходу"
+        ];
+        return process[index] || defaultValue;
+      }
+      
+      if (currentLang === 'ka' && index < 5) {
+        const process = [
+          "სისხლის აღება", "PRP-ის მომზადება", "თავის კანის გაწმენდა", "PRP ინექცია", "მოვლის ინსტრუქციები"
+        ];
+        return process[index] || defaultValue;
+      }
+    }
+    
+    // Mezoterapi
+    if (service.id === 5) {
+      if (currentLang === 'en' && index < 5) {
+        const process = [
+          "Hair analysis", "Solution preparation", "Scalp cleaning", "Micro injections", "Aftercare advice"
+        ];
+        return process[index] || defaultValue;
+      }
+      
+      if (currentLang === 'ru' && index < 5) {
+        const process = [
+          "Анализ волос", "Подготовка раствора", "Очищение кожи головы", "Микроинъекции", "Советы по уходу"
+        ];
+        return process[index] || defaultValue;
+      }
+      
+      if (currentLang === 'ka' && index < 5) {
+        const process = [
+          "თმის ანალიზი", "ხსნარის მომზადება", "თავის კანის გაწმენდა", "მიკრო ინექციები", "მოვლის რჩევები"
+        ];
+        return process[index] || defaultValue;
+      }
+    }
+    
     // Sabit çeviriler - Diğer hizmetler için
     return defaultValue;
   };
@@ -226,24 +274,90 @@ const ServiceCard = ({ service }: { service: Service }) => {
       return translation;
     }
     
-    // Alternatif çeviri yöntemi dene
-    if (currentLang === 'en' && index < 4) {
+    // Saç ekimi ve Sakal ekimi için (1, 2)
+    if ((service.id === 1 || service.id === 2) && currentLang === 'en' && index < 4) {
       const benefits = [
         "Permanent solution", "Natural appearance", "Minimal scarring", "Quick recovery"
       ];
       return benefits[index] || defaultValue;
     }
     
-    if (currentLang === 'ru' && index < 4) {
+    if ((service.id === 1 || service.id === 2) && currentLang === 'ru' && index < 4) {
       const benefits = [
         "Постоянное решение", "Естественный вид", "Минимальные следы", "Быстрое восстановление"
       ];
       return benefits[index] || defaultValue;
     }
     
-    if (currentLang === 'ka' && index < 4) {
+    if ((service.id === 1 || service.id === 2) && currentLang === 'ka' && index < 4) {
       const benefits = [
         "მუდმივი გადაწყვეტა", "ბუნებრივი იერსახე", "მინიმალური კვალი", "სწრაფი აღდგენა"
+      ];
+      return benefits[index] || defaultValue;
+    }
+    
+    // Kaş ekimi için (3)
+    if (service.id === 3 && currentLang === 'en' && index < 4) {
+      const benefits = [
+        "Fine and precise work", "Permanent result", "Custom design", "Natural appearance"
+      ];
+      return benefits[index] || defaultValue;
+    }
+    
+    if (service.id === 3 && currentLang === 'ru' && index < 4) {
+      const benefits = [
+        "Тонкая и точная работа", "Постоянный результат", "Индивидуальный дизайн", "Естественный вид"
+      ];
+      return benefits[index] || defaultValue;
+    }
+    
+    if (service.id === 3 && currentLang === 'ka' && index < 4) {
+      const benefits = [
+        "ნატიფი და ზუსტი სამუშაო", "მუდმივი შედეგი", "ინდივიდუალური დიზაინი", "ბუნებრივი იერსახე"
+      ];
+      return benefits[index] || defaultValue;
+    }
+    
+    // PRP Tedavisi için (4)
+    if (service.id === 4 && currentLang === 'en' && index < 4) {
+      const benefits = [
+        "Natural treatment method", "Quick application", "Minimal side effects", "Painless procedure"
+      ];
+      return benefits[index] || defaultValue;
+    }
+    
+    if (service.id === 4 && currentLang === 'ru' && index < 4) {
+      const benefits = [
+        "Естественный метод лечения", "Быстрое применение", "Минимальные побочные эффекты", "Безболезненная процедура"
+      ];
+      return benefits[index] || defaultValue;
+    }
+    
+    if (service.id === 4 && currentLang === 'ka' && index < 4) {
+      const benefits = [
+        "ბუნებრივი მკურნალობის მეთოდი", "სწრაფი გამოყენება", "მინიმალური გვერდითი ეფექტები", "უმტკივნეულო პროცედურა"
+      ];
+      return benefits[index] || defaultValue;
+    }
+    
+    // Mezoterapi için (5)
+    if (service.id === 5 && currentLang === 'en' && index < 4) {
+      const benefits = [
+        "Improved hair quality", "Reduced hair loss", "Strengthened hair follicles", "Natural appearance"
+      ];
+      return benefits[index] || defaultValue;
+    }
+    
+    if (service.id === 5 && currentLang === 'ru' && index < 4) {
+      const benefits = [
+        "Улучшение качества волос", "Уменьшение выпадения волос", "Укрепление волосяных фолликулов", "Естественный вид"
+      ];
+      return benefits[index] || defaultValue;
+    }
+    
+    if (service.id === 5 && currentLang === 'ka' && index < 4) {
+      const benefits = [
+        "თმის ხარისხის გაუმჯობესება", "თმის ცვენის შემცირება", "თმის ფოლიკულების გაძლიერება", "ბუნებრივი იერსახე"
       ];
       return benefits[index] || defaultValue;
     }
@@ -425,6 +539,118 @@ const ServiceCard = ({ service }: { service: Service }) => {
           return {
             question: "როგორ უნდა მოვუაროთ?",
             answer: "პირველი კვირის განმავლობაში საჭიროა მოვლის სპეციალური ინსტრუქციების დაცვა."
+          };
+        }
+      }
+    }
+    
+    // PRP Tedavisi için sabit çeviriler
+    if (service.id === 4 && faqIndex !== undefined) {
+      if (currentLang === 'en') {
+        if (faqIndex === 0) {
+          return {
+            question: "How often should PRP treatment be done?",
+            answer: "Usually 4-6 sessions are recommended, 3-4 weeks apart."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "When will results be visible?",
+            answer: "You will start seeing the first results within 2-3 months."
+          };
+        } else if (faqIndex === 2) {
+          return {
+            question: "Return to daily life after the procedure?",
+            answer: "You can return to your daily life immediately after the procedure."
+          };
+        }
+      } else if (currentLang === 'ru') {
+        if (faqIndex === 0) {
+          return {
+            question: "Как часто следует проводить PRP терапию?",
+            answer: "Обычно рекомендуется 4-6 сеансов с интервалом 3-4 недели."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "Когда будут видны результаты?",
+            answer: "Первые результаты вы начнете видеть через 2-3 месяца."
+          };
+        } else if (faqIndex === 2) {
+          return {
+            question: "Возвращение к повседневной жизни после процедуры?",
+            answer: "Вы можете вернуться к повседневной жизни сразу после процедуры."
+          };
+        }
+      } else if (currentLang === 'ka') {
+        if (faqIndex === 0) {
+          return {
+            question: "რამდენად ხშირად უნდა ჩატარდეს PRP მკურნალობა?",
+            answer: "ჩვეულებრივ რეკომენდებულია 4-6 სეანსი, 3-4 კვირის ინტერვალით."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "როდის იქნება შედეგები ხილული?",
+            answer: "პირველ შედეგებს 2-3 თვეში დაიწყებთ."
+          };
+        } else if (faqIndex === 2) {
+          return {
+            question: "ყოველდღიურ ცხოვრებაში დაბრუნება პროცედურის შემდეგ?",
+            answer: "შეგიძლიათ დაუბრუნდეთ ყოველდღიურ ცხოვრებას პროცედურის დასრულებისთანავე."
+          };
+        }
+      }
+    }
+    
+    // Mezoterapi için sabit çeviriler
+    if (service.id === 5 && faqIndex !== undefined) {
+      if (currentLang === 'en') {
+        if (faqIndex === 0) {
+          return {
+            question: "How many sessions are needed?",
+            answer: "Usually 4-6 sessions are recommended, applied 2-3 weeks apart."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "Is the procedure painful?",
+            answer: "A minimum level of discomfort is felt."
+          };
+        } else if (faqIndex === 2) {
+          return {
+            question: "When will I get results?",
+            answer: "You will start seeing the first results after 2-3 sessions."
+          };
+        }
+      } else if (currentLang === 'ru') {
+        if (faqIndex === 0) {
+          return {
+            question: "Сколько сеансов необходимо?",
+            answer: "Обычно рекомендуется 4-6 сеансов, применяемых с интервалом 2-3 недели."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "Процедура болезненна?",
+            answer: "Ощущается минимальный дискомфорт."
+          };
+        } else if (faqIndex === 2) {
+          return {
+            question: "Когда я получу результаты?",
+            answer: "Вы начнете видеть первые результаты после 2-3 сеансов."
+          };
+        }
+      } else if (currentLang === 'ka') {
+        if (faqIndex === 0) {
+          return {
+            question: "რამდენი სეანსია საჭირო?",
+            answer: "ჩვეულებრივ რეკომენდებულია 4-6 სეანსი, გამოყენებული 2-3 კვირის ინტერვალით."
+          };
+        } else if (faqIndex === 1) {
+          return {
+            question: "არის პროცედურა მტკივნეული?",
+            answer: "იგრძნობა მინიმალური დისკომფორტი."
+          };
+        } else if (faqIndex === 2) {
+          return {
+            question: "როდის მივიღებ შედეგებს?",
+            answer: "პირველი შედეგების დანახვას 2-3 სეანსის შემდეგ დაიწყებთ."
           };
         }
       }
