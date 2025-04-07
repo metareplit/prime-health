@@ -773,24 +773,36 @@
     }
   },
   "appointment": {
-    "book": {
-      "title": "Randevu Al",
-      "subtitle": "Size en uygun tarih ve saati seçin",
-      "selectDate": "Tarih seçin",
-      "selectTime": "Saat seçin",
-      "selectService": "Hizmet seçin",
-      "personalInfo": "Kişisel Bilgiler",
-      "notes": "Notlar",
-      "success": "Randevunuz başarıyla oluşturuldu",
-      "submit": "Randevu Oluştur",
-      "notesPlaceholder": "Eklemek istediğiniz notlar...",
-      "error": "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin."
-    },
-    "status": {
-      "pending": "Bekliyor",
-      "confirmed": "Onaylandı",
-      "cancelled": "İptal Edildi",
-      "completed": "Tamamlandı"
+    "title": "Book Appointment",
+    "description": "Create your appointment by selecting the most convenient date and time",
+    "form": {
+      "fullName": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "date": "Date",
+      "time": "Time",
+      "notes": "Notes",
+      "serviceType": "Service Type",
+      "medicalHistory": "Medical History",
+      "age": "Age",
+      "submit": "Book Appointment",
+      "cancel": "Cancel",
+      "success": "Your appointment has been successfully created",
+      "error": "An error occurred while creating the appointment",
+      "loading": "Creating appointment...",
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email address",
+      "invalidPhone": "Please enter a valid phone number",
+      "invalidDate": "Please select a valid date",
+      "futureDate": "Please select a future date",
+      "invalidTime": "Please select a valid time",
+      "invalidAge": "Please enter a valid age",
+      "serviceTypes": {
+        "hairTransplant": "Hair Transplant",
+        "beardTransplant": "Beard Transplant",
+        "eyebrowTransplant": "Eyebrow Transplant",
+        "prp": "PRP Treatment"
+      }
     }
   },
   "form": {

@@ -772,24 +772,36 @@
     }
   },
   "appointment": {
-    "book": {
-      "title": "Randevu Al",
-      "subtitle": "Size en uygun tarih ve saati seçin",
-      "selectDate": "Tarih seçin",
-      "selectTime": "Saat seçin",
-      "selectService": "Hizmet seçin",
-      "personalInfo": "Kişisel Bilgiler",
+    "title": "Randevu Oluştur",
+    "description": "Size en uygun tarih ve saati seçerek randevunuzu oluşturun",
+    "form": {
+      "fullName": "Ad Soyad",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "date": "Tarih",
+      "time": "Saat",
       "notes": "Notlar",
-      "success": "Randevunuz başarıyla oluşturuldu",
+      "serviceType": "Hizmet Türü",
+      "medicalHistory": "Tıbbi Geçmiş",
+      "age": "Yaş",
       "submit": "Randevu Oluştur",
-      "notesPlaceholder": "Eklemek istediğiniz notlar...",
-      "error": "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin."
-    },
-    "status": {
-      "pending": "Bekliyor",
-      "confirmed": "Onaylandı",
-      "cancelled": "İptal Edildi",
-      "completed": "Tamamlandı"
+      "cancel": "İptal",
+      "success": "Randevunuz başarıyla oluşturuldu",
+      "error": "Randevu oluşturulurken bir hata oluştu",
+      "loading": "Randevu oluşturuluyor...",
+      "required": "Bu alan zorunludur",
+      "invalidEmail": "Geçerli bir e-posta adresi giriniz",
+      "invalidPhone": "Geçerli bir telefon numarası giriniz",
+      "invalidDate": "Geçerli bir tarih seçiniz",
+      "futureDate": "Gelecek bir tarih seçiniz",
+      "invalidTime": "Geçerli bir saat seçiniz",
+      "invalidAge": "Geçerli bir yaş giriniz",
+      "serviceTypes": {
+        "hairTransplant": "Saç Ekimi",
+        "beardTransplant": "Sakal Ekimi",
+        "eyebrowTransplant": "Kaş Ekimi",
+        "prp": "PRP Tedavisi"
+      }
     }
   },
   "form": {

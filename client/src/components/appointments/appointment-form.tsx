@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import { useTranslation } from "react-i18next";
 import {
   Form,
   FormControl,
@@ -30,6 +31,7 @@ const timeSlots = [
 ];
 
 export default function AppointmentForm({ selectedService }: AppointmentFormProps) {
+  const { t } = useTranslation('common');
   const { toast } = useToast();
 
   const form = useForm({
@@ -54,16 +56,16 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/appointments"] });
       toast({
-        title: "Başarılı!",
-        description: "Randevunuz başarıyla oluşturuldu.",
+        title: t('appointment.form.success'),
+        description: t('appointment.form.success'),
       });
       form.reset();
     },
     onError: (error: Error) => {
       toast({
         variant: "destructive",
-        title: "Hata!",
-        description: "Randevu oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.",
+        title: t('appointment.form.error'),
+        description: t('appointment.form.error'),
       });
     },
   });
@@ -81,7 +83,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
     <Card>
       <CardHeader>
         <CardTitle className="text-2xl font-semibold text-center">
-          Randevu Oluştur
+          {t('appointment.title')}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -92,9 +94,9 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
               name="fullName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ad Soyad</FormLabel>
+                  <FormLabel>{t('appointment.form.fullName')}</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Ad Soyad" />
+                    <Input {...field} placeholder={t('appointment.form.fullName')} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -106,9 +108,9 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>E-posta</FormLabel>
+                  <FormLabel>{t('appointment.form.email')}</FormLabel>
                   <FormControl>
-                    <Input {...field} type="email" placeholder="E-posta adresiniz" />
+                    <Input {...field} type="email" placeholder={t('appointment.form.email')} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -120,7 +122,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Telefon</FormLabel>
+                  <FormLabel>{t('appointment.form.phone')}</FormLabel>
                   <FormControl>
                     <PhoneInput
                       country={'tr'}
@@ -128,6 +130,10 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                       onChange={phone => field.onChange(phone)}
                       inputClass="w-full !h-10"
                       containerClass="!w-full"
+                      preferredCountries={['tr', 'ru', 'ge', 'az']}
+                      enableSearch={true}
+                      searchPlaceholder={t('appointment.form.searchCountry')}
+                      searchNotFound={t('appointment.form.countryNotFound')}
                     />
                   </FormControl>
                   <FormMessage />
@@ -141,7 +147,7 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                 name="date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Tarih</FormLabel>
+                    <FormLabel>{t('appointment.form.date')}</FormLabel>
                     <FormControl>
                       <Input
                         type="date"
@@ -159,11 +165,11 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
                 name="time"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Saat</FormLabel>
+                    <FormLabel>{t('appointment.form.time')}</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Saat seçin" />
+                          <SelectValue placeholder={t('appointment.form.time')} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -185,11 +191,11 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
               name="notes"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Notlar</FormLabel>
+                  <FormLabel>{t('appointment.form.notes')}</FormLabel>
                   <FormControl>
                     <Textarea
                       {...field}
-                      placeholder="Randevu ile ilgili eklemek istediğiniz notlar..."
+                      placeholder={t('appointment.form.notes')}
                       className="min-h-[100px]"
                     />
                   </FormControl>
@@ -204,9 +210,9 @@ export default function AppointmentForm({ selectedService }: AppointmentFormProp
               disabled={createAppointment.isPending}
             >
               {createAppointment.isPending ? (
-                "Randevu Oluşturuluyor..."
+                t('appointment.form.loading')
               ) : (
-                "Randevu Oluştur"
+                t('appointment.form.submit')
               )}
             </Button>
           </form>

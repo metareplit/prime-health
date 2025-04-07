@@ -7,7 +7,6 @@ import { Metadata } from "@/components/ui/metadata";
 import { Clock, Calendar as CalendarIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useNotifications } from "@/hooks/use-notifications";
-import { useAuth } from "@/lib/auth";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -34,8 +33,6 @@ export default function Appointment() {
   const { t } = useTranslation('common');
   const [date, setDate] = useState<Date | undefined>(new Date());
   const { sendSMSMutation } = useNotifications();
-  // Remove user from Auth since our current AuthContext doesn't have it
-  // const { user } = useAuth();
 
   const form = useForm<AppointmentFormData>({
     resolver: zodResolver(appointmentSchema),
@@ -72,8 +69,8 @@ export default function Appointment() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/5 to-transparent py-6 md:py-10">
       <Metadata 
-        title={t('patient.appointments.createTitle')}
-        description={t('patient.appointments.createDescription')}
+        title={t('appointment.title')}
+        description={t('appointment.description')}
         keywords="saç ekimi randevu, estetik operasyon randevu, online konsültasyon, ücretsiz danışmanlık"
         type="website"
       />
@@ -82,10 +79,10 @@ export default function Appointment() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8 md:mb-10">
             <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">
-              {t('patient.appointments.createTitle')}
+              {t('appointment.title')}
             </h1>
             <p className="text-base md:text-lg text-gray-600">
-              {t('patient.appointments.createDescription')}
+              {t('appointment.description')}
             </p>
           </div>
 
@@ -96,7 +93,7 @@ export default function Appointment() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <CalendarIcon className="h-5 w-5 text-primary" />
-                      {t('patient.appointments.selectDate')}
+                      {t('appointment.form.date')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -107,7 +104,7 @@ export default function Appointment() {
                       locale={tr}
                       className="rounded-md border"
                       disabled={(date) => date < new Date()}
-                      aria-label={t('patient.appointments.selectDate')}
+                      aria-label={t('appointment.form.date')}
                     />
                   </CardContent>
                 </Card>
@@ -116,7 +113,7 @@ export default function Appointment() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Clock className="h-5 w-5 text-primary" />
-                      {t('patient.appointments.appointmentDetails')}
+                      {t('appointment.form.serviceType')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -125,7 +122,7 @@ export default function Appointment() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t('patient.appointments.fullName')}</FormLabel>
+                          <FormLabel>{t('appointment.form.fullName')}</FormLabel>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
@@ -139,7 +136,7 @@ export default function Appointment() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t('patient.appointments.phone')}</FormLabel>
+                          <FormLabel>{t('appointment.form.phone')}</FormLabel>
                           <FormControl>
                             <PhoneInput
                               country={'tr'}
@@ -151,8 +148,8 @@ export default function Appointment() {
                               dropdownClass="!w-[300px]"
                               preferredCountries={['tr', 'ru', 'ge', 'az']}
                               enableSearch={true}
-                              searchPlaceholder={t('patient.appointments.searchCountry')}
-                              searchNotFound={t('patient.appointments.countryNotFound')}
+                              searchPlaceholder={t('appointment.form.searchCountry')}
+                              searchNotFound={t('appointment.form.countryNotFound')}
                             />
                           </FormControl>
                           <FormMessage />
@@ -165,7 +162,7 @@ export default function Appointment() {
                       name="age"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t('patient.appointments.age')}</FormLabel>
+                          <FormLabel>{t('appointment.form.age')}</FormLabel>
                           <FormControl>
                             <Input {...field} type="number" min="18" max="100" />
                           </FormControl>
@@ -179,11 +176,11 @@ export default function Appointment() {
                       name="medicalHistory"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t('patient.appointments.medicalHistory')}</FormLabel>
+                          <FormLabel>{t('appointment.form.medicalHistory')}</FormLabel>
                           <FormControl>
                             <Textarea 
                               {...field} 
-                              placeholder={t('patient.appointments.medicalHistoryPlaceholder')}
+                              placeholder={t('appointment.form.medicalHistory')}
                               className="resize-none"
                               rows={3}
                             />
@@ -198,7 +195,7 @@ export default function Appointment() {
                       name="serviceType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t('patient.appointments.serviceType')}</FormLabel>
+                          <FormLabel>{t('appointment.form.serviceType')}</FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -210,7 +207,7 @@ export default function Appointment() {
                                   <RadioGroupItem value="sac-ekimi" />
                                 </FormControl>
                                 <FormLabel className="font-normal cursor-pointer">
-                                  {t('patient.appointments.hairTransplant')}
+                                  {t('appointment.form.serviceTypes.hairTransplant')}
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-2">
@@ -218,7 +215,7 @@ export default function Appointment() {
                                   <RadioGroupItem value="sakal-ekimi" />
                                 </FormControl>
                                 <FormLabel className="font-normal cursor-pointer">
-                                  {t('patient.appointments.beardTransplant')}
+                                  {t('appointment.form.serviceTypes.beardTransplant')}
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-2">
@@ -226,7 +223,7 @@ export default function Appointment() {
                                   <RadioGroupItem value="kas-ekimi" />
                                 </FormControl>
                                 <FormLabel className="font-normal cursor-pointer">
-                                  {t('patient.appointments.eyebrowTransplant')}
+                                  {t('appointment.form.serviceTypes.eyebrowTransplant')}
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-2">
@@ -234,7 +231,7 @@ export default function Appointment() {
                                   <RadioGroupItem value="prp" />
                                 </FormControl>
                                 <FormLabel className="font-normal cursor-pointer">
-                                  {t('patient.appointments.prpTreatment')}
+                                  {t('appointment.form.serviceTypes.prp')}
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
@@ -244,29 +241,17 @@ export default function Appointment() {
                       )}
                     />
 
-                    <div>
-                      <h3 className="font-medium mb-2">{t('patient.appointments.selectedDate')}</h3>
-                      <p className="text-gray-600">
-                        {date?.toLocaleDateString('tr-TR', {
-                          weekday: 'long',
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                        })}
-                      </p>
-                    </div>
-
                     <Button 
                       type="submit"
                       className="w-full bg-primary/90 hover:bg-primary"
                       size="lg"
                       disabled={sendSMSMutation.isPending}
                     >
-                      {sendSMSMutation.isPending ? "Gönderiliyor..." : t('patient.appointments.createButton')}
+                      {sendSMSMutation.isPending ? t('appointment.form.loading') : t('appointment.form.submit')}
                     </Button>
 
                     <p className="text-sm text-gray-500 text-center">
-                      {t('patient.appointments.contactNote')}
+                      {t('appointment.form.contactNote')}
                     </p>
                   </CardContent>
                 </Card>
