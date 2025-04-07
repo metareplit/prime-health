@@ -22,6 +22,82 @@ const getCategoryIcons = () => {
   };
 };
 
+// Mock data for testing without backend
+const mockProducts = [
+  {
+    id: 1,
+    name: "VitHair 3 Month Set",
+    description: "3 aylık saç bakım ve güçlendirme seti",
+    category: "monthly-sets",
+    image: "/images/products/monthly-sets/vithair-3-month-set.webp",
+    price: 299.99,
+    features: ["Saç dökülmesini önler", "Saç büyümesini hızlandırır", "Saç köklerini güçlendirir"]
+  },
+  {
+    id: 2,
+    name: "VitHair 6 Month Set",
+    description: "6 aylık saç bakım ve güçlendirme seti",
+    category: "monthly-sets",
+    image: "/images/products/monthly-sets/vithair-6-month-set.webp",
+    price: 549.99,
+    features: ["Saç dökülmesini önler", "Saç büyümesini hızlandırır", "Saç köklerini güçlendirir"]
+  },
+  {
+    id: 3,
+    name: "VitHair Anti Hair Loss Shampoo",
+    description: "Saç dökülmesini önleyici ve saç uzamasını hızlandırıcı özel formüllü şampuan (300ml)",
+    category: "shampoo-and-foam",
+    image: "/images/products/shampoo-and-foam/vithair-anti-loss-shampoo.webp",
+    price: 89.99,
+    features: ["Saç dökülmesini önler", "Saç büyümesini hızlandırır", "Saç derisini besler"]
+  },
+  {
+    id: 4,
+    name: "VitHair Advanced ANTI LOSS Hair Growth Foam",
+    description: "Saç uzamasını hızlandırıcı ve saç dökülmesini önleyici köpük (150ml)",
+    category: "shampoo-and-foam",
+    image: "/images/products/shampoo-and-foam/vithair-anti-loss-foam.webp",
+    price: 79.99,
+    features: ["Saç dökülmesini önler", "Saç büyümesini hızlandırır", "Kolay uygulama"]
+  },
+  {
+    id: 5,
+    name: "VitHair Serum Spray 50 ml",
+    description: "Saç uzamasını hızlandırıcı ve saç dökülmesini önleyici özel formüllü sprey",
+    category: "spray",
+    image: "/images/products/spray/vithair-serum-spray.webp",
+    price: 69.99,
+    features: ["Saç dökülmesini önler", "Saç büyümesini hızlandırır", "Hızlı emilim"]
+  },
+  {
+    id: 6,
+    name: "VitHair 60 Tablet",
+    description: "Saç büyümesini destekleyen biotin, multivitamin ve mineral içerikli takviye tablet",
+    category: "tablet",
+    image: "/images/products/tablet/vithair-biotin-tablet.webp",
+    price: 129.99,
+    features: ["Biotin içerir", "Multivitamin ve mineral desteği", "Günlük kullanım"]
+  },
+  {
+    id: 7,
+    name: "VitHair PRP",
+    description: "Saç büyümesini destekleyen özel PRP çözümü",
+    category: "mesotherapy-and-prp",
+    image: "/images/products/mesotherapy/vithair-prp.webp",
+    price: 199.99,
+    features: ["PRP tedavisi", "Saç köklerini güçlendirir", "Profesyonel kullanım"]
+  },
+  {
+    id: 8,
+    name: "VitHair Mesotherapy Serum",
+    description: "Saç büyümesini destekleyen mezoterapi serumu",
+    category: "mesotherapy-and-prp",
+    image: "/images/products/mesotherapy/vithair-mesotherapy.webp",
+    price: 179.99,
+    features: ["Mezoterapi tedavisi", "Saç köklerini besler", "Profesyonel kullanım"]
+  }
+];
+
 export default function Products() {
   const { t } = useTranslation('common');
   const [searchTerm, setSearchTerm] = useState("");
@@ -90,161 +166,10 @@ export default function Products() {
   const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
   
-  const { data: products = [], isLoading } = useQuery({
-    queryKey: ['/api/products', currentLanguage],
-    queryFn: async () => {
-      const response = await fetch('/api/products');
-      if (!response.ok) {
-        throw new Error('Failed to fetch products');
-      }
-      
-      const products = await response.json();
-      
-      // Ürün isimlerini ve açıklamalarını dilin durumuna göre güncelle
-      return products.map((product: any) => {
-        // Ürün isimlerini dillere göre map'leme
-        const productNames: Record<string, Record<string, string>> = {
-          "VitHair 3 Month Set": {
-            tr: "VitHair 3 Aylık Set",
-            en: "VitHair 3 Month Set",
-            ru: "VitHair Набор на 3 месяца",
-            ka: "VitHair 3 თვის ნაკრები"
-          },
-          "VitHair 6 Month Set": {
-            tr: "VitHair 6 Aylık Set",
-            en: "VitHair 6 Month Set",
-            ru: "VitHair Набор на 6 месяцев",
-            ka: "VitHair 6 თვის ნაკრები"
-          },
-          "VitHair Anti Hair Loss Shampoo": {
-            tr: "VitHair Saç Dökülmesine Karşı Şampuan",
-            en: "VitHair Anti Hair Loss Shampoo",
-            ru: "VitHair Шампунь против выпадения волос",
-            ka: "VitHair თმის ცვენის საწინააღმდეგო შამპუნი"
-          },
-          "VitHair Advanced ANTI LOSS Hair Growth Foam": {
-            tr: "VitHair Gelişmiş Saç Büyütme Köpüğü",
-            en: "VitHair Advanced Hair Growth Foam",
-            ru: "VitHair Пена для роста волос",
-            ka: "VitHair გაძლიერებული თმის ზრდის ქაფი"
-          },
-          "VitHair Anti Hair Loss Shampoo and Care Foam Double Set": {
-            tr: "VitHair Şampuan ve Bakım Köpüğü İkili Set",
-            en: "VitHair Shampoo and Care Foam Double Set",
-            ru: "VitHair Двойной набор шампунь и пена",
-            ka: "VitHair შამპუნისა და მოვლის ქაფის ორმაგი ნაკრები"
-          },
-          "VitHair Serum Spray 50 ml": {
-            tr: "VitHair Serum Sprey 50 ml",
-            en: "VitHair Serum Spray 50 ml",
-            ru: "VitHair Спрей-сыворотка 50 мл",
-            ka: "VitHair შრატის სპრეი 50 მლ"
-          },
-          "VitHair 60 Tablet - (Biotin Multivitamins and Minerals)": {
-            tr: "VitHair 60 Tablet - (Biotin Multivitamin ve Mineraller)",
-            en: "VitHair 60 Tablet - (Biotin Multivitamins and Minerals)",
-            ru: "VitHair 60 Таблеток - (Биотин Мультивитамины и Минералы)",
-            ka: "VitHair 60 ტაბლეტი - (ბიოტინი მულტივიტამინები და მინერალები)"
-          },
-          "VitHair PRP": {
-            tr: "VitHair PRP",
-            en: "VitHair PRP",
-            ru: "VitHair PRP",
-            ka: "VitHair PRP"
-          },
-          "VitHair Mesotherapy Serum": {
-            tr: "VitHair Mezoterapi Serumu",
-            en: "VitHair Mesotherapy Serum",
-            ru: "VitHair Сыворотка для мезотерапии",
-            ka: "VitHair მეზოთერაპიის შრატი"
-          }
-        };
-        
-        // Ürün açıklamalarını dillere göre map'leme
-        const productDescriptions: Record<string, Record<string, string>> = {
-          "3 aylık saç bakım ve güçlendirme seti": {
-            tr: "3 aylık saç bakım ve güçlendirme seti",
-            en: "3-month hair care and strengthening set",
-            ru: "Набор для ухода и укрепления волос на 3 месяца",
-            ka: "3 თვის თმის მოვლისა და გაძლიერების ნაკრები"
-          },
-          "6 aylık saç bakım ve güçlendirme seti": {
-            tr: "6 aylık saç bakım ve güçlendirme seti",
-            en: "6-month hair care and strengthening set",
-            ru: "Набор для ухода и укрепления волос на 6 месяцев",
-            ka: "6 თვის თმის მოვლისა და გაძლიერების ნაკრები"
-          },
-          "Saç dökülmesini önleyici ve saç uzamasını hızlandırıcı özel formüllü şampuan (300ml)": {
-            tr: "Saç dökülmesini önleyici ve saç uzamasını hızlandırıcı özel formüllü şampuan (300ml)",
-            en: "Special formula shampoo that prevents hair loss and accelerates hair growth (300ml)",
-            ru: "Шампунь специальной формулы, предотвращающий выпадение волос и ускоряющий их рост (300 мл)",
-            ka: "სპეციალური ფორმულის შამპუნი, რომელიც ხელს უშლის თმის ცვენას და აჩქარებს თმის ზრდას (300მლ)"
-          },
-          "Saç uzamasını hızlandırıcı ve saç dökülmesini önleyici köpük (150ml)": {
-            tr: "Saç uzamasını hızlandırıcı ve saç dökülmesini önleyici köpük (150ml)",
-            en: "Foam that accelerates hair growth and prevents hair loss (150ml)",
-            ru: "Пена, ускоряющая рост волос и предотвращающая их выпадение (150 мл)",
-            ka: "ქაფი, რომელიც აჩქარებს თმის ზრდას და ხელს უშლის თმის ცვენას (150მლ)"
-          },
-          "Anti Hair Loss Şampuan ve Saç Bakım Köpüğü çift ürün seti": {
-            tr: "Anti Hair Loss Şampuan ve Saç Bakım Köpüğü çift ürün seti",
-            en: "Anti Hair Loss Shampoo and Hair Care Foam dual product set",
-            ru: "Набор из двух продуктов: шампунь против выпадения волос и пена для ухода за волосами",
-            ka: "თმის ცვენის საწინააღმდეგო შამპუნისა და თმის მოვლის ქაფის ორმაგი პროდუქტის ნაკრები"
-          },
-          "Saç uzamasını hızlandırıcı ve saç dökülmesini önleyici özel formüllü sprey": {
-            tr: "Saç uzamasını hızlandırıcı ve saç dökülmesini önleyici özel formüllü sprey",
-            en: "Special formula spray that accelerates hair growth and prevents hair loss",
-            ru: "Спрей специальной формулы, ускоряющий рост волос и предотвращающий их выпадение",
-            ka: "სპეციალური ფორმულის სპრეი, რომელიც აჩქარებს თმის ზრდას და ხელს უშლის თმის ცვენას"
-          },
-          "Saç büyümesini destekleyen biotin, multivitamin ve mineral içerikli takviye tablet": {
-            tr: "Saç büyümesini destekleyen biotin, multivitamin ve mineral içerikli takviye tablet",
-            en: "Supplement tablet containing biotin, multivitamins and minerals that support hair growth",
-            ru: "Биологически активная добавка с биотином, мультивитаминами и минералами, способствующими росту волос",
-            ka: "საკვები დანამატი ტაბლეტი, რომელიც შეიცავს ბიოტინს, მულტივიტამინებსა და მინერალებს, რომლებიც ხელს უწყობს თმის ზრდას"
-          },
-          "Saç büyümesini destekleyen özel PRP çözümü": {
-            tr: "Saç büyümesini destekleyen özel PRP çözümü",
-            en: "Special PRP solution that supports hair growth",
-            ru: "Специальный PRP-раствор, способствующий росту волос",
-            ka: "სპეციალური PRP გადაწყვეტილება, რომელიც ხელს უწყობს თმის ზრდას"
-          },
-          "Saç büyümesini destekleyen mezoterapi serumu": {
-            tr: "Saç büyümesini destekleyen mezoterapi serumu",
-            en: "Mesotherapy serum that supports hair growth",
-            ru: "Сыворотка для мезотерапии, способствующая росту волос",
-            ka: "მეზოთერაპიის შრატი, რომელიც ხელს უწყობს თმის ზრდას"
-          }
-        };
-
-        // Ürün adını içeren bir JSON objesi varsa o ismi kullan, aksi takdirde originalini kullan
-        let productName = product.name;
-        const nameObj = Object.entries(productNames).find(([key]) => {
-          return product.name === key;
-        });
-        
-        if (nameObj && nameObj[1] && currentLanguage in nameObj[1]) {
-          productName = nameObj[1][currentLanguage as keyof typeof nameObj[1]];
-        }
-        
-        // Ürün açıklamasını içeren bir JSON objesi varsa o açıklamayı kullan, aksi takdirde originalini kullan
-        let productDescription = product.description;
-        const descObj = Object.entries(productDescriptions).find(([key]) => {
-          return product.description === key;
-        });
-        
-        if (descObj && descObj[1] && currentLanguage in descObj[1]) {
-          productDescription = descObj[1][currentLanguage as keyof typeof descObj[1]];
-        }
-        
-        return {
-          ...product,
-          name: productName,
-          description: productDescription
-        };
-      });
-    }
+  // Use mock data instead of API call
+  const { data: products = mockProducts, isLoading } = useQuery({
+    queryKey: ['products', currentLanguage],
+    queryFn: async () => mockProducts,
   });
 
   const getProductsByCategory = (categoryId: string) => {
@@ -301,7 +226,7 @@ export default function Products() {
         <Tabs defaultValue="all" value={selectedCategory} onValueChange={setSelectedCategory}>
           {/* Categories */}
           <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm shadow-sm mb-8">
-            <TabsList className="w-full h-auto flex items-center justify-start gap-2 p-4 overflow-x-auto hide-scrollbar">
+            <TabsList className="w-full h-auto flex items-center justify-center gap-2 p-4 overflow-x-auto hide-scrollbar">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
@@ -376,10 +301,14 @@ function ProductCard({ product }: { product: any }) {
         <CardContent className="p-3 md:p-4 flex flex-col h-full">
           <div className="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 mb-3 md:mb-4 group-hover:from-primary/10 group-hover:to-primary/20 transition-all duration-300">
             <img
-              src={product.images?.[0]}
+              src={product.image}
               alt={product.name}
               className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-300"
               loading="lazy"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = '/images/products/placeholder.webp';
+              }}
             />
           </div>
           <div className="space-y-2 flex-1">
@@ -393,21 +322,14 @@ function ProductCard({ product }: { product: any }) {
               {product.description}
             </p>
             
-            {product.specifications && (
+            {product.features && (
               <div className="pt-2 space-y-1">
-                <p className="text-xs font-medium text-primary">{t('products.product.ingredients')}</p>
-                <p className="text-xs text-muted-foreground">
-                  {product.specifications['İçerik'] || product.specifications['Volume'] || '-'}
-                </p>
-                
-                {product.specifications['Saç Tipi'] && (
-                  <>
-                    <p className="text-xs font-medium text-primary mt-2">{t('products.product.hairTypes.all')}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {product.specifications['Saç Tipi']}
-                    </p>
-                  </>
-                )}
+                <p className="text-xs font-medium text-primary">{t('products.product.features')}</p>
+                <ul className="text-xs text-muted-foreground list-disc list-inside">
+                  {product.features.map((feature: string, index: number) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
               </div>
             )}
           </div>

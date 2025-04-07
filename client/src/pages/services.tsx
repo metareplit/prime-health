@@ -796,10 +796,52 @@ const ServiceCard = ({ service }: { service: Service }) => {
   );
 };
 
+// Mock data for testing without backend
+const mockServices: Service[] = [
+  {
+    id: 1,
+    name: "Saç Ekimi",
+    description: "Sapphire FUE tekniği ile kalıcı ve doğal saç ekimi",
+    process: ["Ücretsiz konsültasyon", "Saç analizi", "Planlama", "Greft ekimi", "Sonrası bakım"],
+    image: "/images/services/primehealth1.png"
+  },
+  {
+    id: 2,
+    name: "Sakal Ekimi",
+    description: "Kalıcı ve doğal sakal ekimi çözümleri",
+    process: ["Yüz analizi", "Sakal tasarımı", "Lokal anestezi", "Greft ekimi", "Sonrası bakım"],
+    image: "/images/services/primehealth2.png"
+  },
+  {
+    id: 3,
+    name: "Kaş Ekimi",
+    description: "Doğal ve kalıcı kaş ekimi işlemi",
+    process: ["Kaş analizi", "Tasarım", "Lokal anestezi", "Hassas ekim", "Bakım önerileri"],
+    image: "/images/services/primehealth3.png"
+  },
+  {
+    id: 4,
+    name: "PRP Tedavisi",
+    description: "Kendi kanınızdan elde edilen trombositler ile saç büyümesini uyarma",
+    process: ["Kan alımı", "PRP hazırlama", "Saç derisi temizliği", "PRP enjeksiyonu", "Bakım talimatları"],
+    image: "/images/services/primehealth4.png"
+  },
+  {
+    id: 5,
+    name: "Mezoterapi",
+    description: "Saç köklerini besleyen vitamin ve mineral enjeksiyonu",
+    process: ["Saç analizi", "Solüsyon hazırlama", "Saç derisi temizliği", "Mikro enjeksiyonlar", "Bakım önerileri"],
+    image: "/images/services/primehealth5.png"
+  }
+];
+
 export default function Services() {
-  const { t } = useTranslation('common');
-  const { data: services, isLoading } = useQuery<Service[]>({
-    queryKey: ["/api/services"],
+  const { t, i18n } = useTranslation('common');
+  
+  // Use mock data instead of API call and get isLoading state
+  const { data: services = mockServices, isLoading } = useQuery<Service[]>({
+    queryKey: ['services'],
+    queryFn: async () => mockServices,
   });
 
   return (
