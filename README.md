@@ -27,7 +27,7 @@ Prime Health, Gürcistan'ın Tiflis şehrinde bulunan profesyonel bir saç ekimi
 
 1. Projeyi klonlayın:
 ```bash
-git clone https://github.com/your-username/prime-health.git
+git clone https://github.com/metareplit/prime-health.git
 ```
 
 2. Bağımlılıkları yükleyin:
@@ -62,4 +62,4 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 Prime Health - [primehealthtblisi@gmail.com](mailto:primehealthtblisi@gmail.com)
 
-Proje Linki: [https://github.com/your-username/prime-health](https://github.com/your-username/prime-health) 
+Proje Linki: [https://github.com/metareplit/prime-health](https://github.com/metareplit/prime-health)
